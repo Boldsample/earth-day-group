@@ -1,0 +1,57 @@
+#intro
+	.p-carousel-prev, .p-carousel-next
+		display: none
+	.p-carousel-indicators
+		bottom: 0
+		position: absolute
+		width: 100%
+		.p-carousel-indicator
+			margin: 0
+			width: 48px
+			.p-link
+				background: white
+				border-radius: 0
+				height: 4px
+				margin: 0
+				padding: 0
+				width: 100%
+			&:nth-child(2) .p-link
+				opacity: .8
+			&:nth-child(3) .p-link
+				opacity: .6
+			&:nth-child(4) .p-link
+				opacity: .4
+		[data-p-highlight="true"]
+			.p-link
+				background: var(--secondary)
+				box-shadow: 0px 0px 8px rgba(255,255,255,.5)
+				opacity: 1 !important
+				transform: scaleY(1.8)
+	.intro
+		height: 100vh
+		position: relative
+		width: 100%
+		.background
+			bottom: 0
+			height: 85vw
+			left: 0
+			object-fit: cover
+			position: absolute
+			width: 100%
+			z-index: -1
+		.content
+			align-content: center
+			display: flex
+			height: 660px
+			flex-wrap: wrap
+			margin-top: calc((100vh - 750px) / 2)
+			margin-left: calc(50% + ((50% - 506px) / 2))
+			position: absolute
+			width: 480px
+			h1, ul
+				margin-bottom: 15px
+
+@media (min-width: 120vh)
+	#intro .intro .background
+		bottom: 0
+		height: auto
