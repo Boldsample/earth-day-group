@@ -1,4 +1,5 @@
 import './utils/styles/main.sass'
+import './utils/styles/responsive.sass'
 import 'react-toastify/dist/ReactToastify.css'
 
 import React from 'react'
