@@ -1,9 +1,8 @@
-import '../ui/intro.sass'
+import '../ui/style.sass'
 import intro1 from '../../../../assets/intro-1.svg'
 import intro2 from '../../../../assets/intro-2.svg'
 import intro3 from '../../../../assets/intro-3.svg'
 import intro4 from '../../../../assets/intro-4.svg'
-import 'primereact/resources/themes/lara-light-indigo/theme.css'
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
