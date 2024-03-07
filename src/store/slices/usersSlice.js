@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, getUsers } from "../../services/userServices";
+// import { getUser, getUsers } from "../../services/userServices";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
