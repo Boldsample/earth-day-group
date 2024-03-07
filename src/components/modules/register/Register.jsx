@@ -10,7 +10,7 @@ import backgroundImg from '../../../assets/registerCategories/registerCatBackgro
 const Register = () => {
   return (
     <>
-    <div className="registerCat__container">
+    <div className="category__container">
     <img className="background" src={backgroundImg}/>
         <div className="content__container">
           <h4 className="category__title">Register as:</h4>
