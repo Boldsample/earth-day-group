@@ -8,6 +8,7 @@ const CategoryCard = ({
   title,
   description,
   iconBackgroundColor,
+  icon
 }) => {
   const cardStyle = {
     backgroundColor: backgroundColor,
@@ -24,7 +25,9 @@ const CategoryCard = ({
 
   return (
     <div className="category-Card" style={cardStyle}>
-      <div className="category-Card-Icon" style={iconBackground}></div>
+      <div className="category-Card-Icon" style={iconBackground}>
+      <img src={icon} alt="Category Icon" />
+      </div>
       <h3 style={textStyle}>{title}</h3>
       <p style={textStyle}>{description}</p>
     </div>
