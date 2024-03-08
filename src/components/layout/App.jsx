@@ -7,14 +7,16 @@ import Header from "./Header";
 import Intro from "../modules/static/pages/Intro";
 import Recover from "../modules/login/pages/Recover";
 import LoginForm from "../modules/login/pages/LoginForm";
-import Register from "../modules/register/Register";
+import RegisterCategories from "../modules/register/registerCategories/RegisterCategories";
+import RegisterUser from "../modules/register/registerUser/RegisterUser";
 
 const App = () => {
   return (
     <Provider store={store}>
       <PrimeReactProvider>
         <Header />
-        <Register />
+        {/* <RegisterCategories /> */}
+        <RegisterUser/>
         <BrowserRouter>
           <Routes>
             {/* <Route exact path="/" element={<Intro />} />

@@ -1,20 +1,20 @@
 import React from "react";
-import CategoryCard from "../../ui/cards/categoryCard/CategoryCard";
-import './register.sass'
-import userIcon from '../../../assets/registerCategories/registerCat-1.svg'
-import recycleIcon from '../../../assets/registerCategories/registerCat-2.svg'
-import shelterIcon from '../../../assets/registerCategories/registerCat-3.svg'
-import ecommerceIcon from '../../../assets/registerCategories/registerCat-4.svg'
-import backgroundImg from '../../../assets/registerCategories/registerCatBackground.svg'
+import CategoryCard from "../../../ui/cards/categoryCard/CategoryCard";
+import './registerCategories.sass'
+import userIcon from '../../../../assets/registerCategories/registerCat-1.svg'
+import recycleIcon from '../../../../assets/registerCategories/registerCat-2.svg'
+import shelterIcon from '../../../../assets/registerCategories/registerCat-3.svg'
+import ecommerceIcon from '../../../../assets/registerCategories/registerCat-4.svg'
+import backgroundImg from '../../../../assets/registerCategories/registerCatBackground.svg'
 
-const Register = () => {
-  return (
+const registerCategories = () => {
+  return (  
     <>
     <div className="category__container">
-    <img className="background" src={backgroundImg}/>
+    <img className="category__background" src={backgroundImg}/>
         <div className="content__container">
           <h4 className="category__title">Register as:</h4>
-          <div className="category-Grid">
+          <div className="category__grid">
             <CategoryCard
               backgroundColor="#77BEF9"
               iconBackgroundColor="#23649A"
@@ -54,9 +54,8 @@ const Register = () => {
           </div>
         </div>
     </div>
-    
     </>
   );
 };
 
-export default Register;
+export default registerCategories;

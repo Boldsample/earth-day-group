@@ -24,8 +24,8 @@ const CategoryCard = ({
   };
 
   return (
-    <div className="category-Card" style={cardStyle}>
-      <div className="category-Card-Icon" style={iconBackground}>
+    <div className="category__card" style={cardStyle}>
+      <div className="category__card-Icon" style={iconBackground}>
       <img src={icon} alt="Category Icon" />
       </div>
       <h3 style={textStyle}>{title}</h3>
