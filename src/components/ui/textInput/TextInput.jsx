@@ -5,6 +5,7 @@ import { Controller } from "react-hook-form";
 import "./textInput.sass";
 
 const TextInput = ({
+  labelname= '',
   inputName,
   placeHolderText,
   type = "text",
@@ -26,6 +27,7 @@ const TextInput = ({
     height: height,
   };
 
+  
   const renderInput = () => (
     <>
       <Controller
@@ -42,7 +44,6 @@ const TextInput = ({
             {...field}
             placeholder={placeHolderText}
             type={type}
-            // value={email}
           />
         )}
       />
@@ -54,7 +55,8 @@ const TextInput = ({
     <div className="p-field">
       {showLabel ? (
         <label htmlFor={inputName}>
-          {inputName}
+          {label} {isRequired && <span className="text-red-600">*</span>}
+          {labelname}
           {renderInput()}
         </label>
       ) : (

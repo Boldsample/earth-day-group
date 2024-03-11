@@ -3,6 +3,7 @@ import "./registerUser.sass";
 import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
+import NumberInput from "../../../ui/numberInput/NumberInput";
 import TextInput from "../../../ui/textInput/TextInput";
 import { useForm, FormProvider } from "react-hook-form";
 
@@ -19,13 +20,16 @@ const RegisterUser = () => {
     defaultValues: {
       name: "", // Make sure all fields are initialized
       email: "",
+      phoneNumber: ""
       // Initialize all other fields used in the form
     },
   });
 
-  const getFormErrorMessage = () => {
-    return errors && <small className="p-error">{errors?.message}</small>;
+
+const getFormErrorMessage = (fieldName) => {
+    return errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>;
   };
+
   console.log(getValues());
 
   const onSubmit = (data) => console.log(data);
@@ -38,6 +42,8 @@ const RegisterUser = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="registerInput__container-x2">
             <TextInput
+            isRequired={true}
+            labelName='name'
               isEdit={true}
               getFormErrorMessage={getFormErrorMessage}
               control={control}
@@ -47,10 +53,10 @@ const RegisterUser = () => {
               showLabel={false}
               rules={{
                 maxLength: {
-                  value: 2,
-                  message: "El campo supera los 100 caracteres",
+                  value: 20,
+                  message: "El campo supera los 20 caracteres",
                 },
-                required: "El campo es requerido.",
+                required: "*El campo es requerido.",
                 pattern: {
                   value: /^\S/,
                   message: "No debe tener espacios al inicio",
@@ -102,15 +108,38 @@ const RegisterUser = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <label className="registerInput__container-x1" htmlFor="phoneNumber">
+
+          <NumberInput
+          isRequired={true}
+            labelName='Phone Number'
+             isEdit={true}
+             getFormErrorMessage={getFormErrorMessage}
+             control={control}
+             nameInput="phoneNumber"
+             placeHolderText="Phone Number*"
+             width="100%"
+             showLabel={true}
+             rules={{
+               maxLength: {
+                 value: 7,
+                 message: "El campo supera los 7 caracteres",
+               },
+               required: "*El campo es requerido.",
+               pattern: {
+                 value: /^\S/,
+                 message: "No debe tener espacios al inicio",
+               },
+             }}
+          />
+          {/* <label className="registerInput__container-x1" htmlFor="phoneNumber">
             Phone Number
             <InputText
               id="phoneNumber"
               placeholder="++01 0000 000*"
               // value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
           </label>
+            /> */}
           <div className="registerInput__container-x2">
             <label htmlFor="password">
               Password
