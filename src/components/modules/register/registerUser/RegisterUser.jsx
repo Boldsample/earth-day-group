@@ -5,6 +5,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import NumberInput from "../../../ui/numberInput/NumberInput";
 import TextInput from "../../../ui/textInput/TextInput";
+import TextAreaInput from "../../../ui/textAreaInput/TextAreaInput";
 import { useForm, FormProvider } from "react-hook-form";
 
 const RegisterUser = () => {
@@ -20,7 +21,8 @@ const RegisterUser = () => {
     defaultValues: {
       name: "", // Make sure all fields are initialized
       email: "",
-      phoneNumber: ""
+      phoneNumber: "",
+      bio: "",
       // Initialize all other fields used in the form
     },
   });
@@ -99,7 +101,30 @@ const getFormErrorMessage = (fieldName) => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <label className="registerInput__container-x1" htmlFor="bio">
+          <TextAreaInput
+            isRequired={false}
+            labelName='Bio'
+             isEdit={true}
+             getFormErrorMessage={getFormErrorMessage}
+             control={control}
+             nameInput="bio"
+             placeHolderText="Tell us about yourself"
+            //  width="100%"
+             showLabel={true}
+             rules={{
+               maxLength: {
+                 value: 50,
+                 message: "El campo supera los 50 caracteres",
+               },
+               required: "*El campo es requerido.",
+               pattern: {
+                 value: /^\S/,
+                 message: "No debe tener espacios al inicio",
+               },
+             }}
+          
+          />
+          {/* <label className="registerInput__container-x1" htmlFor="bio">
             Bio
             <InputText
               id="bio"
@@ -107,7 +132,7 @@ const getFormErrorMessage = (fieldName) => {
               // value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </label>
+          </label> */}
 
           <NumberInput
           isRequired={true}
