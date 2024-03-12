@@ -28,7 +28,8 @@ const RegisterUser = () => {
       bio: "",
       country: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      username: '',
       // Initialize all other fields used in the form
     },
   });
@@ -61,7 +62,7 @@ const getFormErrorMessage = (fieldName) => {
           <div className="registerInput__container-x2">
             <TextInput
             isRequired={true}
-            labelName='name'
+            labelName='Name'
               isEdit={true}
               getFormErrorMessage={getFormErrorMessage}
               control={control}
@@ -82,39 +83,57 @@ const getFormErrorMessage = (fieldName) => {
               }}
             />
             <TextInput
-              getFormErrorMessage={getFormErrorMessage}
+            isRequired={true}
+            labelName='E-mail'
               isEdit={true}
+              getFormErrorMessage={getFormErrorMessage}
               control={control}
               inputName="email"
               placeHolderText="E-mail*"
               width="100%"
               showLabel={false}
+              rules={{
+                maxLength: {
+                  value: 60,
+                  message: "El campo supera los 60 caracteres",
+                },
+                required: "*El campo es requerido.",
+                pattern: {
+                  value: /^\S/,
+                  message: "No debe tener espacios al inicio",
+                },
+              }}
             />
-            {/* <InputText
-            id="name"
-            placeholder="Complete Name*"
-            // value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <InputText
-            id="email"
-            placeholder="E-mail*"
-            // value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          /> */}
+           
           </div>
           <div className="registerInput__container-x2">
-            <InputText
-              id="username"
-              placeholder="Username*"
-              // value={email}
-              onChange={(e) => setEmail(e.target.value)}
+          <TextInput
+            isRequired={true}
+            labelName='Username'
+              isEdit={true}
+              getFormErrorMessage={getFormErrorMessage}
+              control={control}
+              inputName="username"
+              placeHolderText="Username*"
+              width="100%"
+              showLabel={false}
+              rules={{
+                maxLength: {
+                  value: 20,
+                  message: "El campo supera los 20 caracteres",
+                },
+                required: "*El campo es requerido.",
+                pattern: {
+                  value: /^\S/,
+                  message: "No debe tener espacios al inicio",
+                },
+              }}
             />
             <DropDownInput
                 control={control}
                 showLabel={false}
+                labelName="Location"
                 nameInput="country"
-                labelName=""
                 isEdit={true}
                 isRequired={true}
                 // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
@@ -122,15 +141,8 @@ const getFormErrorMessage = (fieldName) => {
                 optionLabel="name" 
                 placeHolderText="Select a Country" 
                 className=""
-                getFormErrorMessage={getFormErrorMessage}
-                
+                getFormErrorMessage={getFormErrorMessage} 
             />
-            {/* <InputText
-              id="location"
-              placeholder="Location*"
-              // value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            /> */}
           </div>
           <TextAreaInput
             isRequired={false}
@@ -155,16 +167,6 @@ const getFormErrorMessage = (fieldName) => {
              }}
           
           />
-          {/* <label className="registerInput__container-x1" htmlFor="bio">
-            Bio
-            <InputText
-              id="bio"
-              placeholder="Tell us about yourself"
-              // value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label> */}
-
           <NumberInput
           isRequired={true}
             labelName='Phone Number'
@@ -187,15 +189,6 @@ const getFormErrorMessage = (fieldName) => {
                },
              }}
           />
-          {/* <label className="registerInput__container-x1" htmlFor="phoneNumber">
-            Phone Number
-            <InputText
-              id="phoneNumber"
-              placeholder="++01 0000 000*"
-              // value={email}
-              onChange={(e) => setEmail(e.target.value)}
-          </label>
-            /> */}
           <div className="registerInput__container-x2">
             <PasswordInput
                   isRequired={true}
@@ -243,22 +236,6 @@ const getFormErrorMessage = (fieldName) => {
                      },
                    }}
             />
-            {/* <label htmlFor="password">
-              Password
-              <InputText
-                className="p-inputtext"
-                id="password"
-                placeholder="Enter Password"
-                // value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
-            <InputText
-              id="password"
-              placeholder="Confirm Password"
-              // value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            /> */}
           </div>
           <div className="p-field" style={{ marginBottom: "24px" }}>
             <Button label="Sign up" type="submit" />
