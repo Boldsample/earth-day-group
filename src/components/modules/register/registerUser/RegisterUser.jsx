@@ -9,7 +9,7 @@ import TextAreaInput from "../../../ui/textAreaInput/TextAreaInput";
 import DropDownInput from "../../../ui/dropDownInput/DropDownInput";
 import { useForm, FormProvider } from "react-hook-form";
 import PasswordInput from "../../../ui/passwordInput/PasswordInput";
-
+import RadioInput from "../../../ui/radioInput/RadioInput";
 
 const RegisterUser = () => {
   const {
@@ -22,31 +22,32 @@ const RegisterUser = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "", // Make sure all fields are initialized
+      name: "", 
       email: "",
       phoneNumber: "",
       bio: "",
       country: "",
       password: "",
       confirmPassword: "",
-      username: '',
-      // Initialize all other fields used in the form
+      username: "",
+   
     },
   });
 
-//   const [selectedCity, setSelectedCity] = useState(null);
-
   const countries = [
-    { name: 'Colombia', code: 'COL' },
-    { name: 'United States', code: 'USA' },
-    { name: 'Ecuador', code: 'ECU' },
-    { name: 'Peru', code: 'PER' },
-    { name: 'Panama', code: 'PAN' }
-];
+    { name: "Colombia", code: "COL" },
+    { name: "United States", code: "USA" },
+    { name: "Ecuador", code: "ECU" },
+    { name: "Peru", code: "PER" },
+    { name: "Panama", code: "PAN" },
+  ];
 
-
-const getFormErrorMessage = (fieldName) => {
-    return errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>;
+  const getFormErrorMessage = (fieldName) => {
+    return (
+      errors[fieldName] && (
+        <small className="p-error">{errors[fieldName]?.message}</small>
+      )
+    );
   };
 
   console.log(getValues());
@@ -61,8 +62,8 @@ const getFormErrorMessage = (fieldName) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="registerInput__container-x2">
             <TextInput
-            isRequired={true}
-            labelName='Name'
+              isRequired={true}
+              labelName="Name"
               isEdit={true}
               getFormErrorMessage={getFormErrorMessage}
               control={control}
@@ -83,8 +84,8 @@ const getFormErrorMessage = (fieldName) => {
               }}
             />
             <TextInput
-            isRequired={true}
-            labelName='E-mail'
+              isRequired={true}
+              labelName="E-mail"
               isEdit={true}
               getFormErrorMessage={getFormErrorMessage}
               control={control}
@@ -104,12 +105,11 @@ const getFormErrorMessage = (fieldName) => {
                 },
               }}
             />
-           
           </div>
           <div className="registerInput__container-x2">
-          <TextInput
-            isRequired={true}
-            labelName='Username'
+            <TextInput
+              isRequired={true}
+              labelName="Username"
               isEdit={true}
               getFormErrorMessage={getFormErrorMessage}
               control={control}
@@ -130,112 +130,117 @@ const getFormErrorMessage = (fieldName) => {
               }}
             />
             <DropDownInput
-                control={control}
-                showLabel={false}
-                labelName="Location"
-                nameInput="country"
-                isEdit={true}
-                isRequired={true}
-                // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-                options={countries} 
-                optionLabel="name" 
-                placeHolderText="Select a Country" 
-                className=""
-                getFormErrorMessage={getFormErrorMessage} 
+              control={control}
+              showLabel={false}
+              labelName="Location"
+              nameInput="country"
+              isEdit={true}
+              isRequired={true}
+              // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
+              options={countries}
+              optionLabel="name"
+              placeHolderText="Select a Country"
+              className=""
+              getFormErrorMessage={getFormErrorMessage}
             />
           </div>
           <TextAreaInput
             isRequired={false}
-            labelName='Bio'
-             isEdit={true}
-             getFormErrorMessage={getFormErrorMessage}
-             control={control}
-             nameInput="bio"
-             placeHolderText="Tell us about yourself"
+            labelName="Bio"
+            isEdit={true}
+            getFormErrorMessage={getFormErrorMessage}
+            control={control}
+            nameInput="bio"
+            placeHolderText="Tell us about yourself"
             //  width="100%"
-             showLabel={true}
-             rules={{
-               maxLength: {
-                 value: 50,
-                 message: "El campo supera los 50 caracteres",
-               },
-               required: "*El campo es requerido.",
-               pattern: {
-                 value: /^\S/,
-                 message: "No debe tener espacios al inicio",
-               },
-             }}
-          
+            showLabel={true}
+            rules={{
+              maxLength: {
+                value: 50,
+                message: "El campo supera los 50 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }}
           />
           <NumberInput
-          isRequired={true}
-            labelName='Phone Number'
-             isEdit={true}
-             getFormErrorMessage={getFormErrorMessage}
-             control={control}
-             nameInput="phoneNumber"
-             placeHolderText="Phone Number*"
-             width="100%"
-             showLabel={true}
-             rules={{
-               maxLength: {
-                 value: 7,
-                 message: "El campo supera los 7 caracteres",
-               },
-               required: "*El campo es requerido.",
-               pattern: {
-                 value: /^\S/,
-                 message: "No debe tener espacios al inicio",
-               },
-             }}
+            isRequired={true}
+            labelName="Phone Number"
+            isEdit={true}
+            getFormErrorMessage={getFormErrorMessage}
+            control={control}
+            nameInput="phoneNumber"
+            placeHolderText="Phone Number*"
+            width="100%"
+            showLabel={true}
+            rules={{
+              maxLength: {
+                value: 7,
+                message: "El campo supera los 7 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }}
           />
           <div className="registerInput__container-x2">
             <PasswordInput
-                  isRequired={true}
-                  labelName='Password'
-                   isEdit={true}
-                   getFormErrorMessage={getFormErrorMessage}
-                   control={control}
-                   nameInput="password"
-                   placeHolderText="Enter password"
-                   width="100%"
-                   showLabel={true}
-                   maxLength={20}
-                   rules={{
-                     maxLength: {
-                       value: 20,
-                       message: "El campo supera los 20 caracteres",
-                     },
-                     required: "*El campo es requerido.",
-                     pattern: {
-                       value: /^\S/,
-                       message: "No debe tener espacios al inicio",
-                     },
-                   }}
+              isRequired={true}
+              labelName="Password"
+              isEdit={true}
+              getFormErrorMessage={getFormErrorMessage}
+              control={control}
+              nameInput="password"
+              placeHolderText="Enter password"
+              width="100%"
+              showLabel={true}
+              maxLength={20}
+              rules={{
+                maxLength: {
+                  value: 20,
+                  message: "El campo supera los 20 caracteres",
+                },
+                required: "*El campo es requerido.",
+                pattern: {
+                  value: /^\S/,
+                  message: "No debe tener espacios al inicio",
+                },
+              }}
             />
             <PasswordInput
-                  isRequired={true}
-                  labelName='Password'
-                   isEdit={true}
-                   getFormErrorMessage={getFormErrorMessage}
-                   control={control}
-                   nameInput="confirmPassword"
-                   placeHolderText="Confirm Password"
-                   width="100%"
-                   showLabel={false}
-                   maxLength={20}
-                   rules={{
-                     maxLength: {
-                       value: 20,
-                       message: "El campo supera los 20 caracteres",
-                     },
-                     required: "*El campo es requerido.",
-                     pattern: {
-                       value: /^\S/,
-                       message: "No debe tener espacios al inicio",
-                     },
-                   }}
+              isRequired={true}
+              labelName="Password"
+              isEdit={true}
+              getFormErrorMessage={getFormErrorMessage}
+              control={control}
+              nameInput="confirmPassword"
+              placeHolderText="Confirm Password"
+              width="100%"
+              showLabel={false}
+              maxLength={20}
+              rules={{
+                maxLength: {
+                  value: 20,
+                  message: "El campo supera los 20 caracteres",
+                },
+                required: "*El campo es requerido.",
+                pattern: {
+                  value: /^\S/,
+                  message: "No debe tener espacios al inicio",
+                },
+              }}
             />
+			<RadioInput
+			showLabel={true}
+			labelName="Lorem Ipsum"
+			nameInput="termsandconditions"
+			control={control}
+			/>
           </div>
           <div className="p-field" style={{ marginBottom: "24px" }}>
             <Button label="Sign up" type="submit" />
