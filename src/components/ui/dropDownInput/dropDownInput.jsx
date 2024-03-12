@@ -2,26 +2,13 @@ import { Dropdown } from 'primereact/dropdown'
 import { ChangeEventHandler } from 'react'
 import { Controller } from 'react-hook-form'
 
-type InputProps = {
-  control: any
-  label: string
-  isRequerid: boolean
-  nameInput: string
-  getFormErrorMessage: Function
-  options: any
-  optionLabel: string
-  optionValue: string
-  rules?: any
-  isEdit?: boolean
-  className?: string
-  placeholder?: string
-  onChange?: () => void
-}
 
-function DropdownHookForm({
+function DropDownInput({
+  showLabel,
+  labelName = '',
   control,
   label,
-  isRequerid,
+  isRequired,
   nameInput,
   rules,
   isEdit,
@@ -30,15 +17,21 @@ function DropdownHookForm({
   optionValue,
   getFormErrorMessage,
   className = '',
-  placeholder = '',
+  placeHolderText = '',
   onChange,
-}: InputProps) {
-  return (
-    <div className="field mb-5">
-      <label htmlFor={nameInput} className="block font-semibold">
-        {label} {isRequerid && <span className="text-red-600">*</span>}
-      </label>
-      <Controller
+  width,
+  height
+}) {
+
+  // const inputWidth = {
+  //   width: width,
+  //   height: height,
+  // };
+
+  
+  const renderInput = () => (
+    <>
+       <Controller
         name={nameInput}
         control={control}
         rules={rules}
@@ -56,13 +49,62 @@ function DropdownHookForm({
             options={options}
             optionLabel={optionLabel}
             optionValue={optionValue}
-            placeholder={placeholder}
-            className={'w-full md:w-14rem ' + className}
+            placeholder={placeHolderText}
+            className={'w-full md:w-14rem '  + className}
           />
         )}
       />
       {getFormErrorMessage(nameInput)}
+    </>
+  );
+
+  return (
+    <div className="p-field">
+      {showLabel ? (
+        <label htmlFor={nameInput}>
+          {label} {isRequired && <span className="text-red-600">*</span>}
+          {labelName}
+          {renderInput()}
+        </label>
+      ) : (
+        renderInput()
+      )}
     </div>
-  )
-}
-export default DropdownHookForm
+  );
+};
+
+export default DropDownInput;
+
+//   return (
+//     <div className="field mb-5">
+//       <label htmlFor={nameInput} className="block font-semibold">
+//         {label} {isRequerid && <span className="text-red-600">*</span>}
+//       </label>
+//       <Controller
+//         name={nameInput}
+//         control={control}
+//         rules={rules}
+//         render={({ field }) => (
+//           <Dropdown
+//             disabled={!isEdit}
+//             value={field.value}
+//             key={field.value}
+//             onChange={(e) => {
+//               field.onChange(e.value)
+//               if (onChange) {
+//                 onChange()
+//               }
+//             }}
+//             options={options}
+//             optionLabel={optionLabel}
+//             optionValue={optionValue}
+//             placeholder={placeholder}
+//             className={'w-full md:w-14rem ' + className}
+//           />
+//         )}
+//       />
+//       {getFormErrorMessage(nameInput)}
+//     </div>
+//   )
+// }
+// export default DropdownHookForm

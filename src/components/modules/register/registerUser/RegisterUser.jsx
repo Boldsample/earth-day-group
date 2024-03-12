@@ -6,7 +6,10 @@ import { InputText } from "primereact/inputtext";
 import NumberInput from "../../../ui/numberInput/NumberInput";
 import TextInput from "../../../ui/textInput/TextInput";
 import TextAreaInput from "../../../ui/textAreaInput/TextAreaInput";
+import DropDownInput from "../../../ui/dropDownInput/DropDownInput";
 import { useForm, FormProvider } from "react-hook-form";
+import PasswordInput from "../../../ui/passwordInput/PasswordInput";
+
 
 const RegisterUser = () => {
   const {
@@ -23,9 +26,22 @@ const RegisterUser = () => {
       email: "",
       phoneNumber: "",
       bio: "",
+      country: "",
+      password: "",
+      confirmPassword: ""
       // Initialize all other fields used in the form
     },
   });
+
+//   const [selectedCity, setSelectedCity] = useState(null);
+
+  const countries = [
+    { name: 'Colombia', code: 'COL' },
+    { name: 'United States', code: 'USA' },
+    { name: 'Ecuador', code: 'ECU' },
+    { name: 'Peru', code: 'PER' },
+    { name: 'Panama', code: 'PAN' }
+];
 
 
 const getFormErrorMessage = (fieldName) => {
@@ -94,12 +110,27 @@ const getFormErrorMessage = (fieldName) => {
               // value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <InputText
+            <DropDownInput
+                control={control}
+                showLabel={false}
+                nameInput="country"
+                labelName=""
+                isEdit={true}
+                isRequired={true}
+                // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
+                options={countries} 
+                optionLabel="name" 
+                placeHolderText="Select a Country" 
+                className=""
+                getFormErrorMessage={getFormErrorMessage}
+                
+            />
+            {/* <InputText
               id="location"
               placeholder="Location*"
               // value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
+            /> */}
           </div>
           <TextAreaInput
             isRequired={false}
@@ -166,7 +197,53 @@ const getFormErrorMessage = (fieldName) => {
           </label>
             /> */}
           <div className="registerInput__container-x2">
-            <label htmlFor="password">
+            <PasswordInput
+                  isRequired={true}
+                  labelName='Password'
+                   isEdit={true}
+                   getFormErrorMessage={getFormErrorMessage}
+                   control={control}
+                   nameInput="password"
+                   placeHolderText="Enter password"
+                   width="100%"
+                   showLabel={true}
+                   maxLength={20}
+                   rules={{
+                     maxLength: {
+                       value: 20,
+                       message: "El campo supera los 20 caracteres",
+                     },
+                     required: "*El campo es requerido.",
+                     pattern: {
+                       value: /^\S/,
+                       message: "No debe tener espacios al inicio",
+                     },
+                   }}
+            />
+            <PasswordInput
+                  isRequired={true}
+                  labelName='Password'
+                   isEdit={true}
+                   getFormErrorMessage={getFormErrorMessage}
+                   control={control}
+                   nameInput="confirmPassword"
+                   placeHolderText="Confirm Password"
+                   width="100%"
+                   showLabel={false}
+                   maxLength={20}
+                   rules={{
+                     maxLength: {
+                       value: 20,
+                       message: "El campo supera los 20 caracteres",
+                     },
+                     required: "*El campo es requerido.",
+                     pattern: {
+                       value: /^\S/,
+                       message: "No debe tener espacios al inicio",
+                     },
+                   }}
+            />
+            {/* <label htmlFor="password">
               Password
               <InputText
                 className="p-inputtext"
@@ -181,7 +258,7 @@ const getFormErrorMessage = (fieldName) => {
               placeholder="Confirm Password"
               // value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
+            /> */}
           </div>
           <div className="p-field" style={{ marginBottom: "24px" }}>
             <Button label="Sign up" type="submit" />
