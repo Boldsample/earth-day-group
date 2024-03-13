@@ -9,7 +9,7 @@ import TextAreaInput from "../../../ui/textAreaInput/TextAreaInput";
 import DropDownInput from "../../../ui/dropDownInput/DropDownInput";
 import { useForm, FormProvider } from "react-hook-form";
 import PasswordInput from "../../../ui/passwordInput/PasswordInput";
-import RadioInput from "../../../ui/radioInput/RadioInput";
+import CheckBoxInput from "../../../ui/checkBoxInput/CheckBoxInput";
 
 const RegisterUser = () => {
   const {
@@ -22,7 +22,7 @@ const RegisterUser = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
+      name: "", 
       email: "",
       phoneNumber: "",
       bio: "",
@@ -30,7 +30,7 @@ const RegisterUser = () => {
       password: "",
       confirmPassword: "",
       username: "",
-      termsAndConditions: 0,
+	  termsConditionsChecked: false
     },
   });
 
@@ -54,6 +54,7 @@ const RegisterUser = () => {
       )
     );
   };
+
 
   console.log(getValues());
 
@@ -241,15 +242,13 @@ const RegisterUser = () => {
               }}
             />
           </div>
-          <RadioInput
-            isEdit={true}
-            isRequired={true}
-            showLabel={true}
-            labelName="Lorem Ipsum"
-            nameInput="termsAndConditions"
-            control={control}
-            data={LDAP}
-          />
+			<CheckBoxInput
+				nameInput='termsConditionsChecked'
+				control={control}
+				rules={{ required: "Accept is required." }}
+				getFormErrorMessage={getFormErrorMessage}
+				checkBoxText="I've read and accept the terms & conditions."
+			/>
           <div className="p-field" style={{ marginBottom: "24px" }}>
             <Button label="Sign up" type="submit" />
           </div>

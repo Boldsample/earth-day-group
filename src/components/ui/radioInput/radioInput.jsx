@@ -1,5 +1,6 @@
 import { RadioButton } from "primereact/radiobutton";
 import { Controller } from "react-hook-form";
+import './radioInput.sass'
 
 function RadioInput({
   labelName,
@@ -11,8 +12,16 @@ function RadioInput({
   nameInput,
   isEdit,
 }) {
+
+  // Los datos deben ser pasados asi desde el componente padre por medio de props.
+  // const data = [
+  //   { name: "Con autenticación", value: 1 },
+  //   { name: "Sin autenticación", value: 2 },
+  // ];
+
   const renderInput = () => (
     <>
+    <div className="radioInput__container">
       {data.map(({ name, value }) => (
         <>
           <Controller
@@ -38,6 +47,7 @@ function RadioInput({
           </label>
         </>
       ))}
+    </div>
     </>
   );
 
