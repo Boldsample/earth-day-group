@@ -27,6 +27,7 @@ function NumberInput({
 
   const renderInput = () => (
     <>
+    <div>
       <Controller
         name={nameInput}
         control={control}
@@ -49,6 +50,7 @@ function NumberInput({
           />
         )}
       />
+    </div>
       {getFormErrorMessage(nameInput)}
     </>
   );

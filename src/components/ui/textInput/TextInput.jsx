@@ -30,6 +30,7 @@ const TextInput = ({
   
   const renderInput = () => (
     <>
+    <div>
       <Controller
         name={inputName}
         control={control}
@@ -47,6 +48,7 @@ const TextInput = ({
           />
         )}
       />
+    </div>
       {getFormErrorMessage(inputName)}
     </>
   );

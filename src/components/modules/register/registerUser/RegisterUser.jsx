@@ -10,6 +10,7 @@ import DropDownInput from "../../../ui/dropDownInput/DropDownInput";
 import { useForm, FormProvider } from "react-hook-form";
 import PasswordInput from "../../../ui/passwordInput/PasswordInput";
 import CheckBoxInput from "../../../ui/checkBoxInput/CheckBoxInput";
+import ProfilePhoto from "../../../ui/profilePhoto/ProfilePhoto";
 
 const RegisterUser = () => {
   const {
@@ -22,15 +23,15 @@ const RegisterUser = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "", 
+      name: "",
       email: "",
-      phoneNumber: "",
+      phoneNumber: null,
       bio: "",
       country: "",
       password: "",
       confirmPassword: "",
       username: "",
-	  termsConditionsChecked: false
+      termsConditionsChecked: false,
     },
   });
 
@@ -42,11 +43,6 @@ const RegisterUser = () => {
     { name: "Panama", code: "PAN" },
   ];
 
-  const LDAP = [
-    { name: "Con autenticación", value: 1 },
-    { name: "Sin autenticación", value: 2 },
-  ];
-
   const getFormErrorMessage = (fieldName) => {
     return (
       errors[fieldName] && (
@@ -55,7 +51,6 @@ const RegisterUser = () => {
     );
   };
 
-
   console.log(getValues());
 
   const onSubmit = (data) => console.log(data);
@@ -63,8 +58,15 @@ const RegisterUser = () => {
   return (
     <div className="layout">
       <div className="main__content">
-        <h5 id="hello">Profile Picture</h5>
-        <p>Click to upload</p>
+        <div className="profile__container">
+          <div className="profilePicture__container">
+            <ProfilePhoto />
+          </div>
+		  <div className="profileUpload__container">
+          <h5 className="profileUpload__title">Profile Picture</h5>
+          <p>Click to upload</p>
+		  </div>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="registerInput__container-x2">
             <TextInput
@@ -242,13 +244,13 @@ const RegisterUser = () => {
               }}
             />
           </div>
-			<CheckBoxInput
-				nameInput='termsConditionsChecked'
-				control={control}
-				rules={{ required: "Accept is required." }}
-				getFormErrorMessage={getFormErrorMessage}
-				checkBoxText="I've read and accept the terms & conditions."
-			/>
+          <CheckBoxInput
+            nameInput="termsConditionsChecked"
+            control={control}
+            rules={{ required: "Accept is required." }}
+            getFormErrorMessage={getFormErrorMessage}
+            checkBoxText="I've read and accept the terms & conditions."
+          />
           <div className="p-field" style={{ marginBottom: "24px" }}>
             <Button label="Sign up" type="submit" />
           </div>

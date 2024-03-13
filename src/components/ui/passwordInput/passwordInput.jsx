@@ -21,8 +21,15 @@ function PasswordInput({
   //   height: height,
   // };
 
+  const errorStyling = {
+    'display': 'flex;',
+    'flex-direction': 'column;',
+    'align-self': 'end;'
+  }
+
   const renderInput = () => (
     <>
+    <div>
        <Controller
         name={nameInput}
         control={control}
@@ -39,6 +46,7 @@ function PasswordInput({
           />
         )}
       />
+    </div>
       {getFormErrorMessage(nameInput)}
     </>
   );
