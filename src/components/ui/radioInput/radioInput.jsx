@@ -1,20 +1,21 @@
-import { RadioButton } from 'primereact/radiobutton'
-import { Controller } from 'react-hook-form'
+import { RadioButton } from "primereact/radiobutton";
+import { Controller } from "react-hook-form";
 
 function RadioInput({
   labelName,
   showLabel,
   control,
-  data = [{ value: 0, name: '' }],
+  data,
   label,
   isRequired,
   nameInput,
   isEdit,
-}){
-const renderInput = () => (
-  <>
-   {data.map(({ name, value }) => (
-     <Controller
+}) {
+  const renderInput = () => (
+    <>
+      {data.map(({ name, value }) => (
+        <>
+          <Controller
             name={nameInput}
             control={control}
             rules={{
@@ -26,38 +27,36 @@ const renderInput = () => (
                 disabled={!isEdit}
                 value={value}
                 checked={field.value === value}
-                onChange={(e) => {                            
-                    field.onChange(e.value)}}
+                onChange={(e) => {
+                  field.onChange(e.value);
+                }}
               />
+            )}
+          />
+          <label htmlFor={name} className="ml-2 mr-5">
+            {name}
+          </label>
+        </>
+      ))}
+    </>
+  );
+
+  return (
+    <div className="p-field">
+      {showLabel ? (
+        <label htmlFor={nameInput}>
+          {label} {isRequired && <span className="text-red-600">*</span>}
+          {labelName}
+          {renderInput()}
+        </label>
+      ) : (
+        renderInput()
       )}
-    />
-   ))}
-    {/* {getFormErrorMessage(nameInput)} */}
-  </>
-);
+    </div>
+  );
+}
 
-return (
-  <div className="p-field">
-    {showLabel ? (
-      <label htmlFor={nameInput}>
-        {label} {isRequired && <span className="text-red-600">*</span>}
-        {labelName}
-        {renderInput()}
-      </label>
-    ) : (
-      renderInput()
-    )}
-  </div>
-)};
-
-
-export default RadioInput; 
-
-
-
-
-
-
+export default RadioInput;
 
 // {
 //   return (
@@ -80,7 +79,7 @@ export default RadioInput;
 //                 disabled={!isEdit}
 //                 value={value}
 //                 checked={field.value === value}
-//                 onChange={(e) => {                            
+//                 onChange={(e) => {
 //                     field.onChange(e.value)}}
 //               />
 //             )}

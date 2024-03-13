@@ -1,11 +1,9 @@
-import { InputNumber } from 'primereact/inputnumber'
-import { Tooltip } from 'primereact/tooltip'
-import { Controller } from 'react-hook-form'
-
-
+import { InputNumber } from "primereact/inputnumber";
+import { Tooltip } from "primereact/tooltip";
+import { Controller } from "react-hook-form";
 
 function NumberInput({
-  labelName = '',
+  labelName = "",
   control,
   label,
   isRequired,
@@ -13,26 +11,23 @@ function NumberInput({
   rules,
   isEdit,
   getFormErrorMessage,
-  className = '',
-  placeHolderText = '',
+  className = "",
+  placeHolderText = "",
   maxLength = 10,
   showTooltip = false,
-  messageHelp = '',
+  messageHelp = "",
   showLabel,
   width,
-  height
-
+  height,
 }) {
-
   const inputWidth = {
     width: width,
     height: height,
   };
 
-  
   const renderInput = () => (
     <>
-       <Controller
+      <Controller
         name={nameInput}
         control={control}
         rules={rules}
@@ -49,7 +44,7 @@ function NumberInput({
             minFractionDigits={0}
             maxFractionDigits={5}
             onValueChange={(e) => field.onChange(e)}
-            className={'w-full ' + className}
+            className={"w-full " + className}
             placeholder={placeHolderText}
           />
         )}
@@ -71,12 +66,9 @@ function NumberInput({
       )}
     </div>
   );
-};
+}
 
 export default NumberInput;
-
-
-  
 
 //   return (
 //     <div className="field mb-5">

@@ -22,7 +22,7 @@ const RegisterUser = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "", 
+      name: "",
       email: "",
       phoneNumber: "",
       bio: "",
@@ -30,7 +30,7 @@ const RegisterUser = () => {
       password: "",
       confirmPassword: "",
       username: "",
-   
+      termsAndConditions: 0,
     },
   });
 
@@ -40,6 +40,11 @@ const RegisterUser = () => {
     { name: "Ecuador", code: "ECU" },
     { name: "Peru", code: "PER" },
     { name: "Panama", code: "PAN" },
+  ];
+
+  const LDAP = [
+    { name: "Con autenticación", value: 1 },
+    { name: "Sin autenticación", value: 2 },
   ];
 
   const getFormErrorMessage = (fieldName) => {
@@ -235,13 +240,16 @@ const RegisterUser = () => {
                 },
               }}
             />
-			<RadioInput
-			showLabel={true}
-			labelName="Lorem Ipsum"
-			nameInput="termsandconditions"
-			control={control}
-			/>
           </div>
+          <RadioInput
+            isEdit={true}
+            isRequired={true}
+            showLabel={true}
+            labelName="Lorem Ipsum"
+            nameInput="termsAndConditions"
+            control={control}
+            data={LDAP}
+          />
           <div className="p-field" style={{ marginBottom: "24px" }}>
             <Button label="Sign up" type="submit" />
           </div>
