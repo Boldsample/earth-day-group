@@ -11,6 +11,14 @@ import { useForm, FormProvider } from "react-hook-form";
 import PasswordInput from "../../../ui/passwordInput/PasswordInput";
 import CheckBoxInput from "../../../ui/checkBoxInput/CheckBoxInput";
 import ProfilePhoto from "../../../ui/profilePhoto/ProfilePhoto";
+import { useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { addCleanData } from "../../../../store/slices/usersSlice";
+import { getUsersList } from "../../../../store/slices/usersSlice";
+
+
 
 const RegisterUser = () => {
   const {
@@ -34,6 +42,16 @@ const RegisterUser = () => {
       termsConditionsChecked: false,
     },
   });
+  
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => console.log(state.users))
+  
+  useEffect(()=>{
+    dispatch(getUsersList('juan'))
+  }, [])
+  
+  console.log(userInfo)
+  // console.log(cleanData)
 
   const countries = [
     { name: "Colombia", code: "COL" },
@@ -42,16 +60,16 @@ const RegisterUser = () => {
     { name: "Peru", code: "PER" },
     { name: "Panama", code: "PAN" },
   ];
-
+  
   const getFormErrorMessage = (fieldName) => {
     return (
       errors[fieldName] && (
         <small className="p-error">{errors[fieldName]?.message}</small>
-      )
+        )
     );
   };
 
-  console.log(getValues());
+  // console.log(getValues());
 
   const onSubmit = (data) => console.log(data);
 

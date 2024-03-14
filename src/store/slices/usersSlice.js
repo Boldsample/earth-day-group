@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { getUser, getUsers } from "../../services/userServices";
+import { getUser, getUsers } from "../../services/userServices";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -14,6 +14,7 @@ const initialState = {
 export const getUsersList = createAsyncThunk(
   "users/getUsersList",
   async (inputField) => {
+    // console.log(inputField)
     const res = await getUsers(inputField);
     return res;
   }
