@@ -1,11 +1,11 @@
-import React from "react";
-import CategoryCard from "../../../ui/cards/categoryCard/CategoryCard";
+import React from "react"
 import './registerCategories.sass'
-import userIcon from '../../../../assets/registerCategories/registerCat-1.svg'
-import recycleIcon from '../../../../assets/registerCategories/registerCat-2.svg'
-import shelterIcon from '../../../../assets/registerCategories/registerCat-3.svg'
-import ecommerceIcon from '../../../../assets/registerCategories/registerCat-4.svg'
-import backgroundImg from '../../../../assets/registerCategories/registerCatBackground.svg'
+import CategoryCard from "@ui/cards/categoryCard/CategoryCard"
+import userIcon from '@assets/registerCategories/registerCat-1.svg'
+import recycleIcon from '@assets/registerCategories/registerCat-2.svg'
+import shelterIcon from '@assets/registerCategories/registerCat-3.svg'
+import ecommerceIcon from '@assets/registerCategories/registerCat-4.svg'
+import backgroundImg from '@assets/registerCategories/registerCatBackground.svg'
 
 const registerCategories = () => {
   return (  
