@@ -27,30 +27,30 @@ function NumberInput({
 
   const renderInput = () => (
     <>
-    <div>
-      <Controller
-        name={nameInput}
-        control={control}
-        rules={rules}
-        render={({ field }) => (
-          <InputNumber
-            style={inputWidth}
-            maxLength={maxLength}
-            disabled={!isEdit}
-            useGrouping={false}
-            id={field.name}
-            ref={field.ref}
-            value={field.value}
-            onBlur={field.onBlur}
-            minFractionDigits={0}
-            maxFractionDigits={5}
-            onValueChange={(e) => field.onChange(e)}
-            className={"w-full " + className}
-            placeholder={placeHolderText}
-          />
-        )}
-      />
-    </div>
+      <div>
+        <Controller
+          name={nameInput}
+          control={control}
+          rules={rules}
+          render={({ field }) => (
+            <InputNumber
+              style={inputWidth}
+              maxLength={maxLength}
+              disabled={!isEdit}
+              useGrouping={false}
+              id={field.name}
+              ref={field.ref}
+              value={field.value}
+              onBlur={field.onBlur}
+              minFractionDigits={0}
+              maxFractionDigits={5}
+              onValueChange={(e) => field.onChange(e)}
+              className={"w-full " + className}
+              placeholder={placeHolderText}
+            />
+          )}
+        />
+      </div>
       {getFormErrorMessage(nameInput)}
     </>
   );

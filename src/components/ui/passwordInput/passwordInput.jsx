@@ -1,5 +1,5 @@
-import { Password } from 'primereact/password'
-import { Controller } from 'react-hook-form'
+import { Password } from "primereact/password";
+import { Controller } from "react-hook-form";
 
 function PasswordInput({
   showLabel,
@@ -11,48 +11,47 @@ function PasswordInput({
   rules,
   isEdit,
   getFormErrorMessage,
-  className = '',
-  placeHolderText = '',
+  className = "",
+  placeHolderText = "",
   maxLength = 50,
 }) {
-
   // const inputWidth = {
   //   width: width,
   //   height: height,
   // };
 
   const errorStyling = {
-    'display': 'flex;',
-    'flex-direction': 'column;',
-    'align-self': 'end;'
-  }
+    display: "flex;",
+    "flex-direction": "column;",
+    "align-self": "end;",
+  };
 
   const renderInput = () => (
     <>
-    <div>
-       <Controller
-        name={nameInput}
-        control={control}
-        rules={rules}
-        render={({ field }) => (
-          <Password
-            maxLength={maxLength}
-            disabled={!isEdit}
-            id={field.name}
-            placeholder={placeHolderText}
-            className={'w-full ' + className}
-            value={field.value}
-            onChange={(e) => field.onChange(e)}
-          />
-        )}
-      />
-    </div>
+      <div>
+        <Controller
+          name={nameInput}
+          control={control}
+          rules={rules}
+          render={({ field }) => (
+            <Password
+              maxLength={maxLength}
+              disabled={!isEdit}
+              id={field.name}
+              placeholder={placeHolderText}
+              className={"w-full " + className}
+              value={field.value}
+              onChange={(e) => field.onChange(e)}
+            />
+          )}
+        />
+      </div>
       {getFormErrorMessage(nameInput)}
     </>
   );
 
   return (
-    <div className="p-field">
+    <div className={"p-field " + className}>
       {showLabel ? (
         <label htmlFor={nameInput}>
           {label} {isRequired && <span className="text-red-600">*</span>}
@@ -64,7 +63,7 @@ function PasswordInput({
       )}
     </div>
   );
-};
+}
 
 export default PasswordInput;
 

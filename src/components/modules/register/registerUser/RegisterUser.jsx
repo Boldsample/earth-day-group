@@ -13,12 +13,11 @@ import CheckBoxInput from "../../../ui/checkBoxInput/CheckBoxInput";
 import ProfilePhoto from "../../../ui/profilePhoto/ProfilePhoto";
 import { useEffect } from "react";
 
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { addCleanData } from "../../../../store/slices/usersSlice";
-import { getUsersList } from "../../../../store/slices/usersSlice";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCleanData,
+  getUsersList,
+} from "../../../../store/slices/usersSlice";
 
 const RegisterUser = () => {
   const {
@@ -42,15 +41,15 @@ const RegisterUser = () => {
       termsConditionsChecked: false,
     },
   });
-  
+
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => console.log(state.users))
-  
-  useEffect(()=>{
-    dispatch(getUsersList('juan'))
-  }, [])
-  
-  console.log(userInfo)
+  const userInfo = useSelector((state) => console.log(state.users));
+
+  useEffect(() => {
+    dispatch(getUsersList("juan"));
+  }, []);
+
+  console.log(userInfo);
   // console.log(cleanData)
 
   const countries = [
@@ -60,16 +59,16 @@ const RegisterUser = () => {
     { name: "Peru", code: "PER" },
     { name: "Panama", code: "PAN" },
   ];
-  
+
   const getFormErrorMessage = (fieldName) => {
     return (
       errors[fieldName] && (
         <small className="p-error">{errors[fieldName]?.message}</small>
-        )
+      )
     );
   };
 
-  // console.log(getValues());
+  console.log(getValues());
 
   const onSubmit = (data) => console.log(data);
 
@@ -80,10 +79,10 @@ const RegisterUser = () => {
           <div className="profilePicture__container">
             <ProfilePhoto />
           </div>
-		  <div className="profileUpload__container">
-          <h5 className="profileUpload__title">Profile Picture</h5>
-          <p>Click to upload</p>
-		  </div>
+          <div className="profileUpload__container">
+            <h5 className="profileUpload__title">Profile Picture</h5>
+            <p>Click to upload</p>
+          </div>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="registerInput__container-x2">
@@ -239,15 +238,16 @@ const RegisterUser = () => {
               }}
             />
             <PasswordInput
+              className="noLabel"
               isRequired={true}
-              labelName="Password"
+              labelName="Confirm Password"
               isEdit={true}
               getFormErrorMessage={getFormErrorMessage}
               control={control}
               nameInput="confirmPassword"
               placeHolderText="Confirm Password"
               width="100%"
-              showLabel={false}
+              showLabel={true}
               maxLength={20}
               rules={{
                 maxLength: {
