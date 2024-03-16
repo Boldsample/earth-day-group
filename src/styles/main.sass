@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons')
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
+
+:root
+	--primary: #408D27
+	--secondary: #23649A
+	--text: #737373
+
+*
+	box-sizing: border-box
+	font-family: "Roboto", sans-serif
+html, body
+	background-color: #FFFBEB
+	color: var(--text)
+	font-size: 24px
+	font-weight: 400
+	line-height: 1.3em
+	margin: 0
+	overflow: hidden
+	padding: 0
+a
+	color: var(--primary)
+	text-decoration: none !important
+p
+	margin: 0 0 0.6em
+	width: 100%
+h1, h2, .h1, .h2
+	color: var(--primary)
+	font-size: 80px
+	font-weight: 900
+	line-height: 1em
+	margin: 0
+	text-transform: uppercase
+	width: 100%
+h2, .h2
+	font-size: 64px
+
+h4
+	color: var(--primary)
+	font-size: 48px
+h5
+	color: var(--primary)
+	font-size: 32px
+
+ul
+	margin: 0
+	padding-left: 0.8em
+	width: 100%
+	li::marker
+		color: var(--secondary)
+button, .button
+	background-color: var(--text)
+	border: none
+	border-radius: 4px
+	color: white
+	cursor: pointer
+	font-size: 16px
+	font-weight: 700
+	line-height: 1.5em
+	margin-right: 40px
+	padding: 8px 16px
+	text-decoration: none !important
+	.material-icons
+		margin-bottom: 0.1em
+		vertical-align: middle
+	&.primary
+		background-color: var(--primary)
+	&.secondary
+		background-color: var(--secondary)
+
+header
+	display: flex
+	justify-content: center
+	position: relative
+	width: 100%
+	.logo
+		background: var(--primary)
+		border-radius: 0 0 16px 16px
+		height: 120px
+		padding: 32px 10px
+		width: 176px
+		img
+			height: 56px
+
+.p-carousel-prev, .p-carousel-next
+	display: none
+.p-carousel-indicators
+	bottom: 20px
+	position: absolute
+	width: 100%
+	.p-carousel-indicator
+		margin: 0
+		width: 48px
+		.p-link
+			background: white
+			border-radius: 0
+			height: 4px
+			margin: 0
+			padding: 0
+			width: 100%
+		&:nth-child(2) .p-link
+			opacity: .8
+		&:nth-child(3) .p-link
+			opacity: .6
+		&:nth-child(4) .p-link
+			opacity: .4
+	[data-p-highlight="true"]
+		.p-link
+			background: var(--secondary)
+			box-shadow: 0px 0px 8px rgba(255,255,255,.5)
+			opacity: 1 !important
+			transform: scaleY(1.8)
+
+.font-black
+	font-weight: 900
+.text-primary
+	color: var(--primary)
+.text-center
+	text-align: center
+.text-right
+	text-align: right
+.text-xs
+	font-size: 12px
+	line-height: 16px
+
+.layout
+		height: 100vh
+		position: relative
+		width: 100%
+		.layout__background
+			bottom: 0
+			height: 85vw
+			left: 0
+			object-fit: cover
+			pointer-events: none
+			position: absolute
+			width: 100%
+		.main__content
+			align-content: center
+			display: flex
+			height: 660px
+			flex-wrap: wrap
+			margin-top: calc((100vh - 660px) / 2)
+			margin-left: calc(50% + ((50% - 506px) / 2))
+			position: absolute
+			width: 480px
+			h1, ul
+				margin-bottom: 15px
+
+@media (min-width: 120vh)
+	#layout .layout .layout__background
+		bottom: 0
+		height: auto
+@media (max-width: 1024px)
+	#layout .layout
+		.layout__background
+			width: 100%
+		.main__content
+			height: auto
+			margin: 0
+			padding: 150px 32px 0
+			position: relative
+			width: 100%

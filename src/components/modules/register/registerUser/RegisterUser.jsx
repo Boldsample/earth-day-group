@@ -1,23 +1,17 @@
 import React from "react";
 import "./registerUser.sass";
-import { Link } from "react-router-dom";
-import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
-import NumberInput from "../../../ui/numberInput/NumberInput";
-import TextInput from "../../../ui/textInput/TextInput";
-import TextAreaInput from "../../../ui/textAreaInput/TextAreaInput";
-import DropDownInput from "../../../ui/dropDownInput/DropDownInput";
-import { useForm, FormProvider } from "react-hook-form";
-import PasswordInput from "../../../ui/passwordInput/PasswordInput";
-import CheckBoxInput from "../../../ui/checkBoxInput/CheckBoxInput";
-import ProfilePhoto from "../../../ui/profilePhoto/ProfilePhoto";
 import { useEffect } from "react";
-
+import { Button } from "primereact/button";
+import TextInput from "@ui/forms/textInput/TextInput";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addCleanData,
-  getUsersList,
-} from "../../../../store/slices/usersSlice";
+import { useForm, FormProvider } from "react-hook-form";
+import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto";
+import NumberInput from "@ui/forms/numberInput/NumberInput";
+import TextAreaInput from "@ui/forms/textAreaInput/TextAreaInput";
+import DropDownInput from "@ui/forms/dropDownInput/DropDownInput";
+import PasswordInput from "@ui/forms/passwordInput/PasswordInput";
+import CheckBoxInput from "@ui/forms/checkBoxInput/CheckBoxInput";
+import { addCleanData, getUsersList } from "@store/slices/usersSlice";
 
 const RegisterUser = () => {
   const {
