@@ -12,6 +12,7 @@ import DropDownInput from "@ui/forms/dropDownInput/DropDownInput";
 import PasswordInput from "@ui/forms/passwordInput/PasswordInput";
 import CheckBoxInput from "@ui/forms/checkBoxInput/CheckBoxInput";
 import { addCleanData, getUsersList } from "@store/slices/usersSlice";
+import { createUser } from "../../../../services/userServices";
 
 const RegisterUser = () => {
   const {
@@ -28,7 +29,7 @@ const RegisterUser = () => {
       email: "",
       phoneNumber: null,
       bio: "",
-      country: "",
+      location: "",
       password: "",
       confirmPassword: "",
       username: "",
@@ -40,7 +41,7 @@ const RegisterUser = () => {
   const userInfo = useSelector((state) => console.log(state.users));
 
   useEffect(() => {
-    dispatch(getUsersList("juan"));
+    dispatch(getUsersList());
   }, []);
 
   console.log(userInfo);
@@ -64,7 +65,20 @@ const RegisterUser = () => {
 
   console.log(getValues());
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const cleanData = {
+      name: data.name,
+      email: data.email,
+      username: data.username,
+      location: data.location.name,
+      bio: data.bio,
+      phone: data.phoneNumber,
+      password: data.password,
+    };
+    console.log(data);
+    const response = await createUser(cleanData);
+    console.log(response);
+  };
 
   return (
     <div className="layout">
@@ -152,7 +166,7 @@ const RegisterUser = () => {
               control={control}
               showLabel={false}
               labelName="Location"
-              nameInput="country"
+              nameInput="location"
               isEdit={true}
               isRequired={true}
               // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}

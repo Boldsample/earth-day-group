@@ -11,14 +11,11 @@ const initialState = {
   cleanData: [],
 };
 
-export const getUsersList = createAsyncThunk(
-  "users/getUsersList",
-  async (inputField) => {
-    // console.log(inputField)
-    const res = await getUsers(inputField);
-    return res;
-  }
-);
+export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
+  // console.log(inputField)
+  const res = await getUsers();
+  return res;
+});
 
 export const getUserData = createAsyncThunk(
   "users/getUserData",

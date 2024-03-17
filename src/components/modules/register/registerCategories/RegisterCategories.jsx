@@ -1,21 +1,23 @@
-import React from "react"
-import './registerCategories.sass'
-import CategoryCard from "@ui/cards/categoryCard/CategoryCard"
-import userIcon from '@assets/registerCategories/registerCat-1.svg'
-import recycleIcon from '@assets/registerCategories/registerCat-2.svg'
-import shelterIcon from '@assets/registerCategories/registerCat-3.svg'
-import ecommerceIcon from '@assets/registerCategories/registerCat-4.svg'
-import backgroundImg from '@assets/registerCategories/registerCatBackground.svg'
+import React from "react";
+import "./registerCategories.sass";
+import CategoryCard from "@ui/cards/categoryCard/CategoryCard";
+import userIcon from "@assets/registerCategories/registerCat-1.svg";
+import recycleIcon from "@assets/registerCategories/registerCat-2.svg";
+import shelterIcon from "@assets/registerCategories/registerCat-3.svg";
+import ecommerceIcon from "@assets/registerCategories/registerCat-4.svg";
+import backgroundImg from "@assets/registerCategories/registerCatBackground.svg";
 
 const registerCategories = () => {
-  return (  
+  return (
     <>
-    <div className="category__container">
-    <img className="category__background" src={backgroundImg}/>
+      <div className="category__container">
+        <img className="category__background" src={backgroundImg} />
         <div className="content__container">
           <h4 className="category__title">Register as:</h4>
           <div className="category__grid">
             <CategoryCard
+              hoverBackgroundColor="#23649A"
+              hoverIconColor="#77BEF9"
               backgroundColor="#77BEF9"
               iconBackgroundColor="#23649A"
               height="200px"
@@ -25,6 +27,8 @@ const registerCategories = () => {
               icon={userIcon}
             />
             <CategoryCard
+              hoverBackgroundColor="#408D27"
+              hoverIconColor="#7FAE70"
               backgroundColor="#7FAE70"
               iconBackgroundColor="#408D27"
               height="200px"
@@ -34,6 +38,8 @@ const registerCategories = () => {
               icon={recycleIcon}
             />
             <CategoryCard
+              hoverBackgroundColor="#77BEF9"
+              hoverIconColor="#23649A"
               backgroundColor="#23649A"
               iconBackgroundColor="#77BEF9"
               height="234px"
@@ -43,6 +49,8 @@ const registerCategories = () => {
               icon={shelterIcon}
             />
             <CategoryCard
+              hoverBackgroundColor="#7FAE70"
+              hoverIconColor="#408D27"
               backgroundColor="#408D27"
               iconBackgroundColor="#7FAE70"
               height="234px"
@@ -53,7 +61,7 @@ const registerCategories = () => {
             />
           </div>
         </div>
-    </div>
+      </div>
     </>
   );
 };
