@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
-  // console.log(inputField)
   const res = await getUsers();
   return res;
 });

@@ -13,6 +13,7 @@ import PasswordInput from "@ui/forms/passwordInput/PasswordInput";
 import CheckBoxInput from "@ui/forms/checkBoxInput/CheckBoxInput";
 import { addCleanData, getUsersList } from "@store/slices/usersSlice";
 import { createUser } from "../../../../services/userServices";
+import { FileUpload } from "primereact/fileupload";
 
 const RegisterUser = () => {
   const {
@@ -34,11 +35,12 @@ const RegisterUser = () => {
       confirmPassword: "",
       username: "",
       termsConditionsChecked: false,
+      demo: "",
     },
   });
 
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => console.log(state.users));
+  const userInfo = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUsersList());
@@ -63,7 +65,7 @@ const RegisterUser = () => {
     );
   };
 
-  console.log(getValues());
+  // console.log(getValues());
 
   const onSubmit = async (data) => {
     const cleanData = {
@@ -83,16 +85,25 @@ const RegisterUser = () => {
   return (
     <div className="layout">
       <div className="main__content">
-        <div className="profile__container">
-          <div className="profilePicture__container">
-            <ProfilePhoto />
-          </div>
-          <div className="profileUpload__container">
-            <h5 className="profileUpload__title">Profile Picture</h5>
-            <p>Click to upload</p>
-          </div>
-        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="profile__container">
+            <div className="profilePicture__container">
+              <ProfilePhoto />
+            </div>
+            <div className="profileUpload__container">
+              <h5 className="profileUpload__title">Profile Picture</h5>
+              {/* <p>Click to upload</p> */}
+              <FileUpload
+                mode="basic"
+                name="demo"
+                url="/api/upload"
+                accept="image/*"
+                maxFileSize={1000000}
+                // onUpload={onUpload}
+                control={control}
+              />
+            </div>
+          </div>
           <div className="registerInput__container-x2">
             <TextInput
               isRequired={true}
