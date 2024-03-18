@@ -15,6 +15,7 @@ import { addCleanData, getUsersList } from "@store/slices/usersSlice";
 import { createUser } from "../../../../services/userServices";
 import { FileUpload } from "primereact/fileupload";
 
+
 const RegisterUser = () => {
   const {
     control,
@@ -65,6 +66,29 @@ const RegisterUser = () => {
     );
   };
 
+  // const uploadInvoice = async (invoiceFile) => {
+  //   let formData = new FormData();
+  //   formData.append('invoiceFile', invoiceFile);
+  
+  //   const response = await fetch(`orders/${orderId}/uploadInvoiceFile`,
+  //     {
+  //       method: 'POST',
+  //       body: formData
+  //     },
+  //   );
+  // };
+
+  const invoiceUploadHandler = ({files}) => {
+    const [file] = files;
+    console.log(file)
+    // const fileReader = new FileReader();
+    // fileReader.onload = (e) => {
+    //   uploadInvoice(e.target.result);
+    // };
+    // fileReader.readAsDataURL(file);
+  };
+
+
   // console.log(getValues());
 
   const onSubmit = async (data) => {
@@ -94,13 +118,17 @@ const RegisterUser = () => {
               <h5 className="profileUpload__title">Profile Picture</h5>
               {/* <p>Click to upload</p> */}
               <FileUpload
+              className="profilePhotoUpload"
                 mode="basic"
-                name="demo"
+                name="profilePhoto"
                 url="/api/upload"
                 accept="image/*"
                 maxFileSize={1000000}
-                // onUpload={onUpload}
-                control={control}
+                customUpload
+                uploadHandler={invoiceUploadHandler}
+                // control={control}
+                chooseLabel="Click here to upload"
+                previewWidth={50}
               />
             </div>
           </div>
