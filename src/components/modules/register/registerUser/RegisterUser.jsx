@@ -1,10 +1,10 @@
 import React from "react";
 import "./registerUser.sass";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button } from "primereact/button";
 import TextInput from "@ui/forms/textInput/TextInput";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, set } from "react-hook-form";
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto";
 import NumberInput from "@ui/forms/numberInput/NumberInput";
 import TextAreaInput from "@ui/forms/textAreaInput/TextAreaInput";
@@ -17,6 +17,12 @@ import { FileUpload } from "primereact/fileupload";
 
 
 const RegisterUser = () => {
+  
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.user);
+  const [photoFile, setPhotoFile] = useState(null)
+  const photoUploadReference = useRef(null);
+
   const {
     control,
     handleSubmit,
@@ -36,12 +42,9 @@ const RegisterUser = () => {
       confirmPassword: "",
       username: "",
       termsConditionsChecked: false,
-      demo: "",
+      profilePhoto: "",
     },
   });
-
-  const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUsersList());
@@ -49,6 +52,14 @@ const RegisterUser = () => {
 
   console.log(userInfo);
   // console.log(cleanData)
+
+  const OptionsType = {
+    label: 'click here to upload',
+    // icon: 'pi pi-fw pi-images',
+    iconOnly: false,
+    className: 'profilePhotoUpload',
+    style: {}
+};
 
   const countries = [
     { name: "Colombia", code: "COL" },
@@ -79,8 +90,15 @@ const RegisterUser = () => {
   // };
 
   const invoiceUploadHandler = ({files}) => {
-    const [file] = files;
-    console.log(file)
+    if(setPhotoFile != null){
+      console.log("por aqui")
+      photoUploadReference.current.clear();
+    }if(setPhotoFile === null){
+      console.log("por aqui 2")
+      const [file] = files;
+      setPhotoFile(file)
+      console.log(file)
+    }
     // const fileReader = new FileReader();
     // fileReader.onload = (e) => {
     //   uploadInvoice(e.target.result);
@@ -90,6 +108,7 @@ const RegisterUser = () => {
 
 
   // console.log(getValues());
+  console.log(photoFile)
 
   const onSubmit = async (data) => {
     const cleanData = {
@@ -116,8 +135,11 @@ const RegisterUser = () => {
             </div>
             <div className="profileUpload__container">
               <h5 className="profileUpload__title">Profile Picture</h5>
+              <div className="profileUpload__component">
+              {photoFile !== null ? (<span>x</span>): ("")}
               {/* <p>Click to upload</p> */}
               <FileUpload
+              ref={photoUploadReference}
               className="profilePhotoUpload"
                 mode="basic"
                 name="profilePhoto"
@@ -127,9 +149,12 @@ const RegisterUser = () => {
                 customUpload
                 uploadHandler={invoiceUploadHandler}
                 // control={control}
-                chooseLabel="Click here to upload"
+                // chooseLabel="Click here to upload"
                 previewWidth={50}
+                // chooseIcon="pi pi-arrow-down"
+                chooseOptions={OptionsType}
               />
+              </div>
             </div>
           </div>
           <div className="registerInput__container-x2">
