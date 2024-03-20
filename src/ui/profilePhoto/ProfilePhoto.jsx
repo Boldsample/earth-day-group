@@ -4,11 +4,10 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import "./profilePhoto.sass";
 
 const ProfilePhoto = ({ userPhoto }) => {
-  console.log(userPhoto);
   return (
     <div className="icon__background">
       {userPhoto ? (
-        <img src={userPhoto} width="10px" alt="User Photo" />
+        <img className="icon__background" src={userPhoto}  alt="User Photo" />
       ) : (
         <FontAwesomeIcon icon={faUser} />
       )}

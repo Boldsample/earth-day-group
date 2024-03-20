@@ -11,16 +11,14 @@ import TextAreaInput from "@ui/forms/textAreaInput/TextAreaInput";
 import DropDownInput from "@ui/forms/dropDownInput/DropDownInput";
 import PasswordInput from "@ui/forms/passwordInput/PasswordInput";
 import CheckBoxInput from "@ui/forms/checkBoxInput/CheckBoxInput";
-import { addCleanData, getUsersList } from "@store/slices/usersSlice";
+import { getUsersList } from "@store/slices/usersSlice";
 import { createUser } from "../../../../services/userServices";
-import { FileUpload } from "primereact/fileupload";
+import FileUploadInput from "@ui/forms/fileUploadInput/FileUploadInput";
 
 const RegisterUser = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
   const [photoFileBlob, setPhotoFileBlob] = useState(null);
-  const photoUploadReference = useRef(null);
-  const fileSelectReference = useRef(null);
 
   const {
     control,
@@ -50,15 +48,6 @@ const RegisterUser = () => {
   }, []);
 
   console.log(userInfo);
-  // console.log(cleanData)
-
-  const OptionsType = {
-    label: "click here to upload",
-    // icon: 'pi pi-fw pi-images',
-    iconOnly: false,
-    className: "profilePhotoUpload",
-    style: {},
-  };
 
   const countries = [
     { name: "Colombia", code: "COL" },
@@ -88,28 +77,14 @@ const RegisterUser = () => {
   //   );
   // };
 
-  const invoiceUploadHandler = ({ files }) => {
-    const [file] = files;
-    // setPhotoFile(file);
-    console.log(file);
-    return false;
-    fileSelectReference.current.onFileSelect();
-    // if (setPhotoFile != null) {
-    //   console.log("por aqui");
-    //   photoUploadReference.current.clear();
-    // }
-    // if (setPhotoFile === null) {
-    //   console.log("por aqui 2");
-    //   const [file] = files;
-    //   setPhotoFile(file);
-    //   console.log(file);
-    // }
-    // const fileReader = new FileReader();
-    // fileReader.onload = (e) => {
-    //   uploadInvoice(e.target.result);
-    // };
-    // fileReader.readAsDataURL(file);
-  };
+  // const invoiceUploadHandler = ( event ) => {
+
+  //   const fileReader = new FileReader();
+  //   fileReader.onload = (e) => {
+  //     uploadInvoice(e.target.result);
+  //   };
+  //   fileReader.readAsDataURL(file);
+  // };
 
   // console.log(getValues());
 
@@ -138,30 +113,8 @@ const RegisterUser = () => {
             </div>
             <div className="profileUpload__container">
               <h5 className="profileUpload__title">Profile Picture</h5>
-              <div className="profileUpload__component">
-                {photoFileBlob !== null ? <span>x</span> : ""}
-                {/* <p>Click to upload</p> */}
-                <FileUpload
-                  ref={fileSelectReference}
-                  className="profilePhotoUpload"
-                  mode="basic"
-                  name="profilePhoto"
-                  url="/api/upload"
-                  accept="image/*"
-                  maxFileSize={1000000}
-                  previewWidth={50}
-                  chooseOptions={OptionsType}
-                  onUpload={() => {}}
-                  onSelect={(event) => {
-                    console.log(event.files[0]);
-                    const originalUrl = event.files[0].objectURL;
-                    const cleanedUrl = originalUrl
-                      .replace(/^blob:/, "")
-                      .toString();
-                    setPhotoFileBlob(cleanedUrl);
-                  }}
-                />
-              </div>
+
+              <FileUploadInput setPhotoFileBlob={setPhotoFileBlob} />
             </div>
           </div>
           <div className="registerInput__container-x2">
