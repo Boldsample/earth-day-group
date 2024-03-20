@@ -15,13 +15,12 @@ import { addCleanData, getUsersList } from "@store/slices/usersSlice";
 import { createUser } from "../../../../services/userServices";
 import { FileUpload } from "primereact/fileupload";
 
-
 const RegisterUser = () => {
-  
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
-  const [photoFile, setPhotoFile] = useState(null)
+  const [photoFileBlob, setPhotoFileBlob] = useState(null);
   const photoUploadReference = useRef(null);
+  const fileSelectReference = useRef(null);
 
   const {
     control,
@@ -54,12 +53,12 @@ const RegisterUser = () => {
   // console.log(cleanData)
 
   const OptionsType = {
-    label: 'click here to upload',
+    label: "click here to upload",
     // icon: 'pi pi-fw pi-images',
     iconOnly: false,
-    className: 'profilePhotoUpload',
-    style: {}
-};
+    className: "profilePhotoUpload",
+    style: {},
+  };
 
   const countries = [
     { name: "Colombia", code: "COL" },
@@ -80,7 +79,7 @@ const RegisterUser = () => {
   // const uploadInvoice = async (invoiceFile) => {
   //   let formData = new FormData();
   //   formData.append('invoiceFile', invoiceFile);
-  
+
   //   const response = await fetch(`orders/${orderId}/uploadInvoiceFile`,
   //     {
   //       method: 'POST',
@@ -89,16 +88,22 @@ const RegisterUser = () => {
   //   );
   // };
 
-  const invoiceUploadHandler = ({files}) => {
-    if(setPhotoFile != null){
-      console.log("por aqui")
-      photoUploadReference.current.clear();
-    }if(setPhotoFile === null){
-      console.log("por aqui 2")
-      const [file] = files;
-      setPhotoFile(file)
-      console.log(file)
-    }
+  const invoiceUploadHandler = ({ files }) => {
+    const [file] = files;
+    // setPhotoFile(file);
+    console.log(file);
+    return false;
+    fileSelectReference.current.onFileSelect();
+    // if (setPhotoFile != null) {
+    //   console.log("por aqui");
+    //   photoUploadReference.current.clear();
+    // }
+    // if (setPhotoFile === null) {
+    //   console.log("por aqui 2");
+    //   const [file] = files;
+    //   setPhotoFile(file);
+    //   console.log(file);
+    // }
     // const fileReader = new FileReader();
     // fileReader.onload = (e) => {
     //   uploadInvoice(e.target.result);
@@ -106,9 +111,7 @@ const RegisterUser = () => {
     // fileReader.readAsDataURL(file);
   };
 
-
   // console.log(getValues());
-  console.log(photoFile)
 
   const onSubmit = async (data) => {
     const cleanData = {
@@ -131,29 +134,33 @@ const RegisterUser = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="profile__container">
             <div className="profilePicture__container">
-              <ProfilePhoto />
+              <ProfilePhoto userPhoto={photoFileBlob} />
             </div>
             <div className="profileUpload__container">
               <h5 className="profileUpload__title">Profile Picture</h5>
               <div className="profileUpload__component">
-              {photoFile !== null ? (<span>x</span>): ("")}
-              {/* <p>Click to upload</p> */}
-              <FileUpload
-              ref={photoUploadReference}
-              className="profilePhotoUpload"
-                mode="basic"
-                name="profilePhoto"
-                url="/api/upload"
-                accept="image/*"
-                maxFileSize={1000000}
-                customUpload
-                uploadHandler={invoiceUploadHandler}
-                // control={control}
-                // chooseLabel="Click here to upload"
-                previewWidth={50}
-                // chooseIcon="pi pi-arrow-down"
-                chooseOptions={OptionsType}
-              />
+                {photoFileBlob !== null ? <span>x</span> : ""}
+                {/* <p>Click to upload</p> */}
+                <FileUpload
+                  ref={fileSelectReference}
+                  className="profilePhotoUpload"
+                  mode="basic"
+                  name="profilePhoto"
+                  url="/api/upload"
+                  accept="image/*"
+                  maxFileSize={1000000}
+                  previewWidth={50}
+                  chooseOptions={OptionsType}
+                  onUpload={() => {}}
+                  onSelect={(event) => {
+                    console.log(event.files[0]);
+                    const originalUrl = event.files[0].objectURL;
+                    const cleanedUrl = originalUrl
+                      .replace(/^blob:/, "")
+                      .toString();
+                    setPhotoFileBlob(cleanedUrl);
+                  }}
+                />
               </div>
             </div>
           </div>
