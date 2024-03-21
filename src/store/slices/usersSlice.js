@@ -18,8 +18,8 @@ export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
 
 export const getUserData = createAsyncThunk(
   "users/getUserData",
-  async (name) => {
-    const res = await getUser(name);
+  async (userId) => {
+    const res = await getUser(userId);
     return res;
   }
 );

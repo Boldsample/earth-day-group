@@ -49,7 +49,7 @@ const Intro = () => {
 				{item?.list ? <ul>{item.list.map((i, key) => <li key={key}>{i}</li>)}</ul> : null}
 				<div>
 					{activeIndex + 1 < introItems.length ? <>
-						<Link className="button" to="/login/">Skip <span className="material-icons">skip_next</span></Link>
+						<Link className="button" to="/register/categories/">Skip <span className="material-icons">skip_next</span></Link>
 						<button onClick={() => setActiveIndex((prevIndex) => (prevIndex + 1) % introItems.length)} className="secondary">Next <span className="material-icons">chevron_right</span></button>
 					</> : <Link className="button secondary" to="/register/categories/">Next <span className="material-icons">chevron_right</span></Link>}
 				</div>

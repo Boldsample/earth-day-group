@@ -11,7 +11,7 @@ import TextAreaInput from "@ui/forms/textAreaInput/TextAreaInput";
 import DropDownInput from "@ui/forms/dropDownInput/DropDownInput";
 import PasswordInput from "@ui/forms/passwordInput/PasswordInput";
 import CheckBoxInput from "@ui/forms/checkBoxInput/CheckBoxInput";
-import { getUsersList } from "@store/slices/usersSlice";
+import { getUsersList, getUserData } from "@store/slices/usersSlice";
 import { createUser } from "../../../../services/userServices";
 import FileUploadInput from "@ui/forms/fileUploadInput/FileUploadInput";
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton";
@@ -19,7 +19,8 @@ import { Link } from "react-router-dom";
 
 const RegisterUser = () => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.users);
+  const userInfo = useSelector((state) => state.users.userData);
+  const userList = useSelector((state) => state.users);
   const [photoFileBlob, setPhotoFileBlob] = useState(null);
 
   const {
@@ -46,10 +47,12 @@ const RegisterUser = () => {
   });
 
   useEffect(() => {
-    dispatch(getUsersList());
+    // dispatch(getUsersList());
+    dispatch(getUserData(5));
   }, []);
 
-  // console.log(userInfo); //Checks redux store.
+  console.log(userInfo);
+  console.log(userList);
 
   const countries = [
     { name: "Colombia", code: "COL" },
