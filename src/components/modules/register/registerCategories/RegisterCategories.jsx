@@ -6,6 +6,8 @@ import recycleIcon from "@assets/registerCategories/registerCat-2.svg";
 import shelterIcon from "@assets/registerCategories/registerCat-3.svg";
 import ecommerceIcon from "@assets/registerCategories/registerCat-4.svg";
 import backgroundImg from "@assets/registerCategories/registerCatBackground.svg";
+import { Link } from "react-router-dom";
+import GoBackButton from "../../../../ui/buttons/goBackButton/GoBackButton";
 
 const registerCategories = () => {
   return (
@@ -15,6 +17,7 @@ const registerCategories = () => {
         <div className="content__container">
           <h4 className="category__title">Register as:</h4>
           <div className="category__grid">
+            <Link to="/register/user/">
             <CategoryCard
               hoverBackgroundColor="#23649A"
               hoverIconColor="#77BEF9"
@@ -26,6 +29,7 @@ const registerCategories = () => {
               description="Explore the marketplace and connect with companies and charity homes."
               icon={userIcon}
             />
+            </Link>
             <CategoryCard
               hoverBackgroundColor="#408D27"
               hoverIconColor="#7FAE70"
@@ -61,6 +65,9 @@ const registerCategories = () => {
             />
           </div>
         </div>
+        <Link to="/">
+          <GoBackButton/>
+        </Link>
       </div>
     </>
   );

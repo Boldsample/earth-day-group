@@ -21,7 +21,7 @@ const FileUploadInput = ({ setPhotoFileBlob }) => {
         event.target.value = "";
       } else {
         alert("File size exceeds 2MB limit.");
-        event.target.value = null;
+        event.target.value = "";
       }
     }
   };

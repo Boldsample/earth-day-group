@@ -14,10 +14,12 @@ import CheckBoxInput from "@ui/forms/checkBoxInput/CheckBoxInput";
 import { getUsersList } from "@store/slices/usersSlice";
 import { createUser } from "../../../../services/userServices";
 import FileUploadInput from "@ui/forms/fileUploadInput/FileUploadInput";
+import GoBackButton from "@ui/buttons/goBackButton/GoBackButton";
+import { Link } from "react-router-dom";
 
 const RegisterUser = () => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector((state) => state.users);
   const [photoFileBlob, setPhotoFileBlob] = useState(null);
 
   const {
@@ -47,7 +49,7 @@ const RegisterUser = () => {
     dispatch(getUsersList());
   }, []);
 
-  console.log(userInfo);
+  // console.log(userInfo); //Checks redux store.
 
   const countries = [
     { name: "Colombia", code: "COL" },
@@ -306,6 +308,9 @@ const RegisterUser = () => {
           </div>
         </form>
       </div>
+      <Link to='/register/categories/'>
+        <GoBackButton/>
+      </Link>
     </div>
   );
 };
