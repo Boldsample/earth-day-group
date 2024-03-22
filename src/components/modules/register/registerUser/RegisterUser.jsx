@@ -51,8 +51,8 @@ const RegisterUser = () => {
     dispatch(getUserData(5));
   }, []);
 
-  console.log(userInfo);
-  console.log(userList);
+  // console.log(userInfo);
+  // console.log(userList);
 
   const countries = [
     { name: "Colombia", code: "COL" },
@@ -311,8 +311,8 @@ const RegisterUser = () => {
           </div>
         </form>
       </div>
-      <Link to='/register/categories/'>
-        <GoBackButton/>
+      <Link to="/register/categories/">
+        <GoBackButton />
       </Link>
     </div>
   );

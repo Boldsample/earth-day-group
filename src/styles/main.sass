@@ -69,10 +69,19 @@ button, .button
 		background-color: var(--secondary)
 
 header
-	display: flex
-	justify-content: center
-	position: relative
+	display: grid
+	grid-template-columns: 1fr 2fr 1fr
+	align-items: center
+	justify-items: center
+	// display: flex
+	// justify-content: center
+	// position: relative
 	width: 100%
+
+	.navbar-item
+		display: flex
+		align-items: center
+
 	.logo
 		background: var(--primary)
 		border-radius: 0 0 16px 16px
@@ -124,28 +133,28 @@ header
 	line-height: 16px
 
 .layout
-		height: 100vh
-		position: relative
+	height: 100vh
+	position: relative
+	width: 100%
+	.layout__background
+		bottom: 0
+		height: 85vw
+		left: 0
+		object-fit: cover
+		pointer-events: none
+		position: absolute
 		width: 100%
-		.layout__background
-			bottom: 0
-			height: 85vw
-			left: 0
-			object-fit: cover
-			pointer-events: none
-			position: absolute
-			width: 100%
-		.main__content
-			align-content: center
-			display: flex
-			height: 660px
-			flex-wrap: wrap
-			margin-top: calc((100vh - 660px) / 2)
-			margin-left: calc(50% + ((50% - 506px) / 2))
-			position: absolute
-			width: 480px
-			h1, ul
-				margin-bottom: 15px
+	.main__content
+		align-content: center
+		display: flex
+		height: 660px
+		flex-wrap: wrap
+		margin-top: calc((100vh - 660px) / 2)
+		margin-left: calc(50% + ((50% - 506px) / 2))
+		position: absolute
+		width: 480px
+		h1, ul
+			margin-bottom: 15px
 
 @media (min-width: 120vh)
 	#layout .layout .layout__background
