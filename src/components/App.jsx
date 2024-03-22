@@ -15,8 +15,8 @@ const App = () => {
   return (
     <Provider store={store}>
       <PrimeReactProvider>
-        <Header />
         <BrowserRouter>
+            <Header />
           <Routes>
             <Route exact path="/" element={<Intro />} />
 						<Route path="/login/" element={<LoginForm />} />

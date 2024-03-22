@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import {Button} from 'primereact/button'
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const user = useSelector((state) => state.users.userData);
@@ -13,18 +16,21 @@ const Header = () => {
   // Nav
   return (
     <header>
-      <div class="navbar-item user-info">
+      {Object.keys(user).length != 0 ? ( <div className="navbar-item user-info">
         <ProfilePhoto />
-        <span class="user-name">John Doe</span>
-      </div>
+        <span className="user-name">Hi, {user.name}</span>
+      </div>) : (null) }
       <div className="navbar-item logo">
         <img src={logo} alt="Earth Day Group" />
-        {/* <button>login</button> */}
       </div>
-      <div class="navbar-item icons">
-        <FontAwesomeIcon icon={faBell} />
+      {Object.keys(user).length != 0 ? ( <div className="navbar-item icons">
         <FontAwesomeIcon icon={faShoppingCart} />
-      </div>
+        <FontAwesomeIcon icon={faBell} />
+      </div>) : 
+      (<div className="navbar-item">
+           <Link className="button secondary" to="/login/">Log in</Link>
+        </div>) }
+      
     </header>
   );
 };

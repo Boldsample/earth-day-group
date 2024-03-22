@@ -15,7 +15,7 @@ const registerCategories = () => {
       <div className="category__container">
         <img className="category__background" src={backgroundImg} />
         <div className="content__container">
-          <h4 className="category__title">Register as:</h4>
+          <h2 className="category__title">Register as:</h2>
           <div className="category__grid">
             <Link to="/register/user/">
             <CategoryCard
