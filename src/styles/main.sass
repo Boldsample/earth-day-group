@@ -5,7 +5,7 @@
 	--primary: #408D27
 	--secondary: #23649A
 	--text: #737373
-	
+
 	--green-earth: #408D27
 	--blue-earth: #77BEF9
 	--white: #fff
@@ -40,7 +40,7 @@ a
 p
 	margin: 0 0 0.6em
 	width: 100%
-h1, h2, .h1, .h2
+h1, h2, h3, h4, h5, h6 .h1, .h2
 	color: var(--primary)
 	font-size: 80px
 	font-weight: 900
@@ -98,7 +98,7 @@ header
 		display: flex
 		align-items: center
 	.icons
-		color: var(--primar)
+		color: var(--green-earth)
 		gap: 32px
 
 	.logo
@@ -145,7 +145,7 @@ header
 .font-bold
 	font-weight: 700
 .font-regular
-	font-weight: 400 
+	font-weight: 400
 .text-primary
 	color: var(--primary)
 .text-center
@@ -155,6 +155,12 @@ header
 .text-xs
 	font-size: 12px
 	line-height: 16px
+.text-lowerCase
+	text-transform: lowercase
+.text-lowerCase
+	text-transform: uppercase
+.text-defaultCase
+	text-transform: initial
 
 .layout
 	height: 100vh
@@ -182,39 +188,38 @@ header
 
 h1
 	font-weight: 900
-	size: 5em
+	font-size: 5em
 	line-height: 88px
 
 h2
 	font-weight: 900
-	size: 3em
+	font-size: 3em
 	line-height: 56px
 
 h3
 	font-weight: 900
-	size: 2em
+	font-size: 2em
 	line-height: 2.5em
 
 h4
-	size: 1.5em
+	font-size: 1.5em
 	line-height: 2em
 
 h5
-	size: 1em
+	font-size: 1em
 	line-height: 1.5em
 
 h6
-	size: 0.75em
+	font-size: 0.75em
 	line-height: 1em
 
 .h7
-	size: 1.25em
+	font-size: 1.25em
 	line-height: 1.5em
 
-.small text
-	size: 0.5em
+.small__text
+	font-size: 0.5em
 	line-height: 0.75em
-
 
 @media (min-width: 120vh)
 	#layout .layout .layout__background
@@ -230,5 +235,3 @@ h6
 			padding: 150px 32px 0
 			position: relative
 			width: 100%
-
-

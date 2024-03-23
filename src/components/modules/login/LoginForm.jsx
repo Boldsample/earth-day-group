@@ -1,13 +1,13 @@
-import "./style.sass"
-import "@styles/forms.sass"
+import "./style.sass";
+import "@styles/forms.sass";
 
-import login from "@assets/login.svg"
+import login from "@assets/login.svg";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ const LoginForm = () => {
       <div className="intro">
         <img className="background" src={login} />
         <div className="content login-form">
-          <h4>Login to your account</h4>
+          <h4 className="text-defaultCase">Login to your account</h4>
           <div className="p-field" style={{ marginBottom: "24px" }}>
             <label htmlFor="email">
               <InputText

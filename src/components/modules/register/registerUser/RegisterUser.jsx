@@ -117,7 +117,9 @@ const RegisterUser = () => {
               <ProfilePhoto userPhoto={photoFileBlob} />
             </div>
             <div className="profileUpload__container">
-              <h5 className="profileUpload__title">Profile Picture</h5>
+              <h5 className="profileUpload__title text-defaultCase">
+                Profile Picture
+              </h5>
 
               <FileUploadInput setPhotoFileBlob={setPhotoFileBlob} />
             </div>

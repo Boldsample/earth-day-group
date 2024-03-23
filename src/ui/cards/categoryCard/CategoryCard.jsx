@@ -47,7 +47,9 @@ const CategoryCard = ({
       <div className="category__card-Icon" style={iconBackground}>
         <img src={icon} alt="Category Icon" />
       </div>
-      <h4  style={textStyle}>{title}</h4>
+      <h4 className="text-defaultCase" style={textStyle}>
+        {title}
+      </h4>
       <p style={textStyle}>{description}</p>
     </div>
   );
