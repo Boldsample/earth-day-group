@@ -7,6 +7,7 @@ import { faBell, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import { Link } from "react-router-dom";
+import Nav from "../../ui/nav/Nav";
 
 const Header = () => {
   const user = useSelector((state) => state.users.userData);
@@ -26,10 +27,13 @@ const Header = () => {
         <img src={logo} alt="Earth Day Group" />
       </div>
       {Object.keys(user).length != 0 ? (
-        <div className="navbar-item icons">
-          <FontAwesomeIcon icon={faShoppingCart} />
-          <FontAwesomeIcon icon={faBell} />
-        </div>
+        <>
+          <div className="navbar-item icons">
+            <FontAwesomeIcon icon={faShoppingCart} />
+            <FontAwesomeIcon icon={faBell} />
+          </div>
+          <Nav />
+        </>
       ) : (
         <div className="navbar-item">
           <Link className="button secondary" to="/login/">

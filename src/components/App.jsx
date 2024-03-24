@@ -18,9 +18,9 @@ const App = () => {
       <PrimeReactProvider>
         <BrowserRouter>
           <Header />
-          <RegisterThankYouPage />
+          {/* <RegisterThankYouPage /> */}
           <Routes>
-            {/* <Route exact path="/" element={<Intro />} />
+            <Route exact path="/" element={<Intro />} />
             <Route path="/login/" element={<LoginForm />} />
             <Route path="/recover/" element={<Recover />} />
             <Route
@@ -28,7 +28,7 @@ const App = () => {
               path="/register/categories/"
               element={<RegisterCategories />}
             />
-            <Route exact path="/register/user/" element={<RegisterUser />} /> */}
+            <Route exact path="/register/user/" element={<RegisterUser />} />
           </Routes>
         </BrowserRouter>
       </PrimeReactProvider>
