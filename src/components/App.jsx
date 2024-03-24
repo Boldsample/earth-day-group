@@ -21,10 +21,14 @@ const App = () => {
           <RegisterThankYouPage />
           <Routes>
             {/* <Route exact path="/" element={<Intro />} />
-						<Route path="/login/" element={<LoginForm />} />
-						<Route path="/recover/" element={<Recover />} />
-						<Route exact path="/register/categories/" element={<RegisterCategories />} />
-						<Route exact path="/register/user/" element={<RegisterUser/>} /> */}
+            <Route path="/login/" element={<LoginForm />} />
+            <Route path="/recover/" element={<Recover />} />
+            <Route
+              exact
+              path="/register/categories/"
+              element={<RegisterCategories />}
+            />
+            <Route exact path="/register/user/" element={<RegisterUser />} /> */}
           </Routes>
         </BrowserRouter>
       </PrimeReactProvider>

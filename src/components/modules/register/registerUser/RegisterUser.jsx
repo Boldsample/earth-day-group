@@ -47,12 +47,12 @@ const RegisterUser = () => {
   });
 
   useEffect(() => {
-    // dispatch(getUsersList());
+    dispatch(getUsersList());
     dispatch(getUserData(5));
   }, []);
 
   // console.log(userInfo);
-  // console.log(userList);
+  console.log(userList);
 
   const countries = [
     { name: "Colombia", code: "COL" },

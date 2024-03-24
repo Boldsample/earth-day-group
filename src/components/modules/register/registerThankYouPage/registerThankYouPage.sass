@@ -1,11 +1,19 @@
-.thankYouPage__container
+.thankYouPage__layout
+    height: 100vh
     display: flex
-    flex-direction: column
     justify-content: center
     align-items: center
-    width: 608px
-    height: 256px
-h1
-    text-align: center
-button
-    width: 50%
+    position: relative
+    width: 100%
+
+    .thankYouPage__container
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        position: absolute
+        width: 608px
+        height: 256px
+        h1, p
+            text-align: center
+            margin-bottom: 25px

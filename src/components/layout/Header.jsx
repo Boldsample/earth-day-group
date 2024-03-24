@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const user = useSelector((state) => state.users.userData);
-  console.log(user, "in header");
+  // console.log(user, "in header");
   // noNav
   // LoginNav
   // Nav
