@@ -6,20 +6,22 @@ import location from "@assets/navBar-icons/navIcon-2.svg";
 import inbox from "@assets/navBar-icons/navIcon-3.svg";
 import shop from "@assets/navBar-icons/navIcon-4.svg";
 import settings from "@assets/navBar-icons/navIcon-5.svg";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const sections = [
-    { label: "Home", icon: home },
-    { label: "Location", icon: location },
-    { label: "Inbox", icon: inbox },
-    { label: "Shop", icon: shop },
-    { label: "Settings", icon: settings },
+    { label: "Home", icon: home, path: "/dashboard/" },
+    { label: "Location", icon: location, path: "" },
+    { label: "Inbox", icon: inbox, path: "" },
+    { label: "Shop", icon: shop, path: "" },
+    { label: "Settings", icon: settings, path: "" },
   ];
   return (
     <div className="nav__container">
       {sections.map((section) => {
         return (
           <>
+          <Link to={section.path}>
             <Tooltip target=".custom-target-icon" />
             <img
               data-pr-tooltip={section.label}
@@ -27,12 +29,10 @@ const Nav = () => {
               data-pr-at="right+5 top"
               data-pr-my="left center-2"
               className="custom-target-icon"
-              style={{
-                cursor: "pointer",
-              }}
               key={section.label}
               src={section.icon}
             ></img>
+          </Link>
           </>
         );
       })}

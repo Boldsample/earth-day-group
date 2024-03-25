@@ -19,6 +19,7 @@
     "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.6.8",
     "material-design-icons": "^3.0.1",
+    "primeicons": "^6.0.1",
     "primereact": "^10.5.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.0",

@@ -9,6 +9,7 @@ import backgroundImg from "@assets/registerCategories/registerCatBackground.svg"
 import { Link } from "react-router-dom";
 import GoBackButton from "../../../../ui/buttons/goBackButton/GoBackButton";
 
+
 const registerCategories = () => {
   return (
     <>

@@ -11,6 +11,9 @@ import LoginForm from "@modules/login/LoginForm";
 import RegisterUser from "@modules/register/registerUser/RegisterUser";
 import RegisterCategories from "@modules/register/registerCategories/RegisterCategories";
 import RegisterThankYouPage from "@modules/register/registerThankYouPage/RegisterThankYouPage";
+import Dashboard from "./modules/user/dashboard/Dashboard";
+import 'primeicons/primeicons.css';
+        
 
 const App = () => {
   return (
@@ -29,6 +32,7 @@ const App = () => {
               element={<RegisterCategories />}
             />
             <Route exact path="/register/user/" element={<RegisterUser />} />
+            <Route exact path="/dashboard/" element={<Dashboard />} />
           </Routes>
         </BrowserRouter>
       </PrimeReactProvider>

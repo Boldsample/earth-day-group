@@ -4,6 +4,7 @@ import { Tooltip } from "primereact/tooltip";
 import { Controller } from "react-hook-form";
 import "./textInput.sass";
 
+
 const TextInput = ({
   labelname= '',
   inputName,
@@ -21,6 +22,8 @@ const TextInput = ({
   isRequired,
   isEdit,
   showToolTip,
+  showIcon,
+  iconName
 }) => {
   const inputWidth = {
     width: width,
@@ -30,8 +33,26 @@ const TextInput = ({
   
   const renderInput = () => (
     <>
-    <div>
-      <Controller
+    {showIcon ? (<span className="p-input-icon-left">
+    <i className={iconName} />
+    <Controller
+        name={inputName}
+        control={control}
+        rules={rules}
+        render={({ field }) => (
+          <InputText
+            maxLength={maxLength}
+            style={ showIcon ? { paddingLeft: "50px"} : {} + inputWidth }
+            disabled={!isEdit}
+            className={"p-inputtext" + tailoredClass}
+            id={field.name}
+            {...field}
+            placeholder={placeHolderText}
+            type={type}
+          />
+        )}
+      />
+</span>) : (<Controller
         name={inputName}
         control={control}
         rules={rules}
@@ -47,8 +68,7 @@ const TextInput = ({
             type={type}
           />
         )}
-      />
-    </div>
+      />)}
       {getFormErrorMessage(inputName)}
     </>
   );
