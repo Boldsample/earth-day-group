@@ -10,6 +10,7 @@ const modules = [
     iconBackgroundColor: '#23649A',
     height: '200px',
     fontColor: '#fff',
+    link: ''
     },
     {title: 'Recycle', 
     description: 'Look for recycle center companies that may interest you',
@@ -20,6 +21,7 @@ const modules = [
     iconBackgroundColor: "#408D27",
     height: '200px',
     fontColor: '#fff',
+    link: ''
     },
     {title: 'Post Offer', 
     description: 'Post your recyclable material and sell it to the highest bidder',
@@ -30,6 +32,7 @@ const modules = [
     iconBackgroundColor: '#77BEF9',
     height: '200px',
     fontColor: '#fff',
+    link: '/dashboard/Offerslist'
     },
     {title: 'Shelters', 
     description: 'Find animal shelters near your location',
@@ -40,6 +43,7 @@ const modules = [
     iconBackgroundColor:"#7FAE70",
     height: '200px',
     fontColor: '#fff',
+    link: ''
     },
     {title: 'Social Organization', 
     description: 'Find social organizations near your location',
@@ -50,6 +54,7 @@ const modules = [
     iconBackgroundColor: '#23649A',
     height: '200px',
     fontColor: '#fff',
+    link: ''
     }
   ]
 

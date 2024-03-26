@@ -24,9 +24,21 @@ const MultiUseCard = ({ type, title, description, date }) => {
             </div>
           </>
         );
-      case 'type2':
+      case 'offer':
         return (
           <>
+            <div>
+                <img src="" alt="" />
+            </div>
+            <div className='multiUse__mainInfo'>
+                <p>Paperrecycle.org</p>
+                <p>E-waste Available for Sale</p>
+                <small>Sent you an offer: $225</small>
+            </div>
+            <div className='multiUse__status'>
+                <small>Sent you an offer: $225</small>
+                <small>Rejected</small>
+            </div>
             <h3>{title}</h3>
             <p>{description}</p>
           </>

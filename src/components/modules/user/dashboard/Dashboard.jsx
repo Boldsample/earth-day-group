@@ -52,7 +52,8 @@ console.log(modules)
         </div>
         <div className="category__grid">
             {modules.map((module, key)=>{
-                return <CategoryCard
+                return <Link to={module.link}>
+                <CategoryCard
                   hoverBackgroundColor={module.hoverBackgroundColor}
                   hoverIconColor={module.hoverIconColor}
                   backgroundColor={module.backgroundColor}
@@ -63,6 +64,7 @@ console.log(modules)
                   description={module.description}
                   icon={module.icon}
                 />
+                </Link>
             })}
         </div>    
       </div>
