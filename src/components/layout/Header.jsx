@@ -30,7 +30,9 @@ const Header = () => {
         <>
           <div className="navbar-item icons">
             <FontAwesomeIcon icon={faShoppingCart} />
+            <Link to={"/dashboard/notifications"}>
             <FontAwesomeIcon icon={faBell} />
+            </Link>
           </div>
           <Nav />
         </>
