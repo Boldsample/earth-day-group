@@ -54,7 +54,7 @@ console.log(modules)
             {modules.map((module, key)=>{
                 return <CategoryCard
                   hoverBackgroundColor={module.hoverBackgroundColor}
-                  hoverIconColor={module.hoverBackgroundColor}
+                  hoverIconColor={module.hoverIconColor}
                   backgroundColor={module.backgroundColor}
                   iconBackgroundColor={module.iconBackgroundColor}
                   height={module.height}

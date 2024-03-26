@@ -1,7 +1,7 @@
 import home from "@assets/navBar-icons/navIcon-1.svg";
 
 const modules = [
-    {title: 'MarketPlace', 
+    {title: 'Market Place', 
     description: 'Find products that are eco friendly',
     icon: home,
     hoverBackgroundColor: '#23649A',
