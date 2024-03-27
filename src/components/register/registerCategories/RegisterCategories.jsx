@@ -30,6 +30,7 @@ const registerCategories = () => {
 					title="User:"
 					description="Explore the marketplace and connect with companies and charity homes."
 					icon={userIcon}
+					className={'categoryCard-width'}
 					/>
 					</Link>
 					<CategoryCard
@@ -42,6 +43,7 @@ const registerCategories = () => {
 					title="Recycling Center:"
 					description="Register your recycling center or company and extend your operation area."
 					icon={recycleIcon}
+					className={'categoryCard-width'}
 					/>
 					<CategoryCard
 					hoverBackgroundColor="#77BEF9"
@@ -53,6 +55,7 @@ const registerCategories = () => {
 					title="Social Organization Animal Shelter:"
 					description="Register your social organization and let many more people know about your work."
 					icon={shelterIcon}
+					className={'categoryCard-width'}
 					/>
 					<CategoryCard
 					hoverBackgroundColor="#7FAE70"
@@ -64,6 +67,7 @@ const registerCategories = () => {
 					title="Eco-Commerce:"
 					description="Register your Eco-Commerce and let more people know about your enviromentally friendly products."
 					icon={ecommerceIcon}
+					className={'categoryCard-width'}
 					/>
 				</div>
 			</div>

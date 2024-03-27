@@ -18,12 +18,6 @@ const Notifications = () => {
         description='Green Earth Recycling sent you a new offer'
         date='11-02-2023 10:45 am'
         />
-         <MultiUseCard 
-        type='notification'
-        title='New Notification'
-        description='Green Earth Recycling sent you a new offer'
-        date='11-02-2023 10:45 am'
-        />
       </div>
     </div>
   )

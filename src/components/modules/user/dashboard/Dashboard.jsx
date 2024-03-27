@@ -33,7 +33,7 @@ console.log(modules)
 
   return (
     <div className="layout">
-      <div className="main__content">
+      <div className="main__content -dashboard-container">
         <div className="category__search">
         <h4>Discover:</h4>
           <TextInput 
@@ -50,7 +50,7 @@ console.log(modules)
               showLabel={false}
             />
         </div>
-        <div className="category__grid">
+        <div className="category__grid -dashboard">
             {modules.map((module, key)=>{
                 return <Link to={module.link}>
                 <CategoryCard
@@ -63,6 +63,7 @@ console.log(modules)
                   title={module.title}
                   description={module.description}
                   icon={module.icon}
+                  className={'-dashboard-card'}
                 />
                 </Link>
             })}

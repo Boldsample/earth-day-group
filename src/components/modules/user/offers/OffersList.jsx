@@ -7,22 +7,21 @@ const OffersList = () => {
       <div className="main__content">
         <h4 className='text-defaultCase'>Offers</h4>
         <MultiUseCard 
-        type='notification'
-        title='New Notification'
-        description='Green Earth Recycling sent you a new offer'
+        type='offer'
+        title='Paperrecycle.org'
+        description='Paper Waste for sale'
         date='11-02-2023 10:45 am'
-        />
-         <MultiUseCard 
-        type='notification'
-        title='New Notification'
-        description='Green Earth Recycling sent you a new offer'
-        date='11-02-2023 10:45 am'
+        offer='sent you an offer: $225'
+        orderStatus='Rejected'
+
         />
          <MultiUseCard 
         type='offer'
-        title='New Notification'
-        description='Green Earth Recycling sent you a new offer'
+        title='Paperrecycle.org'
+        description='Paper Waste for sale'
         date='11-02-2023 10:45 am'
+        offer='sent you an offer: $225'
+        orderStatus='Rejected'
         />
       </div>
     </div>

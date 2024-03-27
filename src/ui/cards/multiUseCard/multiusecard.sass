@@ -7,13 +7,45 @@
     padding: 16px
     border-radius: 8px
     margin: 20px 0
+    display: flex
+    flex-direction: column
+    justify-content: center
+    .multiuseCard__p
+        margin-top: 10px
+        font-size: 17px
     .multiUse__header
         display: flex
         flex-direction: row
         justify-content: space-between
+        align-items: center
     .multiUse__title
         display: flex
         flex-direction: row
+        align-items: center
         svg
+            font-size: 25px
             color: var(--green-earth)
-            margin-right: 30px
+            margin-right: 20px
+    
+    .offer__container
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+    .left__container
+        display: flex
+        justify-content: space-between
+    
+    .offer__image
+        align-self: flex-start
+        display: flex
+        justify-content: center
+        height: 60px
+        width: 60px
+        margin-right: 20px
+        // border-radius: 50%
+        // background-color: var(--green-earth)
+    .offer__status
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        align-items: flex-end

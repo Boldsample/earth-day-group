@@ -11,6 +11,7 @@ const CategoryCard = ({
   description,
   iconBackgroundColor,
   icon,
+  className
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -39,7 +40,7 @@ const CategoryCard = ({
 
   return (
     <div
-      className="category__card"
+      className={`category__card ${className}`}
       style={cardStyle}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

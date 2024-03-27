@@ -2,9 +2,9 @@ import React from 'react';
 import './multiusecard.sass'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell} from "@fortawesome/free-solid-svg-icons";
+import companyLogo from "@assets/test-img.png";
 
-const MultiUseCard = ({ type, title, description, date }) => {
-  // Conditional rendering based on the type prop
+const MultiUseCard = ({ type, title, description, date, offer, orderStatus }) => {
   const renderCardContent = () => {
     switch (type) {
       case 'notification':
@@ -13,34 +13,36 @@ const MultiUseCard = ({ type, title, description, date }) => {
             <div className='multiUse__header'>
               <div className='multiUse__title'>
                 <FontAwesomeIcon icon={faBell} />
-                <p className="font-bold">{title}</p>
+                <h4 className="font-bold">{title}</h4>
               </div>
               <div className='multiuse__date'>
                 <small>{date}</small>
               </div>
             </div>
             <div className='multiUse__Body'>
-            <p>{description}</p>
+            <p className='multiuseCard__p'>{description}</p>
             </div>
           </>
         );
       case 'offer':
         return (
           <>
-            <div>
-                <img src="" alt="" />
+          <div className='offer__container'>
+                <div className="left__container">
+                    <div className='offer__image'>
+                        <img  src={companyLogo} alt={title} width='70px' />
+                    </div>
+                    <div className='offer__mainInfo'>
+                        <h4>{title}</h4>
+                        <p className='multiuseCard__p'>{description}</p>
+                        <small>{offer}</small>
+                    </div>
+                </div>
+            <div className='offer__status'>
+                <small>{date}</small>
+                <small>{orderStatus}</small>
             </div>
-            <div className='multiUse__mainInfo'>
-                <p>Paperrecycle.org</p>
-                <p>E-waste Available for Sale</p>
-                <small>Sent you an offer: $225</small>
-            </div>
-            <div className='multiUse__status'>
-                <small>Sent you an offer: $225</small>
-                <small>Rejected</small>
-            </div>
-            <h3>{title}</h3>
-            <p>{description}</p>
+          </div>
           </>
         );
       default:
