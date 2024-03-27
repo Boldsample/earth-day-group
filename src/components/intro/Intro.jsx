@@ -1,4 +1,3 @@
-import './style.sass'
 import intro1 from '@assets/intro/image-1.svg'
 import intro2 from '@assets/intro/image-2.svg'
 import intro3 from '@assets/intro/image-3.svg'
@@ -41,12 +40,12 @@ const introItems = [
 const Intro = () => {
 	const [activeIndex, setActiveIndex] = useState(0);
 	const IntroTemplate = (item) => {
-		return <div className="intro">
-			<img className="background" src={item?.img} />
-			<div className="content">
-				<h1 className={item?.classes}>{item?.title}</h1>
-				<p>{item?.content}</p>
-				{item?.list ? <ul>{item.list.map((i, key) => <li key={key}>{i}</li>)}</ul> : null}
+		return <div className="layout">
+			<img className="layout__background" src={item?.img} />
+			<div className="main__content">
+				<h1 className={'text-upperCase mb-1 '+item?.classes}>{item?.title}</h1>
+				<p className="mb-1">{item?.content}</p>
+				{item?.list ? <ul className='mb-1'>{item.list.map((i, key) => <li key={key}>{i}</li>)}</ul> : null}
 				<div>
 					{activeIndex + 1 < introItems.length ? <>
 						<Link className="button" to="/register/categories/">Skip <span className="material-icons">skip_next</span></Link>

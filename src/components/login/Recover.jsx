@@ -15,11 +15,11 @@ const Recover = () => {
 		console.log('Email:', email)
 	}
 
-	return <div id="intro">
-		<div className="intro">
-			<img className="background" src={login} />
-			<div className="content login-form">
-				<h2 style={{marginBottom: '24px'}}>Forgot password?</h2>
+	return <div>
+		<div className="layout">
+			<img className="layout__background" src={login} />
+			<div className="main__content login-form">
+				<h1 className="text-upperCase mb-1">Forgot password?</h1>
 				<p>Enter your registered Email ID and we’ll send you a link to reset your password.</p>
 				<div className="p-field">
 					<label htmlFor="email">

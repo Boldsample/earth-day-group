@@ -12,6 +12,8 @@ export default defineConfig({
 			'@store': '/src/store',
 			'@styles': '/src/styles',
 			'@assets': '/src/assets',
+			'@services': '/src/services',
+			'@components': '/src/components',
 			'@modules': '/src/components/modules'
 		},
 	},

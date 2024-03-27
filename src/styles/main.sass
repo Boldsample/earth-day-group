@@ -28,9 +28,10 @@
 html, body
 	background-color: #FFFBEB
 	color: var(--text)
-	font-size: 24px
+	font-size: 16px
 	font-weight: 400
 	line-height: 1.3em
+	min-height: 100vh
 	margin: 0
 	overflow-x: hidden
 	padding: 0
@@ -38,16 +39,48 @@ a
 	color: var(--primary)
 	text-decoration: none !important
 p
-	margin: 0 0 0.6em
+	font-size: 1.6rem
+	line-height: 1.4em
+	margin: 0 0 0.6rem
 	width: 100%
-h1, h2, h3, h4, h5, h6 .h1, .h2
-	color: var(--primary)
-	font-size: 80px
-	font-weight: 900
-	line-height: 1em
+h1, h2, h3, h4, h5, h6
+	color: var(--green-earth)
 	margin: 0
-	text-transform: uppercase
+	line-height: 1em
 	width: 100%
+h1
+	font-size: 5rem
+	font-weight: 900
+h2
+	font-size: 3rem
+	font-weight: 900
+h3
+	font-size: 2rem
+	font-weight: 900
+	line-height: 2.5em
+h4
+	font-size: 1.5rem
+	font-weight: 900
+	line-height: 1.2em
+h5
+	font-size: 1rem
+	font-weight: 400
+	line-height: 1.5em
+h6
+	font-size: 0.75rem
+	font-weight: 400
+	line-height: 1em
+.h7
+	font-size: 1.25rem
+	line-height: 1.5em
+// h1, h2, h3, h4, h5, h6 .h1, .h2
+// 	color: var(--primary)
+// 	font-size: 80px
+// 	font-weight: 900
+// 	line-height: 1em
+// 	margin: 0
+// 	text-transform: uppercase
+// 	width: 100%
 // h2, .h2
 // 	font-size: 64px
 
@@ -59,6 +92,8 @@ h1, h2, h3, h4, h5, h6 .h1, .h2
 // 	font-size: 32px
 
 ul
+	font-size: 1.6rem
+	line-height: 1.4em
 	margin: 0
 	padding-left: 0.8em
 	width: 100%
@@ -89,10 +124,9 @@ header
 	grid-template-columns: 1fr 2fr 1fr
 	align-items: center
 	justify-items: center
-	// display: flex
-	// justify-content: center
-	// position: relative
+	position: absolute
 	width: 100%
+	z-index: 100
 
 	.navbar-item
 		display: flex
@@ -110,6 +144,35 @@ header
 		width: 176px
 		img
 			height: 56px
+
+.layout
+	display: flex
+	justify-content: flex-end
+	min-height: 100vh
+	position: relative
+	width: 100%
+	.layout__background
+		bottom: 0
+		height: 92vh
+		left: 0
+		object-fit: cover
+		pointer-events: none
+		position: absolute
+		width: 100%
+	.main__content
+		align-content: center
+		align-self: flex-start
+		display: flex
+		min-height: 80vh
+		flex-wrap: wrap
+		padding-right: 16rem
+		padding-top: 130px
+		position: relative
+		width: 50rem
+		&.halfwidth
+			width: 50vw
+		&.fullwidth
+			width: calc(100vw - 16rem)
 
 .p-carousel-prev, .p-carousel-next
 	display: none
@@ -140,6 +203,18 @@ header
 			opacity: 1 !important
 			transform: scaleY(1.8)
 
+.mb-1
+	margin-bottom: 1.4rem
+.mb-2
+	margin-bottom: 2rem
+.mb-3
+	margin-bottom: 2.6rem
+.mb-4
+	margin-bottom: 3.2rem
+.mb-5
+	margin-bottom: 3.8rem
+.mr-1
+	margin-right: 1.4rem
 .font-black
 	font-weight: 900
 .font-bold
@@ -157,81 +232,15 @@ header
 	line-height: 16px
 .text-lowerCase
 	text-transform: lowercase
-.text-lowerCase
+.text-upperCase
 	text-transform: uppercase
 .text-defaultCase
 	text-transform: initial
-
-.layout
-	height: 100vh
-	position: relative
-	width: 100%
-	.layout__background
-		bottom: 0
-		height: 85vw
-		left: 0
-		object-fit: cover
-		pointer-events: none
-		position: absolute
-		width: 100%
-	.main__content
-		align-content: center
-		display: flex
-		height: 660px
-		flex-wrap: wrap
-		margin-top: calc((100vh - 660px) / 2)
-		margin-left: calc(50% + ((50% - 506px) / 2))
-		position: absolute
-		width: 480px
-		h1, ul
-			margin-bottom: 15px
-
-// h1
-// 	font-weight: 900
-// 	font-size: 5em
-// 	line-height: 88px
-
-// h2
-// 	font-weight: 900
-// 	font-size: 3em
-// 	line-height: 56px
-
-// h3
-// 	font-weight: 900
-// 	font-size: 2em
-// 	line-height: 2.5em
-
-// h4
-// 	font-size: 1.5em
-// 	line-height: 2em
-
-// h5
-// 	font-size: 1em
-// 	line-height: 1.5em
-
-// h6
-// 	font-size: 0.75em
-// 	line-height: 1em
-
-// .h7
-// 	font-size: 1.25em
-// 	line-height: 1.5em
 
 .small__text
 	font-size: 0.5em
 	line-height: 0.75em
 
-@media (min-width: 120vh)
-	#layout .layout .layout__background
-		bottom: 0
-		height: auto
-@media (max-width: 1024px)
-	#layout .layout
-		.layout__background
-			width: 100%
-		.main__content
-			height: auto
-			margin: 0
-			padding: 150px 32px 0
-			position: relative
-			width: 100%
+@media (max-width: 1380px)
+	html
+		font-size: 12px

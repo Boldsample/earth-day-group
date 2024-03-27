@@ -1,16 +1,16 @@
-import Header from "./layout/Header";
 import store from "@store/store";
+import Header from "@ui/header/Header";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { PrimeReactProvider } from "primereact/api";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Intro from "@modules/intro/Intro";
-import Recover from "@modules/login/Recover";
-import LoginForm from "@modules/login/LoginForm";
-import RegisterUser from "@modules/register/registerUser/RegisterUser";
-import RegisterCategories from "@modules/register/registerCategories/RegisterCategories";
-import RegisterThankYouPage from "@modules/register/registerThankYouPage/RegisterThankYouPage";
+import Intro from "@components/intro/Intro";
+import Recover from "@components/login/Recover";
+import LoginForm from "@components/login/LoginForm";
+import RegisterUser from "@components/register/registerUser/RegisterUser";
+import RegisterCategories from "@components/register/registerCategories/RegisterCategories";
+import RegisterThankYouPage from "@components/register/registerThankYouPage/RegisterThankYouPage";
 import Dashboard from "./modules/user/dashboard/Dashboard";
 import Notifications from "./modules/user/notifications/Notifications";
 import OffersList from "./modules/user/offers/OffersList";

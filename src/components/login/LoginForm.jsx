@@ -19,11 +19,11 @@ const LoginForm = () => {
   };
 
   return (
-    <div id="intro">
-      <div className="intro">
-        <img className="background" src={login} />
-        <div className="content login-form">
-          <h4 className="text-defaultCase">Login to your account</h4>
+    <div>
+      <div className="layout">
+        <img className="layout__background" src={login} />
+        <div className="main__content login-form">
+          <h4>Login to your account</h4>
           <div className="p-field" style={{ marginBottom: "24px" }}>
             <label htmlFor="email">
               <InputText

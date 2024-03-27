@@ -3,17 +3,24 @@
 	label
 		display: block
 		font-weight: 700
-		size: 24px
+		size: 1.6rem
 		color: var(--primary)
 	.p-inputtext:not(.p-dropdown-label)
 		background: transparent
 		border: 1px solid var(--text)
 		border-radius: 8px
-		padding: 16px 24px
+		font-size: 1.6rem
+		padding: 16px 22px
 		width: 100%
 	.p-dropdown
 		// display: grid
 		background: transparent
 		border: 1px solid var(--text)
+		width: 100%
+		.p-dropdown-label.p-placeholder
+			font-size: 1.6rem
+			line-height: 1.2em
+			padding: 16px 22px
+			width: 100%
 	&.noLabel label
 		color: transparent

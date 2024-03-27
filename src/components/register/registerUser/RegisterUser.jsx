@@ -12,7 +12,7 @@ import DropDownInput from "@ui/forms/dropDownInput/DropDownInput";
 import PasswordInput from "@ui/forms/passwordInput/PasswordInput";
 import CheckBoxInput from "@ui/forms/checkBoxInput/CheckBoxInput";
 import { getUsersList, getUserData } from "@store/slices/usersSlice";
-import { createUser } from "../../../../services/userServices";
+import { createUser } from "@services/userServices";
 import FileUploadInput from "@ui/forms/fileUploadInput/FileUploadInput";
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton";
 import { Link } from "react-router-dom";
@@ -110,7 +110,7 @@ const RegisterUser = () => {
 
   return (
     <div className="layout">
-      <div className="main__content">
+      <div className="main__content halfwidth">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="profile__container">
             <div className="profilePicture__container">
