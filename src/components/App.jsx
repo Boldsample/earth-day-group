@@ -14,6 +14,7 @@ import RegisterThankYouPage from "@components/register/registerThankYouPage/Regi
 import Dashboard from "./modules/user/dashboard/Dashboard";
 import Notifications from "./modules/user/notifications/Notifications";
 import OffersList from "./modules/user/offers/OffersList";
+
 import 'primeicons/primeicons.css';
         
 
@@ -34,6 +35,7 @@ const App = () => {
               element={<RegisterCategories />}
             />
             <Route exact path="/register/user/" element={<RegisterUser />} />
+            <Route exact path="/register/thankyoupage" element={<RegisterThankYouPage />} />
             <Route exact path="/dashboard/" element={<Dashboard />} />
             <Route exact path="/dashboard/notifications" element={<Notifications />} />
             <Route exact path="/dashboard/Offerslist" element={<OffersList />} />

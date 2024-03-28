@@ -16,8 +16,10 @@ import { createUser } from "@services/userServices";
 import FileUploadInput from "@ui/forms/fileUploadInput/FileUploadInput";
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RegisterUser = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.userData);
   const userList = useSelector((state) => state.users);
@@ -106,6 +108,11 @@ const RegisterUser = () => {
     console.log(data);
     const response = await createUser(cleanData);
     console.log(response);
+    if(response.status === 201){
+      navigate("/register/thankyoupage")
+    }else{
+      console.log("Registro fallo. Ha habido un error.")
+    }
   };
 
   return (
