@@ -12,8 +12,7 @@ const OffersList = () => {
         description='Paper Waste for sale'
         date='11-02-2023 10:45 am'
         offer='sent you an offer: $225'
-        orderStatus='Rejected'
-
+        orderStatus='Pending'
         />
          <MultiUseCard 
         type='offer'

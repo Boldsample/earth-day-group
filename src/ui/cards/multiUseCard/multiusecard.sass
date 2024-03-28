@@ -10,15 +10,24 @@
     display: flex
     flex-direction: column
     justify-content: center
+
     .multiuseCard__p
-        margin-top: 10px
+        margin: 10px 0 0 0 
         font-size: 17px
-    .multiUse__header
+
+    .text-pending
+         color: var(--blue-earth)
+    .text-aproved
+        color: var(--green-earth)
+    .text-rejected
+        color: var(--red-state)
+
+    .notification__header
         display: flex
         flex-direction: row
         justify-content: space-between
         align-items: center
-    .multiUse__title
+    .notification__title
         display: flex
         flex-direction: row
         align-items: center
@@ -35,6 +44,20 @@
         display: flex
         justify-content: space-between
     
+    .offerCircle__status
+        display: inline-block
+        width: 10px
+        height: 10px
+        border-radius: 50%
+        margin-right: 5px
+    
+    .--pending
+        background-color: var(--blue-earth)
+    .--aproved
+        background-color: var(--green-earth)
+    .--rejected
+        background-color: var(--red-state)
+
     .offer__image
         align-self: flex-start
         display: flex
