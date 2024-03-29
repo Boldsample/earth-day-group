@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import modules from "./modules";
 import { Link } from "react-router-dom";
 import CategoryCard from "@ui/cards/categoryCard/CategoryCard";
+
 import "./dashboard.sass";
 
 const Dashboard = () => {
@@ -37,6 +38,13 @@ const Dashboard = () => {
       <div className="main__content -dashboard-container">
         <div className="category__search">
           <h4>Discover:</h4>
+          <span className="p-input-icon-left">
+            <i className="pi pi-search" />
+            <InputText 
+            className="p-inputtext"
+            placeholder="Search" />
+          </span>
+
           <TextInput
             showIcon={true}
             iconName="pi pi-search"

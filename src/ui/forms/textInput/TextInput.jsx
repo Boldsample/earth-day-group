@@ -38,16 +38,17 @@ const TextInput = ({
             name={inputName}
             control={control}
             rules={rules}
-            render={({ field, onChange }) => (
+            render={({ field }) => (
               <InputText
                 maxLength={maxLength}
-                style={showIcon ? { paddingLeft: "50px" } : {} + inputWidth}
+                style={showIcon ? { paddingLeft: "50px", ...inputWidth } : inputWidth}
                 disabled={!isEdit}
                 className={"p-inputtext" + tailoredClass}
-                id={field.name}
+                // id={field.name}
                 {...field}
                 placeholder={placeHolderText}
                 type={type}
+                onChange={(e) => field.onChange(console.log(e.target.value))}
               />
             )}
           />
