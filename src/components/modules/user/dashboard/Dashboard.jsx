@@ -1,14 +1,13 @@
-import React from 'react'
+import React from "react";
 import TextInput from "@ui/forms/textInput/TextInput";
-import { InputText } from 'primereact/inputtext';
+import { InputText } from "primereact/inputtext";
 import { useForm } from "react-hook-form";
-import  modules  from './modules';
-import { Link } from 'react-router-dom';
+import modules from "./modules";
+import { Link } from "react-router-dom";
 import CategoryCard from "@ui/cards/categoryCard/CategoryCard";
-import './dashboard.sass'
+import "./dashboard.sass";
 
 const Dashboard = () => {
-    
   const {
     control,
     handleSubmit,
@@ -19,10 +18,10 @@ const Dashboard = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      searchWord: ""
+      searchWord: "",
     },
   });
-console.log(modules)
+  console.log(modules);
   const getFormErrorMessage = (fieldName) => {
     return (
       errors[fieldName] && (
@@ -31,28 +30,31 @@ console.log(modules)
     );
   };
 
+  // const filteredModules = modules.filter(module => module.title.toLowerCase().includes(filteredModule.toLowerCase()))
+  console.log(getValues);
   return (
     <div className="layout">
       <div className="main__content -dashboard-container">
         <div className="category__search">
-        <h4>Discover:</h4>
-          <TextInput 
+          <h4>Discover:</h4>
+          <TextInput
             showIcon={true}
             iconName="pi pi-search"
-              isRequired={false}
-              labelName="Search"
-              isEdit={true}
-              getFormErrorMessage={getFormErrorMessage}
-              control={control}
-              inputName="searchWord"
-              placeHolderText="Search"
-              width="100%"
-              showLabel={false}
-            />
+            isRequired={false}
+            labelName="Search"
+            isEdit={true}
+            getFormErrorMessage={getFormErrorMessage}
+            control={control}
+            inputName="searchWord"
+            placeHolderText="Search"
+            width="100%"
+            showLabel={false}
+          />
         </div>
         <div className="category__grid -dashboard">
-            {modules.map((module, key)=>{
-                return <Link to={module.link}>
+          {modules.map((module, key) => {
+            return (
+              <Link to={module.link}>
                 <CategoryCard
                   hoverBackgroundColor={module.hoverBackgroundColor}
                   hoverIconColor={module.hoverIconColor}
@@ -63,14 +65,15 @@ console.log(modules)
                   title={module.title}
                   description={module.description}
                   icon={module.icon}
-                  className={'-dashboard-card'}
+                  className={"-dashboard-card"}
                 />
-                </Link>
-            })}
-        </div>    
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default Dashboard
+export default Dashboard;

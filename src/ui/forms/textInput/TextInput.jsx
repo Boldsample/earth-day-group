@@ -4,9 +4,8 @@ import { Tooltip } from "primereact/tooltip";
 import { Controller } from "react-hook-form";
 import "./textInput.sass";
 
-
 const TextInput = ({
-  labelname= '',
+  labelname = "",
   inputName,
   placeHolderText,
   type = "text",
@@ -23,52 +22,55 @@ const TextInput = ({
   isEdit,
   showToolTip,
   showIcon,
-  iconName
+  iconName,
 }) => {
   const inputWidth = {
     width: width,
     height: height,
   };
 
-  
   const renderInput = () => (
     <>
-    {showIcon ? (<span className="p-input-icon-left">
-    <i className={iconName} />
-    <Controller
-        name={inputName}
-        control={control}
-        rules={rules}
-        render={({ field }) => (
-          <InputText
-            maxLength={maxLength}
-            style={ showIcon ? { paddingLeft: "50px"} : {} + inputWidth }
-            disabled={!isEdit}
-            className={"p-inputtext" + tailoredClass}
-            id={field.name}
-            {...field}
-            placeholder={placeHolderText}
-            type={type}
+      {showIcon ? (
+        <span className="p-input-icon-left">
+          <i className={iconName} />
+          <Controller
+            name={inputName}
+            control={control}
+            rules={rules}
+            render={({ field, onChange }) => (
+              <InputText
+                maxLength={maxLength}
+                style={showIcon ? { paddingLeft: "50px" } : {} + inputWidth}
+                disabled={!isEdit}
+                className={"p-inputtext" + tailoredClass}
+                id={field.name}
+                {...field}
+                placeholder={placeHolderText}
+                type={type}
+              />
+            )}
           />
-        )}
-      />
-</span>) : (<Controller
-        name={inputName}
-        control={control}
-        rules={rules}
-        render={({ field }) => (
-          <InputText
-            maxLength={maxLength}
-            style={inputWidth}
-            disabled={!isEdit}
-            className={"p-inputtext" + tailoredClass}
-            id={field.name}
-            {...field}
-            placeholder={placeHolderText}
-            type={type}
-          />
-        )}
-      />)}
+        </span>
+      ) : (
+        <Controller
+          name={inputName}
+          control={control}
+          rules={rules}
+          render={({ field }) => (
+            <InputText
+              maxLength={maxLength}
+              style={inputWidth}
+              disabled={!isEdit}
+              className={"p-inputtext" + tailoredClass}
+              id={field.name}
+              {...field}
+              placeholder={placeHolderText}
+              type={type}
+            />
+          )}
+        />
+      )}
       {getFormErrorMessage(inputName)}
     </>
   );
