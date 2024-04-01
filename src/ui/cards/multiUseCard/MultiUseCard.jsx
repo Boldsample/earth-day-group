@@ -1,4 +1,3 @@
-import React from "react";
 import "./multiusecard.sass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";

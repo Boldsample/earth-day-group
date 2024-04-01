@@ -1,0 +1,61 @@
+.card__grid
+	display: grid
+	grid-template-columns: repeat(2, 1fr)
+	gap: 6rem
+
+.card
+	align-items: flex-start
+	background-color: var(--blue-earth)
+	border-radius: 1rem
+	cursor: pointer
+	display: flex
+	flex-direction: column
+	gap: 1rem
+	isolation: isolate
+	padding: 3rem 6rem 3rem 3rem
+	position: relative
+	transition: background-color 0.3s ease-in-out
+	width: 32rem
+	h4, h5
+		color: white
+	.card__icon
+		align-items: center
+		background-color: var(--dark-blue)
+		border-radius: 5rem
+		display: flex
+		flex-direction: column
+		justify-content: center
+		position: absolute
+		height: 9rem
+		right: -3.5rem
+		top: -4rem
+		transition: background-color 0.3s ease-in-out
+		width: 9rem
+	&:hover
+		background-color: var(--dark-blue)
+		.card__icon
+			background-color: var(--blue-earth)
+.card.dark-blue
+	background-color: var(--dark-blue)
+	.card__icon
+		background-color: var(--blue-earth)
+	&:hover
+		background-color: var(--blue-earth)
+		.card__icon
+			background-color: var(--dark-blue)
+.card.light-green
+	background-color: var(--light-green)
+	.card__icon
+		background-color: var(--green-earth)
+	&:hover
+		background-color: var(--green-earth)
+		.card__icon
+			background-color: var(--light-green)
+.card.green-earth
+	background-color: var(--green-earth)
+	.card__icon
+		background-color: var(--light-green)
+	&:hover
+		background-color: var(--light-green)
+		.card__icon
+			background-color: var(--green-earth)

@@ -18,10 +18,8 @@ const Nav = () => {
   ];
   return (
     <div className="nav__container">
-      {sections.map((section) => {
-        return (
-          <>
-          <Link to={section.path}>
+      {sections.map((section, key) => {
+        return <Link key={key} to={section.path}>
             <Tooltip target=".custom-target-icon" />
             <img
               data-pr-tooltip={section.label}
@@ -33,8 +31,6 @@ const Nav = () => {
               src={section.icon}
             ></img>
           </Link>
-          </>
-        );
       })}
     </div>
   );

@@ -9,6 +9,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@ui': '/src/ui',
+			'@json': '/src/json',
 			'@store': '/src/store',
 			'@styles': '/src/styles',
 			'@assets': '/src/assets',

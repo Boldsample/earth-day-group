@@ -4,12 +4,12 @@ import { InputText } from "primereact/inputtext";
 import { useForm } from "react-hook-form";
 import modules from "./modules";
 import { Link } from "react-router-dom";
-import CategoryCard from "@ui/cards/categoryCard/CategoryCard";
+import Card from "@ui/cards/Card";
 
 import "./dashboard.sass";
 
 const Dashboard = () => {
-  const [filteredModule, setFilteredModule] = useState({});
+  const [filteredModule, setFilteredModule] = useState([]);
   const filteredModules = modules.filter((module) =>
     module.title.toLowerCase().includes(filteredModule)
   );
@@ -34,7 +34,7 @@ const Dashboard = () => {
           {filteredModules.length > 0
             ? filteredModules.map((module, key) => (
                 <Link to={module.link} key={key}>
-                  <CategoryCard
+                  <Card
                     hoverBackgroundColor={module.hoverBackgroundColor}
                     hoverIconColor={module.hoverIconColor}
                     backgroundColor={module.backgroundColor}

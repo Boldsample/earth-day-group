@@ -1,76 +1,39 @@
-import { InputTextarea } from "primereact/inputtextarea";
-import { Controller } from "react-hook-form";
+import { Controller } from "react-hook-form"
+import { InputTextarea } from "primereact/inputtextarea"
 
 const TextAreaInput = ({
-  showLabel,
-  labelName,
-  control,
-  label,
-  isRequired,
-  nameInput,
-  rules,
-  isEdit,
-  getFormErrorMessage,
-  className = "",
-  placeHolderText = "",
+	label,
+	rules,
+	control,
+	disabled,
+	nameInput,
+	showLabel,
+	isRequired,
+	getFormErrorMessage,
+	placeHolderText = "",
 }) => {
-  const renderInput = () => (
-    <>
-    <div>
-      <Controller
-        name={nameInput}
-        control={control}
-        rules={rules}
-        render={({ field }) => (
-          <InputTextarea
-            id={field.name}
-            disabled={!isEdit}
-            {...field}
-            placeholder={placeHolderText}
-            className={"w-full " + className}
-            rows={5}
-            cols={30}
-          />
-        )}
-      />
-    </div>
-      {getFormErrorMessage(nameInput)}
-    </>
-  );
+	const renderInput = () => <>
+		<Controller
+			rules={rules}
+			name={nameInput}
+			control={control}
+			render={({ field }) => <InputTextarea
+				rows={5}
+				cols={30}
+				id={field.name}
+				disabled={disabled}
+				placeholder={placeHolderText}
+				{...field} />
+			} />
+		{getFormErrorMessage(nameInput)}
+	</>
 
-  return (
-    <div className="p-field">
-      {showLabel ? (
-        <label htmlFor={nameInput}>
-          {label} {isRequired && <span className="text-red-600">*</span>}
-          {labelName}
-          {renderInput()}
-        </label>
-      ) : (
-        renderInput()
-      )}
-    </div>
-  );
-};
+	return <div className="p-field">
+		{showLabel ? <label htmlFor={nameInput}>
+			{label} {isRequired && <span className="text-red-600">*</span>}
+			{renderInput()}
+		</label> : renderInput()}
+	</div>
+}
 
-export default TextAreaInput;
-
-// {
-//   return (
-//     <div className="field mb-5">
-//       <label htmlFor={nameInput} className="block font-semibold">
-//         {label} {isRequerid && <span className="text-red-600">*</span>}
-//       </label>
-//       <Controller
-//         name={nameInput}
-//         control={control}
-//         rules={rules}
-//         render={({ field }) => (
-//           <InputTextarea id={field.name} disabled={!isEdit} {...field} placeholder={placeholder} className={'w-full '+ className} rows={5} cols={30}  />
-//         )}
-//       />
-//       {getFormErrorMessage(nameInput)}
-//     </div>
-//   )
-// }
-// export default TextAreaHookForm
+export default TextAreaInput

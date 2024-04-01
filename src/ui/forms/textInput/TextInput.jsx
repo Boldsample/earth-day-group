@@ -1,94 +1,51 @@
-import React from "react";
-import { InputText } from "primereact/inputtext";
-import { Tooltip } from "primereact/tooltip";
-import { Controller } from "react-hook-form";
-import "./textInput.sass";
+import { Controller } from "react-hook-form"
+import { InputText } from "primereact/inputtext"
 
 const TextInput = ({
-  labelname = "",
-  inputName,
-  placeHolderText,
-  type = "text",
-  tailoredClass,
-  maxLength,
-  width,
-  height,
-  color,
-  showLabel,
-  getFormErrorMessage,
-  control,
-  rules,
-  isRequired,
-  isEdit,
-  showToolTip,
-  showIcon,
-  iconName,
+	label,
+	rules,
+	width,
+	height,
+	control,
+	showIcon,
+	iconName,
+	maxLength,
+	nameInput,
+	showLabel,
+	isRequired,
+	type = "text",
+	getFormErrorMessage,
+	placeHolderText = "",
 }) => {
-  const inputWidth = {
-    width: width,
-    height: height,
-  };
+	const inputWidth = {
+		width: width,
+		height: height,
+	};
+	const renderInput = () => <>
+		{showIcon ? <span className="p-input-icon-left">
+			<i className={iconName} />
+		</span> : null}
+		<Controller
+			rules={rules}
+			name={nameInput}
+			control={control}
+			render={({ field }) => <InputText
+				type={type}
+				id={field.name}
+				style={inputWidth}
+				maxLength={maxLength}
+				placeholder={placeHolderText}
+				{...field} />
+			} />
+		{getFormErrorMessage(nameInput)}
+	</>
 
-  const renderInput = () => (
-    <>
-      {showIcon ? (
-        <span className="p-input-icon-left">
-          <i className={iconName} />
-          <Controller
-            name={inputName}
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <InputText
-                maxLength={maxLength}
-                style={showIcon ? { paddingLeft: "50px", ...inputWidth } : inputWidth}
-                disabled={!isEdit}
-                className={"p-inputtext" + tailoredClass}
-                // id={field.name}
-                {...field}
-                placeholder={placeHolderText}
-                type={type}
-                onChange={(e) => field.onChange(console.log(e.target.value))}
-              />
-            )}
-          />
-        </span>
-      ) : (
-        <Controller
-          name={inputName}
-          control={control}
-          rules={rules}
-          render={({ field }) => (
-            <InputText
-              maxLength={maxLength}
-              style={inputWidth}
-              disabled={!isEdit}
-              className={"p-inputtext" + tailoredClass}
-              id={field.name}
-              {...field}
-              placeholder={placeHolderText}
-              type={type}
-            />
-          )}
-        />
-      )}
-      {getFormErrorMessage(inputName)}
-    </>
-  );
+	return <div className="p-field">
+		{showLabel ? <label htmlFor={nameInput}>
+			{label} {isRequired && <span className="text-red-600">*</span>}
+			{renderInput()}
+		</label> : renderInput()}
+	</div>
+}
 
-  return (
-    <div className="p-field">
-      {showLabel ? (
-        <label htmlFor={inputName}>
-          {label} {isRequired && <span className="text-red-600">*</span>}
-          {labelname}
-          {renderInput()}
-        </label>
-      ) : (
-        renderInput()
-      )}
-    </div>
-  );
-};
-
-export default TextInput;
+export default TextInput

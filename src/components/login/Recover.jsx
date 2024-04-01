@@ -1,8 +1,3 @@
-import './style.sass'
-import '@styles/forms.sass'
-
-import login from '@assets/login.svg'
-
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'primereact/button'
@@ -17,7 +12,7 @@ const Recover = () => {
 
 	return <div>
 		<div className="layout">
-			<img className="layout__background" src={login} />
+			<img className="layout__background" src="/assets/login/image-1.svg" />
 			<div className="main__content login-form">
 				<h1 className="text-upperCase mb-1">Forgot password?</h1>
 				<p>Enter your registered Email ID and we’ll send you a link to reset your password.</p>

@@ -1,7 +1,8 @@
-import '@styles/main.sass'
-import '@styles/responsive.sass'
-import 'react-toastify/dist/ReactToastify.css'
-import 'primereact/resources/themes/lara-light-indigo/theme.css'
+import "@styles/main.sass"
+import "@styles/forms.sass"
+import "@styles/responsive.sass"
+import "react-toastify/dist/ReactToastify.css"
+import "primereact/resources/themes/lara-light-indigo/theme.css"
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'

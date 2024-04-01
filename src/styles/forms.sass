@@ -1,13 +1,15 @@
 .p-field
 	width: 100%
+	&.noLabel label
+		color: transparent
 	label
 		display: block
 		font-weight: 700
 		size: 1.6rem
-		color: var(--primary)
+		color: var(--green-earth)
 	.p-inputtext:not(.p-dropdown-label)
 		background: transparent
-		border: 1px solid var(--text)
+		border: 1px solid var(--grey)
 		border-radius: 8px
 		font-size: 1.6rem
 		padding: 16px 22px
@@ -15,12 +17,30 @@
 	.p-dropdown
 		// display: grid
 		background: transparent
-		border: 1px solid var(--text)
+		border: 1px solid var(--grey)
 		width: 100%
-		.p-dropdown-label.p-placeholder
+		.p-dropdown-label
 			font-size: 1.6rem
 			line-height: 1.2em
 			padding: 16px 22px
 			width: 100%
-	&.noLabel label
-		color: transparent
+	.p-password
+		display: block
+	.checkbox__label
+		color: var(--grey)
+		display: block
+		font-weight: 400
+		.p-checkbox
+			margin-right: 1rem
+			.p-checkbox-box
+				border-color: var(--green-earth)
+				&.p-focus
+					border-color: var(--green-earth)
+				&.p-highlight
+					background-color: var(--green-earth)
+					border-color: var(--green-earth)
+	.social-login
+		display: inline-block
+		margin: 0 1rem
+		img
+			height: 4rem

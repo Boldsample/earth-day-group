@@ -1,76 +1,130 @@
-import "./style.sass";
-import "@styles/forms.sass";
+import { useForm } from "react-hook-form"
+import { Button } from "primereact/button"
+import { useEffect, useState } from "react"
+import { useGoogleLogin } from "@react-oauth/google"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
-import login from "@assets/login.svg";
-
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { TextInput, PasswordInput } from "@ui/forms/"
+import { authUser, getUserGoogle } from "@services/userServices"
+import { getUserData, updateUser } from "@store/slices/usersSlice"
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const [sending, setSending] = useState(false)
+	const userInfo = useSelector((state) => state.users)
+	const {
+		reset,
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			email: "",
+			password: ""
+		},
+	})
 
-  const handleLogin = () => {
-    console.log("Email:", email);
-    console.log("Contraseña:", password);
-  };
+	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+	const onSubmit = async (data) => {
+		if(await authUser(data))
+			dispatch(getUserData())
+	}
+	const gLogin = useGoogleLogin({
+		onSuccess: async tokenResponse => {
+			let userData = await getUserGoogle(tokenResponse.access_token)
+			delete userData.id
+			dispatch(updateUser({...userData, googleToken: tokenResponse.access_token}))
+			navigate('/register/')
+		}
+	})
+	const fLogin = (response) => {
+		console.log(response)
+	}
 
-  return (
-    <div>
-      <div className="layout">
-        <img className="layout__background" src={login} />
-        <div className="main__content login-form">
-          <h4>Login to your account</h4>
-          <div className="p-field" style={{ marginBottom: "24px" }}>
-            <label htmlFor="email">
-              <InputText
-                id="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="p-field">
-            <label htmlFor="password">
-              <InputText
-                id="password"
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="p-field text-right" style={{ marginBottom: "24px" }}>
-            <Link className="text-xs" to="/recover/">
-              Forgot password?
-            </Link>
-          </div>
-          <div className="p-field" style={{ marginBottom: "24px" }}>
-            <Button label="Login" onClick={handleLogin} />
-          </div>
-          <div className="p-field">
-            <p className="text-center" style={{ fontSize: "16px" }}>
-              Or sign in with
-            </p>
-            <GoogleOAuthProvider clientId="510464940348-562le9obed61s1a4gk8clo1gh809lhvu.apps.googleusercontent.com">
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
-            </GoogleOAuthProvider>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-export default LoginForm;
+	useEffect(() => {
+	}, [])
+
+	console.log(userInfo)
+
+	return <div>
+		<div className="layout">
+			<img className="layout__background" src="/assets/login/image-1.svg" />
+			<form onSubmit={handleSubmit(onSubmit)} className="main__content login-form">
+				<h4 className="mb-1">Login to your account</h4>
+				<div className="p-field mb-1">
+					<label htmlFor="email">
+						<TextInput
+							isRequired={true}
+							labelName="email"
+							disabled={sending}
+							getFormErrorMessage={getFormErrorMessage}
+							control={control}
+							nameInput="email"
+							placeHolderText="Email or username"
+							rules={{
+								maxLength: {
+									value: 60,
+									message: "El campo supera los 60 caracteres",
+								},
+								required: "*El campo es requerido.",
+								pattern: {
+									value: /^\S/,
+									message: "No debe tener espacios al inicio",
+								}
+							}}
+						/>
+					</label>
+				</div>
+				<div className="p-field mb-1">
+					<label htmlFor="password">
+						<PasswordInput
+							feedback={false}
+							control={control}
+							isRequired={true}
+							disabled={sending}
+							labelName="password"
+							nameInput="password"
+							placeHolderText="Password"
+							getFormErrorMessage={getFormErrorMessage}
+							rules={{
+								maxLength: {
+									value: 60,
+									message: "El campo supera los 60 caracteres",
+								},
+								required: "*El campo es requerido.",
+								pattern: {
+									value: /^\S/,
+									message: "No debe tener espacios al inicio",
+								}
+							}}
+						/>
+					</label>
+				</div>
+				<div className="p-field flex mb-1">
+					<Link className="text-xs" to="/register/">Create a new account</Link>
+					<Link className="text-xs" to="/recover/">Forgot password?</Link>
+				</div>
+				<div className="p-field mb-2">
+					<Button label="Login" type="submit" disabled={sending} className="dark-blue full-width" />
+				</div>
+				<div className="p-field">
+					<p className="text-center">Or sign in with</p>
+					<p className="text-center">
+						<FacebookLogin
+							autoLoad={true}
+							callback={fLogin}
+							appId="1357569244808289"
+							render={renderProps => (
+								<a className="social-login" onClick={renderProps.onClick}><img src="/assets/social/facebook.svg" alt="Facebook" /></a>
+							)} />
+						<a className="social-login" onClick={gLogin}><img src="/assets/social/google.svg" alt="Google" /></a>
+					</p>
+				</div>
+			</form>
+		</div>
+	</div>
+}
+export default LoginForm

@@ -1,118 +1,52 @@
-import { InputNumber } from "primereact/inputnumber";
-import { Tooltip } from "primereact/tooltip";
-import { Controller } from "react-hook-form";
+import { Controller } from "react-hook-form"
+import { InputNumber } from "primereact/inputnumber"
 
-function NumberInput({
-  labelName = "",
-  control,
-  label,
-  isRequired,
-  nameInput,
-  rules,
-  isEdit,
-  getFormErrorMessage,
-  className = "",
-  placeHolderText = "",
-  maxLength = 10,
-  showTooltip = false,
-  messageHelp = "",
-  showLabel,
-  width,
-  height,
-}) {
-  const inputWidth = {
-    width: width,
-    height: height,
-  };
+const NumberInput = ({
+	label,
+	rules,
+	width,
+	height,
+	control,
+	disabled,
+	nameInput,
+	showLabel,
+	isRequired,
+	maxLength = 10,
+	getFormErrorMessage,
+	placeHolderText = "",
+}) => {
+	const inputWidth = {
+		width: width,
+		height: height,
+	};
+	const renderInput = () => <>
+		<Controller
+			rules={rules}
+			name={nameInput}
+			control={control}
+			render={({ field }) => <InputNumber
+				id={field.name}
+				ref={field.ref}
+				style={inputWidth}
+				disabled={disabled}
+				useGrouping={false}
+				value={field.value}
+				onBlur={field.onBlur}
+				maxLength={maxLength}
+				minFractionDigits={0}
+				maxFractionDigits={5}
+				placeholder={placeHolderText}
+				onValueChange={(e) => field.onChange(e)} />
+			} />
+		{getFormErrorMessage(nameInput)}
+	</>
 
-  const renderInput = () => (
-    <>
-      <div>
-        <Controller
-          name={nameInput}
-          control={control}
-          rules={rules}
-          render={({ field }) => (
-            <InputNumber
-              style={inputWidth}
-              maxLength={maxLength}
-              disabled={!isEdit}
-              useGrouping={false}
-              id={field.name}
-              ref={field.ref}
-              value={field.value}
-              onBlur={field.onBlur}
-              minFractionDigits={0}
-              maxFractionDigits={5}
-              onValueChange={(e) => field.onChange(e)}
-              className={"w-full " + className}
-              placeholder={placeHolderText}
-            />
-          )}
-        />
-      </div>
-      {getFormErrorMessage(nameInput)}
-    </>
-  );
-
-  return (
-    <div className="p-field">
-      {showLabel ? (
-        <label htmlFor={nameInput}>
-          {label} {isRequired && <span className="text-red-600">*</span>}
-          {labelName}
-          {renderInput()}
-        </label>
-      ) : (
-        renderInput()
-      )}
-    </div>
-  );
+	return <div className="p-field">
+		{showLabel ? <label htmlFor={nameInput}>
+			{label} {isRequired && <span className="text-red-600">*</span>}
+			{renderInput()}
+		</label> : renderInput()}
+	</div>
 }
 
-export default NumberInput;
-
-//   return (
-//     <div className="field mb-5">
-//       <label htmlFor={nameInput} className="block font-semibold">
-//         {showTooltip && (
-//           <>
-//             <Tooltip target=".custom-target-icon" />
-//             <i
-//               className="custom-target-icon pi pi-info-circle p-text-secondary p-overlay-badge"
-//               data-pr-tooltip={messageHelp}
-//               data-pr-position="right"
-//               data-pr-at="right+5 top"
-//               data-pr-my="left center-2"
-//               style={{ fontSize: '1rem', cursor: 'pointer', marginRight: "5px"}}></i>
-//           </>
-//         )}
-//         {label} {isRequired && <span className="text-red-600">*</span>}
-//       </label>
-//       <Controller
-//         name={nameInput}
-//         control={control}
-//         rules={rules}
-//         render={({ field }) => (
-//           <InputNumber
-//             maxLength={maxLength}
-//             disabled={!isEdit}
-//             useGrouping={false}
-//             id={field.name}
-//             ref={field.ref}
-//             value={field.value}
-//             onBlur={field.onBlur}
-//             minFractionDigits={0}
-//             maxFractionDigits={5}
-//             onValueChange={() => field.onChange(e)}
-//             className={'w-full ' + className}
-//             placeholder={placeholder}
-//           />
-//         )}
-//       />
-//       {getFormErrorMessage(nameInput)}
-//     </div>
-//   )
-// }
-
-// export default InputNumberHookForm
+export default NumberInput

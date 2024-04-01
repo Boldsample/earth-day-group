@@ -30,7 +30,7 @@ function InputSwitchHookForm({
           <>
             <Tooltip target=".custom-target-icon" />
             <i
-              className="custom-target-icon pi pi-info-circle p-text-secondary p-overlay-badge"
+              className="custom-target-icon pi pi-info-circle p-text-dark-blue p-overlay-badge"
               data-pr-tooltip={messageHelp}
               data-pr-position="right"
               data-pr-at="right+5 top"
