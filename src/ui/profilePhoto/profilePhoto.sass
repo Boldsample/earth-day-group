@@ -1,15 +1,18 @@
 .profile__photo
+	align-items: center
 	background-color: var(--light-grey)
 	border-radius: 50%
 	color: var(--grey)
 	display: flex
-	flex-direction: column
-	height: 5rem
+	height: 4rem
 	justify-content: center
 	margin-right: 1rem
-	width: 5rem
+	min-width: 4rem
+	overflow: hidden
+	width: 4rem
+	&.left
+		margin-left: 8rem
 	img
-		border-radius: 50%
 		height: 100%
 		object-fit: cover
 		width: 100%

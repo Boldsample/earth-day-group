@@ -19,6 +19,7 @@
 *
 	box-sizing: border-box
 	font-family: "Roboto", sans-serif
+	max-width: 100%
 html, body
 	background-color: #FFFBEB
 	color: var(--grey)
@@ -43,6 +44,10 @@ h1, h2, h3, h4, h5, h6
 	margin: 0
 	line-height: 1em
 	width: 100%
+	.pi
+		font-size: 1.1em
+		margin-right: 0.3em
+		vertical-align: middle
 h1
 	font-size: 5rem
 	font-weight: 900
@@ -87,13 +92,18 @@ button, .button
 	font-size: 16px
 	font-weight: 700
 	line-height: 1.5em
-	margin-right: 40px
 	padding: 8px 16px
 	text-decoration: none !important
 	.material-icons
 		margin-bottom: 0.1em
 		vertical-align: middle
-	&.full-width
+	&.small
+		font-size: 14px
+		font-weight: 400
+		padding: 4px 16px
+	& + button, & + .button
+		margin-left: 20px
+	&.fullwidth
 		width: 100%
 	&.green-earth
 		background-color: var(--green-earth)
@@ -101,30 +111,48 @@ button, .button
 		background-color: var(--dark-blue)
 
 header
-	display: grid
-	grid-template-columns: 1fr 2fr 1fr
 	align-items: center
+	display: grid
+	grid-template-columns: 1fr 1fr 1fr
 	justify-items: center
 	position: absolute
 	width: 100%
 	z-index: 100
-
 	.navbar-item
-		display: flex
 		align-items: center
-	.icons
-		color: var(--green-earth)
-		gap: 32px
-
-	.logo
-		grid-column: 2
-		background: var(--green-earth)
-		border-radius: 0 0 16px 16px
-		height: 120px
-		padding: 32px 10px
-		width: 176px
-		img
-			height: 56px
+		display: flex
+		&.go-back
+			justify-self: flex-start
+			margin-left: 8rem
+			.pi
+				font-size: 4rem
+			.plus
+				align-items: center
+				border: var(--grey) 1px solid
+				border-radius: 0.5rem
+				display: inline-flex
+				height: 3rem
+				justify-content: center
+				margin-left: 1rem
+				width: 3rem
+				.pi
+					font-size: 1.5rem
+		&.icons
+			color: var(--green-earth)
+			gap: 32px
+			justify-self: flex-end
+			justify-content: flex-end
+			margin-right: 8rem
+			width: auto
+		&.logo
+			grid-column: 2
+			background: var(--green-earth)
+			border-radius: 0 0 16px 16px
+			height: 120px
+			padding: 32px 10px
+			width: 176px
+			img
+				height: 56px
 
 .layout
 	display: flex
@@ -150,10 +178,15 @@ header
 		padding-top: 130px
 		position: relative
 		width: 50rem
+		&.halfspace
+			padding-right: 8rem
 		&.halfwidth
 			width: 50vw
 		&.fullwidth
 			width: calc(100vw - 8rem)
+		&.fullviewportwidth
+			padding: 0
+			width: 100%
 
 .p-carousel-prev, .p-carousel-next
 	display: none
@@ -187,6 +220,9 @@ header
 .flex
 	display: flex !important
 	justify-content: space-between
+	width: 100%
+.inline-block
+	display: inline-block
 .font-black
 	font-weight: 900
 .font-bold
@@ -198,6 +234,7 @@ header
 .text-dark-blue
 	color: var(--dark-blue)
 .text-center
+	justify-content: center
 	text-align: center
 .text-right
 	text-align: right
@@ -210,6 +247,12 @@ header
 	text-transform: uppercase
 .text-defaultCase
 	text-transform: initial
+.text-gray
+	color: var(--grey)
+.text-dark-blue
+	color: var(--dark-blue)
+.self-end
+	justify-self: flex-end
 
 .small__text
 	font-size: 0.5em

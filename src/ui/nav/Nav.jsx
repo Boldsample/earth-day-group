@@ -1,20 +1,15 @@
-import React from "react";
-import "./nav.sass";
-import { Tooltip } from "primereact/tooltip";
-import home from "@assets/navBar-icons/navIcon-1.svg";
-import location from "@assets/navBar-icons/navIcon-2.svg";
-import inbox from "@assets/navBar-icons/navIcon-3.svg";
-import shop from "@assets/navBar-icons/navIcon-4.svg";
-import settings from "@assets/navBar-icons/navIcon-5.svg";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import { Tooltip } from "primereact/tooltip"
+
+import "./nav.sass"
 
 const Nav = () => {
   const sections = [
-    { label: "Home", icon: home, path: "/dashboard/" },
-    { label: "Location", icon: location, path: "" },
-    { label: "Inbox", icon: inbox, path: "" },
-    { label: "Shop", icon: shop, path: "" },
-    { label: "Settings", icon: settings, path: "" },
+    { label: "Home", icon: '/assets/icons/home.svg', path: "/dashboard/" },
+    { label: "Location", icon: '/assets/icons/location.svg', path: "" },
+    { label: "Inbox", icon: '/assets/icons/inbox.svg', path: "" },
+    { label: "Shop", icon: '/assets/icons/shop.svg', path: "" },
+    { label: "Settings", icon: '/assets/icons/settings.svg', path: "" },
   ];
   return (
     <div className="nav__container">

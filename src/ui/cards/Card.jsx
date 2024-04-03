@@ -1,5 +1,4 @@
 import "./style.sass"
-import { useState } from "react"
 
 const Card = ({
 	icon,

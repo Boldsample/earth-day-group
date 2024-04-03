@@ -1,78 +1,91 @@
 .multiUse__card
-    background-color: var(--white)
-    width: 100%
-    height: 150px
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
-    backdrop-filter: blur(10px)
-    padding: 16px
-    border-radius: 8px
-    margin: 20px 0
-    display: flex
-    flex-direction: column
-    justify-content: center
+	backdrop-filter: blur(10px)
+	background-color: var(--white)
+	border-radius: 0.9rem
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+	display: flex
+	flex-direction: column
+	height: 14rem
+	justify-content: center
+	margin: 1.5rem 0
+	padding: 1.5rem
+	width: 100%
+	.main__container
+		display: flex
+		.offer__image
+			align-self: flex-start
+			margin-right: 20px
+			object-fit: cover
+			height: 60px
+			width: 60px
+		button
+			margin-top: 0.6rem
+		.flex
+			margin-top: 1rem
+			table
+				font-size: 1rem
+				line-height: 1.2rem
+				th, td
+					padding-right: 0.5rem
+			.date
+				font-size: 1.2rem
+				justify-self: flex-end
+				text-align: right
+				width: 10rem
 
-    .multiuseCard__p
-        margin: 10px 0 0 0 
-        font-size: 17px
+	.multiuseCard__p
+		margin: 10px 0 0 0 
+		font-size: 17px
 
-    .text-pending
-         color: var(--blue-earth)
-    .text-aproved
-        color: var(--green-earth)
-    .text-rejected
-        color: var(--red-state)
+	.text-pending
+		color: var(--blue-earth)
+	.text-aproved
+		color: var(--green-earth)
+	.text-rejected
+		color: var(--red-state)
 
 // Notifications card style
 
 .notification__header
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-    align-items: center
+	display: flex
+	flex-direction: row
+	justify-content: space-between
+	align-items: center
 .notification__title
-    display: flex
-    flex-direction: row
-    align-items: center
-    svg
-        font-size: 25px
-        color: var(--green-earth)
-        margin-right: 20px
-    
+	display: flex
+	flex-direction: row
+	align-items: center
+	svg
+		font-size: 25px
+		color: var(--green-earth)
+		margin-right: 20px
+	
 // Offers card style
 
 .offer__container
-    display: flex
-    flex-direction: row
-    justify-content: space-between
+	display: flex
+	flex-direction: row
+	justify-content: space-between
 .left__container
-    display: flex
-    justify-content: space-between
+	display: flex
+	justify-content: space-between
 
 .offerCircle__status
-    display: inline-block
-    width: 10px
-    height: 10px
-    border-radius: 50%
-    margin-right: 5px
+	display: inline-block
+	width: 10px
+	height: 10px
+	border-radius: 50%
+	margin-right: 5px
 
 .--pending
-    background-color: var(--blue-earth)
+	background-color: var(--blue-earth)
 .--aproved
-    background-color: var(--green-earth)
+	background-color: var(--green-earth)
 .--rejected
-    background-color: var(--red-state)
+	background-color: var(--red-state)
 
-.offer__image
-    align-self: flex-start
-    display: flex
-    justify-content: center
-    height: 60px
-    width: 60px
-    margin-right: 20px
-    // border-radius: 50%
-    // background-color: var(--green-earth)
 .offer__status
-    display: flex
-    flex-direction: column
-    justify-content: space-between
-    align-items: flex-end
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+	align-items: flex-end

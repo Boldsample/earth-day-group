@@ -5,10 +5,11 @@ import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
 import { createUser } from "@services/userServices"
+import { getUserData } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
+import { updateThankyou } from "@store/slices/globalSlice"
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput } from "@ui/forms"
-import { getUsersList, getUserData } from "@store/slices/usersSlice"
 
 import countries from "@json/countries.json"
 import "./style.sass"
@@ -17,7 +18,6 @@ const RegisterUser = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [sending, setSending] = useState(false)
-	// const userList = useSelector((state) => state.users)
 	const user = useSelector((state) => state.users.userData);
 	const [photoFileBlob, setPhotoFileBlob] = useState(user?.picture)
 	const {
@@ -28,13 +28,13 @@ const RegisterUser = () => {
 	} = useForm({
 		defaultValues: {
 			bio: "",
+			phone: null,
 			location: "",
 			password: "",
 			username: "",
 			name: user?.name,
-			profilePhoto: "",
-			phoneNumber: null,
 			email: user?.email,
+			picture: user?.picture,
 			password_confirmation: "",
 			termsConditionsChecked: false
 		}
@@ -42,9 +42,16 @@ const RegisterUser = () => {
 	
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const onSubmit = async (data) => {
-		console.log({...user, ...data})
-		if(await createUser({...user, ...data}))
+		if(await createUser({...user, ...data})){
 			dispatch(getUserData())
+			dispatch(updateThankyou({
+				title: "Congrats!", 
+				link: "/dashboard/",
+				background: "image-1.svg",
+				button_label: "Go to dashboard",
+				content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+			}))
+		}
 	}
 
 	useEffect(() => {
@@ -84,9 +91,7 @@ const RegisterUser = () => {
 						<ProfilePhoto userPhoto={photoFileBlob} />
 					</div>
 					<div className="profileUpload__container">
-						<h5 className="profileUpload__title text-defaultCase">
-							Profile Picture
-						</h5>
+						<h5 className="profileUpload__title text-defaultCase">Profile Picture</h5>
 						<FileUploadInput setPhotoFileBlob={setPhotoFileBlob} />
 					</div>
 				</div>
@@ -160,18 +165,19 @@ const RegisterUser = () => {
 					}}
 					/>
 					<DropDownInput
-					control={control}
-					showLabel={false}
-					labelName="Location"
-					nameInput="location"
-					isEdit={true}
-					isRequired={true}
-					// value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-					options={countries}
-					optionLabel="name"
-					placeHolderText="Select a Country"
-					className=""
-					getFormErrorMessage={getFormErrorMessage}
+						control={control}
+						showLabel={false}
+						labelName="Location"
+						nameInput="location"
+						isEdit={true}
+						isRequired={true}
+						// value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
+						options={countries}
+						optionLabel="name"
+						optionValue="code"
+						placeHolderText="Select a Country"
+						className=""
+						getFormErrorMessage={getFormErrorMessage}
 					/>
 				</div>
 				<TextAreaInput
@@ -199,7 +205,7 @@ const RegisterUser = () => {
 					isRequired={true}
 					control={control}
 					label="Phone Number"
-					nameInput="phoneNumber"
+					nameInput="phone"
 					placeHolderText="Phone Number*"
 					getFormErrorMessage={getFormErrorMessage}
 					rules={{
@@ -269,7 +275,7 @@ const RegisterUser = () => {
 					/>
 				</div>
 				<div className="p-field" style={{ marginBottom: "24px" }}>
-					<Button label="Sign up" type="submit" />
+					<Button className="dark-blue fullwidth" label="Sign up" type="submit" />
 				</div>
 			</form>
 		</div>

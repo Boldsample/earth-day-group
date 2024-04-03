@@ -1,30 +1,32 @@
-import React from 'react'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { updateAddLink } from '@store/slices/globalSlice'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 
 const OffersList = () => {
-  return (
-    <div className="layout">
-      <div className="main__content">
-        <h4 className='text-defaultCase'>Offers</h4>
-        <MultiUseCard 
-        type='offer'
-        title='Paperrecycle.org'
-        description='Paper Waste for sale'
-        date='11-02-2023 10:45 am'
-        offer='sent you an offer: $225'
-        orderStatus='Pending'
-        />
-         <MultiUseCard 
-        type='offer'
-        title='Paperrecycle.org'
-        description='Paper Waste for sale'
-        date='11-02-2023 10:45 am'
-        offer='sent you an offer: $225'
-        orderStatus='Rejected'
-        />
-      </div>
-    </div>
-  )
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(updateAddLink('/offers/new/'))
+	}, [])
+
+	return <div className="layout">
+		<img className="layout__background" src="/assets/user/image-1.svg" />
+		<div className="main__content halfspace halfwidth">
+			<h1 className='text-defaultCase'>My Offers</h1>
+			<MultiUseCard 
+				type='offer'
+				title='Paper waste for sale'
+				material={['Paper']}
+				quantity='25 Kg'
+				price='$250.00'
+				offers='24'
+				receive={true}
+				date='11-02-2023'
+			/>
+		</div>
+	</div>
 }
 
 export default OffersList

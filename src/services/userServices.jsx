@@ -26,13 +26,21 @@ export const createUser = async (data) => {
 		await API.post("/register", data)
 		return true
 	} catch (e) {
-		toast.error(e.response.status+': '+e.response.data.errors.message)
+		toast.error(e.response.status+': '+e.response.data.message)
+		return false
+	}
+}
+export const logoutUser = async () => {
+	try {
+		await API.post("/logout")
+		return true
+	} catch (e) {
+		toast.error(e.response.status+': '+e.response.data.message)
 		return false
 	}
 }
 export const getUser = async () => {
 	const { data } = await API.get(`/api/user/`)
-	// const { data } = await API.get(`/user/${id}/`)
 	return data
 }
 export const getUsers = async () => {

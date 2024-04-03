@@ -33,21 +33,20 @@ const LoginForm = () => {
 			dispatch(getUserData())
 	}
 	const gLogin = useGoogleLogin({
-		onSuccess: async tokenResponse => {
-			let userData = await getUserGoogle(tokenResponse.access_token)
-			delete userData.id
-			dispatch(updateUser({...userData, googleToken: tokenResponse.access_token}))
+		onSuccess: async ({access_token}) => {
+			const { name, email, picture, locale } = await getUserGoogle(access_token)
+			dispatch(updateUser({google_token: access_token, name, email, picture, locale, email_verified_at: new Date().toISOString().replace('T', ' ').substring(0, 19)}))
 			navigate('/register/')
 		}
 	})
-	const fLogin = (response) => {
-		console.log(response)
+	const fLogin = ({name, email, picture, accessToken}) => {
+		dispatch(updateUser({ facebook_token: accessToken, name, email, picture: picture.data.url, email_verified_at: new Date().toISOString().replace('T', ' ').substring(0, 19) }))
+		navigate('/register/')
 	}
 
 	useEffect(() => {
+		dispatch(updateUser({}))
 	}, [])
-
-	console.log(userInfo)
 
 	return <div>
 		<div className="layout">
@@ -108,7 +107,7 @@ const LoginForm = () => {
 					<Link className="text-xs" to="/recover/">Forgot password?</Link>
 				</div>
 				<div className="p-field mb-2">
-					<Button label="Login" type="submit" disabled={sending} className="dark-blue full-width" />
+					<Button label="Login" type="submit" disabled={sending} className="dark-blue fullwidth" />
 				</div>
 				<div className="p-field">
 					<p className="text-center">Or sign in with</p>
@@ -117,10 +116,11 @@ const LoginForm = () => {
 							autoLoad={true}
 							callback={fLogin}
 							appId="1357569244808289"
+							fields="name,email,picture"
 							render={renderProps => (
-								<a className="social-login" onClick={renderProps.onClick}><img src="/assets/social/facebook.svg" alt="Facebook" /></a>
+								<a className="social-login" onClick={renderProps.onClick}><img src="/assets/icons/facebook.svg" alt="Facebook" /></a>
 							)} />
-						<a className="social-login" onClick={gLogin}><img src="/assets/social/google.svg" alt="Google" /></a>
+						<a className="social-login" onClick={gLogin}><img src="/assets/icons/google.svg" alt="Google" /></a>
 					</p>
 				</div>
 			</form>

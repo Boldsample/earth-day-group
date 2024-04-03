@@ -30,7 +30,6 @@ const usersSlice = createSlice({
 			state.inputField = action.payload;
 		},
 		updateUser: (state, action) => {
-			console.log(state, action)
 			state.userData = { ...action.payload };
 		},
 		addUserList: (state, action) => {
@@ -80,4 +79,4 @@ export const {
 	resetState,
 } = usersSlice.actions;
 
-export default usersSlice.reducer;
+export default usersSlice.reducer

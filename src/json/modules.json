@@ -1,0 +1,37 @@
+[
+	{
+		"title": "Market Place",
+		"className": "blue-earth",
+		"link": "/",
+		"icon": "/assets/icons/market-place.svg",
+		"description": "Find products that are eco friendly"
+	},
+	{
+		"title": "Recycle",
+		"className": "light-green",
+		"link": "/",
+		"icon": "/assets/icons/recycle.svg",
+		"description": "Look for recycle center companies that may interest you"
+	},
+	{
+		"title": "Post Offer",
+		"className": "dark-blue",
+		"link": "/offers/",
+		"icon": "/assets/icons/post-offer.svg",
+		"description": "Post your recyclable material and sell it to the highest bidder"
+	},
+	{
+		"title": "Shelters",
+		"className": "green-earth",
+		"link": "/",
+		"icon": "/assets/icons/shelters.svg",
+		"description": "Find animal shelters near your location"
+	},
+	{
+		"title": "Social Organization",
+		"className": "green-earth",
+		"link": "/",
+		"icon": "/assets/icons/social-organization.svg",
+		"description": "Find social organizations near your location"
+	}
+]
