@@ -17,7 +17,7 @@ export const authUser = async (data) => {
 		await API.post("/login", data)
 		return true
 	} catch (e) {
-		toast.error(e.response.status+': '+e.response.data.message)
+		toast.error(e.response?.status+': '+e.response?.data.message)
 		return false
 	}
 }
@@ -26,7 +26,7 @@ export const createUser = async (data) => {
 		await API.post("/register", data)
 		return true
 	} catch (e) {
-		toast.error(e.response.status+': '+e.response.data.message)
+		toast.error(e.response?.status+': '+e.response?.data.message)
 		return false
 	}
 }

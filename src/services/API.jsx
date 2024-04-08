@@ -3,7 +3,7 @@ import axios from "axios"
 export const API = axios.create({
 	withXSRFToken: true,
 	withCredentials: true,
-	baseURL: "http://localhost:8000",
+	baseURL: "http://earth-day-group.boldsample.com/api",
 	headers: {
 		Accept: 'application/json'
 	}

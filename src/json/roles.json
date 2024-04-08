@@ -9,7 +9,7 @@
 	{
 		"title": "Recycling Center:",
 		"className": "light-green",
-		"link": "/",
+		"link": "/register/company",
 		"icon": "/assets/icons/reciclyng-center.svg",
 		"description": "Register your recycling center or company and extend your operation area."
 	},

@@ -10,11 +10,12 @@ import Header from "@ui/header/Header"
 import { Recover, LoginForm } from "@components/login"
 import { Dashboard, OffersList, OfferNew } from "@modules/user"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
-import { RegisterRole, RegisterUser } from "@components/register"
+import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
 import Notifications from "@components/notifications/Notifications"
 
 import 'primeicons/primeicons.css'
 import 'react-toastify/dist/ReactToastify.css'
+
 
 const App = () => {
 	return <GoogleOAuthProvider clientId="510464940348-562le9obed61s1a4gk8clo1gh809lhvu.apps.googleusercontent.com">
@@ -29,7 +30,7 @@ const App = () => {
 					<Route path="/thankyou" element={<ThankYouPage />} />
 					<Route exact path="/register" element={<RegisterRole />} />
 					<Route exact path="/register/user" element={<RegisterUser />} />
-
+					<Route exact path="/register/company" element={<RegisterCompany />} />
 					<Route exact path="/dashboard/" element={<Dashboard />} />
 					<Route exact path="/dashboard/notifications" element={<Notifications />} />
 					<Route exact path="/offers" element={<OffersList />} />
