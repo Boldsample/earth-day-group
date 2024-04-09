@@ -1,7 +1,7 @@
 import React from 'react'
-import UploadProfilePhotoInput from '@forms/uploadProfilePhotoInput'
-import ProfilePhoto from '@forms/profilePhoto'
+import FileUploadInput from '../fileUploadInput';
 import './uploadprofilephotoinput.sass'
+import ProfilePhoto from '../../profilePhoto/ProfilePhoto'
 
 const UploadProfilePhotoInput = ({photoFileBlob, setPhotoFileBlob}) => {
   return (
