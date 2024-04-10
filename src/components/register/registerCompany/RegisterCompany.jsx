@@ -12,6 +12,7 @@ import { updateThankyou } from "@store/slices/globalSlice"
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
 import { TabView, TabPanel } from 'primereact/tabview';
 import FormOne from './FormOne'
+import FormTwo from './FormTwo'
 
 const RegisterCompany = () => {
     const navigate = useNavigate()
@@ -94,7 +95,12 @@ const RegisterCompany = () => {
 					/>
 				</TabPanel>
 				<TabPanel header='tab 2'>
-					<h1>Tab 2</h1>
+				<FormTwo 
+						control={control}
+						getFormErrorMessage={getFormErrorMessage}
+						photoFileBlob={photoFileBlob}
+						setPhotoFileBlob={setPhotoFileBlob}
+					/>
 				</TabPanel>	
 			</TabView>
                 
