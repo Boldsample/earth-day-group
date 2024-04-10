@@ -2,6 +2,7 @@ import React from 'react'
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput, UploadProfilePhotoInput } from "@ui/forms"
 import countries from "@json/countries.json"
 import { Button } from 'primereact/button'
+import RecycleMaterialCard from '../../../ui/cards/recycleMaterialCard/RecycleMaterialCard'
 
 const FormTwo = ({control, getFormErrorMessage, photoFileBlob, setPhotoFileBlob  }) => {
   return (
@@ -63,6 +64,9 @@ const FormTwo = ({control, getFormErrorMessage, photoFileBlob, setPhotoFileBlob 
       }}
     />
     <Button className="dark-blue fullwidth" label="Add" type="submit" />
+    </div>
+    <div className="materialsCard__grid">
+        <RecycleMaterialCard/>
     </div>
     <TextAreaInput
       label="Description"
