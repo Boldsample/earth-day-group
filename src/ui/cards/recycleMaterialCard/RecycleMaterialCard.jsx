@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faCircle } from "@fortawesome/free-solid-svg-icons";
 import "./recycleMaterialCard.sass";
 
-const RecycleMaterialCard = () => {
+const RecycleMaterialCard = ({material, unit, price,  color}) => {
   return (
     <div className="recycle__card">
-      <FontAwesomeIcon icon={faCircle} />
+      <FontAwesomeIcon icon={faCircle} className={color} />
       <div className="body__container">
-        <p>Paper</p>
-        <p>1kg:$2.5</p>
+        <p>{material}</p>
+        {/* <p>1kg:$2.5</p> */}
+        <p>{unit}: {price}</p>
       </div>
       <div className="close__icon">
         <FontAwesomeIcon icon={faClose} />
