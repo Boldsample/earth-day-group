@@ -5,6 +5,7 @@ const FormOne = ({control, getFormErrorMessage, photoFileBlob, setPhotoFileBlob 
   return (
     <>
       <UploadProfilePhotoInput
+        type='profilePhotoUpload'
         photoFileBlob={photoFileBlob}
         setPhotoFileBlob={setPhotoFileBlob}
       />

@@ -7,7 +7,7 @@ import RecycleMaterialCard from '../../../ui/cards/recycleMaterialCard/RecycleMa
 const FormTwo = ({control, getFormErrorMessage, photoFileBlob, setPhotoFileBlob  }) => {
   return (
     <>
-    <h5>Please add a complete detailed list of recyclable material</h5>
+    <h5>Please add a complete detailed  list of recyclable material</h5>
     <h4>Recyclable Material</h4>
     <div className="registerInput__container-x2">
     <DropDownInput
@@ -71,8 +71,11 @@ const FormTwo = ({control, getFormErrorMessage, photoFileBlob, setPhotoFileBlob 
         <RecycleMaterialCard material="Plastic" unit="1kg" price="$2.5" color='glassCategory'/>
         <RecycleMaterialCard material="Organic" unit="1kg" price="$2.5" color='organicCategory'/>  
     </div>
+    <UploadProfilePhotoInput
+        type='imageUpload'
+    />
     <TextAreaInput
-      label="Description"
+      label="Bio"
       nameInput="description"
       showLabel={true}
       control={control}
