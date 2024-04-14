@@ -1,11 +1,25 @@
-import React from 'react'
-import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput, UploadProfilePhotoInput } from "@ui/forms"
-import countries from "@json/countries.json"
-const FormOne = ({control, getFormErrorMessage, photoFileBlob, setPhotoFileBlob  }) => {
+import React from "react";
+import {
+  TextInput,
+  NumberInput,
+  PasswordInput,
+  TextAreaInput,
+  DropDownInput,
+  CheckBoxInput,
+  FileUploadInput,
+  UploadPhotoInput,
+} from "@ui/forms";
+import countries from "@json/countries.json";
+const FormOne = ({
+  control,
+  getFormErrorMessage,
+  photoFileBlob,
+  setPhotoFileBlob,
+}) => {
   return (
     <>
-      <UploadProfilePhotoInput
-        type='profilePhotoUpload'
+      <UploadPhotoInput
+        type="profilePhotoUpload"
         photoFileBlob={photoFileBlob}
         setPhotoFileBlob={setPhotoFileBlob}
       />
@@ -215,6 +229,6 @@ const FormOne = ({control, getFormErrorMessage, photoFileBlob, setPhotoFileBlob 
       </div>
     </>
   );
-}
+};
 
-export default FormOne
+export default FormOne;
