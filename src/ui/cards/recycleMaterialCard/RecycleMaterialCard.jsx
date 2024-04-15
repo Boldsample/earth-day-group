@@ -12,9 +12,9 @@ const RecycleMaterialCard = ({material, unit, price,  color}) => {
         {/* <p>1kg:$2.5</p> */}
         <p>{unit}: {price}</p>
       </div>
-      <div className="close__icon">
+      <button className="close__icon">
         <FontAwesomeIcon icon={faClose} />
-      </div>
+      </button>
     </div>
   );
 };

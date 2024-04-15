@@ -10,6 +10,7 @@ import {
   UploadPhotoInput,
 } from "@ui/forms";
 import countries from "@json/countries.json";
+import materials from "@json/recyclableMaterials.json";
 import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
 
@@ -19,6 +20,10 @@ const FormTwo = ({
   photoFileBlob,
   setPhotoFileBlob,
 }) => {
+  const units = [
+    {unit: 'Kilo', code: 'Kg'},
+    {unit: 'Libra', code: 'Lb'},
+  ]
   return (
     <>
       <h5>Please add a complete detailed list of recyclable material</h5>
@@ -32,8 +37,8 @@ const FormTwo = ({
           isEdit={true}
           isRequired={true}
           // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-          options={countries}
-          optionLabel="name"
+          options={materials}
+          optionLabel="material"
           optionValue="code"
           placeHolderText="Select Material"
           className=""
@@ -47,8 +52,8 @@ const FormTwo = ({
           isEdit={true}
           isRequired={true}
           // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-          options={countries}
-          optionLabel="name"
+          options={units}
+          optionLabel="unit"
           optionValue="code"
           placeHolderText="Select Unit"
           className=""
@@ -63,7 +68,7 @@ const FormTwo = ({
           control={control}
           label="Phone Number"
           nameInput="phone"
-          placeHolderText="Add Price"
+          placeHolderText="Add Price per unit"
           getFormErrorMessage={getFormErrorMessage}
           rules={{
             maxLength: {
