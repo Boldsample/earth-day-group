@@ -36,9 +36,9 @@ const RegisterCompany = () => {
       picture: user?.picture,
       password_confirmation: "",
       termsConditionsChecked: false,
-      materialsç: "",
+      materials: "",
       unit: "",
-      unitPrice: 0,
+      unitPrice: null,
       bio: "",
     },
   });
