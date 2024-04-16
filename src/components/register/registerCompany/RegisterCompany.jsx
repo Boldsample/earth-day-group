@@ -36,6 +36,10 @@ const RegisterCompany = () => {
       picture: user?.picture,
       password_confirmation: "",
       termsConditionsChecked: false,
+      materialsç: "",
+      unit: "",
+      unitPrice: 0,
+      bio: "",
     },
   });
 
@@ -44,19 +48,20 @@ const RegisterCompany = () => {
       <small className="p-error">{errors[fieldName]?.message}</small>
     );
   const onSubmit = async (data) => {
-    if (await createUser({ ...user, ...data })) {
-      dispatch(getUserData());
-      dispatch(
-        updateThankyou({
-          title: "Congrats!",
-          link: "/dashboard/",
-          background: "image-1.svg",
-          button_label: "Go to dashboard",
-          content:
-            "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
-        })
-      );
-    }
+    console.log(data);
+    // if (await createUser({ ...user, ...data })) {
+    //   dispatch(getUserData());
+    //   dispatch(
+    //     updateThankyou({
+    //       title: "Congrats!",
+    //       link: "/dashboard/",
+    //       background: "image-1.svg",
+    //       button_label: "Go to dashboard",
+    //       content:
+    //         "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+    //     })
+    //   );
+    // }
   };
 
   useEffect(() => {

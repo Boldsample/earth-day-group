@@ -21,9 +21,9 @@ const FormTwo = ({
   setPhotoFileBlob,
 }) => {
   const units = [
-    {unit: 'Kilo', code: 'Kg'},
-    {unit: 'Libra', code: 'Lb'},
-  ]
+    { unit: "Kilo", code: "Kg" },
+    { unit: "Libra", code: "Lb" },
+  ];
   return (
     <>
       <h5>Please add a complete detailed list of recyclable material</h5>
@@ -32,8 +32,8 @@ const FormTwo = ({
         <DropDownInput
           control={control}
           showLabel={false}
-          labelName="Location"
-          nameInput="location"
+          labelName="Material"
+          nameInput="materials"
           isEdit={true}
           isRequired={true}
           // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
@@ -47,8 +47,8 @@ const FormTwo = ({
         <DropDownInput
           control={control}
           showLabel={false}
-          labelName="Location"
-          nameInput="location"
+          labelName="Unit"
+          nameInput="unit"
           isEdit={true}
           isRequired={true}
           // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
@@ -66,8 +66,8 @@ const FormTwo = ({
           showLabel={false}
           isRequired={true}
           control={control}
-          label="Phone Number"
-          nameInput="phone"
+          label="Unit Price"
+          nameInput="unitPrice"
           placeHolderText="Add Price per unit"
           getFormErrorMessage={getFormErrorMessage}
           rules={{
@@ -113,7 +113,7 @@ const FormTwo = ({
       <UploadPhotoInput type="imageUpload" />
       <TextAreaInput
         label="Bio"
-        nameInput="description"
+        nameInput="bio"
         showLabel={true}
         control={control}
         isRequired={false}
