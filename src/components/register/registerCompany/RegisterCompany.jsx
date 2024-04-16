@@ -20,10 +20,13 @@ const RegisterCompany = () => {
   const [sending, setSending] = useState(false);
   const user = useSelector((state) => state.users.userData);
   const [photoFileBlob, setPhotoFileBlob] = useState(user?.picture);
+  const [recyclableMaterials, setRecyclableMaterials] = useState([])
   const {
     reset,
     control,
     handleSubmit,
+    getValues,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -91,7 +94,7 @@ const RegisterCompany = () => {
   // };
 
   // console.log(getValues());
-
+  console.log(recyclableMaterials)
   return (
     <div className="layout">
       <img className="layout__background" src="/assets/register/image-2.svg" />
@@ -112,6 +115,11 @@ const RegisterCompany = () => {
                 getFormErrorMessage={getFormErrorMessage}
                 photoFileBlob={photoFileBlob}
                 setPhotoFileBlob={setPhotoFileBlob}
+                getValues={getValues}
+                recyclableMaterials={recyclableMaterials}
+                setRecyclableMaterials={setRecyclableMaterials}
+                reset={reset}
+                setValue={setValue}
               />
             </TabPanel>
           </TabView>

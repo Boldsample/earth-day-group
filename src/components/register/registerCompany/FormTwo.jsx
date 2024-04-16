@@ -19,10 +19,15 @@ const FormTwo = ({
   getFormErrorMessage,
   photoFileBlob,
   setPhotoFileBlob,
+  getValues,
+  recyclableMaterials,
+  setRecyclableMaterials,
+  reset,
+  setValue
 }) => {
   const units = [
     { unit: "Kilo", code: "Kg" },
-    { unit: "Libra", code: "Lb" },
+    { unit: "Pound", code: "Lb" },
   ];
   return (
     <>
@@ -39,7 +44,7 @@ const FormTwo = ({
           // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
           options={materials}
           optionLabel="material"
-          optionValue="code"
+          optionValue="material"
           placeHolderText="Select Material"
           className=""
           getFormErrorMessage={getFormErrorMessage}
@@ -82,33 +87,37 @@ const FormTwo = ({
             },
           }}
         />
-        <Button className="dark-blue fullwidth" label="Add" type="submit" />
+        <Button className="dark-blue fullwidth" label="Add" type="submit" onClick={()=>{
+          const _material = getValues(['materials', 'unit', 'unitPrice'])
+          const selectedMaterial = {
+            type: _material[0],
+            unit: _material[1],
+            price: _material[2],
+            color: _material[0].toLowerCase() + 'Category'
+          }
+          setRecyclableMaterials([...recyclableMaterials, selectedMaterial])
+          // reset({materials: '', unit: '', unitPrice: null})
+          setValue('materials', '');
+          setValue('unit', '');
+          setValue('unitPrice', '');
+
+        }} />
       </div>
       <div className="materialsCard__grid">
-        <RecycleMaterialCard
+        {recyclableMaterials.map(material =>{
+          return <RecycleMaterialCard
+          material={material.type}
+          unit={material.unit}
+          price={material.price}
+          color={material.color}
+          />
+        })}
+        {/* <RecycleMaterialCard
           material="Paper"
           unit="1kg"
           price="$2.5"
           color="paperCategory"
-        />
-        <RecycleMaterialCard
-          material="Glass"
-          unit="1kg"
-          price="$2.5"
-          color="metalCategory"
-        />
-        <RecycleMaterialCard
-          material="Plastic"
-          unit="1kg"
-          price="$2.5"
-          color="glassCategory"
-        />
-        <RecycleMaterialCard
-          material="Organic"
-          unit="1kg"
-          price="$2.5"
-          color="organicCategory"
-        />
+        /> */}
       </div>
       <UploadPhotoInput type="imageUpload" />
       <TextAreaInput
