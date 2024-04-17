@@ -29,7 +29,7 @@
 	},
 	{
 		"title": "Social Organization",
-		"className": "green-earth",
+		"className": "blue-earth",
 		"link": "/",
 		"icon": "/assets/icons/social-organization.svg",
 		"description": "Find social organizations near your location"

@@ -1,10 +1,17 @@
+import { useEffect } from 'react'
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
-import "./registerThankYouPage.sass"
+import "./ThankYouPage.sass"
+import { setHeader } from '@store/slices/globalSlice'
 
 const ThankYouPage = () => {
+	const dispatch = useDispatch()
 	const { title, content, link, button_label, background } = useSelector((state) => state.global.thankyou)
+
+	useEffect(() => {
+		dispatch(setHeader('login'))
+	}, [])
 
 	return <div className="layout">
 		<img className="layout__background" src={'/assets/thankyou/image-1.svg'} />

@@ -8,10 +8,10 @@ import store from "@store/store"
 import Intro from "@components/intro"
 import Header from "@ui/header/Header"
 import { Recover, LoginForm } from "@components/login"
-import { Dashboard, OffersList, OfferNew } from "@modules/user"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
-import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
 import Notifications from "@components/notifications/Notifications"
+import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
+import { Dashboard, OffersList, OfferNew, Map, OrdersList, Settings } from "@modules/user"
 
 import 'primeicons/primeicons.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -31,10 +31,14 @@ const App = () => {
 					<Route exact path="/register" element={<RegisterRole />} />
 					<Route exact path="/register/user" element={<RegisterUser />} />
 					<Route exact path="/register/company" element={<RegisterCompany />} />
+
 					<Route exact path="/dashboard/" element={<Dashboard />} />
 					<Route exact path="/dashboard/notifications" element={<Notifications />} />
 					<Route exact path="/offers" element={<OffersList />} />
 					<Route exact path="/offers/new" element={<OfferNew />} />
+					<Route exact path="/location" element={<Map />} />
+					<Route exact path="/orders/" element={<OrdersList />} />
+					<Route exact path="/settings/" element={<Settings />} />
 				</Routes>
 				</BrowserRouter>
 			</PrimeReactProvider>

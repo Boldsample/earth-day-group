@@ -1,14 +1,22 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Button } from 'primereact/button'
+import { useState, useEffect } from 'react'
 import { InputText } from 'primereact/inputtext'
 
+import { setHeader } from '@store/slices/globalSlice'
+
 const Recover = () => {
+	const dispatch = useDispatch()
 	const [email, setEmail] = useState('')
 
 	const handleLogin = () => {
 		console.log('Email:', email)
 	}
+
+	useEffect(() => {
+		dispatch(setHeader('login'))
+	}, [])
 
 	return <div>
 		<div className="layout">

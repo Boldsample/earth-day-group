@@ -67,7 +67,7 @@ h5
 	font-weight: 400
 	line-height: 1.4em
 h6
-	font-size: 0.75rem
+	font-size: 1rem
 	font-weight: 400
 	line-height: 1em
 .h7
@@ -84,7 +84,7 @@ ul
 		color: var(--dark-blue)
 button, .button
 	background-color: var(--grey)
-	border: none
+	border: var(--grey) 1px solid
 	border-radius: 4px
 	color: white
 	cursor: pointer
@@ -105,10 +105,26 @@ button, .button
 		margin-left: 20px
 	&.fullwidth
 		width: 100%
-	&.green-earth
-		background-color: var(--green-earth)
 	&.dark-blue
 		background-color: var(--dark-blue)
+		border-color: var(--dark-blue)
+		color: var(--dark-blue)
+	&.red-state
+		background-color: var(--red-state)
+		border-color: var(--red-state)
+		color: var(--red-state)
+	&.blue-earth
+		background-color: var(--blue-earth)
+		border-color: var(--blue-earth)
+		color: var(--blue-earth)
+	&.green-earth
+		background-color: var(--green-earth)
+		border-color: var(--green-earth)
+		color: var(--green-earth)
+	&:not(.outline)
+		color: white
+	&.outline
+		background: transparent
 
 header
 	align-items: center
@@ -118,6 +134,10 @@ header
 	position: absolute
 	width: 100%
 	z-index: 100
+	&.map, &.settings
+		background: white
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+		padding: 10px 0
 	.navbar-item
 		align-items: center
 		display: flex
@@ -182,6 +202,10 @@ header
 			padding-right: 8rem
 		&.halfwidth
 			width: 50vw
+		&.centerwidth
+			padding-right: 200px
+			padding-left: 200px
+			width: 100%
 		&.fullwidth
 			width: calc(100vw - 8rem)
 		&.fullviewportwidth
@@ -253,6 +277,8 @@ header
 	color: var(--dark-blue)
 .self-end
 	justify-self: flex-end
+.fullwidth
+	width: 100%
 
 .small__text
 	font-size: 0.5em

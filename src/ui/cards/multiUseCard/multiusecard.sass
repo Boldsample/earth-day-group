@@ -12,12 +12,13 @@
 	width: 100%
 	.main__container
 		display: flex
+		justify-content: space-between
 		.offer__image
 			align-self: flex-start
-			margin-right: 20px
+			margin-right: 1rem
 			object-fit: cover
-			height: 60px
-			width: 60px
+			height: 7rem
+			width: 7rem
 		button
 			margin-top: 0.6rem
 		.flex
@@ -32,6 +33,17 @@
 				justify-self: flex-end
 				text-align: right
 				width: 10rem
+	&.order
+		height: 7rem
+		p
+			font-size: 1rem
+		h6
+			align-self: center
+			width: auto
+		.Pending
+			color: var(--blue-earth)
+		.Canceled
+			color: var(--red-state)
 
 	.multiuseCard__p
 		margin: 10px 0 0 0 

@@ -1,0 +1,27 @@
+[
+	{
+		"label": "Home", 
+		"icon": "/assets/icons/home.svg", 
+		"path": "/dashboard/"
+	},
+	{
+		"label": "Location", 
+		"icon": "/assets/icons/location.svg", 
+		"path": "/location/"
+	},
+	{
+		"label": "Inbox", 
+		"icon": "/assets/icons/inbox.svg", 
+		"path": ""
+	},
+	{
+		"label": "Shop", 
+		"icon": "/assets/icons/shop.svg", 
+		"path": ""
+	},
+	{
+		"label": "Settings", 
+		"icon": "/assets/icons/settings.svg", 
+		"path": ""
+	}
+]

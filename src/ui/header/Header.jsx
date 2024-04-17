@@ -1,5 +1,5 @@
-import { Button } from "primereact/button"
-import { useEffect, useState } from "react"
+
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate, useLocation } from "react-router-dom"
@@ -16,7 +16,9 @@ const Header = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const user = useSelector((state) => state.users.userData)
+	const header = useSelector((state) => state.global.header)
 	const addLink = useSelector((state) => state.global.addLink)
+	const headerTitle = useSelector((state) => state.global.headerTitle)
 
 	const logout = async (e) => {
 		e.preventDefault()
@@ -36,19 +38,31 @@ const Header = () => {
 			navigate('/login/')
 	}, [user, location])
 
-	return <header>
-		{user?.id && location.pathname == '/dashboard/' ? <div className="navbar-item user-info">
+	return <header className={header}>
+
+		{['dashboard'].some(s => s == header) && 
+		<div className="navbar-item user-info">
 			<ProfilePhoto userPhoto={user.picture} className="left" />
 			<small className="user-name">Hi, {user.name}</small>
-		</div> : null}
-		{!['/', '/dashboard/'].some(url => url==location.pathname) ? <div className="navbar-item go-back">
+		</div>}
+
+		{!['intro', 'dashboard'].some(s => s == header) && 
+		<div className="navbar-item go-back">
 			<a onClick={() => navigate(-1)}><i className="pi pi-angle-left" /></a>
 			{addLink && <Link className="plus" to={addLink}><i className="pi pi-plus" /></Link>}
-		</div> : null}
+		</div>}
+
+		{['settings', 'map'].some(s => s == header) && 
+		<div className="navbar-item">
+			<h4>{headerTitle}</h4>
+		</div>}
+		
+		{!['settings', 'map'].some(s => s == header) && 
 		<div className="navbar-item logo">
 			<Link to="/"><img src="/assets/earth-day-group.png" alt="Earth Day Group" /></Link>
-		</div>
-		{user?.id ? <>
+		</div>}
+
+		{!['intro', 'login', 'settings', 'map'].some(s => s == header) && <>
 			<div className="navbar-item icons">
 				{location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
 					<ProfilePhoto userPhoto={user.picture} />
@@ -59,10 +73,12 @@ const Header = () => {
 				<a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
 			</div>
 			<Nav />
-		</> : null}
-		{!user?.id && ['/', '/register/', '/register/user/', '/recover/'].some(url => url==location.pathname) ? <div className="navbar-item">
+		</>}
+
+		{['intro', 'register'].some(s => s == header) && 
+		<div className="navbar-item">
 			<Link className="button dark-blue" to="/login/">Log in</Link>
-		</div> : null }
+		</div>}
 	</header>
 }
 

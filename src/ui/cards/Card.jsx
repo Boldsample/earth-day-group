@@ -10,9 +10,7 @@ const Card = ({
 		<div className="card__icon">
 			<img src={icon} alt="Category Icon" />
 		</div>
-		<h4>
-			{title}
-		</h4>
+		<h4>{title}</h4>
 		<h5>{description}</h5>
 	</div>
 }

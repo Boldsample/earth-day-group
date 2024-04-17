@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import { useGoogleLogin } from "@react-oauth/google"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+//import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
+import { setHeader } from '@store/slices/globalSlice'
 import { TextInput, PasswordInput } from "@ui/forms/"
 import { authUser, getUserGoogle } from "@services/userServices"
 import { getUserData, updateUser } from "@store/slices/usersSlice"
@@ -39,13 +40,15 @@ const LoginForm = () => {
 			navigate('/register/')
 		}
 	})
-	const fLogin = ({name, email, picture, accessToken}) => {
-		dispatch(updateUser({ facebook_token: accessToken, name, email, picture: picture.data.url, email_verified_at: new Date().toISOString().replace('T', ' ').substring(0, 19) }))
-		navigate('/register/')
-	}
+	// const fLogin = ({name, email, picture, accessToken}) => {
+	// 	dispatch(updateUser({ facebook_token: accessToken, name, email, picture: picture.data.url, email_verified_at: new Date().toISOString().replace('T', ' ').substring(0, 19) }))
+	// 	navigate('/register/')
+	// }
 
 	useEffect(() => {
 		dispatch(updateUser({}))
+		dispatch(setHeader('login'))
+
 	}, [])
 
 	return <div>
@@ -112,14 +115,15 @@ const LoginForm = () => {
 				<div className="p-field">
 					<p className="text-center">Or sign in with</p>
 					<p className="text-center">
-						<FacebookLogin
+						<a className="social-login"><img src="/assets/icons/facebook.svg" alt="Facebook" /></a>
+						{/* <FacebookLogin
 							autoLoad={true}
 							callback={fLogin}
 							appId="1357569244808289"
 							fields="name,email,picture"
 							render={renderProps => (
 								<a className="social-login" onClick={renderProps.onClick}><img src="/assets/icons/facebook.svg" alt="Facebook" /></a>
-							)} />
+							)} /> */}
 						<a className="social-login" onClick={gLogin}><img src="/assets/icons/google.svg" alt="Google" /></a>
 					</p>
 				</div>

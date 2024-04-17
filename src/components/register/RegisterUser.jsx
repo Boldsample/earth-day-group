@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
 import { createUser } from "@services/userServices"
+import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import { updateThankyou } from "@store/slices/globalSlice"
@@ -23,6 +24,8 @@ const RegisterUser = () => {
 	const {
 		reset,
 		control,
+		setValue,
+		getValues,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
@@ -34,9 +37,9 @@ const RegisterUser = () => {
 			username: "",
 			name: user?.name,
 			email: user?.email,
+			accept_terms: false,
 			picture: user?.picture,
-			password_confirmation: "",
-			termsConditionsChecked: false
+			password_confirmation: ""
 		}
 	})
 	
@@ -55,8 +58,7 @@ const RegisterUser = () => {
 	}
 
 	useEffect(() => {
-		// dispatch(getUsersList());
-		// dispatch(getUserData(5));
+		dispatch(setHeader('login'))
 	}, [])
 
 	// const uploadInvoice = async (invoiceFile) => {
@@ -88,11 +90,16 @@ const RegisterUser = () => {
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className="profile__container">
 					<div className="profilePicture__container">
-						<ProfilePhoto userPhoto={photoFileBlob} />
+						<ProfilePhoto userPhoto={getValues('picture')} />
 					</div>
 					<div className="profileUpload__container">
 						<h5 className="profileUpload__title text-defaultCase">Profile Picture</h5>
-						<FileUploadInput setPhotoFileBlob={setPhotoFileBlob} />
+						<FileUploadInput
+							control={control}
+							nameInput="picture"
+							setValue={setValue}
+							setPhotoFileBlob={setPhotoFileBlob}
+						/>
 					</div>
 				</div>
 				<div className="registerInput__container-x2">
@@ -267,8 +274,8 @@ const RegisterUser = () => {
 				</div>
 				<div className="p-field" style={{ marginBottom: "24px" }}>
 					<CheckBoxInput
-						nameInput="termsConditionsChecked"
 						control={control}
+						nameInput="accept_terms"
 						rules={{ required: "Accept is required." }}
 						getFormErrorMessage={getFormErrorMessage}
 						checkBoxText="I've read and accept the terms & conditions."

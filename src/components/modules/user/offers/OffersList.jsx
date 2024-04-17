@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { updateAddLink } from '@store/slices/globalSlice'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
+import { setHeader, updateAddLink } from '@store/slices/globalSlice'
 
 const OffersList = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
+		dispatch(setHeader('user'))
 		dispatch(updateAddLink('/offers/new/'))
 	}, [])
 
@@ -23,8 +24,7 @@ const OffersList = () => {
 				price='$250.00'
 				offers='24'
 				receive={true}
-				date='11-02-2023'
-			/>
+				date='11-02-2023' />
 		</div>
 	</div>
 }

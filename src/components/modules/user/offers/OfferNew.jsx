@@ -4,10 +4,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
-import { createUser } from "@services/userServices"
-import { getUserData } from "@store/slices/usersSlice"
-import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
-import { updateThankyou } from "@store/slices/globalSlice"
+import { setHeader } from '@store/slices/globalSlice'
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput } from "@ui/forms"
 
@@ -42,17 +39,11 @@ const OfferNew = () => {
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const onSubmit = async (data) => {
 		navigate('offers')
-		// if(await createUser({...user, ...data})){
-		// 	dispatch(getUserData())
-		// 	dispatch(updateThankyou({
-		// 		title: "Congrats!", 
-		// 		link: "/dashboard/",
-		// 		background: "image-1.svg",
-		// 		button_label: "Go to dashboard",
-		// 		content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
-		// 	}))
-		// }
 	}
+
+	useEffect(() => {
+		dispatch(setHeader('user'))
+	}, [])
 
 	return <div className="layout">
 		<img className="layout__background" src="/assets/user/image-2.svg" />
@@ -96,7 +87,7 @@ const OfferNew = () => {
 					<NumberInput
 						width="100%"
 						label="Quantity"
-						showLabel={true}
+						showLabel={false}
 						control={control}
 						isRequired={true}
 						nameInput="quantity"
@@ -126,7 +117,7 @@ const OfferNew = () => {
 				</div>
 				<NumberInput
 					width="100%"
-					showLabel={true}
+					showLabel={false}
 					control={control}
 					nameInput="price"
 					isRequired={true}
@@ -144,9 +135,10 @@ const OfferNew = () => {
 							message: "No debe tener espacios al inicio",
 						},
 					}} />
-				<div className="mt-2">
+				<div className="mb-1"></div>
+				{/* <div className="mt-2">
 					<h5 className="text-bold">Add picture</h5>
-				</div>
+				</div> */}
 				<div className="p-field" style={{ marginBottom: "24px" }}>
 					<Button className="dark-blue fullwidth" label="Post" type="submit" />
 				</div>

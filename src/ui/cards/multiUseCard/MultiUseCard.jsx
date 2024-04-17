@@ -11,6 +11,7 @@ const MultiUseCard = ({
 	title,
 	price,
 	offers,
+	status,
 	receive,
 	material,
 	quantity,
@@ -40,7 +41,7 @@ const renderCardContent = () => {
 	case "offer":
 		return <div className="main__container">
 			<img className="offer__image" src={companyLogo} alt={title} />
-			<div>
+			<div className="fullwidth">
 				<h4 className="font-bold text-gray">{title}</h4>
 				{material.map((m, key) => <Button key={key} label={m} className="small green-earth" />)}
 				<div className="flex">
@@ -65,6 +66,15 @@ const renderCardContent = () => {
 					<p className="date">{date}</p>
 				</div>
 			</div>
+		</div>
+	case "order":
+		return <div className="main__container">
+			<div>
+				<h5 className="font-bold text-gray">{title}</h5>
+				<p>Placed on: {date}</p>
+			</div>
+			<h6 className={status}>{status}</h6>
+		</div>
 			{/* <div className="offer__container">
 			<div className="left__container">
 				<div className="offer__mainInfo">
@@ -109,13 +119,12 @@ const renderCardContent = () => {
 				</small>
 			</div>
 			</div> */}
-		</div>
 	default:
 		return null;
 	}
 };
 
-return <div className="multiUse__card">{renderCardContent()}</div>;
+	return <div className={`multiUse__card ${type}`}>{renderCardContent()}</div>;
 };
 
 export default MultiUseCard;

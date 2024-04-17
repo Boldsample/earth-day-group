@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
+import { getJSON } from "@utils/useJSON"
 import { getUser, getUsers } from "@services/userServices"
 
 const initialState = {
@@ -18,10 +19,11 @@ export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
 export const getUserData = createAsyncThunk(
 	"users/getUserData",
 	async () => {
-		const res = await getUser();
+		const res = await getJSON('users')
+		//const res = await getUser();
 		return res;
 	}
-);
+)
 const usersSlice = createSlice({
 	name: "users",
 	initialState,
