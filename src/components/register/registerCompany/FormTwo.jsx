@@ -25,19 +25,19 @@ const FormTwo = ({
 
   const handleMaterials = () => {
     const _recyclableMaterials = [...recyclableMaterials];
-    const _material = getValues(["materials", "unit", "unitPrice"]);
+    const inputValue = getValues(["materials", "unit", "unitPrice"]);
     const selectedMaterial = {
-      type: _material[0],
-      unit: _material[1],
-      price: _material[2],
-      color: _material[0].toLowerCase() + "Category",
+      type: inputValue[0],
+      unit: inputValue[1],
+      price: inputValue[2],
+      color: inputValue[0].toLowerCase() + "Category",
     };
     const duplicateIndex = _recyclableMaterials.findIndex((material) => {
-      return material.type == _material[0];
+      return material.type == inputValue[0];
     });
     if (duplicateIndex != -1) {
-      _recyclableMaterials[duplicateIndex].unit = _material[1];
-      _recyclableMaterials[duplicateIndex].price = _material[2];
+      _recyclableMaterials[duplicateIndex].unit = inputValue[1];
+      _recyclableMaterials[duplicateIndex].price = inputValue[2];
       setRecyclableMaterials([..._recyclableMaterials]);
     } else {
       setRecyclableMaterials([...recyclableMaterials, selectedMaterial]);
