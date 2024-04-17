@@ -1,15 +1,11 @@
 import React from "react";
 import {
-  TextInput,
   NumberInput,
-  PasswordInput,
   TextAreaInput,
   DropDownInput,
   CheckBoxInput,
-  FileUploadInput,
   UploadPhotoInput,
 } from "@ui/forms";
-import countries from "@json/countries.json";
 import materials from "@json/recyclableMaterials.json";
 import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
@@ -17,18 +13,39 @@ import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMa
 const FormTwo = ({
   control,
   getFormErrorMessage,
-  photoFileBlob,
-  setPhotoFileBlob,
   getValues,
   recyclableMaterials,
   setRecyclableMaterials,
-  reset,
-  setValue
+  setValue,
 }) => {
   const units = [
     { unit: "Kilo", code: "Kg" },
     { unit: "Pound", code: "Lb" },
   ];
+
+  const handleMaterials = () => {
+    const _recyclableMaterials = [...recyclableMaterials];
+    const _material = getValues(["materials", "unit", "unitPrice"]);
+    const selectedMaterial = {
+      type: _material[0],
+      unit: _material[1],
+      price: _material[2],
+      color: _material[0].toLowerCase() + "Category",
+    };
+    const duplicateIndex = _recyclableMaterials.findIndex((material) => {
+      return material.type == _material[0];
+    });
+    if (duplicateIndex != -1) {
+      _recyclableMaterials[duplicateIndex].unit = _material[1];
+      _recyclableMaterials[duplicateIndex].price = _material[2];
+      setRecyclableMaterials([..._recyclableMaterials]);
+    } else {
+      setRecyclableMaterials([...recyclableMaterials, selectedMaterial]);
+    }
+    setValue("materials", "");
+    setValue("unit", "");
+    setValue("unitPrice", "");
+  };
   return (
     <>
       <h5>Please add a complete detailed list of recyclable material</h5>
@@ -87,37 +104,24 @@ const FormTwo = ({
             },
           }}
         />
-        <Button className="dark-blue fullwidth" label="Add" type="submit" onClick={()=>{
-          const _material = getValues(['materials', 'unit', 'unitPrice'])
-          const selectedMaterial = {
-            type: _material[0],
-            unit: _material[1],
-            price: _material[2],
-            color: _material[0].toLowerCase() + 'Category'
-          }
-          setRecyclableMaterials([...recyclableMaterials, selectedMaterial])
-          // reset({materials: '', unit: '', unitPrice: null})
-          setValue('materials', '');
-          setValue('unit', '');
-          setValue('unitPrice', '');
-
-        }} />
+        <Button
+          className="dark-blue fullwidth"
+          label="Add"
+          type="submit"
+          onClick={handleMaterials}
+        />
       </div>
       <div className="materialsCard__grid">
-        {recyclableMaterials.map(material =>{
-          return <RecycleMaterialCard
-          material={material.type}
-          unit={material.unit}
-          price={material.price}
-          color={material.color}
-          />
+        {recyclableMaterials.map((material) => {
+          return (
+            <RecycleMaterialCard
+              material={material.type}
+              unit={material.unit}
+              price={material.price}
+              color={material.color}
+            />
+          );
         })}
-        {/* <RecycleMaterialCard
-          material="Paper"
-          unit="1kg"
-          price="$2.5"
-          color="paperCategory"
-        /> */}
       </div>
       <UploadPhotoInput type="imageUpload" />
       <TextAreaInput
