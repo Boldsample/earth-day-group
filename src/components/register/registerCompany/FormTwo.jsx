@@ -53,6 +53,13 @@ const FormTwo = ({
     setValue("unit", "");
     setValue("unitPrice", "");
   };
+
+  const removeMaterial = (clickedMaterial) => {
+		const filteredMaterials = recyclableMaterials.filter(
+		(material) => material.type !== clickedMaterial
+		);
+		setRecyclableMaterials(filteredMaterials);
+	};
   return (
     <>
       <h5>Please add a complete detailed list of recyclable material</h5>
@@ -123,11 +130,12 @@ const FormTwo = ({
         {recyclableMaterials.map((material, key) => {
           return (
             <RecycleMaterialCard
-			  key={key}
+			        key={key}
               material={material.type}
               unit={material.unit}
               price={material.price}
               color={material.color}
+              removeMaterial={removeMaterial}
             />
           );
         })}
