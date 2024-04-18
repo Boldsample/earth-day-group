@@ -23,10 +23,13 @@ const RegisterCompany = () => {
   const [recyclableMaterials, setRecyclableMaterials] = useState([])
   const {
     reset,
+	watch,
     control,
-    handleSubmit,
-    getValues,
     setValue,
+	setError,
+    getValues,
+	clearErrors,
+    handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -51,7 +54,7 @@ const RegisterCompany = () => {
       <small className="p-error">{errors[fieldName]?.message}</small>
     );
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     // if (await createUser({ ...user, ...data })) {
     //   dispatch(getUserData());
     //   dispatch(
@@ -94,7 +97,7 @@ const RegisterCompany = () => {
   // };
 
   // console.log(getValues());
-  console.log(recyclableMaterials)
+  // console.log(recyclableMaterials)
   return (
     <div className="layout">
       <img className="layout__background" src="/assets/register/image-2.svg" />
@@ -103,17 +106,21 @@ const RegisterCompany = () => {
           <TabView>
             <TabPanel>
               <FormOne
+				watch={watch}
                 control={control}
+				setError={setError}
+                setValue={setValue}
+                getValues={getValues}
                 getFormErrorMessage={getFormErrorMessage}
-                photoFileBlob={photoFileBlob}
-                setPhotoFileBlob={setPhotoFileBlob}
               />
             </TabPanel>
             <TabPanel>
               <FormTwo
                 control={control}
-                getFormErrorMessage={getFormErrorMessage}
+				setError={setError}
+				clearErrors={clearErrors}
                 photoFileBlob={photoFileBlob}
+                getFormErrorMessage={getFormErrorMessage}
                 setPhotoFileBlob={setPhotoFileBlob}
                 getValues={getValues}
                 recyclableMaterials={recyclableMaterials}
@@ -129,6 +136,7 @@ const RegisterCompany = () => {
               className="dark-blue fullwidth"
               label="Sign up"
               type="submit"
+			  name="submit"
             />
           </div>
         </form>

@@ -12,11 +12,13 @@ import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMa
 
 const FormTwo = ({
   control,
-  getFormErrorMessage,
+  setError,
+  setValue,
   getValues,
+  clearErrors,
+  getFormErrorMessage,
   recyclableMaterials,
   setRecyclableMaterials,
-  setValue,
 }) => {
   const units = [
     { unit: "Kilo", code: "Kg" },
@@ -24,8 +26,13 @@ const FormTwo = ({
   ];
 
   const handleMaterials = () => {
+	clearErrors(['unitPrice']);
     const _recyclableMaterials = [...recyclableMaterials];
     const inputValue = getValues(["materials", "unit", "unitPrice"]);
+	if(!inputValue[0] || !inputValue[1] || !inputValue[2]){
+		setError('unitPrice', { type: 'manual', message: 'Should select a Material, a Unit and fill a price.' })
+		return false
+	}
     const selectedMaterial = {
       type: inputValue[0],
       unit: inputValue[1],
@@ -64,7 +71,6 @@ const FormTwo = ({
           optionValue="material"
           placeHolderText="Select Material"
           className=""
-          getFormErrorMessage={getFormErrorMessage}
         />
         <DropDownInput
           control={control}
@@ -79,7 +85,6 @@ const FormTwo = ({
           optionValue="code"
           placeHolderText="Select Unit"
           className=""
-          getFormErrorMessage={getFormErrorMessage}
         />
       </div>
       <div className="registerInput__container-x2">
@@ -92,29 +97,31 @@ const FormTwo = ({
           nameInput="unitPrice"
           placeHolderText="Add Price per unit"
           getFormErrorMessage={getFormErrorMessage}
-          rules={{
-            maxLength: {
-              value: 7,
-              message: "El campo supera los 7 caracteres",
-            },
-            required: "*El campo es requerido.",
-            pattern: {
-              value: /^\S/,
-              message: "No debe tener espacios al inicio",
-            },
-          }}
+        //   rules={{
+        //     maxLength: {
+        //       value: 7,
+        //       message: "El campo supera los 7 caracteres",
+        //     },
+        //     required: errors => { console.log(errors); return errors.add ? '*El campo es requerido.' : false},
+        //     pattern: {
+        //       value: /^\S/,
+        //       message: "No debe tener espacios al inicio",
+        //     },
+        //   }}
         />
         <Button
           className="dark-blue fullwidth"
           label="Add"
-          type="submit"
+		  name="add"
+          type="button"
           onClick={handleMaterials}
         />
       </div>
       <div className="materialsCard__grid">
-        {recyclableMaterials.map((material) => {
+        {recyclableMaterials.map((material, key) => {
           return (
             <RecycleMaterialCard
+			  key={key}
               material={material.type}
               unit={material.unit}
               price={material.price}

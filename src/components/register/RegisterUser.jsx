@@ -23,6 +23,7 @@ const RegisterUser = () => {
 	const [photoFileBlob, setPhotoFileBlob] = useState(user?.picture)
 	const {
 		reset,
+		watch,
 		control,
 		setValue,
 		getValues,
@@ -35,11 +36,11 @@ const RegisterUser = () => {
 			location: "",
 			password: "",
 			username: "",
-			name: user?.name,
-			email: user?.email,
 			accept_terms: false,
-			picture: user?.picture,
-			password_confirmation: ""
+			name: user?.name || "",
+			email: user?.email || "",
+			password_confirmation: "",
+			picture: user?.picture || "",
 		}
 	})
 	
@@ -82,7 +83,7 @@ const RegisterUser = () => {
 	//   fileReader.readAsDataURL(file);
 	// };
 
-	// console.log(getValues());
+	console.log(getValues());
 
 	return <div className="layout">
 		<img className="layout__background" src="/assets/register/image-2.svg" />
@@ -95,10 +96,10 @@ const RegisterUser = () => {
 					<div className="profileUpload__container">
 						<h5 className="profileUpload__title text-defaultCase">Profile Picture</h5>
 						<FileUploadInput
+							watch={watch}
 							control={control}
 							nameInput="picture"
 							setValue={setValue}
-							setPhotoFileBlob={setPhotoFileBlob}
 						/>
 					</div>
 				</div>
