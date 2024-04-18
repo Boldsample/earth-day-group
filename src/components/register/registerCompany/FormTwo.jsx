@@ -71,6 +71,7 @@ const FormTwo = ({
           optionValue="material"
           placeHolderText="Select Material"
           className=""
+          getFormErrorMessage={getFormErrorMessage}
         />
         <DropDownInput
           control={control}
@@ -85,6 +86,7 @@ const FormTwo = ({
           optionValue="code"
           placeHolderText="Select Unit"
           className=""
+          getFormErrorMessage={getFormErrorMessage}
         />
       </div>
       <div className="registerInput__container-x2">
