@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { setHeader } from '@store/slices/globalSlice'
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
-import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput } from "@ui/forms"
+import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput, UploadPhotoInput } from "@ui/forms"
 
 import countries from "@json/countries.json"
 
@@ -135,6 +135,7 @@ const OfferNew = () => {
 							message: "No debe tener espacios al inicio",
 						},
 					}} />
+					<UploadPhotoInput type="imageUpload" title='Add Picture' className='imagesHub__container-variant' />
 				<div className="mb-1"></div>
 				{/* <div className="mt-2">
 					<h5 className="text-bold">Add picture</h5>

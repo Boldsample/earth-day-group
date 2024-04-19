@@ -140,7 +140,7 @@ const FormTwo = ({
           );
         })}
       </div>
-      <UploadPhotoInput type="imageUpload" />
+      <UploadPhotoInput type="imageUpload" title='Add Images' />
       <TextAreaInput
         label="Bio"
         nameInput="bio"

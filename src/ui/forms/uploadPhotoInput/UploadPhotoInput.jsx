@@ -5,7 +5,7 @@ import FileUploadInput from "../fileUploadInput";
 import "./uploadprofilephotoinput.sass";
 import ProfilePhoto from "../../profilePhoto/ProfilePhoto";
 
-const UploadPhotoInput = ({ type, watch, control, setValue, getValues }) => {
+const UploadPhotoInput = ({ type, watch, control, setValue, getValues, title, iconColor, className }) => {
 	const [reachedImageCapacity, setReachedImageCapacity] = useState(false);
 	const [imageId, setImageId] = useState(0);
 	const [uploadedImages, setUploadedImages] = useState([]);
@@ -63,14 +63,14 @@ const UploadPhotoInput = ({ type, watch, control, setValue, getValues }) => {
 			</div>
 		case "imageUpload":
 			return (
-			<div className="imagesHub__container">
-				<h4>Add Images</h4>
+			<div className={`imagesHub__container ${className}`}>
+				<h4>{title}</h4>
 				<div className="imageCarousel__container">
 				<div className="imageUpload__container">
 					<label htmlFor="file" className="imageUpload__button">
 					<FontAwesomeIcon
 						icon={faCloudArrowUp}
-						color="green"
+						color="#408D27"
 						fontSize="20px"
 					/>
 					</label>
