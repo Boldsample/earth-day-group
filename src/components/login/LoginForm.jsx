@@ -30,8 +30,11 @@ const LoginForm = () => {
 
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const onSubmit = async (data) => {
-		if(await authUser(data))
+		console.log('Log In')
+		if(await authUser(data)){
+			console.log('Login true')
 			dispatch(getUserData())
+		}
 	}
 	const gLogin = useGoogleLogin({
 		onSuccess: async ({access_token}) => {
@@ -107,7 +110,7 @@ const LoginForm = () => {
 				</div>
 				<div className="p-field flex mb-1">
 					<Link className="text-xs" to="/register/">Create a new account</Link>
-					<Link className="text-xs" to="/recover/">Forgot password?</Link>
+					<Link className="text-xs" to="/forgot/">Forgot password?</Link>
 				</div>
 				<div className="p-field mb-2">
 					<Button label="Login" type="submit" disabled={sending} className="dark-blue fullwidth" />

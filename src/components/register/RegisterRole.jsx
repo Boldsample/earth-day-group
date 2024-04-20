@@ -10,7 +10,7 @@ const RegisterRole = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(setHeader('login'))
+		dispatch(setHeader('register'))
 	}, [])
 	
 	return <div className="layout">

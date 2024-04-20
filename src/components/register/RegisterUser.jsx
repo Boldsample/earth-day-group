@@ -16,11 +16,8 @@ import countries from "@json/countries.json"
 import "./style.sass"
 
 const RegisterUser = () => {
-	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const [sending, setSending] = useState(false)
 	const user = useSelector((state) => state.users.userData);
-	const [photoFileBlob, setPhotoFileBlob] = useState(user?.picture)
 	const {
 		reset,
 		watch,
@@ -59,31 +56,8 @@ const RegisterUser = () => {
 	}
 
 	useEffect(() => {
-		dispatch(setHeader('login'))
+		dispatch(setHeader('register'))
 	}, [])
-
-	// const uploadInvoice = async (invoiceFile) => {
-	//   let formData = new FormData();
-	//   formData.append('invoiceFile', invoiceFile);
-
-	//   const response = await fetch(`orders/${orderId}/uploadInvoiceFile`,
-	//     {
-	//       method: 'POST',
-	//       body: formData
-	//     },
-	//   );
-	// };
-
-	// const invoiceUploadHandler = ( event ) => {
-
-	//   const fileReader = new FileReader();
-	//   fileReader.onload = (e) => {
-	//     uploadInvoice(e.target.result);
-	//   };
-	//   fileReader.readAsDataURL(file);
-	// };
-
-	console.log(getValues());
 
 	return <div className="layout">
 		<img className="layout__background" src="/assets/register/image-2.svg" />

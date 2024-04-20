@@ -43,6 +43,16 @@ export const logoutUser = async () => {
 		return false
 	}
 }
+export const recoverUser = async (data) => {
+	try {
+		await saveJSON('users', data, 'update')
+		//await API.post("/logout")
+		return true
+	} catch (e) {
+		toast.error(e.response.status+': '+e.response.data.message)
+		return false
+	}
+}
 export const getUser = async () => {
 	const { data } = await API.get(`/api/user/`)
 	return data
