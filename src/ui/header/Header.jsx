@@ -27,6 +27,8 @@ const Header = () => {
 	}
 
 	useEffect(() => {
+		console.log(user)
+		console.log(header)
 		if(!['/offers/'].some(url => url==location.pathname))
 			dispatch(updateAddLink(''))
 
@@ -37,8 +39,6 @@ const Header = () => {
 		else if(!user?.id && ['/dashboard/', '/dashboard/notifications/'].some(url => url==location.pathname))
 			navigate('/login/')
 	}, [user, location])
-
-	console.log(user)
 
 	return <header className={header}>
 

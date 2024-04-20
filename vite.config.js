@@ -1,11 +1,16 @@
 import { defineConfig } from 'vite'
+import mkcert from 'vite-plugin-mkcert'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-	plugins: [react()],
+	plugins: [
+		react(),
+		mkcert(),
+	],
 	server: {
 		port: 9000,
-		host: '127.0.0.1'
+		https: true,
+		host: 'localhost',
 	},
 	resolve: {
 		alias: {
