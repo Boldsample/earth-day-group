@@ -30,11 +30,8 @@ const LoginForm = () => {
 
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const onSubmit = async (data) => {
-		console.log('Log In')
-		if(await authUser(data)){
-			console.log('Login true')
+		if(await authUser(data))
 			dispatch(getUserData())
-		}
 	}
 	const gLogin = useGoogleLogin({
 		onSuccess: async ({access_token}) => {

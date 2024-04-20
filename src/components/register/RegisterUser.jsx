@@ -30,6 +30,7 @@ const RegisterUser = () => {
 		defaultValues: {
 			bio: "",
 			phone: null,
+			role: "user",
 			location: "",
 			password: "",
 			username: "",

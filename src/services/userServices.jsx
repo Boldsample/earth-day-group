@@ -14,51 +14,38 @@ export const getUserGoogle = async (token) => {
 	return res.data
 }
 export const authUser = async (data) => {
-	try {
-		const _user = getJSON('users', data)
-		sessionStorage.setItem('insertedID', _user.id)
-		//await API.post("/login", data)
-		return true
-	} catch (e) {
-		toast.error(e.response?.status+': '+e.response?.data.message)
-		return false
-	}
+	const response = getJSON('users', data)
+	//const response = await API.post("/login", data)
+	if(response?.status == 404)
+		toast.error(response.status+': '+response.data.message)
+	return response?.id
 }
 export const createUser = async (data) => {
-	try {
-		await saveJSON('users', data)
-		//await API.post("/register", data)
-		return true
-	} catch (e) {
-		toast.error(e.response?.status+': '+e.response?.data.message)
-		return false
-	}
+	const response = saveJSON('users', data)
+	//await API.post("/register", data)
+	if(response?.status == 404)
+		toast.error(response.status+': '+response.data.message)
+	return true
 }
 export const logoutUser = async () => {
-	try {
-		//await API.post("/logout")
-		return true
-	} catch (e) {
-		toast.error(e.response.status+': '+e.response.data.message)
-		return false
-	}
+	//await API.post("/logout")
+	return true
 }
-export const recoverUser = async (data) => {
-	try {
-		await saveJSON('users', data, 'update')
-		//await API.post("/logout")
-		return true
-	} catch (e) {
-		toast.error(e.response.status+': '+e.response.data.message)
-		return false
-	}
+export const recoverUser = async (data, validate) => {
+	const response = saveJSON('users', data, 'update', validate)
+	//await API.post("/register", data)
+	if(response?.status == 404)
+		toast.error(response.status+': '+response.data.message)
+	return true
 }
 export const getUser = async () => {
-	const { data } = await API.get(`/api/user/`)
+	const data = await getJSON('users')
+	//const { data } = await API.get(`/api/user/`)
 	return data
 }
 export const getUsers = async () => {
-	const res = await API.get("/users");
+	const data = await getAllJSON('users')
+	//const res = await API.get("/users")
 	return res.data;
 }
 // export const getUser = async (name) => {
