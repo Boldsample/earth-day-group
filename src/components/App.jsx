@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import store from "@store/store"
 import Intro from "@components/intro"
 import Header from "@ui/header/Header"
-import { Recover, LoginForm } from "@components/login"
+import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import Notifications from "@components/notifications/Notifications"
 import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
@@ -25,6 +25,7 @@ const App = () => {
 				<Header />
 				<Routes>
 					<Route exact path="/" element={<Intro />} />
+					<Route path="/forgot" element={<Forgot />} />
 					<Route path="/login" element={<LoginForm />} />
 					<Route path="/recover" element={<Recover />} />
 					<Route path="/thankyou" element={<ThankYouPage />} />

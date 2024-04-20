@@ -19,7 +19,9 @@ export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
 export const getUserData = createAsyncThunk(
 	"users/getUserData",
 	async () => {
+		console.log('test')
 		const res = await getJSON('users')
+		console.log('getUser')
 		//const res = await getUser();
 		return res;
 	}

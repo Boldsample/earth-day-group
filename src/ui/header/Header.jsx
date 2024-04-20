@@ -38,6 +38,8 @@ const Header = () => {
 			navigate('/login/')
 	}, [user, location])
 
+	console.log(user)
+
 	return <header className={header}>
 
 		{['dashboard'].some(s => s == header) && 
@@ -62,7 +64,7 @@ const Header = () => {
 			<Link to="/"><img src="/assets/earth-day-group.png" alt="Earth Day Group" /></Link>
 		</div>}
 
-		{!['intro', 'login', 'settings', 'map'].some(s => s == header) && <>
+		{!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
 			<div className="navbar-item icons">
 				{location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
 					<ProfilePhoto userPhoto={user.picture} />
