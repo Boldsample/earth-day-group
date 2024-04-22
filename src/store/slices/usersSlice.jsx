@@ -30,6 +30,9 @@ const usersSlice = createSlice({
 		captureInputData: (state, action) => {
 			state.inputField = action.payload;
 		},
+		storeUserRegistrationData: (state, action) => {
+			state.userData = { ...action.payload };
+		},
 		updateUser: (state, action) => {
 			state.userData = { ...action.payload };
 		},
@@ -78,6 +81,7 @@ export const {
 	addCleanData,
 	addUserList,
 	resetState,
+	storeUserRegistrationData
 } = usersSlice.actions;
 
 export default usersSlice.reducer

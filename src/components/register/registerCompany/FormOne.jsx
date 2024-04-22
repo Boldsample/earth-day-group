@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "primereact/button";
+import { storeUserRegistrationData } from "@store/slices/usersSlice";
 import {
   TextInput,
   NumberInput,
@@ -14,6 +15,7 @@ import {
 } from "@ui/forms";
 import countries from "@json/countries.json";
 const FormOne = ({ activeIndex, setActiveIndex }) => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.users.userData);
   const {
     reset,
@@ -27,7 +29,7 @@ const FormOne = ({ activeIndex, setActiveIndex }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      profile_picture: user?.picture,
+      // profile_picture: user?.picture,
       company_name: user?.name,
       email: user?.email,
       website: "",
@@ -37,6 +39,7 @@ const FormOne = ({ activeIndex, setActiveIndex }) => {
       password: "",
       password_confirmation: "",
       terms_conditions_checked: false,
+      picture: ""
     },
   });
 
@@ -46,8 +49,11 @@ const FormOne = ({ activeIndex, setActiveIndex }) => {
     );
 
   const onSubmit = async (data) => {
-    console.log("click");
+    console.log(data);
     setActiveIndex(1);
+    dispatch(storeUserRegistrationData({
+      ...data
+    }))
     // console.log(data);
     // if (await createUser({ ...user, ...data })) {
     //   dispatch(getUserData());
@@ -272,7 +278,7 @@ const FormOne = ({ activeIndex, setActiveIndex }) => {
         </div>
         <div className="p-field" style={{ marginBottom: "24px" }}>
           <CheckBoxInput
-            nameInput="termsConditionsChecked"
+            nameInput="terms_conditions_checked"
             control={control}
             rules={{ required: "Accept is required." }}
             getFormErrorMessage={getFormErrorMessage}

@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
   NumberInput,
@@ -12,6 +13,8 @@ import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
 
 const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
+  const userData = useSelector((state) => state.users.userData)
+  const [uploadedImages, setUploadedImages] = useState([]);
   const {
     reset,
     watch,
@@ -34,6 +37,8 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
     { unit: "Kilo", code: "Kg" },
     { unit: "Pound", code: "Lb" },
   ];
+
+  console.log(userData, "userDataHere")
 
   const handleMaterials = () => {
     clearErrors(["unitPrice"]);
@@ -80,7 +85,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
     );
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log(recyclableMaterials);
     handleMaterials();
     // if (await createUser({ ...user, ...data })) {
     //   dispatch(getUserData());
@@ -185,7 +190,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
           );
         })}
       </div>
-      <UploadPhotoInput type="imageUpload" title="Add Images" />
+      <UploadPhotoInput type="imageUpload" title="Add Images" setUploadedImages={setUploadedImages} uploadedImages={uploadedImages} />
       {/* <TextAreaInput
         label="Bio"
         nameInput="bio"
