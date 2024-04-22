@@ -18,17 +18,18 @@ const RegisterCompany = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sending, setSending] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const user = useSelector((state) => state.users.userData);
   const [photoFileBlob, setPhotoFileBlob] = useState(user?.picture);
-  const [recyclableMaterials, setRecyclableMaterials] = useState([])
+  const [recyclableMaterials, setRecyclableMaterials] = useState([]);
   const {
     reset,
-	watch,
+    watch,
     control,
     setValue,
-	setError,
+    setError,
     getValues,
-	clearErrors,
+    clearErrors,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -102,44 +103,38 @@ const RegisterCompany = () => {
     <div className="layout">
       <img className="layout__background" src="/assets/register/image-2.svg" />
       <div className="main__content halfwidth">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <TabView>
-            <TabPanel>
-              <FormOne
-				watch={watch}
-                control={control}
-				setError={setError}
-                setValue={setValue}
-                getValues={getValues}
-                getFormErrorMessage={getFormErrorMessage}
-              />
-            </TabPanel>
-            <TabPanel>
-              <FormTwo
-                control={control}
-				setError={setError}
-				clearErrors={clearErrors}
-                photoFileBlob={photoFileBlob}
-                getFormErrorMessage={getFormErrorMessage}
-                setPhotoFileBlob={setPhotoFileBlob}
-                getValues={getValues}
-                recyclableMaterials={recyclableMaterials}
-                setRecyclableMaterials={setRecyclableMaterials}
-                reset={reset}
-                setValue={setValue}
-              />
-            </TabPanel>
-          </TabView>
-
-          <div className="p-field" style={{ marginBottom: "24px" }}>
-            <Button
-              className="dark-blue fullwidth"
-              label="Sign up"
-              type="submit"
-			  name="submit"
+        <TabView
+          activeIndex={activeIndex}
+          onTabChange={(e) => setActiveIndex(e.index)}
+        >
+          <TabPanel>
+            <FormOne
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+              watch={watch}
+              control={control}
+              setError={setError}
+              setValue={setValue}
+              getValues={getValues}
+              getFormErrorMessage={getFormErrorMessage}
             />
-          </div>
-        </form>
+          </TabPanel>
+          <TabPanel>
+            <FormTwo
+              control={control}
+              setError={setError}
+              clearErrors={clearErrors}
+              photoFileBlob={photoFileBlob}
+              getFormErrorMessage={getFormErrorMessage}
+              setPhotoFileBlob={setPhotoFileBlob}
+              getValues={getValues}
+              recyclableMaterials={recyclableMaterials}
+              setRecyclableMaterials={setRecyclableMaterials}
+              reset={reset}
+              setValue={setValue}
+            />
+          </TabPanel>
+        </TabView>
       </div>
       <Link to="/register/categories/">
         <GoBackButton />

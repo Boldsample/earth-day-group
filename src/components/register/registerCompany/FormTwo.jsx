@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import {
   NumberInput,
   TextAreaInput,
@@ -10,29 +11,41 @@ import materials from "@json/recyclableMaterials.json";
 import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
 
-const FormTwo = ({
-  control,
-  setError,
-  setValue,
-  getValues,
-  clearErrors,
-  getFormErrorMessage,
-  recyclableMaterials,
-  setRecyclableMaterials,
-}) => {
+const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
+  const {
+    reset,
+    watch,
+    control,
+    setValue,
+    setError,
+    getValues,
+    clearErrors,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      materials: "",
+      unit: "",
+      unitPrice: null,
+    },
+  });
+
   const units = [
     { unit: "Kilo", code: "Kg" },
     { unit: "Pound", code: "Lb" },
   ];
 
   const handleMaterials = () => {
-	clearErrors(['unitPrice']);
+    clearErrors(["unitPrice"]);
     const _recyclableMaterials = [...recyclableMaterials];
     const inputValue = getValues(["materials", "unit", "unitPrice"]);
-	if(!inputValue[0] || !inputValue[1] || !inputValue[2]){
-		setError('unitPrice', { type: 'manual', message: 'Should select a Material, a Unit and fill a price.' })
-		return false
-	}
+    // if (!inputValue[0] || !inputValue[1] || !inputValue[2]) {
+    //   setError("unitPrice", {
+    //     type: "manual",
+    //     message: "Should select a Material, a Unit and fill a price.",
+    //   });
+    //   return false;
+    // }
     const selectedMaterial = {
       type: inputValue[0],
       unit: inputValue[1],
@@ -55,82 +68,114 @@ const FormTwo = ({
   };
 
   const removeMaterial = (clickedMaterial) => {
-		const filteredMaterials = recyclableMaterials.filter(
-		(material) => material.type !== clickedMaterial
-		);
-		setRecyclableMaterials(filteredMaterials);
-	};
+    const filteredMaterials = recyclableMaterials.filter(
+      (material) => material.type !== clickedMaterial
+    );
+    setRecyclableMaterials(filteredMaterials);
+  };
+
+  const getFormErrorMessage = (fieldName) =>
+    errors[fieldName] && (
+      <small className="p-error">{errors[fieldName]?.message}</small>
+    );
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    handleMaterials();
+    // if (await createUser({ ...user, ...data })) {
+    //   dispatch(getUserData());
+    //   dispatch(
+    //     updateThankyou({
+    //       title: "Congrats!",
+    //       link: "/dashboard/",
+    //       background: "image-1.svg",
+    //       button_label: "Go to dashboard",
+    //       content:
+    //         "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+    //     })
+    //   );
+    // }
+  };
+
   return (
     <>
-      <h5>Please add a complete detailed list of recyclable material</h5>
-      <h4>Recyclable Material</h4>
-      <div className="registerInput__container-x2">
-        <DropDownInput
-          control={control}
-          showLabel={false}
-          labelName="Material"
-          nameInput="materials"
-          isEdit={true}
-          isRequired={true}
-          // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-          options={materials}
-          optionLabel="material"
-          optionValue="material"
-          placeHolderText="Select Material"
-          className=""
-          getFormErrorMessage={getFormErrorMessage}
-        />
-        <DropDownInput
-          control={control}
-          showLabel={false}
-          labelName="Unit"
-          nameInput="unit"
-          isEdit={true}
-          isRequired={true}
-          // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-          options={units}
-          optionLabel="unit"
-          optionValue="code"
-          placeHolderText="Select Unit"
-          className=""
-          getFormErrorMessage={getFormErrorMessage}
-        />
-      </div>
-      <div className="registerInput__container-x2">
-        <NumberInput
-          width="100%"
-          showLabel={false}
-          isRequired={true}
-          control={control}
-          label="Unit Price"
-          nameInput="unitPrice"
-          placeHolderText="Add Price per unit"
-          getFormErrorMessage={getFormErrorMessage}
-        //   rules={{
-        //     maxLength: {
-        //       value: 7,
-        //       message: "El campo supera los 7 caracteres",
-        //     },
-        //     required: errors => { console.log(errors); return errors.add ? '*El campo es requerido.' : false},
-        //     pattern: {
-        //       value: /^\S/,
-        //       message: "No debe tener espacios al inicio",
-        //     },
-        //   }}
-        />
-        <Button
-          className="dark-blue fullwidth"
-          label="Add"
-		  name="add"
-          type="button"
-          onClick={handleMaterials}
-        />
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h5>Please add a complete detailed list of recyclable material</h5>
+        <h4>Recyclable Material</h4>
+        <div className="registerInput__container-x2">
+          <DropDownInput
+            control={control}
+            showLabel={false}
+            labelName="Material"
+            nameInput="materials"
+            isEdit={true}
+            isRequired={true}
+            // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
+            options={materials}
+            optionLabel="material"
+            optionValue="material"
+            placeHolderText="Select Material"
+            className=""
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              required: "*El campo es requerido.",
+            }}
+          />
+          <DropDownInput
+            control={control}
+            showLabel={false}
+            labelName="Unit"
+            nameInput="unit"
+            isEdit={true}
+            isRequired={true}
+            // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
+            options={units}
+            optionLabel="unit"
+            optionValue="code"
+            placeHolderText="Select Unit"
+            className=""
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              required: "*El campo es requerido.",
+            }}
+          />
+        </div>
+        <div className="registerInput__container-x2">
+          <NumberInput
+            width="100%"
+            showLabel={false}
+            isRequired={true}
+            control={control}
+            label="Unit Price"
+            nameInput="unitPrice"
+            placeHolderText="Add Price per unit"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 20,
+                message: "El campo supera los 20 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }}
+          />
+          <Button
+            className="dark-blue fullwidth"
+            label="Add"
+            name="add"
+            type="submit"
+            // onClick={handleMaterials}
+          />
+        </div>
+      </form>
       <div className="materialsCard__grid">
         {recyclableMaterials.map((material, key) => {
           return (
             <RecycleMaterialCard
-			        key={key}
+              key={key}
               material={material.type}
               unit={material.unit}
               price={material.price}
@@ -140,8 +185,8 @@ const FormTwo = ({
           );
         })}
       </div>
-      <UploadPhotoInput type="imageUpload" title='Add Images' />
-      <TextAreaInput
+      <UploadPhotoInput type="imageUpload" title="Add Images" />
+      {/* <TextAreaInput
         label="Bio"
         nameInput="bio"
         showLabel={true}
@@ -160,7 +205,16 @@ const FormTwo = ({
             message: "No debe tener espacios al inicio",
           },
         }}
-      />
+      /> */}
+      <div className="p-field" style={{ marginBottom: "24px" }}>
+        <Button
+          onSubmit={onSubmit}
+          className="dark-blue fullwidth"
+          label="Sign up"
+          type="submit"
+          name="submit"
+        />
+      </div>
     </>
   );
 };
