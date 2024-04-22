@@ -3,13 +3,14 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { faBell, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
 import { updateUser } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import { updateAddLink } from '@store/slices/globalSlice'
+import HeaderNotifications from "@components/notifications/HeaderNotifications"
 
 const Header = () => {
 	const location = useLocation()
@@ -27,8 +28,8 @@ const Header = () => {
 	}
 
 	useEffect(() => {
-		console.log(user)
-		console.log(header)
+		// console.log(user)
+		// console.log(header)
 		if(!['/offers/'].some(url => url==location.pathname))
 			dispatch(updateAddLink(''))
 
@@ -54,7 +55,7 @@ const Header = () => {
 			{addLink && <Link className="plus" to={addLink}><i className="pi pi-plus" /></Link>}
 		</div>}
 
-		{['settings', 'map'].some(s => s == header) && 
+		{['settings'].some(s => s == header) && 
 		<div className="navbar-item">
 			<h4>{headerTitle}</h4>
 		</div>}
@@ -71,7 +72,7 @@ const Header = () => {
 					<small className="user-name">Hi, {user.name}</small>
 				</div> : null}
 				<FontAwesomeIcon icon={faShoppingCart} />
-				<Link to={"/dashboard/notifications"}><FontAwesomeIcon icon={faBell} /></Link>
+				<HeaderNotifications />
 				<a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
 			</div>
 			<Nav />
