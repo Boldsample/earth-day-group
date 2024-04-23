@@ -23,21 +23,17 @@ const OfferNew = () => {
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			bio: "",
-			phone: null,
-			location: "",
-			password: "",
-			username: "",
-			name: user?.name,
-			email: user?.email,
-			picture: user?.picture,
-			password_confirmation: "",
-			termsConditionsChecked: false
+			title: '',
+			material: '',
+			quantity: '',
+			price: '',
+
 		}
 	})
 	
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const onSubmit = async (data) => {
+		console.log(data)
 		navigate('offers')
 	}
 
@@ -78,8 +74,8 @@ const OfferNew = () => {
 						showLabel={false}
 						isRequired={true}
 						nameInput="material"
-						labelName="Select material"
-						placeHolderText="Select material"
+						labelName="Select Material"
+						placeHolderText="Select Material"
 						getFormErrorMessage={getFormErrorMessage}
 						options={['Paper', 'Glass', 'Plastic', 'E-Waste', 'Metal', 'Organic']} />
 				</div>
@@ -109,9 +105,9 @@ const OfferNew = () => {
 						control={control}
 						showLabel={false}
 						isRequired={true}
-						nameInput="material"
-						labelName="Select material"
-						placeHolderText="Select material"
+						nameInput="unit"
+						labelName="Select Unit"
+						placeHolderText="Select Unit"
 						getFormErrorMessage={getFormErrorMessage}
 						options={['Kg', 'cc']} />
 				</div>
@@ -122,7 +118,7 @@ const OfferNew = () => {
 					nameInput="price"
 					isRequired={true}
 					label="Asking price"
-					placeHolderText="Asking price*"
+					placeHolderText="Asking Price*"
 					getFormErrorMessage={getFormErrorMessage}
 					rules={{
 						maxLength: {
