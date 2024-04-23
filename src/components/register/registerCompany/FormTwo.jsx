@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { updateUser } from "@store/slices/usersSlice";
+
 import {
   NumberInput,
   TextAreaInput,
@@ -13,7 +15,8 @@ import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
 
 const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
-  const userData = useSelector((state) => state.users.userData)
+  const userData = useSelector((state) => state.users.userData);
+  const dispatch = useDispatch();
   const [uploadedImages, setUploadedImages] = useState([]);
   const {
     reset,
@@ -38,7 +41,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
     { unit: "Pound", code: "Lb" },
   ];
 
-  console.log(userData, "userDataHere")
+  console.log(userData, "userDataHere");
 
   const handleMaterials = () => {
     clearErrors(["unitPrice"]);
@@ -61,9 +64,21 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
       return material.type == inputValue[0];
     });
     if (duplicateIndex != -1) {
-      _recyclableMaterials[duplicateIndex].unit = inputValue[1];
-      _recyclableMaterials[duplicateIndex].price = inputValue[2];
-      setRecyclableMaterials([..._recyclableMaterials]);
+      const updatedMaterials = _recyclableMaterials.map((material, index) => {
+        if (index === duplicateIndex) {
+          return {
+            ...material,
+            unit: inputValue[1],
+            price: inputValue[2],
+          };
+        }
+        return material;
+      });
+
+      setRecyclableMaterials(updatedMaterials);
+      // _recyclableMaterials[duplicateIndex].unit = inputValue[1];
+      // _recyclableMaterials[duplicateIndex].price = inputValue[2];
+      // setRecyclableMaterials([..._recyclableMaterials]);
     } else {
       setRecyclableMaterials([...recyclableMaterials, selectedMaterial]);
     }
@@ -85,7 +100,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
     );
 
   const onSubmit = async (data) => {
-    console.log(recyclableMaterials);
+    // console.log(recyclableMaterials);
     handleMaterials();
     // if (await createUser({ ...user, ...data })) {
     //   dispatch(getUserData());
@@ -100,6 +115,17 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
     //     })
     //   );
     // }
+  };
+
+  const saveAllInfo = () => {
+    dispatch(
+      updateUser({
+        ...userData,
+        recyclableMaterials: recyclableMaterials,
+        uploadedImages: uploadedImages,
+      })
+    );
+    console.log(userData);
   };
 
   return (
@@ -190,7 +216,12 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
           );
         })}
       </div>
-      <UploadPhotoInput type="imageUpload" title="Add Images" setUploadedImages={setUploadedImages} uploadedImages={uploadedImages} />
+      <UploadPhotoInput
+        type="imageUpload"
+        title="Add Images"
+        setUploadedImages={setUploadedImages}
+        uploadedImages={uploadedImages}
+      />
       {/* <TextAreaInput
         label="Bio"
         nameInput="bio"
@@ -213,10 +244,10 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
       /> */}
       <div className="p-field" style={{ marginBottom: "24px" }}>
         <Button
-          onSubmit={onSubmit}
+          onClick={saveAllInfo}
           className="dark-blue fullwidth"
           label="Sign up"
-          type="submit"
+          // type="submit"
           name="submit"
         />
       </div>
