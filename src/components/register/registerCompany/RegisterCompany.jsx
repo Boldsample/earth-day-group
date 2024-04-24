@@ -22,6 +22,7 @@ const RegisterCompany = () => {
   const user = useSelector((state) => state.users.userData);
   const [photoFileBlob, setPhotoFileBlob] = useState(user?.picture);
   const [recyclableMaterials, setRecyclableMaterials] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true)
   const {
     reset,
     watch,
@@ -107,7 +108,11 @@ const RegisterCompany = () => {
           activeIndex={activeIndex}
           onTabChange={(e) => setActiveIndex(e.index)}
         >
-          <TabPanel>
+          <TabPanel 
+              header={activeIndex == 1? 'Edit previous form' : ''}
+  
+              leftIcon={activeIndex == 1? 'pi pi-angle-left' : ''}
+          >
             <FormOne
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
@@ -117,9 +122,10 @@ const RegisterCompany = () => {
               setValue={setValue}
               getValues={getValues}
               getFormErrorMessage={getFormErrorMessage}
+              setIsDisabled={setIsDisabled}
             />
           </TabPanel>
-          <TabPanel>
+          <TabPanel disabled={isDisabled}>
             <FormTwo
               control={control}
               setError={setError}

@@ -105,7 +105,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h5>Please add a complete detailed list of recyclable material</h5>
+        <h5>This form is optional and can be completed later. If you prefer to skip it, click "Sign Up."</h5>
         <h4>Recyclable Material</h4>
         <div className="registerInput__container-x2">
           <DropDownInput

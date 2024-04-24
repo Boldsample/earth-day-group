@@ -14,7 +14,7 @@ import {
   UploadPhotoInput,
 } from "@ui/forms";
 import countries from "@json/countries.json";
-const FormOne = ({ activeIndex, setActiveIndex }) => {
+const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.userData);
   const {
@@ -51,6 +51,7 @@ const FormOne = ({ activeIndex, setActiveIndex }) => {
   const onSubmit = async (data) => {
     console.log(data);
     setActiveIndex(1);
+    setIsDisabled(false)
     dispatch(storeUserRegistrationData({
       ...data
     }))

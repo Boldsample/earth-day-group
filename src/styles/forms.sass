@@ -47,11 +47,22 @@
 
 .p-tabview
 	.p-tabview-nav
+		align-items: end
 		padding-left: 0
+		background: var(--blue-versionone)
+
 		li
+			background-color: var(--blue-versionone)
 			width: 50%
 			.p-tabview-nav-link
 				background: var(--blue-versionone)
+				.p-tabview-title
+					font-size: 0.9em
+					font-weight: 500
+				.pi-angle-left
+					margin-right: 10px
+
+				
 		.p-tabview-ink-bar
 			background-color: var(--dark-blue)
 			height: 4px
@@ -59,4 +70,4 @@
 
 .p-tabview
 	.p-tabview-panels
-		background: transparent
+		background: transparent		
