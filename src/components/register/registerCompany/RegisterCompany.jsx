@@ -11,8 +11,10 @@ import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto";
 import { updateThankyou } from "@store/slices/globalSlice";
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton";
 import { TabView, TabPanel } from "primereact/tabview";
-import FormOne from "./FormOne";
-import FormTwo from "./FormTwo";
+import FormOne from "./CompanyStandardForm";
+import FormTwo from "./CompanyDetailedForm";
+import CompanyStandardForm from "./CompanyStandardForm";
+import CompanyDetailedForm from "./CompanyDetailedForm";
 
 
 const RegisterCompany = () => {
@@ -115,7 +117,7 @@ const RegisterCompany = () => {
             header={activeIndex == 1 ? "Edit previous form" : ""}
             leftIcon={activeIndex == 1 ? "pi pi-angle-left" : ""}
           >
-            <FormOne
+            <CompanyStandardForm
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
               watch={watch}
@@ -128,7 +130,7 @@ const RegisterCompany = () => {
             />
           </TabPanel>
           <TabPanel disabled={isDisabled}>
-            <FormTwo
+            <CompanyDetailedForm
               control={control}
               setError={setError}
               clearErrors={clearErrors}

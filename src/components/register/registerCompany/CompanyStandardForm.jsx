@@ -14,7 +14,7 @@ import {
   UploadPhotoInput,
 } from "@ui/forms";
 import countries from "@json/countries.json";
-const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
+const CompanyStandardForm = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.userData);
   const {
@@ -309,4 +309,4 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
   );
 };
 
-export default FormOne;
+export default CompanyStandardForm;

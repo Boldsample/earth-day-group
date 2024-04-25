@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { updateUser } from "@store/slices/usersSlice";
+import { updateUser, getUserData } from "@store/slices/usersSlice";
+import { createUser } from "@services/userServices"
+import { updateThankyou } from "@store/slices/globalSlice";
 import {
   NumberInput,
   TextAreaInput,
@@ -14,8 +16,8 @@ import materials from "@json/recyclableMaterials.json";
 import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
 
-const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
-  const userData = useSelector((state) => state.users.userData);
+const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) => {
+  const user = useSelector((state) => state.users.userData);
   const dispatch = useDispatch();
   const [uploadedImages, setUploadedImages] = useState([]);
   const {
@@ -43,7 +45,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
     { unit: "Pound", code: "Lb" },
   ];
 
-  console.log(userData, "userDataHere");
+  console.log(user, "userDataHere");
 
   const handleMaterials = () => {
     // clearErrors(["unit_price"]);
@@ -102,38 +104,36 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
       <small className="p-error">{errors[fieldName]?.message}</small>
     );
 
-  const onSubmit = async (data) => {
-    // console.log(recyclableMaterials);
+  const handleRecyclableMaterial = async (data) => {
+    // console.log(data);
     handleMaterials();
-    // if (await createUser({ ...user, ...data })) {
-    //   dispatch(getUserData());
-    //   dispatch(
-    //     updateThankyou({
-    //       title: "Congrats!",
-    //       link: "/dashboard/",
-    //       background: "image-1.svg",
-    //       button_label: "Go to dashboard",
-    //       content:
-    //         "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
-    //     })
-    //   );
-    // }
   };
 
-  const saveAllInfo = () => {
+  const onSubmit = async () => {
     dispatch(
       updateUser({
-        ...userData,
+        ...user,
         recyclableMaterials: recyclableMaterials,
         uploadedImages: uploadedImages,
       })
     );
-    console.log(userData);
+    if(await createUser({...user})){
+			dispatch(getUserData())
+			dispatch(updateThankyou({
+				title: "Congrats!", 
+				link: "/dashboard/",
+				background: "image-1.svg",
+				button_label: "Go to dashboard",
+				content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+			}))
+		}
+
+
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleRecyclableMaterial)}>
         <h5 className="recycableMaterialForm__title">
           This form is optional and can be completed later. If you prefer to
           skip it, click "Sign Up."
@@ -260,7 +260,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
       </div>
       <div className="p-field" style={{ marginBottom: "24px" }}>
         <Button
-          onClick={saveAllInfo}
+          onClick={onSubmit}
           className="dark-blue fullwidth"
           label="Sign up"
           // type="submit"
@@ -271,4 +271,4 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
   );
 };
 
-export default FormTwo;
+export default CompanyDetailedForm;
