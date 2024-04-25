@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { updateUser } from "@store/slices/usersSlice";
@@ -32,9 +32,11 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
     defaultValues: {
       materials: "",
       unit: "",
-      unitPrice: null,
+      unit_price: "",
     },
   });
+
+  useEffect(() => {}, [recyclableMaterials]);
 
   const units = [
     { unit: "Kilo", code: "Kg" },
@@ -44,9 +46,9 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
   console.log(userData, "userDataHere");
 
   const handleMaterials = () => {
-    clearErrors(["unitPrice"]);
+    // clearErrors(["unit_price"]);
     const _recyclableMaterials = [...recyclableMaterials];
-    const inputValue = getValues(["materials", "unit", "unitPrice"]);
+    const inputValue = getValues(["materials", "unit", "unit_price"]);
     // if (!inputValue[0] || !inputValue[1] || !inputValue[2]) {
     //   setError("unitPrice", {
     //     type: "manual",
@@ -60,6 +62,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
       price: inputValue[2],
       color: inputValue[0].toLowerCase() + "Category",
     };
+    console.log(selectedMaterial);
     const duplicateIndex = _recyclableMaterials.findIndex((material) => {
       return material.type == inputValue[0];
     });
@@ -84,7 +87,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
     }
     setValue("materials", "");
     setValue("unit", "");
-    setValue("unitPrice", "");
+    setValue("unit_price", "");
   };
 
   const removeMaterial = (clickedMaterial) => {
@@ -131,7 +134,10 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h5>This form is optional and can be completed later. If you prefer to skip it, click "Sign Up."</h5>
+        <h5>
+          This form is optional and can be completed later. If you prefer to
+          skip it, click "Sign Up."
+        </h5>
         <h4>Recyclable Material</h4>
         <div className="registerInput__container-x2">
           <DropDownInput
@@ -173,12 +179,13 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
         </div>
         <div className="registerInput__container-x2">
           <NumberInput
+            disabled={false}
             width="100%"
             showLabel={false}
             isRequired={true}
             control={control}
             label="Unit Price"
-            nameInput="unitPrice"
+            nameInput="unit_price"
             placeHolderText="Add Price per unit"
             getFormErrorMessage={getFormErrorMessage}
             rules={{

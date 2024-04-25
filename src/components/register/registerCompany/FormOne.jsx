@@ -30,16 +30,17 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
   } = useForm({
     defaultValues: {
       // profile_picture: user?.picture,
-      company_name: user?.name,
-      email: user?.email,
-      website: "",
-      location: "",
-      phone: null,
-      description: "",
-      password: "",
-      password_confirmation: "",
-      terms_conditions_checked: false,
-      picture: ""
+      company_name: user?.company_name || "",
+      nit: user?.nit || "",
+      email: user?.email || "",
+      website: user?.website || "",
+      location: user?.location,
+      phone: user?.phone || "",
+      description: user?.description || "",
+      password: user?.password || "",
+      password_confirmation: user?.password_confirmation || "",
+      terms_conditions_checked: user?.terms_conditions_checked || "",
+      picture: user?.picture || "",
     },
   });
 
@@ -51,10 +52,12 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
   const onSubmit = async (data) => {
     console.log(data);
     setActiveIndex(1);
-    setIsDisabled(false)
-    dispatch(storeUserRegistrationData({
-      ...data
-    }))
+    setIsDisabled(false);
+    dispatch(
+      storeUserRegistrationData({
+        ...data,
+      })
+    );
     // console.log(data);
     // if (await createUser({ ...user, ...data })) {
     //   dispatch(getUserData());
@@ -190,6 +193,7 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
           getFormErrorMessage={getFormErrorMessage}
         />
         <NumberInput
+          disabled={false}
           width="100%"
           showLabel={true}
           isRequired={true}
@@ -289,7 +293,7 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
         <div className="p-field" style={{ marginBottom: "24px" }}>
           <Button
             className="dark-blue fullwidth"
-            label="Sign up"
+            label="Confirm"
             type="submit"
             name="submit"
           />

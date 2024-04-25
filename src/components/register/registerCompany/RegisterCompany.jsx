@@ -22,7 +22,8 @@ const RegisterCompany = () => {
   const user = useSelector((state) => state.users.userData);
   const [photoFileBlob, setPhotoFileBlob] = useState(user?.picture);
   const [recyclableMaterials, setRecyclableMaterials] = useState([]);
-  const [isDisabled, setIsDisabled] = useState(true)
+  const [isDisabled, setIsDisabled] = useState(true);
+  // const isActive = activeIndex == 0 ? setIsDisabled(true) : setIsDisabled(false);
   const {
     reset,
     watch,
@@ -73,9 +74,10 @@ const RegisterCompany = () => {
   };
 
   useEffect(() => {
+    activeIndex == 0 ? setIsDisabled(true) : setIsDisabled(false);
     // dispatch(getUsersList());
     // dispatch(getUserData(5));
-  }, []);
+  }, [activeIndex]);
 
   // const uploadInvoice = async (invoiceFile) => {
   //   let formData = new FormData();
@@ -108,10 +110,9 @@ const RegisterCompany = () => {
           activeIndex={activeIndex}
           onTabChange={(e) => setActiveIndex(e.index)}
         >
-          <TabPanel 
-              header={activeIndex == 1? 'Edit previous form' : ''}
-  
-              leftIcon={activeIndex == 1? 'pi pi-angle-left' : ''}
+          <TabPanel
+            header={activeIndex == 1 ? "Edit previous form" : ""}
+            leftIcon={activeIndex == 1 ? "pi pi-angle-left" : ""}
           >
             <FormOne
               activeIndex={activeIndex}
