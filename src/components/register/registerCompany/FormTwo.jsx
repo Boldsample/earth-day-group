@@ -8,6 +8,7 @@ import {
   DropDownInput,
   CheckBoxInput,
   UploadPhotoInput,
+  SwitchInput
 } from "@ui/forms";
 import materials from "@json/recyclableMaterials.json";
 import { Button } from "primereact/button";
@@ -247,6 +248,16 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
           },
         }}
       /> */}
+      <div className="registerInput__container-x2">
+        <SwitchInput
+          label={'Pick up from home?'}
+          nameInput={'home_pick_up'}
+          control={control}
+          isRequired={false}
+          isEdit={true}
+          value={1}
+        />
+      </div>
       <div className="p-field" style={{ marginBottom: "24px" }}>
         <Button
           onClick={saveAllInfo}
