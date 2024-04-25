@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { updateUser } from "@store/slices/usersSlice";
-
 import {
   NumberInput,
   TextAreaInput,
@@ -134,7 +133,7 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h5>
+        <h5 className="recycableMaterialForm__title">
           This form is optional and can be completed later. If you prefer to
           skip it, click "Sign Up."
         </h5>
@@ -152,7 +151,6 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
             optionLabel="material"
             optionValue="material"
             placeHolderText="Select Material"
-            className=""
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               required: "*El campo es requerido.",
@@ -201,11 +199,11 @@ const FormTwo = ({ recyclableMaterials, setRecyclableMaterials }) => {
             }}
           />
           <Button
-            className="dark-blue fullwidth"
+            className="green-earth fullwidth text-left"
             label="Add"
             name="add"
             type="submit"
-            // onClick={handleMaterials}
+            style={{paddingLeft: '22px'}}
           />
         </div>
       </form>

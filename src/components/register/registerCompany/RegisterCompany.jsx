@@ -14,6 +14,7 @@ import { TabView, TabPanel } from "primereact/tabview";
 import FormOne from "./FormOne";
 import FormTwo from "./FormTwo";
 
+
 const RegisterCompany = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

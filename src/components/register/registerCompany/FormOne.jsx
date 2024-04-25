@@ -177,6 +177,7 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
             }}
           />
         </div>
+        <div className="registerInput__container-x1">
         <DropDownInput
           control={control}
           showLabel={false}
@@ -192,6 +193,8 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
           className=""
           getFormErrorMessage={getFormErrorMessage}
         />
+        </div>
+        <div className="registerInput__container-x1">
         <NumberInput
           disabled={false}
           width="100%"
@@ -213,7 +216,9 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
               message: "No debe tener espacios al inicio",
             },
           }}
-        />
+        />  
+          </div>
+        <div className="registerInput__container-x1">
         <TextAreaInput
           label="Description"
           nameInput="description"
@@ -234,6 +239,7 @@ const FormOne = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
             },
           }}
         />
+          </div>
         <div className="registerInput__container-x2">
           <PasswordInput
             width="100%"

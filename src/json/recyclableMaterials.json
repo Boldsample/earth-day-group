@@ -2,37 +2,37 @@
 	{
 		"material": "Paper",
         "code": 1,
-		"className": "paperCategory"
+		"classname": "paperCategory"
 		
 	},
 	{
 		"material": "Glass",
         "code": 2,
-		"className": "glassCategory"
+		"classname": "glassCategory"
 		
 	},
 	{
-		"material": "Plastic ",
+		"material": "Plastic",
         "code": 3,
-		"className": "plasticCategory"
+		"classname": "plasticCategory"
 
 	},
 	{
 		"material": "E-Waste",
         "code": 4,
-		"className": "green-earth"
+		"classname": "green-earth"
 
 	},
 	{
 		"material": "Metal",
         "code": 5,
-		"className": "metalCategory"
+		"classname": "metalCategory"
 	
 	},
     {
 		"material": "Organic",
         "code": 6,
-		"className": "eWasteCategory"
+		"classname": "eWasteCategory"
 
 	}
 ]
