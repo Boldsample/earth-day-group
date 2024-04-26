@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { updateUser, getUserData } from "@store/slices/usersSlice";
-import { createUser } from "@services/userServices"
+import { createUser } from "@services/userServices";
 import { updateThankyou } from "@store/slices/globalSlice";
 import {
   NumberInput,
-  TextAreaInput,
   DropDownInput,
-  CheckBoxInput,
   UploadPhotoInput,
-  SwitchInput
+  SwitchInput,
 } from "@ui/forms";
 import materials from "@json/recyclableMaterials.json";
 import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
 
-const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) => {
+const CompanyDetailedForm = ({
+  recyclableMaterials,
+  setRecyclableMaterials,
+}) => {
+  const numberInput = useRef(null);
   const user = useSelector((state) => state.users.userData);
   const dispatch = useDispatch();
   const [uploadedImages, setUploadedImages] = useState([]);
   const {
     reset,
-    watch,
     control,
-    setValue,
-    setError,
     getValues,
-    clearErrors,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -45,26 +43,20 @@ const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) =>
     { unit: "Pound", code: "Lb" },
   ];
 
-  console.log(user, "userDataHere");
+  function handleFocus() {
+    numberInput.current.getInput().blur();
+  }
 
   const handleMaterials = () => {
-    // clearErrors(["unit_price"]);
     const _recyclableMaterials = [...recyclableMaterials];
     const inputValue = getValues(["materials", "unit", "unit_price"]);
-    // if (!inputValue[0] || !inputValue[1] || !inputValue[2]) {
-    //   setError("unitPrice", {
-    //     type: "manual",
-    //     message: "Should select a Material, a Unit and fill a price.",
-    //   });
-    //   return false;
-    // }
+
     const selectedMaterial = {
       type: inputValue[0],
       unit: inputValue[1],
       price: inputValue[2],
       color: inputValue[0].toLowerCase() + "Category",
     };
-    console.log(selectedMaterial);
     const duplicateIndex = _recyclableMaterials.findIndex((material) => {
       return material.type == inputValue[0];
     });
@@ -79,17 +71,11 @@ const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) =>
         }
         return material;
       });
-
       setRecyclableMaterials(updatedMaterials);
-      // _recyclableMaterials[duplicateIndex].unit = inputValue[1];
-      // _recyclableMaterials[duplicateIndex].price = inputValue[2];
-      // setRecyclableMaterials([..._recyclableMaterials]);
     } else {
       setRecyclableMaterials([...recyclableMaterials, selectedMaterial]);
     }
-    setValue("materials", "");
-    setValue("unit", "");
-    setValue("unit_price", "");
+    reset();
   };
 
   const removeMaterial = (clickedMaterial) => {
@@ -107,28 +93,29 @@ const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) =>
   const handleRecyclableMaterial = async (data) => {
     // console.log(data);
     handleMaterials();
+    handleFocus();
   };
 
   const onSubmit = async () => {
-    dispatch(
-      updateUser({
+    if (
+      await createUser({
         ...user,
         recyclableMaterials: recyclableMaterials,
         uploadedImages: uploadedImages,
       })
-    );
-    if(await createUser({...user})){
-			dispatch(getUserData())
-			dispatch(updateThankyou({
-				title: "Congrats!", 
-				link: "/dashboard/",
-				background: "image-1.svg",
-				button_label: "Go to dashboard",
-				content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
-			}))
-		}
-
-
+    ) {
+      dispatch(getUserData());
+      dispatch(
+        updateThankyou({
+          title: "Congrats!",
+          link: "/dashboard/",
+          background: "image-1.svg",
+          button_label: "Go to dashboard",
+          content:
+            "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+        })
+      );
+    }
   };
 
   return (
@@ -178,6 +165,7 @@ const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) =>
         </div>
         <div className="registerInput__container-x2">
           <NumberInput
+            inputRef={numberInput}
             disabled={false}
             width="100%"
             showLabel={false}
@@ -189,8 +177,8 @@ const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) =>
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
+                value: 3,
+                message: "El campo supera los 3 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
@@ -204,7 +192,7 @@ const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) =>
             label="Add"
             name="add"
             type="submit"
-            style={{paddingLeft: '22px'}}
+            style={{ paddingLeft: "22px" }}
           />
         </div>
       </form>
@@ -228,30 +216,10 @@ const CompanyDetailedForm = ({ recyclableMaterials, setRecyclableMaterials }) =>
         setUploadedImages={setUploadedImages}
         uploadedImages={uploadedImages}
       />
-      {/* <TextAreaInput
-        label="Bio"
-        nameInput="bio"
-        showLabel={true}
-        control={control}
-        isRequired={false}
-        placeHolderText="Tell us about your company"
-        getFormErrorMessage={getFormErrorMessage}
-        rules={{
-          maxLength: {
-            value: 50,
-            message: "El campo supera los 50 caracteres",
-          },
-          required: "*El campo es requerido.",
-          pattern: {
-            value: /^\S/,
-            message: "No debe tener espacios al inicio",
-          },
-        }}
-      /> */}
       <div className="registerInput__container-x2">
         <SwitchInput
-          label={'Pick up from home?'}
-          nameInput={'home_pick_up'}
+          label={"Pick up from home?"}
+          nameInput={"home_pick_up"}
           control={control}
           isRequired={false}
           isEdit={true}

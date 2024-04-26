@@ -14,6 +14,7 @@ const NumberInput = ({
   maxLength = 10,
   getFormErrorMessage,
   placeHolderText = "",
+  inputRef,
 }) => {
   const inputWidth = {
     width: width,
@@ -28,7 +29,8 @@ const NumberInput = ({
         render={({ field }) => (
           <InputNumber
             id={field.name}
-            ref={field.ref}
+            // ref={field.ref}
+            ref={inputRef}
             style={inputWidth}
             disabled={disabled}
             useGrouping={false}

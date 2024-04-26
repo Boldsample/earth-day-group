@@ -14,7 +14,11 @@ import {
   UploadPhotoInput,
 } from "@ui/forms";
 import countries from "@json/countries.json";
-const CompanyStandardForm = ({ activeIndex, setActiveIndex, setIsDisabled }) => {
+const CompanyStandardForm = ({
+  activeIndex,
+  setActiveIndex,
+  setIsDisabled,
+}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.userData);
   const {
@@ -24,12 +28,10 @@ const CompanyStandardForm = ({ activeIndex, setActiveIndex, setIsDisabled }) => 
     setValue,
     setError,
     getValues,
-    clearErrors,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      // profile_picture: user?.picture,
       company_name: user?.company_name || "",
       nit: user?.nit || "",
       email: user?.email || "",
@@ -58,20 +60,6 @@ const CompanyStandardForm = ({ activeIndex, setActiveIndex, setIsDisabled }) => 
         ...data,
       })
     );
-    // console.log(data);
-    // if (await createUser({ ...user, ...data })) {
-    //   dispatch(getUserData());
-    //   dispatch(
-    //     updateThankyou({
-    //       title: "Congrats!",
-    //       link: "/dashboard/",
-    //       background: "image-1.svg",
-    //       button_label: "Go to dashboard",
-    //       content:
-    //         "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
-    //     })
-    //   );
-    // }
   };
 
   return (
@@ -178,68 +166,68 @@ const CompanyStandardForm = ({ activeIndex, setActiveIndex, setIsDisabled }) => 
           />
         </div>
         <div className="registerInput__container-x1">
-        <DropDownInput
-          control={control}
-          showLabel={false}
-          labelName="Location"
-          nameInput="location"
-          isEdit={true}
-          isRequired={true}
-          // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-          options={countries}
-          optionLabel="name"
-          optionValue="code"
-          placeHolderText="Select a Country"
-          className=""
-          getFormErrorMessage={getFormErrorMessage}
-        />
+          <DropDownInput
+            control={control}
+            showLabel={false}
+            labelName="Location"
+            nameInput="location"
+            isEdit={true}
+            isRequired={true}
+            // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
+            options={countries}
+            optionLabel="name"
+            optionValue="code"
+            placeHolderText="Select a Country"
+            className=""
+            getFormErrorMessage={getFormErrorMessage}
+          />
         </div>
         <div className="registerInput__container-x1">
-        <NumberInput
-          disabled={false}
-          width="100%"
-          showLabel={true}
-          isRequired={true}
-          control={control}
-          label="Phone Number"
-          nameInput="phone"
-          placeHolderText="Phone Number*"
-          getFormErrorMessage={getFormErrorMessage}
-          rules={{
-            maxLength: {
-              value: 7,
-              message: "El campo supera los 7 caracteres",
-            },
-            required: "*El campo es requerido.",
-            pattern: {
-              value: /^\S/,
-              message: "No debe tener espacios al inicio",
-            },
-          }}
-        />  
-          </div>
+          <NumberInput
+            disabled={false}
+            width="100%"
+            showLabel={true}
+            isRequired={true}
+            control={control}
+            label="Phone Number"
+            nameInput="phone"
+            placeHolderText="Phone Number*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 7,
+                message: "El campo supera los 7 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }}
+          />
+        </div>
         <div className="registerInput__container-x1">
-        <TextAreaInput
-          label="Description"
-          nameInput="description"
-          showLabel={true}
-          control={control}
-          isRequired={false}
-          placeHolderText="Tell us about your company"
-          getFormErrorMessage={getFormErrorMessage}
-          rules={{
-            maxLength: {
-              value: 50,
-              message: "El campo supera los 50 caracteres",
-            },
-            required: "*El campo es requerido.",
-            pattern: {
-              value: /^\S/,
-              message: "No debe tener espacios al inicio",
-            },
-          }}
-        />
-          </div>
+          <TextAreaInput
+            label="Description"
+            nameInput="description"
+            showLabel={true}
+            control={control}
+            isRequired={false}
+            placeHolderText="Tell us about your company"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 50,
+                message: "El campo supera los 50 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }}
+          />
+        </div>
         <div className="registerInput__container-x2">
           <PasswordInput
             width="100%"
