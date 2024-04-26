@@ -17,6 +17,7 @@ const RegisterCompany = () => {
   const [recyclableMaterials, setRecyclableMaterials] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [pickUpFromHome, setPickUpFromHome] = useState(false);
 
   useEffect(() => {
     activeIndex == 0 ? setIsDisabled(true) : setIsDisabled(false);
@@ -48,6 +49,8 @@ const RegisterCompany = () => {
                 recyclableMaterials={recyclableMaterials}
                 uploadedImages={uploadedImages}
                 setUploadedImages={setUploadedImages}
+                pickUpFromHome={pickUpFromHome}
+                setPickUpFromHome={setPickUpFromHome}
             />
           </TabPanel>
         </TabView>

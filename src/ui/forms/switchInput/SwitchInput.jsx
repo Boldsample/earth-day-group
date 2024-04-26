@@ -9,13 +9,15 @@ function SwitchInput({
   nameInput,
   isEdit,
   value,
+  checked,
+  setChecked
 }) {
   return (
     <div className="switchInput__container">
       <label>   
         {label} {isRequired && <span className="text-red-600">*</span>}
       </label>
-      <Controller
+      {/* <Controller
         name={nameInput}
         control={control}
         rules={{
@@ -37,7 +39,14 @@ function SwitchInput({
             }}
           />
         )}
-      />
+      /> */}
+       <InputSwitch
+            checked={checked}
+            disabled={!isEdit}
+            // console.log(e.value)
+            onChange={(e) => setChecked(e.value)}
+   
+          />
     </div>
   )
 }

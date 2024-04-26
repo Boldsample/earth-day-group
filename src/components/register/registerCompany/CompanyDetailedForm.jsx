@@ -14,11 +14,18 @@ import materials from "@json/recyclableMaterials.json";
 import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
 
-const CompanyDetailedForm = ({recyclableMaterials, setRecyclableMaterials, uploadedImages, setUploadedImages}) => {
+const CompanyDetailedForm = ({
+  recyclableMaterials,
+  setRecyclableMaterials,
+  uploadedImages,
+  setUploadedImages,
+  pickUpFromHome,
+  setPickUpFromHome
+}) => {
   const numberInput = useRef(null);
   const user = useSelector((state) => state.users.userData);
   const dispatch = useDispatch();
-  // const [uploadedImages, setUploadedImages] = useState([]);
+
   const {
     reset,
     control,
@@ -72,7 +79,7 @@ const CompanyDetailedForm = ({recyclableMaterials, setRecyclableMaterials, uploa
     } else {
       setRecyclableMaterials([...recyclableMaterials, selectedMaterial]);
     }
-    console.log(recyclableMaterials)
+
     reset();
   };
 
@@ -97,8 +104,9 @@ const CompanyDetailedForm = ({recyclableMaterials, setRecyclableMaterials, uploa
     if (
       await createUser({
         ...user,
-        recyclableMaterials: recyclableMaterials,
-        uploadedImages: uploadedImages,
+        recyclable_materials: recyclableMaterials,
+        uploaded_images: uploadedImages,
+        pick_up_from_home: pickUpFromHome
       })
     ) {
       dispatch(getUserData());
@@ -194,16 +202,16 @@ const CompanyDetailedForm = ({recyclableMaterials, setRecyclableMaterials, uploa
         </div>
       </form>
       <div className="materialsCard__grid">
-        {recyclableMaterials.map((material, key) => {
+        {recyclableMaterials.map((material) => {
           return (
-              <RecycleMaterialCard
-                key={key}
-                material={material.type}
-                unit={material.unit}
-                price={material.price}
-                color={material.color}
-                removeMaterial={removeMaterial}
-                />
+            <RecycleMaterialCard
+              key={material.type}
+              material={material.type}
+              unit={material.unit}
+              price={material.price}
+              color={material.color}
+              removeMaterial={removeMaterial}
+            />
           );
         })}
       </div>
@@ -217,7 +225,9 @@ const CompanyDetailedForm = ({recyclableMaterials, setRecyclableMaterials, uploa
         <SwitchInput
           label={"Pick up from home?"}
           nameInput={"home_pick_up"}
-          control={control}
+          // control={control}
+          checked={pickUpFromHome}
+          setChecked={setPickUpFromHome}
           isRequired={false}
           isEdit={true}
           value={1}
