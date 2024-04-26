@@ -11,7 +11,7 @@
 		background: transparent
 		border: 1px solid var(--grey)
 		border-radius: 8px
-		font-size: 1.6rem
+		font-size: 1.2rem
 		padding: 16px 22px
 		width: 100%
 	.p-dropdown
@@ -20,7 +20,7 @@
 		border: 1px solid var(--grey)
 		width: 100%
 		.p-dropdown-label
-			font-size: 1.6rem
+			font-size: 1.2rem
 			line-height: 1.2em
 			padding: 16px 22px
 			width: 100%
@@ -47,11 +47,22 @@
 
 .p-tabview
 	.p-tabview-nav
+		align-items: end
 		padding-left: 0
+		background: var(--blue-versionone)
+
 		li
+			background-color: var(--blue-versionone)
 			width: 50%
 			.p-tabview-nav-link
 				background: var(--blue-versionone)
+				.p-tabview-title
+					font-size: 1.2rem
+					font-weight: 500
+				.pi-angle-left
+					margin-right: 10px
+
+				
 		.p-tabview-ink-bar
 			background-color: var(--dark-blue)
 			height: 4px
@@ -59,4 +70,4 @@
 
 .p-tabview
 	.p-tabview-panels
-		background: transparent
+		background: transparent		
