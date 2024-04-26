@@ -14,14 +14,11 @@ import materials from "@json/recyclableMaterials.json";
 import { Button } from "primereact/button";
 import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
 
-const CompanyDetailedForm = ({
-  recyclableMaterials,
-  setRecyclableMaterials,
-}) => {
+const CompanyDetailedForm = ({recyclableMaterials, setRecyclableMaterials, uploadedImages, setUploadedImages}) => {
   const numberInput = useRef(null);
   const user = useSelector((state) => state.users.userData);
   const dispatch = useDispatch();
-  const [uploadedImages, setUploadedImages] = useState([]);
+  // const [uploadedImages, setUploadedImages] = useState([]);
   const {
     reset,
     control,
@@ -43,11 +40,11 @@ const CompanyDetailedForm = ({
     { unit: "Pound", code: "Lb" },
   ];
 
-  function handleFocus() {
+  function removeFocusFromNumberInput() {
     numberInput.current.getInput().blur();
   }
 
-  const handleMaterials = () => {
+  const createMaterial = () => {
     const _recyclableMaterials = [...recyclableMaterials];
     const inputValue = getValues(["materials", "unit", "unit_price"]);
 
@@ -75,6 +72,7 @@ const CompanyDetailedForm = ({
     } else {
       setRecyclableMaterials([...recyclableMaterials, selectedMaterial]);
     }
+    console.log(recyclableMaterials)
     reset();
   };
 
@@ -91,9 +89,8 @@ const CompanyDetailedForm = ({
     );
 
   const handleRecyclableMaterial = async (data) => {
-    // console.log(data);
-    handleMaterials();
-    handleFocus();
+    createMaterial();
+    removeFocusFromNumberInput();
   };
 
   const onSubmit = async () => {
@@ -199,14 +196,14 @@ const CompanyDetailedForm = ({
       <div className="materialsCard__grid">
         {recyclableMaterials.map((material, key) => {
           return (
-            <RecycleMaterialCard
-              key={key}
-              material={material.type}
-              unit={material.unit}
-              price={material.price}
-              color={material.color}
-              removeMaterial={removeMaterial}
-            />
+              <RecycleMaterialCard
+                key={key}
+                material={material.type}
+                unit={material.unit}
+                price={material.price}
+                color={material.color}
+                removeMaterial={removeMaterial}
+                />
           );
         })}
       </div>
@@ -231,7 +228,6 @@ const CompanyDetailedForm = ({
           onClick={onSubmit}
           className="dark-blue fullwidth"
           label="Sign up"
-          // type="submit"
           name="submit"
         />
       </div>

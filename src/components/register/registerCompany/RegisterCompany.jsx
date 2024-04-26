@@ -14,41 +14,9 @@ const RegisterCompany = () => {
   const dispatch = useDispatch();
   const [activeIndex, setActiveIndex] = useState(0);
   const user = useSelector((state) => state.users.userData);
-  const [photoFileBlob, setPhotoFileBlob] = useState(user?.picture);
   const [recyclableMaterials, setRecyclableMaterials] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
-  const {
-    reset,
-    watch,
-    control,
-    setValue,
-    setError,
-    getValues,
-    clearErrors,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      description: "",
-      phone: null,
-      location: "",
-      password: "",
-      companyName: user?.name,
-      email: user?.email,
-      picture: user?.picture,
-      password_confirmation: "",
-      termsConditionsChecked: false,
-      materials: "",
-      unit: "",
-      unitPrice: null,
-      bio: "",
-    },
-  });
-
-  const getFormErrorMessage = (fieldName) =>
-    errors[fieldName] && (
-      <small className="p-error">{errors[fieldName]?.message}</small>
-    );
 
   useEffect(() => {
     activeIndex == 0 ? setIsDisabled(true) : setIsDisabled(false);
@@ -71,28 +39,15 @@ const RegisterCompany = () => {
             <CompanyStandardForm
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
-              watch={watch}
-              control={control}
-              setError={setError}
-              setValue={setValue}
-              getValues={getValues}
-              getFormErrorMessage={getFormErrorMessage}
               setIsDisabled={setIsDisabled}
             />
           </TabPanel>
           <TabPanel disabled={isDisabled}>
             <CompanyDetailedForm
-              control={control}
-              setError={setError}
-              clearErrors={clearErrors}
-              photoFileBlob={photoFileBlob}
-              getFormErrorMessage={getFormErrorMessage}
-              setPhotoFileBlob={setPhotoFileBlob}
-              getValues={getValues}
-              recyclableMaterials={recyclableMaterials}
-              setRecyclableMaterials={setRecyclableMaterials}
-              reset={reset}
-              setValue={setValue}
+                setRecyclableMaterials={setRecyclableMaterials}
+                recyclableMaterials={recyclableMaterials}
+                uploadedImages={uploadedImages}
+                setUploadedImages={setUploadedImages}
             />
           </TabPanel>
         </TabView>
