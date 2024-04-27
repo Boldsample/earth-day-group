@@ -11,6 +11,7 @@ import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import { updateThankyou } from "@store/slices/globalSlice"
 import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput } from "@ui/forms"
+import { saveJSON } from "@utils/useJSON"
 
 import countries from "@json/countries.json"
 import "./style.sass"
@@ -30,6 +31,7 @@ const RegisterUser = () => {
 		defaultValues: {
 			bio: "",
 			phone: null,
+			role: "user",
 			location: "",
 			password: "",
 			username: "",

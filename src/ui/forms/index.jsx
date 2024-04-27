@@ -6,6 +6,7 @@ import DropDownInput from "./dropDownInput";
 import CheckBoxInput from "./checkBoxInput";
 import FileUploadInput from "./fileUploadInput";
 import UploadPhotoInput from "./uploadPhotoInput";
+import SwitchInput from "./switchInput";
 
 export {
   TextInput,
@@ -16,4 +17,5 @@ export {
   CheckBoxInput,
   FileUploadInput,
   UploadPhotoInput,
+  SwitchInput
 };

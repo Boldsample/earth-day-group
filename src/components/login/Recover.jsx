@@ -21,21 +21,19 @@ const Recover = () => {
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			email: "",
 			password: "",
-			password_confirmation: "",
+			password_confirmation: ""
 		}
 	})
 
 	const onSubmit = async (data) => {
-		if(await recoverUser(data))
+		if(await recoverUser(data, {email: searchParams.get('token')}))
 			navigate('/login/')
 	}
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
 	useEffect(() => {
 		dispatch(setHeader('register'))
-		setValue('email', searchParams.get('token'))
 	}, [])
 
 	return <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,14 +43,6 @@ const Recover = () => {
 				<h1 className="text-upperCase mb-1">Recover</h1>
 				<p>Please enter a new password.</p>
 				<div className="registerInput__container-x2">
-					<Controller
-						name={'email'}
-						control={control}
-						render={({ field }) => <input
-							id="email"
-							type="hidden"
-							value={watch(field.name)} />
-					} />
 					<PasswordInput
 						width="100%"
 						maxLength={20}

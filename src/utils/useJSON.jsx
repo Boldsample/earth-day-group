@@ -1,31 +1,120 @@
-export const saveJSON = async (field, data, action='create') => {
-	let _data = JSON.parse(sessionStorage.getItem(field)) || []
-	let _id = _data.length + 1
-	if(action == 'update'){
-		const _index = _data.findIndex(user => {
-			if(user.email == data.email){
-				_id = user.id
-				return true
-			}
-			return false
-		})
-		_data[_index] = {..._data[_index], ...data}
-	}else
-		_data.push({id: _id, ...data})
-	sessionStorage.setItem(field, JSON.stringify(_data))
-	sessionStorage.setItem('insertedID', _id)
-}
+/*
+---- USAGE saveJSON ----
+Return: Nothing
+Params:
+- table: Sesion variable (Example: users)
+- data: Data to save as object (Example: { name: 'Test', email: 'test@test.com', password: 'test' })
+- action (optional): Action to excecute (default: create)
+	- create: Add a new register
+	- update: Update an existing register
+- validation (optional): The variables to validate as object (Example: { id: 1 })
+*/
+export const saveJSON = async (
+  table,
+  data,
+  action = "create",
+  validation = {}
+) => {
+  let _data = JSON.parse(sessionStorage.getItem(table)) || [];
+  let _id = _data.length + 1;
+  if (action == "update") {
+    const toValidate = Object.keys(validation);
+    const _index = _data.findIndex((item) => {
+      let _next = true;
+      toValidate.map((key) => {
+        if (!_next) return false;
+        _next = validation[key] == item[key];
+        return validation[key] == item[key];
+      });
+      return _next;
+    });
+    _data[_index] = { ..._data[_index], ...data };
+  } else if (action == "add") {
+    data.map((item) => {
+      item.user = sessionStorage.getItem("insertedID");
+      item.id = _id++;
+      _data.push(item);
+    });
+  } else {
+    _data.push({ id: _id, ...data });
+    sessionStorage.setItem("insertedID", _id);
+  }
+  sessionStorage.setItem(table, JSON.stringify(_data));
+};
 
-export const getJSON = (field, {email, password} = {}) => {
-	console.log(1)
-	const _id = sessionStorage.getItem('insertedID')
-	console.log(_id)
-	let _data = JSON.parse(sessionStorage.getItem(field)) || []
-	console.log(_data)
-	if(email && password)
-		return _data.find(item => item.email == email && item.password == password) || {status: '404', data: { message: 'Ocurrió un error' } }
-	else if(_id)
-		return _data.find(item => item.id == _id) || {status: '404', data: { message: 'Ocurrió un error' } }
-	else
-		return {status: '404', data: { message: 'Ocurrió un error' } }
-}
+/*
+---- USAGE getJSON ----
+Return: Object with finded element of table
+Params:
+- table: Sesion variable (Example: users)
+- validation: The variables to validate as object (Example: { id: 1 })
+*/
+export const getJSON = (table, validation = {}) => {
+  const toValidate = Object.keys(validation);
+  const _id = sessionStorage.getItem("insertedID");
+  let _data = JSON.parse(sessionStorage.getItem(table)) || [];
+  sessionStorage.removeItem("insertedID");
+  if (toValidate.length) {
+    let _error;
+    const _response = _data.find((item) => {
+      let _next = true;
+      toValidate.map((key) => {
+        if (!_next) return false;
+        _error = key;
+        _next = validation[key] == item[key];
+        return validation[key] == item[key];
+      });
+      return _next;
+    });
+    if (_response) sessionStorage.setItem("insertedID", _response.id);
+    return (
+      _response || {
+        status: "404",
+        data: {
+          message: `El valor de ${_error} no se encuentra en nuestra base de datos.`,
+        },
+      }
+    );
+  } else if (_id)
+    return (
+      _data.find((item) => item.id == _id) || {
+        status: "404",
+        data: { message: "Ocurrió un error" },
+      }
+    );
+  return { status: "404", data: { message: "Ocurrió un error" } };
+};
+
+/*
+---- USAGE getAllJSON ----
+Return: Array with all or filtered element of table
+Params:
+- table: Sesion variable (Example: users)
+- validation (optional): The variables to validate as object (Example: { role: 'user' })
+*/
+export const getAllJSON = (table, validation = {}) => {
+  const toValidate = Object.keys(validation);
+  let _data = JSON.parse(sessionStorage.getItem(table)) || [];
+  if (toValidate.length) {
+    let _error;
+    const _response = _data.filter((item) => {
+      let _next = true;
+      toValidate.map((key) => {
+        if (!_next) return false;
+        _error = key;
+        _next = validation[key] == item[key];
+        return validation[key] == item[key];
+      });
+      return _next;
+    });
+    return (
+      _response || {
+        status: "404",
+        data: {
+          message: `El valor de ${_error} no se encuentra en nuestra base de datos.`,
+        },
+      }
+    );
+  } else
+    return _data || { status: "404", data: { message: "Ocurrió un error" } };
+};

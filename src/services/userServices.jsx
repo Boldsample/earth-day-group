@@ -1,66 +1,75 @@
-import axios from "axios"
-import { toast } from 'react-toastify'
+import axios from "axios";
+import { toast } from "react-toastify";
 
-import { API } from "./API"
-import { saveJSON, getJSON } from "@utils/useJSON"
+import { API } from "./API";
+import { saveJSON, getJSON } from "@utils/useJSON";
 
 export const getUserGoogle = async (token) => {
-	const res = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`, {
-		headers: {
-			Authorization: `Bearer ${token}`,
-			Accept: 'application/json'
-		}
-	})
-	return res.data
-}
+  const res = await axios.get(
+    `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    }
+  );
+  return res.data;
+};
 export const authUser = async (data) => {
-	try {
-		const _user = getJSON('users', data)
-		sessionStorage.setItem('insertedID', _user.id)
-		//await API.post("/login", data)
-		return true
-	} catch (e) {
-		toast.error(e.response?.status+': '+e.response?.data.message)
-		return false
-	}
-}
+  const response = getJSON("users", data);
+  //const response = await API.post("/login", data)
+  if (response?.status == 404)
+    toast.error(response.status + ": " + response.data.message);
+  return response?.id;
+};
 export const createUser = async (data) => {
-	try {
-		await saveJSON('users', data)
-		//await API.post("/register", data)
-		return true
-	} catch (e) {
-		toast.error(e.response?.status+': '+e.response?.data.message)
-		return false
-	}
-}
+  const response = saveJSON("users", data);
+  //await API.post("/register", data)
+  if (response?.status == 404)
+    toast.error(response.status + ": " + response.data.message);
+  return true;
+};
+
+export const addMaterials = async (data) => {
+  const response = saveJSON("materials", data, "add");
+  //await API.post("/register", data)
+  if (response?.status == 404)
+    toast.error(response.status + ": " + response.data.message);
+  return true;
+};
+
+export const addImages = async (data) => {
+  const response = saveJSON("images", data, "add");
+  //await API.post("/register", data)
+  if (response?.status == 404)
+    toast.error(response.status + ": " + response.data.message);
+  return true;
+};
+
 export const logoutUser = async () => {
-	try {
-		//await API.post("/logout")
-		return true
-	} catch (e) {
-		toast.error(e.response.status+': '+e.response.data.message)
-		return false
-	}
-}
-export const recoverUser = async (data) => {
-	try {
-		await saveJSON('users', data, 'update')
-		//await API.post("/logout")
-		return true
-	} catch (e) {
-		toast.error(e.response.status+': '+e.response.data.message)
-		return false
-	}
-}
+  //await API.post("/logout")
+  return true;
+};
+export const recoverUser = async (data, validate) => {
+  const response = saveJSON("users", data, "update", validate);
+  //await API.post("/register", data)
+  if (response?.status == 404)
+    toast.error(response.status + ": " + response.data.message);
+  return true;
+};
 export const getUser = async () => {
-	const { data } = await API.get(`/api/user/`)
-	return data
-}
+  const data = await getJSON("users");
+  data.images = await getJSON("images", { user: data.id });
+  data.materials = await getJSON("materials", { user: data.id });
+  //const { data } = await API.get(`/api/user/`)
+  return data;
+};
 export const getUsers = async () => {
-	const res = await API.get("/users");
-	return res.data;
-}
+  const data = await getAllJSON("users");
+  //const res = await API.get("/users")
+  return res.data;
+};
 // export const getUser = async (name) => {
 //   const url = `https://api.github.com/users/${name}`;
 //   const res = await fetch(url);

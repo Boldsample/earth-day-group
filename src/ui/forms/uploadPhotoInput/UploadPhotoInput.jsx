@@ -5,10 +5,11 @@ import FileUploadInput from "../fileUploadInput";
 import "./uploadprofilephotoinput.sass";
 import ProfilePhoto from "../../profilePhoto/ProfilePhoto";
 
-const UploadPhotoInput = ({ type, watch, control, setValue, getValues, title, iconColor, className }) => {
+
+const UploadPhotoInput = ({ type, watch, control, setValue, getValues, title, iconColor, className, setUploadedImages, uploadedImages }) => {
 	const [reachedImageCapacity, setReachedImageCapacity] = useState(false);
 	const [imageId, setImageId] = useState(0);
-	const [uploadedImages, setUploadedImages] = useState([]);
+	// const [uploadedImages, setUploadedImages] = useState([]);
 
 	const handleFileChange = (event) => {
 		const file = event.target.files[0];
