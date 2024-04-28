@@ -32,11 +32,12 @@ const CompanyStandardForm = ({
     formState: { errors },
   } = useForm({
     defaultValues: {
-      company_name: user?.company_name || "",
+      role: "company",
+      name: user?.company_name || "",
       nit: user?.nit || "",
       email: user?.email || "",
       website: user?.website || "",
-      location: user?.location,
+      address: user?.address || "",
       phone: user?.phone || "",
       description: user?.description || "",
       password: user?.password || "",
@@ -80,7 +81,7 @@ const CompanyStandardForm = ({
             isEdit={true}
             getFormErrorMessage={getFormErrorMessage}
             control={control}
-            nameInput="company_name"
+            nameInput="name"
             placeHolderText="Company Name*"
             width="100%"
             showLabel={false}
@@ -113,8 +114,8 @@ const CompanyStandardForm = ({
               },
               required: "*El campo es requerido.",
               pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Please enter a valid e-mail address",
               },
             }}
           />
@@ -166,20 +167,27 @@ const CompanyStandardForm = ({
           />
         </div>
         <div className="registerInput__container-x1">
-          <DropDownInput
-            control={control}
-            showLabel={false}
-            labelName="Location"
-            nameInput="location"
-            isEdit={true}
+          <TextInput
             isRequired={true}
-            // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-            options={countries}
-            optionLabel="name"
-            optionValue="code"
-            placeHolderText="Select a Country"
-            className=""
+            labelName="Address"
+            isEdit={true}
             getFormErrorMessage={getFormErrorMessage}
+            control={control}
+            nameInput="address"
+            placeHolderText="Street Address*"
+            width="100%"
+            showLabel={false}
+            rules={{
+              maxLength: {
+                value: 20,
+                message: "El campo supera los 20 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }}
           />
         </div>
         <div className="registerInput__container-x1">
@@ -246,8 +254,9 @@ const CompanyStandardForm = ({
               },
               required: "*El campo es requerido.",
               pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                message:
+                  "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
               },
             }}
           />
@@ -269,8 +278,9 @@ const CompanyStandardForm = ({
               },
               required: "*El campo es requerido.",
               pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                message:
+                  "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
               },
             }}
           />
