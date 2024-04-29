@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { updateUser, getUserData } from "@store/slices/usersSlice";
-import { createUser } from "@services/userServices";
-import { setHeader } from "@store/slices/globalSlice"
+import { createUser, addImages, addMaterials } from "@services/userServices";
 import { updateThankyou } from "@store/slices/globalSlice";
 import {
   NumberInput,
@@ -21,7 +20,7 @@ const CompanyDetailedForm = ({
   uploadedImages,
   setUploadedImages,
   pickUpFromHome,
-  setPickUpFromHome
+  setPickUpFromHome,
 }) => {
   const numberInput = useRef(null);
   const user = useSelector((state) => state.users.userData);
@@ -107,11 +106,11 @@ const CompanyDetailedForm = ({
     if (
       await createUser({
         ...user,
-        recyclable_materials: recyclableMaterials,
-        uploaded_images: uploadedImages,
-        pick_up_from_home: pickUpFromHome
+        pick_up_from_home: pickUpFromHome,
       })
     ) {
+      await addMaterials(recyclableMaterials);
+      await addImages(uploadedImages);
       dispatch(getUserData());
       dispatch(
         updateThankyou({
