@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { updateUser, getUserData } from "@store/slices/usersSlice";
 import { createUser } from "@services/userServices";
+import { setHeader } from "@store/slices/globalSlice"
 import { updateThankyou } from "@store/slices/globalSlice";
 import {
   NumberInput,
@@ -40,7 +41,9 @@ const CompanyDetailedForm = ({
     },
   });
 
-  useEffect(() => {}, [recyclableMaterials]);
+  useEffect(() => {
+    dispatch(setHeader('register'))
+  }, [recyclableMaterials]);
 
   const units = [
     { unit: "Kilo", code: "Kg" },
@@ -117,7 +120,7 @@ const CompanyDetailedForm = ({
           background: "image-1.svg",
           button_label: "Go to dashboard",
           content:
-            "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+            "You’re all signed up! We sent you a verification link send your provide email. Please verify your identity.",
         })
       );
     }

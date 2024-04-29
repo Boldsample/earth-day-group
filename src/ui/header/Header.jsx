@@ -29,10 +29,11 @@ const Header = () => {
 	useEffect(() => {
 		console.log(user)
 		console.log(header)
+		console.log(location.pathname)
 		if(!['/offers/'].some(url => url==location.pathname))
 			dispatch(updateAddLink(''))
 
-		if(user?.id && ['/register/user/'].some(url => url==location.pathname))
+		if(user?.id && ['/register/user/', '/register/company/'].some(url => url==location.pathname))
 			navigate('/thankyou/')
 		else if(user?.id && ['/', '/register/', '/login/', '/recover/'].some(url => url==location.pathname))
 			navigate('/dashboard/')
