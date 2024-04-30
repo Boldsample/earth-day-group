@@ -35,7 +35,7 @@ const Nav = () => {
     sections.push({
       label: "Profile",
       icon: "/assets/icons/userProfile.svg",
-      path: "/location/",
+      path: "/profile/",
     });
     sections.push({
       label: "Inbox",

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { updateUser, getUserData } from "@store/slices/usersSlice";
 import { createUser, addImages, addMaterials } from "@services/userServices";
-import { updateThankyou } from "@store/slices/globalSlice";
+import { updateThankyou, setHeader } from "@store/slices/globalSlice";
 import {
   NumberInput,
   DropDownInput,

@@ -13,6 +13,8 @@ import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import Notifications from "@components/notifications/Notifications"
 import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
 import { Dashboard, OffersList, OfferNew, Map, OrdersList, Settings } from "@modules/user"
+import Profile from "./modules/company/Profile"
+
 
 import 'primeicons/primeicons.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -41,6 +43,7 @@ const App = () => {
 						<Route exact path="/location" element={<Map />} />
 						<Route exact path="/orders/" element={<OrdersList />} />
 						<Route exact path="/settings/" element={<Settings />} />
+						<Route exact path="/profile/" element={<Profile />} />
 					</Routes>
 					</BrowserRouter>
 				</PrimeReactProvider>
