@@ -1,4 +1,6 @@
 import React from 'react'
+import CompanyInformation from './CompanyInformation'
+import PhotoGallery from './PhotoGallery'
 import './profile.sass'
 
 const Profile = () => {
@@ -6,8 +8,7 @@ const Profile = () => {
     <div className="layout">
       <img className="layout__background" src="/assets/register/image-2.svg" />
          <div className="profile__layout">
-        <p>this is the profile component</p>
-        <h2>Another text sample</h2>
+            <CompanyInformation/>
          </div>
       </div>
   )
