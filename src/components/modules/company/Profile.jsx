@@ -9,6 +9,7 @@ const Profile = () => {
       <img className="layout__background" src="/assets/register/image-2.svg" />
          <div className="profile__layout">
             <CompanyInformation/>
+            <PhotoGallery/>
          </div>
       </div>
   )
