@@ -1,8 +1,12 @@
 import { useDispatch } from 'react-redux'
-import { useState, useEffect, useCallback } from 'react'
-import { GoogleMap, useJsApiLoader, MarkerF, InfoWindowF } from '@react-google-maps/api'
+import { InputText } from 'primereact/inputtext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { faLocationCrosshairs, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { GoogleMap, useJsApiLoader, MarkerF, InfoWindowF, Autocomplete } from '@react-google-maps/api'
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
+import useGeolocalization from '@utils/useGeolocalization'
 import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import './style.sass'
@@ -19,10 +23,12 @@ const markers = [
 
 const Map = () => {
 	const dispatch = useDispatch()
+	const autocompleteInput = useRef()
 	const [ map, setMap ] = useState(null)
 	const [ show, setShow ] = useState(null)
 	const [current, setCurrent] = useState({lat: 0, lng: 0})
 	const { isLoaded } = useJsApiLoader({
+		libraries: ['places'],
 		id: 'google-map-script',
 		googleMapsApiKey: "AIzaSyA6Ml_ldHM_SaImawJPIitRZ8T-EJGl2VI"
 	})
@@ -33,6 +39,13 @@ const Map = () => {
 	const onUnmount = useCallback(map => {
 		setMap(null)
 	}, [])
+	const setAutocomplete = autocomplete => window.autocomplete = autocomplete
+	const onPlaceChanged = () => {
+		const _place = window.autocomplete.getPlace()
+		const _location = _place?.geometry?.location
+		if(_location)
+			setCurrent({ lat: _location.lat(), lng: _location.lng() })
+	}
 
 	useEffect(() => {
 		dispatch(setHeader('map'))
@@ -46,6 +59,18 @@ const Map = () => {
 	}, [])
 	
 	return <div className="layout">
+		<div className="navbar-item map__search">
+			<div className="search">
+				{isLoaded && <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
+					<InputText
+						placeholder="Search"
+						ref={autocompleteInput}
+						className="p-inputtext" />
+				</Autocomplete>}
+				<a onClick={() => {}}><FontAwesomeIcon icon={faSearch} /></a>
+				<a onClick={() => {}}><FontAwesomeIcon icon={faLocationCrosshairs} /></a>
+			</div>
+		</div>
 		{show && <div className="marker__detail">
 			<ProfilePhoto className="mb-1" userPhoto={null} />
 			<h5 className="font-bold text-gray">Rainbow Shop</h5>

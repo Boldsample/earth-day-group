@@ -1,3 +1,5 @@
+import Cookies from "js-cookie"
+
 /*
 ---- USAGE saveJSON ----
 Return: Nothing
@@ -10,7 +12,7 @@ Params:
 - validation (optional): The variables to validate as object (Example: { id: 1 })
 */
 export const saveJSON = async (table, data, action='create', validation={}) => {
-	let _data = JSON.parse(sessionStorage.getItem(table)) || []
+	let _data = Cookies.get(table) ? JSON.parse(Cookies.get(table)) : []
 	let _id = _data.length + 1
 	if(action == 'update'){
 		const toValidate = Object.keys(validation)
@@ -26,9 +28,9 @@ export const saveJSON = async (table, data, action='create', validation={}) => {
 		_data[_index] = {..._data[_index], ...data}
 	}else{
 		_data.push({id: _id, ...data})
-		sessionStorage.setItem('insertedID', _id)
+		Cookies.set('insertedID', _id)
 	}
-	sessionStorage.setItem(table, JSON.stringify(_data))
+	Cookies.set(table, JSON.stringify(_data))
 }
 
 /*
@@ -40,9 +42,9 @@ Params:
 */
 export const getJSON = (table, validation = {}) => {
 	const toValidate = Object.keys(validation)
-	const _id = sessionStorage.getItem('insertedID')
-	let _data = JSON.parse(sessionStorage.getItem(table)) || []
-	sessionStorage.removeItem('insertedID')
+	const _id = Cookies.get('insertedID')
+	let _data = JSON.parse(Cookies.get(table)) || []
+	Cookies.remove('insertedID')
 	if(toValidate.length){
 		let _error
 		const _response = _data.find(item => {
@@ -56,7 +58,7 @@ export const getJSON = (table, validation = {}) => {
 			return _next
 		})
 		if(_response)
-			sessionStorage.setItem('insertedID', _response.id)
+		Cookies.set('insertedID', _response.id)
 		return _response || {status: '404', data: { message: `El valor de ${_error} no se encuentra en nuestra base de datos.` } }
 	}else if(_id)
 		return _data.find(item => item.id == _id) || {status: '404', data: { message: 'Ocurrió un error' } }
@@ -72,7 +74,7 @@ Params:
 */
 export const getAllJSON = (table, validation = {}) => {
 	const toValidate = Object.keys(validation)
-	let _data = JSON.parse(sessionStorage.getItem(table)) || []
+	let _data = JSON.parse(Cookies.get(table)) || []
 	if(toValidate.length){
 		let _error
 		const _response = _data.filter(item => {

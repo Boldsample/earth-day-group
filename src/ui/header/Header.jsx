@@ -1,4 +1,3 @@
-
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -59,18 +58,6 @@ const Header = () => {
 		{['settings'].some(s => s == header) && 
 		<div className="navbar-item">
 			<h4>{headerTitle}</h4>
-		</div>}
-		
-		{['map'].some(s => s == header) && 
-		<div className="navbar-item">
-			<div className="search">
-				<InputText
-					placeholder="Search"
-					className="p-inputtext"
-					onChange={(e) => setFilteredModule(e.target.value)} />
-				<a onClick={() => {}}><FontAwesomeIcon icon={faSearch} /></a>
-				<a onClick={() => {}}><FontAwesomeIcon icon={faLocationCrosshairs} /></a>
-			</div>
 		</div>}
 		
 		{!['settings', 'map'].some(s => s == header) && 
