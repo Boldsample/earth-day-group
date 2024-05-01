@@ -9,6 +9,8 @@ import modules from "@json/modules"
 import { setHeader } from '@store/slices/globalSlice'
 
 import "./dashboard.sass"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
 const Dashboard = () => {
 	const dispatch = useDispatch()
@@ -25,10 +27,10 @@ const Dashboard = () => {
 	return <div className="layout">
 		<img className="layout__background" src="/assets/intro/image-3.svg" />
 		<div className="main__content dashboard-content">
-			<div className="category__search mb-3">
+			<div className="search mb-3">
 				<h4>Discover:</h4>
 				<span className="p-input-icon-left">
-					<i className="pi pi-search" />
+					<FontAwesomeIcon icon={faSearch} />
 					<InputText
 						placeholder="Search"
 						className="p-inputtext"
