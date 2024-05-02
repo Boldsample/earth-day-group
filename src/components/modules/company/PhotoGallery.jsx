@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
 import { Carousel } from "primereact/carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
 import companyImg from "../../../assets/testImg2.png";
 import "./profile.sass";
 
 const PhotoGallery = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const images = [companyImg, companyImg, companyImg, companyImg];
-  const imageElement = useRef(null);
 
   const responsiveOptions = [
     {
@@ -31,16 +32,10 @@ const PhotoGallery = () => {
     },
   ];
 
-  // function getIndex() {
-  //   console.log(imageElement.current.getElement());
-  // }
 
-  const productTemplate = (image, index) => {
-    const middleIndex = Math.floor(images.length / 2);
-    const isMiddleImage = index === activeIndex || index === middleIndex;
-    console.log(index, image);
+  const productTemplate = (image) => {
     return (
-      <div className={`image_container ${isMiddleImage ? "middle_image" : ""}`}>
+      <div className="image_container">
         <img className="carousel__image" src={image} alt={image} />
       </div>
     );
@@ -48,14 +43,15 @@ const PhotoGallery = () => {
 
   return (
     <div className="photoGallery__container">
+       <h2>Pictures</h2>
       <Carousel
-        // ref={getIndex}
+       prevIcon={(options) => <FontAwesomeIcon icon={faChevronLeft}  {...options.iconProps} />}
+       nextIcon={(options) => <FontAwesomeIcon icon={faChevronRight}  {...options.iconProps} />}
         value={images}
         numVisible={3}
-        numScroll={3}
+        numScroll={1}
         responsiveOptions={responsiveOptions}
-        // itemTemplate={productTemplate}
-        itemTemplate={(image) => productTemplate(image, images.indexOf(image))}
+        itemTemplate={productTemplate}
         onPageChange={(e) => setActiveIndex(e.page)}
         page={activeIndex}
       />
