@@ -33,7 +33,7 @@ const CompanyStandardForm = ({
   } = useForm({
     defaultValues: {
       role: "company",
-      name: user?.company_name || "",
+      name: user?.name || "",
       nit: user?.nit || "",
       email: user?.email || "",
       website: user?.website || "",

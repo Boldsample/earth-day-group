@@ -1,0 +1,38 @@
+.header_notifications
+	display: inline-block
+	position: relative
+	.list
+		max-height: 0
+		max-width: 280px
+		overflow: hidden
+		padding: 20px 20px 0
+		position: absolute
+		right: -20px
+		transition: all .4s ease-in-out
+		width: 280px
+		.notification
+			border-radius: 0
+			height: auto
+			margin: 0
+			padding: 10px 20px
+			transition: all .2s ease-in-out
+			&:hover
+				background-color: var(--green-earth)
+				color: var(--white)
+			&:first-child
+				border-radius: 0.9rem 0.9rem 0 0
+			&:last-child
+				border-radius: 0 0 0.9rem 0.9rem
+			&:nth-child(n+2)
+				border-top: 1px solid var(--green-earth)
+			.notification__header
+				flex-wrap: wrap
+				.notification__title
+					width: 100%
+					svg, h4
+						display: none
+			p
+				font-size: 14px
+				margin: 0
+	&:hover .list
+		max-height: 300px

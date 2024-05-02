@@ -1,11 +1,10 @@
+import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { Button } from "primereact/button"
 import { useEffect, useState } from "react"
+import { useFacebook } from "react-facebook"
 import { useGoogleLogin } from "@react-oauth/google"
-import { Link, useNavigate } from "react-router-dom"
-import { useFacebook, useProfile } from "react-facebook"
-//import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 import { setHeader } from '@store/slices/globalSlice'
 import { TextInput, PasswordInput } from "@ui/forms/"
@@ -13,13 +12,10 @@ import { authUser, getUserGoogle } from "@services/userServices"
 import { getUserData, updateUser } from "@store/slices/usersSlice"
 
 const LoginForm = () => {
-	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [ fApi, setFApi ] = useState()
 	const { isLoading, init } = useFacebook()
-	const [ sending, setSending ] = useState(false)
 	const {
-		reset,
 		control,
 		handleSubmit,
 		formState: { errors },
@@ -32,8 +28,10 @@ const LoginForm = () => {
 
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const onSubmit = async (data) => {
-		if(await authUser(data))
+		if(await authUser(data)){
+			console.log('login')
 			dispatch(getUserData())
+		}
 	}
 	const gLogin = useGoogleLogin({
 		onSuccess: async ({access_token}) => {
@@ -83,9 +81,9 @@ const LoginForm = () => {
 				<div className="p-field mb-1">
 					<label htmlFor="email">
 						<TextInput
+							disabled={false}
 							isRequired={true}
 							labelName="email"
-							disabled={sending}
 							getFormErrorMessage={getFormErrorMessage}
 							control={control}
 							nameInput="email"
@@ -107,10 +105,10 @@ const LoginForm = () => {
 				<div className="p-field mb-1">
 					<label htmlFor="password">
 						<PasswordInput
+							disabled={false}
 							feedback={false}
 							control={control}
 							isRequired={true}
-							disabled={sending}
 							labelName="password"
 							nameInput="password"
 							placeHolderText="Password"
@@ -134,7 +132,7 @@ const LoginForm = () => {
 					<Link className="text-xs" to="/forgot/">Forgot password?</Link>
 				</div>
 				<div className="p-field mb-2">
-					<Button label="Login" type="submit" disabled={sending} className="dark-blue fullwidth" />
+					<Button label="Login" type="submit" disabled={false} className="dark-blue fullwidth" />
 				</div>
 				<div className="p-field">
 					<p className="text-center">Or sign in with</p>

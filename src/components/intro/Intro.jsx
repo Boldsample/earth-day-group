@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Carousel } from 'primereact/carousel'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 
 import introItems from '@json/intro.json'
 import { setHeader } from '@store/slices/globalSlice'
@@ -23,9 +25,9 @@ const Intro = () => {
 				{item?.list ? <ul className='mb-1'>{item.list.map((i, key) => <li key={key}>{i}</li>)}</ul> : null}
 				<div>
 					{activeIndex + 1 < introItems.length ? <>
-						<Link className="button" to="/register/">Skip <span className="material-icons">skip_next</span></Link>
-						<button onClick={() => setActiveIndex((prevIndex) => (prevIndex + 1) % introItems.length)} className="dark-blue">Next <span className="material-icons">chevron_right</span></button>
-					</> : <Link className="button dark-blue" to="/register/">Next <span className="material-icons">chevron_right</span></Link>}
+						<Link className="button" to="/register/">Skip <FontAwesomeIcon icon={faRightToBracket} /></Link>
+						<button onClick={() => setActiveIndex((prevIndex) => (prevIndex + 1) % introItems.length)} className="dark-blue">Next <FontAwesomeIcon icon={faChevronRight} /></button>
+					</> : <Link className="button dark-blue" to="/register/">Next <FontAwesomeIcon icon={faChevronRight} /></Link>}
 				</div>
 			</div>
 		</div>
