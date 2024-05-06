@@ -16,8 +16,8 @@ export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
   const res = await getUsers();
   return res;
 });
-export const getUserData = createAsyncThunk("users/getUserData", async () => {
-  const res = await getUser();
+export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
+  const res = await getUser(id);
   return res;
 });
 const usersSlice = createSlice({
@@ -28,6 +28,7 @@ const usersSlice = createSlice({
       state.inputField = action.payload;
     },
     storeUserRegistrationData: (state, action) => {
+		console.log(action.payload)
       state.userData = { ...action.payload };
     },
     updateUser: (state, action) => {

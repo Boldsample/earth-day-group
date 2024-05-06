@@ -28,10 +28,8 @@ const LoginForm = () => {
 
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const onSubmit = async (data) => {
-		if(await authUser(data)){
-			console.log('login')
-			dispatch(getUserData())
-		}
+		const id = await authUser(data)
+		dispatch(getUserData(id))
 	}
 	const gLogin = useGoogleLogin({
 		onSuccess: async ({access_token}) => {
@@ -43,9 +41,7 @@ const LoginForm = () => {
 	const fLogin = async () => {
 		fApi.login(function({authResponse}){
 			if(authResponse){
-				console.log(authResponse)
 				fApi.api('/me', {fields: 'name, email'}, async ({email}) => {
-					console.log(email)
 					if(await authUser({email}))
 						dispatch(getUserData())
 				});
@@ -62,10 +58,8 @@ const LoginForm = () => {
 					.then(response => setFApi(response))
 			else{
 				fApi.getLoginStatus(({authResponse}) => {
-					console.log(authResponse)
 					if(authResponse)
 						FB.logout()
-					// fApi.api('/me', {fields: 'name, email'}, { access_token: authResponse.accessToken }, (response) => console.log('UserData: ', response))
 				})
 			}
 		}

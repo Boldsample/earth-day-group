@@ -1,28 +1,24 @@
-import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { Button } from "primereact/button";
+import { Autocomplete } from "@react-google-maps/api";
+import { useDispatch, useSelector } from "react-redux";
 import { storeUserRegistrationData } from "@store/slices/usersSlice";
 import {
   TextInput,
   NumberInput,
   PasswordInput,
   TextAreaInput,
-  DropDownInput,
   CheckBoxInput,
-  FileUploadInput,
   UploadPhotoInput,
 } from "@ui/forms";
-import countries from "@json/countries.json";
+
 const CompanyStandardForm = ({
-  activeIndex,
   setActiveIndex,
   setIsDisabled,
 }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.userData);
   const {
-    reset,
     watch,
     control,
     setValue,
@@ -53,7 +49,6 @@ const CompanyStandardForm = ({
     );
 
   const onSubmit = async (data) => {
-    console.log(data);
     setActiveIndex(1);
     setIsDisabled(false);
     dispatch(
@@ -62,6 +57,10 @@ const CompanyStandardForm = ({
       })
     );
   };
+	const setAutocomplete = autocomplete => window.autocomplete = autocomplete
+	const onPlaceChanged = () => {
+    setValue('address', window.autocomplete.getPlace().formatted_address)
+	}
 
   return (
     <>
@@ -167,28 +166,26 @@ const CompanyStandardForm = ({
           />
         </div>
         <div className="registerInput__container-x1">
-          <TextInput
-            isRequired={true}
-            labelName="Address"
-            isEdit={true}
-            getFormErrorMessage={getFormErrorMessage}
-            control={control}
-            nameInput="address"
-            placeHolderText="Street Address*"
-            width="100%"
-            showLabel={false}
-            rules={{
-              maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
-              },
-              required: "*El campo es requerido.",
-              pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
-              },
-            }}
-          />
+          <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
+            <TextInput
+              width="100%"
+              isEdit={true}
+              control={control}
+              showLabel={false}
+              isRequired={true}
+              labelName="Address"
+              nameInput="address"
+              placeHolderText="Address*"
+              getFormErrorMessage={getFormErrorMessage}
+              rules={{
+                required: "*El campo es requerido.",
+                pattern: {
+                  value: /^\S/,
+                  message: "No debe tener espacios al inicio",
+                },
+              }}
+            />
+          </Autocomplete>
         </div>
         <div className="registerInput__container-x1">
           <NumberInput

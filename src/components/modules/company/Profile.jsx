@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import CompanyInformation from './CompanyInformation'
-import PhotoGallery from './PhotoGallery'
-import { useDispatch, useSelector } from "react-redux";
+import PhotoGallery from "./PhotoGallery"
+import { useSelector } from "react-redux"
+import CompanyInformation from "./CompanyInformation"
 
-import './profile.sass'
-import { useState } from 'react'
+import "./profile.sass"
+
 const Profile = () => {
   const user = useSelector((state) => state.users.userData);
   const {images} = user

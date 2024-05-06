@@ -100,7 +100,6 @@ const UploadPhotoInput = ({
               </div>
               <div className="imageCatalog__container">
                 {uploadedImages.map((image) => (
-                  <>
                     <div key={image.id} className="image__container">
                       <button
                         className="close__btn"
@@ -114,7 +113,6 @@ const UploadPhotoInput = ({
                       </button>
                       <img className="uploadedImage" src={image.data} alt="" />
                     </div>
-                  </>
                 ))}
               </div>
             </div>

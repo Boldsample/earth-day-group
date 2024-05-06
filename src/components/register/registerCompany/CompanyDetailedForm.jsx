@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { updateUser, getUserData } from "@store/slices/usersSlice";
 import { createUser, addImages, addMaterials } from "@services/userServices";
-import { updateThankyou, setHeader } from "@store/slices/globalSlice";
+import { updateThankyou } from "@store/slices/globalSlice";
 import {
   NumberInput,
   DropDownInput,
@@ -24,8 +24,9 @@ const CompanyDetailedForm = ({
 }) => {
   const numberInput = useRef(null);
   const user = useSelector((state) => state.users.userData);
-  const dispatch = useDispatch(uploadedImages);
-  console.log(uploadedImages)
+  console.log(user)
+  const dispatch = useDispatch();
+
   const {
     reset,
     control,
@@ -40,9 +41,7 @@ const CompanyDetailedForm = ({
     },
   });
 
-  useEffect(() => {
-    dispatch(setHeader('register'))
-  }, [recyclableMaterials]);
+  useEffect(() => {}, [recyclableMaterials]);
 
   const units = [
     { unit: "Kilo", code: "Kg" },
@@ -103,14 +102,15 @@ const CompanyDetailedForm = ({
   };
 
   const onSubmit = async () => {
+	console.log('test')
     if (
       await createUser({
         ...user,
         pick_up_from_home: pickUpFromHome,
       })
     ) {
-      await addMaterials(recyclableMaterials, "add");
-      await addImages(uploadedImages, "add");
+      await addMaterials(recyclableMaterials);
+      await addImages(uploadedImages);
       dispatch(getUserData());
       dispatch(
         updateThankyou({
@@ -119,7 +119,7 @@ const CompanyDetailedForm = ({
           background: "image-1.svg",
           button_label: "Go to dashboard",
           content:
-            "You’re all signed up! We sent you a verification link send your provide email. Please verify your identity.",
+            "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
         })
       );
     }

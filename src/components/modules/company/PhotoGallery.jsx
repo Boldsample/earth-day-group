@@ -1,17 +1,13 @@
-import React, { useState, useRef } from "react";
-import { Carousel } from "primereact/carousel";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import companyImg from "../../../assets/testImg2.png";
+import { useState } from "react"
+import { Carousel } from "primereact/carousel"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
+
 import "./profile.sass";
+import companyImg from "../../../assets/testImg2.png";
 
 const PhotoGallery = ({images}) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const images = [companyImg, companyImg, companyImg, companyImg];
-
   const responsiveOptions = [
     {
       breakpoint: "1400px",

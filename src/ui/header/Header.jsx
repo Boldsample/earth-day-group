@@ -1,4 +1,4 @@
-
+import Cookies from "js-cookie"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -7,9 +7,9 @@ import { faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
-import { updateUser } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import { updateAddLink } from '@store/slices/globalSlice'
+import { getUserData, updateUser } from "@store/slices/usersSlice"
 import HeaderNotifications from "@components/notifications/HeaderNotifications"
 
 const Header = () => {
@@ -28,6 +28,10 @@ const logout = async (e) => {
 };
 
 	useEffect(() => {
+		if(!user?.id){
+			const _id = Cookies.get('edgActiveUser')
+			dispatch(getUserData(_id))
+		}
 		if(!['/offers/'].some(url => url==location.pathname))
 			dispatch(updateAddLink(''))
 
@@ -68,8 +72,8 @@ const logout = async (e) => {
 		{!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
 			<div className="navbar-item icons">
 				{location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
-					<ProfilePhoto userPhoto={user.picture} />
-					<small className="user-name">Hi, {user.name}</small>
+					<ProfilePhoto userPhoto={user?.picture} />
+					<small className="user-name">Hi, {user?.name}</small>
 				</div> : null}
 				<FontAwesomeIcon icon={faShoppingCart} />
 				<HeaderNotifications />
