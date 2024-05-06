@@ -4,16 +4,32 @@ import CompanyInformation from "./CompanyInformation"
 
 import "./profile.sass"
 
+<<<<<<< HEAD
+=======
+import './profile.sass'
+
+>>>>>>> sprintApril
 const Profile = () => {
   const user = useSelector((state) => state.users.userData);
-  const {images} = user
-  console.log(user, images)
+  const [imageCatalog, setImageCatalog] = useState([null])
+ 
+  // const {images} = user
+console.log(user)
+
+  useEffect(()=>{
+    setImageCatalog(user.images)
+  }, [])
+
   return (
     <div className="layout">
       <img className="layout__background" src="/assets/register/image-2.svg" />
          <div className="profile__layout">
-            <CompanyInformation/>
-            <PhotoGallery/>
+            <CompanyInformation
+              company={user}
+            />
+            <PhotoGallery
+              imageCatalog={imageCatalog}
+            />
          </div>
       </div>
   )

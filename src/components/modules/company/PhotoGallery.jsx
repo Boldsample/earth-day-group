@@ -1,13 +1,15 @@
-import { useState } from "react"
-import { Carousel } from "primereact/carousel"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons"
-
+import React, { useState, useRef } from "react";
+import { Carousel } from "primereact/carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import "./profile.sass";
-import companyImg from "../../../assets/testImg2.png";
 
-const PhotoGallery = ({images}) => {
+const PhotoGallery = ({imageCatalog}) => {
   const [activeIndex, setActiveIndex] = useState(0);
+
   const responsiveOptions = [
     {
       breakpoint: "1400px",
@@ -32,20 +34,21 @@ const PhotoGallery = ({images}) => {
   ];
 
   const productTemplate = (image) => {
-    return <img className="carousel__image" src={image} alt={image} />;
+    return <img className="carousel__image" src={image?.data} alt={image} />;
   };
 
   return (
     <div className="photoGallery__container">
       <h2>Pictures</h2>
-      <Carousel
+      {imageCatalog == null ? <p>You have not uploaded any images to your profile.</p> : 
+        <Carousel
         prevIcon={(options) => (
           <FontAwesomeIcon icon={faChevronLeft} {...options.iconProps} />
         )}
         nextIcon={(options) => (
           <FontAwesomeIcon icon={faChevronRight} {...options.iconProps} />
         )}
-        value={images}
+        value={imageCatalog}
         numVisible={3}
         numScroll={1}
         responsiveOptions={responsiveOptions}
@@ -54,6 +57,8 @@ const PhotoGallery = ({images}) => {
         page={activeIndex}
         showIndicators={false}
       />
+      }
+      
     </div>
   );
 };
