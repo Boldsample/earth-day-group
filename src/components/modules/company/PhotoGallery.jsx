@@ -8,7 +8,7 @@ import {
 import companyImg from "../../../assets/testImg2.png";
 import "./profile.sass";
 
-const PhotoGallery = () => {
+const PhotoGallery = ({images}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const images = [companyImg, companyImg, companyImg, companyImg];
 

@@ -24,8 +24,8 @@ const CompanyDetailedForm = ({
 }) => {
   const numberInput = useRef(null);
   const user = useSelector((state) => state.users.userData);
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch(uploadedImages);
+  console.log(uploadedImages)
   const {
     reset,
     control,
@@ -109,8 +109,8 @@ const CompanyDetailedForm = ({
         pick_up_from_home: pickUpFromHome,
       })
     ) {
-      await addMaterials(recyclableMaterials);
-      await addImages(uploadedImages);
+      await addMaterials(recyclableMaterials, "add");
+      await addImages(uploadedImages, "add");
       dispatch(getUserData());
       dispatch(
         updateThankyou({

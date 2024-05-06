@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 import { API } from "./API";
-import { saveJSON, getJSON } from "@utils/useJSON";
+import { saveJSON, getJSON, getAllJSON } from "@utils/useJSON";
 
 export const getUserGoogle = async (token) => {
   const res = await axios.get(
@@ -40,6 +40,7 @@ export const addMaterials = async (data) => {
 };
 
 export const addImages = async (data) => {
+  console.log(data, 'images')
   const response = saveJSON("images", data, "add");
   //await API.post("/register", data)
   if (response?.status == 404)
@@ -60,8 +61,8 @@ export const recoverUser = async (data, validate) => {
 };
 export const getUser = async () => {
   const data = await getJSON("users");
-  data.images = await getJSON("images", { user: data.id });
-  data.materials = await getJSON("materials", { user: data.id });
+  data.images = await getAllJSON("images", { user: data.id });
+  data.materials = await getAllJSON("materials", { user: data.id });
   //const { data } = await API.get(`/api/user/`)
   return data;
 };
