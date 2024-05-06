@@ -13,7 +13,7 @@ import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import Notifications from "@components/notifications/Notifications"
 import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
 import { Dashboard, OffersList, OfferNew, Map, OrdersList, Settings } from "@modules/user"
-import Profile from "./modules/company/Profile"
+import Profile from "./modules/company/profile/Profile"
 
 
 import 'primeicons/primeicons.css'

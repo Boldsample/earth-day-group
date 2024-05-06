@@ -4,7 +4,6 @@ import { faPhone, faLocationDot, faHouse, faGlobe, faComments } from "@fortaweso
 import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCard'
 import { Button } from 'primereact/button'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto';
-import companyImg from '../../../assets/testImg2.png'
 import './profile.sass'
 
 const CompanyInformation = ({company}) => {
@@ -13,7 +12,7 @@ const CompanyInformation = ({company}) => {
     <div className='companyInformation__grid'>
         <div className="image__container">
             {/* <img src={companyImg} alt="Company Image" /> */}
-            <ProfilePhoto className="profile__photo-large" size="75px"/>
+            <ProfilePhoto className="profile__photo-large" size="75px" userPhoto={company?.picture}/>
         </div>
         <div className="companyInformation__container">
             <h2>{company?.name}</h2>
@@ -30,8 +29,8 @@ const CompanyInformation = ({company}) => {
             <div className="recycableGoods__container"> 
                 <h4>Price for Recycable Goods</h4>
                 <div className='materialsCard__grid'>
-                    {company?.materials.length != 0 ?
-                        company?.materials.map((material) => {
+                    {company?.materials?.length != 0 ?
+                        company?.materials?.map((material) => {
                             return <RecycleMaterialCard
                             key={material.id}
                             material={material.type}

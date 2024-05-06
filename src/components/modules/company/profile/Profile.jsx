@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import CompanyInformation from './CompanyInformation'
 import PhotoGallery from './PhotoGallery'
 import { useDispatch, useSelector } from "react-redux";
-
 import './profile.sass'
 
 const Profile = () => {

@@ -177,8 +177,8 @@ const RegisterUser = () => {
               showLabel={false}
               rules={{
                 maxLength: {
-                  value: 20,
-                  message: "El campo supera los 20 caracteres",
+                  value: 40,
+                  message: "El campo supera los 40 caracteres",
                 },
                 required: "*El campo es requerido.",
                 pattern: {
@@ -198,8 +198,8 @@ const RegisterUser = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 50,
-                message: "El campo supera los 50 caracteres",
+                value: 230,
+                message: "El campo supera los 230 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
