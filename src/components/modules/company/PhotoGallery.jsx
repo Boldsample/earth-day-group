@@ -5,12 +5,10 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import companyImg from "../../../assets/testImg2.png";
 import "./profile.sass";
 
-const PhotoGallery = ({images}) => {
+const PhotoGallery = ({imageCatalog}) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const images = [companyImg, companyImg, companyImg, companyImg];
 
   const responsiveOptions = [
     {
@@ -36,20 +34,21 @@ const PhotoGallery = ({images}) => {
   ];
 
   const productTemplate = (image) => {
-    return <img className="carousel__image" src={image} alt={image} />;
+    return <img className="carousel__image" src={image?.data} alt={image} />;
   };
 
   return (
     <div className="photoGallery__container">
       <h2>Pictures</h2>
-      <Carousel
+      {imageCatalog == null ? <p>You have not uploaded any images to your profile.</p> : 
+        <Carousel
         prevIcon={(options) => (
           <FontAwesomeIcon icon={faChevronLeft} {...options.iconProps} />
         )}
         nextIcon={(options) => (
           <FontAwesomeIcon icon={faChevronRight} {...options.iconProps} />
         )}
-        value={images}
+        value={imageCatalog}
         numVisible={3}
         numScroll={1}
         responsiveOptions={responsiveOptions}
@@ -58,6 +57,8 @@ const PhotoGallery = ({images}) => {
         page={activeIndex}
         showIndicators={false}
       />
+      }
+      
     </div>
   );
 };

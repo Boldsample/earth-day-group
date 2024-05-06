@@ -4,17 +4,28 @@ import PhotoGallery from './PhotoGallery'
 import { useDispatch, useSelector } from "react-redux";
 
 import './profile.sass'
-import { useState } from 'react'
+
 const Profile = () => {
   const user = useSelector((state) => state.users.userData);
-  const {images} = user
-  console.log(user, images)
+  const [imageCatalog, setImageCatalog] = useState([null])
+ 
+  // const {images} = user
+console.log(user)
+
+  useEffect(()=>{
+    setImageCatalog(user.images)
+  }, [])
+
   return (
     <div className="layout">
       <img className="layout__background" src="/assets/register/image-2.svg" />
          <div className="profile__layout">
-            <CompanyInformation/>
-            <PhotoGallery/>
+            <CompanyInformation
+              company={user}
+            />
+            <PhotoGallery
+              imageCatalog={imageCatalog}
+            />
          </div>
       </div>
   )
