@@ -190,8 +190,8 @@ const RegisterUser = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 50,
-                message: "El campo supera los 50 caracteres",
+                value: 230,
+                message: "El campo supera los 230 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
