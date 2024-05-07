@@ -10,6 +10,7 @@ lerna-debug.log*
 api
 edg_api_backup
 node_modules
+php
 dist
 dist-ssr
 *.local
