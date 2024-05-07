@@ -4,11 +4,6 @@ import CompanyInformation from "./CompanyInformation"
 
 import "./profile.sass"
 
-<<<<<<< HEAD
-=======
-import './profile.sass'
-
->>>>>>> sprintApril
 const Profile = () => {
   const user = useSelector((state) => state.users.userData);
   const [imageCatalog, setImageCatalog] = useState([null])
