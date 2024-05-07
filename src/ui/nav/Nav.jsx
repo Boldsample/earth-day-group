@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Nav = () => {
-  const userRole = useSelector((state) => state.users.userData.role);
-  console.log(userRole, "role");
+  const userRole = useSelector((state) => state?.users?.userData?.role);
   let sections = [];
 
   sections.push({

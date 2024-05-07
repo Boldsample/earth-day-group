@@ -1,34 +1,24 @@
-import { useForm } from "react-hook-form";
-import { Button } from "primereact/button";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useForm } from "react-hook-form"
+import { Button } from "primereact/button"
+import { Autocomplete } from "@react-google-maps/api"
+import { useDispatch, useSelector } from "react-redux"
 
-import { createUser } from "@services/userServices";
-import { setHeader } from "@store/slices/globalSlice";
-import { getUserData } from "@store/slices/usersSlice";
-import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto";
-import { updateThankyou } from "@store/slices/globalSlice";
-import GoBackButton from "@ui/buttons/goBackButton/GoBackButton";
-import {
-  TextInput,
-  NumberInput,
-  PasswordInput,
-  TextAreaInput,
-  DropDownInput,
-  CheckBoxInput,
-  FileUploadInput,
-} from "@ui/forms";
-import { saveJSON } from "@utils/useJSON";
+import { createUser } from "@services/userServices"
+import { setHeader } from "@store/slices/globalSlice"
+import { getUserData } from "@store/slices/usersSlice"
+import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
+import { updateThankyou } from "@store/slices/globalSlice"
+import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
+import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput } from "@ui/forms"
 
-import countries from "@json/countries.json";
-import "./style.sass";
+import "./style.sass"
 
 const RegisterUser = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.userData);
   const {
-    reset,
     watch,
     control,
     setValue,
@@ -37,12 +27,12 @@ const RegisterUser = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      bio: "",
       phone: null,
+      address: "",
       role: "user",
-      location: "",
       password: "",
       username: "",
+      description: "",
       accept_terms: false,
       name: user?.name || "",
       email: user?.email || "",
@@ -56,20 +46,23 @@ const RegisterUser = () => {
       <small className="p-error">{errors[fieldName]?.message}</small>
     );
   const onSubmit = async (data) => {
-    if (await createUser({ ...user, ...data })) {
-      dispatch(getUserData());
-      dispatch(
-        updateThankyou({
-          title: "Congrats!",
-          link: "/dashboard/",
-          background: "image-1.svg",
-          button_label: "Go to dashboard",
-          content:
-            "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
-        })
-      );
-    }
-  };
+	  const id = await createUser({ ...user, ...data })
+	  dispatch(getUserData(id))
+    dispatch(
+      updateThankyou({
+        title: "Congrats!",
+        link: "/dashboard/",
+        background: "image-1.svg",
+        button_label: "Go to dashboard",
+        content:
+          "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+      })
+    )
+  }
+  const setAutocomplete = autocomplete => window.autocomplete = autocomplete
+	const onPlaceChanged = () => {
+    setValue('address', window.autocomplete.getPlace()?.formatted_address)
+	}
 
   useEffect(() => {
     dispatch(setHeader("register"));
@@ -165,35 +158,34 @@ const RegisterUser = () => {
                 },
               }}
             />
-            <TextInput
-              isRequired={true}
-              labelName="Address"
-              isEdit={true}
-              getFormErrorMessage={getFormErrorMessage}
-              control={control}
-              nameInput="address"
-              placeHolderText="Street Address*"
-              width="100%"
-              showLabel={false}
-              rules={{
-                maxLength: {
-                  value: 40,
-                  message: "El campo supera los 40 caracteres",
-                },
-                required: "*El campo es requerido.",
-                pattern: {
-                  value: /^\S/,
-                  message: "No debe tener espacios al inicio",
-                },
-              }}
-            />
+            <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
+              <TextInput
+                width="100%"
+                isEdit={true}
+                control={control}
+                showLabel={false}
+                isRequired={true}
+                autocomplete="off"
+                labelName="Address"
+                nameInput="address"
+                placeHolderText="Address*"
+                getFormErrorMessage={getFormErrorMessage}
+                rules={{
+                  required: "*El campo es requerido.",
+                  pattern: {
+                    value: /^\S/,
+                    message: "No debe tener espacios al inicio",
+                  },
+                }}
+              />
+            </Autocomplete>
           </div>
           <TextAreaInput
             label="Bio"
-            nameInput="bio"
             showLabel={true}
             control={control}
             isRequired={false}
+            nameInput="description"
             placeHolderText="Tell us about yourself"
             getFormErrorMessage={getFormErrorMessage}
             rules={{

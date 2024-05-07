@@ -4,7 +4,6 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const FileUploadInput = ({
-	rules,
 	watch,
 	control,
 	setValue,
@@ -14,7 +13,6 @@ const FileUploadInput = ({
 	const handleFileChange = (event) => {
 		const file = event.target.files[0]
 		if(file){
-			console.log('Test 0')
 			if(file.size <= 2 * 1024 * 1024){
 				setSelectedFile(file)
 				const reader = new FileReader()

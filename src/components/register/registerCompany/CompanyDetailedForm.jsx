@@ -1,18 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
-import { updateUser, getUserData } from "@store/slices/usersSlice";
-import { createUser, addImages, addMaterials } from "@services/userServices";
-import { updateThankyou, setHeader } from "@store/slices/globalSlice";
-import {
-  NumberInput,
-  DropDownInput,
-  UploadPhotoInput,
-  SwitchInput,
-} from "@ui/forms";
-import materials from "@json/recyclableMaterials.json";
-import { Button } from "primereact/button";
-import RecycleMaterialCard from "../../../ui/cards/recycleMaterialCard/RecycleMaterialCard";
+import { useForm } from "react-hook-form"
+import { useEffect, useRef } from "react"
+import { Button } from "primereact/button"
+import { useDispatch, useSelector } from "react-redux"
+
+import materials from "@json/recyclableMaterials.json"
+import { getUserData } from "@store/slices/usersSlice"
+import { updateThankyou } from "@store/slices/globalSlice"
+import { createUser, addImages, addMaterials } from "@services/userServices"
+import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
+import { NumberInput, DropDownInput, UploadPhotoInput, SwitchInput } from "@ui/forms"
 
 const CompanyDetailedForm = ({
   recyclableMaterials,
@@ -22,10 +18,13 @@ const CompanyDetailedForm = ({
   pickUpFromHome,
   setPickUpFromHome,
 }) => {
-  const numberInput = useRef(null);
-  const user = useSelector((state) => state.users.userData);
-  const dispatch = useDispatch(uploadedImages);
-  console.log(uploadedImages)
+  const dispatch = useDispatch()
+  const numberInput = useRef(null)
+  const user = useSelector((state) => state.users.userData)
+  const units = [
+    { unit: "Kilo", code: "Kg" },
+    { unit: "Pound", code: "Lb" },
+  ]
   const {
     reset,
     control,
@@ -34,96 +33,59 @@ const CompanyDetailedForm = ({
     formState: { errors },
   } = useForm({
     defaultValues: {
-      materials: "",
       unit: "",
+      materials: "",
       unit_price: "",
     },
-  });
-
-  useEffect(() => {
-    dispatch(setHeader('register'))
-  }, [recyclableMaterials]);
-
-  const units = [
-    { unit: "Kilo", code: "Kg" },
-    { unit: "Pound", code: "Lb" },
-  ];
-
-  function removeFocusFromNumberInput() {
-    numberInput.current.getInput().blur();
-  }
+  })
 
   const createMaterial = () => {
-    const _recyclableMaterials = [...recyclableMaterials];
-    const inputValue = getValues(["materials", "unit", "unit_price"]);
-
+    const _recyclableMaterials = [...recyclableMaterials]
+    const inputValue = getValues(["materials", "unit", "unit_price"])
     const selectedMaterial = {
       type: inputValue[0],
       unit: inputValue[1],
       price: inputValue[2],
       color: inputValue[0].toLowerCase() + "Category",
-    };
-    const duplicateIndex = _recyclableMaterials.findIndex((material) => {
-      return material.type == inputValue[0];
-    });
-    if (duplicateIndex != -1) {
-      const updatedMaterials = _recyclableMaterials.map((material, index) => {
-        if (index === duplicateIndex) {
-          return {
-            ...material,
-            unit: inputValue[1],
-            price: inputValue[2],
-          };
-        }
-        return material;
-      });
-      setRecyclableMaterials(updatedMaterials);
-    } else {
-      setRecyclableMaterials([...recyclableMaterials, selectedMaterial]);
     }
-
-    reset();
-  };
-
+    const duplicateIndex = _recyclableMaterials.findIndex(material => material.type == inputValue[0])
+    if(duplicateIndex != -1){
+      const updatedMaterials = _recyclableMaterials.map((material, index) => {
+        if(index === duplicateIndex)
+          return { ...material, unit: inputValue[1], price: inputValue[2] }
+        return material
+      })
+      setRecyclableMaterials(updatedMaterials)
+    }else
+      setRecyclableMaterials([...recyclableMaterials, selectedMaterial])
+    reset()
+  }
   const removeMaterial = (clickedMaterial) => {
-    const filteredMaterials = recyclableMaterials.filter(
-      (material) => material.type !== clickedMaterial
-    );
+    const filteredMaterials = recyclableMaterials.filter(material => material.type !== clickedMaterial)
     setRecyclableMaterials(filteredMaterials);
   };
-
-  const getFormErrorMessage = (fieldName) =>
-    errors[fieldName] && (
-      <small className="p-error">{errors[fieldName]?.message}</small>
-    );
-
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const handleRecyclableMaterial = async (data) => {
-    createMaterial();
-    removeFocusFromNumberInput();
-  };
-
+    createMaterial()
+    numberInput.current.getInput().blur()
+  }
   const onSubmit = async () => {
-    if (
-      await createUser({
-        ...user,
-        pick_up_from_home: pickUpFromHome,
-      })
-    ) {
-      await addMaterials(recyclableMaterials, "add");
-      await addImages(uploadedImages, "add");
-      dispatch(getUserData());
-      dispatch(
-        updateThankyou({
-          title: "Congrats!",
-          link: "/dashboard/",
-          background: "image-1.svg",
-          button_label: "Go to dashboard",
-          content:
-            "You’re all signed up! We sent you a verification link send your provide email. Please verify your identity.",
-        })
-      );
-    }
-  };
+    const id = await createUser({ ...user, pick_up_from_home: pickUpFromHome })
+    await addMaterials({ id: id, data: recyclableMaterials })
+    await addImages({ id: id, data: uploadedImages })
+    dispatch(getUserData(id))
+    dispatch(updateThankyou({
+      title: "Congrats!",
+      link: "/dashboard/",
+      background: "image-1.svg",
+      button_label: "Go to dashboard",
+      content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+    }))
+  }
+
+  useEffect(() => {}, [recyclableMaterials])
+  console.log(recyclableMaterials)
+  console.log(uploadedImages)
 
   return (
     <>
@@ -244,7 +206,7 @@ const CompanyDetailedForm = ({
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default CompanyDetailedForm;
+export default CompanyDetailedForm

@@ -14,6 +14,7 @@ const TextInput = ({
 	showLabel,
 	isRequired,
 	type = "text",
+	autocomplete = "on",
 	getFormErrorMessage,
 	placeHolderText = "",
 }) => {
@@ -34,6 +35,7 @@ const TextInput = ({
 				id={field.name}
 				style={inputWidth}
 				maxLength={maxLength}
+				autoComplete={autocomplete}
 				placeholder={placeHolderText}
 				{...field} />
 			} />
