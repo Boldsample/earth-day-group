@@ -210,8 +210,8 @@ const CompanyStandardForm = ({
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
-            value: 50,
-            message: "El campo supera los 50 caracteres",
+            value: 100,
+            message: "El campo supera los 100 caracteres",
           },
           required: "*El campo es requerido.",
           pattern: {

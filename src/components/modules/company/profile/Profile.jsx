@@ -1,8 +1,9 @@
 import PhotoGallery from "./PhotoGallery"
 import { useSelector } from "react-redux"
 import CompanyInformation from "./CompanyInformation"
-
+import { useState, useEffect } from "react"
 import "./profile.sass"
+import Footer from "@ui/footer/Footer"
 
 const Profile = () => {
   const user = useSelector((state) => state.users.userData);
@@ -26,6 +27,7 @@ console.log(user)
               imageCatalog={imageCatalog}
             />
          </div>
+         <Footer/>
       </div>
   )
 }

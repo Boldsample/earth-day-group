@@ -2,6 +2,7 @@ import { Controller } from "react-hook-form"
 import { InputTextarea } from "primereact/inputtextarea"
 
 const TextAreaInput = ({
+	className,
 	label,
 	rules,
 	control,
@@ -18,6 +19,7 @@ const TextAreaInput = ({
 			name={nameInput}
 			control={control}
 			render={({ field }) => <InputTextarea
+				className={className}
 				rows={5}
 				cols={30}
 				id={field.name}
