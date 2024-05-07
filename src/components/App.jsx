@@ -9,20 +9,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import store from "@store/store"
 import Intro from "@components/intro"
 import Header from "@ui/header/Header"
+import Profile from "./modules/company/Profile"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import Notifications from "@components/notifications/Notifications"
 import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
 import { Dashboard, OffersList, OfferNew, Map, OrdersList, Settings } from "@modules/user"
-import Profile from "./modules/company/Profile"
-
 
 import 'primeicons/primeicons.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
-	return <GoogleOAuthProvider clientId="510464940348-562le9obed61s1a4gk8clo1gh809lhvu.apps.googleusercontent.com">
-		<FacebookProvider appId="1357569244808289">
+  return <GoogleOAuthProvider clientId="510464940348-562le9obed61s1a4gk8clo1gh809lhvu.apps.googleusercontent.com">
+    <FacebookProvider appId="1357569244808289">
       <LoadScript googleMapsApiKey="AIzaSyA6Ml_ldHM_SaImawJPIitRZ8T-EJGl2VI" libraries={['places']} loading="async">
         <Provider store={store}>
           <PrimeReactProvider>
@@ -52,7 +51,7 @@ const App = () => {
           <ToastContainer />
         </Provider>
       </LoadScript>
-		</FacebookProvider>
-	</GoogleOAuthProvider>
+    </FacebookProvider>
+  </GoogleOAuthProvider>
 }
 export default App

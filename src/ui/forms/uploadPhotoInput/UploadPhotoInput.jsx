@@ -12,14 +12,12 @@ const UploadPhotoInput = ({
   setValue,
   getValues,
   title,
-  iconColor,
   className,
   setUploadedImages,
   uploadedImages,
 }) => {
-  const [reachedImageCapacity, setReachedImageCapacity] = useState(false);
-  const [imageId, setImageId] = useState(0);
-  // const [uploadedImages, setUploadedImages] = useState([]);
+  const [imageId, setImageId] = useState(0)
+  const [reachedImageCapacity, setReachedImageCapacity] = useState(false)
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -32,7 +30,7 @@ const UploadPhotoInput = ({
           } else {
             setUploadedImages([
               ...uploadedImages,
-              { id: imageId, data: reader.result },
+              { id: imageId, picture: reader.result },
             ]);
             setImageId((imageId) => imageId + 1);
           }
@@ -111,7 +109,7 @@ const UploadPhotoInput = ({
                           fontSize="10px"
                         />
                       </button>
-                      <img className="uploadedImage" src={image.data} alt="" />
+                      <img className="uploadedImage" src={image.picture} alt="" />
                     </div>
                 ))}
               </div>

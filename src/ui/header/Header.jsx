@@ -28,10 +28,9 @@ const logout = async (e) => {
 };
 
 	useEffect(() => {
-		if(!user?.id){
-			const _id = Cookies.get('edgActiveUser')
+		const _id = Cookies.get('edgActiveUser')
+		if(!user?.id && _id != 'undefined')
 			dispatch(getUserData(_id))
-		}
 		if(!['/offers/'].some(url => url==location.pathname))
 			dispatch(updateAddLink(''))
 

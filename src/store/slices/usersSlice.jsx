@@ -28,7 +28,6 @@ const usersSlice = createSlice({
       state.inputField = action.payload;
     },
     storeUserRegistrationData: (state, action) => {
-		console.log(action.payload)
       state.userData = { ...action.payload };
     },
     updateUser: (state, action) => {

@@ -31,20 +31,20 @@ export const createUser = async (data) => {
   const response = await API.post("/register/", data)
   if (response?.status == 404)
     toast.error(response.status + ": " + response.data.message);
-  return true;
+  return response?.data?.id;
 };
 
 export const addMaterials = async (data) => {
-  const response = saveJSON("materials", data, "add");
-  //await API.post("/register", data)
+  //const response = saveJSON("materials", data, "add");
+  const response = await API.post("/add/materials", data)
   if (response?.status == 404)
     toast.error(response.status + ": " + response.data.message);
   return true;
 };
 
 export const addImages = async (data) => {
-  const response = saveJSON("images", data, "add");
-  //await API.post("/register", data)
+  //const response = saveJSON("images", data, "add");
+  const response = await API.post("/add/images", data)
   if (response?.status == 404)
     toast.error(response.status + ": " + response.data.message);
   return true;
