@@ -71,10 +71,16 @@ export const getUser = async (id) => {
   const { data } = await API.get(`/user/${id}`)
   return data.data;
 };
-export const getUsers = async () => {
-  const data = await getAllJSON("users");
-  //const res = await API.get("/users")
-  return res.data;
+export const getUsers = async (filter) => {
+  //const data = await getAllJSON("users");
+  let filterStr = ''
+  Object.keys(filter).map(f => {
+    filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
+  })
+  filterStr = encodeURIComponent(filterStr)
+  const res = await API.get(`/get/users&filter=${filterStr}`)
+  console.log(res)
+  return res?.data?.data;
 };
 // export const getUser = async (name) => {
 //   const url = `https://api.github.com/users/${name}`;
