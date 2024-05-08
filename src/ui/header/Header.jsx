@@ -23,8 +23,9 @@ const Header = () => {
 
   const logout = async (e) => {
     e.preventDefault()
-    if(await logoutUser())
-      dispatch(updateUser({}))
+    if(await logoutUser()){
+		dispatch(updateUser({}))
+	}
   };
 
   useEffect(() => {
@@ -39,15 +40,15 @@ const Header = () => {
     else if(user?.id && ['/', '/register/', '/login/', '/recover/'].some(url => url==location.pathname)){
       dispatch(setHeader('dashboard'))
       navigate('/dashboard/')
-    }else if(!user?.id && ['user', 'map'].some(s => s==header))
+    }else if(!user?.id && ['dashboard', 'user', 'map'].some(s => s==header))
       navigate('/login/')
   }, [user, location, header])
 
   return <header className={header}>
     {['dashboard'].some(s => s == header) && 
       <div className="navbar-item user-info">
-        <ProfilePhoto userPhoto={user.picture} className="left" />
-        <small className="user-name">Hi, {user.name}</small>
+        <ProfilePhoto userPhoto={user?.picture} className="left" />
+        <small className="user-name">Hi, {user?.name}</small>
       </div>
     }
 
