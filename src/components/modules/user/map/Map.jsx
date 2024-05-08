@@ -32,7 +32,7 @@ const Map = () => {
 	const loadMarkers = async () => {
 		let _response = await getUsers({role: 'company'})
 		const geocoder = new window.google.maps.Geocoder()
-		const geocodePromises = _response.map(async marker => {
+		const geocodePromises = _response?.map(async marker => {
 			return new Promise((resolve, reject) => {
 				geocoder.geocode({ address: marker.address }, (response, status) => {
 					if(response?.length > 0){
@@ -93,10 +93,6 @@ const Map = () => {
 			onUnmount={onUnmount}
 			options={{ styles: mapConfig }}
 			mapContainerStyle={{ width: '100vw', height: '100vh' }}>
-			<MarkerF icon={{
-				url: "/assets/icons/map-home.svg",
-				scaledSize: new window.google.maps.Size(60, 60)
-			}} position={current} onClick={() => {}} />
 			<MarkerClustererF>
 				{clusterer => <div>
 					{markers.map((marker, key) => {
@@ -114,6 +110,10 @@ const Map = () => {
 					})}
 				</div>}
 			</MarkerClustererF>
+			<MarkerF icon={{
+				url: "/assets/icons/map-home.svg",
+				scaledSize: new window.google.maps.Size(60, 60)
+			}} position={current} onClick={() => {}} />
 		</GoogleMap>
 	</div>
 }

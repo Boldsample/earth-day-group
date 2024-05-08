@@ -8,9 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 api
+php
 edg_api_backup
 node_modules
-php
 dist
 dist-ssr
 *.local
