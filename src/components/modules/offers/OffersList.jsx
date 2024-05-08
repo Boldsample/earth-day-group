@@ -25,7 +25,7 @@ const Offers = () => {
 	return <div className="layout">
 		<img className="layout__background" src="/assets/user/image-1.svg" />
 		<div className="main__content halfspace halfwidth">
-			<h1 className='text-defaultCase'>My Offers</h1>
+			<h1 className='text-defaultCase'>Offers</h1>
 			{offers?.length ? 
 				offers?.map(offer => <MultiUseCard 
 					offers='24'

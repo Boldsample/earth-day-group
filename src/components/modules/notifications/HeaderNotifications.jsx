@@ -17,7 +17,7 @@ const HeaderNotifications = () => {
 	}, [])
 	
 	return <div className="header_notifications">
-		<Link to={"/dashboard/notifications"}><FontAwesomeIcon icon={faBell} /></Link>
+		<Link to={"/notifications/"}><FontAwesomeIcon icon={faBell} /></Link>
 		<div className="list">
 			<MultiUseCard 
 				type='notification'

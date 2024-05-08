@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react'
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import { setHeader, updateAddLink } from '@store/slices/globalSlice'
 
-const Orders = [
+const TestOrders = [
 	{ status: "Pending", title: "Order #1003", date: "12-04-2023 11:34" },
 	{ status: "Completed", title: "Order #1002", date: "12-04-2023 11:34" },
 	{ status: "Canceled", title: "Order #1001", date: "12-04-2023 11:34" }
 ]
 
-const OrdersList = () => {
+const Orders = () => {
 	const dispatch = useDispatch()
 	const [filter, setFilter] = useState('')
 
@@ -33,7 +33,7 @@ const OrdersList = () => {
 				<Button className="small outline green-earth" label="Completed" onClick={() => handlerFilter('Completed')} />
 				<Button className="small outline red-state" label="Canceled" onClick={() => handlerFilter('Canceled')} />
 			</div>
-			{Orders.filter(order => order.status == filter || filter == '').map((o, key) => <MultiUseCard key={key} 
+			{TestOrders.filter(order => order.status == filter || filter == '').map((o, key) => <MultiUseCard key={key} 
 				type="order"
 				date={o.date}
 				title={o.title}
@@ -42,4 +42,4 @@ const OrdersList = () => {
 	</div>
 }
 
-export default OrdersList
+export default Orders
