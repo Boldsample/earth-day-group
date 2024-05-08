@@ -1,10 +1,8 @@
 import axios from "axios"
 import Cookies from "js-cookie"
 import { toast } from "react-toastify"
-import { useDispatch } from "react-redux"
 
 import { API } from "./API"
-import { updateUser } from "@store/slices/usersSlice"
 import { saveJSON, getJSON, getAllJSON } from "@utils/useJSON"
 
 export const getUserGoogle = async (token) => {
@@ -24,6 +22,7 @@ export const authUser = async (data) => {
   const response = await API.post("/login/", data)
   if (response?.status == 404)
     toast.error(response.status + ": " + response.data.message);
+  Cookies.set('edgActiveUser', response?.data?.id)
   return response?.data?.id;
 };
 export const createUser = async (data) => {
@@ -31,6 +30,7 @@ export const createUser = async (data) => {
   const response = await API.post("/register/", data)
   if (response?.status == 404)
     toast.error(response.status + ": " + response.data.message);
+  Cookies.set('edgActiveUser', response?.data?.id)
   return response?.data?.id;
 };
 
@@ -64,10 +64,9 @@ export const recoverUser = async (data, validate) => {
   return true;
 };
 export const getUser = async (id) => {
-//   const data = await getJSON("users");
-//   data.images = await getAllJSON("images", { user: data.id });
-//   data.materials = await getAllJSON("materials", { user: data.id });
-  Cookies.set('edgActiveUser', id)
+  //   const data = await getJSON("users");
+  //   data.images = await getAllJSON("images", { user: data.id });
+  //   data.materials = await getAllJSON("materials", { user: data.id });
   const { data } = await API.get(`/user/${id}`)
   return data.data;
 };
@@ -78,9 +77,8 @@ export const getUsers = async (filter) => {
     filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
   })
   filterStr = encodeURIComponent(filterStr)
-  const res = await API.get(`/get/users&filter=${filterStr}`)
-  console.log(res)
-  return res?.data?.data;
+  const response = await API.get(`/get/users&filter=${filterStr}`)
+  return response?.data?.data;
 };
 // export const getUser = async (name) => {
 //   const url = `https://api.github.com/users/${name}`;

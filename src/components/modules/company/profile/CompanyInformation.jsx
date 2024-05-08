@@ -7,7 +7,6 @@ import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto';
 import './profile.sass'
 
 const CompanyInformation = ({company}) => {
-    console.log(company.materials)
   return (
     <div className='companyInformation__grid'>
         <div className="image__container">
@@ -23,7 +22,7 @@ const CompanyInformation = ({company}) => {
             <ul className="contact__grid">               
                 <li><FontAwesomeIcon icon={faPhone} className='contact__icon'/>{company?.phone}</li>
                 <li><FontAwesomeIcon icon={faLocationDot}  className='contact__icon'/>{company?.address}</li>
-                <li><FontAwesomeIcon icon={faGlobe}  className='contact__icon'/>{company.email}</li>
+                <li><FontAwesomeIcon icon={faGlobe}  className='contact__icon'/>{company?.email}</li>
                 <li><FontAwesomeIcon icon={faHouse}  className='contact__icon'/> Pickup from home: {company?.pick_up_from_home == true ? "Available" : "Not Available"}</li>
             </ul>
             <div className="recycableGoods__container"> 

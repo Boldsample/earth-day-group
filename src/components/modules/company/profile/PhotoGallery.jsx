@@ -34,13 +34,13 @@ const PhotoGallery = ({imageCatalog}) => {
   ];
 
   const productTemplate = (image) => {
-    return <img className="carousel__image" src={image?.data} alt={image} />;
+    return <img className="carousel__image" src={image?.picture} alt={image} />;
   };
 
   return (
     <div className="photoGallery__container">
       <h2>Pictures</h2>
-      {imageCatalog == null ? <p>You have not uploaded any images to your profile.</p> : 
+      {!imageCatalog?.length ? <p>You have not uploaded any images to your profile.</p> : 
         <Carousel
         prevIcon={(options) => (
           <FontAwesomeIcon icon={faChevronLeft} {...options.iconProps} />

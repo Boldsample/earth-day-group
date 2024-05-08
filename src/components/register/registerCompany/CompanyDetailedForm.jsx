@@ -71,8 +71,10 @@ const CompanyDetailedForm = ({
   }
   const onSubmit = async () => {
     const id = await createUser({ ...user, pick_up_from_home: pickUpFromHome })
-    await addMaterials({ id: id, data: recyclableMaterials })
-    await addImages({ id: id, data: uploadedImages })
+	const _sendMaterials = recyclableMaterials.map(material => { material.user = id; return material; })
+    await addMaterials(_sendMaterials)
+	const _sendImages = uploadedImages.map(image => { delete image.id; image.user = id; return image; })
+    await addImages(_sendImages)
     dispatch(getUserData(id))
     dispatch(updateThankyou({
       title: "Congrats!",

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { InputText } from 'primereact/inputtext'
+import { useState, useEffect, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState, useEffect, useCallback, useRef } from 'react'
 import { faLocationCrosshairs, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { GoogleMap, MarkerF, Autocomplete, InfoBoxF, MarkerClustererF } from '@react-google-maps/api'
 
@@ -61,8 +61,6 @@ const Map = () => {
 			}
 		)
 	}, [])
-
-	console.log(show)
 	
 	return <div className="layout">
 		<div className="navbar-item map__search">
@@ -84,7 +82,7 @@ const Map = () => {
 			<p>{show.phone}</p>
 			{show.pick_up_from_home && <h5 className="font-bold mb-1">Pick at Home</h5>}
 			<p className="small mb-1">{show.description}</p>
-			<Link className="button dark-blue">Learn more</Link>
+			<Link to={`/company/${show.id}`} className="button dark-blue">Learn more</Link>
 		</div>}
 		<GoogleMap
 			zoom={13}
