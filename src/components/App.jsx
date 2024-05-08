@@ -14,7 +14,7 @@ import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import Notifications from "@components/notifications/Notifications"
 import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
-import { Dashboard, OffersList, OfferNew, Map, OrdersList, Settings } from "@modules/user"
+import { Dashboard, Offers, OfferNew, Map, OrdersList, Settings, Companies } from "@modules/user"
 
 import 'primeicons/primeicons.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -39,12 +39,14 @@ const App = () => {
 
               <Route exact path="/dashboard/" element={<Dashboard />} />
               <Route exact path="/dashboard/notifications" element={<Notifications />} />
-              <Route exact path="/offers" element={<OffersList />} />
+              <Route exact path="/offers" element={<Offers />} />
               <Route exact path="/offers/new" element={<OfferNew />} />
               <Route exact path="/location" element={<Map />} />
               <Route exact path="/orders/" element={<OrdersList />} />
               <Route exact path="/settings/" element={<Settings />} />
               <Route exact path="/profile/" element={<Profile />} />
+			  <Route exact path="/companies/" element={<Companies />} />
+			  <Route exact path="/company/:id" element={<Profile />} />
             </Routes>
             </BrowserRouter>
           </PrimeReactProvider>

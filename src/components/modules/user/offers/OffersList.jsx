@@ -1,39 +1,49 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { getOffers } from '@services/offersServices'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 import { setHeader, updateAddLink } from '@store/slices/globalSlice'
-import { getAllOffers } from '@services/offersServices'
 
-const OffersList = () => {
-	const [offersList, setOffersList] = useState([])
+const Offers = () => {
 	const dispatch = useDispatch()
+	const [offers, setOffers] = useState([])
+  const user = useSelector((state) => state.users.userData)
+
+  const callOffers = async () =>{
+    const _offers = await getOffers({ user: user.id })
+    setOffers(_offers)
+  }
+
 	useEffect(() => {
+    callOffers()
 		dispatch(setHeader('user'))
 		dispatch(updateAddLink('/offers/new/'))
-		const getOffers = async  () =>{
-			const offers = await getAllOffers("offers")
-			setOffersList(offers)
-		}
-		getOffers()
-	}, [])
-	console.log(offersList)
-	// console.log(getAllOffers("offers"))
+	}, [user])
+	
 	return <div className="layout">
 		<img className="layout__background" src="/assets/user/image-1.svg" />
 		<div className="main__content halfspace halfwidth">
 			<h1 className='text-defaultCase'>My Offers</h1>
-			{offersList.map(offer => <MultiUseCard 
-				type='offer'
-				title={offer.title}
-				material={[offer.material]}
-				quantity={offer.quantity}
-				price={offer.price}
-				offers='24'
-				receive={true}
-				date='11-02-2023' />)}
+			{offers?.length ? 
+				offers?.map(offer => <MultiUseCard 
+					offers='24'
+					type='offer'
+          key={offer.id}
+					receive={true}
+					title={offer.title}
+					material={[offer.material]}
+					quantity={offer.quantity}
+					price={offer.price}
+					date='11-02-2023' />) : 
+        <div className="mt-2">
+          <p>You didn’t post any offer yet.</p>
+          <Link className="button dark-blue mt-1" to="/offers/new">Create post offer</Link>
+        </div>
+      }
 		</div>
 	</div>
 }
 
-export default OffersList
+export default Offers

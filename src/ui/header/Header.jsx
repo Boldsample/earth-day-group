@@ -13,19 +13,19 @@ import { getUserData, updateUser } from "@store/slices/usersSlice"
 import HeaderNotifications from "@components/notifications/HeaderNotifications"
 
 const Header = () => {
-const location = useLocation()
-const dispatch = useDispatch()
-const navigate = useNavigate()
-const user = useSelector((state) => state.users.userData)
-const header = useSelector((state) => state.global.header)
-const addLink = useSelector((state) => state.global.addLink)
-const headerTitle = useSelector((state) => state.global.headerTitle)
+  const location = useLocation()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const user = useSelector((state) => state.users.userData)
+  const header = useSelector((state) => state.global.header)
+  const addLink = useSelector((state) => state.global.addLink)
+  const headerTitle = useSelector((state) => state.global.headerTitle)
 
-const logout = async (e) => {
-	e.preventDefault()
-	if(await logoutUser())
-		dispatch(updateUser({}))
-};
+  const logout = async (e) => {
+    e.preventDefault()
+    if(await logoutUser())
+      dispatch(updateUser({}))
+  };
 
 	useEffect(() => {
 		const _id = Cookies.get('edgActiveUser')
