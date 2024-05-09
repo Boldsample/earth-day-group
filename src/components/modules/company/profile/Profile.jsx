@@ -13,23 +13,23 @@ import "./profile.sass"
 const Profile = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const [ profile, setProfile ] = useState({})
+  const [ profile, setProfile ] = useState(null)
+  const user = useSelector((state) => state.users.userData)
   
   const getProfileData = async () => {
-    let _profile
-    if(id)
-      _profile = await getUser(id)
-    else
-      _profile = useSelector((state) => state.users.userData)
-    return setProfile(_profile)
+    const _profile = await getUser(id)
+    setProfile(_profile)
   }
 
   useEffect(() => {
-    getProfileData()
+    if(id)
+      getProfileData()
+    else
+      setProfile(user)
 		dispatch(setHeader('user'))
   }, [])
 
-  return <div className="layout">
+  return profile && <div className="layout">
     {/*<img className="layout__background" src="/assets/register/image-2.svg" />*/}
     <div className="profile__layout">
       <CompanyInformation company={profile} canEdit={!id} />
