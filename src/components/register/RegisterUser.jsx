@@ -1,15 +1,14 @@
 import { useEffect } from "react"
-import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
 import { Autocomplete } from "@react-google-maps/api"
 import { useDispatch, useSelector } from "react-redux"
 
-import { createUser, updateUser } from "@services/userServices"
 import { getUserData } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import { updateThankyou } from "@store/slices/globalSlice"
-import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
+import { createUser, updateUser } from "@services/userServices"
 import { setHeader, setHeaderTitle } from "@store/slices/globalSlice"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput } from "@ui/forms"
 
@@ -53,10 +52,11 @@ const RegisterUser = () => {
         delete data.password_confirmation
       }
       id = await updateUser({ ...data }, {id: user.id})
-      dispatch(getUserData(id))
-    }else{
-	    id = await createUser({ ...user, ...data })
-      dispatch(getUserData(id))
+    }else
+      id = await createUser({ ...user, ...data })
+    if(user.id)
+      toast.success("Your profile has been updated successfully.")
+    else
       dispatch(
         updateThankyou({
           title: "Congrats!",
@@ -67,12 +67,12 @@ const RegisterUser = () => {
             "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
         })
       )
-    }
+    dispatch(getUserData(id))
   }
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
-	const onPlaceChanged = () => {
+  const onPlaceChanged = () => {
     setValue('address', window.autocomplete.getPlace()?.formatted_address)
-	}
+  }
 
   useEffect(() => {
     if(user?.id){
@@ -259,8 +259,8 @@ const RegisterUser = () => {
             }}
           />
           <PasswordInput
-            label="&nbsp;"
             width="100%"
+            label="&nbsp;"
             maxLength={20}
             feedback={false}
             showLabel={true}

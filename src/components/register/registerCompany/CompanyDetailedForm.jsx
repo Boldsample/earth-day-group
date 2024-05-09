@@ -1,14 +1,15 @@
-import { useRef, useState } from "react"
+import { useRef } from "react"
+import { toast } from "react-toastify"
+import { useDispatch } from "react-redux"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
-import { useDispatch, useSelector } from "react-redux"
 
 import materials from "@json/recyclableMaterials.json"
 import { getUserData } from "@store/slices/usersSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
-import { createUser, addImages, addMaterials } from "@services/userServices"
 import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
 import { NumberInput, DropDownInput, UploadPhotoInput, SwitchInput } from "@ui/forms"
+import { createUser, addImages, addMaterials, updateUser } from "@services/userServices"
 
 const CompanyDetailedForm = ({ user, setUser }) => {
   const dispatch = useDispatch()
@@ -32,13 +33,14 @@ const CompanyDetailedForm = ({ user, setUser }) => {
   })
 
   const setPickUpFromHome = () => {
-    setUser({ ...user, pick_up_from_home: !user.pick_up_from_home })
+	  const _value = user.pick_up_from_home == 1 ? 0 : 1
+    setUser({ ...user, pick_up_from_home: _value })
   }
   const setUploadedImages = (images) => {
     setUser({ ...user, images: images })
   }
   const createMaterial = () => {
-    let _recyclableMaterials = [...user.recyclableMaterials]
+    let _recyclableMaterials = [...user.materials]
     const inputValue = getValues(["materials", "unit", "unit_price"])
     let selectedMaterial = {
       type: inputValue[0],
@@ -55,12 +57,12 @@ const CompanyDetailedForm = ({ user, setUser }) => {
       })
     }else
       _recyclableMaterials = [..._recyclableMaterials, {...selectedMaterial}]
-    setUser({ ...user, recyclableMaterials: _recyclableMaterials })
+    setUser({ ...user, materials: _recyclableMaterials })
     reset()
   }
   const removeMaterial = (clickedMaterial) => {
-    const filteredMaterials = user.recyclableMaterials.filter(material => material.type !== clickedMaterial)
-    setUser({ ...user, recyclableMaterials: filteredMaterials })
+    const filteredMaterials = user.materials.filter(material => material.type !== clickedMaterial)
+    setUser({ ...user, materials: filteredMaterials })
   };
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const handleRecyclableMaterial = async (data) => {
@@ -68,25 +70,44 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     numberInput.current.getInput().blur()
   }
   const onSubmit = async () => {
+    let id
     let _user = { ...user }
-    delete _user.recyclableMaterials
+    delete _user.materials
     delete _user.images
+    if(user.id){
+      if(_user.password == ''){
+        delete _user.password
+        delete _user.password_confirmation
+      }
+      id = await updateUser({ ..._user }, {id: user.id})
+    }else
+      id = await createUser({ ..._user })
 
-    const id = await createUser({ ..._user })
-	  const _sendMaterials = user.recyclableMaterials.map(material => { material.user = id; return material; })
-	  const _sendImages = user.images.map(image => { delete image.id; image.user = id; return image; })
-    
+	  const _sendMaterials = user.materials.map(material => {
+      let _material = {...material}
+      _material.user = id
+      return _material
+    })
+	  const _sendImages = user.images.map(image => {
+      let _image = {...image}
+      _image.user = id
+      return _image
+    })
     await addMaterials(_sendMaterials)
     await addImages(_sendImages)
-    dispatch(getUserData(id))
-    dispatch(updateThankyou({
-      title: "Congrats!",
-      link: "/dashboard/",
-      background: "image-1.svg",
-      button_label: "Go to dashboard",
-      content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
-    }))
-  }
+
+    if(!user.id)
+      dispatch(updateThankyou({
+        title: "Congrats!",
+        link: "/dashboard/",
+        background: "image-1.svg",
+        button_label: "Go to dashboard",
+        content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+      }))
+    else
+      toast.success("Your profile has been updated successfully.")
+	  dispatch(getUserData(id))
+	}
 
   return (
     <>
@@ -167,7 +188,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         </div>
       </form>
       <div className="materialsCard__grid">
-        {user?.recyclableMaterials.map((material) => {
+        {user?.materials.map((material) => {
           return (
             <RecycleMaterialCard
               key={material.type}
@@ -191,7 +212,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
           label={"Pick up from home?"}
           nameInput={"home_pick_up"}
           // control={control}
-          checked={user.pick_up_from_home}
+          checked={user.pick_up_from_home == 1}
           setChecked={setPickUpFromHome}
           isRequired={false}
           isEdit={true}

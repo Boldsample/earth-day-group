@@ -18,6 +18,8 @@ export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
 });
 export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
   const res = await getUser(id);
+  delete res.password
+  delete res.password_confirmation
   return res;
 });
 const usersSlice = createSlice({

@@ -31,8 +31,8 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
       address: user?.address || "",
       password: user?.password || "",
       description: user?.description || "",
+      accept_terms: user?.accept_terms && true || false,
       password_confirmation: user?.password_confirmation || "",
-      terms_conditions_checked: user?.terms_conditions_checked || "",
     },
   })
 
@@ -220,17 +220,17 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         label="Password"
         showLabel={true}
         control={control}
-        isRequired={true}
         nameInput="password"
+        isRequired={!user?.id}
         placeHolderText="Enter password"
         getFormErrorMessage={getFormErrorMessage}
         rules={{
-          maxLength: {
+          maxLength: user?.id ? undefined : {
             value: 20,
             message: "El campo supera los 20 caracteres",
           },
-          required: "*El campo es requerido.",
-          pattern: {
+          required: user?.id ? undefined : "*El campo es requerido.",
+          pattern: user?.id ? undefined : {
             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
             message:
               "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
@@ -238,34 +238,27 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         }}
       />
       <PasswordInput
-        label=""
         width="100%"
+        label="&nbsp;"
         maxLength={20}
+        feedback={false}
         showLabel={true}
         control={control}
-        isRequired={true}
         className="noLabel"
+        isRequired={!user?.id}
         nameInput="password_confirmation"
         placeHolderText="Confirm Password"
         getFormErrorMessage={getFormErrorMessage}
         rules={{
-          maxLength: {
-            value: 20,
-            message: "El campo supera los 20 caracteres",
-          },
-          required: "*El campo es requerido.",
-          pattern: {
-            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-            message:
-              "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
-          },
+          required: user?.id ? undefined : "*El campo es requerido.",
+          validate: value => value === getValues().password || "The password doesn't match",
         }}
       />
     </div>
     <div className="p-field" style={{ marginBottom: "24px" }}>
       <CheckBoxInput
-        nameInput="terms_conditions_checked"
         control={control}
+        nameInput="accept_terms"
         rules={{ required: "Accept is required." }}
         getFormErrorMessage={getFormErrorMessage}
         checkBoxText="I've read and accept the terms & conditions."

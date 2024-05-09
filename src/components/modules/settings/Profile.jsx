@@ -1,17 +1,33 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Column } from 'primereact/column'
-import { DataTable } from 'primereact/datatable'
 import { useDispatch, useSelector } from 'react-redux'
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
+import { formatExternalURL } from '@utils/formatExternalURL'
 import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
+import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCard'
 
 import "./styles.sass"
 
 const ProfileSettings = () => {
 	const dispatch = useDispatch()
 	const user = useSelector((state) => state.users.userData)
+	const userData = () => {
+		switch (user?.role) {
+			case 'company':
+				return [
+					{ key: 'Phone Number', value: user?.phone },
+					{ key: 'NIT', value: user?.nit },
+					{ key: 'Website', value: <a href={formatExternalURL(user?.website)} target="_blank">{user?.website}</a> },
+					{ key: 'Address', value: user?.address }
+				]
+			default:
+				return [
+					{ key: 'Phone Number', value: user?.phone },
+					{ key: 'Address', value: user?.address }
+				]
+		}
+	}
 
 	useEffect(() => {
 		dispatch(setHeader('settings'))
@@ -21,22 +37,51 @@ const ProfileSettings = () => {
 	return <div className="layout" style={{background: 'white'}}>
 		<div className="main__content centerwidth alignttop text-center">
 			<div className="settings__card">
-				<ProfilePhoto className="mb-1" userPhoto={user.picture} />
-				<h4 className="font-bold text-gray">{user.name}</h4>
-				<p>{user.email}</p>
-				{user.pick_up_from_home && <h5 className="font-bold mb-1">Pick at Home</h5>}
-				<p className="small mb-1">{user.description}</p>
-				<Link to={`/company/${user.id}`} className="button dark-blue">Learn more</Link>
+				<ProfilePhoto className="mb-1" userPhoto={user?.picture} />
+				<h4 className="font-bold text-gray">{user?.name}</h4>
+				<p>{user?.email}</p>
+				{user?.role == 'user' && <p className="small mb-1">{user?.description}</p>}
+				<Link to={'/settings/edit/'} className="button dark-blue">Edit</Link>
 			</div>
 			<div className="settings__card">
-				<DataTable value={[
-					{ key: 'Phone Number', value: user.phone },
-					{ key: 'Address', value: user.address }
-				]} tableStyle={{ minWidth: '50rem' }}>
-					<Column field="key" header="Code"></Column>
-					<Column field="value" header="Name"></Column>
-				</DataTable>
+				{userData().map((data, key) => <div key={key} className="settings__table">
+					<h4 className="internal">{data.key}</h4>
+					<p>{data.value}</p>
+				</div>)}
 			</div>
+			{user?.role == 'company' && <>
+				<div className="settings__card">
+					<h4 className="internal mb-1">About Organization</h4>
+					<p className="small mb-1">{user?.description}</p>
+				</div>
+				<div className="settings__card">
+					<div className="settings__table">
+						<h4 className="internal">Pickup at Home</h4>
+						<p>{user?.pick_up_from_home ? 'Available' : 'Unavailable'}</p>
+					</div>
+					{user?.images?.length > 0 && <>
+						<h4 className="internal text-left">Gallery</h4>
+						<div className="gallery mb-2">
+							{user.images.map(image => 
+								<img key={image.id} src={image.picture} />
+							)}
+						</div>
+					</>}
+					{user?.materials?.length > 0 && <>
+						<h4 className="internal text-left">Material Price</h4>
+						<div className="materials">
+							{user.materials.map(material => 
+								<RecycleMaterialCard
+									key={material.id}
+									material={material.type}
+									unit={material.unit}
+									price={material.price}
+									color={material.color} />
+							)}
+						</div>
+					</>}
+				</div>
+			</>}
 		</div>
 	</div>
 }

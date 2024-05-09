@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { TabView, TabPanel } from "primereact/tabview"
 import CompanyStandardForm from "./CompanyStandardForm"
@@ -8,12 +9,16 @@ import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
 const RegisterCompany = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isDisabled, setIsDisabled] = useState(true)
-  const [userData, setUserData] = useState({ pick_up_from_home: false, images: [], recyclableMaterials: [] })
+  const user = useSelector((state) => {
+    delete state.users.userData.password
+    delete state.users.userData.password_confirmation
+    return state.users.userData
+  });
+  const [userData, setUserData] = useState(user?.id ? {...user} : { pick_up_from_home: false, images: [], materials: [] })
 
   useEffect(() => {
     activeIndex == 0 ? setIsDisabled(true) : setIsDisabled(false);
   }, [activeIndex]);
-  console.log(userData)
 
   return (
     <div className="layout">

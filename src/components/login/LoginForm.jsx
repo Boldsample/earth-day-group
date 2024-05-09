@@ -10,6 +10,7 @@ import { setHeader } from '@store/slices/globalSlice'
 import { TextInput, PasswordInput } from "@ui/forms/"
 import { authUser, getUserGoogle } from "@services/userServices"
 import { getUserData, updateUser } from "@store/slices/usersSlice"
+import { toast } from "react-toastify"
 
 const LoginForm = () => {
 	const dispatch = useDispatch()
@@ -46,7 +47,7 @@ const LoginForm = () => {
 						dispatch(getUserData())
 				});
 			}else
-				console.log('User cancelled login or did not fully authorize.');
+				toast.error('User cancelled login or did not fully authorize.');
   		});
 	}
 

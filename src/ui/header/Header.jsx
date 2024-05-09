@@ -81,7 +81,7 @@ const Header = () => {
       </div>
     }
 
-    {!['intro', 'login', 'register', 'settings'].some(s => s == header) &&
+    {!['intro', 'login', 'register'].some(s => s == header) &&
       <Nav />
     }
 
