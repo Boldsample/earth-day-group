@@ -1,5 +1,5 @@
+import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
-import { useEffect, useRef } from "react"
 import { Button } from "primereact/button"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -10,17 +10,9 @@ import { createUser, addImages, addMaterials } from "@services/userServices"
 import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
 import { NumberInput, DropDownInput, UploadPhotoInput, SwitchInput } from "@ui/forms"
 
-const CompanyDetailedForm = ({
-  recyclableMaterials,
-  setRecyclableMaterials,
-  uploadedImages,
-  setUploadedImages,
-  pickUpFromHome,
-  setPickUpFromHome,
-}) => {
+const CompanyDetailedForm = ({ user, setUser }) => {
   const dispatch = useDispatch()
   const numberInput = useRef(null)
-  const user = useSelector((state) => state.users.userData)
   const units = [
     { unit: "Kilo", code: "Kg" },
     { unit: "Pound", code: "Lb" },
@@ -39,10 +31,16 @@ const CompanyDetailedForm = ({
     },
   })
 
+  const setPickUpFromHome = () => {
+    setUser({ ...user, pick_up_from_home: !user.pick_up_from_home })
+  }
+  const setUploadedImages = (images) => {
+    setUser({ ...user, images: images })
+  }
   const createMaterial = () => {
-    const _recyclableMaterials = [...recyclableMaterials]
+    let _recyclableMaterials = [...user.recyclableMaterials]
     const inputValue = getValues(["materials", "unit", "unit_price"])
-    const selectedMaterial = {
+    let selectedMaterial = {
       type: inputValue[0],
       unit: inputValue[1],
       price: inputValue[2],
@@ -50,19 +48,19 @@ const CompanyDetailedForm = ({
     }
     const duplicateIndex = _recyclableMaterials.findIndex(material => material.type == inputValue[0])
     if(duplicateIndex != -1){
-      const updatedMaterials = _recyclableMaterials.map((material, index) => {
+      _recyclableMaterials = _recyclableMaterials.map((material, index) => {
         if(index === duplicateIndex)
           return { ...material, unit: inputValue[1], price: inputValue[2] }
         return material
       })
-      setRecyclableMaterials(updatedMaterials)
     }else
-      setRecyclableMaterials([...recyclableMaterials, selectedMaterial])
+      _recyclableMaterials = [..._recyclableMaterials, {...selectedMaterial}]
+    setUser({ ...user, recyclableMaterials: _recyclableMaterials })
     reset()
   }
   const removeMaterial = (clickedMaterial) => {
-    const filteredMaterials = recyclableMaterials.filter(material => material.type !== clickedMaterial)
-    setRecyclableMaterials(filteredMaterials);
+    const filteredMaterials = user.recyclableMaterials.filter(material => material.type !== clickedMaterial)
+    setUser({ ...user, recyclableMaterials: filteredMaterials })
   };
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const handleRecyclableMaterial = async (data) => {
@@ -70,10 +68,15 @@ const CompanyDetailedForm = ({
     numberInput.current.getInput().blur()
   }
   const onSubmit = async () => {
-    const id = await createUser({ ...user, pick_up_from_home: pickUpFromHome })
-	const _sendMaterials = recyclableMaterials.map(material => { material.user = id; return material; })
+    let _user = { ...user }
+    delete _user.recyclableMaterials
+    delete _user.images
+
+    const id = await createUser({ ..._user })
+	  const _sendMaterials = user.recyclableMaterials.map(material => { material.user = id; return material; })
+	  const _sendImages = user.images.map(image => { delete image.id; image.user = id; return image; })
+    
     await addMaterials(_sendMaterials)
-	const _sendImages = uploadedImages.map(image => { delete image.id; image.user = id; return image; })
     await addImages(_sendImages)
     dispatch(getUserData(id))
     dispatch(updateThankyou({
@@ -84,10 +87,6 @@ const CompanyDetailedForm = ({
       content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
     }))
   }
-
-  useEffect(() => {}, [recyclableMaterials])
-  console.log(recyclableMaterials)
-  console.log(uploadedImages)
 
   return (
     <>
@@ -168,7 +167,7 @@ const CompanyDetailedForm = ({
         </div>
       </form>
       <div className="materialsCard__grid">
-        {recyclableMaterials.map((material) => {
+        {user?.recyclableMaterials.map((material) => {
           return (
             <RecycleMaterialCard
               key={material.type}
@@ -184,15 +183,15 @@ const CompanyDetailedForm = ({
       <UploadPhotoInput
         type="imageUpload"
         title="Add Images"
+        uploadedImages={user.images}
         setUploadedImages={setUploadedImages}
-        uploadedImages={uploadedImages}
       />
       <div className="registerInput__container-x2">
         <SwitchInput
           label={"Pick up from home?"}
           nameInput={"home_pick_up"}
           // control={control}
-          checked={pickUpFromHome}
+          checked={user.pick_up_from_home}
           setChecked={setPickUpFromHome}
           isRequired={false}
           isEdit={true}

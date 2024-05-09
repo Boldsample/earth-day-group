@@ -1,8 +1,6 @@
-import { useForm } from "react-hook-form";
-import { Button } from "primereact/button";
-import { Autocomplete } from "@react-google-maps/api";
-import { useDispatch, useSelector } from "react-redux";
-import { storeUserRegistrationData } from "@store/slices/usersSlice";
+import { useForm } from "react-hook-form"
+import { Button } from "primereact/button"
+import { Autocomplete } from "@react-google-maps/api"
 import {
   TextInput,
   NumberInput,
@@ -12,12 +10,7 @@ import {
   UploadPhotoInput,
 } from "@ui/forms";
 
-const CompanyStandardForm = ({
-  setActiveIndex,
-  setIsDisabled,
-}) => {
-  const dispatch = useDispatch()
-  const user = useSelector((state) => state.users.userData)
+const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
   const {
     watch,
     control,
@@ -29,28 +22,27 @@ const CompanyStandardForm = ({
   } = useForm({
     defaultValues: {
       role: "company",
-      name: user?.name || "",
       nit: user?.nit || "",
+      name: user?.name || "",
       email: user?.email || "",
+      phone: user?.phone || "",
+      picture: user?.picture || "",
       website: user?.website || "",
       address: user?.address || "",
-      phone: user?.phone || "",
-      description: user?.description || "",
       password: user?.password || "",
+      description: user?.description || "",
       password_confirmation: user?.password_confirmation || "",
       terms_conditions_checked: user?.terms_conditions_checked || "",
-      picture: user?.picture || "",
     },
   })
 
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
-  const onSubmit = async (data) => {
-    setActiveIndex(1)
-    setIsDisabled(false)
-    dispatch(storeUserRegistrationData({ ...data }))
-  }
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
   const onPlaceChanged = () => setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+  const onSubmit = async (data) => {
+	setUser({ ...user, ...data })
+    setActiveIndex(1)
+  }
 
   return <form onSubmit={handleSubmit(onSubmit)}>
     <UploadPhotoInput

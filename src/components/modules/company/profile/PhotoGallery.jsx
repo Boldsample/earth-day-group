@@ -42,20 +42,21 @@ const PhotoGallery = ({imageCatalog}) => {
       <h2>Pictures</h2>
       {!imageCatalog?.length ? <p>You have not uploaded any images to your profile.</p> : 
         <Carousel
-        prevIcon={(options) => (
-          <FontAwesomeIcon icon={faChevronLeft} {...options.iconProps} />
-        )}
-        nextIcon={(options) => (
-          <FontAwesomeIcon icon={faChevronRight} {...options.iconProps} />
-        )}
-        value={imageCatalog}
-        numVisible={3}
-        numScroll={1}
-        responsiveOptions={responsiveOptions}
-        itemTemplate={productTemplate}
-        onPageChange={(e) => setActiveIndex(e.page)}
-        page={activeIndex}
-        showIndicators={false}
+          prevIcon={(options) => (
+            <FontAwesomeIcon icon={faChevronLeft} {...options.iconProps} />
+          )}
+          nextIcon={(options) => (
+            <FontAwesomeIcon icon={faChevronRight} {...options.iconProps} />
+          )}
+          circular
+          value={imageCatalog}
+          numVisible={3}
+          numScroll={1}
+          responsiveOptions={responsiveOptions}
+          itemTemplate={productTemplate}
+          onPageChange={(e) => setActiveIndex(e.page)}
+          page={activeIndex}
+          showIndicators={false}
       />
       }
       

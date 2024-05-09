@@ -30,9 +30,9 @@ const Profile = () => {
   }, [])
 
   return <div className="layout">
-    <img className="layout__background" src="/assets/register/image-2.svg" />
+    {/*<img className="layout__background" src="/assets/register/image-2.svg" />*/}
     <div className="profile__layout">
-      <CompanyInformation company={profile} />
+      <CompanyInformation company={profile} canEdit={!id} />
       <PhotoGallery imageCatalog={profile?.images} />
     </div>
     <Footer/>

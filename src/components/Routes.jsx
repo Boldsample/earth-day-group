@@ -6,9 +6,9 @@ import Header from "@ui/header/Header"
 import Profile from "@modules/company/profile/Profile"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
-import { Notifications, Offers, OfferNew, Chat } from "@modules"
+import { Dashboard, Map, Orders, Companies } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
-import { Dashboard, Map, Orders, Settings, Companies } from "@modules/user"
+import { Notifications, Offers, OfferNew, Chat, Settings, ProfileSettings, Terms, About, Activity } from "@modules"
 
 const AppRoutes = () => {
   const role = useSelector((state) => state.users.userData?.role)
@@ -37,6 +37,11 @@ const AppRoutes = () => {
         <Route exact path="/location" element={<Map />} />
         <Route exact path="/orders/" element={<Orders />} />
         <Route exact path="/settings/" element={<Settings />} />
+		<Route exact path="/settings/profile/" element={<ProfileSettings />} />
+		<Route exact path="/settings/edit/" element={<RegisterUser />} />
+		<Route exact path="/settings/terms/" element={<Terms />} />
+		<Route exact path="/settings/about/" element={<About />} />
+		<Route exact path="/settings/activity/" element={<Activity />} />
         <Route exact path="/companies/" element={<Companies />} />
         <Route exact path="/company/:id" element={<Profile />} />
       </>}
@@ -47,6 +52,11 @@ const AppRoutes = () => {
         <Route exact path="/notifications" element={<Notifications />} />
         <Route exact path="/profile/" element={<Profile />} />
         <Route exact path="/settings/" element={<Settings />} />
+		<Route exact path="/settings/profile/" element={<ProfileSettings />} />
+		<Route exact path="/settings/edit/" element={<RegisterCompany />} />
+		<Route exact path="/settings/terms/" element={<Terms />} />
+		<Route exact path="/settings/about/" element={<About />} />
+		<Route exact path="/settings/activity/" element={<Activity />} />
       </>}
     </Routes>
   </BrowserRouter>

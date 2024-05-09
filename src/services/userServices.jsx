@@ -16,73 +16,81 @@ export const getUserGoogle = async (token) => {
     }
   );
   return res.data;
-};
+}
+
 export const authUser = async (data) => {
-  //const response = getJSON("users", data);
+  //const response = getJSON("users", data)
   const response = await API.post("/login/", data)
   if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message);
+    toast.error(response.status + ": " + response.data.message)
   Cookies.set('edgActiveUser', response?.data?.id)
-  return response?.data?.id;
-};
+  return response?.data?.id
+}
+
 export const createUser = async (data) => {
-  //const response = saveJSON("users", data);
+  //const response = saveJSON("users", data)
   const response = await API.post("/register/", data)
   if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message);
+    toast.error(response.status + ": " + response.data.message)
   Cookies.set('edgActiveUser', response?.data?.id)
-  return response?.data?.id;
-};
+  return response?.data?.id
+}
+
+export const updateUser = async (data, filter) => {
+  let filterStr = ''
+  Object.keys(filter).map(f => {
+    filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
+  })
+  filterStr = encodeURIComponent(filterStr)
+  const response = await API.post(`/update/users&filter=${filterStr}`, data)
+  if (response?.status == 404)
+    toast.error(response.status + ": " + response.data.message)
+  return filter.id
+}
 
 export const addMaterials = async (data) => {
-  //const response = saveJSON("materials", data, "add");
+  //const response = saveJSON("materials", data, "add")
   const response = await API.post("/add/materials", data)
   if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message);
-  return true;
-};
+    toast.error(response.status + ": " + response.data.message)
+  return true
+}
 
 export const addImages = async (data) => {
-  //const response = saveJSON("images", data, "add");
+  //const response = saveJSON("images", data, "add")
   const response = await API.post("/add/images", data)
   if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message);
-  return true;
-};
+    toast.error(response.status + ": " + response.data.message)
+  return true
+}
 
 export const logoutUser = async () => {
   Cookies.remove('edgActiveUser')
   //await API.post("/logout")
 
-  return true;
-};
+  return true
+}
 export const recoverUser = async (data, validate) => {
-  const response = saveJSON("users", data, "update", validate);
+  const response = saveJSON("users", data, "update", validate)
   //await API.post("/register", data)
   if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message);
-  return true;
-};
+    toast.error(response.status + ": " + response.data.message)
+  return true
+}
 export const getUser = async (id) => {
-  //   const data = await getJSON("users");
-  //   data.images = await getAllJSON("images", { user: data.id });
-  //   data.materials = await getAllJSON("materials", { user: data.id });
+  //   const data = await getJSON("users")
+  //   data.images = await getAllJSON("images", { user: data.id })
+  //   data.materials = await getAllJSON("materials", { user: data.id })
   const { data } = await API.get(`/user/${id}`)
-  return data.data;
-};
+  return data.data
+}
 export const getUsers = async (filter) => {
-  //const data = await getAllJSON("users");
+  //const data = await getAllJSON("users")
   let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
   })
   filterStr = encodeURIComponent(filterStr)
   const response = await API.get(`/get/users&filter=${filterStr}`)
-  return response?.data?.data;
-};
-// export const getUser = async (name) => {
-//   const url = `https://api.github.com/users/${name}`;
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   return data;
-// };
+  return response?.data?.data
+}
