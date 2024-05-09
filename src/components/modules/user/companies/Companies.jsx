@@ -22,7 +22,7 @@ const Companies = () => {
     setCompanies(_companies);
   };
 
-  const filteredCompanies = companies.filter((company) =>
+  const filteredCompanies = companies?.filter((company) =>
     company.name.toLowerCase().includes(filteredCompany)
   );
 
