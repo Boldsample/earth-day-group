@@ -12,7 +12,15 @@ const Offers = () => {
   const user = useSelector((state) => state.users.userData)
 
   const callOffers = async () =>{
-    const _offers = await getOffers({ user: user.id })
+    let _filter
+    if(user.role == 'user'){
+      _filter = { user: user.id }
+    }else{
+      let _materials = []
+      user.materials.map(material => { _materials.push(material.type) })
+      _filter = "`material`='" + _materials.join("' OR `material`='") +"'"
+    }
+    const _offers = await getOffers(_filter)
     setOffers(_offers)
   }
 
@@ -29,17 +37,11 @@ const Offers = () => {
       <h1 className='text-defaultCase'>Offers</h1>
       {offers?.length ? 
         offers?.map(offer => <MultiUseCard 
-          offers='24'
-          type='offer'
+          offer={offer}
           key={offer.id}
-          receive={true}
-          title={offer.title}
-          material={[offer.material]}
-          quantity={offer.quantity}
-          price={offer.price}
-          date='11-02-2023' />) : 
+          type={user.role == 'user' ? 'offer' : 'offer_company'} />) : 
         <div className="mt-2">
-          <p>You didn’t post any offer yet.</p>
+          <p>{user.role == 'user' ? "You didn’t post any offer yet." : "There's no offers for the materials you buy"}</p>
           {user.role == 'user' && 
             <Link className="button dark-blue mt-1" to="/offers/new">Create post offer</Link>
           }

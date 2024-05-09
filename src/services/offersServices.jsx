@@ -12,9 +12,12 @@ export const createOffer = async (data) => {
 export const getOffers = async (filter) => {
 	//const response = await getAllJSON(data);
 	let filterStr = ''
-  Object.keys(filter).map(f => {
-    filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
-  })
+  if(typeof filter == 'string')
+    filterStr = filter
+  else
+    Object.keys(filter).map(f => {
+      filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
+    })
   filterStr = encodeURIComponent(filterStr)
   const response = await API.get(`/get/offers&filter=${filterStr}`)
 	if (response?.status == 404)

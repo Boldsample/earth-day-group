@@ -40,10 +40,10 @@ const renderCardContent = () => {
 		);
 	case "offer":
 		return <div className="main__container">
-			<img className="offer__image" src={companyLogo} alt={title} />
+			<img className="offer__image" src={companyLogo} alt={offer?.title} />
 			<div className="fullwidth">
-				<h4 className="font-bold text-gray">{title}</h4>
-				{material.map((m, key) => <Button key={key} label={m} className="small green-earth" />)}
+				<h4 className="font-bold text-gray">{offer?.title}</h4>
+				<Button label={offer?.material} className="small green-earth" />
 				<div className="flex">
 					<table>
 						<thead>
@@ -56,14 +56,30 @@ const renderCardContent = () => {
 						</thead>
 						<tbody>
 							<tr>
-								<td>{quantity}</td>
-								<td>{price}</td>
-								<td>{offers}</td>
-								<td>{receive ? <i className="pi pi-eye" /> : null }</td>
+								<td>{offer?.quantity + ' ' + offer?.unit}</td>
+								<td>{offer?.price}</td>
+								<td>{offer?.offers || 0}</td>
+								<td><i className="pi pi-eye" /></td>
 							</tr>
 						</tbody>
 					</table>
-					<p className="date">{date}</p>
+					<p className="date">{offer?.date}</p>
+				</div>
+			</div>
+		</div>
+	case "offer_company":
+		return <div className="main__container">
+			<img className="offer__image" src={companyLogo} alt={offer?.title} />
+			<div className="fullwidth">
+				<h4 className="font-bold text-gray">{offer?.title}</h4>
+				<Button label={offer?.material} className="small green-earth" />
+				<Button label={offer?.quantity + ' ' + offer?.unit} className="small" />
+				<div className="flex">
+					<p className="date" style={{textAlign: 'left', width: '200px'}}>
+						{offer?.name}<br />
+						Asking price: $ {offer?.price}
+					</p>
+					<p className="date">{offer?.date}</p>
 				</div>
 			</div>
 		</div>
