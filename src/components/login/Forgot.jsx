@@ -10,6 +10,7 @@ const Forgot = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [email, setEmail] = useState('')
+	const [sending, setSending] = useState(false)
 
 	const handleLogin = async () => {
 		navigate('/recover/?token='+email)
@@ -31,7 +32,7 @@ const Forgot = () => {
 					</label>
 				</div>
 				<div className="p-field">
-					<Button className="dark-blue fullwidth" label="Send" onClick={handleLogin} />
+					<Button className="dark-blue fullwidth" label="Send" onClick={handleLogin} loading={sending} />
 				</div>
 			</div>
 		</div>

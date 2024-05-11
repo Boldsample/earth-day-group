@@ -10,7 +10,7 @@ const ThankYouPage = () => {
 	const { title, content, link, button_label, background } = useSelector((state) => state.global.thankyou)
 
 	useEffect(() => {
-		dispatch(setHeader('login'))
+		dispatch(setHeader('thankyou'))
 	}, [])
 
 	return <div className="layout">

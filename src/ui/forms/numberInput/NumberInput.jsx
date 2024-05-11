@@ -2,6 +2,7 @@ import { Controller } from "react-hook-form";
 import { InputNumber } from "primereact/inputnumber";
 
 const NumberInput = ({
+  mode,
   label,
   rules,
   width,
@@ -28,12 +29,14 @@ const NumberInput = ({
         control={control}
         render={({ field }) => (
           <InputNumber
-            id={field.name}
-            // ref={field.ref}
+		  	    mode={mode}
+            locale="en-US"
+            currency="USD"
             ref={inputRef}
+            id={field.name}
             style={inputWidth}
             disabled={disabled}
-            useGrouping={false}
+            /*useGrouping={false}*/
             value={field.value}
             onBlur={field.onBlur}
             maxLength={maxLength}

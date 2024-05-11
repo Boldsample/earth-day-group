@@ -3,11 +3,19 @@ import { saveJSON, getAllJSON } from "@utils/useJSON"
 
 export const createOffer = async (data) => {
   //const response = saveJSON("offers", data);
-  const response = await API.post("/add/offers", [data])
+  const response = await API.post("/add/offers", data)
   if (response?.status == 404)
     toast.error(response.status + ": " + response.data.message)
-  return true;
+  return response?.data?.id
 };
+
+export const addImages = async (data) => {
+  //const response = saveJSON("images", data, "add")
+  const response = await API.post("/add_multiple/images", data)
+  if (response?.status == 404)
+    toast.error(response.status + ": " + response.data.message)
+  return true
+}
 
 export const getOffers = async (filter) => {
 	//const response = await getAllJSON(data);

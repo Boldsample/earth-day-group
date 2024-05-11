@@ -14,11 +14,11 @@ const Offers = () => {
   const callOffers = async () =>{
     let _filter
     if(user.role == 'user'){
-      _filter = { user: user.id }
+      _filter = { user: user?.id }
     }else{
       let _materials = []
-      user.materials.map(material => { _materials.push(material.type) })
-      _filter = "`material`='" + _materials.join("' OR `material`='") +"'"
+      user?.materials?.map(material => { _materials?.push(material.type) })
+      _filter = "`material`='" + _materials?.join("' OR `material`='") +"'"
     }
     const _offers = await getOffers(_filter)
     setOffers(_offers)

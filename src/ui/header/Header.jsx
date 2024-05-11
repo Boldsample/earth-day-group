@@ -52,7 +52,7 @@ const Header = () => {
       </div>
     }
 
-    {!['intro', 'dashboard'].some((s) => s == header) && 
+    {!['intro', 'dashboard', 'thankyou'].some((s) => s == header) && 
       <div className="navbar-item go-back">
         <a onClick={() => navigate(-1)}><i className="pi pi-angle-left" /></a>
         {addLink && <Link className="plus" to={addLink}><i className="pi pi-plus" /></Link>}

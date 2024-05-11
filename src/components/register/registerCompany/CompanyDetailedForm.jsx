@@ -1,5 +1,5 @@
-import { useRef } from "react"
 import { toast } from "react-toastify"
+import { useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
@@ -13,6 +13,7 @@ import { createUser, addImages, addMaterials, updateUser } from "@services/userS
 
 const CompanyDetailedForm = ({ user, setUser }) => {
   const dispatch = useDispatch()
+  const [sending, setSending] = useState(false)
   const numberInput = useRef(null)
   const units = [
     { unit: "Kilo", code: "Kg" },
@@ -74,6 +75,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     let _user = { ...user }
     delete _user.materials
     delete _user.images
+	setSending(true)
     if(user.id){
       if(_user.password == ''){
         delete _user.password
@@ -83,12 +85,12 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     }else
       id = await createUser({ ..._user })
 
-	  const _sendMaterials = user.materials.map(material => {
+	const _sendMaterials = user.materials.map(material => {
       let _material = {...material}
       _material.user = id
       return _material
     })
-	  const _sendImages = user.images.map(image => {
+	const _sendImages = user.images.map(image => {
       let _image = {...image}
       _image.user = id
       return _image
@@ -96,6 +98,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     await addMaterials(_sendMaterials)
     await addImages(_sendImages)
 
+    setSending(false)
     if(!user.id)
       dispatch(updateThankyou({
         title: "Congrats!",
@@ -220,12 +223,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         />
       </div>
       <div className="p-field" style={{ marginBottom: "24px" }}>
-        <Button
-          onClick={onSubmit}
-          className="dark-blue fullwidth"
-          label="Sign up"
-          name="submit"
-        />
+        <Button onClick={onSubmit} className="dark-blue fullwidth" label="Sign up" name="submit" loading={sending} />
       </div>
     </>
   )

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { TabView, TabPanel } from "primereact/tabview"
 import CompanyStandardForm from "./CompanyStandardForm"
 import CompanyDetailedForm from "./CompanyDetailedForm"
-import GoBackButton from "@ui/buttons/goBackButton/GoBackButton"
 
 const RegisterCompany = () => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -33,9 +32,6 @@ const RegisterCompany = () => {
           </TabPanel>
         </TabView>
       </div>
-      <Link to="/register/categories/">
-        <GoBackButton />
-      </Link>
     </div>
   );
 };

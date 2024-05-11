@@ -1,7 +1,7 @@
-import { useEffect } from "react"
 import { toast } from "react-toastify"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
+import { useEffect, useState } from "react"
 import { Autocomplete } from "@react-google-maps/api"
 import { useDispatch, useSelector } from "react-redux"
 
@@ -16,6 +16,7 @@ import "./style.sass"
 
 const RegisterUser = () => {
   const dispatch = useDispatch();
+  const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData);
   const {
     watch,
@@ -46,6 +47,7 @@ const RegisterUser = () => {
     );
   const onSubmit = async (data) => {
     let id
+    setSending(true)
     if(user.id){
       if(data.password == ''){
         delete data.password
@@ -54,6 +56,7 @@ const RegisterUser = () => {
       id = await updateUser({ ...data }, {id: user.id})
     }else
       id = await createUser({ ...user, ...data })
+	  setSending(false)
     if(user.id)
       toast.success("Your profile has been updated successfully.")
     else
@@ -286,11 +289,7 @@ const RegisterUser = () => {
           />
         </div>
         <div className="p-field" style={{ marginBottom: "24px" }}>
-          <Button
-            className="dark-blue fullwidth"
-            label={user.id ? "Save" : "Sign up"}
-            type="submit"
-          />
+          <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
         </div>
       </form>
     </div>
