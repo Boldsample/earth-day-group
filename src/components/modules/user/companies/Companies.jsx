@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { getUsers } from "@services/userServices";
 import { setHeader } from "@store/slices/globalSlice";
+import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton";
 
 import "./styles.sass";
 import Footer from "@ui/footer/Footer";
@@ -16,6 +17,7 @@ const Companies = () => {
   const dispatch = useDispatch();
   const [companies, setCompanies] = useState([]);
   const [filteredCompany, setFilteredCompany] = useState(companies);
+  const skeletonPlaceHolder = ["", "", "", ""]
 
   const loadCompanies = async (filter = { role: "company" }) => {
     let _companies = await getUsers(filter);
@@ -73,6 +75,7 @@ const Companies = () => {
           </span>
         </div>
         <div className="recycleCompaniesCards__grid">
+          {/* <CardSkeleton/> */}
           {filteredCompanies?.length > 0
             ? filteredCompanies.map((company, key) => {
                 return (
@@ -101,7 +104,7 @@ const Companies = () => {
                   </div>
                 );
               })
-            : "No companies found."}
+            : skeletonPlaceHolder.map(skeleton =>  <CardSkeleton/>)}
         </div>
       </div>
       <Footer />
