@@ -4,18 +4,18 @@ import { faClose, faCircle } from "@fortawesome/free-solid-svg-icons";
 import "./recycleMaterialCard.sass";
 
 const RecycleMaterialCard = ({material, unit, price,  color, removeMaterial}) => {
+  
 
   return (
     <div className="recycle__card">
       <FontAwesomeIcon icon={faCircle} className={color} />
       <div className="body__container">
         <p>{material}</p>
-        {/* <p>1kg:$2.5</p> */}
         <p>1{unit}: ${price}</p>
       </div>
-      <button className="close__icon" onClick={()=> removeMaterial(material)}>
+      {removeMaterial &&  <button className="close__icon" onClick={()=> removeMaterial(material)}>
         <FontAwesomeIcon icon={faClose} />
-      </button>
+      </button>}
     </div>
   );
 };
