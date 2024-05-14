@@ -3,6 +3,7 @@ import { FacebookProvider } from "react-facebook"
 import { LoadScript } from "@react-google-maps/api"
 import { PrimeReactProvider } from "primereact/api"
 import { GoogleOAuthProvider } from "@react-oauth/google"
+import LoadingContentOverlay from "@ui/spinner/LoadingContentOverlay"
 
 import store from "@store/store"
 
@@ -12,7 +13,9 @@ const Providers = ({ children }) => {
       <LoadScript googleMapsApiKey="AIzaSyA6Ml_ldHM_SaImawJPIitRZ8T-EJGl2VI" libraries={['places']} loading="async">
         <Provider store={store}>
           <PrimeReactProvider>
+          <LoadingContentOverlay>
             {children}
+          </LoadingContentOverlay>     
           </PrimeReactProvider>
         </Provider>
       </LoadScript>

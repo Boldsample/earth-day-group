@@ -1,0 +1,18 @@
+import React from 'react'
+import LoadingOverlay from 'react-loading-overlay'
+import { useSelector } from "react-redux"
+
+const LoadingContentOverlay = ({children}) => {
+  const loading = useSelector((state) => state.global.loading)
+
+  return (
+    <LoadingOverlay
+      active={loading}
+      spinner
+    >
+      {children}
+    </LoadingOverlay>
+  )
+}
+
+export default LoadingContentOverlay
