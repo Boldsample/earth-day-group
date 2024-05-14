@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "./profilePhoto.sass"
 
-const ProfilePhoto = ({ userPhoto, className = '' }) => {
+const ProfilePhoto = ({ userPhoto, className, size}) => {
 	return <div className={`profile__photo `+className}>
 		{userPhoto ? (
 			<img className="icon__background" src={userPhoto}  alt="User Photo" />
 		) : (
-			<FontAwesomeIcon icon={faUser} />
+			<FontAwesomeIcon style={{fontSize: size}} icon={faUser} />
 		)}
 	</div>
 }

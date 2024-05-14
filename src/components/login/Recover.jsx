@@ -11,8 +11,9 @@ import { setHeader } from "@store/slices/globalSlice"
 const Recover = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const [ email, setEmail ] = useState('')
-	let [ searchParams, setSearchParams ] = useSearchParams()
+	const [email, setEmail] = useState('')
+  const [sending, setSending] = useState(false)
+	let [searchParams, setSearchParams] = useSearchParams()
 	const {
 		watch,
 		control,
@@ -27,8 +28,10 @@ const Recover = () => {
 	})
 
 	const onSubmit = async (data) => {
+    setSending(true)
 		if(await recoverUser(data, {email: searchParams.get('token')}))
 			navigate('/login/')
+    setSending(false)
 	}
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
@@ -88,7 +91,7 @@ const Recover = () => {
 						}} />
 				</div>
 				<div className="p-field" style={{ marginBottom: "24px" }}>
-					<Button className="dark-blue fullwidth" label="Sign up" type="submit" />
+					<Button className="dark-blue fullwidth" label="Sign up" type="submit" loading={sending} />
 				</div>
 			</div>
 		</div>

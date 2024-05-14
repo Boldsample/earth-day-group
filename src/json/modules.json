@@ -9,7 +9,7 @@
 	{
 		"title": "Recycle",
 		"className": "light-green",
-		"link": "/",
+		"link": "/companies/",
 		"icon": "/assets/icons/recycle.svg",
 		"description": "Look for recycle center companies that may interest you"
 	},

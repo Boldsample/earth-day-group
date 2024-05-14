@@ -1,8 +1,6 @@
 import Map from "./map/Map"
-import OfferNew from "./offers/OfferNew"
-import Settings from "./settings/Settings"
-import OffersList from "./offers/OffersList"
-import OrdersList from "./orders/OrdersList"
+import Orders from "./orders/Orders"
 import Dashboard from "./dashboard/Dashboard"
+import Companies from "./companies/Companies"
 
-export { Dashboard, OffersList, OfferNew, Map, OrdersList, Settings }
+export { Dashboard, Map, Orders, Companies }

@@ -1,27 +1,51 @@
-[
-	{
-		"label": "Home", 
-		"icon": "/assets/icons/home.svg", 
-		"path": "/dashboard/"
-	},
-	{
-		"label": "Location", 
-		"icon": "/assets/icons/location.svg", 
-		"path": "/location/"
-	},
-	{
-		"label": "Inbox", 
-		"icon": "/assets/icons/inbox.svg", 
-		"path": ""
-	},
-	{
-		"label": "Shop", 
-		"icon": "/assets/icons/shop.svg", 
-		"path": ""
-	},
-	{
-		"label": "Settings", 
-		"icon": "/assets/icons/settings.svg", 
-		"path": ""
-	}
-]
+{
+	"user": [
+		{
+			"label": "Home", 
+			"icon": "/assets/icons/home.svg", 
+			"path": "/dashboard/"
+		},
+		{
+			"label": "Location", 
+			"icon": "/assets/icons/location.svg", 
+			"path": "/location/"
+		},
+		{
+			"label": "Inbox", 
+			"icon": "/assets/icons/inbox.svg", 
+			"path": "/chat/"
+		},
+		{
+			"label": "Shop", 
+			"icon": "/assets/icons/shop.svg", 
+			"path": "/orders/"
+		},
+		{
+			"label": "Settings", 
+			"icon": "/assets/icons/settings.svg", 
+			"path": "/settings/"
+		}
+	],
+	"company": [
+		{
+			"label": "Home", 
+			"icon": "/assets/icons/home.svg", 
+			"path": "/dashboard/"
+		},
+		{
+      "label": "Profile",
+      "icon": "/assets/icons/userProfile.svg",
+      "path": "/profile/"
+		},
+		{
+			"label": "Inbox", 
+			"icon": "/assets/icons/inbox.svg", 
+			"path": "/chat/"
+		},
+		{
+			"label": "Settings", 
+			"icon": "/assets/icons/settings.svg", 
+			"path": "/settings/"
+		}
+	]
+}
