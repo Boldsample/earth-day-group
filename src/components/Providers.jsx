@@ -13,9 +13,7 @@ const Providers = ({ children }) => {
       <LoadScript googleMapsApiKey="AIzaSyA6Ml_ldHM_SaImawJPIitRZ8T-EJGl2VI" libraries={['places']} loading="async">
         <Provider store={store}>
           <PrimeReactProvider>
-          <LoadingContentOverlay>
-            {children}
-          </LoadingContentOverlay>     
+            {children}   
           </PrimeReactProvider>
         </Provider>
       </LoadScript>

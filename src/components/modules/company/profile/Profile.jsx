@@ -1,12 +1,12 @@
 import { useParams } from "react-router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import LoadingOverlay from 'react-loading-overlay'
 import Footer from "@ui/footer/Footer"
 import PhotoGallery from "./PhotoGallery"
 import { getUser } from "@services/userServices"
 import { setHeader, loadingData } from "@store/slices/globalSlice"
 import CompanyInformation from "./CompanyInformation"
+import LoadingContentOverlay from "@ui/spinner/LoadingContentOverlay"
 
 import "./profile.sass"
 
@@ -35,19 +35,16 @@ const Profile = () => {
 		dispatch(setHeader('user'))
   }, [profile])
 
-  return profile && <div className="layout">
-    {/* <LoadingOverlay
-      active={loading}
-      spinner
-    > */}
+  return profile && <LoadingContentOverlay>
+  <div className="layout">
     {/*<img className="layout__background" src="/assets/register/image-2.svg" />*/}
     <div className="profile__layout">
       <CompanyInformation company={profile} canEdit={!id} />
       <PhotoGallery imageCatalog={profile?.images} />
     </div>
     <Footer/>
-    {/* </LoadingOverlay> */}
   </div>
+  </LoadingContentOverlay>
 }
 
 export default Profile
