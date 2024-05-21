@@ -7,7 +7,7 @@ import Profile from "@modules/company/profile/Profile"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Dashboard, Map, Orders, Companies } from "@modules/user"
-import { RegisterRole, RegisterUser, RegisterCompany } from "@components/register"
+import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor } from "@components/register"
 import { Notifications, Offers, OfferNew, Chat, Settings, ProfileSettings, Terms, About, Activity } from "@modules"
 
 const AppRoutes = () => {
@@ -21,6 +21,7 @@ const AppRoutes = () => {
       <Route exact path="/register" element={<RegisterRole />} />
       <Route exact path="/register/user" element={<RegisterUser />} />
       <Route exact path="/register/company" element={<RegisterCompany />} />
+      <Route exact path="/register/vendor" element={<RegisterVendor />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/forgot" element={<Forgot />} />
       <Route path="/recover" element={<Recover />} />
