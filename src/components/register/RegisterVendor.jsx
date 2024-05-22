@@ -38,7 +38,8 @@ const RegisterVendor = () => {
       username: user?.username || "",
       description: user?.description || "",
       accept_terms: user?.accept_terms && true || false,
-      delivery_available: user?.delivery_available || ""
+      delivery_available: user?.delivery_available || "",
+      self_pickup: user?.self_pickup || ""
     },
   });
   const [userData, setUserData] = useState(user?.id ? {...user} : { accept_terms: false, delivery_available: false, images: [] })
