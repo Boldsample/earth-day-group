@@ -38,12 +38,13 @@ const RegisterVendor = () => {
       username: user?.username || "",
       description: user?.description || "",
       accept_terms: user?.accept_terms && true || false,
-      delivery_available: user?.delivery_available || "",
-      self_pickup: user?.self_pickup || ""
+      delivery_available: user?.delivery_available || false,
+      self_pickup: user?.self_pickup || "",
+      delivery_charges: user?.delivery_charges || "",
     },
   });
-  const [userData, setUserData] = useState(user?.id ? {...user} : { accept_terms: false, delivery_available: false, images: [] })
-  
+  const [userData, setUserData] = useState(user?.id ? {...user} : { accept_terms: false, delivery_available: false, self_pickup: false, images: [] })
+  const [deliveryAvailable, setDeliveryAvailable] = useState(0) 
   const radioData = [
       { name: "YES", value: 1 },
       { name: "NO", value: 0 },
@@ -52,8 +53,6 @@ const RegisterVendor = () => {
   const setUploadedImages = (images) => {
     setUserData({ ...user, images: images })
   }
-
-
 
   const getFormErrorMessage = (fieldName) =>
     errors[fieldName] && (
@@ -97,7 +96,7 @@ const RegisterVendor = () => {
       dispatch(setHeaderTitle('Edit Profile'))
     }else
       dispatch(setHeader("register"));
-  }, []);
+  }, [deliveryAvailable]);
 
   return <div className="layout">
     <img className="layout__background" src="/assets/register/image-2.svg" />
@@ -210,6 +209,7 @@ const RegisterVendor = () => {
             />
           </Autocomplete>
         </div>
+        <div className="registerInput__container-x1">
         <NumberInput
           width="100%"
           showLabel={true}
@@ -231,7 +231,9 @@ const RegisterVendor = () => {
             },
           }}
         />
+        </div>
         <RadioInput
+          setDeliveryAvailable={setDeliveryAvailable}
           labelName="Delivery Available"
           showLabel={true}
           nameInput="delivery_available"
@@ -240,6 +242,31 @@ const RegisterVendor = () => {
           isEdit={true}
           control={control}
         />
+        {deliveryAvailable === 1 ? 
+          <div className="registerInput__container-x1">
+          <NumberInput
+            width="100%"
+            showLabel={false}
+            isRequired={true}
+            control={control}
+            label="Delivery Charges"
+            nameInput="delivery_charges"
+            placeHolderText="Delivery Charges*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 12,
+                message: "El campo supera los 7 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }}
+          />
+          </div>
+        : ""}
         <RadioInput
           labelName="Self Pickup"
           showLabel={true}
@@ -249,6 +276,7 @@ const RegisterVendor = () => {
           isEdit={true}
           control={control}
         />
+        <div className="registerInput__container-x1">
          <NumberInput
           width="100%"
           showLabel={true}
@@ -270,6 +298,7 @@ const RegisterVendor = () => {
             },
           }}
         />
+        </div>
         <UploadPhotoInput
         type="imageUpload"
         title="Add Images"

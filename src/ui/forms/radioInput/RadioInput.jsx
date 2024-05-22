@@ -1,9 +1,9 @@
 import { RadioButton } from "primereact/radiobutton";
 import { Controller } from "react-hook-form";
-import { useState } from "react";
 import './radioInput.sass'
 
 function RadioInput({
+  setDeliveryAvailable = 0,
   labelName,
   showLabel,
   control,
@@ -37,7 +37,7 @@ function RadioInput({
                 value={value}
                 checked={field.value === value}
                 onChange={(e) => {
-                  console.log(field)
+                  setDeliveryAvailable(e.value)
                   field.onChange(e.value);
                 }}
               />
