@@ -1,5 +1,6 @@
 import { RadioButton } from "primereact/radiobutton";
 import { Controller } from "react-hook-form";
+import { useState } from "react";
 import './radioInput.sass'
 
 function RadioInput({
@@ -12,13 +13,13 @@ function RadioInput({
   nameInput,
   isEdit,
 }) {
-
+  const [checked, setChecked] = useState(false)
   // Los datos deben ser pasados asi desde el componente padre por medio de props.
   // const data = [
   //   { name: "Con autenticación", value: 1 },
   //   { name: "Sin autenticación", value: 2 },
   // ];
-
+console.log(checked)
   const renderInput = () => (
     <>
     <div className="radioInput__container">
@@ -32,17 +33,19 @@ function RadioInput({
             }}
             render={({ field }) => (
               <RadioButton
+                // unstyled={true}
                 inputId={name}
                 disabled={!isEdit}
                 value={value}
                 checked={field.value === value}
                 onChange={(e) => {
+                  setChecked(e.checked)
                   field.onChange(e.value);
                 }}
               />
             )}
           />
-          <label htmlFor={name} className="ml-2 mr-5">
+          <label htmlFor={name} className={checked == true ? 'highlighted' : ''}>
             {name}
           </label>
         </>
@@ -54,11 +57,13 @@ function RadioInput({
   return (
     <div className="p-field">
       {showLabel ? (
+        <>
         <label htmlFor={nameInput}>
           {label} {isRequired && <span className="text-red-600">*</span>}
           {labelName}
-          {renderInput()}
         </label>
+          {renderInput()}
+        </>
       ) : (
         renderInput()
       )}
