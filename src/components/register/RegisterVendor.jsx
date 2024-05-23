@@ -41,6 +41,7 @@ const RegisterVendor = () => {
       delivery_available: user?.delivery_available || false,
       self_pickup: user?.self_pickup || "",
       delivery_charges: user?.delivery_charges || "",
+      shop_detail: user?.shop_detail || "",
     },
   });
   const [userData, setUserData] = useState(user?.id ? {...user} : { accept_terms: false, delivery_available: false, self_pickup: false, images: [] })
@@ -59,6 +60,7 @@ const RegisterVendor = () => {
       <small className="p-error">{errors[fieldName]?.message}</small>
     );
   const onSubmit = async (data) => {
+    console.log(data)
     let id
     setSending(true)
     if(user.id){

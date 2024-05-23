@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import './radioInput.sass'
 
 function RadioInput({
-  setDeliveryAvailable = 0,
+  setDeliveryAvailable,
   labelName,
   showLabel,
   control,
@@ -37,7 +37,7 @@ function RadioInput({
                 value={value}
                 checked={field.value === value}
                 onChange={(e) => {
-                  setDeliveryAvailable(e.value)
+                 setDeliveryAvailable &&  setDeliveryAvailable(e.value)
                   field.onChange(e.value);
                 }}
               />
