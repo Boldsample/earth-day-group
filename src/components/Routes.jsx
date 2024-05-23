@@ -6,7 +6,7 @@ import Header from "@ui/header/Header"
 import Profile from "@modules/company/profile/Profile"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
-import { Dashboard, Map, Orders, Companies } from "@modules/user"
+import { Dashboard, Map, Orders, Companies, Vendors } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor } from "@components/register"
 import { Notifications, Offers, OfferNew, Chat, Settings, ProfileSettings, Terms, About, Activity } from "@modules"
 
@@ -38,13 +38,14 @@ const AppRoutes = () => {
         <Route exact path="/location" element={<Map />} />
         <Route exact path="/orders/" element={<Orders />} />
         <Route exact path="/settings/" element={<Settings />} />
-		<Route exact path="/settings/profile/" element={<ProfileSettings />} />
-		<Route exact path="/settings/edit/" element={<RegisterUser />} />
-		<Route exact path="/settings/terms/" element={<Terms />} />
-		<Route exact path="/settings/about/" element={<About />} />
-		<Route exact path="/settings/activity/" element={<Activity />} />
+        <Route exact path="/settings/profile/" element={<ProfileSettings />} />
+        <Route exact path="/settings/edit/" element={<RegisterUser />} />
+        <Route exact path="/settings/terms/" element={<Terms />} />
+        <Route exact path="/settings/about/" element={<About />} />
+        <Route exact path="/settings/activity/" element={<Activity />} />
         <Route exact path="/companies/" element={<Companies />} />
         <Route exact path="/company/:id" element={<Profile />} />
+        <Route exact path="/vendors/" element={<Vendors />} />
       </>}
 
       {/*   COMPANY   */}
