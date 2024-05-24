@@ -1,38 +1,27 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { getUsers } from "@services/userServices";
-import { setHeader } from "@store/slices/globalSlice";
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton";
-import categories from '@json/categories.json'
-
 import "./styles.sass";
 import Footer from "@ui/footer/Footer";
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto";
 
-const CategoryListing = ({category}) => {
-  const dispatch = useDispatch();
-  const [companies, setCompanies] = useState([]);
-  const [filteredCompany, setFilteredCompany] = useState(companies);
+const CategoryListing = ({content, category}) => {
+  const [listing, setListing] = useState([]);
+  const [filteredListing, setFilteredListing] = useState(listing);
   const skeletonPlaceHolder = ["", "", "", ""]
 
-  const loadCompanies = async (filter = { role: "company" }) => {
-    let _companies = await getUsers(filter);
-    setCompanies(_companies);
-  };
-
-  const filteredCompanies = companies?.filter((company) =>
-    company.name.toLowerCase().includes(filteredCompany)
+  const filteredListings = listing?.filter((category) =>
+    category.name.toLowerCase().includes(filteredListing)
   );
 
   useEffect(() => {
-    loadCompanies();
-    dispatch(setHeader("user"));
-  }, []);
+    setListing(category)
+  }, [category]);
+  
+console.log(listing)
 
   const secondaryBannerData = [
     {
@@ -50,14 +39,14 @@ const CategoryListing = ({category}) => {
   ];
 
   const backGroundImage = {
-    background: categories[1].bannerImage,
+    background: content.bannerImage,
     backgroundSize: "cover"
   }
-console.log(categories)
+
   return (
     <div className="layout">
       <div className="companies__banner" style={backGroundImage}>
-        <h1 className="text-upperCase">{categories[1].title}</h1>
+        <h1 className="text-upperCase">{content.title}</h1>
       </div>
       <div className="secondary__banner">
         {secondaryBannerData.map((data) => {
@@ -76,14 +65,14 @@ console.log(categories)
             <InputText
               placeholder="Search Companies"
               className="p-inputtext"
-              onChange={(e) => setFilteredCompany(e.target.value)}
+              onChange={(e) => setFilteredListing(e.target.value)}
             />
           </span>
         </div>
         <div className="recycleCompaniesCards__grid">
           {/* <CardSkeleton/> */}
-          {filteredCompanies?.length > 0
-            ? filteredCompanies.map((company, key) => {
+          {filteredListings?.length > 0
+            ? filteredListings.map((company, key) => {
                 return (
                   <div className="recycleCompanyCard__container">
                     <ProfilePhoto
