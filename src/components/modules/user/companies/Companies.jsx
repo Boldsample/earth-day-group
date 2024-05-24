@@ -4,7 +4,6 @@ import CategoryListing from "@ui/templates/categoryListing/CategoryListing";
 import { getUsers } from "@services/userServices";
 import { setHeader } from "@store/slices/globalSlice";
 
-import "./styles.sass";
 
 
 const Companies = () => {
@@ -26,7 +25,7 @@ const Companies = () => {
     loadCompanies();
     dispatch(setHeader("user"));
   }, []);
-console.log(companies)
+
   return (
     <>
         <CategoryListing content={companyTemplateContent} category={companies}/>
