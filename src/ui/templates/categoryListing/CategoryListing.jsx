@@ -49,9 +49,9 @@ console.log(listing)
         <h1 className="text-upperCase">{content.title}</h1>
       </div>
       <div className="secondary__banner">
-        {secondaryBannerData.map((data) => {
+        {secondaryBannerData.map((data, key) => {
           return (
-            <div className="icon__container">
+            <div key={key} className="icon__container">
               <img src={data.icon} alt={data.title} />
               <h3>{data.title}</h3>
             </div>
@@ -74,7 +74,7 @@ console.log(listing)
           {filteredListings?.length > 0
             ? filteredListings.map((company, key) => {
                 return (
-                  <div className="recycleCompanyCard__container">
+                  <div key={key} className="recycleCompanyCard__container">
                     <ProfilePhoto
                       className="recycleCompanyProfile__photo"
                       userPhoto={company.picture}
@@ -83,7 +83,7 @@ console.log(listing)
                     <div className="contactInformation__layout">
                       <div className="contactInformation__container">
                         <div className="proximity__container">
-                          <span class="proximity__icon"></span>
+                          <span className="proximity__icon"></span>
                           <small>2,3miles away</small>
                         </div>
                         <h4>{company.name}</h4>
