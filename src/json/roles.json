@@ -23,7 +23,7 @@
 	{
 		"title": "Eco-Commerce:",
 		"className": "green-earth",
-		"link": "/",
+		"link": "/register/vendor",
 		"icon": "/assets/icons/eco-commerce.svg",
 		"description": "Register your Eco-Commerce and let more people know about your enviromentally friendly products."
 	}

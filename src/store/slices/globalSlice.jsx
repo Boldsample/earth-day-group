@@ -28,6 +28,10 @@ const globalSlice = createSlice({
 		resetState: (state) => {
 			return initialState;
 		},
+		loadingData: (state, action) =>{
+			state.loading = action.payload
+		}
+
 	}
 })
 
@@ -40,6 +44,7 @@ export const {
 	updateAddLink,
 	updateThankyou,
 	setHeaderTitle,
+	loadingData
 } = globalSlice.actions;
 
 export default globalSlice.reducer

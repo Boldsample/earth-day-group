@@ -7,6 +7,7 @@ import CheckBoxInput from "./checkBoxInput";
 import FileUploadInput from "./fileUploadInput";
 import UploadPhotoInput from "./uploadPhotoInput";
 import SwitchInput from "./switchInput";
+import RadioInput from "./radioInput/RadioInput";
 
 export {
   TextInput,
@@ -17,5 +18,6 @@ export {
   CheckBoxInput,
   FileUploadInput,
   UploadPhotoInput,
-  SwitchInput
+  SwitchInput,
+  RadioInput
 };

@@ -2,7 +2,7 @@
 	{
 		"title": "Market Place",
 		"className": "blue-earth",
-		"link": "/",
+		"link": "/vendors/",
 		"icon": "/assets/icons/market-place.svg",
 		"description": "Find products that are eco friendly"
 	},

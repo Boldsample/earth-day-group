@@ -3,6 +3,7 @@ import { Controller } from "react-hook-form";
 import './radioInput.sass'
 
 function RadioInput({
+  setDeliveryAvailable,
   labelName,
   showLabel,
   control,
@@ -12,7 +13,6 @@ function RadioInput({
   nameInput,
   isEdit,
 }) {
-
   // Los datos deben ser pasados asi desde el componente padre por medio de props.
   // const data = [
   //   { name: "Con autenticación", value: 1 },
@@ -32,17 +32,18 @@ function RadioInput({
             }}
             render={({ field }) => (
               <RadioButton
-                inputId={name}
+                inputId={nameInput + "_" + name}
                 disabled={!isEdit}
                 value={value}
                 checked={field.value === value}
                 onChange={(e) => {
+                 setDeliveryAvailable &&  setDeliveryAvailable(e.value)
                   field.onChange(e.value);
                 }}
               />
             )}
           />
-          <label htmlFor={name} className="ml-2 mr-5">
+          <label htmlFor={nameInput + "_" + name} >
             {name}
           </label>
         </>
@@ -54,11 +55,13 @@ function RadioInput({
   return (
     <div className="p-field">
       {showLabel ? (
+        <>
         <label htmlFor={nameInput}>
           {label} {isRequired && <span className="text-red-600">*</span>}
           {labelName}
-          {renderInput()}
         </label>
+          {renderInput()}
+        </>
       ) : (
         renderInput()
       )}
