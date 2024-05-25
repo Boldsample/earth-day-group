@@ -34,6 +34,7 @@ const AppRoutes = () => {
         <Route exact path="/offers/new" element={<OfferNew />} />
         <Route exact path="/offers/new" element={<Chat />} />
         <Route exact path="/chat" element={<Chat />} />
+        <Route exact path="/chat/:contact" element={<Chat />} />
         <Route exact path="/location" element={<Map />} />
         <Route exact path="/orders/" element={<Orders />} />
         <Route exact path="/settings/" element={<Settings />} />

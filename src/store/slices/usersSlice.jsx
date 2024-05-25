@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-import { getJSON } from "@utils/useJSON";
-import { getUser, getUsers } from "@services/userServices";
+import { getJSON } from "@utils/useJSON"
+import { getNotifications, getUser, getUsers } from "@services/userServices"
 
 const initialState = {
   loading: false,
@@ -10,40 +10,33 @@ const initialState = {
   usersList: [],
   cleanData: [],
   inputField: "",
-};
+  notifications: [],
+}
 
 export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
   const res = await getUsers();
   return res;
-});
+})
+
 export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
   const res = await getUser(id);
   delete res.password
   delete res.password_confirmation
   return res;
-});
+})
+
+export const callNotifications = createAsyncThunk("users/notifications", async (data) => {
+  const res = await getNotifications(data)
+  console.log(res)
+  return res;
+})
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    captureInputData: (state, action) => {
-      state.inputField = action.payload;
-    },
-    storeUserRegistrationData: (state, action) => {
-      state.userData = { ...action.payload };
-    },
-    updateUser: (state, action) => {
-      state.userData = { ...action.payload };
-    },
-    addUserList: (state, action) => {
-      state.usersList = [...action.payload];
-    },
-    addCleanData: (state, action) => {
-      state.cleanData = action.payload;
-    },
-    resetState: (state) => {
-      return initialState;
-    },
+    updateUser: (state, action) => state.userData = { ...action.payload },
+    resetState: (state) => initialState,
   },
   extraReducers(builder) {
     builder.addCase(getUsersList.pending, (state) => {
@@ -69,6 +62,10 @@ const usersSlice = createSlice({
     builder.addCase(getUserData.rejected, (state, action) => {
       state.loading = false;
       if (action.error.code) state.error = action.error.code;
+    });
+    builder.addCase(callNotifications.fulfilled, (state, action) => {
+      state.loading = false;
+      state.notifications = action.payload;
     });
   },
 });

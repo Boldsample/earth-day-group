@@ -1,0 +1,74 @@
+.chat__scroll
+  height: calc(100vh - 200px)
+  margin-top: -20px
+  margin-bottom: 20px
+  overflow: auto
+  width: 100%
+.chat__messages
+  display: flex
+  flex-direction: column
+  padding: 0 60px
+  width: 100%
+  .chat_card
+    display: flex
+    width: 100%
+    .multiUse__card
+      height: auto
+      margin-top: 20px
+      margin-right: auto
+      margin-bottom: 0
+      min-width: 200px
+      max-width: 500px
+      width: auto
+      .main__container
+        display: flex
+        flex-wrap: wrap
+        .profile__photo
+          left: -60px
+          margin: 0
+          position: absolute
+          top: 0
+        .date
+          opacity: 0.7
+          font-size: 0.7em
+          width: 100%
+    &.user .multiUse__card
+      background: var(--green-earth)
+      color: white
+      margin-right: 0
+      margin-left: auto
+      .main__container
+        justify-content: flex-end
+        text-align: right
+        .profile__photo
+          left: auto
+          right: -60px
+    &.same .multiUse__card
+      margin-top: 4px
+      .profile__photo
+        display: none
+.chat__input
+  display: flex
+  padding: 0 60px
+  width: 100%
+  input
+    background: var(--light-gray)
+    border: none
+    border-radius: 8px
+    padding: 0 20px
+    width: 100%
+  .emoji
+    align-items: center
+    color: var(--grey)
+    display: flex
+    font-size: 24px
+    justify-content: center
+    padding: 8px
+    position: relative
+    .emoji__wrapper
+      bottom: 40px
+      position: absolute
+      right: 0
+      max-width: none
+      button
+        margin: 0

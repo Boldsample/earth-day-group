@@ -1,38 +1,36 @@
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Link } from 'react-router-dom'
-import { setHeader } from '@store/slices/globalSlice'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
+import { callNotifications } from '@store/slices/usersSlice'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './styles.sass'
 
 const HeaderNotifications = () => {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const userId = useSelector((state) => state.users.userData.id)
+  const notifications = useSelector((state) => state.users.notifications)
 
-	useEffect(() => {
-		dispatch(setHeader('user'))
-	}, [])
-	
-	return <div className="header_notifications">
-		<Link to={"/notifications/"}><FontAwesomeIcon icon={faBell} /></Link>
-		<div className="list">
-			<MultiUseCard 
-				type='notification'
-				title='New Notification'
-				description='Green Earth Recycling sent you a new offer'
-				date='11-02-2023 10:45 am'
-			/>
-			<MultiUseCard 
-				type='notification'
-				title='New Notification'
-				description='Green Earth Recycling sent you a new offer'
-				date='11-02-2023 10:45 am'
-			/>
-		</div>
-	</div>
+  useEffect(() => {
+    if(userId){
+      const _last = notifications.length ? notifications[0].date : 0
+      dispatch(callNotifications({user: userId, date: _last}))
+    }
+  }, [userId, notifications])
+  
+  return <div className="header_notifications">
+    <Link to={"/notifications/"}><FontAwesomeIcon icon={faBell} /></Link>
+    <div className="list">
+      {notifications?.length && notifications.map(notification => 
+        <MultiUseCard 
+          type='notification'
+          data={notification} />
+      )}
+    </div>
+  </div>
 }
 
 export default HeaderNotifications

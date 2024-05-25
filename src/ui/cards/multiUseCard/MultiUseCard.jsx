@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Button } from "primereact/button"
 import { faBell } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -10,40 +11,35 @@ import "./multiusecard.sass"
 const MultiUseCard = ({
   type,
   date,
+  data,
   title,
-  price,
-  offers,
   status,
-  receive,
-  material,
-  quantity,
+  message,
   description,
-  offer,
-  orderStatus,
 }) => {
 const renderCardContent = () => {
   switch (type) {
   case "notification":
-    return <>
+    return <Link to={data.link}>
       <div className="notification__header">
         <div className="notification__title">
           <FontAwesomeIcon icon={faBell} />
-          <h4 className="font-bold">{title}</h4>
+          <h4 className="font-bold">{data.title}</h4>
         </div>
         <div className="notification__date">
-          <small>{date}</small>
+          <small>{data.date}</small>
         </div>
       </div>
       <div className="notification__Body">
-        <p className="multiuseCard__p">{description}</p>
+        <p className="multiuseCard__p">{data.message}</p>
       </div>
-    </>
+    </Link>
   case "offer":
     return <div className="main__container">
-      <ProfilePhoto userPhoto={offer?.picture} />
+      <ProfilePhoto userPhoto={data?.picture} />
       <div className="fullwidth">
-        <h4 className="font-bold text-gray">{offer?.title}</h4>
-        <Button label={offer?.material} className="small green-earth" />
+        <h4 className="font-bold text-gray">{data?.title}</h4>
+        <Button label={data?.material} className="small green-earth" />
         <div className="flex">
           <table>
             <thead>
@@ -56,30 +52,30 @@ const renderCardContent = () => {
             </thead>
             <tbody>
               <tr>
-                <td>{offer?.quantity + ' ' + offer?.unit}</td>
-                <td>{offer?.price}</td>
-                <td>{offer?.offers || 0}</td>
+                <td>{data?.quantity + ' ' + data?.unit}</td>
+                <td>{data?.price}</td>
+                <td>{data?.offers || 0}</td>
                 <td><i className="pi pi-eye" /></td>
               </tr>
             </tbody>
           </table>
-          <p className="date">{offer?.date}</p>
+          <p className="date">{data?.date}</p>
         </div>
       </div>
     </div>
   case "offer_company":
     return <div className="main__container">
-      <ProfilePhoto className="offer__image" userPhoto={offer?.picture} />
+      <ProfilePhoto className="offer__image" userPhoto={data?.picture} />
       <div className="fullwidth">
-        <h4 className="font-bold text-gray">{offer?.title}</h4>
-        <Button label={offer?.material} className="small green-earth" />
-        <Button label={offer?.quantity + ' ' + offer?.unit} className="small" />
+        <h4 className="font-bold text-gray">{data?.title}</h4>
+        <Button label={data?.material} className="small green-earth" />
+        <Button label={data?.quantity + ' ' + data?.unit} className="small" />
         <div className="flex">
           <p className="date" style={{textAlign: 'left', width: '200px'}}>
-            {offer?.name}<br />
-            Asking price: $ {offer?.price}
+            {data?.name}<br />
+            Asking price: $ {data?.price}
           </p>
-          <p className="date">{offer?.date}</p>
+          <p className="date">{data?.date}</p>
         </div>
       </div>
     </div>
@@ -90,6 +86,12 @@ const renderCardContent = () => {
         <p>Placed on: {date}</p>
       </div>
       <h6 className={status}>{status}</h6>
+    </div>
+  case "chat":
+    return <div className={'main__container '+status}>
+      <ProfilePhoto userPhoto={message?.picture} />
+      {message.message}
+      <div className="date">{message.date}</div>
     </div>
   default:
     return null;

@@ -14,7 +14,7 @@ const Offers = () => {
   const callOffers = async () =>{
     let _filter
     if(user.role == 'user'){
-      _filter = { user: user?.id }
+      _filter = { 'o.user': user?.id }
     }else{
       let _materials = []
       user?.materials?.map(material => { _materials?.push(material.type) })

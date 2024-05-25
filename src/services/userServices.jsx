@@ -64,12 +64,18 @@ export const addImages = async (data) => {
   return true
 }
 
+export const getNotifications = async (filter) => {
+  const response = await API.get(`/get/notifications&user=${filter.user}&last=${filter.date}`)
+  return response?.data?.data
+}
+
 export const logoutUser = async () => {
   Cookies.remove('edgActiveUser')
   //await API.post("/logout")
 
   return true
 }
+
 export const recoverUser = async (data, validate) => {
   const response = saveJSON("users", data, "update", validate)
   //await API.post("/register", data)
@@ -77,6 +83,7 @@ export const recoverUser = async (data, validate) => {
     toast.error(response.status + ": " + response.data.message)
   return true
 }
+
 export const getUser = async (id) => {
   //   const data = await getJSON("users")
   //   data.images = await getAllJSON("images", { user: data.id })
@@ -84,6 +91,7 @@ export const getUser = async (id) => {
   const { data } = await API.get(`/user/${id}`)
   return data.data
 }
+
 export const getUsers = async (filter) => {
   //const data = await getAllJSON("users")
   let filterStr = ''

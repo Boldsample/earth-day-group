@@ -69,17 +69,21 @@ const Header = () => {
       </div>
     }
 
-    {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && 
-      <div className="navbar-item icons">
-        {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
-          <ProfilePhoto userPhoto={user?.picture} />
-          <small className="user-name">Hi, {user?.name}</small>
-        </div> : null}
-        <FontAwesomeIcon icon={faShoppingCart} />
-        <HeaderNotifications />
-        <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
-      </div>
-    }
+    {['map'].some(s => s == header) && <div></div>}
+
+    <div className="navbar-item icons">
+      {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
+          {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
+            <ProfilePhoto userPhoto={user?.picture} />
+            <small className="user-name">Hi, {user?.name}</small>
+          </div> : null}
+          <FontAwesomeIcon icon={faShoppingCart} />
+      </>}
+      <HeaderNotifications />
+      {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
+          <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
+      </>}
+    </div>
 
     {!['intro', 'login', 'register'].some(s => s == header) &&
       <Nav />
