@@ -24,11 +24,12 @@ const HeaderNotifications = () => {
   return <div className="header_notifications">
     <Link to={"/notifications/"}><FontAwesomeIcon icon={faBell} /></Link>
     <div className="list">
-      {notifications?.length && notifications.map(notification => 
+      {notifications?.length && notifications.map((notification, key) => 
         <MultiUseCard 
+          key={key}
           type='notification'
           data={notification} />
-      )}
+      ) || null}
     </div>
   </div>
 }

@@ -8,7 +8,7 @@ import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Dashboard, Map, Orders, Companies, Vendors } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor } from "@components/register"
-import { Notifications, Offers, OfferNew, Chat, Settings, ProfileSettings, Terms, About, Activity } from "@modules"
+import { Notifications, Offers, OfferNew, Chats, Chat, Settings, ProfileSettings, Terms, About, Activity } from "@modules"
 
 const AppRoutes = () => {
   const role = useSelector((state) => state.users.userData?.role)
@@ -34,7 +34,7 @@ const AppRoutes = () => {
         <Route exact path="/offers" element={<Offers />} />
         <Route exact path="/offers/new" element={<OfferNew />} />
         <Route exact path="/offers/new" element={<Chat />} />
-        <Route exact path="/chat" element={<Chat />} />
+        <Route exact path="/chat" element={<Chats />} />
         <Route exact path="/chat/:contact" element={<Chat />} />
         <Route exact path="/location" element={<Map />} />
         <Route exact path="/orders/" element={<Orders />} />

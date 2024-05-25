@@ -27,7 +27,6 @@ export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
 
 export const callNotifications = createAsyncThunk("users/notifications", async (data) => {
   const res = await getNotifications(data)
-  console.log(res)
   return res;
 })
 

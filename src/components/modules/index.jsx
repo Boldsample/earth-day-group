@@ -1,4 +1,5 @@
 import Chat from "./chat/Chat"
+import Chats from "./chat/Chats"
 import Terms from "./settings/Terms"
 import About from "./settings/About"
 import Offers from "./offers/OffersList"
@@ -8,4 +9,4 @@ import Activity from "./settings/Activity"
 import ProfileSettings from "./settings/Profile"
 import Notifications from "./notifications/Notifications"
 
-export { Notifications, Offers, OfferNew, Chat, Settings, ProfileSettings, Terms, About, Activity }
+export { Notifications, Offers, OfferNew, Chats, Chat, Settings, ProfileSettings, Terms, About, Activity }

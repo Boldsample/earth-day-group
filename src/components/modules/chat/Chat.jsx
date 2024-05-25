@@ -23,6 +23,7 @@ const Chat = () => {
   const [calling, setCalling] = useState(false)
   const [messages, setMessages] = useState(null)
   const userId = useSelector((state) => state.users.userData.id)
+  const notifications = useSelector((state) => state.users.notifications)
 
   const handleEmoji = e => {
     setOpen(false)
@@ -42,23 +43,24 @@ const Chat = () => {
     }))
     setMessage("")
   }
-  const callMessages = async (_last) => {
-    if(!calling){
-      setCalling(true)
-      const _add = await getMessages({user: userId, contact: contact, last: _last})
-      setMessages(prev => {
-        const _prev = prev?.length ? [...prev] : []
-        const _new = [..._prev, ..._add]
-        return _new
-      })
-      callMessages(_add[_add.length - 1].id)
-      setCalling(false)
-    }
+  const callMessages = async () => {
+    setCalling(true)
+    const _last = messages?.length ? messages[messages.length - 1].date : 0
+    console.log(_last)
+    const _add = await getMessages({user: userId, contact: contact, last: _last})
+    setMessages(prev => {
+      const _prev = prev?.length ? [...prev] : []
+      const _new = [..._prev, ..._add]
+      return _new
+    })
+    setCalling(false)
   }
 
   useEffect(() => {
-    if(messages === null && !calling)
-      callMessages(0)
+    if(!calling)
+      callMessages()
+  }, [notifications])
+  useEffect(() => {
     chatWrapper.current.scrollTo({
       behavior: 'smooth',
       top: chatWrapper.current.scrollHeight,
@@ -68,16 +70,17 @@ const Chat = () => {
     if(emojiWrapper.current)
       document.addEventListener("mousedown", handleClickOutside)
     return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [open, dispatch, messages])
+  }, [open, messages])
+  console.log(messages)
 
   return <div className="layout" style={{background: 'white'}}>
     <div className="main__content centerwidth">
       <div ref={chatWrapper} className="chat__scroll">
         <div className="chat__messages">
-          {messages?.map(message => {
+          {messages?.map((message, key) => {
             const same = last == message.incoming ? 'same ' : ''
             last = message.incoming
-            return <div className={'chat_card ' + same + (message.incoming == userId ? 'user' : 'contact')}>
+            return <div key={key} className={'chat_card ' + same + (message.incoming == userId ? 'user' : 'contact')}>
               <MultiUseCard 
                 type="chat"
                 message={message} />

@@ -92,7 +92,7 @@ export const getUser = async (id) => {
   return data.data
 }
 
-export const getUsers = async (filter) => {
+export const getUsers = async (filter = {}) => {
   //const data = await getAllJSON("users")
   let filterStr = ''
   Object.keys(filter).map(f => {
