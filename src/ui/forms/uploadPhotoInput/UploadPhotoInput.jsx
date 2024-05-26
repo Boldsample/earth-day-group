@@ -9,14 +9,14 @@ import "./uploadprofilephotoinput.sass"
 
 const UploadPhotoInput = ({
   type,
+  title,
   watch,
   control,
   setValue,
   getValues,
-  title,
   className,
-  setUploadedImages,
   uploadedImages,
+  setUploadedImages,
 }) => {
   const [reachedImageCapacity, setReachedImageCapacity] = useState(false)
 
@@ -61,20 +61,16 @@ const UploadPhotoInput = ({
         return <div className={`imagesHub__container ${className}`}>
           <h4>{title}</h4>
           <div className="imageCarousel__container">
-            <div className="imageUpload__container">
-              <label htmlFor="file" className="imageUpload__button">
-                <FontAwesomeIcon icon={faCloudArrowUp} color="#408D27" fontSize="20px" />
-              </label>
-              <input id="file" type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
-            </div>
-            <div className="imageCatalog__container">
-              {uploadedImages.map((image, key) => 
-                <div key={key} className="image__container">
-                  <button className="close__btn" onClick={() => removeImage(key)}><FontAwesomeIcon icon={faClose} color="green" fontSize="10px" /></button>
-                  <img className="uploadedImage" src={image.picture} alt="" />
-                </div>
-              )}
-            </div>
+            <input id="file" type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
+            <label htmlFor="file" className="imageUpload__button">
+              <FontAwesomeIcon icon={faCloudArrowUp} color="#408D27" fontSize="20px" />
+            </label>
+            {uploadedImages?.length && uploadedImages?.map((image, key) => 
+              <div key={key} className="image__container">
+                <button type="button" className="close__btn" onClick={() => removeImage(key)}><FontAwesomeIcon icon={faClose} color="green" fontSize="10px" /></button>
+                <img className="uploadedImage" src={image.picture} alt="" />
+              </div>
+            ) || null}
           </div>
           {reachedImageCapacity && 
             <small className="p-error">*You can only Upload 7 images. Please remove one if you wish to add a new one.</small>

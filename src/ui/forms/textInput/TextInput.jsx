@@ -15,6 +15,7 @@ const TextInput = ({
 	showLabel,
 	isRequired,
 	type = "text",
+	disabled = false,
 	autocomplete = "on",
 	getFormErrorMessage,
 	placeHolderText = "",
@@ -32,10 +33,11 @@ const TextInput = ({
 			name={nameInput}
 			control={control}
 			render={({ field }) => <InputText
-				className={className}
 				type={type}
 				id={field.name}
 				style={inputWidth}
+				disabled={disabled}
+				className={className}
 				maxLength={maxLength}
 				autoComplete={autocomplete}
 				placeholder={placeHolderText}

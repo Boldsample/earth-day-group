@@ -60,19 +60,23 @@ export const updateUser = async (data, filter) => {
 }
 
 export const addMaterials = async (data) => {
-  //const response = saveJSON("materials", data, "add")
-  const response = await API.post("/add_multiple/materials", data)
-  if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message)
-  return true
+  try {
+    const { data } = await API.post("/add_multiple/materials", formData)
+    return true
+  } catch ({response}) {
+    return response.data
+  }
 }
 
-export const addImages = async (data) => {
-  //const response = saveJSON("images", data, "add")
-  const response = await API.post("/add_multiple/images", data)
-  if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message)
-  return true
+export const addImages = async (formData) => {
+  try {
+    console.log(formData)
+    await API.post("/add_multiple/images", formData)
+    return true
+  } catch ({response}) {
+    console.log('test')
+    return response.data
+  }
 }
 
 export const getNotifications = async (filter) => {

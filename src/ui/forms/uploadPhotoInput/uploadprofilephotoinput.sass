@@ -33,45 +33,43 @@
 		display: block
 		margin: 10px 0 0 0
 		.imageUpload__button
-			display: inline-flex
-			justify-content: center
-			vertical-align: top
 			align-items: center
-			height: 88px
-			width: 96px
 			background: transparent
 			border: 1px solid var(--grey)
 			border-radius: 8px
 			cursor: pointer
-			margin-right: 5px
-		.imageUpload__container, .imageCatalog__container
-			display: inline
-		.imageCatalog__container
-			display: inline
-			.image__container
-				display: inline-block
-				position: relative
-				.close__btn
-					padding: 0
-					display: flex
-					justify-content: center
-					align-items: center
-					position: absolute
-					background-color: white
-					width: 15px
-					height: 15px
-					top: -5px
-					right: 0px
-					border-radius: 50px
-					z-index: 2
-					cursor: pointer
-					border-color: green
-				.uploadedImage
-					border-radius: 8px
-					height: 88px
-					margin-right: 5px
-					object-fit: cover
-					width: 96px
+			display: inline-flex
+			height: 5rem
+			justify-content: center
+			margin-right: calc((100% - 30rem) / 5)
+			vertical-align: top
+			width: 5rem
+		.image__container
+			display: inline-block
+			margin-right: calc((100% - 30rem) / 5)
+			position: relative
+			&:last-child
+				margin-right: 0
+			.close__btn
+				padding: 0
+				display: flex
+				justify-content: center
+				align-items: center
+				position: absolute
+				background-color: white
+				width: 15px
+				height: 15px
+				top: -5px
+				right: 0px
+				border-radius: 50px
+				z-index: 2
+				cursor: pointer
+				border-color: green
+			.uploadedImage
+				border-radius: 8px
+				height: 5rem
+				object-fit: cover
+				width: 5rem
 
 .imagesHub__container-variant
 	margin: 20px 0

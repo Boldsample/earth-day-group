@@ -6,11 +6,10 @@ import { Autocomplete } from "@react-google-maps/api"
 import { useDispatch, useSelector } from "react-redux"
 
 import { getUserData } from "@store/slices/usersSlice"
-import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import { updateThankyou } from "@store/slices/globalSlice"
 import { createUser, updateUser } from "@services/userServices"
 import { setHeader, setHeaderTitle } from "@store/slices/globalSlice"
-import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, FileUploadInput, UploadPhotoInput } from "@ui/forms"
+import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput } from "@ui/forms"
 
 import "./style.sass"
 

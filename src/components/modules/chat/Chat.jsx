@@ -48,11 +48,12 @@ const Chat = () => {
     const _last = messages?.length ? messages[messages.length - 1].date : 0
     console.log(_last)
     const _add = await getMessages({user: userId, contact: contact, last: _last})
-    setMessages(prev => {
-      const _prev = prev?.length ? [...prev] : []
-      const _new = [..._prev, ..._add]
-      return _new
-    })
+    if(_add?.length)
+      setMessages(prev => {
+        const _prev = prev?.length ? [...prev] : []
+        const _new = [..._prev, ..._add]
+        return _new
+      })
     setCalling(false)
   }
 

@@ -15,9 +15,7 @@ const Recover = () => {
   const [sending, setSending] = useState(false)
 	let [searchParams, setSearchParams] = useSearchParams()
 	const {
-		watch,
 		control,
-		setValue,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
