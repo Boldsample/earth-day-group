@@ -1,4 +1,3 @@
-import Cookies from "js-cookie"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -7,9 +6,9 @@ import { faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
+import { resetState } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
-import { setHeader, updateAddLink } from '@store/slices/globalSlice'
-import { getUserData, updateUser } from "@store/slices/usersSlice"
+import { updateAddLink } from '@store/slices/globalSlice'
 import HeaderNotifications from "@components/modules/notifications/HeaderNotifications"
 
 const Header = () => {
@@ -22,27 +21,14 @@ const Header = () => {
   const headerTitle = useSelector((state) => state.global.headerTitle)
 
   const logout = async (e) => {
-    e.preventDefault()
-    if(await logoutUser()){
-		dispatch(updateUser({}))
-	}
+    if(await logoutUser())
+      dispatch(resetState())
   };
 
   useEffect(() => {
-    const _id = Cookies.get('edgActiveUser')
-    if(!user?.id && _id != 'undefined')
-      dispatch(getUserData(_id))
-    if(!['/offers/'].some(url => url==location.pathname))
+    if(!['/offers/'].some(url => url == location.pathname))
       dispatch(updateAddLink(''))
-
-    if(user?.id && ['/register/user/', '/register/company/'].some(url => url==location.pathname))
-      navigate('/thankyou/')
-    else if(user?.id && ['/', '/register/', '/login/', '/recover/'].some(url => url==location.pathname)){
-      dispatch(setHeader('dashboard'))
-      navigate('/dashboard/')
-    }else if(!user?.id && ['dashboard', 'user', 'map'].some(s => s==header))
-      navigate('/login/')
-  }, [user, location, header])
+  }, [location])
 
   return <header className={header}>
     {['dashboard'].some(s => s == header) && 
@@ -71,19 +57,21 @@ const Header = () => {
 
     {['map'].some(s => s == header) && <div></div>}
 
+  {!['intro', 'login', 'register'].some(s => s == header) && 
     <div className="navbar-item icons">
       {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
-          {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
-            <ProfilePhoto userPhoto={user?.picture} />
-            <small className="user-name">Hi, {user?.name}</small>
-          </div> : null}
-          <FontAwesomeIcon icon={faShoppingCart} />
+        {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
+          <ProfilePhoto userPhoto={user?.picture} />
+          <small className="user-name">Hi, {user?.name}</small>
+        </div> : null}
+        <FontAwesomeIcon icon={faShoppingCart} />
       </>}
       <HeaderNotifications />
       {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
-          <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
+        <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
       </>}
     </div>
+  }
 
     {!['intro', 'login', 'register'].some(s => s == header) &&
       <Nav />

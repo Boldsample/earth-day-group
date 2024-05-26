@@ -18,22 +18,33 @@ export const getUserGoogle = async (token) => {
   return res.data;
 }
 
-export const authUser = async (data) => {
-  //const response = getJSON("users", data)
-  const response = await API.post("/login/", data)
-  if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message)
-  Cookies.set('edgActiveUser', response?.data?.id)
-  return response?.data?.id
+export const authUser = async (formData) => {
+  try {
+    const {data} = await API.post("/login/", formData)
+    Cookies.set('edgActiveUser', data?.id)
+    return data
+  } catch ({response}) {
+    return response.data
+  }
 }
 
-export const createUser = async (data) => {
-  //const response = saveJSON("users", data)
-  const response = await API.post("/register/", data)
-  if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message)
-  Cookies.set('edgActiveUser', response?.data?.id)
-  return response?.data?.id
+export const checkUser = async (formData) => {
+  try {
+    const {data} = await API.post("/check_user/", formData)
+    return data
+  } catch ({response}) {
+    return response.data
+  }
+}
+
+export const createUser = async (formData) => {
+  try {
+    const {data} = await API.post("/register/", formData)
+    Cookies.set('edgActiveUser', data?.id)
+    return data
+  } catch ({response}) {
+    return response.data
+  }
 }
 
 export const updateUser = async (data, filter) => {

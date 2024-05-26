@@ -1,3 +1,4 @@
+import { toast } from "react-toastify"
 import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
@@ -10,68 +11,73 @@ import { setHeader } from '@store/slices/globalSlice'
 import { TextInput, PasswordInput } from "@ui/forms/"
 import { authUser, getUserGoogle } from "@services/userServices"
 import { getUserData, updateUser } from "@store/slices/usersSlice"
-import { toast } from "react-toastify"
 
 const LoginForm = () => {
-	const dispatch = useDispatch()
-	const [ fApi, setFApi ] = useState()
-	const { isLoading, init } = useFacebook()
-	const [sending, setSending] = useState(false)
-	const {
-		control,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({
-		defaultValues: {
-			email: "",
-			password: ""
-		},
-	})
-	
-	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
-	const onSubmit = async (data) => {
+  const dispatch = useDispatch()
+  const [ fApi, setFApi ] = useState()
+  const { isLoading, init } = useFacebook()
+  const [sending, setSending] = useState(false)
+  const {
+    control,
+    setError,
+    setFocus,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: ""
+    },
+  })
+  
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+  const onSubmit = async (data) => {
     setSending(true)
-		const id = await authUser(data)
+    const response = await authUser(data)
     setSending(false)
-		dispatch(getUserData(id))
-	}
-	const gLogin = useGoogleLogin({
-		onSuccess: async ({access_token}) => {
-			const { name, email, picture, locale } = await getUserGoogle(access_token)
-			if(await authUser({email}))
-				dispatch(getUserData())
-		}
-	})
-	const fLogin = async () => {
-		fApi.login(function({authResponse}){
-			if(authResponse){
-				fApi.api('/me', {fields: 'name, email'}, async ({email}) => {
-					if(await authUser({email}))
-						dispatch(getUserData())
-				});
-			}else
-			toast.error('User cancelled login or did not fully authorize.');
-		});
-	}
-	
-	useEffect(() => {
-		if(!isLoading){
-			if(!fApi)
-				init()
-			.then(response => response.getFB())
-			.then(response => setFApi(response))
-			else{
-				fApi.getLoginStatus(({authResponse}) => {
-					if(authResponse)
-						FB.logout()
-				})
-			}
-		}
-		dispatch(updateUser({}))
-		dispatch(setHeader('login'))
-	}, [isLoading, fApi])
-	
-	return <div className="layout">
+    if(response?.id)
+      dispatch(getUserData(response.id))
+    else{
+      setFocus(response.field)
+      setError(response.field, { type: "manual", message: response.message })
+    }
+  }
+  const gLogin = useGoogleLogin({
+    onSuccess: async ({access_token}) => {
+      const { name, email, picture, locale } = await getUserGoogle(access_token)
+      if(await authUser({email}))
+        dispatch(getUserData())
+    }
+  })
+  const fLogin = async () => {
+    fApi.login(function({authResponse}){
+      if(authResponse){
+        fApi.api('/me', {fields: 'name, email'}, async ({email}) => {
+          if(await authUser({email}))
+            dispatch(getUserData())
+        });
+      }else
+      toast.error('User cancelled login or did not fully authorize.');
+    });
+  }
+  
+  useEffect(() => {
+    if(!isLoading){
+      if(!fApi)
+        init()
+      .then(response => response.getFB())
+      .then(response => setFApi(response))
+      else{
+        fApi.getLoginStatus(({authResponse}) => {
+          if(authResponse)
+            FB.logout()
+        })
+      }
+    }
+    dispatch(setHeader('login'))
+  }, [isLoading, fApi])
+  
+  return <div className="layout">
     <img className="layout__background" src="/assets/login/image-1.svg" />
     <form onSubmit={handleSubmit(onSubmit)} className="main__content login-form">
       <h4 className="mb-1">Login to your account</h4>
@@ -137,6 +143,6 @@ const LoginForm = () => {
         </p>
       </div>
     </form>
-	</div>
+  </div>
 }
 export default LoginForm

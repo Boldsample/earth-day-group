@@ -31,11 +31,11 @@ export const callNotifications = createAsyncThunk("users/notifications", async (
 })
 
 const usersSlice = createSlice({
-  name: "users",
   initialState,
+  name: "users",
   reducers: {
+    resetState: state => { return {...initialState} },
     updateUser: (state, action) => state.userData = { ...action.payload },
-    resetState: (state) => initialState,
   },
   extraReducers(builder) {
     builder.addCase(getUsersList.pending, (state) => {

@@ -2,20 +2,20 @@ import { Controller } from "react-hook-form";
 import { InputNumber } from "primereact/inputnumber";
 
 const NumberInput = ({
-  mode,
   label,
   rules,
   width,
   height,
   control,
   disabled,
+  inputRef,
   nameInput,
   showLabel,
   isRequired,
   maxLength = 10,
+  mode = 'decimal',
   getFormErrorMessage,
   placeHolderText = "",
-  inputRef,
 }) => {
   const inputWidth = {
     width: width,
@@ -27,26 +27,21 @@ const NumberInput = ({
         rules={rules}
         name={nameInput}
         control={control}
-        render={({ field }) => (
-          <InputNumber
-		  	    mode={mode}
-            locale="en-US"
-            currency="USD"
-            ref={inputRef}
-            id={field.name}
-            style={inputWidth}
-            disabled={disabled}
-            /*useGrouping={false}*/
-            value={field.value}
-            onBlur={field.onBlur}
-            maxLength={maxLength}
-            minFractionDigits={0}
-            maxFractionDigits={5}
-            placeholder={placeHolderText}
-            onValueChange={(e) => field.onChange(e)}
-          />
-        )}
-      />
+        render={({ field }) => <InputNumber
+          mode={mode}
+          locale="en-US"
+          currency="USD"
+          ref={inputRef}
+          id={field.name}
+          style={inputWidth}
+          disabled={disabled}
+          onBlur={field.onBlur}
+          maxLength={maxLength}
+          value={field.value || null}
+          placeholder={placeHolderText}
+          useGrouping={mode != 'decimal'}
+          onValueChange={(e) => field.onChange(e)} />
+        } />
       {getFormErrorMessage(nameInput)}
     </>
   );

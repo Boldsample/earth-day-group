@@ -1,20 +1,18 @@
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
 import { Autocomplete } from "@react-google-maps/api"
-import {
-  TextInput,
-  NumberInput,
-  PasswordInput,
-  TextAreaInput,
-  CheckBoxInput,
-  UploadPhotoInput,
-} from "@ui/forms";
+
+import { checkUser } from "@services/userServices"
+import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput } from "@ui/forms"
 
 const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
+  const [sending, setSending] = useState(false)
   const {
     watch,
     control,
     setValue,
+    setFocus,
     setError,
     getValues,
     handleSubmit,
@@ -29,6 +27,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
       picture: user?.picture || "",
       website: user?.website || "",
       address: user?.address || "",
+      username: user?.username || "",
       password: user?.password || "",
       description: user?.description || "",
       accept_terms: user?.accept_terms && true || false,
@@ -40,7 +39,18 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
   const onPlaceChanged = () => setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
-	setUser({ ...user, ...data })
+    if(!user.id){
+      setSending(true)
+      const { email, username } = getValues()
+      const response = await checkUser({ email, username })
+      setSending(false)
+      if(response?.field){
+        setFocus(response.field)
+        setError(response.field, { type: "manual", message: response.message })
+        return
+      }
+    }
+    setUser({ ...user, ...data })
     setActiveIndex(1)
   }
 
@@ -51,19 +61,18 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
       setError={setError}
       setValue={setValue}
       getValues={getValues}
-      type="profilePhotoUpload"
-    />
+      type="profilePhotoUpload" />
     <div className="registerInput__container-x2">
       <TextInput
+        width="100%"
+        isEdit={true}
+        nameInput="name"
+        control={control}
+        showLabel={false}
         isRequired={true}
         labelName="Company Name"
-        isEdit={true}
-        getFormErrorMessage={getFormErrorMessage}
-        control={control}
-        nameInput="name"
         placeHolderText="Company Name*"
-        width="100%"
-        showLabel={false}
+        getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
             value: 20,
@@ -74,18 +83,17 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
             value: /^\S/,
             message: "No debe tener espacios al inicio",
           },
-        }}
-      />
+        }} />
       <TextInput
+        width="100%"
+        isEdit={true}
+        control={control}
+        showLabel={false}
+        nameInput="email"
         isRequired={true}
         labelName="E-mail"
-        isEdit={true}
-        getFormErrorMessage={getFormErrorMessage}
-        control={control}
-        nameInput="email"
         placeHolderText="E-mail*"
-        width="100%"
-        showLabel={false}
+        getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
             value: 60,
@@ -101,15 +109,15 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
     </div>
     <div className="registerInput__container-x2">
       <TextInput
-        isRequired={true}
-        labelName="NIT"
-        isEdit={true}
-        getFormErrorMessage={getFormErrorMessage}
-        control={control}
-        nameInput="nit"
-        placeHolderText="NIT*"
         width="100%"
+        isEdit={true}
+        control={control}
         showLabel={false}
+        isRequired={true}
+        labelName="Username"
+        nameInput="username"
+        placeHolderText="Username*"
+        getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
             value: 20,
@@ -120,32 +128,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
             value: /^\S/,
             message: "No debe tener espacios al inicio",
           },
-        }}
-      />
-      <TextInput
-        isRequired={true}
-        labelName="Website"
-        isEdit={true}
-        getFormErrorMessage={getFormErrorMessage}
-        control={control}
-        nameInput="website"
-        placeHolderText="Website"
-        width="100%"
-        showLabel={false}
-        rules={{
-          maxLength: {
-            value: 20,
-            message: "El campo supera los 20 caracteres",
-          },
-          required: "*El campo es requerido.",
-          pattern: {
-            value: /^\S/,
-            message: "No debe tener espacios al inicio",
-          },
-        }}
-      />
-    </div>
-    <div className="registerInput__container-x1">
+        }} />
       <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
         <TextInput
           width="100%"
@@ -167,15 +150,80 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         />
       </Autocomplete>
     </div>
+    <div className="registerInput__container-x2">
+      <TextInput
+        width="100%"
+        isEdit={true}
+        labelName="NIT"
+        nameInput="nit"
+        control={control}
+        showLabel={false}
+        isRequired={true}
+        placeHolderText="NIT*"
+        getFormErrorMessage={getFormErrorMessage}
+        rules={{
+          maxLength: {
+            value: 20,
+            message: "El campo supera los 20 caracteres",
+          },
+          required: "*El campo es requerido.",
+          pattern: {
+            value: /^\S/,
+            message: "No debe tener espacios al inicio",
+          },
+        }}/>
+      <TextInput
+        width="100%"
+        isEdit={true}
+        control={control}
+        showLabel={false}
+        isRequired={true}
+        labelName="Website"
+        nameInput="website"
+        placeHolderText="Website"
+        getFormErrorMessage={getFormErrorMessage}
+        rules={{
+          maxLength: {
+            value: 20,
+            message: "El campo supera los 20 caracteres",
+          },
+          required: "*El campo es requerido.",
+          pattern: {
+            value: /^\S/,
+            message: "No debe tener espacios al inicio",
+          },
+        }} />
+    </div>
+    <div className="registerInput__container-x1">
+      <TextAreaInput
+        showLabel={true}
+        control={control}
+        isRequired={false}
+        label="Description"
+        nameInput="description"
+        getFormErrorMessage={getFormErrorMessage}
+        placeHolderText="Tell us about your company"
+        rules={{
+          maxLength: {
+            value: 100,
+            message: "El campo supera los 100 caracteres",
+          },
+          required: "*El campo es requerido.",
+          pattern: {
+            value: /^\S/,
+            message: "No debe tener espacios al inicio",
+          },
+        }} />
+    </div>
     <div className="registerInput__container-x1">
       <NumberInput
-        disabled={false}
         width="100%"
+        disabled={false}
         showLabel={true}
+        nameInput="phone"
         isRequired={true}
         control={control}
         label="Phone Number"
-        nameInput="phone"
         placeHolderText="Phone Number*"
         getFormErrorMessage={getFormErrorMessage}
         rules={{
@@ -188,30 +236,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
             value: /^\S/,
             message: "No debe tener espacios al inicio",
           },
-        }}
-      />
-    </div>
-    <div className="registerInput__container-x1">
-      <TextAreaInput
-        label="Description"
-        nameInput="description"
-        showLabel={true}
-        control={control}
-        isRequired={false}
-        placeHolderText="Tell us about your company"
-        getFormErrorMessage={getFormErrorMessage}
-        rules={{
-          maxLength: {
-            value: 100,
-            message: "El campo supera los 100 caracteres",
-          },
-          required: "*El campo es requerido.",
-          pattern: {
-            value: /^\S/,
-            message: "No debe tener espacios al inicio",
-          },
-        }}
-      />
+        }} />
     </div>
     <div className="registerInput__container-x2">
       <PasswordInput
@@ -235,8 +260,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
             message:
               "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
           },
-        }}
-      />
+        }} />
       <PasswordInput
         width="100%"
         label="&nbsp;"
@@ -252,8 +276,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         rules={{
           required: user?.id ? undefined : "*El campo es requerido.",
           validate: value => value === getValues().password || "The password doesn't match",
-        }}
-      />
+        }} />
     </div>
     <div className="p-field" style={{ marginBottom: "24px" }}>
       <CheckBoxInput
@@ -261,16 +284,10 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         nameInput="accept_terms"
         rules={{ required: "Accept is required." }}
         getFormErrorMessage={getFormErrorMessage}
-        checkBoxText="I've read and accept the terms & conditions."
-      />
+        checkBoxText="I've read and accept the terms & conditions." />
     </div>
     <div className="p-field" style={{ marginBottom: "24px" }}>
-      <Button
-        className="dark-blue fullwidth"
-        label="Confirm"
-        type="submit"
-        name="submit"
-      />
+      <Button className="dark-blue fullwidth" label="Continue" type="submit" name="submit" loading={sending} />
     </div>
   </form>
 }

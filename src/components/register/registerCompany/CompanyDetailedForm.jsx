@@ -71,35 +71,37 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     numberInput.current.getInput().blur()
   }
   const onSubmit = async () => {
-    let id
+    let response
     let _user = { ...user }
     delete _user.materials
     delete _user.images
-	setSending(true)
+    setSending(true)
     if(user.id){
       if(_user.password == ''){
         delete _user.password
         delete _user.password_confirmation
       }
-      id = await updateUser({ ..._user }, {id: user.id})
-    }else
-      id = await createUser({ ..._user })
-
-	const _sendMaterials = user.materials.map(material => {
+      response = await updateUser({ ..._user }, {id: user.id})
+    }else{
+      delete _user.password_confirmation
+      response = await createUser({ ..._user })
+    }
+    const _sendMaterials = user.materials.map(material => {
       let _material = {...material}
-      _material.user = id
+      _material.user = response.id
       return _material
     })
-	const _sendImages = user.images.map(image => {
+    await addMaterials(_sendMaterials)
+    const _sendImages = user.images.map(image => {
       let _image = {...image}
-      _image.user = id
+      _image.user = response.id
       return _image
     })
-    await addMaterials(_sendMaterials)
     await addImages(_sendImages)
-
     setSending(false)
-    if(!user.id)
+    if(user?.id)
+      toast.success("Your profile has been updated successfully.")
+    else if(response.id)
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",
@@ -107,126 +109,127 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         button_label: "Go to dashboard",
         content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
       }))
-    else
-      toast.success("Your profile has been updated successfully.")
-	  dispatch(getUserData(id))
+    else{
+      setFocus(response.field)
+      setError(response.field, { type: "manual", message: response.message })
+      return
+    }
+    dispatch(getUserData(response.id))
 	}
 
-  return (
-    <>
-      <form onSubmit={handleSubmit(handleRecyclableMaterial)}>
-        <h5 className="recycableMaterialForm__title">
-          This form is optional and can be completed later. If you prefer to
-          skip it, click "Sign Up."
-        </h5>
-        <h4>Recyclable Material</h4>
-        <div className="registerInput__container-x2">
-          <DropDownInput
-            control={control}
-            showLabel={false}
-            labelName="Material"
-            nameInput="materials"
-            isEdit={true}
-            isRequired={true}
-            // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-            options={materials}
-            optionLabel="material"
-            optionValue="material"
-            placeHolderText="Select Material"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              required: "*El campo es requerido.",
-            }}
-          />
-          <DropDownInput
-            control={control}
-            showLabel={false}
-            labelName="Unit"
-            nameInput="unit"
-            isEdit={true}
-            isRequired={true}
-            // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
-            options={units}
-            optionLabel="unit"
-            optionValue="code"
-            placeHolderText="Select Unit"
-            className=""
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              required: "*El campo es requerido.",
-            }}
-          />
-        </div>
-        <div className="registerInput__container-x2">
-          <NumberInput
-            inputRef={numberInput}
-            disabled={false}
-            width="100%"
-            showLabel={false}
-            isRequired={true}
-            control={control}
-            label="Unit Price"
-            nameInput="unit_price"
-            placeHolderText="Add Price per unit"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: {
-                value: 3,
-                message: "El campo supera los 3 caracteres",
-              },
-              required: "*El campo es requerido.",
-              pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
-              },
-            }}
-          />
-          <Button
-            className="green-earth fullwidth text-left"
-            label="Add"
-            name="add"
-            type="submit"
-            style={{ paddingLeft: "22px" }}
-          />
-        </div>
-      </form>
-      <div className="materialsCard__grid">
-        {user?.materials.map((material) => {
-          return (
-            <RecycleMaterialCard
-              key={material.type}
-              material={material.type}
-              unit={material.unit}
-              price={material.price}
-              color={material.color}
-              removeMaterial={removeMaterial}
-            />
-          );
-        })}
-      </div>
-      <UploadPhotoInput
-        type="imageUpload"
-        title="Add Images"
-        uploadedImages={user.images}
-        setUploadedImages={setUploadedImages}
-      />
+  return <>
+    <form onSubmit={handleSubmit(handleRecyclableMaterial)}>
+      <h5 className="recycableMaterialForm__title">
+        This form is optional and can be completed later. If you prefer to
+        skip it, click "Sign Up."
+      </h5>
+      <h4>Recyclable Material</h4>
       <div className="registerInput__container-x2">
-        <SwitchInput
-          label={"Pick up from home?"}
-          nameInput={"home_pick_up"}
-          // control={control}
-          checked={user.pick_up_from_home == 1}
-          setChecked={setPickUpFromHome}
-          isRequired={false}
+        <DropDownInput
+          control={control}
+          showLabel={false}
+          labelName="Material"
+          nameInput="materials"
           isEdit={true}
-          value={1}
+          isRequired={true}
+          // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
+          options={materials}
+          optionLabel="material"
+          optionValue="material"
+          placeHolderText="Select Material"
+          getFormErrorMessage={getFormErrorMessage}
+          rules={{
+            required: "*El campo es requerido.",
+          }}
+        />
+        <DropDownInput
+          control={control}
+          showLabel={false}
+          labelName="Unit"
+          nameInput="unit"
+          isEdit={true}
+          isRequired={true}
+          // value={selectedCity} onChange={(e) => setSelectedCity(e.value)}
+          options={units}
+          optionLabel="unit"
+          optionValue="code"
+          placeHolderText="Select Unit"
+          className=""
+          getFormErrorMessage={getFormErrorMessage}
+          rules={{
+            required: "*El campo es requerido.",
+          }}
         />
       </div>
-      <div className="p-field" style={{ marginBottom: "24px" }}>
-        <Button onClick={onSubmit} className="dark-blue fullwidth" label="Sign up" name="submit" loading={sending} />
+      <div className="registerInput__container-x2">
+        <NumberInput
+          inputRef={numberInput}
+          disabled={false}
+          width="100%"
+          showLabel={false}
+          isRequired={true}
+          control={control}
+          label="Unit Price"
+          nameInput="unit_price"
+          placeHolderText="Add Price per unit"
+          getFormErrorMessage={getFormErrorMessage}
+          rules={{
+            maxLength: {
+              value: 3,
+              message: "El campo supera los 3 caracteres",
+            },
+            required: "*El campo es requerido.",
+            pattern: {
+              value: /^\S/,
+              message: "No debe tener espacios al inicio",
+            },
+          }}
+        />
+        <Button
+          className="green-earth fullwidth text-left"
+          label="Add"
+          name="add"
+          type="submit"
+          style={{ paddingLeft: "22px" }}
+        />
       </div>
-    </>
-  )
+    </form>
+    <div className="materialsCard__grid">
+      {user?.materials.map((material) => {
+        return (
+          <RecycleMaterialCard
+            key={material.type}
+            material={material.type}
+            unit={material.unit}
+            price={material.price}
+            color={material.color}
+            removeMaterial={removeMaterial}
+          />
+        );
+      })}
+    </div>
+    <UploadPhotoInput
+      type="imageUpload"
+      title="Add Images"
+      uploadedImages={user.images}
+      setUploadedImages={setUploadedImages}
+    />
+    <div className="registerInput__container-x2">
+      <SwitchInput
+        label={"Pick up from home?"}
+        nameInput={"home_pick_up"}
+        // control={control}
+        checked={user.pick_up_from_home == 1}
+        setChecked={setPickUpFromHome}
+        isRequired={false}
+        isEdit={true}
+        value={1}
+      />
+    </div>
+    <div className="p-field" style={{ marginBottom: "24px" }}>
+      <Button onClick={onSubmit} className="dark-blue fullwidth" label="Sign up" name="submit" loading={sending} />
+    </div>
+  </>
 }
 
 export default CompanyDetailedForm
