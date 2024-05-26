@@ -28,7 +28,7 @@ const HeaderNotifications = () => {
         <MultiUseCard 
           type='notification'
           data={notification} />
-      )}
+      ) || null}
     </div>
   </div>
 }

@@ -27,16 +27,15 @@ export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
 
 export const callNotifications = createAsyncThunk("users/notifications", async (data) => {
   const res = await getNotifications(data)
-  console.log(res)
   return res;
 })
 
 const usersSlice = createSlice({
-  name: "users",
   initialState,
+  name: "users",
   reducers: {
+    resetState: state => { return {...initialState} },
     updateUser: (state, action) => state.userData = { ...action.payload },
-    resetState: (state) => initialState,
   },
   extraReducers(builder) {
     builder.addCase(getUsersList.pending, (state) => {
