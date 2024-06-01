@@ -7,6 +7,7 @@ const initialState = {
 	loading: false,
 	header: 'false',
 	headerTitle: '',
+
 };
 
 const globalSlice = createSlice({
@@ -31,7 +32,6 @@ const globalSlice = createSlice({
 		loadingData: (state, action) =>{
 			state.loading = action.payload
 		}
-
 	}
 })
 
@@ -44,6 +44,7 @@ export const {
 	updateAddLink,
 	updateThankyou,
 	setHeaderTitle,
+	loadingData
 	loadingData
 } = globalSlice.actions;
 
