@@ -82,8 +82,7 @@ const MultiUseCard = ({
       case "chat":
         return <div className={'main__container'}>
           <ProfilePhoto userPhoto={message?.picture} />
-          {message?.type == 'message' && 
-            message?.message || 
+          {(message?.type == 'offer' && 
             <div className="offer">
               <div className="detail">
                 <small>
@@ -107,7 +106,21 @@ const MultiUseCard = ({
                   <Button className="small red-state" onClick={() => message.replyOffer(message.offer, message.id, true)}><FontAwesomeIcon icon={faXmark} /></Button>
                 </div> 
               || null}
-            </div>
+            </div>) || (message?.type == 'confirmation' && 
+            <div className="offer">
+              <div className="detail">
+                <small><span className="text-green-state">Offer accepted:</span></small>
+                <h5 className={message?.same && 'text-white' || null}>{message?.title}</h5>
+                <div className="mb-1"><Button label={message?.material} className={'small ' + message?.material} /></div>
+                <div><small><b>Quantity:</b> {message?.quantity} {message?.unit}</small></div>
+                <div className="mt-1" style={{fontSize: '18px'}}><b className={message?.same && 'text-white' || 'text-green-earth'}>Final price:</b> {parseInt(message?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+              </div>
+              {!message?.same && 
+                <div className="actions">
+                  <Button className="small green-state" style={{width: '100px'}} onClick={() => message.replyOffer(message.offer, message.id)}><FontAwesomeIcon icon={faCheck} /> Pay</Button>
+                </div> 
+              || null}
+            </div>) || message?.message
           }
           <div className="date">{message?.date}</div>
         </div>

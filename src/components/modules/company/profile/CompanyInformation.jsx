@@ -44,7 +44,7 @@ const CompanyInformation = ({company, canEdit}) => {
         </div>
       </div>
       <div className="buttons__container">
-        <Link className="button green-earth" to={`/chat/${company?.username}/`}><FontAwesomeIcon icon={faPaperPlane}  {...options.iconProps} /> Contact Us</Link>
+        <Link className="button green-earth" to={`/chat/${company?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> Contact Us</Link>
         {canEdit ? 
           <Button label='Edit Profile' className="dark-blue" /> :
           <Button label='Follow' className="dark-blue" />

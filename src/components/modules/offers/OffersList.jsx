@@ -65,7 +65,7 @@ const Offers = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content centerwidth alignttop ' + (user.role == 'user' ? 'useroffers' : '')}>
-      <OfferInfo show={detail.show} offer={detail} onHide={hidePopup}  />
+      <OfferInfo type={user.role == 'user' ? 'min' : 'full'} show={detail.show} offer={detail} onHide={hidePopup}  />
       <h1 className='text-defaultCase'>Offers</h1>
       {offers?.data?.length ? 
         <DataTable paginator stripedRows lazy
@@ -101,7 +101,8 @@ const Offers = () => {
             <Column className="actions" header={null} body={offer => <>
               <Button className="small dark-blue" onClick={() => setDetail({...offer, show: true})}><FontAwesomeIcon icon={faSearch} /></Button>
               {offer.status == 0 && 
-                <Link className="button small green-earth" to={`/chat/${offer.username}/${offer.id}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
+                <Link className="button small green-earth" to={`/chat/${offer.username}/${offer.id}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> || 
+                <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
               }
             </> || null}></Column>}
         </DataTable> : 

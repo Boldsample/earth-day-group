@@ -76,7 +76,7 @@ const Chat = () => {
     }
   }
   const replyOffer = async (offer, proposal, reject = false) => {
-    if(await updateOffer(offer, proposal, reject)){
+    if(await updateOffer(offer, proposal, reject, {incoming: userId, outgoing: outgoing?.id})){
       setMessages(null)
       setSent(true)
     }

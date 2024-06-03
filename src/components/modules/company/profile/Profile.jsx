@@ -36,14 +36,14 @@ const Profile = () => {
   }, [profile])
 
   return profile && <LoadingContentOverlay>
-  <div className="layout">
-    {/*<img className="layout__background" src="/assets/register/image-2.svg" />*/}
-    <div className="profile__layout">
-      <CompanyInformation company={profile} canEdit={!id} />
-      <PhotoGallery imageCatalog={profile?.images} />
+    <div className="layout">
+      {/*<img className="layout__background" src="/assets/register/image-2.svg" />*/}
+      <div className="profile__layout">
+        <CompanyInformation company={profile} canEdit={!id} />
+        <PhotoGallery imageCatalog={profile?.images} />
+      </div>
+      <Footer/>
     </div>
-    <Footer/>
-  </div>
   </LoadingContentOverlay>
 }
 

@@ -7,7 +7,7 @@ export const createOffer = async (data) => {
   return response?.data?.id
 };
 
-export const updateOffer = async (offer, proposal, reject) => {
+export const updateOffer = async (offer, proposal, reject, chat) => {
   if(reject){
     let filterStr = `id=${proposal}`
     filterStr = encodeURIComponent(filterStr)
@@ -16,6 +16,7 @@ export const updateOffer = async (offer, proposal, reject) => {
     let filterStr = `id=${offer}`
     filterStr = encodeURIComponent(filterStr)
     await API.post(`/update/offers&filter=${filterStr}`, { status: proposal })
+    await API.post("/add/chat", { type: 'confirmation', offer, incoming: chat?.incoming, outgoing: chat?.outgoing })
   }
   return true
 }

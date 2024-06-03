@@ -97,7 +97,7 @@ const CategoryListing = ({content, category}) => {
                   </div>
                 );
               })
-            : skeletonPlaceHolder.map(skeleton =>  <CardSkeleton/>)}
+            : skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)}
         </div>
       </div>
       <Footer />

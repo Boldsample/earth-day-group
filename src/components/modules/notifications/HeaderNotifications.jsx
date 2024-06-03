@@ -17,7 +17,7 @@ const HeaderNotifications = () => {
   useEffect(() => {
     if(userId){
       const _last = notifications.length ? notifications[0].date : 0
-      //dispatch(callNotifications({user: userId, date: _last}))
+      dispatch(callNotifications({user: userId, date: _last}))
     }
   }, [userId, notifications])
   
