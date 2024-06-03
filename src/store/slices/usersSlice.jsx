@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-import { getJSON } from "@utils/useJSON"
-import { getNotifications, getUser, getUsers } from "@services/userServices"
+import { getNotifications, getUser, getUsers, updateUser as updateUserD } from "@services/userServices"
 
 const initialState = {
   loading: false,
@@ -20,6 +19,14 @@ export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
 
 export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
   const res = await getUser(id);
+  delete res.password
+  delete res.password_confirmation
+  return res;
+})
+
+export const updateUserData = createAsyncThunk("users/updateUserData", async ({data, filter}) => {
+  const _id = await updateUserD(data, filter)
+  const res = await getUser(_id);
   delete res.password
   delete res.password_confirmation
   return res;
@@ -72,6 +79,9 @@ const usersSlice = createSlice({
     builder.addCase(getUserData.rejected, (state, action) => {
       state.loading = false;
       if (action.error.code) state.error = action.error.code;
+    });
+    builder.addCase(updateUserData.fulfilled, (state, action) => {
+      state.userData = action.payload;
     });
     builder.addCase(callNotifications.fulfilled, (state, action) => {
       state.loading = false;

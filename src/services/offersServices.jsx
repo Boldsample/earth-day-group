@@ -1,5 +1,4 @@
 import { API } from "./API"
-import { saveJSON, getAllJSON } from "@utils/useJSON"
 
 export const createOffer = async (data) => {
   const response = await API.post("/add/offers", data)

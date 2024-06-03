@@ -23,6 +23,7 @@ const Header = () => {
   const logout = async (e) => {
     if(await logoutUser())
       dispatch(resetState())
+      navigate('/login/')
   };
 
   useEffect(() => {

@@ -54,8 +54,6 @@ export const updateUser = async (data, filter) => {
   })
   filterStr = encodeURIComponent(filterStr)
   const response = await API.post(`/update/users&filter=${filterStr}`, data)
-  if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message)
   return filter.id
 }
 
@@ -108,9 +106,12 @@ export const getUser = async (id) => {
 export const getUsers = async (filter = {}) => {
   //const data = await getAllJSON("users")
   let filterStr = ''
-  Object.keys(filter).map(f => {
-    filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
-  })
+  if(typeof filter == 'string')
+    filterStr = filter
+  else
+    Object.keys(filter).map(f => {
+      filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
+    })
   filterStr = encodeURIComponent(filterStr)
   const response = await API.get(`/get/users&filter=${filterStr}`)
   return response?.data?.data

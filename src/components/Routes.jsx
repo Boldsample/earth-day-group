@@ -37,7 +37,6 @@ const AppRoutes = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/recover" element={<Recover />} />
-        {/* <Route path="*" element={<Navigate to="/login/" />} /> */}
       </>}
 
       {/*   USER    */}
@@ -96,7 +95,7 @@ const AppRoutes = () => {
       <Route path="/thankyou" element={<ThankYouPage />} />
       {user?.id && thankyou.title && 
         <Route path="*" element={<Navigate to="/thankyou/" />} />}
-      {/* <Route path="*" element={<LoginForm />} /> */}
+      <Route path="*" element={<LoginForm />} />
     </Routes>
   </BrowserRouter>
 }

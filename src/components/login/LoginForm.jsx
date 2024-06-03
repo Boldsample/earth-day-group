@@ -9,8 +9,8 @@ import { useGoogleLogin } from "@react-oauth/google"
 
 import { setHeader } from '@store/slices/globalSlice'
 import { TextInput, PasswordInput } from "@ui/forms/"
+import { getUserData } from "@store/slices/usersSlice"
 import { authUser, getUserGoogle } from "@services/userServices"
-import { getUserData, updateUser } from "@store/slices/usersSlice"
 
 const LoginForm = () => {
   const dispatch = useDispatch()
