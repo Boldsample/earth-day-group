@@ -20,8 +20,6 @@ const CategoryListing = ({content, category}) => {
   useEffect(() => {
     setListing(category)
   }, [category]);
-  
-console.log(listing)
 
   const secondaryBannerData = [
     {

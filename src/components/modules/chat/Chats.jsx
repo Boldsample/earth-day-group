@@ -18,7 +18,6 @@ const Chats = () => {
     if(user.role == 'user')
       dispatch(updateAddLink('/offers/new/'))
   }, [user])
-  console.log(users)
   
   return <div className="layout">
     <img className="layout__background" src="/assets/user/image-1.svg" />

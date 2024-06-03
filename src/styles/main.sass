@@ -1,312 +1,430 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
 
 :root
-	--green-earth: #408D27
-	--blue-earth: #77BEF9
-	--white: #fff
-	--grey: #737373
-	--dark-blue: #23649A
-	--light-green: #7FAE70
-	--red-state: #EF0000
-	--light-grey: #E0E0E0
-	--green-state: #6AD447
-	--blue-versionone: #FFFBEB
-	--orange: #E88400
-	--yellow: #F3DD17
-	--light-gray: #E8E8E8
+  --green-earth: #408D27
+  --blue-earth: #77BEF9
+  --white: #fff
+  --grey: #737373
+  --dark-blue: #23649A
+  --light-green: #7FAE70
+  --red-state: #EF0000
+  --light-grey: #E0E0E0
+  --green-state: #6AD447
+  --blue-versionone: #FFFBEB
+  --orange: #E88400
+  --yellow: #F3DD17
+  --light-gray: #E8E8E8
 
 *
-	box-sizing: border-box
-	font-family: "Roboto", sans-serif
-	max-width: 100%
+  box-sizing: border-box
+  font-family: "Roboto", sans-serif
+  max-width: 100%
 html, body
-	background-color: #FFFBEB
-	color: var(--grey)
-	font-size: 16px
-	font-weight: 400
-	line-height: 1.3em
-	min-height: 100vh
-	margin: 0
-	overflow-x: hidden
-	padding: 0
+  background-color: #FFFBEB
+  color: var(--grey)
+  font-size: 16px
+  font-weight: 400
+  line-height: 1.3em
+  min-height: 100vh
+  margin: 0
+  overflow-x: hidden
+  padding: 0
 a
-	color: var(--green-earth)
-	cursor: pointer
-	text-decoration: none !important
+  color: var(--green-earth)
+  cursor: pointer
+  text-decoration: none !important
 p
-	font-size: 1.6rem
-	line-height: 1.4em
-	margin: 0 0 0.6rem
-	width: 100%
-	&.small
-		font-size: 1.2rem
+  font-size: 1.6rem
+  line-height: 1.4em
+  margin: 0 0 0.6rem
+  width: 100%
+  &.small
+    font-size: 1.2rem
 h1, h2, h3, h4, h5, h6
-	color: var(--green-earth)
-	margin: 0
-	line-height: 1em
-	width: 100%
-	.pi
-		font-size: 1.1em
-		margin-right: 0.3em
-		vertical-align: middle
+  color: var(--green-earth)
+  margin: 0
+  line-height: 1em
+  width: 100%
+  .pi
+    font-size: 1.1em
+    margin-right: 0.3em
+    vertical-align: middle
 h1
-	font-size: 5rem
-	font-weight: 900
+  font-size: 5rem
+  font-weight: 900
 h2
-	font-size: 4rem
-	font-weight: 900
+  font-size: 4rem
+  font-weight: 900
 h3
-	font-size: 3rem
-	font-weight: 900
-	line-height: 2.5em
+  font-size: 3rem
+  font-weight: 900
+  line-height: 2.5em
 h4
-	font-size: 2.4rem
-	font-weight: 900
-	line-height: 1.2em
+  font-size: 2.4rem
+  font-weight: 900
+  line-height: 1.2em
 h5
-	font-size: 1.6rem
-	font-weight: 400
-	line-height: 1.4em
+  font-size: 1.6rem
+  font-weight: 400
+  line-height: 1.4em
 h6
-	font-size: 1rem
-	font-weight: 400
-	line-height: 1em
+  font-size: 1rem
+  font-weight: 400
+  line-height: 1em
 .h7
-	font-size: 1.25rem
-	line-height: 1.5em
+  font-size: 1.25rem
+  line-height: 1.5em
 
 ul
-	font-size: 1.6rem
-	line-height: 1.4em
-	margin: 0
-	padding-left: 0.8em
-	width: 100%
-	li::marker
-		color: var(--dark-blue)
+  font-size: 1.6rem
+  line-height: 1.4em
+  margin: 0
+  padding-left: 0.8em
+  width: 100%
+  li::marker
+    color: var(--dark-blue)
 button, .button
-	background-color: var(--grey)
-	border: var(--grey) 1px solid
-	border-radius: 4px
-	color: white
-	cursor: pointer
-	display: inline-block
-	font-size: 16px
-	font-weight: 700
-	line-height: 1.5em
-	padding: 8px 16px
-	text-decoration: none !important
-	&.small
-		font-size: 14px
-		font-weight: 400
-		padding: 4px 16px
-	& + button, & + .button
-		margin-left: 20px
-	&.fullwidth
-		width: 100%
-	&.dark-blue
-		background-color: var(--dark-blue)
-		border-color: var(--dark-blue)
-		color: var(--dark-blue)
-	&.red-state
-		background-color: var(--red-state)
-		border-color: var(--red-state)
-		color: var(--red-state)
-	&.blue-earth
-		background-color: var(--blue-earth)
-		border-color: var(--blue-earth)
-		color: var(--blue-earth)
-	&.green-earth
-		background-color: var(--green-earth)
-		border-color: var(--green-earth)
-		color: var(--green-earth)
-	&:not(.outline)
-		color: white
-	&.outline
-		background: transparent
+  background-color: var(--grey)
+  border: var(--grey) 1px solid
+  border-radius: 4px
+  color: white
+  cursor: pointer
+  display: inline-block
+  font-size: 16px
+  font-weight: 700
+  line-height: 1.5em
+  padding: 8px 16px
+  text-decoration: none !important
+  &.small
+    font-size: 14px
+    font-weight: 400
+    padding: 4px 16px
+  & + button, & + .button
+    margin-left: 20px
+  &.small + .small
+    margin-left: 10px
+  &.fullwidth
+    width: 100%
+  &.dark-blue
+    background-color: var(--dark-blue)
+    border-color: var(--dark-blue)
+    color: var(--dark-blue)
+  &.red-state
+    background-color: var(--red-state)
+    border-color: var(--red-state)
+    color: var(--red-state)
+  &.blue-earth
+    background-color: var(--blue-earth)
+    border-color: var(--blue-earth)
+    color: var(--blue-earth)
+  &.green-earth
+    background-color: var(--green-earth)
+    border-color: var(--green-earth)
+    color: var(--green-earth)
+  &.green-state
+    background-color: var(--green-state)
+    border-color: var(--green-state)
+    color: var(--green-state)
+  &:not(.outline)
+    color: white
+  &.outline
+    background: transparent
+  &.Paper
+    background-color: var(--dark-blue)
+    border-color: var(--dark-blue)
+  &.Glass
+    background-color: var(--green-earth)
+    border-color: var(--green-earth)
+  &.Plastic
+    background-color: var(--orange)
+    border-color: var(--orange)
+  &.E-waste
+    background-color: var(--red-state)
+    border-color: var(--red-state)
+  &.Metal
+    background-color: var(--yellow)
+    border-color: var(--yellow)
+  &.Organic
+    background-color: var(--grey)
+    border-color: var(--grey)
 
-header
-	align-items: center
-	display: grid
-	grid-template-columns: 1fr 1fr 1fr
-	justify-items: center
-	position: absolute
-	width: 100%
-	z-index: 100
-	&.map, &.settings
-		background: white
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
-		padding: 10px 0
-	.navbar-item
-		align-items: center
-		display: flex
-		&.go-back
-			justify-self: flex-start
-			margin-left: 8rem
-			.pi
-				font-size: 4rem
-			.plus
-				align-items: center
-				border: var(--grey) 1px solid
-				border-radius: 0.5rem
-				display: inline-flex
-				height: 3rem
-				justify-content: center
-				margin-left: 1rem
-				width: 3rem
-				.pi
-					font-size: 1.5rem
-		&.icons
-			color: var(--green-earth)
-			gap: 32px
-			justify-self: flex-end
-			justify-content: flex-end
-			margin-right: 8rem
-			width: auto
-		&.logo
-			grid-column: 2
-			background: var(--green-earth)
-			border-radius: 0 0 16px 16px
-			height: 120px
-			padding: 32px 10px
-			width: 176px
-			img
-				height: 56px
+.main_header
+  align-items: center
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+  justify-items: center
+  position: absolute
+  width: 100%
+  z-index: 100
+  &.map, &.settings
+    background: white
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+    padding: 10px 0
+  .navbar-item
+    align-items: center
+    display: flex
+    &.go-back
+      justify-self: flex-start
+      margin-left: 8rem
+      .pi
+        font-size: 4rem
+      .plus
+        align-items: center
+        border: var(--grey) 1px solid
+        border-radius: 0.5rem
+        display: inline-flex
+        height: 3rem
+        justify-content: center
+        margin-left: 1rem
+        width: 3rem
+        .pi
+          font-size: 1.5rem
+    &.icons
+      color: var(--green-earth)
+      gap: 32px
+      justify-self: flex-end
+      justify-content: flex-end
+      margin-right: 8rem
+      width: auto
+    &.logo
+      grid-column: 2
+      background: var(--green-earth)
+      border-radius: 0 0 16px 16px
+      height: 120px
+      padding: 32px 10px
+      width: 176px
+      img
+        height: 56px
 
 .layout
-	display: flex
-	flex-wrap: wrap
-	justify-content: flex-end
-	min-height: 100vh
-	position: relative
-	width: 100%
-	.layout__background
-		bottom: 0
-		height: 92vh
-		left: 0
-		object-fit: cover
-		pointer-events: none
-		position: absolute
-		width: 100%
-	.main__content
-		align-content: center
-		align-self: flex-start
-		display: flex
-		min-height: 80vh
-		flex-wrap: wrap
-		padding-right: 16rem
-		padding-top: 130px
-		position: relative
-		width: 50rem
-		&.halfspace
-			padding-right: 8rem
-		&.halfwidth
-			width: 50vw
-		&.centerwidth
-			padding-right: 200px
-			padding-left: 200px
-			width: 100%
-		&.fullwidth
-			width: calc(100vw - 8rem)
-		&.fullviewportwidth
-			padding: 0
-			width: 100%
-		&.alignttop
-			align-content: flex-start
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-end
+  min-height: 100vh
+  position: relative
+  width: 100%
+  .layout__background
+    bottom: 0
+    height: 92vh
+    left: 0
+    object-fit: cover
+    pointer-events: none
+    position: absolute
+    width: 100%
+  .main__content
+    align-content: center
+    align-self: flex-start
+    display: flex
+    min-height: 80vh
+    flex-wrap: wrap
+    padding-right: 16rem
+    padding-top: 130px
+    position: relative
+    width: 50rem
+    &.halfspace
+      padding-right: 8rem
+    &.halfwidth
+      width: 50vw
+    &.centerwidth
+      padding-right: 200px
+      padding-left: 200px
+      width: 100%
+    &.fullwidth
+      width: calc(100vw - 8rem)
+    &.fullviewportwidth
+      padding: 0
+      width: 100%
+    &.alignttop
+      align-content: flex-start
 
 .p-carousel-prev, .p-carousel-next
-	display: none
+  display: none
 .p-carousel-indicators
-	bottom: 20px
-	position: absolute
-	width: 100%
-	.p-carousel-indicator
-		margin: 0
-		width: 48px
-		.p-link
-			background: white
-			border-radius: 0
-			height: 4px
-			margin: 0
-			padding: 0
-			width: 100%
-		&:nth-child(2) .p-link
-			opacity: .8
-		&:nth-child(3) .p-link
-			opacity: .6
-		&:nth-child(4) .p-link
-			opacity: .4
-	[data-p-highlight="true"]
-		.p-link
-			background: var(--dark-blue)
-			box-shadow: 0px 0px 8px rgba(255,255,255,.5)
-			opacity: 1 !important
-			transform: scaleY(1.8)
+  bottom: 20px
+  position: absolute
+  width: 100%
+  .p-carousel-indicator
+    margin: 0
+    width: 48px
+    .p-link
+      background: white
+      border-radius: 0
+      height: 4px
+      margin: 0
+      padding: 0
+      width: 100%
+    &:nth-child(2) .p-link
+      opacity: .8
+    &:nth-child(3) .p-link
+      opacity: .6
+    &:nth-child(4) .p-link
+      opacity: .4
+  [data-p-highlight="true"]
+    .p-link
+      background: var(--dark-blue)
+      box-shadow: 0px 0px 8px rgba(255,255,255,.5)
+      opacity: 1 !important
+      transform: scaleY(1.8)
 
 .flex
-	display: flex !important
-	justify-content: space-between
-	width: 100%
+  display: flex !important
+  justify-content: space-between
+  width: 100%
 .inline-block
-	display: inline-block
+  display: inline-block
 .font-black
-	font-weight: 900
+  font-weight: 900
 .font-bold
-	font-weight: 700
+  font-weight: 700
 .font-regular
-	font-weight: 400
+  font-weight: 400
 .text-green-earth
-	color: var(--green-earth)
+  color: var(--green-earth)
 .text-dark-blue
-	color: var(--dark-blue)
+  color: var(--dark-blue)
 .text-center
-	justify-content: center
-	text-align: center
+  justify-content: center
+  text-align: center
 .text-right
-	text-align: right
+  text-align: right
 .text-left
-	text-align: left
+  text-align: left
 .text-xs
-	font-size: 12px
-	line-height: 16px
+  font-size: 12px
+  line-height: 16px
 .text-lowerCase
-	text-transform: lowercase
+  text-transform: lowercase
 .text-upperCase
-	text-transform: uppercase
+  text-transform: uppercase
 .text-defaultCase
-	text-transform: initial
+  text-transform: initial
 .text-gray
-	color: var(--grey)
+  color: var(--grey)
+.text-white
+  color: var(--white)
 .text-dark-blue
-	color: var(--dark-blue)
+  color: var(--dark-blue)
+.text-red-state
+  color: var(--red-state)
+.text-green-state
+  color: var(--green-state)
 .self-end
-	justify-self: flex-end
+  justify-self: flex-end
 .fullwidth
-	width: 100%
+  width: 100%
 
 .small__text
-	font-size: 0.5em
-	line-height: 0.75em
+  font-size: 0.5em
+  line-height: 0.75em
 
+.p-datatable
+  width: 100%
+  &.no-head .p-datatable-thead
+    display: none
+  .p-datatable-tbody > tr > td 
+    padding: 4px 8px
+    .p-row-toggler
+      display: flex
+      padding: 0
+  .actions
+    text-align: right
+    width: 100px
+    button, .button
+      padding: 4px 8px
+    button.small + .small, .button.small + .small
+      margin-left: 6px
+  .p-datatable-tbody .p-datatable-row-expansion > td
+    padding: 0
+  .p-paginator
+    button
+      background: none
+      border: none
+      color: var(--grey)
+      padding: 0
+      text-align: center
+    button + button
+      margin-left: 0
+    .p-highlight
+      color: var(--green-earth)
+
+.p-dialog
+  .p-dialog-header-close, .p-galleria button
+    align-content: center
+    background: none
+    border: none
+    color: var(--grey)
+    display: flex
+    justify-items: center
+    padding: 0
+  .p-dialog-content
+    display: flex
+    column-gap: 30px
+    .default-image
+      align-items: center
+      background: var(--light-gray)
+      border-radius: 8px
+      color: var(--grey)
+      display: flex
+      font-size: 80px
+      height: 360px
+      justify-content: center
+      width: 360px
+    .p-galleria
+      width: 360px
+      .p-galleria-item img
+        border-radius: 8px
+        height: 360px
+        object-fit: contain
+        width: 100%
+      .p-galleria-thumbnail-container
+        background: none
+        .p-galleria-thumbnail-items
+          column-gap: 10px
+          display: flex
+          justify-content: center
+          .p-galleria-thumbnail-item
+            flex: none
+            img
+              background: black
+              border-radius: 8px
+              height: 80px
+              object-fit: cover
+              width: 80px
+    .content
+      align-content: center
+      align-self: flex-start
+      display: inline-flex
+      flex-wrap: wrap
+      min-height: 360px
+      min-width: 360px
+      width: 360px
+      p
+        border-bottom: 1px solid var(--grey)
+        font-size: 16px
+        padding: 8px 0
+        b
+          display: inline-block
+          width: 130px
 
 $spaces: ("1": "1.4rem", "2": "2.8rem", "3": "4.2rem", "4": "5.6rem", "5": "7rem", "6": "8.4rem", "7": "9.8rem", "8": "11.2rem")
 @each $name, $space in $spaces
-	.mt-#{$name}
-		margin-top: #{$space} !important
-	.mr-#{$name}
-		margin-right: #{$space} !important
-	.mb-#{$name}
-		margin-bottom: #{$space} !important
-	.ml-#{$name}
-		margin-left: #{$space} !important
-	.pt-#{$name}
-		padding-top: #{$space} !important
-	.pr-#{$name}
-		padding-right: #{$space} !important
-	.pb-#{$name}
-		padding-bottom: #{$space} !important
-	.pl-#{$name}
-		padding-left: #{$space} !important
+  .mt-#{$name}
+    margin-top: #{$space} !important
+  .mr-#{$name}
+    margin-right: #{$space} !important
+  .mb-#{$name}
+    margin-bottom: #{$space} !important
+  .ml-#{$name}
+    margin-left: #{$space} !important
+  .pt-#{$name}
+    padding-top: #{$space} !important
+  .pr-#{$name}
+    padding-right: #{$space} !important
+  .pb-#{$name}
+    padding-bottom: #{$space} !important
+  .pl-#{$name}
+    padding-left: #{$space} !important
 
 @media (max-width: 1380px)
-	html
-		font-size: 12px
+  html
+    font-size: 12px

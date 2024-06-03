@@ -26,8 +26,19 @@ export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
 })
 
 export const callNotifications = createAsyncThunk("users/notifications", async (data) => {
+  const info = {
+    offer: { title: 'New offer', message: 'sent you a offer.' },
+    message: { title: 'New message', message: 'sent you a message.' },
+  }
   const res = await getNotifications(data)
-  return res;
+  const _res = res.map(notification => {
+    const {title, message} = info[notification.type]
+    let _notification = {...notification}
+    _notification.title = title
+    _notification.message = message
+    return _notification
+  })
+  return _res;
 })
 
 const usersSlice = createSlice({

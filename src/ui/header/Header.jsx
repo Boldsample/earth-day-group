@@ -30,7 +30,7 @@ const Header = () => {
       dispatch(updateAddLink(''))
   }, [location])
 
-  return <header className={header}>
+  return <header className={'main_header '+header}>
     {['dashboard'].some(s => s == header) && 
       <div className="navbar-item user-info">
         <ProfilePhoto userPhoto={user?.picture} className="left" />

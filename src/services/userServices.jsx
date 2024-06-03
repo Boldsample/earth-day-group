@@ -70,11 +70,9 @@ export const addMaterials = async (data) => {
 
 export const addImages = async (formData) => {
   try {
-    console.log(formData)
     await API.post("/add_multiple/images", formData)
     return true
   } catch ({response}) {
-    console.log('test')
     return response.data
   }
 }

@@ -24,13 +24,13 @@ const ListingProfile = ({children}) => {
     }
     
     useEffect(() => {
-        if(id)
+      if(id)
         getProfileData()
-        else
+      else
         setProfile(user)
-        dispatch(setHeader('user'))
+      dispatch(setHeader('user'))
     }, [])
-    console.log(children)
+
     return profile && <div className="layout">
     {/*<img className="layout__background" src="/assets/register/image-2.svg" />*/}
         <div className="profile__layout">

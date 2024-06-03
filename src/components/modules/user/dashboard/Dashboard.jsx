@@ -28,14 +28,14 @@ const Dashboard = () => {
 		<img className="layout__background" src="/assets/intro/image-3.svg" />
 		<div className="main__content dashboard-content">
 			<div className="search mb-3">
-				<h4>Discover:</h4>
-				<span className="p-input-icon-left">
+				<h4 className="mb-1">Discover:</h4>
+				<div className="fullwidth p-input-icon-left">
 					<FontAwesomeIcon icon={faSearch} />
 					<InputText
 						placeholder="Search"
 						className="p-inputtext"
 						onChange={(e) => setFilteredModule(e.target.value)} />
-				</span>
+				</div>
 			</div>
 			<div className="card__grid">
 				{filteredModules.length > 0 ? filteredModules.map((module, key) => <Link key={key} to={module.link}>

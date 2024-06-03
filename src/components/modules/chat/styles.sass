@@ -3,7 +3,10 @@
   margin-top: -20px
   margin-bottom: 20px
   overflow: auto
+  padding-bottom: 20px
   width: 100%
+  &.offer
+    height: calc(100vh - 280px)
 .chat__messages
   display: flex
   flex-direction: column
@@ -32,6 +35,19 @@
           opacity: 0.7
           font-size: 0.7em
           width: 100%
+        .offer
+          align-items: center
+          display: flex
+          width: 100%
+          .detail
+            flex-grow: 1
+          .actions
+            button
+              border-radius: 50px
+              font-size: 20px
+              height: 50px
+              padding: 0
+              width: 50px
     &.user .multiUse__card
       background: var(--green-earth)
       color: white
@@ -47,16 +63,42 @@
       margin-top: 4px
       .profile__photo
         display: none
+.chat__offer
+  align-items: center
+  display: flex
+  flex-wrap: wrap
+  width: 100%
+  h5
+    margin-right: 20px
+    width: auto
+  .date
+    margin-left: auto
+  .chat__offer__info
+    align-items: center
+    border-top: 1px solid var(--green-earth)
+    display: flex
+    margin-top: 10px
+    padding: 10px 0
+    width: 100%
+    p
+      font-size: 12px
+      margin: 0 20px 0 0
+      width: auto
+    button
+      margin-left: auto
 .chat__input
   display: flex
+  flex-wrap: wrap
   padding: 0 60px
   width: 100%
+  .p-inputnumber
+    flex-grow: 1
   input
     background: var(--light-gray)
     border: none
     border-radius: 8px
+    flex-grow: 1
     padding: 0 20px
-    width: 100%
   .emoji
     align-items: center
     color: var(--grey)
@@ -72,3 +114,5 @@
       max-width: none
       button
         margin: 0
+  button, .button
+    margin-left: 8px

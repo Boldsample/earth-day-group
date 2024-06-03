@@ -24,10 +24,7 @@ function RadioInput({
           disabled={disabled}
           checked={field.value === value}
           inputId={nameInput + "_" + name}
-          onChange={e => {
-            console.log('Test: ', e.value, field.value)
-            field.onChange(e.value)
-          }} />
+          onChange={e => field.onChange(e.value)} />
         } />
       <label htmlFor={nameInput + "_" + name}>{name}</label>
     </div>)}

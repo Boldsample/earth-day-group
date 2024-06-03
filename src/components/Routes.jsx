@@ -37,7 +37,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/recover" element={<Recover />} />
-        <Route path="*" element={<Navigate to="/login/" />} />
+        {/* <Route path="*" element={<Navigate to="/login/" />} /> */}
       </>}
 
       {/*   USER    */}
@@ -69,6 +69,7 @@ const AppRoutes = () => {
         <Route exact path="/profile/" element={<Profile />} />
         <Route exact path="/chat" element={<Chats />} />
         <Route exact path="/chat/:contact" element={<Chat />} />
+        <Route exact path="/chat/:contact/:offer/" element={<Chat />} />
         <Route exact path="/settings/" element={<Settings />} />
         <Route exact path="/settings/profile/" element={<ProfileSettings />} />
         <Route exact path="/settings/edit/" element={<RegisterCompany />} />
@@ -78,7 +79,7 @@ const AppRoutes = () => {
         <Route path="*" element={<Navigate to="/dashboard/" />} />
       </>}
 
-      {/*   COMPANY   */}
+      {/*   VENDOR   */}
       {user.role == 'vendor' && <>
         <Route exact path="/dashboard/" element={<Dashboard />} />
         <Route exact path="/chat" element={<Chats />} />
@@ -95,7 +96,7 @@ const AppRoutes = () => {
       <Route path="/thankyou" element={<ThankYouPage />} />
       {user?.id && thankyou.title && 
         <Route path="*" element={<Navigate to="/thankyou/" />} />}
-      <Route path="*" element={<LoginForm />} />
+      {/* <Route path="*" element={<LoginForm />} /> */}
     </Routes>
   </BrowserRouter>
 }
