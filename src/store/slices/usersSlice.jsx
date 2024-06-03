@@ -12,8 +12,8 @@ const initialState = {
   notifications: [],
 }
 
-export const getUsersList = createAsyncThunk("users/getUsersList", async () => {
-  const res = await getUsers();
+export const getUsersList = createAsyncThunk("users/getUsersList", async (filter) => {
+  const res = await getUsers(filter);
   return res;
 })
 

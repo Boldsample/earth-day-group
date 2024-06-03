@@ -311,7 +311,7 @@ button, .button
 .self-end
   justify-self: flex-end
 .fullwidth
-  width: 100%
+  width: 100% !important
 
 .small__text
   font-size: 0.5em
@@ -408,7 +408,7 @@ button, .button
           display: inline-block
           width: 130px
 
-$spaces: ("1": "1.4rem", "2": "2.8rem", "3": "4.2rem", "4": "5.6rem", "5": "7rem", "6": "8.4rem", "7": "9.8rem", "8": "11.2rem")
+$spaces: ("0": "0", "1": "1.4rem", "2": "2.8rem", "3": "4.2rem", "4": "5.6rem", "5": "7rem", "6": "8.4rem", "7": "9.8rem", "8": "11.2rem")
 @each $name, $space in $spaces
   .mt-#{$name}
     margin-top: #{$space} !important

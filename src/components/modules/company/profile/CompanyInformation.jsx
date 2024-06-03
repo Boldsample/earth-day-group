@@ -1,13 +1,14 @@
 import React from 'react'
 import { Button } from 'primereact/button'
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faPhone, faLocationDot, faHouse, faGlobe } from "@fortawesome/free-solid-svg-icons"
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCard'
 
 import './profile.sass'
+import { Link } from 'react-router-dom'
 
 const CompanyInformation = ({company, canEdit}) => {
   return <div className='companyInformation__grid'>
@@ -43,7 +44,7 @@ const CompanyInformation = ({company, canEdit}) => {
         </div>
       </div>
       <div className="buttons__container">
-        <Button label='Contact Us' icon={(options) => <FontAwesomeIcon icon={faWhatsapp}  {...options.iconProps} />} className="green-earth" />
+        <Link className="button green-earth" to={`/chat/${company?.username}/`}><FontAwesomeIcon icon={faPaperPlane}  {...options.iconProps} /> Contact Us</Link>
         {canEdit ? 
           <Button label='Edit Profile' className="dark-blue" /> :
           <Button label='Follow' className="dark-blue" />

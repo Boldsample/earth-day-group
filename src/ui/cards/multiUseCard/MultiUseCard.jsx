@@ -111,6 +111,16 @@ const MultiUseCard = ({
           }
           <div className="date">{message?.date}</div>
         </div>
+      case "user":
+        return <Link to={`/chat/${data?.username}/`}>
+          <div className={'main__container'}>
+            <ProfilePhoto userPhoto={data?.picture} />
+            <div>
+              <h5>{data?.name}</h5>
+              <span>{data?.description}</span>
+            </div>
+          </div>
+        </Link>
       default:
         return null;
     }

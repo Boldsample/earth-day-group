@@ -58,7 +58,7 @@ const CategoryListing = ({content, category}) => {
       </div>
       <div className="main__content dashboard-content fullwidth content__flex">
         <div className="search mb-1 search-lenght">
-          <span className="p-input-icon-left">
+          <span className="fullwidth p-input-icon-left">
             <FontAwesomeIcon icon={faSearch} />
             <InputText
               placeholder="Search Companies"
