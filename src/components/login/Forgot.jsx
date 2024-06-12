@@ -23,7 +23,7 @@ const Forgot = () => {
 	return <div>
 		<div className="layout">
 			<img className="layout__background" src="/assets/login/image-1.svg" />
-			<div className="main__content login-form">
+			<div className="main__content verticalcenter-2 xpadding-1">
 				<h1 className="text-upperCase mb-1">Forgot password?</h1>
 				<p>Enter your registered Email ID and we’ll send you a link to reset your password.</p>
 				<div className="p-field mb-1">

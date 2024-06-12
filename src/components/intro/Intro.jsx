@@ -19,8 +19,8 @@ const Intro = () => {
 	const IntroTemplate = (item) => {
 		return <div className="layout">
 			<img className="layout__background" src={item?.img} />
-			<div className="main__content">
-				<h1 className={'text-upperCase mb-1 '+item?.classes}>{item?.title}</h1>
+			<div className="main__content verticalcenter-1 xpadding-1" style={item?.wrapperstyle}>
+				<h1 className="text-upperCase mb-1">{item?.title}</h1>
 				<p className="mb-1">{item?.content}</p>
 				{item?.list ? <ul className='mb-1'>{item.list.map((i, key) => <li key={key}>{i}</li>)}</ul> : null}
 				<div>

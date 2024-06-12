@@ -79,7 +79,7 @@ const LoginForm = () => {
   
   return <div className="layout">
     <img className="layout__background" src="/assets/login/image-1.svg" />
-    <form onSubmit={handleSubmit(onSubmit)} className="main__content login-form">
+    <form onSubmit={handleSubmit(onSubmit)} className="main__content verticalcenter-2 xpadding-1">
       <h4 className="mb-1">Login to your account</h4>
       <div className="p-field mb-1">
         <label htmlFor="email">

@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faChevronLeft, faPlus, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
@@ -41,8 +41,8 @@ const Header = () => {
 
     {!['intro', 'dashboard', 'thankyou'].some((s) => s == header) && 
       <div className="navbar-item go-back">
-        <a onClick={() => navigate(-1)}><i className="pi pi-angle-left" /></a>
-        {addLink && <Link className="plus" to={addLink}><i className="pi pi-plus" /></Link>}
+        <a onClick={() => navigate(-1)}><FontAwesomeIcon icon={faChevronLeft} /></a>
+        {addLink && <Link className="plus" to={addLink}><FontAwesomeIcon icon={faPlus} /></Link>}
       </div>
     }
 
@@ -59,7 +59,7 @@ const Header = () => {
     {['map'].some(s => s == header) && <div></div>}
 
   {!['intro', 'login', 'register'].some(s => s == header) && 
-    <div className="navbar-item icons">
+    <div className="navbar-item right-align icons">
       {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
         {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
           <ProfilePhoto userPhoto={user?.picture} />
@@ -78,9 +78,11 @@ const Header = () => {
       <Nav />
     }
 
-    {["intro", "register"].some((s) => s == header) && <div className="navbar-item">
-      <Link className="button dark-blue" to="/login/">Log in</Link>
-    </div>}
+    {["intro", "register"].some((s) => s == header) && 
+      <div className="navbar-item right-align">
+        <Link className="button dark-blue" to="/login/">Log in</Link>
+      </div>
+    }
   </header>
 }
 

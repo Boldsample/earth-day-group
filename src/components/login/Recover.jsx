@@ -40,7 +40,7 @@ const Recover = () => {
 	return <form onSubmit={handleSubmit(onSubmit)}>
 		<div className="layout">
 			<img className="layout__background" src="/assets/login/image-1.svg" />
-			<div className="main__content login-form">
+			<div className="main__content verticalcenter-2 xpadding-1">
 				<h1 className="text-upperCase mb-1">Recover</h1>
 				<p>Please enter a new password.</p>
 				<div className="registerInput__container-x2">

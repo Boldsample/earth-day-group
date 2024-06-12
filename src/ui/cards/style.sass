@@ -1,67 +1,68 @@
 .card__grid
-	display: grid
-	grid-template-columns: repeat(2, 1fr)
-	gap: 4rem
-
+  display: grid
+  gap: 40px
+  grid-template-columns: repeat(2, 1fr)
 .card
-	align-items: flex-start
-	background-color: var(--blue-earth)
-	border-radius: 1rem
-	cursor: pointer
-	display: flex
-	flex-direction: column
-	gap: 0.5rem
-	isolation: isolate
-	padding: 2rem 4rem 2rem 2rem
-	position: relative
-	transition: background-color 0.3s ease-in-out
-	width: 28rem
-	h4, h5
-		color: white
-	h4
-		font-size: 2rem
-	h5
-		font-size: 1.4rem
-	.card__icon
-		align-items: center
-		background-color: var(--dark-blue)
-		border-radius: 5rem
-		display: flex
-		flex-direction: column
-		justify-content: center
-		position: absolute
-		height: 7rem
-		right: -3rem
-		top: -3rem
-		transition: background-color 0.3s ease-in-out
-		width: 7rem
-		img
-			height: 3rem
-	&:hover
-		background-color: var(--dark-blue)
-		.card__icon
-			background-color: var(--blue-earth)
+  align-items: flex-start
+  background-color: var(--blue-earth)
+  border-radius: 8px
+  cursor: pointer
+  display: flex
+  flex-direction: column
+  gap: 5px
+  isolation: isolate
+  padding: 30px
+  position: relative
+  transition: background-color 0.3s ease-in-out
+  width: 298px
+  h4, h5
+    color: white
+    line-height: 1.4em
+  .card__icon
+    align-items: center
+    background-color: var(--dark-blue)
+    border-radius: 40px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    position: absolute
+    height: 80px
+    right: -30px
+    top: -30px
+    transition: background-color 0.3s ease-in-out
+    width: 80px
+    img
+      height: 28px
+  &:hover
+    background-color: var(--dark-blue)
+    .card__icon
+      background-color: var(--blue-earth)
 .card.dark-blue
-	background-color: var(--dark-blue)
-	.card__icon
-		background-color: var(--blue-earth)
-	&:hover
-		background-color: var(--blue-earth)
-		.card__icon
-			background-color: var(--dark-blue)
+  background-color: var(--dark-blue)
+  .card__icon
+    background-color: var(--blue-earth)
+  &:hover
+    background-color: var(--blue-earth)
+    .card__icon
+      background-color: var(--dark-blue)
 .card.light-green
-	background-color: var(--light-green)
-	.card__icon
-		background-color: var(--green-earth)
-	&:hover
-		background-color: var(--green-earth)
-		.card__icon
-			background-color: var(--light-green)
+  background-color: var(--light-green)
+  .card__icon
+    background-color: var(--green-earth)
+  &:hover
+    background-color: var(--green-earth)
+    .card__icon
+      background-color: var(--light-green)
 .card.green-earth
-	background-color: var(--green-earth)
-	.card__icon
-		background-color: var(--light-green)
-	&:hover
-		background-color: var(--light-green)
-		.card__icon
-			background-color: var(--green-earth)
+  background-color: var(--green-earth)
+  .card__icon
+    background-color: var(--light-green)
+  &:hover
+    background-color: var(--light-green)
+    .card__icon
+      background-color: var(--green-earth)
+@media (max-width: 1140px)
+  .card__grid
+    grid-template-columns: repeat(1, 1fr)
+  .card
+    width: calc(100% - 30px)

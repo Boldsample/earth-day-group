@@ -34,12 +34,12 @@ a
   cursor: pointer
   text-decoration: none !important
 p
-  font-size: 1.6rem
+  font-size: 16px
   line-height: 1.4em
-  margin: 0 0 0.6rem
+  margin: 0 0 1em
   width: 100%
   &.small
-    font-size: 1.2rem
+    font-size: 12px
 h1, h2, h3, h4, h5, h6
   color: var(--green-earth)
   margin: 0
@@ -50,33 +50,28 @@ h1, h2, h3, h4, h5, h6
     margin-right: 0.3em
     vertical-align: middle
 h1
-  font-size: 5rem
+  font-size: 50px
   font-weight: 900
 h2
-  font-size: 4rem
+  font-size: 40px
   font-weight: 900
 h3
-  font-size: 3rem
+  font-size: 30px
   font-weight: 900
-  line-height: 2.5em
 h4
-  font-size: 2.4rem
+  font-size: 24px
   font-weight: 900
-  line-height: 1.2em
 h5
-  font-size: 1.6rem
+  font-size: 16px
   font-weight: 400
-  line-height: 1.4em
 h6
-  font-size: 1rem
+  font-size: 10px
   font-weight: 400
-  line-height: 1em
 .h7
-  font-size: 1.25rem
-  line-height: 1.5em
+  font-size: 20px
 
 ul
-  font-size: 1.6rem
+  font-size: 16px
   line-height: 1.4em
   margin: 0
   padding-left: 0.8em
@@ -148,11 +143,14 @@ button, .button
     background-color: var(--grey)
     border-color: var(--grey)
 
+
+/*  HEADER START  */
 .main_header
   align-items: center
   display: grid
   grid-template-columns: 1fr 1fr 1fr
   justify-items: center
+  padding: 0 calc((100% - 1100px) / 2)
   position: absolute
   width: 100%
   z-index: 100
@@ -165,27 +163,19 @@ button, .button
     display: flex
     &.go-back
       justify-self: flex-start
-      margin-left: 8rem
-      .pi
-        font-size: 4rem
-      .plus
+      font-size: 28px
+      margin-left: 8px
+      a
         align-items: center
-        border: var(--grey) 1px solid
-        border-radius: 0.5rem
         display: inline-flex
-        height: 3rem
+        height: 30px
         justify-content: center
-        margin-left: 1rem
-        width: 3rem
-        .pi
-          font-size: 1.5rem
-    &.icons
-      color: var(--green-earth)
-      gap: 32px
-      justify-self: flex-end
-      justify-content: flex-end
-      margin-right: 8rem
-      width: auto
+        margin-right: 10px
+        width: 30px
+      .plus
+        border: var(--grey) 1px solid
+        border-radius: 8px
+        font-size: 20px
     &.logo
       grid-column: 2
       background: var(--green-earth)
@@ -195,17 +185,31 @@ button, .button
       width: 176px
       img
         height: 56px
+    &.icons
+      color: var(--green-earth)
+      gap: 32px
+      width: auto
+    &.right-align
+      justify-self: flex-end
+      justify-content: flex-end
+@media (max-width: 1140px)
+  .main_header
+    padding: 0 20px
+/*  HEADER END  */
 
+
+/*  LAYOUT START  */
 .layout
   display: flex
   flex-wrap: wrap
-  justify-content: flex-end
+  justify-content: flex-start
   min-height: 100vh
+  padding: 0 calc((100% - 1100px) / 2)
   position: relative
   width: 100%
   .layout__background
     bottom: 0
-    height: 92vh
+    height: 95vh
     left: 0
     object-fit: cover
     pointer-events: none
@@ -215,12 +219,23 @@ button, .button
     align-content: center
     align-self: flex-start
     display: flex
-    min-height: 80vh
     flex-wrap: wrap
-    padding-right: 16rem
-    padding-top: 130px
+    margin-left: 50%
+    padding-top: 140px
+    padding-bottom: 30px
     position: relative
-    width: 50rem
+    width: 50%
+    &.verticalcenter-1
+      min-height: 78vh
+    &.verticalcenter-2
+      min-height: 90vh
+    &.absoluteleft
+      margin-left: 0
+    &.width58
+      width: 58%
+    &.xpadding-1
+      padding-right: 50px
+      padding-left: 50px
     &.halfspace
       padding-right: 8rem
     &.halfwidth
@@ -236,6 +251,19 @@ button, .button
       width: 100%
     &.alignttop
       align-content: flex-start
+@media (max-width: 1140px)
+  .hide__mobile
+    display: none !important
+  .layout
+    padding: 0 20px
+    .layout__background
+      object-position: right bottom
+    .main__content
+      margin-left: 0
+      padding: 140px 0 30px !important
+      width: 100% !important
+/*  LAYOUT END  */
+
 
 .p-carousel-prev, .p-carousel-next
   display: none
@@ -408,7 +436,7 @@ button, .button
           display: inline-block
           width: 130px
 
-$spaces: ("0": "0", "1": "1.4rem", "2": "2.8rem", "3": "4.2rem", "4": "5.6rem", "5": "7rem", "6": "8.4rem", "7": "9.8rem", "8": "11.2rem")
+$spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.5em", "6": "3em", "7": "3.5em", "8": "4em")
 @each $name, $space in $spaces
   .mt-#{$name}
     margin-top: #{$space} !important
