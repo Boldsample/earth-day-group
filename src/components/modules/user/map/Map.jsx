@@ -93,9 +93,9 @@ const Map = () => {
     }
   }, [user, map])
 
-
+console.log(show)
   
-  return <div className="layout">
+  return <div className="layout fullwidth">
     {!user?.default_location && 
       <Dialog className="no-close" visible={true} onHide={changeDefault}>
         <div className='text-center'>
@@ -122,6 +122,13 @@ const Map = () => {
       <h5 className="font-bold text-gray">{show.name}</h5>
       <p>{show.email}</p>
       <p>{show.phone}</p>
+      {show?.materials?.length > 0 && 
+        <div>
+          {show?.materials?.map(({material}, key) => 
+            <Button key={key} label={material} className={'small mb-1 ' + material} />
+          )}
+        </div>
+      || null}
       {show.pick_up_from_home && <h5 className="font-bold mb-1">Pick at Home</h5>}
       <p className="small mb-1">{show.description}</p>
       <Link to={`/company/${show.id}`} className="button dark-blue">Learn more</Link>

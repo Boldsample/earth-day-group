@@ -44,18 +44,17 @@ export const getOffer = async (id) => {
 export const getOffers = async (filter, page) => {
 	let filterStr = ''
   Object.keys(filter).map(f => {
-    if(f == 'materials')
-      filterStr += (filterStr ? " AND " : "") + filter[f]
-    else 
-      filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
+    filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
-  const { data } = await API.get(`/get/offers&filter=${filterStr}&page=${page.page * page.rows}&rows=${page.rows}`)
+  const userFilter = filter?.user || ''
+  const { data } = await API.get(`/get/offers&filter=${filterStr}&userfilter=${userFilter}&page=${page.page * page.rows}&rows=${page.rows}`)
   const response = data.data.map(offer => {
     let _offer = {...offer}
     _offer.offers = _offer.offers ? JSON.parse(_offer.offers) : null
     _offer.pictures = _offer.pictures ? JSON.parse(_offer.pictures) : null
     return _offer
   })
-  return {total: data.total, data: response};
+  const materials = data.materials.map(material => ({value: material.material, value: material.material}))
+  return {total: data.total, data: response, materials: materials};
 };

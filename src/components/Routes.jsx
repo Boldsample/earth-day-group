@@ -11,7 +11,7 @@ import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Dashboard, Map, Orders, Companies, Vendors } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor } from "@components/register"
-import { Notifications, Offers, OfferNew, Chats, Chat, Settings, ProfileSettings, Terms, About, Activity } from "@modules"
+import { Notifications, Offers, OfferNew, Chats, Chat, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
 
 const AppRoutes = () => {
   const dispatch = useDispatch()
@@ -51,6 +51,7 @@ const AppRoutes = () => {
         <Route exact path="/orders/" element={<Orders />} />
         <Route exact path="/settings/" element={<Settings />} />
         <Route exact path="/settings/profile/" element={<ProfileSettings />} />
+        <Route exact path="/settings/password/" element={<Password />} />
         <Route exact path="/settings/edit/" element={<RegisterUser />} />
         <Route exact path="/settings/terms/" element={<Terms />} />
         <Route exact path="/settings/about/" element={<About />} />
@@ -71,6 +72,7 @@ const AppRoutes = () => {
         <Route exact path="/chat/:contact/:offer/" element={<Chat />} />
         <Route exact path="/settings/" element={<Settings />} />
         <Route exact path="/settings/profile/" element={<ProfileSettings />} />
+        <Route exact path="/settings/password/" element={<Password />} />
         <Route exact path="/settings/edit/" element={<RegisterCompany />} />
         <Route exact path="/settings/terms/" element={<Terms />} />
         <Route exact path="/settings/about/" element={<About />} />
@@ -85,6 +87,7 @@ const AppRoutes = () => {
         <Route exact path="/chat/:contact" element={<Chat />} />
         <Route exact path="/settings/" element={<Settings />} />
         <Route exact path="/settings/profile/" element={<ProfileSettings />} />
+        <Route exact path="/settings/password/" element={<Password />} />
         <Route exact path="/settings/edit/" element={<RegisterCompany />} />
         <Route exact path="/settings/terms/" element={<Terms />} />
         <Route exact path="/settings/about/" element={<About />} />

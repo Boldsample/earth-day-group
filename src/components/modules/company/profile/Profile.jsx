@@ -36,7 +36,7 @@ const Profile = () => {
   }, [profile])
 
   return profile && <LoadingContentOverlay>
-    <div className="layout">
+    <div className="layout fullwidth">
       {/*<img className="layout__background" src="/assets/register/image-2.svg" />*/}
       <div className="profile__layout">
         <CompanyInformation company={profile} canEdit={!id} />

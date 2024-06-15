@@ -14,9 +14,9 @@ import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, Up
 import "./style.sass"
 
 const RegisterUser = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [sending, setSending] = useState(false)
-  const user = useSelector((state) => state.users.userData);
+  const user = useSelector((state) => state.users.userData)
   const {
     watch,
     control,
@@ -51,17 +51,23 @@ const RegisterUser = () => {
     if(user.id){
       if(data.password == ''){
         delete data.password
-        delete data.password_confirmation
-      }
+        }
+      delete data.password_confirmation
       response = await updateUser({ ...data }, {id: user.id})
     }else{
       delete data.password_confirmation
       response = await createUser({ ...user, ...data })
     }
     setSending(false)
-    if(user?.id)
-      toast.success("Your profile has been updated successfully.")
-    else if(response.id)
+    if(user?.id && response?.id){
+      dispatch(updateThankyou({
+        title: "Updated successfully!",
+        link: "/settings/",
+        background: "image-1.svg",
+        button_label: "Go back to settings",
+        content: "Your profile has updated successfully!",
+      }))
+    }else if(response.id)
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",

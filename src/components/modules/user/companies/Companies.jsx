@@ -16,8 +16,8 @@ const Companies = () => {
   };
 
   const companyTemplateContent = {
+		bannerImage: "url(/assets/user/image-6.svg)",
 		title: "HELP THE PLANET AND HELP YOUR POCKET",
-		bannerImage: "url(/assets/user/image-6.svg) no-repeat center bottom"
 	
 	}
 

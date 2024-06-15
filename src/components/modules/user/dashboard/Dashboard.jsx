@@ -27,7 +27,7 @@ const Dashboard = () => {
 	return <div className="layout">
 		<img className="layout__background" src="/assets/intro/image-3.svg" />
 		<div className="main__content dashboard-content">
-			<div className="search mb-3">
+			<div className="search mb-5">
 				<h4 className="mb-1">Discover:</h4>
 				<div className="fullwidth p-input-icon-left">
 					<FontAwesomeIcon icon={faSearch} />

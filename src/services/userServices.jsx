@@ -54,7 +54,7 @@ export const updateUser = async (data, filter) => {
   })
   filterStr = encodeURIComponent(filterStr)
   const response = await API.post(`/update/users&filter=${filterStr}`, data)
-  return filter.id
+  return {id: filter.id}
 }
 
 export const addMaterials = async (data) => {
@@ -113,6 +113,11 @@ export const getUsers = async (filter = {}) => {
       filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
     })
   filterStr = encodeURIComponent(filterStr)
-  const response = await API.get(`/get/users&filter=${filterStr}`)
-  return response?.data?.data
+  const data = await API.get(`/get/users&filter=${filterStr}`)
+  const response = data?.data?.data?.map(user => {
+    let _user = {...user}
+    _user.materials = _user.materials ? JSON.parse(_user.materials) : null
+    return _user
+  })
+  return response
 }

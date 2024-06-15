@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { InputText } from "primereact/inputtext";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton";
+import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { InputText } from "primereact/inputtext"
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
+import Footer from "@ui/footer/Footer"
+import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
+import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
+
 import "./styles.sass";
-import Footer from "@ui/footer/Footer";
-import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto";
 
 const CategoryListing = ({content, category}) => {
   const [listing, setListing] = useState([]);
@@ -23,45 +25,41 @@ const CategoryListing = ({content, category}) => {
 
   const secondaryBannerData = [
     {
-      title: "100%\nRecycled",
+      title: "100% Recycled",
       icon: "/assets/icons/recycleCompanyIcon1.svg",
     },
     {
-      title: "Eco\nFriendly",
+      title: "Eco Friendly",
       icon: "/assets/icons/recycleCompanyIcon2.svg",
     },
     {
-      title: "Post\nOffer",
+      title: "Sustainable Economy",
       icon: "/assets/icons/recycleCompanyIcon3.svg",
     },
   ];
 
-  const backGroundImage = {
-    background: content.bannerImage,
-    backgroundSize: "cover"
-  }
-
-  return (
-    <div className="layout">
-      <div className="companies__banner" style={backGroundImage}>
+  return <>
+    <div className="layout autoheight template__top">
+      <div className="category__banner" style={{backgroundImage: content.bannerImage}}>
         <h1 className="text-upperCase">{content.title}</h1>
       </div>
-      <div className="secondary__banner">
-        {secondaryBannerData.map((data, key) => {
-          return (
-            <div key={key} className="icon__container">
-              <img src={data.icon} alt={data.title} />
-              <h3>{data.title}</h3>
-            </div>
-          );
-        })}
+      <div className="features">
+        {secondaryBannerData.map((data, key) => 
+          <div key={key} className="icon">
+            <img src={data.icon} alt={data.title} />
+            <h4>{data.title}</h4>
+          </div>
+        )}
       </div>
-      <div className="main__content dashboard-content fullwidth content__flex">
-        <div className="search mb-1 search-lenght">
+    </div>
+    <div className="layout autoheight category__listing">
+      <div className="main__content fullwidth pt-6">
+        <div className="search mb-1">
+          {content.searchLabel && <h3 className="text-center mb-1">{content.searchLabel}</h3>}
           <span className="fullwidth p-input-icon-left">
             <FontAwesomeIcon icon={faSearch} />
             <InputText
-              placeholder="Search Companies"
+              placeholder={"Search"}
               className="p-inputtext"
               onChange={(e) => setFilteredListing(e.target.value)}
             />
@@ -100,9 +98,11 @@ const CategoryListing = ({content, category}) => {
             : skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)}
         </div>
       </div>
+    </div>
+    <div className="layout autoheight fullwidth pt-0">
       <Footer />
     </div>
-  );
-};
+  </>
+}
 
-export default CategoryListing;
+export default CategoryListing

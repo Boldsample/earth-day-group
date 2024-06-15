@@ -15,7 +15,8 @@ const Vendors = () => {
 
   const vendorTemplateContent = {
 		title: "MARKET PLACE",
-		bannerImage: "url(/assets/user/image-7.svg) no-repeat center bottom"
+    searchLabel: "Discover products",
+		bannerImage: "url(/assets/user/image-7.svg)"
 	
 	}
 

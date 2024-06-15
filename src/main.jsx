@@ -4,7 +4,7 @@ import App from '@components/App'
 
 import "@styles/main.sass"
 import "@styles/forms.sass"
-import "primereact/resources/themes/lara-light-indigo/theme.css"
+import "primereact/resources/themes/lara-light-green/theme.css"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	// <React.StrictMode>

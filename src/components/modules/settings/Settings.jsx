@@ -1,13 +1,25 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faChevronRight, faList, faLock, faShieldHalved, faTrashCan, faUser } from '@fortawesome/free-solid-svg-icons'
 
+import { logoutUser } from '@services/userServices'
+import { resetState } from '@store/slices/usersSlice'
 import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import "./styles.sass"
 
 const Settings = () => {
 	const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const logout = async (e) => {
+    if(await logoutUser()){
+      dispatch(resetState())
+      navigate('/login/')
+    }
+  };
 
 	useEffect(() => {
 		dispatch(setHeader('settings'))
@@ -15,17 +27,17 @@ const Settings = () => {
 	}, [])
 
 	return <div className="layout" style={{background: 'white'}}>
-		<div className="main__content centerwidth">
+		<div className="main__content centerwidth verticalcenter-2">
 			<div className="settings">
-				<Link className="button" to="/settings/profile/"><i className="pi pi-user" /> My Profile <i className="pi pi-angle-right" /></Link>
-				<Link className="button" to="/settings/edit/"><i className="pi pi-lock" /> Change Password <i className="pi pi-angle-right" /></Link>
-				<Link className="button" to="/settings/terms/"><i className="pi pi-shield" /> Terms & Conditions <i className="pi pi-angle-right" /></Link>
-				<Link className="button" to="/settings/about/"><i className="pi pi-check" /> About the App <i className="pi pi-angle-right" /></Link>
-				<Link className="button" to="/settings/activity/"><i className="pi pi-shield" /> My Activity <i className="pi pi-angle-right" /></Link>
-				<a className="button"><i className="pi pi-trash" /> Delete Account <i className="pi pi-angle-right" /></a>
+				<Link className="button outline" to="/settings/profile/"><div className="icon"><FontAwesomeIcon icon={faUser} /></div> My Profile <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/settings/password/"><div className="icon"><FontAwesomeIcon icon={faLock} /></div> Change Password <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/settings/terms/"><div className="icon"><FontAwesomeIcon icon={faShieldHalved} /></div> Terms & Conditions <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/settings/about/"><div className="icon"><FontAwesomeIcon icon={faCheck} /></div> About the App <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/settings/activity/"><div className="icon"><FontAwesomeIcon icon={faList} /></div> My Activity <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<a className="button outline"><div className="icon trash"><FontAwesomeIcon icon={faTrashCan} /></div> Delete Account <FontAwesomeIcon icon={faChevronRight} /></a>
 			</div>
 			<div className="fullwidth text-center mt-3">
-				<button className="red-state" style={{width: '340px'}}>Log Out</button>
+				<button className="red-state" onClick={logout} style={{width: '340px'}}>Log Out</button>
 			</div>
 		</div>
 	</div>

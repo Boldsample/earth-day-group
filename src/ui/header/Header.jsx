@@ -21,9 +21,10 @@ const Header = () => {
   const headerTitle = useSelector((state) => state.global.headerTitle)
 
   const logout = async (e) => {
-    if(await logoutUser())
+    if(await logoutUser()){
       dispatch(resetState())
       navigate('/login/')
+    }
   };
 
   useEffect(() => {
@@ -32,6 +33,11 @@ const Header = () => {
   }, [location])
 
   return <header className={'main_header '+header}>
+
+    {!['intro', 'login', 'register'].some(s => s == header) &&
+      <Nav />
+    }
+
     {['dashboard'].some(s => s == header) && 
       <div className="navbar-item user-info">
         <ProfilePhoto userPhoto={user?.picture} className="left" />
@@ -58,24 +64,20 @@ const Header = () => {
 
     {['map'].some(s => s == header) && <div></div>}
 
-  {!['intro', 'login', 'register'].some(s => s == header) && 
-    <div className="navbar-item right-align icons">
-      {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
-        {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
-          <ProfilePhoto userPhoto={user?.picture} />
-          <small className="user-name">Hi, {user?.name}</small>
-        </div> : null}
-        <FontAwesomeIcon icon={faShoppingCart} />
-      </>}
-      <HeaderNotifications />
-      {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
-        <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
-      </>}
-    </div>
-  }
-
-    {!['intro', 'login', 'register'].some(s => s == header) &&
-      <Nav />
+    {!['intro', 'login', 'register'].some(s => s == header) && 
+      <div className="navbar-item right-align icons">
+        {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
+          {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
+            <ProfilePhoto userPhoto={user?.picture} />
+            <small className="user-name">Hi, {user?.name}</small>
+          </div> : null}
+          <FontAwesomeIcon icon={faShoppingCart} />
+        </>}
+        <HeaderNotifications />
+        {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
+          <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
+        </>}
+      </div>
     }
 
     {["intro", "register"].some((s) => s == header) && 

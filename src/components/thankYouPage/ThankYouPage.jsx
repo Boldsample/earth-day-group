@@ -15,7 +15,7 @@ const ThankYouPage = () => {
 
 	return <div className="layout">
 		<img className="layout__background" src={'/assets/thankyou/image-1.svg'} />
-		<div className="main__content fullviewportwidth text-center">
+		<div className="main__content centerwidth verticalcenter-2 text-center">
 			<div className="inline-block" style={{width: '500px'}}>
 				<h1 className="text-upperCase mb-2">{title}</h1>
 				<p className="mb-2">{content}</p>
