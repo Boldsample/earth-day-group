@@ -23,27 +23,26 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    if(profile == null){
+    if(profile == null)
       dispatch(loadingData(true))
-    }else{
-      dispatch(loadingData(false))
-    }
-    if(id)
-      getProfileData()
     else
+      dispatch(loadingData(false))
+    if(profile == null && id)
+      getProfileData()
+    else if(profile == null)
       setProfile(user)
 		dispatch(setHeader('user'))
   }, [profile])
 
   return profile && <LoadingContentOverlay>
-    <div className="layout fullwidth">
+    <div className="layout">
       {/*<img className="layout__background" src="/assets/register/image-2.svg" />*/}
-      <div className="profile__layout">
+      <div className="main__content centerfullwidth">
         <CompanyInformation company={profile} canEdit={!id} />
         <PhotoGallery imageCatalog={profile?.images} />
       </div>
-      <Footer/>
     </div>
+    <Footer/>
   </LoadingContentOverlay>
 }
 

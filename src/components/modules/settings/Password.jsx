@@ -35,7 +35,6 @@ const Password = () => {
     setSending(true)
     delete data.password_confirmation
     const response = await updateUser({ ...data }, {id: user.id})
-    console.log(response)
     setSending(false)
     if(response.id){
       dispatch(updateThankyou({

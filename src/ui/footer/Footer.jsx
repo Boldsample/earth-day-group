@@ -33,7 +33,7 @@ const Footer = () => {
         <Link to="/"><img src="/assets/earth-day-group.png" alt="Earth Day Group" /></Link>
         <p className='contactInfo__text'>Earth Day Group LLC <br />Fort Laudardale,Florida <br />United States <br />infor@earthdaygroup.com</p>
         <form action="">
-            <h6 className='white__title'>Subscribe Here</h6>
+            <h5 className='white__title'>Subscribe Here</h5>
             <div className="registerInput__container-x2">
                 <TextInput
                     className="footer__input"

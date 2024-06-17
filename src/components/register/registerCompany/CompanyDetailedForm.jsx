@@ -1,8 +1,9 @@
 import { toast } from "react-toastify"
 import { useRef, useState } from "react"
-import { useDispatch } from "react-redux"
 import { useForm } from "react-hook-form"
+import { useDispatch } from "react-redux"
 import { Button } from "primereact/button"
+import { useNavigate } from "react-router"
 
 import materials from "@json/recyclableMaterials.json"
 import { getUserData } from "@store/slices/usersSlice"
@@ -13,6 +14,7 @@ import { createUser, addImages, addMaterials, updateUser } from "@services/userS
 
 const CompanyDetailedForm = ({ user, setUser }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [sending, setSending] = useState(false)
   const numberInput = useRef(null)
   const units = [
@@ -105,9 +107,16 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     })
     await addImages(_sendImages)
     setSending(false)
-    if(user?.id)
-      toast.success("Your profile has been updated successfully.")
-    else if(response.id)
+    if(user?.id && response?.id){
+      dispatch(updateThankyou({
+        title: "Updated successfully!",
+        link: "/settings/",
+        background: "image-1.svg",
+        button_label: "Go back to settings",
+        content: "Your profile has updated successfully!",
+      }))
+      navigate('/thankyou/')
+    }else if(response.id)
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",

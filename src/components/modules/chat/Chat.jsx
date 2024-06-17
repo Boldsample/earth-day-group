@@ -83,11 +83,9 @@ const Chat = () => {
   }
 
   useEffect(() => {
-    console.log('Sent: ', sent)
     if(offer && !offerInfo)
       getOffer(offer).then(data => setOfferInfo(data))
     if(!calling && outgoing){
-      console.log('Test')
       callMessages()
     }
   }, [notifications, sent, outgoing])

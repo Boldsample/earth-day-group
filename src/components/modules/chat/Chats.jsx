@@ -26,9 +26,7 @@ const Chats = () => {
   }
 
   useEffect(() => {
-    console.log(filters)
     let _filters = !filters?.length ? "" : "AND (role='" + filters.join("' OR role='") + "')"
-    console.log(_filters)
     dispatch(getUsersList(`id<>'${user?.id}' ${_filters}`))
   }, [filters])
 	useEffect(() => {

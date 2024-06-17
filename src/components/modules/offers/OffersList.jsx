@@ -26,13 +26,11 @@ const Offers = () => {
   const [filters, setFilters] = useState({keyword: '', materials: []})
 
   const updateFilters = (name, value) => {
-    console.log(name, value)
     setFilters(prev => ({...prev, [name]: value}))
   }
   const hidePopup = () => setDetail({...detail, show: false})
   const callOffers = async () =>{
     let _filter = {}
-    console.log(filters)
     if(user.role == 'user')
       _filter['user'] = `o.user=${user?.id}`
     if(filters?.keyword != '')
