@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-import { getNotifications, getUser, getUsers, updateUser as updateUserD } from "@services/userServices"
+import { followUser, getNotifications, getUser, getUsers, updateUser as updateUserD } from "@services/userServices"
 
 const initialState = {
   loading: false,
@@ -91,11 +91,11 @@ const usersSlice = createSlice({
 });
 
 export const {
-  captureInputData,
   updateUser,
-  addCleanData,
-  addUserList,
   resetState,
+  addUserList,
+  addCleanData,
+  captureInputData,
   storeUserRegistrationData,
 } = usersSlice.actions;
 

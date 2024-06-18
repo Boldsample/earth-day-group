@@ -36,7 +36,7 @@ const ListingProfile = ({children}) => {
         <div className="profile__layout">
             <div className='companyInformation__grid'>
                 <div className="image__container">
-                    <ProfilePhoto className="profile__photo-large" size="75px" userPhoto={profile?.picture}/>
+                    <ProfilePhoto className="profile__photo-large" size="75rem" userPhoto={profile?.picture}/>
                 </div>
                 <div className="companyInformation__container">
                     {children}

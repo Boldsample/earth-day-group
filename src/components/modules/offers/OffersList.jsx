@@ -59,7 +59,7 @@ const Offers = () => {
   }
   const rowExpansionTemplate = data => <div className="p-3">
     <DataTable className="no-head" value={data.offers}>
-        <Column header="ID" field="id" className="text-center" style={{width: '40px'}}></Column>
+        <Column header="ID" field="id" className="text-center" style={{width: '40rem'}}></Column>
         <Column header="Company" body={({name, picture}) => <>
           <ProfilePhoto userPhoto={picture} />
           <b>{name}</b>
@@ -105,7 +105,7 @@ const Offers = () => {
           rowExpansionTemplate={rowExpansionTemplate}
           onPage={({page, rows}) => setPage({page, rows})}>
           {user.role == 'user' && 
-            <Column expander={({offers}) => offers?.length > 0 } style={{width: "40px"}} /> || null}
+            <Column expander={({offers}) => offers?.length > 0 } style={{width: "40rem"}} /> || null}
           {/* <Column header={null} body={ProfilePhoto}></Column> */}
           {user.role != 'user' && 
             <Column header="User" field="name"></Column>

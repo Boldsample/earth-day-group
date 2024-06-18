@@ -106,7 +106,7 @@ const Chat = () => {
   }, [open])
 
   return <div className="layout" style={{background: 'white'}}>
-    <div className="main__content centerwidth">
+    <div className="main__content centerfullwidth">
       <div ref={chatWrapper} className={'chat__scroll ' + (offer && 'offer' || '')}>
         <div className="chat__messages">
           {messages?.map((message, key) => {
@@ -134,7 +134,7 @@ const Chat = () => {
           <div className="chat__offer">
             <h5>{offerInfo?.title}</h5>
             <Button label={offerInfo?.material} className={'small ' + offerInfo?.material} />
-            <div className="date" style={{fontSize: '12px'}}>{offerInfo?.date}</div>
+            <div className="date" style={{fontSize: '12rem'}}>{offerInfo?.date}</div>
             <div className="chat__offer__info">
               <p><b>Published by:</b> {offerInfo?.name}</p>
               <p><b>Quantity:</b> {offerInfo?.quantity} {offerInfo?.unit}</p>

@@ -13,13 +13,13 @@ const PhotoGallery = ({imageCatalog}) => {
         spaceBetween={50}
         modules={[Navigation]}
         loop={imageCatalog?.length > 3}
-        rewidn={imageCatalog?.length > 3}
+        rewind={imageCatalog?.length > 3}
         navigation={imageCatalog?.length > 3}
         centeredSlides={imageCatalog?.length > 3}
         className={'slides-' + imageCatalog?.length}
         slidesPerView={imageCatalog?.length > 3 ? 3 : imageCatalog?.length}>
-          {imageCatalog?.map(image => 
-            <SwiperSlide><Image src={image?.picture} preview /></SwiperSlide>
+          {imageCatalog?.map((image, key) => 
+            <SwiperSlide key={key}><Image src={image?.picture} preview /></SwiperSlide>
           )}
       </Swiper>
     }

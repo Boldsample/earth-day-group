@@ -63,11 +63,11 @@ const UploadPhotoInput = ({
           <div className="imageCarousel__container">
             <input id="file" type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
             <label htmlFor="file" className="imageUpload__button">
-              <FontAwesomeIcon icon={faCloudArrowUp} color="#408D27" fontSize="20px" />
+              <FontAwesomeIcon icon={faCloudArrowUp} color="#408D27" fontSize="20rem" />
             </label>
             {uploadedImages?.length && uploadedImages?.map((image, key) => 
               <div key={key} className="image__container">
-                <button type="button" className="close__btn" onClick={() => removeImage(key)}><FontAwesomeIcon icon={faClose} color="green" fontSize="10px" /></button>
+                <button type="button" className="close__btn" onClick={() => removeImage(key)}><FontAwesomeIcon icon={faClose} color="green" fontSize="10rem" /></button>
                 <img className="uploadedImage" src={image.picture} alt="" />
               </div>
             ) || null}

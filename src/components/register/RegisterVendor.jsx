@@ -365,7 +365,7 @@ const RegisterVendor = () => {
               validate: value => value === getValues().password || "The password doesn't match",
             }} />
         </div>
-        <div className="p-field" style={{ marginBottom: "24px" }}>
+        <div className="p-field" style={{ marginBottom: "24rem" }}>
           <CheckBoxInput
             control={control}
             nameInput="accept_terms"
@@ -373,7 +373,7 @@ const RegisterVendor = () => {
             getFormErrorMessage={getFormErrorMessage}
             checkBoxText="I've read and accept the terms & conditions." />
         </div>
-        <div className="p-field" style={{ marginBottom: "24px" }}>
+        <div className="p-field" style={{ marginBottom: "24rem" }}>
           <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
         </div>
       </form>

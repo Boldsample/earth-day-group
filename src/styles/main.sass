@@ -19,27 +19,30 @@
   box-sizing: border-box
   font-family: "Roboto", sans-serif
   max-width: 100%
+html
+  font-size: 1px
 html, body
   background-color: #FFFBEB
   color: var(--grey)
-  font-size: 16px
   font-weight: 400
-  line-height: 1.3em
   min-height: 100vh
   margin: 0
   overflow-x: hidden
   padding: 0
+body
+  font-size: 16rem
+  line-height: 1.3em
 a
   color: var(--green-earth)
   cursor: pointer
   text-decoration: none !important
 p
-  font-size: 16px
+  font-size: 16rem
   line-height: 1.4em
   margin: 0 0 1em
   width: 100%
   &.small
-    font-size: 12px
+    font-size: 12rem
 h1, h2, h3, h4, h5, h6
   color: var(--green-earth)
   margin: 0
@@ -50,28 +53,28 @@ h1, h2, h3, h4, h5, h6
     margin-right: 0.3em
     vertical-align: middle
 h1
-  font-size: 50px
+  font-size: 50rem
   font-weight: 900
 h2
-  font-size: 40px
+  font-size: 40rem
   font-weight: 900
 h3
-  font-size: 30px
+  font-size: 30rem
   font-weight: 900
 h4
-  font-size: 24px
+  font-size: 24rem
   font-weight: 900
 h5
-  font-size: 16px
+  font-size: 16rem
   font-weight: 400
 h6
-  font-size: 10px
+  font-size: 10rem
   font-weight: 400
 .h7
-  font-size: 20px
+  font-size: 20rem
 
 ul
-  font-size: 16px
+  font-size: 16rem
   line-height: 1.4em
   margin: 0
   padding-left: 0.8em
@@ -80,24 +83,24 @@ ul
     color: var(--dark-blue)
 button, .button
   background-color: var(--grey)
-  border: var(--grey) 1px solid
-  border-radius: 4px
+  border: var(--grey) 1rem solid
+  border-radius: 4rem
   color: white
   cursor: pointer
   display: inline-block
-  font-size: 16px
+  font-size: 16rem
   font-weight: 700
   line-height: 1.5em
-  padding: 8px 16px
+  padding: 8rem 16rem
   text-decoration: none !important
   &.small
-    font-size: 14px
+    font-size: 14rem
     font-weight: 400
-    padding: 4px 16px
+    padding: 4rem 16rem
   & + button, & + .button
-    margin-left: 20px
+    margin-left: 20rem
   &.small + .small
-    margin-left: 10px
+    margin-left: 10rem
   &.fullwidth
     width: 100%
   &.dark-blue
@@ -144,7 +147,7 @@ button, .button
     border-color: var(--grey)
 
 .p-component
-  font-size: 16px
+  font-size: 16rem
 
 
 /*  HEADER START  */
@@ -153,49 +156,49 @@ button, .button
   display: grid
   grid-template-columns: 1fr 1fr 1fr
   justify-items: center
-  padding: 0 calc((100% - 1100px) / 2)
+  padding: 0 calc((100% - 1100rem) / 2)
   position: absolute
   width: 100%
   z-index: 100
   &.map, &.settings
     background: white
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
-    padding-top: 10px
-    padding-bottom: 10px
-    height: 70px
+    box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.1)
+    padding-top: 10rem
+    padding-bottom: 10rem
+    height: 70rem
   .navbar-item
     align-items: center
     display: flex
     z-index: 2
     &.go-back
       justify-self: flex-start
-      font-size: 28px
-      margin-left: 8px
+      font-size: 28rem
+      margin-left: 8rem
       a
         align-items: center
         display: inline-flex
-        height: 30px
+        height: 30rem
         justify-content: center
-        margin-right: 10px
-        width: 30px
+        margin-right: 10rem
+        width: 30rem
       .plus
-        border: var(--grey) 1px solid
-        border-radius: 8px
-        font-size: 20px
+        border: var(--grey) 1rem solid
+        border-radius: 8rem
+        font-size: 20rem
     &.user-info
       justify-self: flex-start
     &.logo
       grid-column: 2
       background: var(--green-earth)
-      border-radius: 0 0 16px 16px
-      height: 120px
-      padding: 32px 10px
-      width: 176px
+      border-radius: 0 0 16rem 16rem
+      height: 120rem
+      padding: 32rem 10rem
+      width: 176rem
       img
-        height: 56px
+        height: 56rem
     &.icons
       color: var(--green-earth)
-      gap: 32px
+      gap: 32rem
       width: auto
     &.right-align
       justify-self: flex-end
@@ -204,23 +207,23 @@ button, .button
     align-items: center
     display: flex
     height: 100vh
-    left: calc(50% - 550px)
+    left: calc(50% - 550rem)
     position: fixed
     top: 0
     z-index: 1
     .box
       background-color: var(--white)
-      border-radius: 64px
+      border-radius: 64rem
       display: flex
       flex-direction: column
-      gap: 30px
+      gap: 30rem
       justify-content: center
-      padding: 30px 16px
+      padding: 30rem 16rem
       svg
         cursor: pointer
         transition: all 0.4s ease
-        height: 30px
-        width: 30px
+        height: 30rem
+        width: 30rem
         path
           transition: all 0.4s ease
         &:hover
@@ -229,7 +232,7 @@ button, .button
             fill: var(--green-earth) !important
 @media (max-width: 1140px)
   .main_header
-    padding: 0 20px
+    padding: 0 20rem
 /*  HEADER END  */
 
 
@@ -239,7 +242,7 @@ button, .button
   flex-wrap: wrap
   justify-content: flex-start
   min-height: 100vh
-  padding: 0 calc((100% - 1100px) / 2)
+  padding: 0 calc((100% - 1100rem) / 2)
   position: relative
   width: 100%
   &.fullwidth
@@ -261,8 +264,8 @@ button, .button
     display: flex
     flex-wrap: wrap
     margin-left: 50%
-    padding-top: 140px
-    padding-bottom: 30px
+    padding-top: 140rem
+    padding-bottom: 30rem
     position: relative
     width: 50%
     &.verticalcenter-1
@@ -274,21 +277,21 @@ button, .button
     &.width58
       width: 58%
     &.fullwidth
-      margin-left: 100px
+      margin-left: 100rem
     &.xpadding-1
-      padding-right: 50px
-      padding-left: 50px
+      padding-right: 50rem
+      padding-left: 50rem
     &.halfspace
       padding-right: 8rem
     &.halfwidth
       width: 50vw
     &.centerwidth
       margin: 0 auto
-      max-width: 700px
+      max-width: 700rem
     &.centerfullwidth
       margin: 0
-      padding-right: 100px
-      padding-left: 100px
+      padding-right: 100rem
+      padding-left: 100rem
       width: auto
     &.fullviewportwidth
       padding: 0
@@ -297,12 +300,12 @@ button, .button
   .hide__mobile
     display: none !important
   .layout
-    padding: 0 20px
+    padding: 0 20rem
     .layout__background
       object-position: right bottom
     .main__content
       margin-left: 0
-      padding: 140px 0 30px !important
+      padding: 140rem 0 30rem !important
       width: 100% !important
 /*  LAYOUT END  */
 
@@ -310,16 +313,16 @@ button, .button
 .p-carousel-prev, .p-carousel-next
   display: none
 .p-carousel-indicators
-  bottom: 20px
+  bottom: 20rem
   position: absolute
   width: 100%
   .p-carousel-indicator
     margin: 0
-    width: 48px
+    width: 48rem
     .p-link
       background: white
       border-radius: 0
-      height: 4px
+      height: 4rem
       margin: 0
       padding: 0
       width: 100%
@@ -332,7 +335,7 @@ button, .button
   [data-p-highlight="true"]
     .p-link
       background: var(--dark-blue)
-      box-shadow: 0px 0px 8px rgba(255,255,255,.5)
+      box-shadow: 0rem 0rem 8rem rgba(255,255,255,.5)
       opacity: 1 !important
       transform: scaleY(1.8)
 
@@ -365,8 +368,8 @@ button, .button
 .text-left
   text-align: left
 .text-xs
-  font-size: 12px
-  line-height: 16px
+  font-size: 12rem
+  line-height: 16rem
 .text-lowerCase
   text-transform: lowercase
 .text-upperCase
@@ -409,15 +412,15 @@ button, .button
       justify-self: flex-end
       justify-items: flex-end
       .p-multiselect, .p-inputtext
-        height: 40px
-        margin-right: 8px
-        min-width: 190px
+        height: 40rem
+        margin-right: 8rem
+        min-width: 190rem
       button
-        font-size: 20px
-        height: 40px
+        font-size: 20rem
+        height: 40rem
         line-height: 1em
-        margin: 0 8px 0 0
-        padding: 0 12px
+        margin: 0 8rem 0 0
+        padding: 0 12rem
         vertical-align: top
         &:last-child
           margin-right: 0
@@ -425,23 +428,23 @@ button, .button
     color: black
   .p-datatable-tbody > tr > td
     color: var(--gray)
-    padding: 12px 8px
+    padding: 12rem 8rem
     .p-row-toggler
       display: flex
       padding: 0
   .profile__photo
     display: inline-flex
-    height: 30px
-    min-width: 30px
+    height: 30rem
+    min-width: 30rem
     vertical-align: middle
-    width: 30px
+    width: 30rem
   .actions
     text-align: right
-    width: 100px
+    width: 100rem
     button, .button
-      padding: 4px 8px
+      padding: 4rem 8rem
     button.small + .small, .button.small + .small
-      margin-left: 6px
+      margin-left: 6rem
   .p-datatable-tbody .p-datatable-row-expansion > td
     padding: 0
   .p-paginator
@@ -469,53 +472,53 @@ button, .button
     padding: 0
   .p-dialog-content
     display: flex
-    column-gap: 30px
+    column-gap: 30rem
     .default-image
       align-items: center
       background: var(--light-gray)
-      border-radius: 8px
+      border-radius: 8rem
       color: var(--grey)
       display: flex
-      font-size: 80px
-      height: 360px
+      font-size: 80rem
+      height: 360rem
       justify-content: center
-      width: 360px
+      width: 360rem
     .p-galleria
-      width: 360px
+      width: 360rem
       .p-galleria-item img
-        border-radius: 8px
-        height: 360px
+        border-radius: 8rem
+        height: 360rem
         object-fit: contain
         width: 100%
       .p-galleria-thumbnail-container
         background: none
         .p-galleria-thumbnail-items
-          column-gap: 10px
+          column-gap: 10rem
           display: flex
           justify-content: center
           .p-galleria-thumbnail-item
             flex: none
             img
               background: black
-              border-radius: 8px
-              height: 80px
+              border-radius: 8rem
+              height: 80rem
               object-fit: cover
-              width: 80px
+              width: 80rem
     .content
       align-content: center
       align-self: flex-start
       display: inline-flex
       flex-wrap: wrap
-      min-height: 360px
-      min-width: 360px
-      width: 360px
+      min-height: 360rem
+      min-width: 360rem
+      width: 360rem
       p
-        border-bottom: 1px solid var(--grey)
-        font-size: 16px
-        padding: 8px 0
+        border-bottom: 1rem solid var(--grey)
+        font-size: 16rem
+        padding: 8rem 0
         b
           display: inline-block
-          width: 130px
+          width: 130rem
 
 .p-multiselect-panel
   button
@@ -524,6 +527,25 @@ button, .button
     color: var(--gray)
     padding: 0
     text-align: center
+.p-multiselect-label-container
+  align-items: center
+  display: flex
+.p-inputtext, .p-multiselect-label
+  padding: 12rem
+.p-image-action.p-link
+  align-items: center
+  display: flex
+  height: 36rem
+  justify-content: center
+  padding: 0
+  width: 36rem
+.p-image-preview-indicator .p-icon, .p-image-action.p-link .p-icon
+  height: 24rem
+  width: 24rem
+.p-tooltip.p-tooltip-right, .p-tooltip.p-tooltip-left
+  padding: 0 4rem
+.p-tooltip .p-tooltip-text
+  padding: 12rem
 
 $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.5em", "6": "3em", "7": "3.5em", "8": "4em")
 @each $name, $space in $spaces
@@ -544,6 +566,6 @@ $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.
   .pl-#{$name}
     padding-left: #{$space} !important
 
-@media (max-width: 1380px)
+@media (min-width: 1280px)
   html
-    font-size: 12px
+    font-size: 0.08vw

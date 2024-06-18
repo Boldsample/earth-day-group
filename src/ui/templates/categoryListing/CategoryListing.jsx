@@ -72,9 +72,9 @@ const CategoryListing = ({content, category}) => {
                 return (
                   <div key={key} className="recycleCompanyCard__container">
                     <ProfilePhoto
+                      size="35rem"
                       className="recycleCompanyProfile__photo"
                       userPhoto={company.picture}
-                      size="35px"
                     />
                     <div className="contactInformation__layout">
                       <div className="contactInformation__container">

@@ -88,7 +88,7 @@ const Recover = () => {
 							}
 						}} />
 				</div>
-				<div className="p-field" style={{ marginBottom: "24px" }}>
+				<div className="p-field mb-4">
 					<Button className="dark-blue fullwidth" label="Sign up" type="submit" loading={sending} />
 				</div>
 			</div>
