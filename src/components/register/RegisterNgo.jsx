@@ -1,0 +1,342 @@
+import { toast } from "react-toastify"
+import { useForm } from "react-hook-form"
+import { Button } from "primereact/button"
+import { useEffect, useState } from "react"
+import { Autocomplete } from "@react-google-maps/api"
+import { useDispatch, useSelector } from "react-redux"
+
+import { getUserData } from "@store/slices/usersSlice"
+import { updateThankyou } from "@store/slices/globalSlice"
+import { setHeader, setHeaderTitle } from "@store/slices/globalSlice"
+import { addImages, createUser, updateUser } from "@services/userServices"
+import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
+
+import "./style.sass"
+
+const RegisterNgo = () => {
+  const dispatch = useDispatch()
+  const [sending, setSending] = useState(false)
+  const user = useSelector((state) => state.users.userData)
+  const {
+    watch,
+    control,
+    setValue,
+    setFocus,
+    setError,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      role: "ngo",
+      password: "",
+      name: user?.name || "",
+      phone: user?.phone || "",
+      email: user?.email || "",
+      password_confirmation: "",
+      images: user?.images || [],
+      picture: user?.picture || "",
+      address: user?.address || "",
+      username: user?.username || "",
+      description: user?.description || "",
+      accept_terms: user?.accept_terms && true || false,
+      organization_type: user?.organization_type || 0,
+    },
+  })
+
+  const setAutocomplete = autocomplete => window.autocomplete = autocomplete
+  const onPlaceChanged = () => setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+
+  const radioData = [
+    { name: "Charity Home", value: 1 },
+    { name: "Adoption Center", value: 2 },
+    { name: "Both", value: 3 },
+  ]
+  const setUploadedImages = (images) => {
+    setValue('images', images)
+  }
+  const onSubmit = async (data) => {
+    let response
+    let _user = { ...user, ...data }
+    delete _user.images
+    setSending(true)
+    if(user.id){
+      if(_user.password == ''){
+        delete _user.password
+        delete _user.password_confirmation
+      }
+      response = await updateUser({ ..._user }, {id: user.id})
+    }else{
+      delete _user.password_confirmation
+      response = await createUser({ ..._user })
+    }
+    if(response.field){
+      setFocus(response.field)
+      setError(response.field, { type: "manual", message: response.message })
+      setSending(false)
+      return
+    }
+    const _sendImages = data.images.map(image => {
+      let _image = {...image}
+      _image.user = response.id
+      return _image
+    })
+    await addImages(_sendImages)
+    setSending(false)
+    if(user?.id)
+      toast.success("Your profile has been updated successfully.")
+    else if(response.id)
+      dispatch(updateThankyou({
+        title: "Congrats!",
+        link: "/dashboard/",
+        background: "image-1.svg",
+        button_label: "Go to dashboard",
+        content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+      }))
+    dispatch(getUserData(response.id))
+  }
+
+  useEffect(() => {
+    if(user?.id){
+      dispatch(setHeader('settings'))
+      dispatch(setHeaderTitle('Edit Profile'))
+    }else
+      dispatch(setHeader("register"));
+  }, []);
+
+  return <div className="layout">
+    <img className="layout__background" src="/assets/register/image-2.svg" />
+    <div className="main__content xpadding-1">
+      <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
+        <UploadPhotoInput
+          watch={watch}
+          control={control}
+          setError={setError}
+          setValue={setValue}
+          getValues={getValues}
+          type="profilePhotoUpload" />
+        <div className="registerInput__container-x2">
+          <TextInput
+            width="100%"
+            nameInput="name"
+            control={control}
+            showLabel={false}
+            isRequired={true}
+            labelName="Organization Name"
+            placeHolderText="Organization Name*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 20,
+                message: "El campo supera los 20 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
+          <TextInput
+            width="100%"
+            control={control}
+            showLabel={false}
+            nameInput="email"
+            isRequired={true}
+            labelName="Organization E-mail"
+            placeHolderText="Organization E-mail*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 60,
+                message: "El campo supera los 60 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Please enter a valid e-mail address",
+              },
+            }} />
+        </div>
+        <div className="registerInput__container-x2">
+          <TextInput
+            width="100%"
+            control={control}
+            showLabel={false}
+            isRequired={true}
+            labelName="Username"
+            nameInput="username"
+            placeHolderText="Username*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 20,
+                message: "El campo supera los 20 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
+          <div className="fullwidth" onKeyDown={(e) => { if(e.key === "Enter") e.preventDefault(); }}>
+            <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged} onKeyDown={e => { if(e.key === "Enter") e.preventDefault() }}>
+              <TextInput
+                width="100%"
+                control={control}
+                showLabel={false}
+                isRequired={true}
+                autocomplete="off"
+                labelName="Address"
+                nameInput="address"
+                placeHolderText="Address*"
+                getFormErrorMessage={getFormErrorMessage}
+                rules={{
+                  required: "*El campo es requerido.",
+                  pattern: {
+                    value: /^\S/,
+                    message: "No debe tener espacios al inicio",
+                  },
+                }} />
+            </Autocomplete>
+          </div>
+        </div>
+        <div className="registerInput__container-x2">
+          <TextInput
+            width="100%"
+            control={control}
+            showLabel={false}
+            isRequired={true}
+            labelName="Website"
+            nameInput="website"
+            placeHolderText="Website"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 20,
+                message: "El campo supera los 20 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
+          <NumberInput
+            width="100%"
+            showLabel={false}
+            control={control}
+            isRequired={true}
+            nameInput="phone"
+            label="Phone Number"
+            placeHolderText="Phone Number*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 12,
+                message: "El campo supera los 7 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
+        </div>
+        <div className="registerInput__container-x2">
+          <div className="fullwidth">
+            <RadioInput
+              data={radioData}
+              showLabel={true}
+              control={control}
+              isRequired={true}
+              labelName="Organization Type"
+              nameInput="organization_type"
+              rules={{
+                required: true,
+              }} />
+          </div>
+        </div>
+        <div className="registerInput__container-x1">
+          <TextAreaInput
+            showLabel={true}
+            control={control}
+            isRequired={false}
+            label="Iniciative*"
+            nameInput="description"
+            placeHolderText="Tell us about the your inicitative"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 230,
+                message: "El campo supera los 230 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
+        </div>
+        <UploadPhotoInput
+          type="imageUpload"
+          title="Add Images"
+          uploadedImages={watch('images')}
+          setUploadedImages={setUploadedImages} />
+        <div className="registerInput__container-x2">
+          <PasswordInput
+            width="100%"
+            maxLength={20}
+            label="Password"
+            showLabel={true}
+            control={control}
+            nameInput="password"
+            isRequired={!user?.id}
+            placeHolderText="Enter password"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: user?.id ? undefined : {
+                value: 20,
+                message: "El campo supera los 20 caracteres",
+              },
+              required: user?.id ? undefined : "*El campo es requerido.",
+              pattern: user?.id ? undefined : {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                message:
+                  "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+              },
+            }} />
+          <PasswordInput
+            width="100%"
+            label="&nbsp;"
+            maxLength={20}
+            feedback={false}
+            showLabel={true}
+            control={control}
+            className="noLabel"
+            isRequired={!user?.id}
+            nameInput="password_confirmation"
+            placeHolderText="Confirm Password"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              required: user?.id ? undefined : "*El campo es requerido.",
+              validate: value => value === getValues().password || "The password doesn't match",
+            }} />
+        </div>
+        <div className="p-field" style={{ marginBottom: "24px" }}>
+          <CheckBoxInput
+            control={control}
+            nameInput="accept_terms"
+            rules={{ required: "Accept is required." }}
+            getFormErrorMessage={getFormErrorMessage}
+            checkBoxText="I've read and accept the terms & conditions." />
+        </div>
+        <div className="p-field" style={{ marginBottom: "24px" }}>
+          <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+export default RegisterNgo

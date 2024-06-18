@@ -16,7 +16,7 @@
 	{
 		"title": "Social Organization Animal Shelter:",
 		"className": "dark-blue",
-		"link": "/",
+		"link": "/register/ngo",
 		"icon": "/assets/icons/social-organization.svg",
 		"description": "Register your social organization and let many more people know about your work."
 	},

@@ -10,8 +10,9 @@ import { getUserData } from "@store/slices/usersSlice"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Dashboard, Map, Orders, Companies, Vendors } from "@modules/user"
-import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor } from "@components/register"
+import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
 import { Notifications, Offers, OfferNew, Chats, Chat, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
+
 
 const AppRoutes = () => {
   const dispatch = useDispatch()
@@ -34,6 +35,7 @@ const AppRoutes = () => {
         <Route exact path="/register/user" element={<RegisterUser />} />
         <Route exact path="/register/company" element={<RegisterCompany />} />
         <Route exact path="/register/vendor" element={<RegisterVendor />} />
+        <Route exact path="/register/ngo" element={<RegisterNgo />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/recover" element={<Recover />} />
