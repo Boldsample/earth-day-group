@@ -1,38 +1,38 @@
 .card__grid
   display: grid
-  gap: 40px
+  gap: 40rem
   grid-template-columns: repeat(2, 1fr)
 .card
   align-items: flex-start
   background-color: var(--blue-earth)
-  border-radius: 8px
+  border-radius: 8rem
   cursor: pointer
   display: flex
   flex-direction: column
-  gap: 5px
+  gap: 5rem
   isolation: isolate
-  padding: 30px
+  padding: 30rem
   position: relative
   transition: background-color 0.3s ease-in-out
-  width: 298px
+  width: 298rem
   h4, h5
     color: white
     line-height: 1.4em
   .card__icon
     align-items: center
     background-color: var(--dark-blue)
-    border-radius: 40px
+    border-radius: 40rem
     display: flex
     flex-direction: column
     justify-content: center
     position: absolute
-    height: 80px
-    right: -30px
-    top: -30px
+    height: 80rem
+    right: -30rem
+    top: -30rem
     transition: background-color 0.3s ease-in-out
-    width: 80px
+    width: 80rem
     img
-      height: 28px
+      height: 28rem
   &:hover
     background-color: var(--dark-blue)
     .card__icon
@@ -65,4 +65,4 @@
   .card__grid
     grid-template-columns: repeat(1, 1fr)
   .card
-    width: calc(100% - 30px)
+    width: calc(100% - 30rem)

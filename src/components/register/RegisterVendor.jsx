@@ -1,6 +1,7 @@
 import { toast } from "react-toastify"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
+import { useNavigate } from "react-router"
 import { useEffect, useState } from "react"
 import { Autocomplete } from "@react-google-maps/api"
 import { useDispatch, useSelector } from "react-redux"
@@ -15,6 +16,7 @@ import "./style.sass"
 
 const RegisterVendor = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const {
@@ -85,9 +87,16 @@ const RegisterVendor = () => {
     })
     await addImages(_sendImages)
     setSending(false)
-    if(user?.id)
-      toast.success("Your profile has been updated successfully.")
-    else if(response.id)
+    if(user?.id && response?.id){
+      dispatch(updateThankyou({
+        title: "Updated successfully!",
+        link: "/settings/",
+        background: "image-1.svg",
+        button_label: "Go back to settings",
+        content: "Your profile has updated successfully!",
+      }))
+      navigate('/thankyou/')
+    }else if(response.id)
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",
@@ -356,7 +365,7 @@ const RegisterVendor = () => {
               validate: value => value === getValues().password || "The password doesn't match",
             }} />
         </div>
-        <div className="p-field" style={{ marginBottom: "24px" }}>
+        <div className="p-field" style={{ marginBottom: "24rem" }}>
           <CheckBoxInput
             control={control}
             nameInput="accept_terms"
@@ -364,7 +373,7 @@ const RegisterVendor = () => {
             getFormErrorMessage={getFormErrorMessage}
             checkBoxText="I've read and accept the terms & conditions." />
         </div>
-        <div className="p-field" style={{ marginBottom: "24px" }}>
+        <div className="p-field" style={{ marginBottom: "24rem" }}>
           <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
         </div>
       </form>

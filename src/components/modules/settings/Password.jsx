@@ -35,7 +35,6 @@ const Password = () => {
     setSending(true)
     delete data.password_confirmation
     const response = await updateUser({ ...data }, {id: user.id})
-    console.log(response)
     setSending(false)
     if(response.id){
       dispatch(updateThankyou({
@@ -107,7 +106,7 @@ const Password = () => {
               validate: value => value === getValues().password || "The password doesn't match",
             }} />
         </div>
-        <div className="p-field" style={{ marginBottom: "24px" }}>
+        <div className="p-field" style={{ marginBottom: "24rem" }}>
           <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
         </div>
       </form>

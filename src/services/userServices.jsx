@@ -82,29 +82,23 @@ export const getNotifications = async (filter) => {
 
 export const logoutUser = async () => {
   Cookies.remove('edgActiveUser')
-  //await API.post("/logout")
-
   return true
 }
 
 export const recoverUser = async (data, validate) => {
   const response = saveJSON("users", data, "update", validate)
-  //await API.post("/register", data)
   if (response?.status == 404)
     toast.error(response.status + ": " + response.data.message)
   return true
 }
 
-export const getUser = async (id) => {
-  //   const data = await getJSON("users")
-  //   data.images = await getAllJSON("images", { user: data.id })
-  //   data.materials = await getAllJSON("materials", { user: data.id })
-  const { data } = await API.get(`/user/${id}`)
+export const getUser = async (id, user = null) => {
+  const filter = user != null ? `&user=${user}` : ''
+  const { data } = await API.get(`/user/${id}${filter}`)
   return data.data
 }
 
 export const getUsers = async (filter = {}) => {
-  //const data = await getAllJSON("users")
   let filterStr = ''
   if(typeof filter == 'string')
     filterStr = filter
@@ -120,4 +114,10 @@ export const getUsers = async (filter = {}) => {
     return _user
   })
   return response
+}
+
+export const followUser = async (senddata) => {
+  console.log(senddata)
+  const {data} = await API.post(`/follow/`, senddata)
+  return data.id
 }

@@ -63,7 +63,7 @@ const MultiUseCard = ({
             <Button label={data?.material} className="small green-earth" />
             <Button label={data?.quantity + ' ' + data?.unit} className="small" />
             <div className="flex">
-              <p className="date" style={{textAlign: 'left', width: '200px'}}>
+              <p className="date" style={{textAlign: 'left', width: '200rem'}}>
                 {data?.name}<br />
                 Asking price: $ {data?.price}
               </p>
@@ -98,7 +98,7 @@ const MultiUseCard = ({
                 <div className="mb-1"><Button label={message?.material} className={'small ' + message?.material} /></div>
                 <div><small><b>Quantity:</b> {message?.quantity} {message?.unit}</small></div>
                 <div><small><b>Asking price:</b> {parseInt(message?.asking).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</small></div>
-                <div className="mt-1" style={{fontSize: '18px'}}><b className={message?.same && 'text-white' || 'text-green-earth'}>Proposal:</b> {parseInt(message?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+                <div className="mt-1" style={{fontSize: '18rem'}}><b className={message?.same && 'text-white' || 'text-green-earth'}>Proposal:</b> {parseInt(message?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
               </div>
               {!message?.same && message?.status == 0 && !message.rejected && 
                 <div className="actions">
@@ -113,11 +113,11 @@ const MultiUseCard = ({
                 <h5 className={message?.same && 'text-white' || null}>{message?.title}</h5>
                 <div className="mb-1"><Button label={message?.material} className={'small ' + message?.material} /></div>
                 <div><small><b>Quantity:</b> {message?.quantity} {message?.unit}</small></div>
-                <div className="mt-1" style={{fontSize: '18px'}}><b className={message?.same && 'text-white' || 'text-green-earth'}>Final price:</b> {parseInt(message?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+                <div className="mt-1" style={{fontSize: '18rem'}}><b className={message?.same && 'text-white' || 'text-green-earth'}>Final price:</b> {parseInt(message?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
               </div>
               {!message?.same && 
                 <div className="actions">
-                  <Button className="small green-state" style={{width: '100px'}} onClick={() => message.replyOffer(message.offer, message.id)}><FontAwesomeIcon icon={faCheck} /> Pay</Button>
+                  <Button className="small green-state" style={{width: '100rem'}} onClick={() => message.replyOffer(message.offer, message.id)}><FontAwesomeIcon icon={faCheck} /> Pay</Button>
                 </div> 
               || null}
             </div>) || message?.message

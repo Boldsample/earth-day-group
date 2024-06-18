@@ -9,10 +9,11 @@ import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCa
 
 import './profile.sass'
 
-const CompanyInformation = ({company, canEdit}) => {
+const CompanyInformation = ({company, canEdit, doFollow}) => {
+
   return <div className='companyInformation__grid'>
     <div className="image__container">
-      <ProfilePhoto className="profile__photo-large" size="75px" userPhoto={company?.picture}/>
+      <ProfilePhoto className="profile__photo-large" size="75rem" userPhoto={company?.picture}/>
     </div>
     <div className="companyInformation__container">
       <h2>{company?.name}</h2>
@@ -45,8 +46,8 @@ const CompanyInformation = ({company, canEdit}) => {
       <div className="buttons__container">
         <Link className="button green-earth" to={`/chat/${company?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> Contact Us</Link>
         {canEdit && 
-          <Button className="dark-blue"><FontAwesomeIcon icon={faPen} /> Edit Profile</Button> || 
-          <Button className="dark-blue"><FontAwesomeIcon icon={faHeart} /> Follow</Button>
+          <Link className="dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> Edit Profile</Link> || 
+          <Button className={company?.followed ? 'red-state' : 'dark-blue'} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> {company?.followed ? 'Unfollow' : 'Follow'}</Button>
         }
       </div>
     </div>

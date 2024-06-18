@@ -26,9 +26,7 @@ const Chats = () => {
   }
 
   useEffect(() => {
-    console.log(filters)
     let _filters = !filters?.length ? "" : "AND (role='" + filters.join("' OR role='") + "')"
-    console.log(_filters)
     dispatch(getUsersList(`id<>'${user?.id}' ${_filters}`))
   }, [filters])
 	useEffect(() => {
@@ -37,7 +35,7 @@ const Chats = () => {
   
   return <div className="layout">
     <img className="layout__background" src="/assets/user/image-1.svg" />
-    <div className="main__content halfspace halfwidth alignttop">
+    <div className="main__content">
       <div className="search mb-0">
         <h1 className="text-defaultCase">Chat</h1>
         <div className="mb-1">

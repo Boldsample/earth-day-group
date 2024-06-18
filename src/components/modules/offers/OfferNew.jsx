@@ -166,7 +166,7 @@ const OfferNew = () => {
             uploadedImages={uploadedImages}
             setUploadedImages={setUploadedImages}
             className="imagesHub__container-variant mb-1" />
-          <div className="p-field" style={{ marginBottom: "24px" }}>
+          <div className="p-field" style={{ marginBottom: "24rem" }}>
             <Button className="dark-blue fullwidth" label="Post" type="submit" loading={sending} />
           </div>
         </form>

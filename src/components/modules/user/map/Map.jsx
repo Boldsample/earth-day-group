@@ -57,7 +57,6 @@ const Map = () => {
     const geocoder = new window.google.maps.Geocoder()
     await loadMarkers()
     if(location == 'current'){
-      console.log('current')
       navigator?.geolocation.getCurrentPosition(
         ({ coords: { latitude: lat, longitude: lng } }) => {
           const pos = { lat, lng };
@@ -66,7 +65,6 @@ const Map = () => {
       )
     }
     else{
-      console.log(user.address)
       geocoder.geocode({ address: user.address }, (response) => {
         if(response?.length > 0){
           const { lat, lng } = response[0].geometry.location
@@ -88,12 +86,9 @@ const Map = () => {
     dispatch(setHeader('map'))
     dispatch(setHeaderTitle('Mapa'))
     if(map && user?.default_location){
-      console.log('test')
       toCurrentLocation(user.default_location)
     }
   }, [user, map])
-
-console.log(show)
   
   return <div className="layout fullwidth">
     {!user?.default_location && 
