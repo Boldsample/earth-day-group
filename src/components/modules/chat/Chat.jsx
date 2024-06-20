@@ -136,10 +136,11 @@ const Chat = () => {
             <Button label={offerInfo?.material} className={'small ' + offerInfo?.material} />
             <div className="date" style={{fontSize: '12rem'}}>{offerInfo?.date}</div>
             <div className="chat__offer__info">
-              <p><b>Published by:</b> {offerInfo?.name}</p>
+              <p>You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+              {/* <p><b>Published by:</b> {offerInfo?.name}</p>
               <p><b>Quantity:</b> {offerInfo?.quantity} {offerInfo?.unit}</p>
-              <p><b>Asking price:</b> {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-              <Button type="button" className="small green-earth" onClick={() => setShow(true)}><FontAwesomeIcon icon={faSearch} /> See more</Button>
+              <p><b>Asking price:</b> {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p> */}
+              <Button type="button" className="small green-earth" onClick={() => setShow(true)}><FontAwesomeIcon icon={faSearch} /> See Offer Details</Button>
             </div>
           </div>
           <InputNumber
@@ -149,10 +150,10 @@ const Chat = () => {
             mode="currency"
             value={proposal}
             useGrouping={true}
-            placeholder="Price proposal*"
+            placeholder="Your offer proposal*"
             onValueChange={e => setProposal(e?.value)} />
-          <Link className="button red-state" to={`/chat/${contact}/`}>Cancel</Link>
           <button className={!proposal ? '' : 'dark-blue'} type="submit" disabled={!proposal}>Send offer</button>
+          <Link className="button red-state" to={`/chat/${contact}/`}>Cancel</Link>
         </form>
       }
     </div>
