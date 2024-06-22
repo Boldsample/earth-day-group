@@ -1,4 +1,3 @@
-import { toast } from "react-toastify"
 import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
@@ -35,10 +34,6 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     },
   })
 
-  const setSwitch = () => {
-	  const _value = user.pick_up_from_home == 1 ? 0 : 1
-    setUser({ ...user, pick_up_from_home: _value })
-  }
   const setUploadedImages = (images) => {
     setUser({ ...user, images: images })
   }
@@ -73,6 +68,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     numberInput.current.getInput().blur()
   }
   const onSubmit = async () => {
+    console.log(1)
     let response
     let _user = { ...user }
     delete _user.materials
@@ -116,7 +112,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         content: "Your profile has updated successfully!",
       }))
       navigate('/thankyou/')
-    }else if(response.id)
+    }else if(response.id){
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",
@@ -124,6 +120,8 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         button_label: "Go to dashboard",
         content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
       }))
+      navigate('/thankyou/')
+    }
     dispatch(getUserData(response.id))
 	}
 

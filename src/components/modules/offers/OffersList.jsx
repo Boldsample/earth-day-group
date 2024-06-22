@@ -59,7 +59,7 @@ const Offers = () => {
   }
   const rowExpansionTemplate = data => <div className="p-3">
     <DataTable className="no-head" value={data.offers}>
-        <Column header="ID" field="id" className="text-center" style={{width: '40rem'}}></Column>
+        <Column header="ID" body={() => "-"} field="id" className="text-center" style={{width: '40rem'}}></Column>
         <Column header="Company" body={({name, picture}) => <>
           <ProfilePhoto userPhoto={picture} />
           <b>{name}</b>
@@ -77,6 +77,7 @@ const Offers = () => {
           <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>}></Column>
     </DataTable>
   </div>
+  console.log(offers)
 
   useEffect(() => {
     callOffers()
@@ -90,7 +91,7 @@ const Offers = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
-      <h1 className="text-defaultCase">Offers</h1>
+      <h1 className="text-defaultCase mb-1">Offers</h1>
       <OfferInfo type={user.role == 'user' ? 'min' : 'full'} show={detail.show} offer={detail} onHide={hidePopup}  />
       {offers?.data?.length ? 
         <DataTable paginator stripedRows lazy
@@ -108,7 +109,7 @@ const Offers = () => {
             <Column expander={({offers}) => offers?.length > 0 } style={{width: "40rem"}} /> || null}
           {/* <Column header={null} body={ProfilePhoto}></Column> */}
           {user.role != 'user' && 
-            <Column header="User" field="name"></Column>
+            <Column header="User" body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
           || null}
           <Column header="Title" field="title"></Column>
           <Column header="Material" body={({material}) => 

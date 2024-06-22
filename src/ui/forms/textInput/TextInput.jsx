@@ -12,10 +12,11 @@ const TextInput = ({
 	iconName,
 	maxLength,
 	nameInput,
-	showLabel,
 	isRequired,
 	type = "text",
+  labelName = "",
 	disabled = false,
+	showLabel = true,
 	autocomplete = "on",
 	getFormErrorMessage,
 	placeHolderText = "",
@@ -48,7 +49,7 @@ const TextInput = ({
 
 	return <div className="p-field">
 		{showLabel ? <label htmlFor={nameInput}>
-			{label} {isRequired && <span className="text-red-600">*</span>}
+			{labelName} {isRequired && <span className="text-red-600">*</span>}
 			{renderInput()}
 		</label> : renderInput()}
 	</div>

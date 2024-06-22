@@ -34,7 +34,7 @@ const Map = () => {
       setCurrent({ lat: _location.lat(), lng: _location.lng() })
   }
   const loadMarkers = async () => {
-    let _response = await getUsers("(role='company' OR role='vendors')")
+    let _response = await getUsers(`(role='company' OR role='vendors')`, 'full')
     const geocoder = new window.google.maps.Geocoder()
     const geocodePromises = _response?.map(async marker => {
       return new Promise((resolve, reject) => {

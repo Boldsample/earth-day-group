@@ -9,7 +9,7 @@ const Vendors = () => {
   const [vendors, setVendors] = useState([]);
 
   const loadVendors = async (filter = { role: "vendor" }) => {
-    let _vendors = await getUsers(filter);
+    let _vendors = await getUsers(filter, 'full');
     setVendors(_vendors);
   };
 

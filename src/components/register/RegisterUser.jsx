@@ -70,7 +70,7 @@ const RegisterUser = () => {
         content: "Your profile has updated successfully!",
       }))
       navigate('/thankyou/')
-    }else if(response.id)
+    }else if(response.id){
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",
@@ -78,7 +78,8 @@ const RegisterUser = () => {
         button_label: "Go to dashboard",
         content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
       }))
-    else{
+      navigate('/thankyou/')
+    }else{
       setFocus(response.field)
       setError(response.field, { type: "manual", message: response.message })
       return

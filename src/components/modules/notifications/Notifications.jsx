@@ -14,14 +14,16 @@ const Notifications = () => {
   
   return <div className="layout">
     <img className="layout__background" src="/assets/user/image-5.svg" />
-    <div className="main__content">
+    <div className="main__content verticalcenter-1">
       <h1 className='text-defaultCase'>Notifications</h1>
       {notifications?.length && notifications.map((notification, key) => 
         <MultiUseCard 
           key={key}
           type='notification'
           data={notification} />
-      ) || null}
+      ) || 
+        <p className="mt-3">There's any notification.</p>
+      }
     </div>
   </div>
 }

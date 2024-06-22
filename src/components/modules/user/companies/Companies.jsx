@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import CategoryListing from "@ui/templates/categoryListing/CategoryListing";
-import { getUsers } from "@services/userServices";
-import { setHeader } from "@store/slices/globalSlice";
+import { useDispatch } from "react-redux"
+import { useEffect, useState } from "react"
+import { getUsers } from "@services/userServices"
+import { setHeader } from "@store/slices/globalSlice"
+import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 
 
 
@@ -11,7 +11,7 @@ const Companies = () => {
   const [companies, setCompanies] = useState([]);
 
   const loadCompanies = async (filter = { role: "company" }) => {
-    let _companies = await getUsers(filter);
+    let _companies = await getUsers(filter, 'full');
     setCompanies(_companies);
   };
 

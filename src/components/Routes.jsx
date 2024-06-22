@@ -5,13 +5,14 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 
 import Header from "@ui/header/Header"
 import Intro from "@components/intro/Intro"
+import { VendorDashboard, CreateProduct } from "@modules/vendor"
 import Profile from "@modules/company/profile/Profile"
 import { getUserData } from "@store/slices/usersSlice"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Dashboard, Map, Orders, Companies, Vendors } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
-import { Notifications, Offers, OfferNew, Chats, Chat, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
+import { Notifications, Offers, OfferNew, Chats, Chat, Followers, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
 
 
 const AppRoutes = () => {
@@ -51,6 +52,7 @@ const AppRoutes = () => {
         <Route exact path="/chat/:contact" element={<Chat />} />
         <Route exact path="/location" element={<Map />} />
         <Route exact path="/orders/" element={<Orders />} />
+        <Route exact path="/followers" element={<Followers />} />
         <Route exact path="/settings/" element={<Settings />} />
         <Route exact path="/settings/profile/" element={<ProfileSettings />} />
         <Route exact path="/settings/password/" element={<Password />} />
@@ -72,6 +74,7 @@ const AppRoutes = () => {
         <Route exact path="/chat" element={<Chats />} />
         <Route exact path="/chat/:contact" element={<Chat />} />
         <Route exact path="/chat/:contact/:offer/" element={<Chat />} />
+        <Route exact path="/followers" element={<Followers />} />
         <Route exact path="/settings/" element={<Settings />} />
         <Route exact path="/settings/profile/" element={<ProfileSettings />} />
         <Route exact path="/settings/password/" element={<Password />} />
@@ -84,9 +87,11 @@ const AppRoutes = () => {
 
       {/*   VENDOR   */}
       {user.role == 'vendor' && <>
-        <Route exact path="/dashboard/" element={<Dashboard />} />
+        <Route exact path="/dashboard/" element={<VendorDashboard />} />
         <Route exact path="/chat" element={<Chats />} />
         <Route exact path="/chat/:contact" element={<Chat />} />
+        <Route exact path="/followers" element={<Followers />} />
+        <Route exact path="/product/new" element={<CreateProduct />} />
         <Route exact path="/settings/" element={<Settings />} />
         <Route exact path="/settings/profile/" element={<ProfileSettings />} />
         <Route exact path="/settings/password/" element={<Password />} />

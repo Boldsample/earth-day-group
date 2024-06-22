@@ -96,7 +96,7 @@ const RegisterVendor = () => {
         content: "Your profile has updated successfully!",
       }))
       navigate('/thankyou/')
-    }else if(response.id)
+    }else if(response.id){
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",
@@ -104,6 +104,8 @@ const RegisterVendor = () => {
         button_label: "Go to dashboard",
         content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
       }))
+      navigate('/thankyou/')
+    }
     dispatch(getUserData(response.id))
   }
 

@@ -10,10 +10,11 @@ const NumberInput = ({
   disabled,
   inputRef,
   nameInput,
-  showLabel,
   isRequired,
+  labelName = "",
   maxLength = 10,
   mode = 'decimal',
+  showLabel = true,
   getFormErrorMessage,
   placeHolderText = "",
 }) => {
@@ -50,7 +51,7 @@ const NumberInput = ({
     <div className="p-field">
       {showLabel ? (
         <label htmlFor={nameInput}>
-          {label} {isRequired && <span className="text-red-600">*</span>}
+          {labelName} {isRequired && <span className="text-red-600">*</span>}
           {renderInput()}
         </label>
       ) : (

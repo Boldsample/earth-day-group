@@ -8,10 +8,11 @@ const DropDownInput = ({
   options,
   disabled,
   nameInput,
-  showLabel,
   isRequired,
   optionLabel,
   optionValue,
+  labelName = "",
+  showLabel = true,
   getFormErrorMessage,
   placeHolderText = "",
 }) => {
@@ -42,7 +43,7 @@ const DropDownInput = ({
     <div className="p-field">
       {showLabel ? (
         <label htmlFor={nameInput}>
-          {label} {isRequired && <span className="text-red-600">*</span>}
+          {labelName} {isRequired && <span className="text-red-600">*</span>}
           {renderInput()}
         </label>
       ) : (

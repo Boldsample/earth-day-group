@@ -4,6 +4,7 @@ import './switchInput.sass'
 
 function SwitchInput({
   label,
+  rules,
   control,
   nameInput,
   isRequired,

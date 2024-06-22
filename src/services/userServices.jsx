@@ -62,7 +62,8 @@ export const addMaterials = async (data) => {
     const { data } = await API.post("/add_multiple/materials", formData)
     return true
   } catch ({response}) {
-    return response.data
+    console.log(response)
+    return response?.data
   }
 }
 
@@ -98,7 +99,7 @@ export const getUser = async (id, user = null) => {
   return data.data
 }
 
-export const getUsers = async (filter = {}) => {
+export const getUsers = async (filter = {}, type = 'min') => {
   let filterStr = ''
   if(typeof filter == 'string')
     filterStr = filter
@@ -107,7 +108,7 @@ export const getUsers = async (filter = {}) => {
       filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
     })
   filterStr = encodeURIComponent(filterStr)
-  const data = await API.get(`/get/users&filter=${filterStr}`)
+  const data = await API.get(`/get/users&filter=${filterStr}&type=${type}`)
   const response = data?.data?.data?.map(user => {
     let _user = {...user}
     _user.materials = _user.materials ? JSON.parse(_user.materials) : null

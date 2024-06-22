@@ -13,7 +13,7 @@ const initialState = {
 }
 
 export const getUsersList = createAsyncThunk("users/getUsersList", async (filter) => {
-  const res = await getUsers(filter);
+  const res = await getUsers(filter, 'full');
   return res;
 })
 

@@ -129,8 +129,8 @@ const MultiUseCard = ({
           <div className={'main__container'}>
             <ProfilePhoto userPhoto={data?.picture} />
             <div>
-              <h5>{data?.name}</h5>
-              <span>{data?.description}</span>
+              <h4 className="font-bold">{data?.name}</h4>
+              <span className="text-gray">{data?.description}</span>
             </div>
           </div>
         </Link>

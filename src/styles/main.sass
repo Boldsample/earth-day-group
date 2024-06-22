@@ -348,12 +348,12 @@ button, .button
   align-items: center
 .inline-block
   display: inline-block
-.font-black
-  font-weight: 900
-.font-bold
-  font-weight: 700
 .font-regular
   font-weight: 400
+.font-bold
+  font-weight: 700
+.font-black
+  font-weight: 900
 .text-white
   color: var(--white)
 .text-green-earth
@@ -404,15 +404,14 @@ button, .button
     display: flex
     justify-content: flex-end
     width: 100%
-    // background: transparent
-    // border-top: none
     .filters
-      // display: contents
       display: flex
       justify-self: flex-end
       justify-items: flex-end
+      padding: 12rem 8rem
       .p-multiselect, .p-inputtext
         height: 40rem
+        line-height: 1em
         margin-right: 8rem
         min-width: 190rem
       button
@@ -426,12 +425,23 @@ button, .button
           margin-right: 0
   .p-datatable-thead > tr > th
     color: black
+    padding: 12rem 8rem
   .p-datatable-tbody > tr > td
     color: var(--gray)
     padding: 12rem 8rem
     .p-row-toggler
+      background: transparent
+      border: none
+      color: var(--grey)
       display: flex
+      margin: auto
       padding: 0
+      height: 16rem
+      width: 16rem
+      .p-icon
+        fill: var(--grey)
+        height: 16rem
+        width: 16rem
   .profile__photo
     display: inline-flex
     height: 30rem
@@ -460,6 +470,8 @@ button, .button
       color: black
 
 .p-dialog
+  .p-dialog-content
+    padding: 32rem 24rem
   &.no-close .p-dialog-header-close
     display: none
   .p-dialog-header-close, .p-galleria button
@@ -470,6 +482,9 @@ button, .button
     display: flex
     justify-items: center
     padding: 0
+    .p-icon
+      height: 16rem
+      width: 16rem
   .p-dialog-content
     display: flex
     column-gap: 30rem
@@ -527,9 +542,17 @@ button, .button
     color: var(--gray)
     padding: 0
     text-align: center
-.p-multiselect-label-container
-  align-items: center
-  display: flex
+  .p-multiselect-header
+    padding: 8rem
+  .p-multiselect-items
+    padding: 0
+    .p-multiselect-item
+      padding: 8rem
+      .p-multiselect-checkbox
+        margin-right: 8rem
+  .p-multiselect-label-container
+    align-items: center
+    display: flex
 .p-inputtext, .p-multiselect-label
   padding: 12rem
 .p-image-action.p-link
@@ -546,6 +569,26 @@ button, .button
   padding: 0 4rem
 .p-tooltip .p-tooltip-text
   padding: 12rem
+.p-password-info
+  padding: 4rem
+.p-inputswitch
+  height: 28rem
+  width: 48rem
+  .p-inputswitch-slider:before
+    height: 20rem
+    left: 2rem
+    margin-top: -10rem
+    width: 20rem
+  &.p-highlight .p-inputswitch-slider:before
+    transform: translateX(20rem)
+.p-dropdown .p-dropdown-trigger
+  width: 48rem
+  .p-icon
+    height: 16rem
+    width: 16rem
+.p-dropdown-panel .p-dropdown-items
+  .p-dropdown-item, .p-dropdown-empty-message
+    padding: 12rem 20rem
 
 $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.5em", "6": "3em", "7": "3.5em", "8": "4em")
 @each $name, $space in $spaces
