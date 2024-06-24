@@ -11,8 +11,10 @@ import { getUserData } from "@store/slices/usersSlice"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Dashboard, Map, Orders, Companies, Vendors } from "@modules/user"
+import { CreatePet } from "@modules/ngo"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
 import { Notifications, Offers, OfferNew, Chats, Chat, Followers, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
+
 
 
 const AppRoutes = () => {
@@ -100,6 +102,10 @@ const AppRoutes = () => {
         <Route exact path="/settings/about/" element={<About />} />
         <Route exact path="/settings/activity/" element={<Activity />} />
         <Route path="*" element={<Navigate to="/dashboard/" />} />
+      </>}
+       {/*   NGO   */}
+       {user.role == 'ngo' && <>
+        <Route exact path="/pet/new" element={<CreatePet />} />
       </>}
 
       <Route path="/thankyou" element={<ThankYouPage />} />
