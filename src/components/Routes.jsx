@@ -103,6 +103,7 @@ const AppRoutes = () => {
         <Route exact path="/settings/activity/" element={<Activity />} />
         <Route path="*" element={<Navigate to="/dashboard/" />} />
       </>}
+      <Route exact path="/pet/new" element={<CreatePet />} />
        {/*   NGO   */}
        {user.role == 'ngo' && <>
         <Route exact path="/pet/new" element={<CreatePet />} />

@@ -49,9 +49,8 @@ const CreatePet = () => {
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
   const radioData = [
-    { name: "Charity Home", value: 1 },
-    { name: "Adoption Center", value: 2 },
-    { name: "Both", value: 3 },
+    { name: "Male", value: 1 },
+    { name: "Female", value: 2 },
   ]
   const setUploadedImages = (images) => {
     setValue('images', images)
@@ -109,22 +108,15 @@ const CreatePet = () => {
     <img className="layout__background" src="/assets/register/image-2.svg" />
     <div className="main__content xpadding-1">
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
-        <UploadPhotoInput
-          watch={watch}
-          control={control}
-          setError={setError}
-          setValue={setValue}
-          getValues={getValues}
-          type="profilePhotoUpload" />
-        <div className="registerInput__container-x2">
+        <div className="registerInput__container-x1">
           <TextInput
             width="100%"
             nameInput="name"
             control={control}
-            showLabel={false}
+            showLabel={true}
             isRequired={true}
-            labelName="Organization Name"
-            placeHolderText="Organization Name*"
+            labelName="Pet Name"
+            placeHolderText="Enter Pet Name*"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -137,99 +129,48 @@ const CreatePet = () => {
                 message: "No debe tener espacios al inicio",
               },
             }} />
-          <TextInput
-            width="100%"
-            control={control}
-            showLabel={false}
-            nameInput="email"
-            isRequired={true}
-            labelName="Organization E-mail"
-            placeHolderText="Organization E-mail*"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: {
-                value: 60,
-                message: "El campo supera los 60 caracteres",
-              },
-              required: "*El campo es requerido.",
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "Please enter a valid e-mail address",
-              },
-            }} />
-        </div>
+            </div>
+            <div className="registerInput__container-x1">
+              <RadioInput
+              data={radioData}
+              showLabel={true}
+              control={control}
+              isRequired={true}
+              labelName="Gender"
+              nameInput="organization_type"
+              rules={{
+                required: true,
+              }} />
+            </div>
         <div className="registerInput__container-x2">
-          <TextInput
-            width="100%"
-            control={control}
-            showLabel={false}
-            isRequired={true}
-            labelName="Username"
-            nameInput="username"
-            placeHolderText="Username*"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
-              },
-              required: "*El campo es requerido.",
-              pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
-              },
-            }} />
-          <div className="fullwidth" onKeyDown={(e) => { if(e.key === "Enter") e.preventDefault(); }}>
-            <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged} onKeyDown={e => { if(e.key === "Enter") e.preventDefault() }}>
-              <TextInput
-                width="100%"
-                control={control}
-                showLabel={false}
-                isRequired={true}
-                autocomplete="off"
-                labelName="Address"
-                nameInput="address"
-                placeHolderText="Address*"
-                getFormErrorMessage={getFormErrorMessage}
-                rules={{
-                  required: "*El campo es requerido.",
-                  pattern: {
-                    value: /^\S/,
-                    message: "No debe tener espacios al inicio",
-                  },
-                }} />
-            </Autocomplete>
-          </div>
-        </div>
-        <div className="registerInput__container-x2">
-          <TextInput
-            width="100%"
-            control={control}
-            showLabel={false}
-            isRequired={true}
-            labelName="Website"
-            nameInput="website"
-            placeHolderText="Website"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
-              },
-              required: "*El campo es requerido.",
-              pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
-              },
-            }} />
-          <NumberInput
+        <NumberInput
             width="100%"
             showLabel={false}
             control={control}
             isRequired={true}
             nameInput="phone"
-            label="Phone Number"
-            placeHolderText="Phone Number*"
+            label="Age"
+            placeHolderText="Age*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 12,
+                message: "El campo supera los 7 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
+            <NumberInput
+            width="100%"
+            showLabel={false}
+            control={control}
+            isRequired={true}
+            nameInput="phone"
+            label="Weight (Kilog?)"
+            placeHolderText="Weight (Kilos)*"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -243,28 +184,58 @@ const CreatePet = () => {
               },
             }} />
         </div>
-        <div className="registerInput__container-x2">
-          <div className="fullwidth">
-            <RadioInput
-              data={radioData}
-              showLabel={true}
-              control={control}
-              isRequired={true}
-              labelName="Organization Type"
-              nameInput="organization_type"
-              rules={{
-                required: true,
-              }} />
-          </div>
+        <div className="registerInput__container-x1">
+        <TextInput
+            width="100%"
+            control={control}
+            showLabel={false}
+            isRequired={true}
+            labelName="Breed"
+            nameInput="breed"
+            placeHolderText="Breed"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 20,
+                message: "El campo supera los 20 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
+        </div>
+        <div className="registerInput__container-x1">
+        <NumberInput
+            width="100%"
+            showLabel={true}
+            control={control}
+            isRequired={true}
+            nameInput="phone"
+            label="Adoption Price"
+            placeHolderText="Enter adoption price*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 12,
+                message: "El campo supera los 7 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
         </div>
         <div className="registerInput__container-x1">
           <TextAreaInput
             showLabel={true}
             control={control}
             isRequired={false}
-            label="Iniciative*"
+            label="Pet Details*"
             nameInput="description"
-            placeHolderText="Tell us about the your inicitative"
+            placeHolderText="Enter a description for your pet"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -283,56 +254,9 @@ const CreatePet = () => {
           title="Add Images"
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
-        <div className="registerInput__container-x2">
-          <PasswordInput
-            width="100%"
-            maxLength={20}
-            label="Password"
-            showLabel={true}
-            control={control}
-            nameInput="password"
-            isRequired={!user?.id}
-            placeHolderText="Enter password"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: user?.id ? undefined : {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
-              },
-              required: user?.id ? undefined : "*El campo es requerido.",
-              pattern: user?.id ? undefined : {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                message:
-                  "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
-              },
-            }} />
-          <PasswordInput
-            width="100%"
-            label="&nbsp;"
-            maxLength={20}
-            feedback={false}
-            showLabel={true}
-            control={control}
-            className="noLabel"
-            isRequired={!user?.id}
-            nameInput="password_confirmation"
-            placeHolderText="Confirm Password"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              required: user?.id ? undefined : "*El campo es requerido.",
-              validate: value => value === getValues().password || "The password doesn't match",
-            }} />
-        </div>
+        
         <div className="p-field" style={{ marginBottom: "24px" }}>
-          <CheckBoxInput
-            control={control}
-            nameInput="accept_terms"
-            rules={{ required: "Accept is required." }}
-            getFormErrorMessage={getFormErrorMessage}
-            checkBoxText="I've read and accept the terms & conditions." />
-        </div>
-        <div className="p-field" style={{ marginBottom: "24px" }}>
-          <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Register Pet"} type="submit" loading={sending} />
         </div>
       </form>
     </div>
