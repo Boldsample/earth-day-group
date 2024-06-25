@@ -13,7 +13,7 @@ const CompanyInformation = ({company, canEdit, doFollow}) => {
 
   return <div className='companyInformation__grid'>
     <div className="image__container">
-      <ProfilePhoto className="profile__photo-large" size="75rem" userPhoto={company?.picture}/>
+      <ProfilePhoto className="profile__photo-large" size="12.5rem" userPhoto={company?.picture}/>
     </div>
     <div className="companyInformation__container">
       <h2>{company?.name}</h2>

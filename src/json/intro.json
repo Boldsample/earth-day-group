@@ -13,20 +13,20 @@
 	},
 	{
 		"img": "/assets/intro/image-2.svg",
-    "wrapperstyle": {"paddingRight": "170rem"},
+    "wrapperstyle": {"paddingRight": "10.625rem"},
 		"title": "Locate recycling centers near you",
 		"content": "According to your location EDG will indicate the nearest recycling center and the prices they offer to each type of material."
 	},
 	{
 		"img": "/assets/intro/image-3.svg",
-    "wrapperstyle": {"paddingRight": "120rem"},
+    "wrapperstyle": {"paddingRight": "7.5rem"},
 		"title": "Help your planet and your pocket",
 		"content": "Make an extra income with your recycling, you can choose who to sell or buy depending on your interest."
 	},
 	{
 		"img": "/assets/intro/image-4.svg",
 		"title": "Find social organization",
-    "wrapperstyle": {"paddingRight": "100rem"},
+    "wrapperstyle": {"paddingRight": "6.25rem"},
 		"content": "Give a second change to those objects that you think can help someone else."
 	}
 ]

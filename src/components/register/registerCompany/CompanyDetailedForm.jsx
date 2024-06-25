@@ -189,7 +189,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
           name="add"
           label="Add"
           type="submit"
-          style={{ paddingLeft: "22rem" }}
+          style={{ paddingLeft: "1.375rem" }}
           className="green-earth fullwidth text-left" />
       </div>
     </form>
@@ -216,7 +216,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         nameInput="home_pick_up"
         label="Pick up from home?" />
     </div>
-    <div className="p-field" style={{ marginBottom: "24rem" }}>
+    <div className="p-field" style={{ marginBottom: "1.5rem" }}>
       <Button onClick={onSubmit} className="dark-blue fullwidth" label="Sign up" name="submit" loading={sending} />
     </div>
   </>

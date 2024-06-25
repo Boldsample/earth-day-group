@@ -183,7 +183,7 @@ const CreateProduct = () => {
           title="Add Images"
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
-        <div className="p-field" style={{ marginBottom: "24rem" }}>
+        <div className="p-field" style={{ marginBottom: "1.5rem" }}>
           <Button className="dark-blue fullwidth" label={product?.id ? "Update" : "Create"} type="submit" loading={sending} />
         </div>
       </form>

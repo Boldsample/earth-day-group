@@ -37,7 +37,7 @@ const Settings = () => {
 				<a className="button outline"><div className="icon trash"><FontAwesomeIcon icon={faTrashCan} /></div> Delete Account <FontAwesomeIcon icon={faChevronRight} /></a>
 			</div>
 			<div className="fullwidth text-center mt-3">
-				<button className="red-state" onClick={logout} style={{width: '340rem'}}>Log Out</button>
+				<button className="red-state" onClick={logout} style={{width: '21.25rem'}}>Log Out</button>
 			</div>
 		</div>
 	</div>
