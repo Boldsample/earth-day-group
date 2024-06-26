@@ -1,12 +1,11 @@
-import React, { useState } from "react"
-import { Navigation } from 'swiper/modules'
+import { Image } from "primereact/image"
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination } from 'swiper/modules'
 
 import "./profile.sass"
-import { Image } from "primereact/image"
 
-const PhotoGallery = ({imageCatalog}) => {
-  return <div className="photoGallery__container">
+const PhotoGallery = ({imageCatalog, type = 'full'}) => {
+  return type == 'full' && <div className="photoGallery__container">
     <h2>Pictures</h2>
     {!imageCatalog?.length ? <p>You have not uploaded any images to your profile.</p> : 
       <Swiper
@@ -23,7 +22,19 @@ const PhotoGallery = ({imageCatalog}) => {
           )}
       </Swiper>
     }
-  </div>
+  </div> || 
+  <Swiper
+    loop={true}
+    rewind={true}
+    slidesPerView={1}
+    className="minimal"
+    centeredSlides={true}
+    modules={[Pagination]}
+    pagination={{ clickable: true }} >
+      {imageCatalog?.map((image, key) => 
+        <SwiperSlide key={key}><Image src={image?.picture} preview /></SwiperSlide>
+      )}
+  </Swiper>
 }
 
 export default PhotoGallery

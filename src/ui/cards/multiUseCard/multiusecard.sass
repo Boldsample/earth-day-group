@@ -67,6 +67,37 @@
   &.user
     .main__container
       justify-content: flex-start
+      & > div:nth-child(2)
+        max-width: calc(100% - 8rem)
+      button, .button
+        align-self: center
+        margin-left: 0.4rem
+        margin-top: 0
+        height: 2rem
+        max-width: 2rem
+        padding: 0 0.4rem
+        width: 2rem
+        &:nth-child(3)
+          margin-left: auto
+  &.product
+    border-radius: 1rem
+    max-width: 13.3rem
+    overflow: hidden
+    padding: 0
+    .main__container a
+      display: flex
+      flex-wrap: wrap
+      width: 100%
+      .profile__photo
+        border-radius: 0
+        height: 8rem
+        margin: 0
+        width: 100%
+      .content
+        padding: 1rem
+        width: 100%
+        button
+          margin-left: auto
 
   .multiuseCard__p
     margin: 0.625rem 0 0 0 

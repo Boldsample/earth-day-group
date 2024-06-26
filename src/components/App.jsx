@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify"
 
 import 'swiper/css'
 import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 import 'primeicons/primeicons.css'
 import 'react-toastify/dist/ReactToastify.css'
 

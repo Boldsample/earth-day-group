@@ -10,7 +10,7 @@ import { setHeader } from "@store/slices/globalSlice"
 
 import "./profile.sass"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
-import PhotoGallery from "@components/modules/company/profile/PhotoGallery"
+import PhotoGallery from "@components/modules/profile/PhotoGallery"
 
 const ListingProfile = ({children}) => {
     const { id } = useParams()

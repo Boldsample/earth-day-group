@@ -86,7 +86,7 @@ const CategoryListing = ({content, category}) => {
                         <p>{company.address}</p>
                       </div>
                       <Link
-                        to={`/company/${company.id}`}
+                        to={`/${company.role}/${company.id}`}
                         className="button dark-blue"
                       >
                         Learn more

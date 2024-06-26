@@ -25,10 +25,8 @@ const Offers = () => {
   const [offers, setOffers] = useState({total: 0, data: []})
   const [filters, setFilters] = useState({keyword: '', materials: []})
 
-  const updateFilters = (name, value) => {
-    setFilters(prev => ({...prev, [name]: value}))
-  }
   const hidePopup = () => setDetail({...detail, show: false})
+  const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callOffers = async () =>{
     let _filter = {}
     if(user.role == 'user')
@@ -58,8 +56,8 @@ const Offers = () => {
     // </div>
   }
   const rowExpansionTemplate = data => <div className="p-3">
-    <DataTable className="no-head" value={data.offers}>
-        <Column header="ID" body={() => "-"} field="id" className="text-center" style={{width: '2.5rem'}}></Column>
+    <DataTable value={data.offers}>
+        <Column header="" body={() => "-"} field="id" className="text-center" style={{width: '2.5rem'}}></Column>
         <Column header="Company" body={({name, picture}) => <>
           <ProfilePhoto userPhoto={picture} />
           <b>{name}</b>
@@ -77,7 +75,6 @@ const Offers = () => {
           <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>}></Column>
     </DataTable>
   </div>
-  console.log(offers)
 
   useEffect(() => {
     callOffers()

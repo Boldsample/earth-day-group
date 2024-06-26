@@ -21,3 +21,20 @@ export const addImages = async (data) => {
     toast.error(response.status + ": " + response.data.message)
   return true
 }
+
+export const getProduct = async (id) => {
+  let filterStr = `p.id=${id}`
+  const { data } = await API.get(`/get/products&filter=${filterStr}`)
+  return data?.data[0];
+};
+
+export const getProducts = async (filter, page) => {
+	let filterStr = ''
+  Object.keys(filter).map(f => {
+    filterStr += (filterStr ? " AND " : "") + filter[f]
+  })
+  filterStr = encodeURIComponent(filterStr)
+  const userFilter = filter?.user || ''
+  const { data } = await API.get(`/get/products&filter=${filterStr}&userfilter=${userFilter}&page=${page.page * page.rows}&rows=${page.rows}`)
+  return {total: data.total, data: data.data};
+};

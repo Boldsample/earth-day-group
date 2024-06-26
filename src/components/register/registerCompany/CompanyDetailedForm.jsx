@@ -68,7 +68,6 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     numberInput.current.getInput().blur()
   }
   const onSubmit = async () => {
-    console.log(1)
     let response
     let _user = { ...user }
     delete _user.materials

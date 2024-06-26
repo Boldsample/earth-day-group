@@ -56,7 +56,7 @@ h1
   font-size: 3.125rem
   font-weight: 900
 h2
-  font-size: 2,5rem
+  font-size: 2.5rem
   font-weight: 900
 h3
   font-size: 1.875rem
@@ -82,6 +82,7 @@ ul
   li::marker
     color: var(--dark-blue)
 button, .button
+  align-content: center
   background-color: var(--grey)
   border: var(--grey) 1px solid
   border-radius: 0.25rem
@@ -145,9 +146,13 @@ button, .button
   &.Organic
     background-color: var(--grey)
     border-color: var(--grey)
+  .svg-inline--fa
+    margin-right: 0.3rem
 
 .p-component
   font-size: 1rem
+  &.p-multiselect-items
+    padding-left: 0
 
 
 /*  HEADER START  */
@@ -160,6 +165,13 @@ button, .button
   position: absolute
   width: 100%
   z-index: 100
+  &::before
+    background: linear-gradient(to bottom, #FFFBEBFF 50%, #FFFBEBC0 60%, #FFFBEB30 80%, #FFFBEB00 100%)
+    content: ""
+    height: 170%
+    pointer-events: none
+    position: absolute
+    width: 100%
   &.map, &.settings
     background: white
     box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1)
@@ -245,6 +257,8 @@ button, .button
   padding: 0 calc((100% - 68.75rem) / 2)
   position: relative
   width: 100%
+  &.widthfooter
+    min-height: calc(100vh - 8.75rem)
   &.fullwidth
     justify-content: center
     padding: 0
@@ -252,7 +266,7 @@ button, .button
     min-height: 0
   .layout__background
     bottom: 0
-    height: 95vh
+    height: 100vh
     left: 0
     object-fit: cover
     pointer-events: none
@@ -277,7 +291,8 @@ button, .button
     &.width58
       width: 58%
     &.fullwidth
-      margin-left: 6.25rem
+      margin: 0
+      padding-left: 6.25rem
     &.xpadding-1
       padding-right: 3.125rem
       padding-left: 3.125rem
@@ -292,7 +307,7 @@ button, .button
       margin: 0
       padding-right: 6.25rem
       padding-left: 6.25rem
-      width: auto
+      width: 100%
     &.fullviewportwidth
       padding: 0
       width: 100%
@@ -388,6 +403,7 @@ button, .button
   color: var(--green-state)
 .self-end
   justify-self: flex-end
+  margin-left: auto
 .fullwidth
   width: 100% !important
 
@@ -410,13 +426,13 @@ button, .button
       justify-items: flex-end
       padding: 0.75rem 0.5rem
       .p-multiselect, .p-inputtext
-        height: 2,5rem
+        height: 2.5rem
         line-height: 1em
         margin-right: 0.5rem
-        min-width: 190rem
+        min-width: 11.875rem
       button
         font-size: 1.25rem
-        height: 2,5rem
+        height: 2.5rem
         line-height: 1em
         margin: 0 0.5rem 0 0
         padding: 0 0.75rem
@@ -470,8 +486,6 @@ button, .button
       color: black
 
 .p-dialog
-  .p-dialog-content
-    padding: 2rem 1.5rem
   &.no-close .p-dialog-header-close
     display: none
   .p-dialog-header-close, .p-galleria button
@@ -486,8 +500,9 @@ button, .button
       height: 1rem
       width: 1rem
   .p-dialog-content
-    display: flex
     column-gap: 1.875rem
+    display: flex
+    padding: 2rem 1.5rem
     .default-image
       align-items: center
       background: var(--light-gray)
@@ -495,14 +510,14 @@ button, .button
       color: var(--grey)
       display: flex
       font-size: 5rem
-      height: 2.25rem
+      height: 22.5rem
       justify-content: center
-      width: 2.25rem
+      width: 22.5rem
     .p-galleria
-      width: 2.25rem
+      width: 22.5rem
       .p-galleria-item img
         border-radius: 0.5rem
-        height: 2.25rem
+        height: 22.5rem
         object-fit: contain
         width: 100%
       .p-galleria-thumbnail-container
@@ -524,16 +539,23 @@ button, .button
       align-self: flex-start
       display: inline-flex
       flex-wrap: wrap
-      min-height: 2.25rem
-      min-width: 2.25rem
-      width: 2.25rem
+      min-height: 22.5rem
+      min-width: 22.5rem
+      width: 22.5rem
       p
-        border-bottom: 1rem solid var(--grey)
+        border-bottom: 1px solid var(--grey)
         font-size: 1rem
         padding: 0.5rem 0
         b
           display: inline-block
           width: 8,125rem
+  .profile-content
+    max-width: 50rem
+    .settings__card
+      border-radius: 0
+      border-bottom: 1px solid var(--light-grey)
+      box-shadow: none
+      padding: 2.5rem 1rem
 
 .p-multiselect-panel
   button
@@ -542,53 +564,6 @@ button, .button
     color: var(--gray)
     padding: 0
     text-align: center
-  .p-multiselect-header
-    padding: 0.5rem
-  .p-multiselect-items
-    padding: 0
-    .p-multiselect-item
-      padding: 0.5rem
-      .p-multiselect-checkbox
-        margin-right: 0.5rem
-  .p-multiselect-label-container
-    align-items: center
-    display: flex
-.p-inputtext, .p-multiselect-label
-  padding: 0.75rem
-.p-image-action.p-link
-  align-items: center
-  display: flex
-  height: 2.25rem
-  justify-content: center
-  padding: 0
-  width: 2.25rem
-.p-image-preview-indicator .p-icon, .p-image-action.p-link .p-icon
-  height: 1.5rem
-  width: 1.5rem
-.p-tooltip.p-tooltip-right, .p-tooltip.p-tooltip-left
-  padding: 0 0.25rem
-.p-tooltip .p-tooltip-text
-  padding: 0.75rem
-.p-password-info
-  padding: 0.25rem
-.p-inputswitch
-  height: 1.75rem
-  width: 3rem
-  .p-inputswitch-slider:before
-    height: 1.25rem
-    left: 2rem
-    margin-top: -0.625rem
-    width: 1.25rem
-  &.p-highlight .p-inputswitch-slider:before
-    transform: translateX(1.25rem)
-.p-dropdown .p-dropdown-trigger
-  width: 3rem
-  .p-icon
-    height: 1rem
-    width: 1rem
-.p-dropdown-panel .p-dropdown-items
-  .p-dropdown-item, .p-dropdown-empty-message
-    padding: 0.75rem 1.25rem
 
 $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.5em", "6": "3em", "7": "3.5em", "8": "4em")
 @each $name, $space in $spaces
