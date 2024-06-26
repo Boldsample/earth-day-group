@@ -28,19 +28,14 @@ const CreatePet = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      role: "ngo",
-      password: "",
       name: user?.name || "",
-      phone: user?.phone || "",
-      email: user?.email || "",
-      password_confirmation: "",
+      gender: user?.phone || "",
+      age: user?.email || "",
+      weight: "",
       images: user?.images || [],
-      picture: user?.picture || "",
-      address: user?.address || "",
-      username: user?.username || "",
+      breed: user?.picture || "",
+      adoption_price: user?.address || "",
       description: user?.description || "",
-      accept_terms: user?.accept_terms && true || false,
-      organization_type: user?.organization_type || 0,
     },
   })
 
@@ -137,7 +132,7 @@ const CreatePet = () => {
               control={control}
               isRequired={true}
               labelName="Gender"
-              nameInput="organization_type"
+              nameInput="gender"
               rules={{
                 required: true,
               }} />
@@ -148,7 +143,7 @@ const CreatePet = () => {
             showLabel={false}
             control={control}
             isRequired={true}
-            nameInput="phone"
+            nameInput="age"
             label="Age"
             placeHolderText="Age*"
             getFormErrorMessage={getFormErrorMessage}
@@ -168,7 +163,7 @@ const CreatePet = () => {
             showLabel={false}
             control={control}
             isRequired={true}
-            nameInput="phone"
+            nameInput="weight"
             label="Weight (Kilog?)"
             placeHolderText="Weight (Kilos)*"
             getFormErrorMessage={getFormErrorMessage}
@@ -212,7 +207,7 @@ const CreatePet = () => {
             showLabel={true}
             control={control}
             isRequired={true}
-            nameInput="phone"
+            nameInput="adoption_price"
             label="Adoption Price"
             placeHolderText="Enter adoption price*"
             getFormErrorMessage={getFormErrorMessage}
