@@ -24,7 +24,7 @@ const Offers = () => {
   const user = useSelector((state) => state.users.userData)
   const [offers, setOffers] = useState({total: 0, data: []})
   const [filters, setFilters] = useState({keyword: '', materials: []})
-
+console.log(offers)
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callOffers = async () =>{
@@ -48,8 +48,10 @@ const Offers = () => {
       <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" 
   placeholder="Filter by materials" />
       <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
-      <Button className="red-state" type="button" onClick={() => {}}><FontAwesomeIcon icon={faTrash} /></Button>
       <Button className="green-earth" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
+      <Button className="red-state" type="button" onClick={() => {
+        setFilters({keyword: '', materials: []})
+        }}><FontAwesomeIcon icon={faTrash} /></Button>
     </div>
     // <div className="flex aligncenter">
     //   <h1 className="text-defaultCase">Offers</h1>
@@ -62,15 +64,15 @@ const Offers = () => {
           <ProfilePhoto userPhoto={picture} />
           <b>{name}</b>
         </>}></Column>
-        <Column header="Price offer" body={({price}) => 
+        <Column header="Bid" body={({price}) => 
             <>
-              <b>Offer:</b> {parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+               {parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
             </>}></Column>
         <Column header="Status" body={({id, rejected, accepted}) => (rejected || (accepted != 0 && accepted != id)) && 
           <span className="text-red-state">Rejected</span> || (accepted == id && 
           <span className="text-green-state">Accepted</span>) || 
           <span>Pending</span>}></Column>
-        <Column header="Published" body={({date}) => date.split(' ')[0]}></Column>
+        <Column header="Bidding Date" body={({date}) => date.split(' ')[0]}></Column>
         <Column className="actions" header={null} body={offer => 
           <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>}></Column>
     </DataTable>
@@ -112,12 +114,12 @@ const Offers = () => {
           <Column header="Material" body={({material}) => 
             <Button label={material} className={'small ' + material} />}></Column>
           <Column header="Quantity" body={({quantity, unit}) => quantity + ' ' + unit}></Column>
-          <Column header="Asking" body={({price}) => 
+          <Column header="Sell Price" body={({price}) => 
             parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}></Column>
           {user.role == 'user' && 
             <Column header="Offers" body={({offers}) => offers?.length || 0}></Column>
           || null}
-          <Column header="Published" body={({date}) => date.split(' ')[0]}></Column>
+          <Column header="Published Date" body={({date}) => date.split(' ')[0]}></Column>
           {user.role == 'user' && 
             <Column className="actions" header={null} body={offer => 
               <Button className="small dark-blue" onClick={() => setDetail({...offer, show: true})}><FontAwesomeIcon icon={faSearch} /></Button>}></Column> || 
@@ -130,7 +132,7 @@ const Offers = () => {
             </> || null}></Column>}
         </DataTable> : 
         <div className="mt-2">
-          <p>{user.role == 'user' ? "You didn’t post any offer yet." : "There's no offers for the materials you buy"}</p>
+          <p>{user.role == 'user' ? "You have not posted any offers yet." : "There's no offers for the materials you buy"}</p>
           {user.role == 'user' && 
             <Link className="button dark-blue mt-1" to="/offers/new">Create post offer</Link>
           || null}

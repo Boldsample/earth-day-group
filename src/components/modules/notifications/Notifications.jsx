@@ -22,7 +22,7 @@ const Notifications = () => {
           type='notification'
           data={notification} />
       ) || 
-        <p className="mt-3">There's any notification.</p>
+        <p className="mt-3">There are no notifications.</p>
       }
     </div>
   </div>
