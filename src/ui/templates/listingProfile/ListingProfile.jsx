@@ -10,7 +10,7 @@ import { setHeader } from "@store/slices/globalSlice"
 
 import "./profile.sass"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
-import PhotoGallery from "@components/modules/company/profile/PhotoGallery"
+import PhotoGallery from "@components/modules/profile/PhotoGallery"
 
 const ListingProfile = ({children}) => {
     const { id } = useParams()
@@ -36,7 +36,7 @@ const ListingProfile = ({children}) => {
         <div className="profile__layout">
             <div className='companyInformation__grid'>
                 <div className="image__container">
-                    <ProfilePhoto className="profile__photo-large" size="75rem" userPhoto={profile?.picture}/>
+                    <ProfilePhoto className="profile__photo-large" size="4.6875rem" userPhoto={profile?.picture}/>
                 </div>
                 <div className="companyInformation__container">
                     {children}

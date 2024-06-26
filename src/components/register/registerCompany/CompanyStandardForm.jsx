@@ -278,7 +278,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
           validate: value => value === getValues().password || "The password doesn't match",
         }} />
     </div>
-    <div className="p-field" style={{ marginBottom: "24rem" }}>
+    <div className="p-field" style={{ marginBottom: "1.5rem" }}>
       <CheckBoxInput
         control={control}
         nameInput="accept_terms"
@@ -286,7 +286,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         getFormErrorMessage={getFormErrorMessage}
         checkBoxText="I've read and accept the terms & conditions." />
     </div>
-    <div className="p-field" style={{ marginBottom: "24rem" }}>
+    <div className="p-field" style={{ marginBottom: "1.5rem" }}>
       <Button className="dark-blue fullwidth" label="Continue" type="submit" name="submit" loading={sending} />
     </div>
   </form>

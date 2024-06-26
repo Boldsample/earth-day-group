@@ -42,7 +42,7 @@ const FileUploadInput = ({
 		} />
 		{selectedFile && <div>
 			<button className="fileUpload__btn" onClick={handleCancelButton}>
-				<FontAwesomeIcon style={{ paddingRight: "5rem" }} icon={faTrash} />
+				<FontAwesomeIcon style={{ paddingRight: "0.3125rem" }} icon={faTrash} />
 				{selectedFile.name}
 			</button>
 		</div>}

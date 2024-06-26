@@ -16,7 +16,7 @@ const OfferInfo = ({ type = 'full', show, offer, onHide }) => {
     }
     <div className="content">
       <h4>{offer?.title}</h4>
-      <div className="fullwidth" style={{fontSize: '12rem'}}>{offer?.date}</div>
+      <div className="fullwidth" style={{fontSize: '0.75rem'}}>{offer?.date}</div>
       <Button label={offer?.material} className={'small mb-1 ' + offer?.material} />
       <p><b>Published by:</b> {offer?.name}</p>
       <p><b>Quantity:</b> {offer?.quantity} {offer?.unit}</p>

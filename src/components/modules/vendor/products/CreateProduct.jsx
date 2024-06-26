@@ -29,12 +29,11 @@ const CreateProduct = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      shop: user?.id,
       user: user?.id,
       name: product?.name || "",
       price: product?.price || "",
       images: product?.images || [],
-      catgory: product?.category || "",
+      category: product?.category || "",
       description: product?.description || ""
     },
   })
@@ -60,15 +59,13 @@ const CreateProduct = () => {
     }
     const _sendImages = data.images.map(image => {
       let _image = {...image}
-      _image.user = response.id
+      _image.entity = response.id
       _image.type = 'product'
       return _image
     })
     await addImages(_sendImages)
     setSending(false)
-    console.log(response)
     if(product?.id && response?.id){
-      console.log(1)
       dispatch(updateThankyou({
         title: "Updated successfully!",
         link: `/product/${response?.id}/`,
@@ -78,7 +75,6 @@ const CreateProduct = () => {
       }))
       navigate('/thankyou/')
     }else if(response.id){
-      console.log(2)
       dispatch(updateThankyou({
         title: "Congrats!",
         link: `/product/${response?.id}/`,
@@ -183,7 +179,7 @@ const CreateProduct = () => {
           title="Add Images"
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
-        <div className="p-field" style={{ marginBottom: "24rem" }}>
+        <div className="p-field" style={{ marginBottom: "1.5rem" }}>
           <Button className="dark-blue fullwidth" label={product?.id ? "Update" : "Create"} type="submit" loading={sending} />
         </div>
       </form>

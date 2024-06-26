@@ -3,30 +3,30 @@
   position: relative
   .list
     max-height: 0
-    max-width: 280rem
+    max-width: 17.5rem
     overflow: hidden
-    padding: 20rem 20rem 0
+    padding: 1.25rem 1.25rem 0
     position: absolute
-    right: -20rem
+    right: -1.25rem
     transition: all .4s ease-in-out
-    width: 280rem
+    width: 17.5rem
     .notification
       border-radius: 0
       height: auto
       margin: 0
-      padding: 10rem 20rem
+      padding: 0.625rem 1.25rem
       transition: all .2s ease-in-out
       &:hover
         background-color: var(--green-earth)
         color: var(--white)
       &:first-child
-        border-radius: 9rem 9rem 0 0
+        border-radius: 0.5625rem 0.5625rem 0 0
       &:last-child
-        border-radius: 0 0 9rem 9rem
+        border-radius: 0 0 0.5625rem 0.5625rem
       &:only-child
-        border-radius: 9rem
+        border-radius: 0.5625rem
       &:nth-child(n+2)
-        border-top: 1rem solid var(--green-earth)
+        border-top: 1px solid var(--green-earth)
       svg, h5
         display: none
       p
@@ -34,5 +34,5 @@
       &:hover *
         color: var(--white)
   &:hover .list
-    max-height: 300rem
-    padding-bottom: 20rem
+    max-height: 18.75rem
+    padding-bottom: 1.25rem

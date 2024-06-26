@@ -52,7 +52,6 @@ export const getOffers = async (filter, page) => {
   const response = data.data.map(offer => {
     let _offer = {...offer}
     _offer.offers = _offer.offers ? JSON.parse(_offer.offers) : null
-    _offer.pictures = _offer.pictures ? JSON.parse(_offer.pictures) : null
     return _offer
   })
   const materials = data.materials.map(material => ({value: material.material, value: material.material}))
