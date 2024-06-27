@@ -15,10 +15,12 @@ import { setHeader, updateAddLink } from '@store/slices/globalSlice'
 import { Dropdown } from 'primereact/dropdown'
 import { MultiSelect } from 'primereact/multiselect'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
+import './style.sass'
 
 const Offers = () => {
   const dispatch = useDispatch()
   const [detail, setDetail] = useState({})
+  const [reset, setReset] = useState(false)
   const [page, setPage] = useState({page: 0, rows: 6})
   const [expandedRows, setExpandedRows] = useState({})
   const user = useSelector((state) => state.users.userData)
@@ -50,6 +52,7 @@ console.log(offers)
       <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
       <Button className="green-earth" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="red-state" type="button" onClick={() => {
+        setReset(true)
         setFilters({keyword: '', materials: []})
         }}><FontAwesomeIcon icon={faTrash} /></Button>
     </div>
@@ -80,7 +83,8 @@ console.log(offers)
 
   useEffect(() => {
     callOffers()
-  }, [page])
+    setReset(false)
+  }, [page, reset])
   useEffect(() => {
     dispatch(setHeader('user'))
     if(user.role == 'user')
@@ -114,7 +118,7 @@ console.log(offers)
           <Column header="Material" body={({material}) => 
             <Button label={material} className={'small ' + material} />}></Column>
           <Column header="Quantity" body={({quantity, unit}) => quantity + ' ' + unit}></Column>
-          <Column header="Sell Price" body={({price}) => 
+          <Column className='price__background' header="Sell Price" body={({price}) => 
             parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}></Column>
           {user.role == 'user' && 
             <Column header="Offers" body={({offers}) => offers?.length || 0}></Column>
