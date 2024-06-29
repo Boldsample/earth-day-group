@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceSmile, faSearch } from '@fortawesome/free-solid-svg-icons'
 
+import { ProfileProvider } from '@modules/'
 import { getUser } from '@services/userServices'
 import OfferInfo from '@modules/offers/OfferInfo'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
@@ -29,6 +30,7 @@ const Chat = () => {
   const [show, setShow] = useState(false)
   const [sent, setSent] = useState(false)
   const [message, setMessage] = useState("")
+  const [profile, setProfile] = useState(null)
   const [calling, setCalling] = useState(false)
   const [messages, setMessages] = useState(null)
   const [proposal, setProposal] = useState(null)
@@ -90,8 +92,8 @@ const Chat = () => {
     }
   }, [notifications, sent, outgoing])
   useEffect(() => {
+    dispatch(setHeaderTitle(''))
     dispatch(setHeader('settings'))
-    dispatch(setHeaderTitle(`Chat with ${contact}`))
     if(!outgoing)
       getUser(contact).then(data => setOutgoing(data))
     chatWrapper.current.scrollTo({
@@ -106,18 +108,24 @@ const Chat = () => {
   }, [open])
 
   return <div className="layout" style={{background: 'white'}}>
+    <div className="navbar-item insection_header">
+      <h4><a onClick={e => { e.preventDefault(); setProfile({id: outgoing?.id, update: new Date(), type: 'chat'}); }}>Chat with {contact}</a></h4>
+    </div>
     <div className="main__content centerfullwidth">
       <div ref={chatWrapper} className={'chat__scroll ' + (offer && 'offer' || '')}>
         <div className="chat__messages">
+          <ProfileProvider profile={profile} setProfile={setProfile}>
           {messages?.map((message, key) => {
             const same = last == message.incoming ? 'same ' : ''
             last = message.incoming
             return <div key={key} className={'chat_card ' + same + (message.incoming == userId ? 'user' : 'contact')}>
               <MultiUseCard 
                 type="chat"
-                message={{...message, same: message.incoming == userId, replyOffer: replyOffer}} />
+                action={setProfile}
+                data={{...message, same: message.incoming == userId, replyOffer: replyOffer}} />
             </div>
           })}
+          </ProfileProvider>
         </div>
       </div>
       {!offer && 

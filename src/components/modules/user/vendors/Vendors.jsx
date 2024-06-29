@@ -1,15 +1,22 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from "react-redux"
+
+import { getUsers } from "@services/userServices"
+import { setHeader } from "@store/slices/globalSlice"
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
-import { useDispatch } from "react-redux";
-import { getUsers } from "@services/userServices";
-import { setHeader } from "@store/slices/globalSlice";
 
 const Vendors = () => {
   const dispatch = useDispatch();
-  const [vendors, setVendors] = useState([]);
+  const [page, setPage] = useState({page: 0, rows: 8})
+  const [filters, setFilters] = useState({keyword: ''})
+  const user = useSelector((state) => state.users.userData)
+  const [vendors, setVendors] = useState({total: 0, data: []})
 
-  const loadVendors = async (filter = { role: "vendor" }) => {
-    let _vendors = await getUsers(filter, 'full');
+  const loadVendors = async () => {
+    let _filter = { role: `u.role='vendor'` }
+    if(filters?.keyword != '')
+      _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+    const _vendors = await getUsers(_filter, 'full', user.id, page)
     setVendors(_vendors);
   };
 
@@ -25,11 +32,7 @@ const Vendors = () => {
     dispatch(setHeader("user"));
   }, []);
 
-  return (
-    <>
-        <CategoryListing content={vendorTemplateContent} category={vendors}/>
-    </>
-  )
+  return <CategoryListing content={vendorTemplateContent} category={vendors} reloadList={loadVendors}/>
 }
 
 export default Vendors

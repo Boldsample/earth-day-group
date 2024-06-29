@@ -7,7 +7,8 @@
   --grey: #737373
   --dark-blue: #23649A
   --light-green: #7FAE70
-  --red-state: #EF0000
+  --red-state: #da0000
+  //#EF0000
   --light-grey: #E0E0E0
   --green-state: #6AD447
   --blue-versionone: #FFFBEB
@@ -116,6 +117,14 @@ button, .button
     background-color: var(--blue-earth)
     border-color: var(--blue-earth)
     color: var(--blue-earth)
+  &.orange
+    background-color: var(--orange)
+    border-color: var(--orange)
+    color: var(--orange)
+  &.light-green
+    background-color: var(--light-green)
+    border-color: var(--light-green)
+    color: var(--light-green)
   &.green-earth
     background-color: var(--green-earth)
     border-color: var(--green-earth)
@@ -165,7 +174,7 @@ button, .button
   position: absolute
   width: 100%
   z-index: 100
-  &::before
+  &:not(.map, .settings)::before
     background: linear-gradient(to bottom, #FFFBEBFF 50%, #FFFBEBC0 60%, #FFFBEB30 80%, #FFFBEB00 100%)
     content: ""
     height: 170%
@@ -242,6 +251,20 @@ button, .button
           transform: scale(1.2)
           path
             fill: var(--green-earth) !important
+.insection_header
+  left: 0
+  margin: 0 calc((100% - 31.25rem) / 2)
+  position: absolute
+  width: 31.25rem
+  z-index: 101
+  h4
+    margin: 1.45rem
+    text-align: center
+  .search
+    margin: 0.4375rem
+    .input__wrapper
+      flex-grow: 1
+      width: auto
 @media (max-width: 1140px)
   .main_header
     padding: 0 1.25rem
@@ -550,6 +573,7 @@ button, .button
           display: inline-block
           width: 8,125rem
   .profile-content
+    min-width: 35rem
     max-width: 50rem
     .settings__card
       border-radius: 0

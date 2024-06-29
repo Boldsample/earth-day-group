@@ -4,7 +4,7 @@ import { getProducts } from "@services/productServices"
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 
 const ListProducts = ({id}) => {
-  const [page, setPage] = useState({page: 0, rows: 6})
+  const [page, setPage] = useState({page: 0, rows: 8})
   const [filters, setFilters] = useState({keyword: ''})
   const [products, setProducts] = useState({total: 0, data: []})
 

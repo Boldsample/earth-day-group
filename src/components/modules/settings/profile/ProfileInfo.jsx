@@ -1,4 +1,8 @@
 import { Link } from 'react-router-dom'
+import { Button } from 'primereact/button'
+import { faHeart, faPerson, faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { formatExternalURL } from '@utils/formatExternalURL'
@@ -6,7 +10,8 @@ import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCa
 
 import "../styles.sass"
 
-const ProfileInfo = ({user, type = 'settings'}) => {
+const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settings'}) => {
+
   const userData = () => {
     switch (user?.role) {
       case 'company':
@@ -23,15 +28,14 @@ const ProfileInfo = ({user, type = 'settings'}) => {
         ]
     }
   }
-  console.log(user)
   
   return <>
     <div className="settings__card">
       <ProfilePhoto className="mb-1" userPhoto={user?.picture} />
       <h4 className="font-bold text-gray">{user?.name}</h4>
       <p>{user?.email}</p>
-      {user?.role == 'user' && <p className="small mb-1">{user?.description}</p>}
-      {type == 'settings' && <>
+      {user?.role == 'user' && <p className="mb-2">{user?.description}</p>}
+      {same && <>
         <div className="followers">
           <Link to="/followers/">
             <span>{user?.followers}</span>
@@ -43,9 +47,17 @@ const ProfileInfo = ({user, type = 'settings'}) => {
           </Link>
         </div>
         <Link to={'/settings/edit/'} className="button dark-blue">Edit</Link>
-      </> || null}
+      </> || <>
+        {user?.role != 'user' && 
+          <Button className="light-green" onClick={doFollow}><FontAwesomeIcon icon={faUser} /> View profile</Button>
+        }
+        <Button className={user?.followed ? 'red-state' : 'dark-blue'} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> {user?.followed ? 'Unfollow' : 'Follow'}</Button>
+        {type != 'chat' && 
+          <Link to={`/chat/${user?.username}/`} className="button green-earth"><FontAwesomeIcon icon={faPaperPlane} /> Send a message</Link>
+        }
+      </>}
     </div>
-    {(type == 'settings' || user?.role == 'company') && 
+    {(same || user?.role == 'company') && 
       <div className="settings__card">
         {userData().map((data, key) => <div key={key} className="settings__table">
           <h4 className="internal">{data.key}</h4>

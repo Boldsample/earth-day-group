@@ -79,25 +79,34 @@
         width: 2rem
         &:nth-child(3)
           margin-left: auto
-  &.product
+  &.product, &.company
     border-radius: 1rem
     max-width: 13.3rem
     overflow: hidden
     padding: 0
-    .main__container a
-      display: flex
-      flex-wrap: wrap
-      width: 100%
-      .profile__photo
-        border-radius: 0
-        height: 8rem
-        margin: 0
+    place-content: stretch
+    .main__container
+      .bookmark
+        display: block
+        font-size: 1.3rem
+        padding: 15px
+        position: absolute
+        right: 0
+        width: auto
+      a
+        display: flex
+        flex-wrap: wrap
         width: 100%
-      .content
-        padding: 1rem
-        width: 100%
-        button
-          margin-left: auto
+        .profile__photo
+          border-radius: 0
+          height: 8rem
+          margin: 0
+          width: 100%
+        .content
+          padding: 1rem
+          width: 100%
+          button
+            margin-left: auto
 
   .multiuseCard__p
     margin: 0.625rem 0 0 0 
