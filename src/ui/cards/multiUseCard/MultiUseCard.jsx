@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import { Button } from "primereact/button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEye, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
-import { faBell, faCheck, faChevronRight, faImage, faMarker, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark as faBookmarkLine, faHeart as faHeartLine } from "@fortawesome/free-regular-svg-icons"
+import { faBell, faCheck, faChevronRight, faImage, faLocationDot, faBookmark, faHeart, faXmark } from "@fortawesome/free-solid-svg-icons"
 
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 
@@ -11,11 +11,10 @@ import "./multiusecard.sass"
 const MultiUseCard = ({
   type,
   date,
-  data,
   title,
   status,
-  action,
-  message
+  data = {},
+  action = null,
 }) => {
   const renderCardContent = () => {
     switch (type) {
@@ -82,67 +81,98 @@ const MultiUseCard = ({
           <h6 className={status}>{status}</h6>
         </div>
       case 'chat':
+        const doActionChat = e => {
+          e.preventDefault()
+          action({id: data?.incoming, update: new Date(), type: 'chat'})
+        }
         return <div className={'main__container'}>
-          <ProfilePhoto userPhoto={message?.picture} />
-          {(message?.type == 'offer' && 
+          <a onClick={doActionChat}><ProfilePhoto userPhoto={data?.picture} /></a>
+          {(data?.type == 'offer' && 
             <div className="offer">
               <div className="detail">
                 <small>
-                  {message?.status == message.id && 
+                  {data?.status == data?.id && 
                     <span className="text-green-state">Offer accepted:</span> 
-                  || ((message?.rejected || message?.status != 0) && 
+                  || ((data?.rejected || data?.status != 0) && 
                     <span className="text-red-state">Offer rejected:</span> 
                   ) || 
-                    <span>Offer {message?.same && 'sent' || 'received'}:</span>
+                    <span>Offer {data?.same && 'sent' || 'received'}:</span>
                   }
                 </small>
-                <h5 className={message?.same && 'text-white' || null}>{message?.title}</h5>
-                <div className="mb-1"><Button label={message?.material} className={'small ' + message?.material} /></div>
-                <div><small><b>Quantity:</b> {message?.quantity} {message?.unit}</small></div>
-                <div><small><b>Asking price:</b> {parseInt(message?.asking).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</small></div>
-                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className={message?.same && 'text-white' || 'text-green-earth'}>Proposal:</b> {parseInt(message?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+                <h5 className={data?.same && 'text-white' || null}>{data?.title}</h5>
+                <div className="mb-1"><Button label={data?.material} className={'small ' + data?.material} /></div>
+                <div><small><b>Quantity:</b> {data?.quantity} {data?.unit}</small></div>
+                <div><small><b>Asking price:</b> {parseInt(data?.asking).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</small></div>
+                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className={data?.same && 'text-white' || 'text-green-earth'}>Proposal:</b> {parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
               </div>
-              {!message?.same && message?.status == 0 && !message.rejected && 
+              {!data?.same && data?.status == 0 && !data?.rejected && 
                 <div className="actions">
-                  <Button className="small green-state" onClick={() => message.replyOffer(message.offer, message.id)}><FontAwesomeIcon icon={faCheck} /></Button>
-                  <Button className="small red-state" onClick={() => message.replyOffer(message.offer, message.id, true)}><FontAwesomeIcon icon={faXmark} /></Button>
+                  <Button className="small green-state" onClick={() => data?.replyOffer(data?.offer, data?.id)}><FontAwesomeIcon icon={faCheck} /></Button>
+                  <Button className="small red-state" onClick={() => data?.replyOffer(data?.offer, data?.id, true)}><FontAwesomeIcon icon={faXmark} /></Button>
                 </div> 
               || null}
-            </div>) || (message?.type == 'confirmation' && 
+            </div>) || (data?.type == 'confirmation' && 
             <div className="offer">
               <div className="detail">
                 <small><span className="text-green-state">Offer accepted:</span></small>
-                <h5 className={message?.same && 'text-white' || null}>{message?.title}</h5>
-                <div className="mb-1"><Button label={message?.material} className={'small ' + message?.material} /></div>
-                <div><small><b>Quantity:</b> {message?.quantity} {message?.unit}</small></div>
-                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className={message?.same && 'text-white' || 'text-green-earth'}>Final price:</b> {parseInt(message?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+                <h5 className={data?.same && 'text-white' || null}>{data?.title}</h5>
+                <div className="mb-1"><Button label={data?.material} className={'small ' + data?.material} /></div>
+                <div><small><b>Quantity:</b> {data?.quantity} {data?.unit}</small></div>
+                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className={data?.same && 'text-white' || 'text-green-earth'}>Final price:</b> {parseInt(data?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
               </div>
-              {!message?.same && 
+              {!data?.same && 
                 <div className="actions">
-                  <Button className="small green-state" style={{width: '6.25rem'}} onClick={() => message.replyOffer(message.offer, message.id)}><FontAwesomeIcon icon={faCheck} /> Pay</Button>
+                  <Button className="small green-state" style={{width: '6.25rem'}} onClick={() => data?.replyOffer(data?.offer, data?.id)}><FontAwesomeIcon icon={faCheck} /> Pay</Button>
                 </div> 
               || null}
-            </div>) || message?.message
+            </div>) || data?.message
           }
-          <div className="date">{message?.date}</div>
+          <div className="date">{data?.date}</div>
         </div>
       case 'user':
-        return <div className="main__container">
+        let link = data?.lastchat && `/chat/${data?.username}` || null
+        const doActionUser = e => {
+          if(!data?.lastchat){
+            e.preventDefault()
+            action({id: data?.id, update: new Date()})
+          }
+        }
+        return <Link className="main__container" to={link} onClick={doActionUser}>
           <ProfilePhoto userPhoto={data?.picture} />
           <div>
             <h4 className="font-bold">{data?.name}</h4>
             <span className="text-gray">{data?.lastchat || data?.description}</span>
           </div>
-          <button className="dark-blue" onClick={() => action({data, show: true})}><FontAwesomeIcon icon={faEye} /></button>
-          <Link className="button green-earth" to={`/chat/${data?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
-        </div>
+          {/* <Link className="button green-earth" to={`/chat/${data?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> */}
+        </Link>
       case 'product':
+        const doActionProduct = e => {
+        }
         return <div className="main__container">
-          <Link to={`/product/${data.id}/`}>
+          <a className="bookmark" onClick={doActionProduct}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></a>
+          <Link to={`/product/${data?.id}/`}>
             <ProfilePhoto pictures={data?.pictures} icon={faImage} />
             <div className="content">
               <h5 className="font-bold mb-1">{data?.name}</h5>
               <span className="text-gray">{parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
+              <div className="text-right">
+                <button className="small dark-blue">Ver <FontAwesomeIcon icon={faChevronRight} /></button>
+              </div>
+            </div>
+          </Link>
+        </div>
+      case 'company':
+        const doActionCompany = e => {
+          e.preventDefault()
+          action(data?.id)
+        }
+        return <div className="main__container">
+          <a className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></a>
+          <Link to={`/${data?.role}/${data?.id}/`}>
+            <ProfilePhoto pictures={data?.picture} icon={faImage} />
+            <div className="content">
+              <h5 className="font-bold mb-1">{data?.name}</h5>
+              <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
               <div className="text-right">
                 <button className="small dark-blue">Ver <FontAwesomeIcon icon={faChevronRight} /></button>
               </div>

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 
 const OfferInfo = ({ type = 'full', show, offer, onHide }) => {
-  return <Dialog visible={show} onHide={onHide}>
+  return <Dialog visible={show} onHide={onHide} draggable={false}>
     {offer?.pictures?.length && 
       <Galleria value={offer?.pictures} numVisible={5}
         item={({picture}) => <img src={picture} />}

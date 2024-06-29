@@ -15,7 +15,7 @@ const ProfileSettings = () => {
 
   return <div className="layout" style={{background: 'white'}}>
     <div className="main__content centerwidth alignttop text-center">
-      <ProfileInfo user={user} />
+      <ProfileInfo type="settings" user={user} same={true} />
     </div>
   </div>
 }

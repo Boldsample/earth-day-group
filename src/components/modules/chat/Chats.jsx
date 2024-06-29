@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 import { Button } from 'primereact/button'
-import { Dialog } from 'primereact/dialog'
 import { useEffect, useState } from 'react'
 import { InputText } from 'primereact/inputtext'
 
@@ -8,16 +7,14 @@ import { getUsers } from '@services/userServices'
 import { setHeader } from '@store/slices/globalSlice'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
-import ProfileInfo from '@modules/settings/profile/ProfileInfo'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Chats = () => {
   const [users, setUsers] = useState([])
   const [filters, setFilters] = useState([])
-  const [profile, setProfile] = useState({})
+  const [page, setPage] = useState({page: 0, rows: 8})
   const user = useSelector(state => state.users.userData)
 
-  const hidePopup = () => setProfile({...profile.data, show: false})
   const updateFilter = filter => {
     setFilters(prev => {
       if(prev.includes(filter))
@@ -27,9 +24,11 @@ const Chats = () => {
     })
   }
   const getUserList = async () => {
-    let _filters = !filters?.length ? "" : "AND (role='" + filters.join("' OR role='") + "')"
-    const _users = await getUsers(`u.id<>'${user?.id}' ${_filters}`, 'min', user?.id)
-    setUsers(_users)
+    let _filter = { user: `u.id<>'${user?.id}'` }
+    if(filters?.length > 0)
+      _filter['role'] = "(role='" + filters.join("' OR role='") + "')"
+    const _users = await getUsers(_filter, 'min', user?.id, page)
+    setUsers(_users);
   }
 
   useEffect(() => {
@@ -57,17 +56,11 @@ const Chats = () => {
             onChange={(e) => updateFilter(e.target.value)} />
         </div>
       </div>
-      <Dialog visible={profile?.show} onHide={hidePopup}>
-        <div className="profile-content">
-          <ProfileInfo user={profile.data} type="show" />
-        </div>
-      </Dialog>
-      {users?.length > 0 && users?.map(user => 
+      {users?.data?.length > 0 && users?.data?.map(user => 
         <MultiUseCard
           type="user"
           data={user}
-          key={user.id}
-          action={setProfile} />
+          key={user.id} />
       )}
     </div>
   </div>

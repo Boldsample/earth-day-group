@@ -98,23 +98,15 @@ export const getUser = async (id, user = null) => {
   return data.data
 }
 
-export const getUsers = async (filter = {}, type = 'min', user = null) => {
-  let filterStr = ''
-  if(typeof filter == 'string')
-    filterStr = filter
-  else
-    Object.keys(filter).map(f => {
-      filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
-    })
+export const getUsers = async (filter = {}, type = 'min', user = null, page = {page: 0}) => {
+	let filterStr = ''
+  Object.keys(filter).map(f => {
+    filterStr += (filterStr ? " AND " : "") + filter[f]
+  })
   filterStr = encodeURIComponent(filterStr)
   type += user ? `&user=${user}` : ''
-  const data = await API.get(`/get/users&filter=${filterStr}&type=${type}`)
-  const response = data?.data?.data?.map(user => {
-    let _user = {...user}
-    _user.materials = _user.materials ? JSON.parse(_user.materials) : null
-    return _user
-  })
-  return response
+  const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}&page=${page.page * page.rows}&rows=${page.rows}`)
+  return {total: data.total, data: data.data};
 }
 
 export const followUser = async (senddata) => {

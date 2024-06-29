@@ -20,7 +20,6 @@ const Profile = () => {
   const dispatch = useDispatch()
   const [ profile, setProfile ] = useState(null)
   const user = useSelector((state) => state.users.userData)
-  const loading = useSelector((state) => state.global.loading)
  
   const doFollow = async () => {
     await followUser({user: profile.id, follower: user.id})

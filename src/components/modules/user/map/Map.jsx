@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { Button } from 'primereact/button'
+import { Dialog } from 'primereact/dialog'
 import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect, useCallback } from 'react'
@@ -13,8 +15,6 @@ import { updateUserData } from '@store/slices/usersSlice'
 import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import './style.sass'
-import { Button } from 'primereact/button'
-import { Dialog } from 'primereact/dialog'
 
 const Map = () => {
   const dispatch = useDispatch()
@@ -92,7 +92,7 @@ const Map = () => {
   
   return <div className="layout fullwidth">
     {!user?.default_location && 
-      <Dialog className="no-close" visible={true} onHide={changeDefault}>
+      <Dialog className="no-close" visible={true} onHide={changeDefault} draggable={false}>
         <div className='text-center'>
           <h4 className="mb-2">Select your default location</h4>
           <Button className="green-earth" onClick={() => changeDefault('home')}><FontAwesomeIcon icon={faHouse} /> Use address location</Button>
@@ -100,7 +100,7 @@ const Map = () => {
         </div>
       </Dialog>
     || null}
-    <div className="navbar-item map__search">
+    <div className="navbar-item insection_header">
       <div className="search">
         <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
           <InputText

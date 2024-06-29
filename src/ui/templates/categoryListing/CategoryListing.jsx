@@ -1,26 +1,32 @@
-import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { InputText } from "primereact/inputtext"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Footer from "@ui/footer/Footer"
-import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
+import { followUser } from "@services/userServices"
+import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 
 import "./styles.sass";
 
-const CategoryListing = ({content, category}) => {
+const CategoryListing = ({content, category, reloadList = () => false}) => {
   const [listing, setListing] = useState([]);
-  const [filteredListing, setFilteredListing] = useState(listing);
   const skeletonPlaceHolder = ["", "", "", ""]
+  const user = useSelector((state) => state.users.userData)
+  const [filteredListing, setFilteredListing] = useState(listing);
 
+  const doFollow = async (id) => {
+    await followUser({user: id, follower: user?.id})
+    reloadList()
+  }
   const filteredListings = listing?.filter((category) =>
     category.name.toLowerCase().includes(filteredListing)
   );
 
   useEffect(() => {
-    setListing(category)
+    setListing(category?.data)
   }, [category]);
 
   const secondaryBannerData = [
@@ -65,37 +71,12 @@ const CategoryListing = ({content, category}) => {
             />
           </span>
         </div>
-        <div className="recycleCompaniesCards__grid">
+        <div className="categoryCards_grid">
           {/* <CardSkeleton/> */}
-          {filteredListings?.length > 0
-            ? filteredListings.map((company, key) => {
-                return (
-                  <div key={key} className="recycleCompanyCard__container">
-                    <ProfilePhoto
-                      size="2.1875rem"
-                      className="recycleCompanyProfile__photo"
-                      userPhoto={company.picture}
-                    />
-                    <div className="contactInformation__layout">
-                      <div className="contactInformation__container">
-                        <div className="proximity__container">
-                          <span className="proximity__icon"></span>
-                          <small>2,3miles away</small>
-                        </div>
-                        <h4>{company.name}</h4>
-                        <p>{company.address}</p>
-                      </div>
-                      <Link
-                        to={`/${company.role}/${company.id}`}
-                        className="button dark-blue"
-                      >
-                        Learn more
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })
-            : skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)}
+          {filteredListings?.length > 0 ? 
+            filteredListings.map(company => <MultiUseCard key={company.id} type="company" data={company} action={doFollow} />) : 
+            skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
+          }
         </div>
       </div>
     </div>

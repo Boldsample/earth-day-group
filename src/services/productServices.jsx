@@ -34,7 +34,6 @@ export const getProducts = async (filter, page) => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
-  const userFilter = filter?.user || ''
-  const { data } = await API.get(`/get/products&filter=${filterStr}&userfilter=${userFilter}&page=${page.page * page.rows}&rows=${page.rows}`)
+  const { data } = await API.get(`/get/products&filter=${filterStr}&page=${page.page * page.rows}&rows=${page.rows}`)
   return {total: data.total, data: data.data};
 };
