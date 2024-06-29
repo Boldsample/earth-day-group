@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
-import { faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 
 import OfferInfo from '@modules/offers/OfferInfo'
-import { getOffers } from '@services/offersServices'
-import { setHeader, updateAddLink } from '@store/slices/globalSlice'
-import { Dropdown } from 'primereact/dropdown'
 import { MultiSelect } from 'primereact/multiselect'
+import { getOffers } from '@services/offersServices'
+import { setHeader } from '@store/slices/globalSlice'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
+
 import './style.sass'
 
 const Offers = () => {
@@ -50,11 +50,12 @@ console.log(offers)
       <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" 
   placeholder="Filter by materials" />
       <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
-      <Button className="green-earth" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
-      <Button className="red-state" type="button" onClick={() => {
+      <Button className="small dark-blue" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
+      <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
         setFilters({keyword: '', materials: []})
-        }}><FontAwesomeIcon icon={faTrash} /></Button>
+      }}><FontAwesomeIcon icon={faTrash} /></Button>
+      <Link className="button small green-earth" to="/offers/new/"><FontAwesomeIcon icon={faPlus} /> New Offer</Link>
     </div>
     // <div className="flex aligncenter">
     //   <h1 className="text-defaultCase">Offers</h1>
@@ -87,8 +88,6 @@ console.log(offers)
   }, [page, reset])
   useEffect(() => {
     dispatch(setHeader('user'))
-    if(user.role == 'user')
-      dispatch(updateAddLink('/offers/new/'))
   }, [user])
   
   return <div className="layout">

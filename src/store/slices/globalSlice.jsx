@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   error: "",
-  addLink: "",
   thankyou: {},
   loading: false,
   header: 'false',
@@ -20,9 +19,6 @@ const globalSlice = createSlice({
     setHeaderTitle: (state, action) => {
       state.headerTitle = action.payload;
     },
-    updateAddLink: (state, action) => {
-      state.addLink = action.payload;
-    },
     updateThankyou: (state, action) => {
       state.thankyou = { ...action.payload };
     },
@@ -36,13 +32,11 @@ const globalSlice = createSlice({
 })
 
 export const {
-  addLink,
   setHeader,
   resetState,
   isSettings,
   headerTitle,
   loadingData,
-  updateAddLink,
   updateThankyou,
   setHeaderTitle,
 } = globalSlice.actions;

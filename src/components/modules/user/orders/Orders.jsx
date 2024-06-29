@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux'
 import { Button } from "primereact/button"
 import { useEffect, useState } from 'react'
 
+import { setHeader } from '@store/slices/globalSlice'
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
-import { setHeader, updateAddLink } from '@store/slices/globalSlice'
 
 const TestOrders = [
 	{ status: "Pending", title: "Order #1003", date: "12-04-2023 11:34" },
@@ -19,7 +19,6 @@ const Orders = () => {
 
 	useEffect(() => {
 		dispatch(setHeader('user'))
-		dispatch(updateAddLink('/offers/new/'))
 	}, [])
 
 	return <div className="layout">

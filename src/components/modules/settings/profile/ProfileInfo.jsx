@@ -49,7 +49,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         <Link to={'/settings/edit/'} className="button dark-blue">Edit</Link>
       </> || <>
         {user?.role != 'user' && 
-          <Button className="light-green" onClick={doFollow}><FontAwesomeIcon icon={faUser} /> View profile</Button>
+          <Link className="button light-green" to={`/${user?.role}/${user?.username}/`}><FontAwesomeIcon icon={faUser} /> View profile</Link>
         }
         <Button className={user?.followed ? 'red-state' : 'dark-blue'} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> {user?.followed ? 'Unfollow' : 'Follow'}</Button>
         {type != 'chat' && 

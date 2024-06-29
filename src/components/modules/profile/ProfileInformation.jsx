@@ -56,11 +56,11 @@ const ProfileInformation = ({profile, canEdit, doFollow}) => {
         </div>
       }
       <div className="buttons__container">
-        <Link className="button green-earth" to={`/chat/${profile?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> Contact Us</Link>
+        <Link className="button green-earth" to={`/chat/${profile?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact Us</span></Link>
         {canEdit && <>
-          <Link className="button dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> Edit Profile</Link>
+          <Link className="button dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> <span>Edit Profile</span></Link>
         </> || 
-          <Button className={profile?.followed ? 'red-state' : 'dark-blue'} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> {profile?.followed ? 'Unfollow' : 'Follow'}</Button>
+          <Button className={profile?.followed ? 'red-state' : 'dark-blue'} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? 'Unfollow' : 'Follow'}</span></Button>
         }
       </div>
     </div>

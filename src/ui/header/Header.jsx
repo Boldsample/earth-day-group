@@ -1,14 +1,12 @@
-import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { faChevronLeft, faPlus, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faChevronLeft, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
 import { resetState } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
-import { updateAddLink } from '@store/slices/globalSlice'
 import HeaderNotifications from "@components/modules/notifications/HeaderNotifications"
 
 const Header = () => {
@@ -17,7 +15,6 @@ const Header = () => {
   const navigate = useNavigate()
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
-  const addLink = useSelector((state) => state.global.addLink)
   const headerTitle = useSelector((state) => state.global.headerTitle)
 
   const logout = async (e) => {
@@ -26,11 +23,6 @@ const Header = () => {
       navigate('/login/')
     }
   };
-
-  useEffect(() => {
-    if(!['/offers/'].some(url => url == location.pathname))
-      dispatch(updateAddLink(''))
-  }, [location])
 
   return <header className={'main_header '+header}>
 
@@ -48,7 +40,6 @@ const Header = () => {
     {!['intro', 'dashboard', 'thankyou'].some((s) => s == header) && 
       <div className="navbar-item go-back">
         <a onClick={() => navigate(-1)}><FontAwesomeIcon icon={faChevronLeft} /></a>
-        {addLink && <Link className="plus" to={addLink}><FontAwesomeIcon icon={faPlus} /></Link>}
       </div>
     }
 
