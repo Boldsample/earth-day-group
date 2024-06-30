@@ -149,10 +149,10 @@ const MultiUseCard = ({
         const doActionProduct = e => {
         }
         return <div className="main__container">
-          <a className="bookmark" onClick={doActionProduct}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></a>
           <Link to={`/product/${data?.id}/`}>
             <ProfilePhoto pictures={data?.pictures} icon={faImage} />
             <div className="content">
+              <a className="bookmark" onClick={doActionProduct}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></a>
               <h5 className="font-bold mb-1">{data?.name}</h5>
               <span className="text-gray">{parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
               <div className="text-right">
@@ -167,17 +167,13 @@ const MultiUseCard = ({
           action(data?.id)
         }
         return <div className="main__container">
-          <a className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></a>
-          <Link to={`/${data?.role}/${data?.id}/`}>
-            <ProfilePhoto pictures={data?.picture} icon={faImage} />
-            <div className="content">
-              <h5 className="font-bold mb-1">{data?.name}</h5>
-              <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
-              <div className="text-right">
-                <button className="small dark-blue">Ver <FontAwesomeIcon icon={faChevronRight} /></button>
-              </div>
-            </div>
-          </Link>
+          <Link to={`/${data?.role}/${data?.id}/`}><ProfilePhoto pictures={data?.picture} icon={faImage} /></Link>
+          <div className="content">
+            <h5 className="font-bold"><Link to={`/${data?.role}/${data?.id}/`}>{data?.name}</Link></h5>
+            <Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
+            <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
+            <Link className="button small dark-blue" to={`/${data?.role}/${data?.id}/`}>Ver <FontAwesomeIcon icon={faChevronRight} /></Link>
+          </div>
         </div>
       default:
         return null;

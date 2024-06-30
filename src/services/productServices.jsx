@@ -35,5 +35,5 @@ export const getProducts = async (filter, page) => {
   })
   filterStr = encodeURIComponent(filterStr)
   const { data } = await API.get(`/get/products&filter=${filterStr}&page=${page.page * page.rows}&rows=${page.rows}`)
-  return {total: data.total, data: data.data};
+  return {total: data.total, data: data.data, card: 'product'};
 };
