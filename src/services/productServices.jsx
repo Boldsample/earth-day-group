@@ -3,7 +3,7 @@ import { API } from "./API"
 export const createproduct = async (data) => {
   const response = await API.post("/add/products", data)
   return response?.data
-};
+}
 
 export const updateProduct = async (data, filter) => {
   let filterStr = ''
@@ -26,14 +26,20 @@ export const getProduct = async (id) => {
   let filterStr = `p.id=${id}`
   const { data } = await API.get(`/get/products&filter=${filterStr}`)
   return data?.data[0];
-};
+}
 
-export const getProducts = async (filter, page) => {
+export const getProducts = async (filter, page, user = null) => {
 	let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
-  const { data } = await API.get(`/get/products&filter=${filterStr}&page=${page.page * page.rows}&rows=${page.rows}`)
-  return {total: data.total, data: data.data};
-};
+  user = user ? `&user=${user}` : ''
+  const { data } = await API.get(`/get/products&filter=${filterStr}${user}&page=${page.page}&rows=${page.rows}`)
+  return {total: data.total, data: data.data, card: 'product'};
+}
+
+export const followProduct = async (senddata) => {
+  const {data} = await API.post(`/follow/`, senddata)
+  return data.id
+}

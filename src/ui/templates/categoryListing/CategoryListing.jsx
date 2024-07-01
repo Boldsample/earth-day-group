@@ -1,56 +1,38 @@
 import { useSelector } from "react-redux"
-import { useEffect, useState } from "react"
 import { InputText } from "primereact/inputtext"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import { Paginator } from "primereact/paginator"
+import { Link, useLocation } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCircleChevronRight, faSearch } from "@fortawesome/free-solid-svg-icons"
 
 import Footer from "@ui/footer/Footer"
 import { followUser } from "@services/userServices"
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 
-import "./styles.sass";
+import "../styles.sass"
+import { followProduct } from "@services/productServices"
 
-const CategoryListing = ({content, category, reloadList = () => false}) => {
-  const [listing, setListing] = useState([]);
+const CategoryListing = ({content, elements, filters, reloadElements = () => false, setFilters = () => false, page, setPage = () => false}) => {
+  const location = useLocation()
   const skeletonPlaceHolder = ["", "", "", ""]
   const user = useSelector((state) => state.users.userData)
-  const [filteredListing, setFilteredListing] = useState(listing);
 
   const doFollow = async (id) => {
-    await followUser({user: id, follower: user?.id})
-    reloadList()
+    if(elements?.card == 'product')
+      await followUser({user: id, follower: user?.id})
+    else
+      await followProduct({type: 'product', entity: id, follower: user?.id})
+    reloadElements()
   }
-  const filteredListings = listing?.filter((category) =>
-    category.name.toLowerCase().includes(filteredListing)
-  );
-
-  useEffect(() => {
-    setListing(category?.data)
-  }, [category]);
-
-  const secondaryBannerData = [
-    {
-      title: "100% Recycled",
-      icon: "/assets/icons/recycleCompanyIcon1.svg",
-    },
-    {
-      title: "Eco Friendly",
-      icon: "/assets/icons/recycleCompanyIcon2.svg",
-    },
-    {
-      title: "Sustainable Economy",
-      icon: "/assets/icons/recycleCompanyIcon3.svg",
-    },
-  ];
 
   return <>
     <div className="layout autoheight template__top">
-      <div className="category__banner" style={{backgroundImage: content.bannerImage}}>
+      <div className="template__banner" style={{backgroundImage: content.bannerImage}}>
         <h1 className="text-upperCase">{content.title}</h1>
       </div>
       <div className="features">
-        {secondaryBannerData.map((data, key) => 
+        {content?.secondary?.map((data, key) => 
           <div key={key} className="icon">
             <img src={data.icon} alt={data.title} />
             <h4>{data.title}</h4>
@@ -58,25 +40,29 @@ const CategoryListing = ({content, category, reloadList = () => false}) => {
         )}
       </div>
     </div>
-    <div className="layout autoheight category__listing">
+    <div className="layout autoheight template__listing">
       <div className="main__content fullwidth pt-6">
         <div className="search mb-1">
           {content.searchLabel && <h3 className="text-center mb-1">{content.searchLabel}</h3>}
-          <span className="fullwidth p-input-icon-left">
+          <form onSubmit={reloadElements} className="p-input-icon-left fullwidth">
             <FontAwesomeIcon icon={faSearch} />
             <InputText
               placeholder={"Search"}
+              value={filters.keyword}
               className="p-inputtext"
-              onChange={(e) => setFilteredListing(e.target.value)}
-            />
-          </span>
+              onChange={(e) => setFilters(prev => ({...prev, keyword: e.target.value}))} />
+            <Link type="submit"><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
+          </form>
         </div>
-        <div className="categoryCards_grid">
-          {/* <CardSkeleton/> */}
-          {filteredListings?.length > 0 ? 
-            filteredListings.map(company => <MultiUseCard key={company.id} type="company" data={company} action={doFollow} />) : 
+        <div className="types">
+          {content?.types.map((type, key) => <Link key={key} to={type?.url} className={location.pathname == type?.url ? 'active' : ''}>{type?.label}</Link>)}
+        </div>
+        <div className="templateCards_grid">
+          {elements?.data?.length > 0 ? 
+            elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />) : 
             skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
           }
+          <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
         </div>
       </div>
     </div>

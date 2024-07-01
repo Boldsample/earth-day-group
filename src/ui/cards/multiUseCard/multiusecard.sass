@@ -86,27 +86,47 @@
     padding: 0
     place-content: stretch
     .main__container
-      .bookmark
-        display: block
-        font-size: 1.3rem
-        padding: 15px
-        position: absolute
-        right: 0
-        width: auto
+      display: flex
+      flex-wrap: wrap
+      width: 100%
       a
-        display: flex
-        flex-wrap: wrap
         width: 100%
         .profile__photo
           border-radius: 0
           height: 8rem
           margin: 0
           width: 100%
-        .content
-          padding: 1rem
+      .content
+        display: flex
+        flex-wrap: wrap
+        padding: 1rem 1rem 3.5rem
+        width: 100%
+        .price
+          background: linear-gradient(transparent, black)
+          color: white
+          font-size: 0.8rem
+          left: 0
+          margin-top: -4.3rem
+          padding: 1.8rem 1rem 0.2rem
+          position: absolute
+          text-align: right
           width: 100%
-          button
-            margin-left: auto
+        h5
+          width: calc(100% - 2rem)
+        .bookmark
+          padding: 0 0.5rem
+          width: auto
+        span
+          display: block
+          font-size: 0.9rem
+          line-height: 1.2em
+          margin-top: 0.5rem
+        .button
+          bottom: 1rem
+          margin-left: auto
+          position: absolute
+          right: 1rem
+          width: auto
 
   .multiuseCard__p
     margin: 0.625rem 0 0 0 

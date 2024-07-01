@@ -106,7 +106,7 @@ export const getUsers = async (filter = {}, type = 'min', user = null, page = {p
   filterStr = encodeURIComponent(filterStr)
   type += user ? `&user=${user}` : ''
   const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}&page=${page.page * page.rows}&rows=${page.rows}`)
-  return {total: data.total, data: data.data};
+  return {total: data.total, data: data.data, card: 'company'};
 }
 
 export const followUser = async (senddata) => {

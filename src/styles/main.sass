@@ -434,6 +434,19 @@ button, .button
   font-size: 0.5em
   line-height: 0.75em
 
+.p-paginator
+  background: transparent
+  width: 100%
+  button
+    background: none
+    border: none
+    color: var(--grey)
+    padding: 0
+    text-align: center
+  button + button
+    margin-left: 0
+  .p-highlight
+    color: black
 .p-datatable
   width: 100%
   &.no-head .p-datatable-thead
@@ -497,16 +510,7 @@ button, .button
   .p-datatable-tbody .p-datatable-row-expansion > td
     padding: 0
   .p-paginator
-    button
-      background: none
-      border: none
-      color: var(--grey)
-      padding: 0
-      text-align: center
-    button + button
-      margin-left: 0
-    .p-highlight
-      color: black
+    background: white
 
 .p-dialog
   &.no-close .p-dialog-header-close
