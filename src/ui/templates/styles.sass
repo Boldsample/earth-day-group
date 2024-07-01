@@ -1,6 +1,6 @@
 .layout.template__top
   padding: 0
-  .category__banner
+  .template__banner
     align-items: center
     background: url(/assets/user/image-6.svg) no-repeat center bottom
     background-size: cover
@@ -30,7 +30,7 @@
         margin-top: 0.625rem
 @media (max-width: 767px)
   .layout.template__top
-    .category__banner
+    .template__banner
       height: 37.5rem
       padding: 8.75rem 1.25rem 12,5rem
       width: 100%
@@ -55,7 +55,7 @@
           font-weight: 500
           margin-top: 0.625rem
 
-.layout.category__listing
+.layout.template__listing
   .types
     margin-top: 1rem
     text-align: center
@@ -71,10 +71,10 @@
         color: var(--gray)
   .search
     max-width: 43.75rem
-  .categoryCards_grid
-    display: grid
-    grid-template-columns: repeat(4, 1fr)
-    justify-content: center
+  .templateCards_grid
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-start
     gap: 1.875rem
     margin: 1.875rem 0
     width: 100%

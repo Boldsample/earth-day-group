@@ -10,24 +10,24 @@ import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 const Vendors = () => {
   const dispatch = useDispatch()
   const location = useLocation()
-  const [type, setType] = useState('vendors')
   const [page, setPage] = useState({page: 0, rows: 8})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
   const [elements, setElements] = useState({total: 0, data: []})
 
-  const loadElements = async () => {
+  const loadElements = async (e) => {
+    if(e) e.preventDefault()
     if(location.pathname == '/vendors/'){
       let _filter = { role: `u.role='vendor'` }
       if(filters?.keyword != '')
         _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
       const _vendors = await getUsers(_filter, 'full', user.id, page)
       setElements(_vendors);
-    }else if(location.pathname == '/vendors/products/'){
+    }else if(location.pathname == '/products/'){
       let _filter = {}
       if(filters?.keyword != '')
-        _filter['keyword'] = `(p.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
-      const _products = await getProducts(_filter, page)
+        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+      const _products = await getProducts(_filter, page, user?.id)
       setElements(_products)
     }
   }
@@ -45,7 +45,7 @@ const Vendors = () => {
       {
         card: 'product',
         label: 'Products',
-        url: '/vendors/products/',
+        url: '/products/',
       },
     ],
     secondary: [
@@ -69,10 +69,11 @@ const Vendors = () => {
     dispatch(setHeader("user"));
   }, [page]);
   useEffect(() => {
+    setFilters({keyword: ''})
     setPage({page: 0, rows: 8})
   }, [location]);
 
-  return <CategoryListing content={vendorTemplateContent} elements={elements} filters={filters} setFilters={setFilters} setType={setType} />
+  return <CategoryListing content={vendorTemplateContent} elements={elements} filters={filters} setFilters={setFilters} reloadElements={loadElements} page={page} setPage={setPage} />
 }
 
 export default Vendors

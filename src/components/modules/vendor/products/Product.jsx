@@ -9,11 +9,13 @@ import { setHeader } from "@store/slices/globalSlice"
 import { getProduct } from "@services/productServices"
 
 import "../../profile/profile.sass"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart, faPaperPlane, faPen } from "@fortawesome/free-solid-svg-icons"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import { ListProducts } from ".."
+import ProfileProducts from "@ui/templates/ProfileListing/ProfileProducts"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBookmark, faCartPlus } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark as faBookmarkLine } from "@fortawesome/free-regular-svg-icons"
 
 const Product = () => {
   const { id } = useParams()
@@ -21,6 +23,11 @@ const Product = () => {
   const [ product, setProduct ] = useState(null)
   const user = useSelector((state) => state.users.userData)
 
+  const doFollow = async e => {
+    e.preventDefault()
+    await followProduct({type: 'product', entity: id, follower: user?.id})
+    getProductData()
+  }
   const getProductData = async () => {
     const _product = await getProduct(id)
     setProduct(_product)
@@ -32,10 +39,8 @@ const Product = () => {
 		dispatch(setHeader('user'))
   }, [id])
 
-  console.log(product)
-
   return <>
-    <div className="layout widthfooter">
+    <div className="layout autoheight">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
         <div className="profileInformation__grid">
@@ -48,17 +53,19 @@ const Product = () => {
           <div className="profileInformation__container">
             <h2>{product?.name}</h2>
             <p className="mt-2 mb-4">{product?.description}</p>
+            <h4 className="dark-blue">{parseInt(product?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h4>
             <div className="buttons__container">
-              {/* <Link className="button green-earth" to={`/chat/${product?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> Contact Us</Link>
-              <Link className="button dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> Edit Profile</Link> || 
-              <Button className={product?.followed ? 'red-state' : 'dark-blue'} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> {product?.followed ? 'Unfollow' : 'Follow'}</Button> */}
+              <Link className="button dark-blue" onClick={doFollow}><FontAwesomeIcon icon={product?.followed ? faBookmark : faBookmarkLine} /></Link>
+              <Link className="button green-earth"><FontAwesomeIcon icon={faCartPlus} /> Add to cart</Link>
             </div>
           </div>
         </div>
-        <ListProducts id={product?.userid} />
       </div>
     </div>
-    <Footer />
+    <ProfileProducts user={product?.user} same={user?.id == product?.user} related={true} />
+    <div className="layout autoheight fullwidth pt-0">
+      <Footer />
+    </div>
   </>
 }
 
