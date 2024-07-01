@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 
 import OfferInfo from '@modules/offers/OfferInfo'
+import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import { MultiSelect } from 'primereact/multiselect'
 import { getOffers } from '@services/offersServices'
 import { setHeader } from '@store/slices/globalSlice'
@@ -89,13 +90,16 @@ console.log(offers)
   useEffect(() => {
     dispatch(setHeader('user'))
   }, [user])
+  console.log(offers)
   
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
       <h1 className="text-defaultCase mb-1">Offers</h1>
       <OfferInfo type={user.role == 'user' ? 'min' : 'full'} show={detail.show} offer={detail} onHide={hidePopup}  />
-      {offers?.data?.length ? 
+      {offers?.total == 0 ?  
+      <TableSkeleton/>
+      : offers?.data?.length ? 
         <DataTable paginator stripedRows lazy
           dataKey="id" 
           page={page.page}
@@ -117,8 +121,8 @@ console.log(offers)
           <Column header="Material" body={({material}) => 
             <Button label={material} className={'small ' + material} />}></Column>
           <Column header="Quantity" body={({quantity, unit}) => quantity + ' ' + unit}></Column>
-          <Column className='price__background' header="Sell Price" body={({price}) => 
-            parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}></Column>
+          <Column header="Sell Price" body={({price}) => 
+           <span className='price__background'>{parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>}></Column>
           {user.role == 'user' && 
             <Column header="Offers" body={({offers}) => offers?.length || 0}></Column>
           || null}
@@ -134,6 +138,7 @@ console.log(offers)
               }
             </> || null}></Column>}
         </DataTable> : 
+
         <div className="mt-2">
           <p>{user.role == 'user' ? "You have not posted any offers yet." : "There's no offers for the materials you buy"}</p>
           {user.role == 'user' && 
