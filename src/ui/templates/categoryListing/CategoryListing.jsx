@@ -55,7 +55,7 @@ const CategoryListing = ({content, elements, filters, reloadElements = () => fal
           </form>
         </div>
         <div className="types">
-          {content?.types.map((type, key) => <Link key={key} to={type?.url} className={location.pathname == type?.url ? 'active' : ''}>{type?.label}</Link>)}
+          {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={location.pathname == type?.url ? 'active' : ''}>{type?.label}</Link>)}
         </div>
         <div className="templateCards_grid">
           {elements?.data?.length > 0 ? 
