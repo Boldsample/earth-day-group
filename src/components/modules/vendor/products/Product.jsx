@@ -10,10 +10,9 @@ import { getProduct } from "@services/productServices"
 
 import "../../profile/profile.sass"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
-import PhotoGallery from "@components/modules/profile/PhotoGallery"
-import { ListProducts } from ".."
-import ProfileProducts from "@ui/templates/ProfileListing/ProfileProducts"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import PhotoGallery from "@components/modules/profile/PhotoGallery"
+import ProfileProducts from "@ui/templates/ProfileListing/ProfileProducts"
 import { faBookmark, faCartPlus } from "@fortawesome/free-solid-svg-icons"
 import { faBookmark as faBookmarkLine } from "@fortawesome/free-regular-svg-icons"
 

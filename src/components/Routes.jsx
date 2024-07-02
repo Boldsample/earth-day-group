@@ -13,7 +13,7 @@ import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Dashboard, Map, Orders, Companies, Vendors } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
-import { Notifications, Offers, OfferNew, Chats, Chat, Followers, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
+import { Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
 
 
 
@@ -46,30 +46,31 @@ const AppRoutes = () => {
 
       {/*   USER    */}
       {user.role == 'user' && <>
-        <Route exact path="/dashboard/" element={<Dashboard />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
         <Route exact path="/notifications" element={<Notifications />} />
         <Route exact path="/offers" element={<Offers />} />
         <Route exact path="/offers/new" element={<OfferNew />} />
         <Route exact path="/chat" element={<Chats />} />
         <Route exact path="/chat/:contact" element={<Chat />} />
         <Route exact path="/location" element={<Map />} />
-        <Route exact path="/orders/" element={<Orders />} />
+        <Route exact path="/orders" element={<Orders />} />
         <Route exact path="/followers" element={<Followers />} />
         <Route exact path="/following" element={<Followers followers={false} />} />
-        <Route exact path="/settings/" element={<Settings />} />
-        <Route exact path="/settings/profile/" element={<ProfileSettings />} />
-        <Route exact path="/settings/password/" element={<Password />} />
-        <Route exact path="/settings/edit/" element={<RegisterUser />} />
-        <Route exact path="/settings/terms/" element={<Terms />} />
-        <Route exact path="/settings/about/" element={<About />} />
-        <Route exact path="/settings/activity/" element={<Activity />} />
-        <Route exact path="/companies/" element={<Companies />} />
+        <Route exact path="/bookmarks/*" element={<Bookmarks />} />
+        <Route exact path="/settings" element={<Settings />} />
+        <Route exact path="/settings/profile" element={<ProfileSettings />} />
+        <Route exact path="/settings/password" element={<Password />} />
+        <Route exact path="/settings/edit" element={<RegisterUser />} />
+        <Route exact path="/settings/terms" element={<Terms />} />
+        <Route exact path="/settings/about" element={<About />} />
+        <Route exact path="/settings/activity" element={<Activity />} />
+        <Route exact path="/companies" element={<Companies />} />
         <Route exact path="/company/:id" element={<Profile />} />
-        <Route exact path="/vendors/" element={<Vendors />} />
+        <Route exact path="/vendors" element={<Vendors />} />
         <Route exact path="/vendor/:id" element={<Profile />} />
-        <Route exact path="/products/" element={<Vendors />} />
+        <Route exact path="/products" element={<Vendors />} />
         <Route exact path="/product/:id" element={<Product />} />
-        <Route path="*" element={<Navigate to="/dashboard/" />} />
+        <Route path="*" element={<Navigate to="/dashboard" />} />
       </>}
 
       {/*   COMPANY   */}

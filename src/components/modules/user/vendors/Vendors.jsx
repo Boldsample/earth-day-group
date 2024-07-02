@@ -14,24 +14,6 @@ const Vendors = () => {
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
   const [elements, setElements] = useState({total: 0, data: []})
-
-  const loadElements = async (e) => {
-    if(e) e.preventDefault()
-    if(location.pathname == '/vendors/'){
-      let _filter = { role: `u.role='vendor'` }
-      if(filters?.keyword != '')
-        _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
-      const _vendors = await getUsers(_filter, 'full', user.id, page)
-      setElements(_vendors);
-    }else if(location.pathname == '/products/'){
-      let _filter = {}
-      if(filters?.keyword != '')
-        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
-      const _products = await getProducts(_filter, page, user?.id)
-      setElements(_products)
-    }
-  }
-
   const vendorTemplateContent = {
     title: 'MARKET PLACE',
     searchLabel: 'Discover products',
@@ -62,6 +44,23 @@ const Vendors = () => {
         icon: '/assets/icons/recycleCompanyIcon3.svg',
       },
     ]
+  }
+
+  const loadElements = async (e) => {
+    if(e) e.preventDefault()
+    if(location.pathname == '/vendors/'){
+      let _filter = { role: `u.role='vendor'` }
+      if(filters?.keyword != '')
+        _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+      const _vendors = await getUsers(_filter, 'full', user.id, page)
+      setElements(_vendors);
+    }else if(location.pathname == '/products/'){
+      let _filter = {}
+      if(filters?.keyword != '')
+        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+      const _products = await getProducts(_filter, page, user?.id)
+      setElements(_products)
+    }
   }
 
   useEffect(() => {

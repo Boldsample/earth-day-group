@@ -31,14 +31,16 @@ const CategoryListing = ({content, elements, filters, reloadElements = () => fal
       <div className="template__banner" style={{backgroundImage: content.bannerImage}}>
         <h1 className="text-upperCase">{content.title}</h1>
       </div>
-      <div className="features">
-        {content?.secondary?.map((data, key) => 
-          <div key={key} className="icon">
-            <img src={data.icon} alt={data.title} />
-            <h4>{data.title}</h4>
-          </div>
-        )}
-      </div>
+      {content?.secondary?.length > 0 && 
+        <div className="features">
+          {content?.secondary?.map((data, key) => 
+            <div key={key} className="icon">
+              <img src={data.icon} alt={data.title} />
+              <h4>{data.title}</h4>
+            </div>
+          )}
+        </div>
+      }
     </div>
     <div className="layout autoheight template__listing">
       <div className="main__content fullwidth pt-6">

@@ -8,8 +8,9 @@ import Settings from "./settings/Settings"
 import Password from "./settings/Password"
 import Activity from "./settings/Activity"
 import Followers from "./followers/Followers"
+import Bookmarks from "./bookmarks/Bookmarks"
 import ProfileSettings from "./settings/profile/Profile"
 import Notifications from "./notifications/Notifications"
 import ProfileProvider from "./settings/profile/ProfileProvider"
 
-export { Notifications, Offers, OfferNew, Chats, Chat, Followers, Settings, ProfileSettings, ProfileProvider, Password, Terms, About, Activity }
+export { Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, ProfileProvider, Password, Terms, About, Activity }

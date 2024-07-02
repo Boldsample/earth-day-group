@@ -1,20 +1,12 @@
-import { Link } from "react-router-dom"
 import { useParams } from "react-router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import Footer from "@ui/footer/Footer"
-import { ListProducts } from "../vendor"
-import PhotoGallery from "./PhotoGallery"
 import {  getUser } from "@services/userServices"
 import { setHeader } from "@store/slices/globalSlice"
-import ProfileInformation from "./ProfileInformation"
-import LoadingContentOverlay from "@ui/spinner/LoadingContentOverlay"
+import ProfileListing from "@ui/templates/ProfileListing/ProfileListing"
 
 import "./profile.sass"
-import ProfileListing from "@ui/templates/ProfileListing/ProfileListing"
 
 const Profile = () => {
   const { id } = useParams()
@@ -67,25 +59,6 @@ const Profile = () => {
   }, [])
 
   return <ProfileListing content={profileTemplateContent} same={id} profile={profile} />
-
-  return profile && <LoadingContentOverlay>
-    <div className="layout widthfooter">
-      <img className="layout__background" src="/assets/full-width.svg" />
-      <div className="main__content centerfullwidth">
-        <ProfileInformation profile={profile} canEdit={!id} doFollow={doFollow} />
-        {profile?.images?.length > 0 && 
-          <PhotoGallery imageCatalog={profile?.images} />
-        }
-        {(profile?.role == 'vendor' || profile?.role == 'ngo') && <>
-          {user.id == profile?.id && 
-            <Link className="button green-earth self-end" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> Crear producto</Link>
-          }
-          <ListProducts id={profile?.id} />
-        </>}
-      </div>
-    </div>
-    <Footer/>
-  </LoadingContentOverlay>
 }
 
 export default Profile

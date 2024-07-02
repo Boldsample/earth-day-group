@@ -1,19 +1,11 @@
 import { useSelector } from "react-redux"
-import { InputText } from "primereact/inputtext"
-import { Paginator } from "primereact/paginator"
-import { Link, useLocation } from "react-router-dom"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleChevronRight, faSearch } from "@fortawesome/free-solid-svg-icons"
 
 import Footer from "@ui/footer/Footer"
+import ProfileProducts from "./ProfileProducts"
 import { followUser } from "@services/userServices"
-import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
-import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
+import ProfileInformation from "@components/modules/profile/ProfileInformation"
 
 import "../styles.sass"
-import ProfileInformation from "@components/modules/profile/ProfileInformation"
-import { ListProducts } from "@components/modules/vendor"
-import ProfileProducts from "./ProfileProducts"
 
 const ProfileListing = ({content, same, profile, filters, reloadElements = () => false, setFilters = () => false, page, setPage = () => false}) => {
   const user = useSelector((state) => state.users.userData)

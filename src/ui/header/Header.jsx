@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { faChevronLeft, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark, faChevronLeft, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
@@ -57,13 +57,12 @@ const Header = () => {
 
     {!['intro', 'login', 'register'].some(s => s == header) && 
       <div className="navbar-item right-align icons">
-        {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
-          {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
-            <ProfilePhoto userPhoto={user?.picture} />
-            <small className="user-name">Hi, {user?.name}</small>
-          </div> : null}
-          <FontAwesomeIcon icon={faShoppingCart} />
-        </>}
+        {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
+          <ProfilePhoto userPhoto={user?.picture} />
+          <small className="user-name">Hi, {user?.name}</small>
+        </div> : null}
+        <FontAwesomeIcon icon={faShoppingCart} />
+        <Link to="/bookmarks/"><FontAwesomeIcon icon={faBookmark} /></Link>
         <HeaderNotifications />
         {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
           <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
