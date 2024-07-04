@@ -66,6 +66,9 @@ const RegisterNgo = () => {
     let response
     let _user = { ...user, ...data }
     delete _user.images
+    delete _user.materials
+    delete _user.followers
+    delete _user.following
     setSending(true)
     if(user.id){
       if(_user.password == ''){

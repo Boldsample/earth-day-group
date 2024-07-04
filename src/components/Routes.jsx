@@ -110,7 +110,7 @@ const AppRoutes = () => {
         <Route exact path="/settings/" element={<Settings />} />
         <Route exact path="/settings/profile/" element={<ProfileSettings />} />
         <Route exact path="/settings/password/" element={<Password />} />
-        <Route exact path="/settings/edit/" element={<RegisterCompany />} />
+        <Route exact path="/settings/edit/" element={<RegisterVendor />} />
         <Route exact path="/settings/terms/" element={<Terms />} />
         <Route exact path="/settings/about/" element={<About />} />
         <Route exact path="/settings/activity/" element={<Activity />} />

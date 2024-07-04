@@ -20,58 +20,58 @@ const Map = () => {
   const dispatch = useDispatch()
   const [ map, setMap ] = useState(null)
   const [ show, setShow ] = useState(null)
+  const [ zIndex, setZIndex ] = useState({})
+  const [ bounds, setBounds ] = useState(null)
   const [ markers, setMarkers ] = useState([])
   const [current, setCurrent] = useState({lat: 0, lng: 0})
   const user = useSelector((state) => state.users.userData)
 
+  const updateZIndex = (e, key) => {
+    const _info = e.domEvent.type == 'mouseover'
+    const _index = e.domEvent.type == 'mouseout' ? null : 9999
+    setZIndex(prev => ({...prev, [key]: {index: _index, info: _info}}))
+  }
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
-  const onLoad = useCallback(map => setMap(map), [])
-  const onUnmount = useCallback(map => setMap(null), [])
   const onPlaceChanged = () => {
-    const _place = window.autocomplete.getPlace()
-    const _location = _place?.geometry?.location
+    const _location = window.autocomplete.getPlace()?.geometry?.location
     if(_location)
       setCurrent({ lat: _location.lat(), lng: _location.lng() })
   }
+  const onLoad = useCallback(map => setMap(map), [])
+  const onUnmount = useCallback(map => setMap(null), [])
+  const extendBounds = (_bounds, factor) => {
+    const ne = _bounds.getNorthEast()
+    const sw = _bounds.getSouthWest()
+    const latDiff = (ne.lat() - sw.lat()) * factor
+    const lngDiff = (ne.lng() - sw.lng()) * factor
+    return new window.google.maps.LatLngBounds(
+      new window.google.maps.LatLng(sw.lat() - latDiff, sw.lng() - lngDiff),
+      new window.google.maps.LatLng(ne.lat() + latDiff, ne.lng() + lngDiff)
+    )
+  }
+  const updateBounds = () => {
+    const _bounds = map?.getBounds()
+    if(!bounds || !bounds.contains(_bounds.getNorthEast()) || !_bounds.contains(_bounds.getSouthWest()))
+      setBounds(extendBounds(_bounds, 2))
+  }
   const loadMarkers = async () => {
-    let _response = await getUsers(`(role='company' OR role='vendors')`, 'full')
-    const geocoder = new window.google.maps.Geocoder()
-    const geocodePromises = _response?.map(async marker => {
-      return new Promise((resolve, reject) => {
-        geocoder.geocode({ address: marker.address }, (response, status) => {
-          if(response?.length > 0){
-            const { lat, lng } = response[0].geometry.location
-            marker.position = { lat: lat(), lng: lng() }
-            resolve(marker)
-          }else
-            reject(status)
-        })
-      })
-    })
-    const _markers = await Promise.allSettled(geocodePromises)
-    setMarkers(_markers
-      .filter(result => result.status === 'fulfilled')
-      .map(result => result.value))
+    const ne = bounds.getNorthEast()
+    const sw = bounds.getSouthWest()
+    let _filter = {users: `u.role<>'user'`}
+    _filter['bounds'] = `u.lat BETWEEN ${sw.lat()} AND ${ne.lat()} AND u.lng BETWEEN ${sw.lng()} AND ${ne.lng()}`
+    let _response = await getUsers(_filter, 'full', user?.id)
+    setMarkers(_response?.data)
   }
   const toCurrentLocation = async location => {
-    const geocoder = new window.google.maps.Geocoder()
-    await loadMarkers()
     if(location == 'current'){
       navigator?.geolocation.getCurrentPosition(
         ({ coords: { latitude: lat, longitude: lng } }) => {
-          const pos = { lat, lng };
-          setCurrent(pos);
+          const pos = { lat, lng }
+          setCurrent(pos)
         }
       )
-    }
-    else{
-      geocoder.geocode({ address: user.address }, (response) => {
-        if(response?.length > 0){
-          const { lat, lng } = response[0].geometry.location
-          setCurrent({ lat: lat(), lng: lng() })
-        }
-      })
-    }
+    }else
+      setCurrent({ lat: parseFloat(user?.lat), lng: parseFloat(user?.lng) })
   }
   const getIcon = role => {
     if(role == 'vendor')
@@ -83,11 +83,13 @@ const Map = () => {
   }
 
   useEffect(() => {
+    if(bounds)
+      loadMarkers()
+  }, [bounds])
+  useEffect(() => {
     dispatch(setHeader('map'))
-    dispatch(setHeaderTitle('Mapa'))
-    if(map && user?.default_location){
+    if(map && user?.default_location)
       toCurrentLocation(user.default_location)
-    }
   }, [user, map])
   
   return <div className="layout fullwidth">
@@ -119,8 +121,8 @@ const Map = () => {
       <p>{show.phone}</p>
       {show?.materials?.length > 0 && 
         <div>
-          {show?.materials?.map(({material}, key) => 
-            <Button key={key} label={material} className={'small mb-1 ' + material} />
+          {show?.materials?.map(({type}, key) => 
+            <Button key={key} label={type} className={'small mb-1 ' + type} />
           )}
         </div>
       || null}
@@ -133,27 +135,39 @@ const Map = () => {
       onLoad={onLoad}
       center={current}
       onUnmount={onUnmount}
+      onBoundsChanged={updateBounds}
       options={{ styles: mapConfig }}
       mapContainerStyle={{ width: '100vw', height: '100vh' }}>
       <MarkerClustererF>
         {clusterer => <div>
           {markers.map((marker, key) => {
-            return marker.position?.lat && marker.position?.lng && 
-              <MarkerF key={key} position={marker.position} icon={{
+            return marker?.lat && marker?.lng && 
+              <MarkerF key={key} data-key={key} position={{lat: parseFloat(marker?.lat), lng: parseFloat(marker?.lng)}} icon={{
                   url: getIcon(marker.role),
                   scaledSize: new window.google.maps.Size(60, 60)
-                }} onClick={() => setShow(marker)}>
-                <InfoBoxF>
-                  <a className="map-card" onClick={() => setShow(marker)}>
-                    <ProfilePhoto userPhoto={marker.picture} />
-                    <h4>{marker.name}</h4>
-                  </a>
-                </InfoBoxF>
+                }}
+                optimized={false}
+                zIndex={zIndex[key]?.index}
+                onClick={() => setShow(marker)}
+                onMouseOut={e => updateZIndex(e, key)}
+                onMouseOver={e => updateZIndex(e, key)}>
+                {zIndex[key]?.info && 
+                  <InfoBoxF>
+                    <a className="map-card" onClick={() => setShow(marker)}>
+                      <ProfilePhoto userPhoto={marker.picture} />
+                      <h4>{marker.name}</h4>
+                    </a>
+                  </InfoBoxF>
+                }
               </MarkerF>
           })}
         </div>}
       </MarkerClustererF>
-      <MarkerF position={current} icon={{ url: "/assets/icons/map-home.svg", scaledSize: new window.google.maps.Size(60, 60) }} />
+      <MarkerF position={current} icon={{ url: "/assets/icons/map-home.svg", scaledSize: new window.google.maps.Size(60, 60) }}
+        optimized={false}
+        zIndex={zIndex?.home?.index}
+        onMouseOut={e => updateZIndex(e, 'home')}
+        onMouseOver={e => updateZIndex(e, 'home')} />
     </GoogleMap>
   </div>
 }

@@ -71,12 +71,12 @@ const CompanyDetailedForm = ({ user, setUser }) => {
   const onSubmit = async () => {
     let response
     let _user = { ...user }
-    delete _user.materials
     delete _user.images
+    delete _user.materials
+    delete _user.followers
+    delete _user.following
     setSending(true)
     if(user?.id){
-      delete _user.followers
-      delete _user.following
       if(_user.password == ''){
         delete _user.password
         delete _user.password_confirmation

@@ -39,14 +39,15 @@ const RegisterVendor = () => {
       email: user?.email || "",
       password_confirmation: "",
       images: user?.images || [],
+      website: user?.website || "",
       picture: user?.picture || "",
       address: user?.address || "",
       username: user?.username || "",
       description: user?.description || "",
       delivery_charges: user?.delivery_charges || "",
-      pick_up_from_home: user?.pick_up_from_home || "",
       accept_terms: user?.accept_terms && true || false,
-      delivery_available: user?.delivery_available || 0,
+      pick_up_from_home: parseInt(user?.pick_up_from_home) || 0,
+      delivery_available: parseInt(user?.delivery_available) || 0,
     },
   })
 
@@ -69,6 +70,9 @@ const RegisterVendor = () => {
     let response
     let _user = { ...user, ...data }
     delete _user.images
+    delete _user.materials
+    delete _user.followers
+    delete _user.following
     setSending(true)
     if(user.id){
       if(_user.password == ''){

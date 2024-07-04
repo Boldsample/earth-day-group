@@ -98,14 +98,15 @@ export const getUser = async (id, user = null) => {
   return data.data
 }
 
-export const getUsers = async (filter = {}, type = 'min', user = null, page = {page: 0}) => {
+export const getUsers = async (filter = {}, type = 'min', user = null, page = null) => {
 	let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
   type += user ? `&user=${user}` : ''
-  const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}&page=${page.page * page.rows}&rows=${page.rows}`)
+  type += page ? `&page=${page?.page * page?.rows}&rows=${page.rows}` : ''
+  const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}`)
   return {total: data.total, data: data.data, card: 'company'};
 }
 
