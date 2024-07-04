@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope } from "@fortawesome/free-solid-svg-icons"
+import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, faPlus } from "@fortawesome/free-solid-svg-icons"
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCard'
 
 import './profile.sass'
 
-const ProfileInformation = ({profile, canEdit, doFollow}) => {
+const ProfileInformation = ({profile, same, doFollow}) => {
   return <div className='profileInformation__grid'>
     <div className="image__container">
       <ProfilePhoto className="profile__photo-large" size="12.5rem" userPhoto={profile?.picture}/>
@@ -56,11 +56,12 @@ const ProfileInformation = ({profile, canEdit, doFollow}) => {
         </div>
       }
       <div className="buttons__container">
-        <Link className="button green-earth" to={`/chat/${profile?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact Us</span></Link>
-        {canEdit && <>
-          <Link className="button dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> <span>Edit Profile</span></Link>
+        <Link className="button small green-earth" to={`/chat/${profile?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact Us</span></Link>
+        {same && <>
+          <Link className="button small dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> <span>Edit Profile</span></Link>
+          <Link className="button small blue-earth self-end" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> New product</Link>
         </> || 
-          <Button className={profile?.followed ? 'red-state' : 'dark-blue'} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? 'Unfollow' : 'Follow'}</span></Button>
+          <Button className={'small '+(profile?.followed ? 'red-state' : 'dark-blue')} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? 'Unfollow' : 'Follow'}</span></Button>
         }
       </div>
     </div>

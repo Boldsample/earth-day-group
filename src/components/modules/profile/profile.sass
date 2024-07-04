@@ -38,6 +38,8 @@
   height: auto
   margin-top: 3.125rem
   width: 100%
+  h2.slides-1, h2.slides-2
+    text-align: center
   .swiper
     margin: 1.875rem
     padding-bottom: 3.75rem
@@ -62,6 +64,10 @@
           width: 100%
     &:not(.slides-1, .slides-2, .slides-3) .swiper-slide-active .p-image, &.slides-3 .swiper-slide-next .p-image
       transform: scale(1.25)
+    &.slides-1 .swiper-wrapper, &.slides-2 .swiper-wrapper
+      justify-content: center
+      .swiper-slide:last-child
+        margin-right: 0 !important
     .swiper-button-prev, .swiper-button-next
       bottom: 0
       left: 50%

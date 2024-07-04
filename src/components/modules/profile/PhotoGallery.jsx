@@ -6,7 +6,7 @@ import "./profile.sass"
 
 const PhotoGallery = ({imageCatalog, type = 'full'}) => {
   return type == 'full' && <div className="photoGallery__container">
-    <h2>Pictures</h2>
+    <h2 className={'slides-' + imageCatalog?.length}>Pictures</h2>
     {!imageCatalog?.length ? <p>You have not uploaded any images to your profile.</p> : 
       <Swiper
         spaceBetween={50}

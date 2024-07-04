@@ -8,7 +8,7 @@ import ProfileInformation from "@components/modules/profile/ProfileInformation"
 
 import "../styles.sass"
 
-const ProfileListing = ({content, same, profile, filters, reloadElements = () => false, setFilters = () => false, page, setPage = () => false}) => {
+const ProfileListing = ({content, profile, filters, reloadElements = () => false, setFilters = () => false, page, setPage = () => false}) => {
   const user = useSelector((state) => state.users.userData)
 
   const doFollow = async (id) => {
@@ -20,14 +20,14 @@ const ProfileListing = ({content, same, profile, filters, reloadElements = () =>
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
-        <ProfileInformation profile={profile} canEdit={!same} doFollow={doFollow} />
+        <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} />
         {profile?.images?.length > 0 && 
           <PhotoGallery imageCatalog={profile?.images} />
         }
+        {(profile?.role == 'vendor' || profile?.role == 'ngo') && 
+          <ProfileProducts user={profile?.id} same={user?.id == profile?.id} />
+        }
       </div>
-      {(profile?.role == 'vendor' || profile?.role == 'ngo') && 
-        <ProfileProducts user={profile?.id} same={user?.id == profile?.id} />
-      }
     </div>
     <Footer />
   </>
