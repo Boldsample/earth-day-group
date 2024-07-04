@@ -62,7 +62,7 @@ const Header = () => {
           <small className="user-name">Hi, {user?.name}</small>
         </div> : null}
         <FontAwesomeIcon icon={faShoppingCart} />
-        <Link to="/bookmarks/"><FontAwesomeIcon icon={faBookmark} /></Link>
+        <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
         <HeaderNotifications />
         {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
           <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>

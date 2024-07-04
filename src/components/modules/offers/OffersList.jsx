@@ -27,7 +27,6 @@ const Offers = () => {
   const user = useSelector((state) => state.users.userData)
   const [offers, setOffers] = useState({total: 0, data: []})
   const [filters, setFilters] = useState({keyword: '', materials: []})
-console.log(offers)
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callOffers = async () =>{
@@ -90,7 +89,6 @@ console.log(offers)
   useEffect(() => {
     dispatch(setHeader('user'))
   }, [user])
-  console.log(offers)
   
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />

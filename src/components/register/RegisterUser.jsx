@@ -184,6 +184,7 @@ const RegisterUser = () => {
               nameInput="address"
               placeHolderText="Address*"
               getFormErrorMessage={getFormErrorMessage}
+              onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
                 required: "*El campo es requerido.",
                 pattern: {

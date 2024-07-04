@@ -30,6 +30,7 @@ const RegisterNgo = () => {
     defaultValues: {
       role: "ngo",
       password: "",
+      type: user?.type || 0,
       name: user?.name || "",
       phone: user?.phone || "",
       email: user?.email || "",
@@ -40,7 +41,6 @@ const RegisterNgo = () => {
       username: user?.username || "",
       description: user?.description || "",
       accept_terms: user?.accept_terms && true || false,
-      organization_type: user?.organization_type || 0,
     },
   })
 
@@ -191,6 +191,7 @@ const RegisterNgo = () => {
                 nameInput="address"
                 placeHolderText="Address*"
                 getFormErrorMessage={getFormErrorMessage}
+                onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
                 rules={{
                   required: "*El campo es requerido.",
                   pattern: {

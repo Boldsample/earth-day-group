@@ -36,7 +36,10 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
   })
 
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
-  const onPlaceChanged = () => setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+  const onPlaceChanged = e => {
+    console.log('Test 1')
+    setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+  }
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
     if(!user.id){
@@ -140,6 +143,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
           nameInput="address"
           placeHolderText="Address*"
           getFormErrorMessage={getFormErrorMessage}
+          onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
           rules={{
             required: "*El campo es requerido.",
             pattern: {
