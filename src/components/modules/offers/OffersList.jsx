@@ -22,11 +22,12 @@ const Offers = () => {
   const dispatch = useDispatch()
   const [detail, setDetail] = useState({})
   const [reset, setReset] = useState(false)
+  const [offers, setOffers] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: 6})
   const [expandedRows, setExpandedRows] = useState({})
   const user = useSelector((state) => state.users.userData)
-  const [offers, setOffers] = useState({total: 0, data: []})
   const [filters, setFilters] = useState({keyword: '', materials: []})
+
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callOffers = async () =>{
@@ -40,7 +41,9 @@ const Offers = () => {
     }else if(user.role == 'company'){
       let _materials = user?.materials?.map(material => material.type)
       if(_materials?.length > 0)
-      _filter['materials'] = "(o.material='" + _materials.join("' OR o.material='") +"')"
+        _filter['materials'] = "(o.material='" + _materials.join("' OR o.material='") +"')"
+      else
+        return setOffers({total: 0, data: []})
     }
     const _offers = await getOffers(_filter, page)
     setOffers(_offers)
@@ -55,7 +58,9 @@ const Offers = () => {
         setReset(true)
         setFilters({keyword: '', materials: []})
       }}><FontAwesomeIcon icon={faTrash} /></Button>
-      <Link className="button small green-earth" to="/offers/new/"><FontAwesomeIcon icon={faPlus} /> New Offer</Link>
+      {user?.role == 'user' && 
+        <Link className="button small green-earth" to="/offers/new/"><FontAwesomeIcon icon={faPlus} /> New Offer</Link>
+      }
     </div>
     // <div className="flex aligncenter">
     //   <h1 className="text-defaultCase">Offers</h1>
@@ -95,9 +100,9 @@ const Offers = () => {
     <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
       <h1 className="text-defaultCase mb-1">Offers</h1>
       <OfferInfo type={user.role == 'user' ? 'min' : 'full'} show={detail.show} offer={detail} onHide={hidePopup}  />
-      {offers?.total == 0 ?  
-      <TableSkeleton/>
-      : offers?.data?.length ? 
+      {typeof offers?.total == 'undefined' && offers?.data?.length == 0 && 
+        <TableSkeleton/>
+      || (offers?.total > 0 && 
         <DataTable paginator stripedRows lazy
           dataKey="id" 
           page={page.page}
@@ -135,8 +140,8 @@ const Offers = () => {
                 <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
               }
             </> || null}></Column>}
-        </DataTable> : 
-
+        </DataTable>
+      ) ||
         <div className="mt-2">
           <p>{user.role == 'user' ? "You have not posted any offers yet." : "There's no offers for the materials you buy"}</p>
           {user.role == 'user' && 

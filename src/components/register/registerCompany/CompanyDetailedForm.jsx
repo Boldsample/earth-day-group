@@ -73,7 +73,9 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     delete _user.materials
     delete _user.images
     setSending(true)
-    if(user.id){
+    if(user?.id){
+      delete _user.followers
+      delete _user.following
       if(_user.password == ''){
         delete _user.password
         delete _user.password_confirmation
@@ -83,12 +85,13 @@ const CompanyDetailedForm = ({ user, setUser }) => {
       delete _user.password_confirmation
       response = await createUser({ ..._user })
     }
-    if(response.field){
-      setFocus(response.field)
-      setError(response.field, { type: "manual", message: response.message })
+    if(response?.field){
+      setFocus(response?.field)
+      setError(response?.field, { type: "manual", message: response?.message })
       setSending(false)
       return
-    }
+    }else if(!response?.id)
+      return
     const _sendMaterials = user.materials.map(material => {
       let _material = {...material}
       _material.user = response.id
@@ -193,7 +196,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
       </div>
     </form>
     <div className="materialsCard__grid">
-      {user?.materials.map((material) => 
+      {user?.materials?.map((material) => 
         <RecycleMaterialCard
           key={material.type}
           unit={material.unit}
@@ -216,7 +219,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         label="Pick up from home?" />
     </div>
     <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-      <Button onClick={onSubmit} className="dark-blue fullwidth" label="Sign up" name="submit" loading={sending} />
+      <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? 'Save' : 'Sign up'} name="submit" loading={sending} />
     </div>
   </>
 }

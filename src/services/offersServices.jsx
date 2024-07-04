@@ -34,8 +34,6 @@ export const getOffer = async (id) => {
   const { data } = await API.get(`/get/offers&filter=${filterStr}`)
   const response = data?.data?.map(offer => {
     let _offer = {...offer}
-    _offer.offers = _offer.offers ? JSON.parse(_offer.offers) : null
-    _offer.pictures = _offer.pictures ? JSON.parse(_offer.pictures) : null
     return _offer
   })
   return response[0];

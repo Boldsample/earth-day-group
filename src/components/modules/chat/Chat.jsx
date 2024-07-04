@@ -141,7 +141,7 @@ const Chat = () => {
           <OfferInfo type="min" show={show} offer={offerInfo} onHide={hidePopup}  />
           <div className="chat__offer">
             <h5>{offerInfo?.title}</h5>
-            <Button label={offerInfo?.material} className={'small ' + offerInfo?.material} />
+            <Button type="button" label={offerInfo?.material} className={'small ' + offerInfo?.material} />
             <div className="date" style={{fontSize: '0.75rem'}}>{offerInfo?.date}</div>
             <div className="chat__offer__info">
               <p>You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>

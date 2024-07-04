@@ -21,7 +21,7 @@ const OfferInfo = ({ type = 'full', show, offer, onHide }) => {
       <p><b>Published by:</b> {offer?.name}</p>
       <p><b>Quantity:</b> {offer?.quantity} {offer?.unit}</p>
       <p><b>Asking price:</b> {parseInt(offer?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-      {type == 'full' && 
+      {type == 'full' && offer?.status == 0 && 
         <Link className="mt-1 button small green-earth" to={`/chat/${offer?.username}/${offer?.id}/`}><FontAwesomeIcon icon={faPaperPlane} /> Send an offer</Link>
       || null}
     </div>

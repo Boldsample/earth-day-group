@@ -57,9 +57,9 @@ export const updateUser = async (data, filter) => {
   return {id: filter.id}
 }
 
-export const addMaterials = async (data) => {
+export const addMaterials = async (formData) => {
   try {
-    const { data } = await API.post("/add_multiple/materials", formData)
+    await API.post("/add_multiple/materials", formData)
     return true
   } catch ({response}) {
     return response?.data
