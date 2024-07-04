@@ -1,9 +1,9 @@
+import { ReactSVG } from "react-svg"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { Tooltip } from "primereact/tooltip"
 
 import sectionsJSON from "@json/sections.json"
-import { ReactSVG } from "react-svg"
 
 const Nav = () => {
   const userRole = useSelector((state) => state?.users?.userData?.role);

@@ -6,42 +6,28 @@ import { setHeader } from "@store/slices/globalSlice"
 import { getProducts } from '@services/productServices'
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 
-const Vendors = ({type}) => {
+const Shelters = ({type}) => {
   const dispatch = useDispatch()
   const [page, setPage] = useState({page: 0, rows: 8})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
   const [elements, setElements] = useState({data: []})
   const vendorTemplateContent = {
-    title: 'MARKET PLACE',
-    searchLabel: 'Discover products',
-    bannerImage: 'url(/assets/user/image-7.svg)',
+    searchLabel: 'Discover pets in adoption',
+    bannerImage: 'url(/assets/user/image-9.svg)',
+    title: <div style={{maxWidth: '20rem'}}>SUPPORT THE ONES WITHOUT A HOME!!!</div>,
     types: [
       {
-        id: 'vendors',
+        id: 'shelters',
         card: 'company',
-        url: '/market-place/',
-        label: 'Vendors',
+        url: '/shelters/',
+        label: 'Chatity home',
       },
       {
-        id: 'products',
+        id: 'pets',
+        url: '/pets/',
         card: 'product',
-        label: 'Products',
-        url: '/products/',
-      },
-    ],
-    secondary: [
-      {
-        title: '100% Recycled',
-        icon: '/assets/icons/recycleCompanyIcon1.svg',
-      },
-      {
-        title: 'Eco Friendly',
-        icon: '/assets/icons/recycleCompanyIcon2.svg',
-      },
-      {
-        title: 'Sustainable Economy',
-        icon: '/assets/icons/recycleCompanyIcon3.svg',
+        label: 'Pets Adoptions',
       },
     ]
   }
@@ -49,13 +35,13 @@ const Vendors = ({type}) => {
   const loadElements = async (e) => {
     if(e) e.preventDefault()
     setElements({data: []})
-    if(type == 'vendors'){
-      let _filter = { role: `u.role='vendor'` }
+    if(type == 'shelters'){
+      let _filter = { role: `u.role='ngo'` }
       if(filters?.keyword != '')
         _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
       const _vendors = await getUsers(_filter, 'full', user.id, page)
       setElements(_vendors);
-    }else if(type == 'products'){
+    }else if(type == 'pets'){
       let _filter = {}
       if(filters?.keyword != '')
         _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
@@ -76,4 +62,4 @@ const Vendors = ({type}) => {
   return <CategoryListing content={vendorTemplateContent} section={type} elements={elements} filters={filters} setFilters={setFilters} reloadElements={loadElements} page={page} setPage={setPage} />
 }
 
-export default Vendors
+export default Shelters

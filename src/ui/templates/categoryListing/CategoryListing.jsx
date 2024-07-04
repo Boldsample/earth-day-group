@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { InputText } from "primereact/inputtext"
 import { Paginator } from "primereact/paginator"
-import { Link, useLocation } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleChevronRight, faSearch } from "@fortawesome/free-solid-svg-icons"
 
@@ -13,8 +13,7 @@ import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 import "../styles.sass"
 import { followProduct } from "@services/productServices"
 
-const CategoryListing = ({content, elements, filters, reloadElements = () => false, setFilters = () => false, page, setPage = () => false}) => {
-  const location = useLocation()
+const CategoryListing = ({content, section, elements, filters, reloadElements = () => false, setFilters = () => false, page, setPage = () => false}) => {
   const skeletonPlaceHolder = ["", "", "", ""]
   const user = useSelector((state) => state.users.userData)
 
@@ -57,14 +56,17 @@ const CategoryListing = ({content, elements, filters, reloadElements = () => fal
           </form>
         </div>
         <div className="types">
-          {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={location.pathname == type?.url ? 'active' : ''}>{type?.label}</Link>)}
+          {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={section == type?.id ? 'active' : ''}>{type?.label}</Link>)}
         </div>
         <div className="templateCards_grid">
-          {elements?.data?.length > 0 ? 
-            elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />) : 
+          {elements?.data?.length > 0 && 
+            elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />) 
+          || (elements?.total == 0 &&
+            <div className="fullwidth text-center">No {elements?.card} found.</div>
+          ) || 
             skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
           }
-          <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
+          <Paginator first={page?.page} rows={page?.rows} totalRecords={elements?.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
         </div>
       </div>
     </div>

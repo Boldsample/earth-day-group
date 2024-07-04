@@ -2,7 +2,7 @@
 	{
 		"title": "Market Place",
 		"className": "blue-earth",
-		"link": "/vendors/",
+		"link": "/market-place/",
 		"icon": "/assets/icons/market-place.svg",
 		"description": "Find products that are eco friendly"
 	},
@@ -23,14 +23,14 @@
 	{
 		"title": "Shelters",
 		"className": "green-earth",
-		"link": "/",
+		"link": "/shelters/",
 		"icon": "/assets/icons/shelters.svg",
 		"description": "Find animal shelters near your location"
 	},
 	{
 		"title": "Social Organization",
 		"className": "blue-earth",
-		"link": "/",
+		"link": "/social-organizations/",
 		"icon": "/assets/icons/social-organization.svg",
 		"description": "Find social organizations near your location"
 	}

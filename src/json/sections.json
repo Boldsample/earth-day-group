@@ -18,7 +18,7 @@
     {
       "label": "Shop", 
       "icon": "/assets/icons/shop.svg", 
-      "path": "/orders/"
+      "path": "/market-place/"
     },
     {
       "label": "Settings", 

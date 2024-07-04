@@ -11,7 +11,7 @@ import { Product, CreateProduct } from "@modules/vendor"
 import Profile from "@components/modules/profile/Profile"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
-import { Dashboard, Map, Orders, Companies, Vendors } from "@modules/user"
+import { Dashboard, Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
 import { Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
 
@@ -56,7 +56,6 @@ const AppRoutes = () => {
         <Route exact path="/orders" element={<Orders />} />
         <Route exact path="/followers" element={<Followers />} />
         <Route exact path="/following" element={<Followers followers={false} />} />
-        <Route exact path="/bookmarks/*" element={<Bookmarks />} />
         <Route exact path="/settings" element={<Settings />} />
         <Route exact path="/settings/profile" element={<ProfileSettings />} />
         <Route exact path="/settings/password" element={<Password />} />
@@ -66,10 +65,16 @@ const AppRoutes = () => {
         <Route exact path="/settings/activity" element={<Activity />} />
         <Route exact path="/companies" element={<Companies />} />
         <Route exact path="/company/:id" element={<Profile />} />
-        <Route exact path="/vendors" element={<Vendors />} />
+        <Route exact path="/market-place" element={<Vendors type="vendors" />} />
         <Route exact path="/vendor/:id" element={<Profile />} />
-        <Route exact path="/products" element={<Vendors />} />
+        <Route exact path="/products" element={<Vendors type="products" />} />
         <Route exact path="/product/:id" element={<Product />} />
+        <Route exact path="/products/saved" element={<Bookmarks type="products" />} />
+        <Route exact path="/shelters" element={<Shelters type="shelters" />} />
+        <Route exact path="/pets" element={<Shelters type="pets" />} />
+        <Route exact path="/pets/favorite" element={<Bookmarks type="pets" />} />
+        <Route exact path="/social-organizations" element={<Organizations type="organizations" />} />
+        <Route exact path="/social-organizations/products" element={<Organizations type="products" />} />
         <Route path="*" element={<Navigate to="/dashboard" />} />
       </>}
 
