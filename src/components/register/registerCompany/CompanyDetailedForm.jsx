@@ -10,6 +10,7 @@ import { updateThankyou } from "@store/slices/globalSlice"
 import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
 import { NumberInput, DropDownInput, UploadPhotoInput, SwitchInput } from "@ui/forms"
 import { createUser, addImages, addMaterials, updateUser } from "@services/userServices"
+import { InputSwitch } from "primereact/inputswitch"
 
 const CompanyDetailedForm = ({ user, setUser }) => {
   const dispatch = useDispatch()
@@ -100,7 +101,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     await addMaterials(_sendMaterials)
     const _sendImages = user.images.map(image => {
       let _image = {...image}
-      _image.user = response.id
+      _image.entity = response.id
       return _image
     })
     await addImages(_sendImages)
@@ -126,7 +127,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     }
     dispatch(getUserData(response.id))
 	}
-
+  
   return <>
     <form onSubmit={handleSubmit(handleRecyclableMaterial)}>
       <h5 className="recycableMaterialForm__title">This form is optional and can be completed later. If you prefer to skip it, click "Sign Up."</h5>
@@ -212,11 +213,10 @@ const CompanyDetailedForm = ({ user, setUser }) => {
       uploadedImages={user.images}
       setUploadedImages={setUploadedImages} />
     <div className="registerInput__container-x2">
-      <SwitchInput
-        control={control}
-        isRequired={false}
-        nameInput="home_pick_up"
-        label="Pick up from home?" />
+      <InputSwitch
+        id="pick_up_from_home"
+        checked={!!user?.pick_up_from_home}
+        onChange={e => setUser(prev => { return {...prev, pick_up_from_home: !user?.pick_up_from_home} })} />
     </div>
     <div className="p-field" style={{ marginBottom: "1.5rem" }}>
       <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? 'Save' : 'Sign up'} name="submit" loading={sending} />

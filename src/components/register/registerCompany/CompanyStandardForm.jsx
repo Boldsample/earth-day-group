@@ -20,6 +20,8 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
   } = useForm({
     defaultValues: {
       role: "company",
+      lat: user?.lat || "",
+      lng: user?.lng || "",
       nit: user?.nit || "",
       name: user?.name || "",
       email: user?.email || "",
@@ -37,8 +39,9 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
 
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
   const onPlaceChanged = e => {
-    console.log('Test 1')
     setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+    setValue('lat', window?.autocomplete?.getPlace()?.geometry?.location?.lat())
+    setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
   }
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {

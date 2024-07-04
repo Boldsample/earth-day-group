@@ -32,6 +32,8 @@ const RegisterUser = () => {
     defaultValues: {
       role: "user",
       password: "",
+      lat: user?.lat || "",
+      lng: user?.lng || "",
       name: user?.name || "",
       phone: user?.phone || "",
       email: user?.email || "",
@@ -43,9 +45,13 @@ const RegisterUser = () => {
       accept_terms: user?.accept_terms && true || false,
     },
   })
-
+  
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
-  const onPlaceChanged = () => setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+  const onPlaceChanged = e => {
+    setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+    setValue('lat', window?.autocomplete?.getPlace()?.geometry?.location?.lat())
+    setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
+  }
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
     let response

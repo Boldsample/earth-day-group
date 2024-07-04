@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import Footer from "@ui/footer/Footer"
 import ProfileProducts from "./ProfileProducts"
 import { followUser } from "@services/userServices"
+import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileInformation from "@components/modules/profile/ProfileInformation"
 
 import "../styles.sass"
@@ -16,7 +17,7 @@ const ProfileListing = ({content, same, profile, filters, reloadElements = () =>
   }
 
   return <>
-    <div className="layout autoheight">
+    <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
         <ProfileInformation profile={profile} canEdit={!same} doFollow={doFollow} />
@@ -24,13 +25,11 @@ const ProfileListing = ({content, same, profile, filters, reloadElements = () =>
           <PhotoGallery imageCatalog={profile?.images} />
         }
       </div>
+      {(profile?.role == 'vendor' || profile?.role == 'ngo') && 
+        <ProfileProducts user={profile?.id} same={user?.id == profile?.id} />
+      }
     </div>
-    {(profile?.role == 'vendor' || profile?.role == 'ngo') && 
-      <ProfileProducts user={profile?.id} same={user?.id == profile?.id} />
-    }
-    <div className="layout autoheight fullwidth pt-0">
-      <Footer />
-    </div>
+    <Footer />
   </>
 }
 

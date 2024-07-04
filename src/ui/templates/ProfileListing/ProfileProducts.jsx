@@ -41,31 +41,29 @@ const ProfileProducts = ({user, same = false, related = false}) => {
     {same && 
       <Link className="button green-earth self-end" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> Crear producto</Link>
     }
-    <div className="layout autoheight template__listing">
-      <div className="main__content fullwidth pt-6">
-        <div className="search mb-1">
-          <h3 className="text-center mb-1">{related ? 'Related products' : 'Discover our products'}</h3>
-          {!related && 
-            <form onSubmit={loadElements} className="p-input-icon-left fullwidth">
-              <FontAwesomeIcon icon={faSearch} />
-              <InputText
-                placeholder={"Search"}
-                value={filters.keyword}
-                className="p-inputtext"
-                onChange={(e) => setFilters(prev => ({...prev, keyword: e.target.value}))} />
-              <Link type="submit"><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
-            </form>
-          }
-        </div>
-        <div className="templateCards_grid">
-          {elements?.data?.length > 0 ? 
-            elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />) : 
-            skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
-          }
-          {!related && 
-            <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
-          }
-        </div>
+    <div className="main__content fullwidth template__listing pt-6">
+      <div className="search mb-1">
+        <h3 className="text-center mb-1">{related ? 'Related products' : 'Discover our products'}</h3>
+        {!related && 
+          <form onSubmit={loadElements} className="p-input-icon-left fullwidth">
+            <FontAwesomeIcon icon={faSearch} />
+            <InputText
+              placeholder={"Search"}
+              value={filters.keyword}
+              className="p-inputtext"
+              onChange={(e) => setFilters(prev => ({...prev, keyword: e.target.value}))} />
+            <Link type="submit"><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
+          </form>
+        }
+      </div>
+      <div className="templateCards_grid">
+        {elements?.data?.length > 0 ? 
+          elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />) : 
+          skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
+        }
+        {!related && 
+          <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
+        }
       </div>
     </div>
   </>

@@ -130,9 +130,9 @@ const MultiUseCard = ({
           <div className="date">{data?.date}</div>
         </div>
       case 'user':
-        let link = data?.lastchat && `/chat/${data?.username}` || null
+        let link = typeof action != 'function' && `/chat/${data?.username}` || null
         const doActionUser = e => {
-          if(!data?.lastchat){
+          if(typeof action == 'function'){
             e.preventDefault()
             action({id: data?.id, update: new Date()})
           }

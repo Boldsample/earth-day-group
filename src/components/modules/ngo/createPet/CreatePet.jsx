@@ -73,7 +73,7 @@ const CreatePet = () => {
     }
     const _sendImages = data.images.map(image => {
       let _image = {...image}
-      _image.user = response.id
+      _image.entity = response.id
       return _image
     })
     await addImages(_sendImages)

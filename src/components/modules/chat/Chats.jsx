@@ -24,7 +24,7 @@ const Chats = () => {
     })
   }
   const getUserList = async () => {
-    let _filter = { user: `u.id<>'${user?.id}'` }
+    let _filter = { user: `u.id<>'${user?.id}' AND (c.incoming='${user?.id}' OR c.outgoing='${user?.id}')` }
     if(filters?.length > 0)
       _filter['role'] = "(role='" + filters.join("' OR role='") + "')"
     const _users = await getUsers(_filter, 'min', user?.id, page)
@@ -47,6 +47,7 @@ const Chats = () => {
           <Button label="Users" onClick={() => updateFilter('user')} className={'green-earth small ' + (filters.find(f => f == 'user') ? '' : 'outline')} />
           <Button label="Recycling Centers" onClick={() => updateFilter('company')} className={'green-earth small ' + (filters.find(f => f == 'company') ? '' : 'outline')} />
           <Button label="Vendors" onClick={() => updateFilter('vendor')} className={'green-earth small ' + (filters.find(f => f == 'vendor') ? '' : 'outline')} />
+          <Button label="NGO" onClick={() => updateFilter('ngo')} className={'green-earth small ' + (filters.find(f => f == 'ngo') ? '' : 'outline')} />
         </div>
         <div className="fullwidth p-input-icon-left">
           <FontAwesomeIcon icon={faSearch} />

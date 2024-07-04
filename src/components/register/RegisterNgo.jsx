@@ -30,6 +30,8 @@ const RegisterNgo = () => {
     defaultValues: {
       role: "ngo",
       password: "",
+      lat: user?.lat || "",
+      lng: user?.lng || "",
       type: user?.type || 0,
       name: user?.name || "",
       phone: user?.phone || "",
@@ -45,7 +47,11 @@ const RegisterNgo = () => {
   })
 
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
-  const onPlaceChanged = () => setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+  const onPlaceChanged = e => {
+    setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
+    setValue('lat', window?.autocomplete?.getPlace()?.geometry?.location?.lat())
+    setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
+  }
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
   const radioData = [
@@ -79,7 +85,7 @@ const RegisterNgo = () => {
     }
     const _sendImages = data.images.map(image => {
       let _image = {...image}
-      _image.user = response.id
+      _image.entity = response.id
       return _image
     })
     await addImages(_sendImages)
