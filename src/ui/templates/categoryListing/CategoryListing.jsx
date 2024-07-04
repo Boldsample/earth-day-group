@@ -59,14 +59,18 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
           {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={section == type?.id ? 'active' : ''}>{type?.label}</Link>)}
         </div>
         <div className="templateCards_grid">
-          {elements?.data?.length > 0 && 
-            elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />) 
-          || (elements?.total == 0 &&
-            <div className="fullwidth text-center">No {elements?.card} found.</div>
-          ) || 
+          {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
             skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
+          || (elements?.total > 0 && 
+            elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
+          ) ||
+            <div className="fullwidth text-center mt-2">
+              <p>There's no results</p>
+            </div>
           }
-          <Paginator first={page?.page} rows={page?.rows} totalRecords={elements?.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
+          {page?.rows < elements?.total && 
+            <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
+          }
         </div>
       </div>
     </div>

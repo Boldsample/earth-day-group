@@ -10,10 +10,11 @@ const Companies = () => {
   const [page, setPage] = useState({page: 0, rows: 8})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
-  const [elements, setElements] = useState({total: 0, data: []})
+  const [elements, setElements] = useState({data: []})
 
   const loadElements = async (e) => {
     if(e) e.preventDefault()
+    setElements({data: []})
     let _filter = { role: `u.role='company'` }
     if(filters?.keyword != '')
       _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`

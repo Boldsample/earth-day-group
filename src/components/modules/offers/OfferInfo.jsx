@@ -8,8 +8,8 @@ import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 
 const OfferInfo = ({ type = 'full', show, offer, onHide }) => {
   return <Dialog visible={show} onHide={onHide} draggable={false}>
-    {offer?.pictures?.length && 
-      <Galleria value={offer?.pictures} numVisible={5}
+    {offer?.images?.length && 
+      <Galleria value={offer?.images} numVisible={5}
         item={({picture}) => <img src={picture} />}
         thumbnail={({picture}) => <img src={picture} />} /> || 
       <div className="default-image"><FontAwesomeIcon icon={faImage} /></div>

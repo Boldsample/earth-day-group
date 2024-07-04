@@ -93,9 +93,11 @@ export const recoverUser = async (data, validate) => {
 }
 
 export const getUser = async (id, user = null) => {
-  const filter = user != null ? `&user=${user}` : ''
-  const { data } = await API.get(`/user/${id}${filter}`)
-  return data.data
+  const type = user ? `&user=${user}` : ''
+  let filterStr = isNaN(id) ? `u.username='${id}'` : `u.id='${id}'`
+  filterStr = encodeURIComponent(filterStr)
+  const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}`)
+  return data.data[0]
 }
 
 export const getUsers = async (filter = {}, type = 'min', user = null, page = null) => {

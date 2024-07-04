@@ -44,7 +44,7 @@ const Profile = () => {
       },
     ]
   }
-
+  
   const loadProfile = async () => {
     const _profile = await getUser(id, user?.id)
     setProfile(_profile)

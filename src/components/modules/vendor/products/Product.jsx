@@ -44,8 +44,8 @@ const Product = () => {
       <div className="main__content centerfullwidth">
         <div className="profileInformation__grid">
           <div className="image__container">
-            {product?.pictures?.length > 0 && 
-              <PhotoGallery type="min" imageCatalog={product?.pictures} /> ||
+            {product?.images?.length > 0 && 
+              <PhotoGallery type="min" imageCatalog={product?.images} /> ||
               <ProfilePhoto className="profile__photo-large" size="12.5rem" userPhoto={null}/>
             }
           </div>
