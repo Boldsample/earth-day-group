@@ -1,6 +1,6 @@
-import { toast } from "react-toastify"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
+import { useNavigate } from "react-router"
 import { useEffect, useState } from "react"
 import { Autocomplete } from "@react-google-maps/api"
 import { useDispatch, useSelector } from "react-redux"
@@ -15,6 +15,7 @@ import "./style.sass"
 
 const RegisterNgo = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const {
@@ -28,18 +29,18 @@ const RegisterNgo = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      role: "ngo",
       password: "",
       lat: user?.lat || "",
       lng: user?.lng || "",
-      type: user?.type || 0,
       name: user?.name || "",
       phone: user?.phone || "",
       email: user?.email || "",
       password_confirmation: "",
       images: user?.images || [],
+      website: user?.website || "",
       picture: user?.picture || "",
       address: user?.address || "",
+      role: user?.type || "shelter",
       username: user?.username || "",
       description: user?.description || "",
       accept_terms: user?.accept_terms && true || false,
@@ -55,9 +56,9 @@ const RegisterNgo = () => {
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
   const radioData = [
-    { name: "Charity Home", value: 1 },
-    { name: "Adoption Center", value: 2 },
-    { name: "Both", value: 3 },
+    { name: "Charity Home", value: 'shelter' },
+    { name: "Social-organization", value: 'social' },
+    { name: "Both", value: 'ngo' },
   ]
   const setUploadedImages = (images) => {
     setValue('images', images)
@@ -75,7 +76,7 @@ const RegisterNgo = () => {
         delete _user.password
         delete _user.password_confirmation
       }
-      response = await updateUser({ ..._user }, {id: user.id})
+      response = await updateUser({ ..._user }, {id: user?.id})
     }else{
       delete _user.password_confirmation
       response = await createUser({ ..._user })
@@ -93,9 +94,16 @@ const RegisterNgo = () => {
     })
     await addImages(_sendImages)
     setSending(false)
-    if(user?.id)
-      toast.success("Your profile has been updated successfully.")
-    else if(response.id)
+    if(user?.id && response?.id){
+      dispatch(updateThankyou({
+        title: "Updated successfully!",
+        link: "/settings/",
+        background: "image-1.svg",
+        button_label: "Go back to settings",
+        content: "Your profile has updated successfully!",
+      }))
+      navigate('/thankyou/')
+    }else if(response?.id){
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",
@@ -103,6 +111,8 @@ const RegisterNgo = () => {
         button_label: "Go to dashboard",
         content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
       }))
+      navigate('/thankyou/')
+    }
     dispatch(getUserData(response.id))
   }
 
@@ -257,11 +267,11 @@ const RegisterNgo = () => {
           <div className="fullwidth">
             <RadioInput
               data={radioData}
+              nameInput="role"
               showLabel={true}
               control={control}
               isRequired={true}
               labelName="Organization Type"
-              nameInput="organization_type"
               rules={{
                 required: true,
               }} />

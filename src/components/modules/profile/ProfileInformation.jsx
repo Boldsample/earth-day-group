@@ -56,10 +56,16 @@ const ProfileInformation = ({profile, same, doFollow}) => {
         </div>
       }
       <div className="buttons__container">
-        <Link className="button small green-earth" to={`/chat/${profile?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact Us</span></Link>
+        {!same && 
+          <Link className="button small green-earth" to={`/chat/${profile?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact Us</span></Link>
+        }
         {same && <>
           <Link className="button small dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> <span>Edit Profile</span></Link>
-          <Link className="button small blue-earth self-end" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> New product</Link>
+          {(profile?.role == 'vendor' || profile?.role == 'social' || profile?.role == 'ngo') && 
+            <Link className="button small blue-earth self-end" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> New product</Link>
+          || (profile?.role == 'shelter' && 
+            <Link className="button small blue-earth self-end" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet for adoption</Link>
+          )}
         </> || 
           <Button className={'small '+(profile?.followed ? 'red-state' : 'dark-blue')} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? 'Unfollow' : 'Follow'}</span></Button>
         }

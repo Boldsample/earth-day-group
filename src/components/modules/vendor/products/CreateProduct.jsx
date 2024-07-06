@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { setHeader } from "@store/slices/globalSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
+import { addImages, addProduct, updateProduct } from "@services/productServices"
 import { TextInput, NumberInput, UploadPhotoInput, TextAreaInput, DropDownInput } from "@ui/forms"
-import { addImages, createproduct, updateProduct } from "@services/productServices"
 
 const CreateProduct = () => {
   const dispatch = useDispatch()
@@ -50,7 +50,7 @@ const CreateProduct = () => {
     if(product?.id)
       response = await updateProduct({ ..._product }, {id: product.id})
     else
-      response = await createproduct({ ..._product })
+      response = await addProduct({ ..._product })
     if(response.field){
       setFocus(response.field)
       setError(response.field, { type: "manual", message: response.message })
@@ -59,8 +59,8 @@ const CreateProduct = () => {
     }
     const _sendImages = data.images.map(image => {
       let _image = {...image}
-      _image.entity = response.id
       _image.type = 'product'
+      _image.entity = response.id
       return _image
     })
     await addImages(_sendImages)

@@ -1,11 +1,11 @@
 import { API } from "./API"
 
-export const addProduct = async (data) => {
-  const response = await API.post("/add/products", data)
+export const addPet = async (data) => {
+  const response = await API.post("/add/pets", data)
   return response?.data
 }
 
-export const updateProduct = async (data, filter) => {
+export const updatePet = async (data, filter) => {
   let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
@@ -22,9 +22,9 @@ export const addImages = async (data) => {
   return true
 }
 
-export const getProduct = async (id) => {
+export const getPet = async (id) => {
   let filterStr = `p.id=${id}`
-  const { data } = await API.get(`/get/products&filter=${filterStr}`)
+  const { data } = await API.get(`/get/pets&filter=${filterStr}`)
   return data?.data[0];
 }
 

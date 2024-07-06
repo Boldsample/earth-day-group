@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 
 import Header from "@ui/header/Header"
-import { CreatePet } from "@modules/ngo"
 import Intro from "@components/intro/Intro"
+import { Pet, CreatePet } from "@modules/ngo"
 import { getUserData } from "@store/slices/usersSlice"
 import { Product, CreateProduct } from "@modules/vendor"
 import Profile from "@components/modules/profile/Profile"
@@ -13,7 +13,7 @@ import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Dashboard, Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
-import { Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, About, Activity } from "@modules"
+import { Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, About } from "@modules"
 
 
 
@@ -62,7 +62,6 @@ const AppRoutes = () => {
         <Route exact path="/settings/edit" element={<RegisterUser />} />
         <Route exact path="/settings/terms" element={<Terms />} />
         <Route exact path="/settings/about" element={<About />} />
-        <Route exact path="/settings/activity" element={<Activity />} />
         <Route exact path="/companies" element={<Companies />} />
         <Route exact path="/company/:id" element={<Profile />} />
         <Route exact path="/market-place" element={<Vendors type="vendors" />} />
@@ -80,45 +79,52 @@ const AppRoutes = () => {
 
       {/*   COMPANY   */}
       {user.role == 'company' && <>
-        <Route exact path="/dashboard/" element={<Offers />} />
+        <Route exact path="/dashboard" element={<Offers />} />
         <Route exact path="/notifications" element={<Notifications />} />
-        <Route exact path="/profile/" element={<Profile />} />
+        <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/chat" element={<Chats />} />
         <Route exact path="/chat/:contact" element={<Chat />} />
-        <Route exact path="/chat/:contact/:offer/" element={<Chat />} />
+        <Route exact path="/chat/:contact/:offer" element={<Chat />} />
         <Route exact path="/followers" element={<Followers />} />
         <Route exact path="/following" element={<Followers followers={false} />} />
-        <Route exact path="/settings/" element={<Settings />} />
-        <Route exact path="/settings/profile/" element={<ProfileSettings />} />
-        <Route exact path="/settings/password/" element={<Password />} />
-        <Route exact path="/settings/edit/" element={<RegisterCompany />} />
-        <Route exact path="/settings/terms/" element={<Terms />} />
-        <Route exact path="/settings/about/" element={<About />} />
-        <Route exact path="/settings/activity/" element={<Activity />} />
+        <Route exact path="/settings" element={<Settings />} />
+        <Route exact path="/settings/profile" element={<ProfileSettings />} />
+        <Route exact path="/settings/password" element={<Password />} />
+        <Route exact path="/settings/edit" element={<RegisterCompany />} />
+        <Route exact path="/settings/terms" element={<Terms />} />
+        <Route exact path="/settings/about" element={<About />} />
         <Route path="*" element={<Navigate to="/dashboard/" />} />
       </>}
 
       {/*   VENDOR   */}
       {user.role == 'vendor' && <>
-        <Route exact path="/dashboard/" element={<Profile />} />
+        <Route exact path="/dashboard" element={<Profile />} />
         <Route exact path="/chat" element={<Chats />} />
         <Route exact path="/chat/:contact" element={<Chat />} />
         <Route exact path="/followers" element={<Followers />} />
         <Route exact path="/following" element={<Followers followers={false} />} />
         <Route exact path="/product/:id" element={<Product />} />
         <Route exact path="/product/new" element={<CreateProduct />} />
-        <Route exact path="/settings/" element={<Settings />} />
-        <Route exact path="/settings/profile/" element={<ProfileSettings />} />
-        <Route exact path="/settings/password/" element={<Password />} />
-        <Route exact path="/settings/edit/" element={<RegisterVendor />} />
-        <Route exact path="/settings/terms/" element={<Terms />} />
-        <Route exact path="/settings/about/" element={<About />} />
-        <Route exact path="/settings/activity/" element={<Activity />} />
+        <Route exact path="/settings" element={<Settings />} />
+        <Route exact path="/settings/profile" element={<ProfileSettings />} />
+        <Route exact path="/settings/password" element={<Password />} />
+        <Route exact path="/settings/edit" element={<RegisterVendor />} />
+        <Route exact path="/settings/terms" element={<Terms />} />
+        <Route exact path="/settings/about" element={<About />} />
         <Route path="*" element={<Navigate to="/dashboard/" />} />
       </>}
-      <Route exact path="/pet/new" element={<CreatePet />} />
        {/*   NGO   */}
-       {user.role == 'ngo' && <>
+       {(user.role == 'shelter' || user.role == 'social' || user.role == 'ngo') && <>
+        <Route exact path="/dashboard" element={<Profile />} />
+        <Route exact path="/chat" element={<Chats />} />
+        <Route exact path="/chat/:contact" element={<Chat />} />
+        <Route exact path="/settings" element={<Settings />} />
+        <Route exact path="/settings/profile" element={<ProfileSettings />} />
+        <Route exact path="/settings/password" element={<Password />} />
+        <Route exact path="/settings/edit" element={<RegisterNgo />} />
+        <Route exact path="/settings/terms" element={<Terms />} />
+        <Route exact path="/settings/about" element={<About />} />
+        <Route exact path="/pet/:id" element={<Pet />} />
         <Route exact path="/pet/new" element={<CreatePet />} />
       </>}
 

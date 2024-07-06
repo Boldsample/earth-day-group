@@ -1,70 +1,64 @@
-import { toast } from "react-toastify"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
-import { useEffect, useState } from "react"
-import { Autocomplete } from "@react-google-maps/api"
+import { useNavigate } from "react-router"
+import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { getUserData } from "@store/slices/usersSlice"
+import { setHeader } from "@store/slices/globalSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
-import { setHeader, setHeaderTitle } from "@store/slices/globalSlice"
-import { addImages, createUser, updateUser } from "@services/userServices"
-import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
-
-// import "./style.sass"
+import { addImages, addPet, updatePet } from "@services/petServices"
+import { TextInput, NumberInput, UploadPhotoInput, TextAreaInput, DropDownInput, RadioInput } from "@ui/forms"
 
 const CreatePet = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const numberInput = useRef(null)
+  const [pet, setPet] = useState({})
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
+  const species = [
+    { name: "Cat", code: "Cat" },
+    { name: "Dog", code: "Dog" }
+  ]
+  const genders = [
+    { name: "Male", value: 'Male' },
+    { name: "Female", value: 'Female' },
+  ]
   const {
     watch,
     control,
     setValue,
     setFocus,
     setError,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: user?.name || "",
-      gender: user?.phone || "",
-      age: user?.email || "",
       weight: "",
-      images: user?.images || [],
-      breed: user?.picture || "",
-      adoption_price: user?.address || "",
-      description: user?.description || "",
+      user: user?.id,
+      age: pet?.age || "",
+      name: pet?.name || "",
+      breed: pet?.breed || "",
+      specie: pet?.specie || "",
+      gender: pet?.gender || "",
+      images: pet?.images || [],
+      description: pet?.description || "",
     },
   })
 
-  const setAutocomplete = autocomplete => window.autocomplete = autocomplete
-  const onPlaceChanged = () => setValue('address', window?.autocomplete?.getPlace()?.formatted_address)
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
-
-  const radioData = [
-    { name: "Male", value: 1 },
-    { name: "Female", value: 2 },
-  ]
   const setUploadedImages = (images) => {
     setValue('images', images)
   }
   const onSubmit = async (data) => {
     let response
-    let _user = { ...user, ...data }
-    delete _user.images
+    let _pet = { ...pet, ...data }
+    delete _pet.images
     setSending(true)
-    if(user.id){
-      if(_user.password == ''){
-        delete _user.password
-        delete _user.password_confirmation
-      }
-      response = await updateUser({ ..._user }, {id: user.id})
-    }else{
-      delete _user.password_confirmation
-      response = await createUser({ ..._user })
-    }
+    if(pet?.id)
+      response = await updatePet({ ..._pet }, {id: pet.id})
+    else
+      response = await addPet({ ..._pet })
     if(response.field){
       setFocus(response.field)
       setError(response.field, { type: "manual", message: response.message })
@@ -73,45 +67,49 @@ const CreatePet = () => {
     }
     const _sendImages = data.images.map(image => {
       let _image = {...image}
+      _image.type = 'pet'
       _image.entity = response.id
       return _image
     })
     await addImages(_sendImages)
     setSending(false)
-    if(user?.id)
-      toast.success("Your profile has been updated successfully.")
-    else if(response.id)
+    if(pet?.id && response?.id){
+      dispatch(updateThankyou({
+        title: "Updated successfully!",
+        link: `/pet/${response?.id}/`,
+        background: "image-1.svg",
+        button_label: "Go to pet",
+        content: "The pet for adoption has updated successfully!",
+      }))
+      navigate('/thankyou/')
+    }else if(response.id){
       dispatch(updateThankyou({
         title: "Congrats!",
-        link: "/dashboard/",
+        link: `/pet/${response?.id}/`,
         background: "image-1.svg",
-        button_label: "Go to dashboard",
-        content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+        button_label: "Go to pet",
+        content: "The pet for adoption was created!",
       }))
-    dispatch(getUserData(response.id))
+      navigate('/thankyou/')
+    }
   }
 
   useEffect(() => {
-    if(user?.id){
-      dispatch(setHeader('settings'))
-      dispatch(setHeaderTitle('Edit Profile'))
-    }else
-      dispatch(setHeader("register"));
+      dispatch(setHeader("user"));
   }, []);
 
   return <div className="layout">
     <img className="layout__background" src="/assets/register/image-2.svg" />
     <div className="main__content xpadding-1">
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
-        <div className="registerInput__container-x1">
+        <div className="registerInput__container-x2">
           <TextInput
             width="100%"
             nameInput="name"
             control={control}
-            showLabel={true}
             isRequired={true}
             labelName="Pet Name"
-            placeHolderText="Enter Pet Name*"
+            placeHolderText="Pet Name*"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -124,10 +122,8 @@ const CreatePet = () => {
                 message: "No debe tener espacios al inicio",
               },
             }} />
-            </div>
-            <div className="registerInput__container-x1">
-              <RadioInput
-              data={radioData}
+            <RadioInput
+              data={genders}
               showLabel={true}
               control={control}
               isRequired={true}
@@ -136,54 +132,27 @@ const CreatePet = () => {
               rules={{
                 required: true,
               }} />
-            </div>
-        <div className="registerInput__container-x2">
-        <NumberInput
-            width="100%"
-            showLabel={false}
-            control={control}
-            isRequired={true}
-            nameInput="age"
-            label="Age"
-            placeHolderText="Age*"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: {
-                value: 12,
-                message: "El campo supera los 7 caracteres",
-              },
-              required: "*El campo es requerido.",
-              pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
-              },
-            }} />
-            <NumberInput
-            width="100%"
-            showLabel={false}
-            control={control}
-            isRequired={true}
-            nameInput="weight"
-            label="Weight (Kilog?)"
-            placeHolderText="Weight (Kilos)*"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: {
-                value: 12,
-                message: "El campo supera los 7 caracteres",
-              },
-              required: "*El campo es requerido.",
-              pattern: {
-                value: /^\S/,
-                message: "No debe tener espacios al inicio",
-              },
-            }} />
         </div>
-        <div className="registerInput__container-x1">
-        <TextInput
-            width="100%"
+        <div className="registerInput__container-x2">
+          <DropDownInput
+            className=""
+            isEdit={true}
             control={control}
-            showLabel={false}
+            isRequired={true}
+            optionLabel="name"
+            optionValue="code"
+            options={species}
+            labelName="Specie"
+            nameInput="specie"
+            placeHolderText="Select Specie"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              required: "*El campo es requerido.",
+            }} />
+          <TextInput
+            width="100%"
+            showLabel={true}
+            control={control}
             isRequired={true}
             labelName="Breed"
             nameInput="breed"
@@ -201,20 +170,40 @@ const CreatePet = () => {
               },
             }} />
         </div>
-        <div className="registerInput__container-x1">
-        <NumberInput
+        <div className="registerInput__container-x2">
+          <NumberInput
+            label="Age"
             width="100%"
-            showLabel={true}
+            nameInput="age"
             control={control}
+            showLabel={false}
             isRequired={true}
-            nameInput="adoption_price"
-            label="Adoption Price"
-            placeHolderText="Enter adoption price*"
+            placeHolderText="Age*"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 12,
-                message: "El campo supera los 7 caracteres",
+                value: 2,
+                message: "El campo supera los 2 caracteres",
+              },
+              required: "*El campo es requerido.",
+              pattern: {
+                value: /^\S/,
+                message: "No debe tener espacios al inicio",
+              },
+            }} />
+          <NumberInput
+            width="100%"
+            showLabel={false}
+            control={control}
+            isRequired={true}
+            nameInput="weight"
+            label="Weight (Kilos)*"
+            placeHolderText="Weight (Kilos)*"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 2,
+                message: "El campo supera los 2 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
@@ -228,9 +217,9 @@ const CreatePet = () => {
             showLabel={true}
             control={control}
             isRequired={false}
-            label="Pet Details*"
+            label="Pet Detail*"
             nameInput="description"
-            placeHolderText="Enter a description for your pet"
+            placeHolderText="Tell us about the pet"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -249,9 +238,8 @@ const CreatePet = () => {
           title="Add Images"
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
-        
-        <div className="p-field" style={{ marginBottom: "24px" }}>
-          <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Register Pet"} type="submit" loading={sending} />
+        <div className="p-field" style={{ marginBottom: "1.5rem" }}>
+          <Button className="dark-blue fullwidth" label={pet?.id ? "Update" : "Create"} type="submit" loading={sending} />
         </div>
       </form>
     </div>

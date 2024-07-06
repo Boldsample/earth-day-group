@@ -11,7 +11,7 @@ import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 import { followProduct, getProducts } from "@services/productServices"
 
-const ProfileProducts = ({user, same = false, related = false}) => {
+const ProfileElements = ({type = 'products', user, same = false, related = false}) => {
   const dispatch = useDispatch()
   const skeletonPlaceHolder = ["", "", "", ""]
   const [filters, setFilters] = useState({keyword: ''})
@@ -40,7 +40,7 @@ const ProfileProducts = ({user, same = false, related = false}) => {
 
   return <div className="template__listing fullwidth">
     <div className="search mb-1">
-      <h3 className="text-center mb-1">{related ? 'Related products' : 'Discover our products'}</h3>
+      <h3 className="text-center mb-1">{related && 'Related products' || (type == 'products' ? 'Discover our products' : 'Want to adopt a new friend?')}</h3>
       {!related && (typeof elements?.total == 'undefined' || elements?.total > 0) && 
         <form onSubmit={loadElements} className="p-input-icon-left fullwidth">
           <FontAwesomeIcon icon={faSearch} />
@@ -60,7 +60,7 @@ const ProfileProducts = ({user, same = false, related = false}) => {
         elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
       ) ||
         <div className="fullwidth text-center mt-2">
-          <p>There's no products for this store</p>
+          <p>No {type == 'products' ? 'products' : 'pets for adoption'} found.</p>
         </div>
       }
       {!related && page?.rows < elements?.total && 
@@ -68,11 +68,14 @@ const ProfileProducts = ({user, same = false, related = false}) => {
       }
       {same && 
         <div className="fullwidth text-center">
-          <Link className="button small blue-earth self-center" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> New product</Link>
+          {type == 'products' && 
+            <Link className="button small blue-earth self-center" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> New product</Link> ||
+            <Link className="button small blue-earth self-center" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet for adoption</Link>
+          }
         </div>
       }
     </div>
   </div>
 }
 
-export default ProfileProducts
+export default ProfileElements

@@ -79,7 +79,7 @@ const RegisterVendor = () => {
         delete _user.password
         delete _user.password_confirmation
       }
-      response = await updateUser({ ..._user }, {id: user.id})
+      response = await updateUser({ ..._user }, {id: user?.id})
     }else{
       delete _user.password_confirmation
       response = await createUser({ ..._user })
@@ -106,7 +106,7 @@ const RegisterVendor = () => {
         content: "Your profile has updated successfully!",
       }))
       navigate('/thankyou/')
-    }else if(response.id){
+    }else if(response?.id){
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",

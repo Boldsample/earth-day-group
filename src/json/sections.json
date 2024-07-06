@@ -64,5 +64,22 @@
       "icon": "/assets/icons/settings.svg", 
       "path": "/settings/"
     }
+  ],
+  "ngo": [
+    {
+      "label": "Home", 
+      "icon": "/assets/icons/home.svg", 
+      "path": "/dashboard/"
+    },
+    {
+      "label": "Inbox", 
+      "icon": "/assets/icons/inbox.svg", 
+      "path": "/chat/"
+    },
+    {
+      "label": "Settings", 
+      "icon": "/assets/icons/settings.svg", 
+      "path": "/settings/"
+    }
   ]
 }

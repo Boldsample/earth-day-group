@@ -7,7 +7,7 @@ import sectionsJSON from "@json/sections.json"
 
 const Nav = () => {
   const userRole = useSelector((state) => state?.users?.userData?.role);
-  const sections = sectionsJSON[userRole];
+  const sections = userRole == 'shelter' || userRole == 'shelter' ? sectionsJSON['ngo'] : sectionsJSON[userRole];
 
   return <div className="nav__container">
     <div className="box">

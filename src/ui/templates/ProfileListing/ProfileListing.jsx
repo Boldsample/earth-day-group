@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux"
 
 import Footer from "@ui/footer/Footer"
-import ProfileProducts from "./ProfileProducts"
+import ProfileElements from "./ProfileElements"
 import { followUser } from "@services/userServices"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileInformation from "@components/modules/profile/ProfileInformation"
 
 import "../styles.sass"
 
-const ProfileListing = ({content, profile, filters, reloadElements = () => false, setFilters = () => false, page, setPage = () => false}) => {
+const ProfileListing = ({profile, reloadElements = () => false}) => {
   const user = useSelector((state) => state.users.userData)
 
   const doFollow = async (id) => {
@@ -24,9 +24,11 @@ const ProfileListing = ({content, profile, filters, reloadElements = () => false
         {profile?.images?.length > 0 && 
           <PhotoGallery imageCatalog={profile?.images} />
         }
-        {(profile?.role == 'vendor' || profile?.role == 'ngo') && 
-          <ProfileProducts user={profile?.id} same={user?.id == profile?.id} />
-        }
+        {(profile?.role == 'vendor' || profile?.role == 'social' || profile?.role == 'ngo') && 
+          <ProfileElements type="products" user={profile?.id} same={user?.id == profile?.id} />
+        || ((profile?.role == 'shelter' || profile?.role == 'ngo') && 
+          <ProfileElements type="adoption" user={profile?.id} same={user?.id == profile?.id} />
+      )}
       </div>
     </div>
     <Footer />
