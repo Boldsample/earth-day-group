@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
+import { getPets } from '@services/petServices'
 import { getUsers } from "@services/userServices"
 import { setHeader } from "@store/slices/globalSlice"
-import { getProducts } from '@services/productServices'
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 
 const Shelters = ({type}) => {
@@ -15,13 +15,13 @@ const Shelters = ({type}) => {
   const vendorTemplateContent = {
     searchLabel: 'Discover pets in adoption',
     bannerImage: 'url(/assets/user/image-9.svg)',
-    title: <div style={{maxWidth: '20rem'}}>SUPPORT THE ONES WITHOUT A HOME!!!</div>,
+    title: <div style={{maxWidth: '20rem'}}>SUPPORT THE ONES WITHOUT A HOME</div>,
     types: [
       {
         id: 'shelters',
         card: 'company',
         url: '/shelters/',
-        label: 'Chatity home',
+        label: 'Shelters',
       },
       {
         id: 'pets',
@@ -36,7 +36,7 @@ const Shelters = ({type}) => {
     if(e) e.preventDefault()
     setElements({data: []})
     if(type == 'shelters'){
-      let _filter = { role: `u.role='ngo'` }
+      let _filter = { role: `(u.role='shelter' OR u.role='ngo')` }
       if(filters?.keyword != '')
         _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
       const _vendors = await getUsers(_filter, 'full', user.id, page)
@@ -45,7 +45,7 @@ const Shelters = ({type}) => {
       let _filter = {}
       if(filters?.keyword != '')
         _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
-      const _products = await getProducts(_filter, page, user?.id)
+      const _products = await getPets(_filter, page, user?.id)
       setElements(_products)
     }
   }

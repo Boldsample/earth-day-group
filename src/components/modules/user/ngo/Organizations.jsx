@@ -13,25 +13,24 @@ const Organizations = ({type}) => {
   const user = useSelector((state) => state.users.userData)
   const [elements, setElements] = useState({total: 0, data: []})
   const vendorTemplateContent = {
-    searchLabel: 'Discover products',
-    title: 'TOGETHER WILL BE THE CHANGE!!!',
+    title: 'TOGETHER WE WILL BE THE CHANGE',
     bannerImage: 'url(/assets/user/image-10.svg)',
     secondary: [
       {
-        title: 'We are on a mission to reshape the world through the power of recycling.',
+        title: 'We are on a mission to reshape the world through the power of recycling',
         icon: '/assets/icons/socialOrganizationIcon1.svg',
       },
-    ]
+    ],
   }
 
   const loadElements = async (e) => {
     if(e) e.preventDefault()
     setElements({data: []})
-    let _filter = {}
+    let _filter = { role: `(u.role='social' OR u.role='ngo')` }
     if(filters?.keyword != '')
-      _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
-    const _products = await getProducts(_filter, page, user?.id)
-    setElements(_products)
+      _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+    const _social = await getUsers(_filter, 'full', user.id, page)
+    setElements(_social)
   }
 
   useEffect(() => {

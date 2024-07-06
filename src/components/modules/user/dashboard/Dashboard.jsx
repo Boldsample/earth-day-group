@@ -27,7 +27,7 @@ const Dashboard = () => {
 	return <div className="layout">
 		<img className="layout__background" src="/assets/intro/image-3.svg" />
 		<div className="main__content dashboard-content">
-			<div className="search mb-5">
+			<div className="edg-search mb-5">
 				<h4 className="mb-1">Discover:</h4>
 				<div className="fullwidth p-input-icon-left">
 					<FontAwesomeIcon icon={faSearch} />
@@ -45,7 +45,7 @@ const Dashboard = () => {
 						title={module.title}
 						cardStyle={module.className}
 						description={module.description} />
-				</Link>) : "No modules found."}
+				</Link>) : "We couldn't find what you are looking for. Care to try again."}
 			</div>
 		</div>
 	</div>

@@ -6,9 +6,9 @@
       "path": "/dashboard/"
     },
     {
-      "label": "Location", 
+      "label": "Map", 
       "icon": "/assets/icons/location.svg", 
-      "path": "/location/"
+      "path": "/map/"
     },
     {
       "label": "Inbox", 
@@ -36,40 +36,6 @@
       "label": "Profile",
       "icon": "/assets/icons/userProfile.svg",
       "path": "/profile/"
-    },
-    {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
-      "path": "/chat/"
-    },
-    {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
-      "path": "/settings/"
-    }
-  ],
-  "vendor": [
-    {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
-      "path": "/dashboard/"
-    },
-    {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
-      "path": "/chat/"
-    },
-    {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
-      "path": "/settings/"
-    }
-  ],
-  "ngo": [
-    {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
-      "path": "/dashboard/"
     },
     {
       "label": "Inbox", 

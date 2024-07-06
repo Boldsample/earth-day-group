@@ -1,13 +1,14 @@
-.layout.template__top
-  padding: 0
-  .template__banner
-    align-items: center
-    background: url(/assets/user/image-6.svg) no-repeat center bottom
-    background-size: cover
-    display: flex
-    height: 45vw
-    padding: 8.75rem calc(((100% - 68.75rem) / 2 + 6.25rem)) 12.5rem calc(50% + 6.25rem)
-    width: 100%
+.layout
+  .template__top
+    padding: 0
+    .template__banner
+      align-items: center
+      background: url(/assets/user/image-6.svg) no-repeat center bottom
+      background-size: cover
+      display: flex
+      height: 45vw
+      padding: 8.75rem calc(((100% - 68.75rem) / 2 + 6.25rem)) 12.5rem calc(50% + 6.25rem)
+      width: 100%
   .features
     align-items: center
     background-color: var(--dark-blue)
@@ -31,7 +32,7 @@
         font-weight: 500
         margin-top: 0.625rem
 @media (max-width: 767px)
-  .layout.template__top
+  .layout .template__top
     .template__banner
       height: 37.5rem
       padding: 8.75rem 1.25rem 12,5rem
@@ -58,6 +59,7 @@
           margin-top: 0.625rem
 
 .template__listing
+  margin-bottom: 3.125rem
   .types
     margin-top: 1rem
     text-align: center
@@ -71,8 +73,8 @@
       &:not(.active)
         border-bottom-color: transparent
         color: var(--gray)
-  .search
-    max-width: 43.75rem
+  .edg-search
+    max-width: 34rem
   .templateCards_grid
     display: flex
     flex-wrap: wrap

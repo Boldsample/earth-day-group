@@ -14,6 +14,7 @@
   --orange: #E88400
   --yellow: #F3DD17
   --light-gray: #E8E8E8
+  --faint-green: #f3ffef
 
 *
   box-sizing: border-box
@@ -259,11 +260,21 @@ button, .button
   h4
     margin: 1.45rem
     text-align: center
-  .search
-    margin: 0.4375rem
+    .profile__photo
+      display: inline-flex
+      vertical-align: middle
+  .edg-search
+    margin: 0.8rem 0
     .input__wrapper
       flex-grow: 1
       width: auto
+      .p-inputtext
+        width: 100%
+    a
+      display: inline-block
+      padding: 0 0.4rem
+      &:nth-child(2)
+        margin-left: 0.4rem
 @media (max-width: 1140px)
   .main_header
     padding: 0 1.25rem
@@ -532,6 +543,7 @@ button, .button
   .p-dialog-content
     column-gap: 1.875rem
     display: flex
+    flex-wrap: wrap
     padding: 2rem 1.5rem
     .default-image
       align-items: center
@@ -552,6 +564,7 @@ button, .button
         width: 100%
       .p-galleria-thumbnail-container
         background: none
+        padding: 2rem 0 0
         .p-galleria-thumbnail-items
           column-gap: 0.625rem
           display: flex
@@ -579,14 +592,22 @@ button, .button
         b
           display: inline-block
           width: 8,125rem
-  .profile-content
-    min-width: 35rem
-    max-width: 50rem
+  &.profile-content
+    .p-dialog-header
+      padding-bottom: 0
+    .p-dialog-content
+      padding-top: 0
     .settings__card
       border-radius: 0
       border-bottom: 1px solid var(--light-grey)
       box-shadow: none
       padding: 2.5rem 1rem
+      width: 100%
+      &:first-child
+        padding-top: 0
+      &:last-child
+        border: none
+        padding-bottom:0
 
 .p-multiselect-panel
   button
@@ -595,6 +616,9 @@ button, .button
     color: var(--gray)
     padding: 0
     text-align: center
+
+.chat__input .emoji .emoji__wrapper button
+  padding: 0
 
 $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.5em", "6": "3em", "7": "3.5em", "8": "4em")
 @each $name, $space in $spaces

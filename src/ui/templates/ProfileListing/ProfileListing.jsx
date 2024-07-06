@@ -8,8 +8,20 @@ import ProfileInformation from "@components/modules/profile/ProfileInformation"
 
 import "../styles.sass"
 
-const ProfileListing = ({profile, reloadElements = () => false}) => {
+const ProfileListing = ({type, profile, reloadElements = () => false}) => {
   const user = useSelector((state) => state.users.userData)
+  const ngoTypes = [
+    {
+      id: 'products',
+      url: '/profile/',
+      label: 'Products',
+    },
+    {
+      id: 'pets',
+      url: '/profile/pets/',
+      label: 'Pets Adoptions',
+    },
+  ]
 
   const doFollow = async (id) => {
     await followUser({user: id, follower: user?.id})
@@ -24,11 +36,7 @@ const ProfileListing = ({profile, reloadElements = () => false}) => {
         {profile?.images?.length > 0 && 
           <PhotoGallery imageCatalog={profile?.images} />
         }
-        {(profile?.role == 'vendor' || profile?.role == 'social' || profile?.role == 'ngo') && 
-          <ProfileElements type="products" user={profile?.id} same={user?.id == profile?.id} />
-        || ((profile?.role == 'shelter' || profile?.role == 'ngo') && 
-          <ProfileElements type="adoption" user={profile?.id} same={user?.id == profile?.id} />
-      )}
+        <ProfileElements type={type} user={profile?.id} same={user?.id == profile?.id} types={profile?.role == 'ngo' ? ngoTypes : null} />
       </div>
     </div>
     <Footer />

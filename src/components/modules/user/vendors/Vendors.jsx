@@ -8,10 +8,11 @@ import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 
 const Vendors = ({type}) => {
   const dispatch = useDispatch()
+  const [reset, setReset] = useState(false)
   const [page, setPage] = useState({page: 0, rows: 8})
+  const [elements, setElements] = useState({data: []})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
-  const [elements, setElements] = useState({data: []})
   const vendorTemplateContent = {
     title: 'MARKET PLACE',
     searchLabel: 'Discover products',
@@ -50,11 +51,11 @@ const Vendors = ({type}) => {
     if(e) e.preventDefault()
     setElements({data: []})
     if(type == 'vendors'){
-      let _filter = { role: `u.role='vendor'` }
+      let _filter = { role: `(u.role='vendor' || u.role='social' || u.role='ngo')` }
       if(filters?.keyword != '')
         _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
       const _vendors = await getUsers(_filter, 'full', user.id, page)
-      setElements(_vendors);
+      setElements(_vendors)
     }else if(type == 'products'){
       let _filter = {}
       if(filters?.keyword != '')
@@ -65,15 +66,18 @@ const Vendors = ({type}) => {
   }
 
   useEffect(() => {
-    loadElements();
-    dispatch(setHeader("user"));
-  }, [page]);
+    dispatch(setHeader("user"))
+  }, [user])
+  useEffect(() => {
+    loadElements()
+    setReset(false)
+  }, [page, reset])
   useEffect(() => {
     setFilters({keyword: ''})
-    setPage({page: 0, rows: 8})
-  }, [type]);
+    setPage({page: 0, rows: 8,})
+  }, [type])
 
-  return <CategoryListing content={vendorTemplateContent} section={type} elements={elements} filters={filters} setFilters={setFilters} reloadElements={loadElements} page={page} setPage={setPage} />
+  return <CategoryListing content={vendorTemplateContent} section={type} elements={elements} filters={filters} setFilters={setFilters} setReset={setReset} reloadElements={loadElements} page={page} setPage={setPage} />
 }
 
 export default Vendors

@@ -45,7 +45,7 @@ const Followers = ({followers = true}) => {
   return <div className="layout">
     <img className="layout__background" src="/assets/user/image-1.svg" />
     <div className="main__content">
-      <div className="search mb-0">
+      <div className="edg-search mb-0">
         <h1 className="text-defaultCase mb-1">{followers ? 'Followers' : 'Following'}</h1>
         <div className="mb-1">
           <Button label="Followers" onClick={() => navigate('/followers/')} className={'green-earth small ' + (followers ? '' : 'outline')} />

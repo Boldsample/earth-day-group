@@ -40,7 +40,7 @@ const OfferNew = () => {
     const id = await createOffer(data)
     const _sendImages = uploadedImages.map(image => {
       let _image = {...image}
-      _image.user = id
+      _image.entity = id
       _image.type = 'offers'
       return _image
     })

@@ -27,7 +27,7 @@ const RegisterRole = () => {
               description={role.description}
             />
           </Link>)
-        : "No roles found."}
+        : "We couldn't find what you are looking for. Care to try again."}
       </div>
     </div>
   </div>

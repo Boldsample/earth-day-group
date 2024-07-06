@@ -41,7 +41,7 @@ const Chats = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/user/image-1.svg" />
     <div className="main__content">
-      <div className="search mb-0">
+      <div className="edg-search mb-0">
         <h1 className="text-defaultCase mb-1">Chat</h1>
         <div className="mb-1">
           <Button label="Users" onClick={() => updateFilter('user')} className={'green-earth small ' + (filters.find(f => f == 'user') ? '' : 'outline')} />

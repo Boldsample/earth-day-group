@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { getUserData } from "@store/slices/usersSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
+import { createUser, updateUser } from "@services/userServices"
 import { setHeader, setHeaderTitle } from "@store/slices/globalSlice"
-import { addImages, createUser, updateUser } from "@services/userServices"
 import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
 
 import "./style.sass"
@@ -38,7 +38,6 @@ const RegisterVendor = () => {
       phone: user?.phone || "",
       email: user?.email || "",
       password_confirmation: "",
-      images: user?.images || [],
       website: user?.website || "",
       picture: user?.picture || "",
       address: user?.address || "",
@@ -63,13 +62,9 @@ const RegisterVendor = () => {
     { name: "YES", value: 1 },
     { name: "NO", value: 0 },
   ]
-  const setUploadedImages = (images) => {
-    setValue('images', images)
-  }
   const onSubmit = async (data) => {
     let response
     let _user = { ...user, ...data }
-    delete _user.images
     delete _user.materials
     delete _user.followers
     delete _user.following
@@ -90,12 +85,6 @@ const RegisterVendor = () => {
       setSending(false)
       return
     }
-    const _sendImages = data.images.map(image => {
-      let _image = {...image}
-      _image.entity = response.id
-      return _image
-    })
-    await addImages(_sendImages)
     setSending(false)
     if(user?.id && response?.id){
       dispatch(updateThankyou({
@@ -333,11 +322,6 @@ const RegisterVendor = () => {
               },
             }} />
         </div>
-        <UploadPhotoInput
-          type="imageUpload"
-          title="Add Images"
-          uploadedImages={watch('images')}
-          setUploadedImages={setUploadedImages} />
         <div className="registerInput__container-x2">
           <PasswordInput
             width="100%"

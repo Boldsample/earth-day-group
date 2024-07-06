@@ -142,9 +142,9 @@ const CreatePet = () => {
             optionLabel="name"
             optionValue="code"
             options={species}
-            labelName="Specie"
+            labelName="Type"
             nameInput="specie"
-            placeHolderText="Select Specie"
+            placeHolderText="Select Type"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               required: "*El campo es requerido.",

@@ -112,7 +112,7 @@ export const getUsers = async (filter = {}, type = 'min', user = null, page = nu
   return {total: data.total, data: data.data, card: 'company'};
 }
 
-export const followUser = async (senddata) => {
-  const {data} = await API.post(`/follow/`, senddata)
+export const followUser = async (formData) => {
+  const {data} = await API.post(`/follow/`, formData)
   return data.id
 }

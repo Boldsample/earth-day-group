@@ -3,32 +3,34 @@ import { useSelector } from "react-redux"
 import { InputText } from "primereact/inputtext"
 import { Paginator } from "primereact/paginator"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleChevronRight, faSearch } from "@fortawesome/free-solid-svg-icons"
+import { faCircleChevronRight, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
 
 import Footer from "@ui/footer/Footer"
 import { followUser } from "@services/userServices"
+import { followProduct } from "@services/productServices"
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 
 import "../styles.sass"
-import { followProduct } from "@services/productServices"
 
-const CategoryListing = ({content, section, elements, filters, reloadElements = () => false, setFilters = () => false, page, setPage = () => false}) => {
+const CategoryListing = ({content, section, elements, filters, reloadElements = () => false, setFilters = () => false, setReset = () => false, page, setPage = () => false}) => {
   const skeletonPlaceHolder = ["", "", "", ""]
   const user = useSelector((state) => state.users.userData)
 
   const doFollow = async (id) => {
-    if(elements?.card == 'product')
-      await followUser({user: id, follower: user?.id})
+    if(elements?.card == 'product' || elements?.card == 'pet')
+      await followProduct({type: elements?.card, entity: id, follower: user?.id})
     else
-      await followProduct({type: 'product', entity: id, follower: user?.id})
+      await followUser({user: id, follower: user?.id})
     reloadElements()
   }
 
   return <>
-    <div className="layout autoheight template__top">
-      <div className="template__banner" style={{backgroundImage: content.bannerImage}}>
-        <h1 className="text-upperCase">{content.title}</h1>
+    <div className="layout fullwidth hasfooter">
+      <div className="template__top fullwidth">
+        <div className="template__banner" style={{backgroundImage: content.bannerImage}}>
+          <h1 className="text-upperCase">{content.title}</h1>
+        </div>
       </div>
       {content?.secondary?.length > 0 && 
         <div className="features">
@@ -40,43 +42,46 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
           )}
         </div>
       }
-    </div>
-    <div className="layout autoheight template__listing">
-      <div className="main__content fullwidth pt-6">
-        <div className="search mb-1">
-          {content.searchLabel && <h3 className="text-center mb-1">{content.searchLabel}</h3>}
-          <form onSubmit={reloadElements} className="p-input-icon-left fullwidth">
-            <FontAwesomeIcon icon={faSearch} />
-            <InputText
-              placeholder={"Search"}
-              value={filters.keyword}
-              className="p-inputtext"
-              onChange={(e) => setFilters(prev => ({...prev, keyword: e.target.value}))} />
-            <Link type="submit"><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
-          </form>
-        </div>
-        <div className="types">
-          {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={section == type?.id ? 'active' : ''}>{type?.label}</Link>)}
-        </div>
-        <div className="templateCards_grid">
-          {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
-            skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
-          || (elements?.total > 0 && 
-            elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
-          ) ||
-            <div className="fullwidth text-center mt-2">
-              <p>There's no results</p>
+      <div className="layout autoheight">
+        <div className="main__content centerfullwidth pt-8">
+          <div className="template__listing">
+            <div className="edg-search mb-1">
+              {content.searchLabel && <h3 className="text-center mb-1">{content.searchLabel}</h3>}
+              <form onSubmit={reloadElements} className="p-input-icon-left fullwidth">
+                <FontAwesomeIcon icon={faSearch} />
+                <InputText
+                  placeholder={"Search"}
+                  value={filters.keyword}
+                  className="p-inputtext"
+                  onChange={e => setFilters(prev => ({...prev, keyword: e.target.value}))} />
+                {filters?.keyword && 
+                  <Link className="reset" onClick={() => { setReset(true); setFilters({keyword: ''}) }}><FontAwesomeIcon icon={faTimes} /></Link>
+                }
+                <Link onClick={reloadElements}><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
+              </form>
             </div>
-          }
-          {page?.rows < elements?.total && 
-            <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
-          }
+            <div className="types">
+              {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={section == type?.id ? 'active' : ''}>{type?.label}</Link>)}
+            </div>
+            <div className="templateCards_grid">
+              {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
+                skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
+              || (elements?.total > 0 && 
+                elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
+              ) ||
+                <div className="fullwidth text-center mt-2">
+                  <p>We couldn't find what you are looking for. Care to try again.</p>
+                </div>
+              }
+              {page?.rows < elements?.total && 
+                <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
+              }
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div className="layout autoheight fullwidth pt-0">
-      <Footer />
-    </div>
+    <Footer />
   </>
 }
 

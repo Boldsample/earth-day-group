@@ -63,9 +63,10 @@ const ProfileInformation = ({profile, same, doFollow}) => {
           <Link className="button small dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> <span>Edit Profile</span></Link>
           {(profile?.role == 'vendor' || profile?.role == 'social' || profile?.role == 'ngo') && 
             <Link className="button small blue-earth self-end" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> New product</Link>
-          || (profile?.role == 'shelter' && 
-            <Link className="button small blue-earth self-end" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet for adoption</Link>
-          )}
+          }
+          {(profile?.role == 'shelter' || profile?.role == 'ngo') && 
+            <Link className="button small green-earth self-end" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet</Link>
+          }
         </> || 
           <Button className={'small '+(profile?.followed ? 'red-state' : 'dark-blue')} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? 'Unfollow' : 'Follow'}</span></Button>
         }

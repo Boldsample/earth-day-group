@@ -56,8 +56,8 @@ const RegisterNgo = () => {
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
   const radioData = [
-    { name: "Charity Home", value: 'shelter' },
-    { name: "Social-organization", value: 'social' },
+    { name: "Shelters", value: 'shelter' },
+    { name: "Social Organization", value: 'social' },
     { name: "Both", value: 'ngo' },
   ]
   const setUploadedImages = (images) => {

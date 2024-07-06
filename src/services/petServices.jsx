@@ -28,18 +28,13 @@ export const getPet = async (id) => {
   return data?.data[0];
 }
 
-export const getProducts = async (filter, page, user = null) => {
+export const getPets = async (filter, page, user = null) => {
 	let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
   user = user ? `&user=${user}` : ''
-  const { data } = await API.get(`/get/products&filter=${filterStr}${user}&page=${page.page}&rows=${page.rows}`)
-  return {total: data.total, data: data.data, card: 'product'};
-}
-
-export const followProduct = async (senddata) => {
-  const {data} = await API.post(`/follow/`, senddata)
-  return data.id
+  const { data } = await API.get(`/get/pets&filter=${filterStr}${user}&page=${page.page}&rows=${page.rows}`)
+  return {total: data.total, data: data.data, card: 'pet'};
 }

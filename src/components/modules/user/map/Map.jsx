@@ -5,14 +5,14 @@ import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faLocationCrosshairs, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { GoogleMap, MarkerF, Autocomplete, InfoBoxF, MarkerClustererF } from '@react-google-maps/api'
 
 import mapConfig from "@json/mapConfig.json"
 import { getUsers } from '@services/userServices'
+import { setHeader } from '@store/slices/globalSlice'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { updateUserData } from '@store/slices/usersSlice'
-import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import './style.sass'
 
@@ -74,6 +74,10 @@ const Map = () => {
       setCurrent({ lat: parseFloat(user?.lat), lng: parseFloat(user?.lng) })
   }
   const getIcon = role => {
+    if(role == 'social' || role == 'ngo')
+      return "/assets/icons/map-social.svg"
+    if(role == 'shelter')
+      return "/assets/icons/map-shelter.svg"
     if(role == 'vendor')
       return "/assets/icons/map-market-place.svg"
     return "/assets/icons/map-recycling-center.svg"
@@ -103,7 +107,7 @@ const Map = () => {
       </Dialog>
     || null}
     <div className="navbar-item insection_header">
-      <div className="search">
+      <div className="edg-search">
         <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
           <InputText
             placeholder="Search"
@@ -114,20 +118,27 @@ const Map = () => {
       </div>
     </div>
     {show && <div className="marker__detail">
-      <a className="close" onClick={() => setShow(null)}>X</a>
+      <a className="close" onClick={() => setShow(null)}><FontAwesomeIcon icon={faTimes} /></a>
       <ProfilePhoto className="mb-1" userPhoto={show.picture} />
-      <h5 className="font-bold text-gray">{show.name}</h5>
+      <h4 className="font-bold">{show.name}</h4>
       <p>{show.email}</p>
       <p>{show.phone}</p>
-      {show?.materials?.length > 0 && 
+      <p className="small">&nbsp;</p>
+      <p className="small">{show.description}</p>
+      <p className="small">&nbsp;</p>
+      {show?.materials?.length > 0 && <>
+        <h5 className="font-bold mb-1">Interested in buying:</h5>
         <div>
           {show?.materials?.map(({type}, key) => 
             <Button key={key} label={type} className={'small mb-1 ' + type} />
-          )}
+        )}
         </div>
-      || null}
-      {show.pick_up_from_home && <h5 className="font-bold mb-1">Pick at Home</h5>}
-      <p className="small mb-1">{show.description}</p>
+      </>}
+      <p className="small">&nbsp;</p>
+      {show.role == 'companies' && <>
+        <h5 className="font-bold">Pickup at Home: <span className="text-gray font-regular">{show.pick_up_from_home ? 'Available' : 'Unavailable'}</span></h5>
+        <p className="small">&nbsp;</p>
+      </>}
       <Link to={`/company/${show.id}`} className="button dark-blue">Learn more</Link>
     </div>}
     <GoogleMap

@@ -17,6 +17,7 @@ import { getMessages, sendMessage } from '@services/chatServices'
 import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import './styles.sass'
+import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 
 const Chat = () => {
   let last = 0
@@ -109,7 +110,10 @@ const Chat = () => {
 
   return <div className="layout" style={{background: 'white'}}>
     <div className="navbar-item insection_header">
-      <h4><a onClick={e => { e.preventDefault(); setProfile({id: outgoing?.id, update: new Date(), type: 'chat'}); }}>Chat with {contact}</a></h4>
+      <h4><a onClick={e => { e.preventDefault(); setProfile({id: outgoing?.id, update: new Date(), type: 'chat'}); }}>
+        <ProfilePhoto userPhoto={outgoing?.picture} />
+        {outgoing?.name}
+      </a></h4>
     </div>
     <div className="main__content centerfullwidth">
       <div ref={chatWrapper} className={'chat__scroll ' + (offer && 'offer' || '')}>
@@ -136,7 +140,8 @@ const Chat = () => {
             <div ref={emojiWrapper} className="emoji__wrapper"><EmojiPicker open={open} onEmojiClick={handleEmoji} /></div>
           </div>
           <button className={!message ? '' : 'dark-blue'} type="submit" disabled={!message}>Send</button>
-        </form> || 
+        </form> 
+      || 
         <form className="chat__input" onSubmit={sendOffer}>
           <OfferInfo type="min" show={show} offer={offerInfo} onHide={hidePopup}  />
           <div className="chat__offer">
@@ -145,9 +150,6 @@ const Chat = () => {
             <div className="date" style={{fontSize: '0.75rem'}}>{offerInfo?.date}</div>
             <div className="chat__offer__info">
               <p>You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-              {/* <p><b>Published by:</b> {offerInfo?.name}</p>
-              <p><b>Quantity:</b> {offerInfo?.quantity} {offerInfo?.unit}</p>
-              <p><b>Asking price:</b> {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p> */}
               <Button type="button" className="small green-earth" onClick={() => setShow(true)}><FontAwesomeIcon icon={faSearch} /> See Offer Details</Button>
             </div>
           </div>

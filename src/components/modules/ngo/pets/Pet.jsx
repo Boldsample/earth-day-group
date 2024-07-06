@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
 import { faBookmark, faCartPlus } from "@fortawesome/free-solid-svg-icons"
-import { faBookmark as faBookmarkLine } from "@fortawesome/free-regular-svg-icons"
+import { faBookmark as faBookmarkLine, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 
 const Pet = () => {
   const { id } = useParams()
@@ -38,7 +38,7 @@ const Pet = () => {
   }, [id])
 
   return <>
-    <div className="layout autoheight">
+    <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
         <div className="profileInformation__grid">
@@ -51,19 +51,16 @@ const Pet = () => {
           <div className="profileInformation__container">
             <h2>{pet?.name}</h2>
             <p className="mt-2 mb-4">{pet?.description}</p>
-            <h4 className="dark-blue">{parseInt(pet?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h4>
             <div className="buttons__container">
               <Link className="button dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
-              <Link className="button green-earth"><FontAwesomeIcon icon={faCartPlus} /> Add to cart</Link>
+              <Link to={`/chat/${pet?.username}/`} className="button green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact shelter</span></Link>
             </div>
           </div>
         </div>
+        <ProfileElements type="pets" user={pet?.user} same={user?.id == pet?.user} related={true} />
       </div>
     </div>
-    <ProfileElements user={pet?.user} same={user?.id == pet?.user} related={true} />
-    <div className="layout autoheight fullwidth pt-0">
-      <Footer />
-    </div>
+    <Footer />
   </>
 }
 

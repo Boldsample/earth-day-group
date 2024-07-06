@@ -30,18 +30,17 @@ const Header = () => {
       <Nav />
     }
 
-    {['dashboard'].some(s => s == header) && 
-      <div className="navbar-item user-info">
-        <ProfilePhoto userPhoto={user?.picture} className="left" />
-        <small className="user-name">Hi, {user?.name}</small>
-      </div>
-    }
-
-    {!['intro', 'dashboard', 'thankyou'].some((s) => s == header) && 
-      <div className="navbar-item go-back">
+    <div className="navbar-item go-back">
+      {!['intro', 'dashboard', 'thankyou'].some((s) => s == header) && 
         <a onClick={() => navigate(-1)}><FontAwesomeIcon icon={faChevronLeft} /></a>
-      </div>
-    }
+      }
+      {['dashboard'].some(s => s == header) && <>
+          <ProfilePhoto userPhoto={user?.picture} className="left" />
+          <small className="user-name">Hi, {user?.name}</small>
+        </>
+      }
+    </div>
+
 
     {['settings'].some(s => s == header) && 
       <div className="navbar-item"><h4>{headerTitle}</h4></div>
@@ -57,14 +56,12 @@ const Header = () => {
 
     {!['intro', 'login', 'register'].some(s => s == header) && 
       <div className="navbar-item right-align icons">
-        {location.pathname != '/dashboard/' ? <div className="navbar-item" style={{ width: 'auto'}}>
-          <ProfilePhoto userPhoto={user?.picture} />
-          <small className="user-name">Hi, {user?.name}</small>
-        </div> : null}
-        <FontAwesomeIcon icon={faShoppingCart} />
-        <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
+        {!['settings', 'map'].some(s => s == header) && <>
+          <FontAwesomeIcon icon={faShoppingCart} />
+          <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
+        </>}
         <HeaderNotifications />
-        {!['intro', 'login', 'register', 'settings', 'map'].some(s => s == header) && <>
+        {!['intro', 'login', 'register'].some(s => s == header) && <>
           <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
         </>}
       </div>

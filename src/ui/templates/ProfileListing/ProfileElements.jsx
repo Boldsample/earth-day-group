@@ -10,37 +10,50 @@ import { setHeader } from "@store/slices/globalSlice"
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 import { followProduct, getProducts } from "@services/productServices"
+import { getPets } from "@services/petServices"
 
-const ProfileElements = ({type = 'products', user, same = false, related = false}) => {
+const ProfileElements = ({type = 'products', user, same = false, related = false, types = []}) => {
   const dispatch = useDispatch()
   const skeletonPlaceHolder = ["", "", "", ""]
+  const [elements, setElements] = useState(null)
   const [filters, setFilters] = useState({keyword: ''})
   const userId = useSelector((state) => state.users.userData.id)
-  const [elements, setElements] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: related ? 4 : 8})
 
   const doFollow = async (id) => {
-    await followProduct({type: 'product', entity: id, follower: userId})
+    const _type = type == 'products' ? 'product' : 'pet'
+    await followProduct({type: _type, entity: id, follower: userId})
     loadElements()
   }
   const loadElements = async e => {
     if(e) e?.preventDefault()
-    setElements({data: []})
-    let _filter = {user: `p.user=${user}`}
-    if(filters?.keyword != '')
-      _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
-    const _products = await getProducts(_filter, page, userId)
-    setElements(_products)
+    if(elements !== null)
+      setElements({data: []})
+    if(type == 'products'){
+      let _filter = {user: `p.user=${user}`}
+      if(filters?.keyword != '')
+        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+      const _products = await getProducts(_filter, page, userId)
+      setElements(_products)
+    }else{
+      let _filter = {user: `p.user=${user}`}
+      if(filters?.keyword != '')
+        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+      const _pets = await getPets(_filter, page, userId)
+      setElements(_pets)
+    }
   }
 
   useEffect(() => {
     loadElements();
     dispatch(setHeader("user"));
-  }, [page]);
-
+  }, [page, type]);
+  
+  if(elements == null || elements?.total == 0)
+    return
   return <div className="template__listing fullwidth">
-    <div className="search mb-1">
-      <h3 className="text-center mb-1">{related && 'Related products' || (type == 'products' ? 'Discover our products' : 'Want to adopt a new friend?')}</h3>
+    <div className="edg-search mb-1">
+      <h3 className="text-center mb-1">{related && (type == 'products' ? 'Related products' : `Here are some 'friends you may like'`) || (type == 'products' ? 'Discover our products' : 'Want to adopt a new friend?')}</h3>
       {!related && (typeof elements?.total == 'undefined' || elements?.total > 0) && 
         <form onSubmit={loadElements} className="p-input-icon-left fullwidth">
           <FontAwesomeIcon icon={faSearch} />
@@ -49,9 +62,12 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
             value={filters.keyword}
             className="p-inputtext"
             onChange={(e) => setFilters(prev => ({...prev, keyword: e.target.value}))} />
-          <Link type="submit"><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
+          <Link onClick={loadElements}><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
         </form>
       }
+      <div className="types">
+        {types?.map((listType, key) => <Link key={key} to={listType?.url} className={type == listType?.id ? 'active' : ''}>{listType?.label}</Link>)}
+      </div>
     </div>
     <div className="templateCards_grid">
       {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
@@ -60,7 +76,7 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
         elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
       ) ||
         <div className="fullwidth text-center mt-2">
-          <p>No {type == 'products' ? 'products' : 'pets for adoption'} found.</p>
+          <p>We couldn't find what you are looking for. Care to try again.</p>
         </div>
       }
       {!related && page?.rows < elements?.total && 
@@ -70,7 +86,7 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
         <div className="fullwidth text-center">
           {type == 'products' && 
             <Link className="button small blue-earth self-center" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> New product</Link> ||
-            <Link className="button small blue-earth self-center" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet for adoption</Link>
+            <Link className="button small green-earth self-center" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet</Link>
           }
         </div>
       }

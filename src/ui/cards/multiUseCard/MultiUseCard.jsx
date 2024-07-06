@@ -90,7 +90,7 @@ const MultiUseCard = ({
           {(data?.type == 'offer' && 
             <div className="offer">
               <div className="detail">
-                <small>
+                <small className="font-bold">
                   {data?.status == data?.id && 
                     <span className="text-green-state">Offer accepted:</span> 
                   || ((data?.rejected || data?.status != 0) && 
@@ -99,11 +99,11 @@ const MultiUseCard = ({
                     <span>Offer {data?.same && 'sent' || 'received'}:</span>
                   }
                 </small>
-                <h5 className={data?.same && 'text-white' || null}>{data?.title}</h5>
+                <h5>{data?.title}</h5>
                 <div className="mb-1"><Button label={data?.material} className={'small ' + data?.material} /></div>
                 <div><small><b>Quantity:</b> {data?.quantity} {data?.unit}</small></div>
                 <div><small><b>Asking price:</b> {parseInt(data?.asking).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</small></div>
-                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className={data?.same && 'text-white' || 'text-green-earth'}>Proposal:</b> {parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className="text-green-earth">Proposal:</b> {parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
               </div>
               {!data?.same && data?.status == 0 && !data?.rejected && 
                 <div className="actions">
@@ -115,10 +115,10 @@ const MultiUseCard = ({
             <div className="offer">
               <div className="detail">
                 <small><span className="text-green-state">Offer accepted:</span></small>
-                <h5 className={data?.same && 'text-white' || null}>{data?.title}</h5>
+                <h5>{data?.title}</h5>
                 <div className="mb-1"><Button label={data?.material} className={'small ' + data?.material} /></div>
                 <div><small><b>Quantity:</b> {data?.quantity} {data?.unit}</small></div>
-                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className={data?.same && 'text-white' || 'text-green-earth'}>Final price:</b> {parseInt(data?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className="text-green-earth">Final price:</b> {parseInt(data?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
               </div>
               {!data?.same && 
                 <div className="actions">
@@ -145,6 +145,20 @@ const MultiUseCard = ({
           </div>
           {/* <Link className="button green-earth" to={`/chat/${data?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> */}
         </Link>
+      case 'company':
+        const doActionCompany = e => {
+          e.preventDefault()
+          action(data?.id)
+        }
+        return <div className="main__container">
+          <Link to={`/${data?.role}/${data?.username}/`}><ProfilePhoto pictures={data?.images} icon={faImage} /></Link>
+          <div className="content">
+            <h5 className="font-bold"><Link to={`/${data?.role}/${data?.username}/`}>{data?.name}</Link></h5>
+            <Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
+            <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
+            <Link className="button small dark-blue" to={`/${data?.role}/${data?.username}/`}>Ver <FontAwesomeIcon icon={faChevronRight} /></Link>
+          </div>
+        </div>
       case 'product':
         const doActionProduct = e => {
           e.preventDefault()
@@ -159,18 +173,18 @@ const MultiUseCard = ({
             <Link className="button small dark-blue" to={`/product/${data?.id}/`}>Ver <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
         </div>
-      case 'company':
-        const doActionCompany = e => {
+      case 'pet':
+        const doActionPet = e => {
           e.preventDefault()
           action(data?.id)
         }
         return <div className="main__container">
-          <Link to={`/${data?.role}/${data?.username}/`}><ProfilePhoto pictures={data?.images} icon={faImage} /></Link>
+          <Link to={`/pet/${data?.id}/`}><ProfilePhoto pictures={data?.images} icon={faImage} /></Link>
           <div className="content">
-            <h5 className="font-bold"><Link to={`/${data?.role}/${data?.username}/`}>{data?.name}</Link></h5>
-            <Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
-            <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
-            <Link className="button small dark-blue" to={`/${data?.role}/${data?.username}/`}>Ver <FontAwesomeIcon icon={faChevronRight} /></Link>
+            <h5 className="font-bold"><Link to={`/pet/${data?.id}/`}>{data?.name}</Link></h5>
+            <Link className="bookmark" onClick={doActionPet}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></Link>
+            <small>{data?.gender} - {data?.age} Year{data?.age > 1 ? 's' : ''} old</small>
+            <Link className="button small dark-blue" to={`/pet/${data?.id}/`}>Ver <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
         </div>
       default:

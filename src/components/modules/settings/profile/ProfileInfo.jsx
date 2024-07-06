@@ -31,10 +31,12 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
   
   return <>
     <div className="settings__card">
-      <ProfilePhoto className="mb-1" userPhoto={user?.picture} />
-      <h4 className="font-bold text-gray">{user?.name}</h4>
-      <p>{user?.email}</p>
-      {user?.role == 'user' && <p className="mb-2">{user?.description}</p>}
+      <div className="mb-4">
+        <ProfilePhoto className="mb-1" userPhoto={user?.picture} />
+        <h4 className="font-bold text-gray">{user?.name}</h4>
+        <p>{user?.email}</p>
+        {user?.role == 'user' && <p className="mb-2">{user?.description}</p>}
+      </div>
       {same && <>
         <div className="followers">
           <Link to="/followers/">
