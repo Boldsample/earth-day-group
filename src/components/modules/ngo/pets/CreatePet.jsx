@@ -160,8 +160,8 @@ const CreatePet = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
+                value: 50,
+                message: "El campo supera los 50 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
@@ -223,8 +223,8 @@ const CreatePet = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 230,
-                message: "El campo supera los 230 caracteres",
+                value: 1000,
+                message: "El campo supera los 1000 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {

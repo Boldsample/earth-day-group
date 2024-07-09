@@ -69,7 +69,7 @@ const RegisterVendor = () => {
     delete _user.followers
     delete _user.following
     setSending(true)
-    if(user.id){
+    if(user?.id){
       if(_user.password == ''){
         delete _user.password
         delete _user.password_confirmation
@@ -139,8 +139,8 @@ const RegisterVendor = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
+                value: 100,
+                message: "El campo supera los 100 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
@@ -225,8 +225,8 @@ const RegisterVendor = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
+                value: 50,
+                message: "El campo supera los 50 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
@@ -312,8 +312,8 @@ const RegisterVendor = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 230,
-                message: "El campo supera los 230 caracteres",
+                value: 1000,
+                message: "El campo supera los 1000 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
@@ -371,7 +371,7 @@ const RegisterVendor = () => {
             checkBoxText="I've read and accept the terms & conditions." />
         </div>
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-          <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={user?.id ? "Save" : "Sign up"} type="submit" loading={sending} />
         </div>
       </form>
     </div>

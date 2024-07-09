@@ -52,6 +52,5 @@ export const getOffers = async (filter, page) => {
     _offer.offers = _offer.offers ? JSON.parse(_offer.offers) : null
     return _offer
   })
-  const materials = data.materials.map(material => ({value: material.material, value: material.material}))
-  return {total: data.total, data: response, materials: materials};
+  return {total: data.total, data: response, materials: data?.materials};
 };

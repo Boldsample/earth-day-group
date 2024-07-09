@@ -211,10 +211,6 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         getFormErrorMessage={getFormErrorMessage}
         placeHolderText="Tell us about your company"
         rules={{
-          maxLength: {
-            value: 100,
-            message: "El campo supera los 100 caracteres",
-          },
           required: "*El campo es requerido.",
           pattern: {
             value: /^\S/,

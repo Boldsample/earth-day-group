@@ -9,9 +9,11 @@ const RegisterCompany = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isDisabled, setIsDisabled] = useState(true)
   const user = useSelector((state) => {
-    delete state.users.userData.password
-    delete state.users.userData.password_confirmation
-    return state.users.userData
+    if(state?.users?.userData){
+      delete state.users.userData.password
+      delete state.users.userData.password_confirmation
+    }
+    return state?.users?.userData
   });
   const [userData, setUserData] = useState(user?.id ? {...user} : { pick_up_from_home: false, images: [], materials: [] })
 

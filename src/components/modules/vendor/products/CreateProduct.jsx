@@ -105,8 +105,8 @@ const CreateProduct = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
+                value: 100,
+                message: "El campo supera los 100 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {
@@ -164,8 +164,8 @@ const CreateProduct = () => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 230,
-                message: "El campo supera los 230 caracteres",
+                value: 1000,
+                message: "El campo supera los 1000 caracteres",
               },
               required: "*El campo es requerido.",
               pattern: {

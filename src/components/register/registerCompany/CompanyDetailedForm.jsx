@@ -216,7 +216,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
       <InputSwitch
         id="pick_up_from_home"
         checked={!!user?.pick_up_from_home}
-        onChange={e => setUser(prev => { return {...prev, pick_up_from_home: !user?.pick_up_from_home} })} />
+        onChange={e => setUser(prev => { return {...prev, pick_up_from_home: !user?.pick_up_from_home} })} /> Pick up from home
     </div>
     <div className="p-field" style={{ marginBottom: "1.5rem" }}>
       <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? 'Save' : 'Sign up'} name="submit" loading={sending} />

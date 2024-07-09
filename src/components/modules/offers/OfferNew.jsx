@@ -134,7 +134,8 @@ const OfferNew = () => {
               getFormErrorMessage={getFormErrorMessage}
               options={[
                 {label: "Kg", value: "Kg"}, 
-                {label: "cc", value: "cc"}
+                {label: "cc", value: "cc"},
+                {label: "Units", value: "Units"}
               ]} />
           </div>
           <div className="registerInput__container-x2">

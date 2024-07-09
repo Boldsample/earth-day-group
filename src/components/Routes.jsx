@@ -79,6 +79,7 @@ const AppRoutes = () => {
       }
       {(user?.role == 'user' || user?.role == 'company') && <>
         <Route path="/offers" element={<Offers />} />
+        <Route path="/chat/:contact/:offer" element={<Chat />} />
       </>}
       {(user?.role == 'user' || user?.role == 'vendor' || user?.role == 'social' || user?.role == 'ngo') && <>
         <Route path="/orders" element={<Orders />} />
