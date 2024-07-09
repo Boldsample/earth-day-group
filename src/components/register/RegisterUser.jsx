@@ -292,7 +292,7 @@ const RegisterUser = () => {
             checkBoxText="I've read and accept the terms & conditions." />
         </div>
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-          <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={user?.id ? "Save" : "Sign up"} type="submit" loading={sending} />
         </div>
       </form>
     </div>
