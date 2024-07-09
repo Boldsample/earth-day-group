@@ -151,7 +151,7 @@ const MultiUseCard = ({
           action(data?.id)
         }
         return <div className="main__container">
-          <Link to={`/${data?.role}/${data?.username}/`}><ProfilePhoto pictures={data?.images} icon={faImage} /></Link>
+          <Link to={`/${data?.role}/${data?.username}/`}><ProfilePhoto userPhoto={data?.picture} icon={faImage} /></Link>
           <div className="content">
             <h5 className="font-bold"><Link to={`/${data?.role}/${data?.username}/`}>{data?.name}</Link></h5>
             <Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
@@ -165,7 +165,7 @@ const MultiUseCard = ({
           action(data?.id)
         }
         return <div className="main__container">
-          <Link to={`/product/${data?.id}/`}><ProfilePhoto pictures={data?.images} icon={faImage} /></Link>
+          <Link to={`/product/${data?.id}/`}><ProfilePhoto userPhoto={data?.picture} icon={faImage} /></Link>
           <div className="content">
             <div className="price">{parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
             <h5 className="font-bold"><Link to={`/product/${data?.id}/`}>{data?.name}</Link></h5>
@@ -179,7 +179,7 @@ const MultiUseCard = ({
           action(data?.id)
         }
         return <div className="main__container">
-          <Link to={`/pet/${data?.id}/`}><ProfilePhoto pictures={data?.images} icon={faImage} /></Link>
+          <Link to={`/pet/${data?.id}/`}><ProfilePhoto userPhoto={data?.picture} icon={faImage} /></Link>
           <div className="content">
             <h5 className="font-bold"><Link to={`/pet/${data?.id}/`}>{data?.name}</Link></h5>
             <Link className="bookmark" onClick={doActionPet}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></Link>

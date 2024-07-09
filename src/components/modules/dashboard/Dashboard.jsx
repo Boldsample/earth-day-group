@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
-import { useDispatch } from 'react-redux'
 import { useEffect, useState } from "react"
 import { InputText } from "primereact/inputtext"
+import { useDispatch, useSelector } from 'react-redux'
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 //import modules from "./modules"
 import Card from "@ui/cards/Card"
@@ -9,16 +11,17 @@ import modules from "@json/modules"
 import { setHeader } from '@store/slices/globalSlice'
 
 import "./dashboard.sass"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
 const Dashboard = () => {
 	const dispatch = useDispatch()
 	const [filteredModule, setFilteredModule] = useState([])
+  const user = useSelector((state) => state.users.userData)
 	
-	const filteredModules = modules.filter((module) =>
-		module.title.toLowerCase().includes(filteredModule)
-	)
+	const filteredModules = modules.filter(module => {
+    if(!module?.roles?.some(role => role == user?.role))
+      return false
+		return module?.title?.toLowerCase()?.includes(filteredModule)
+	})
 
 	useEffect(() => {
 		dispatch(setHeader('dashboard'))

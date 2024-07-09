@@ -1,37 +1,74 @@
 [
-	{
-		"title": "Market Place",
-		"className": "blue-earth",
-		"link": "/market-place/",
-		"icon": "/assets/icons/market-place.svg",
-		"description": "Find products that are eco friendly"
-	},
-	{
-		"title": "Recycle",
-		"className": "light-green",
-		"link": "/companies/",
-		"icon": "/assets/icons/recycle.svg",
-		"description": "Look for recycle center companies that may interest you"
-	},
-	{
-		"title": "Post Offer",
-		"className": "dark-blue",
-		"link": "/offers/",
-		"icon": "/assets/icons/post-offer.svg",
-		"description": "Post your recyclable material and sell it to the highest bidder"
-	},
-	{
-		"title": "Shelters",
-		"className": "green-earth",
-		"link": "/shelters/",
-		"icon": "/assets/icons/shelters.svg",
-		"description": "Find animal shelters near your location"
-	},
-	{
-		"title": "Social Organization",
-		"className": "blue-earth",
-		"link": "/social-organizations/",
-		"icon": "/assets/icons/social-organization.svg",
-		"description": "Find social organizations near your location"
-	}
+  {
+    "roles": ["user"],
+    "title": "Market Place",
+    "className": "blue-earth",
+    "link": "/market-place/",
+    "icon": "/assets/icons/market-place.svg",
+    "description": "Find products that are eco friendly"
+  },
+  {
+    "roles": ["user"],
+    "title": "Recycle",
+    "className": "light-green",
+    "link": "/companies/",
+    "icon": "/assets/icons/recycle.svg",
+    "description": "Look for recycle center companies that may interest you"
+  },
+  {
+    "roles": ["user"],
+    "title": "Post Offer",
+    "className": "dark-blue",
+    "link": "/offers/",
+    "icon": "/assets/icons/post-offer.svg",
+    "description": "Post your recyclable material and sell it to the highest bidder"
+  },
+  {
+    "roles": ["user"],
+    "title": "Shelters",
+    "className": "green-earth",
+    "link": "/shelters/",
+    "icon": "/assets/icons/shelters.svg",
+    "description": "Find animal shelters near your location"
+  },
+  {
+    "roles": ["user"],
+    "title": "Social Organization",
+    "className": "blue-earth",
+    "link": "/social-organizations/",
+    "icon": "/assets/icons/social-organization.svg",
+    "description": "Find social organizations near your location"
+  },
+  {
+    "roles": ["company", "vendor", "shelter", "social", "ngo"],
+    "title": "Profile",
+    "className": "blue-earth",
+    "link": "/profile/",
+    "icon": "/assets/icons/user.svg",
+    "description": "View your profile."
+  },
+  {
+    "roles": ["company"],
+    "title": "Recicle Materials",
+    "className": "light-green",
+    "link": "/offers/",
+    "icon": "/assets/icons/post-offer.svg",
+    "description": "Find recyclable material and buy it."
+  },
+  {
+    "roles": ["vendor", "social", "ngo"],
+    "title": "Create Product",
+    "className": "light-green",
+    "link": "/product/new/",
+    "icon": "/assets/icons/market-place.svg",
+    "description": "Create a products that would be excibed on your store."
+  },
+  {
+    "roles": ["shelter", "ngo"],
+    "title": "Create Pet",
+    "className": "dark-blue",
+    "link": "/pet/new/",
+    "icon": "/assets/icons/shelters.svg",
+    "description": "Create a pet for adoption."
+  }
 ]

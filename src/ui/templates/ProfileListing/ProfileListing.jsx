@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 import Footer from "@ui/footer/Footer"
 import ProfileElements from "./ProfileElements"
@@ -9,25 +10,30 @@ import ProfileInformation from "@components/modules/profile/ProfileInformation"
 import "../styles.sass"
 
 const ProfileListing = ({type, profile, reloadElements = () => false}) => {
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.users.userData)
   const ngoTypes = [
     {
       id: 'products',
-      url: '/profile/',
       label: 'Products',
+      url: user?.id == profile?.id ? '/profile/' : `/${profile?.role}/${profile?.username}/`,
     },
     {
       id: 'pets',
-      url: '/profile/pets/',
       label: 'Pets Adoptions',
+      url: user?.id == profile?.id ? '/profile/pets/' : `/${profile?.role}/${profile?.username}/pets/`,
     },
   ]
 
-  const doFollow = async (id) => {
-    await followUser({user: id, follower: user?.id})
-    reloadElements()
+  const doFollow = id => {
+    dispatch(followUser({user: id, follower: user?.id}))
   }
-
+  
+  useEffect(() => {
+    reloadElements()
+  }, [user])
+  if(!profile?.role)
+    return
   return <>
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
@@ -36,7 +42,9 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
         {profile?.images?.length > 0 && 
           <PhotoGallery imageCatalog={profile?.images} />
         }
-        <ProfileElements type={type} user={profile?.id} same={user?.id == profile?.id} types={profile?.role == 'ngo' ? ngoTypes : null} />
+        {profile?.role != 'company' && 
+          <ProfileElements type={type} user={profile?.id} same={user?.id == profile?.id} types={profile?.role == 'ngo' ? ngoTypes : null} />
+        }
       </div>
     </div>
     <Footer />

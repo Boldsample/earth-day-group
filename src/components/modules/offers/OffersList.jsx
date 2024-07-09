@@ -12,7 +12,7 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import OfferInfo from '@modules/offers/OfferInfo'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import { MultiSelect } from 'primereact/multiselect'
-import { getOffers } from '@services/offersServices'
+import { getOffer, getOffers } from '@services/offersServices'
 import { setHeader } from '@store/slices/globalSlice'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 
@@ -30,6 +30,11 @@ const Offers = () => {
 
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
+  const getUserDetail = async id => {
+    const _offer = await getOffer(id)
+    console.log(_offer)
+    setDetail({..._offer, show: true})
+  }
   const callOffers = async () =>{
     let _filter = {}
     if(user.role == 'user')
@@ -50,8 +55,7 @@ const Offers = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" 
-  placeholder="Filter by materials" />
+      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" placeholder="Filter by materials" />
       <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
       <Button className="small dark-blue" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
@@ -132,9 +136,9 @@ const Offers = () => {
           <Column header="Published Date" body={({date}) => date.split(' ')[0]}></Column>
           {user.role == 'user' && 
             <Column className="actions" header={null} body={offer => 
-              <Button className="small dark-blue" onClick={() => setDetail({...offer, show: true})}><FontAwesomeIcon icon={faSearch} /></Button>}></Column> || 
+              <Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>}></Column> || 
             <Column className="actions" header={null} body={offer => <>
-              <Button className="small dark-blue" onClick={() => setDetail({...offer, show: true})}><FontAwesomeIcon icon={faSearch} /></Button>
+              <Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>
               {offer.status == 0 && 
                 <Link className="button small green-earth" to={`/chat/${offer.username}/${offer.id}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> || 
                 <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>

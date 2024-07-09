@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, faPlus, faVenusMars, faPaw, faSignal, faWeightScale } from "@fortawesome/free-solid-svg-icons"
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCard'
@@ -15,7 +15,7 @@ const ProfileInformation = ({profile, same, doFollow}) => {
       <ProfilePhoto className="profile__photo-large" size="12.5rem" userPhoto={profile?.picture}/>
     </div>
     <div className="profileInformation__container">
-      <h2>{profile?.name}</h2>
+      <h2>{profile?.name} {profile?.type ? `(${profile?.type})`: ''}</h2>
       <p className="mt-2 mb-4">{profile?.description}</p>
       <ul className="contact__grid">
         {profile?.email && 
@@ -26,15 +26,6 @@ const ProfileInformation = ({profile, same, doFollow}) => {
         }
         {profile?.website && 
           <li><FontAwesomeIcon icon={faGlobe}  className='contact__icon'/>{profile?.website}</li>
-        }
-        {profile?.gender && 
-          <li><FontAwesomeIcon icon={faGlobe}  className='contact__icon'/>{profile?.gender}</li>
-        }
-        {profile?.weight && 
-          <li><FontAwesomeIcon icon={faGlobe}  className='contact__icon'/>{profile?.weight}</li>
-        }
-        {profile?.ngo && 
-          <li><FontAwesomeIcon icon={faGlobe}  className='contact__icon'/>{profile?.ngo}</li>
         }
         {profile?.role == 'company' && 
           <li><FontAwesomeIcon icon={faHouse}  className='contact__icon'/> Pickup from home: {profile?.pick_up_from_home == true ? "Available" : "Not Available"}</li>

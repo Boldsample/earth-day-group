@@ -5,9 +5,9 @@ import { followUser, getNotifications, getUser, getUsers, updateUser as updateUs
 const initialState = {
   loading: false,
   error: "",
-  userData: {},
   usersList: [],
   cleanData: [],
+  userData: null,
   inputField: "",
   notifications: [],
 }
@@ -25,7 +25,14 @@ export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
 })
 
 export const updateUserData = createAsyncThunk("users/updateUserData", async ({data, filter}) => {
-  const _id = await updateUserD(data, filter)
+  const _id = await updateUser(data, filter)
+  const res = await getUser(_id);
+  delete res.password
+  delete res.password_confirmation
+  return res;
+})
+export const followUserData = createAsyncThunk("users/followUser", async (data) => {
+  const _id = await followUser(data)
   const res = await getUser(_id);
   delete res.password
   delete res.password_confirmation
@@ -81,6 +88,9 @@ const usersSlice = createSlice({
       if (action.error.code) state.error = action.error.code;
     });
     builder.addCase(updateUserData.fulfilled, (state, action) => {
+      state.userData = action.payload;
+    });
+    builder.addCase(followUserData.fulfilled, (state, action) => {
       state.userData = action.payload;
     });
     builder.addCase(callNotifications.fulfilled, (state, action) => {

@@ -34,11 +34,10 @@ const Header = () => {
       {!['intro', 'dashboard', 'thankyou'].some((s) => s == header) && 
         <a onClick={() => navigate(-1)}><FontAwesomeIcon icon={faChevronLeft} /></a>
       }
-      {['dashboard'].some(s => s == header) && <>
-          <ProfilePhoto userPhoto={user?.picture} className="left" />
-          <small className="user-name">Hi, {user?.name}</small>
-        </>
-      }
+      {user?.id && !['map'].some((s) => s == header) && <>
+        <ProfilePhoto userPhoto={user?.picture} className="left" />
+        <small className="user-name" style={{fontSize: '1rem'}}>Hi, {user?.name}</small>
+      </>}
     </div>
 
 
@@ -56,7 +55,7 @@ const Header = () => {
 
     {!['intro', 'login', 'register'].some(s => s == header) && 
       <div className="navbar-item right-align icons">
-        {!['settings', 'map'].some(s => s == header) && <>
+        {!['settings', 'map'].some(s => s == header) && user?.role == 'user' && <>
           <FontAwesomeIcon icon={faShoppingCart} />
           <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
         </>}

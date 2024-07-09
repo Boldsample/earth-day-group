@@ -297,9 +297,11 @@ button, .button
     padding: 0
   &.autoheight
     min-height: 0
+  &.no-overflow
+    overflow: hidden
   .layout__background
     bottom: 0
-    height: 100vh
+    height: 100%
     left: 0
     object-fit: cover
     pointer-events: none
@@ -609,6 +611,8 @@ button, .button
         border: none
         padding-bottom:0
 
+.p-image-preview-indicator
+  background: #00000099
 .p-multiselect-panel
   button
     background: 0

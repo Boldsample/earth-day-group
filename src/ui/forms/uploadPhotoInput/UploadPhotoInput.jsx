@@ -20,24 +20,26 @@ const UploadPhotoInput = ({
 }) => {
   const [reachedImageCapacity, setReachedImageCapacity] = useState(false)
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0]
-    if(file){
-      if(file.size <= 2 * 1024 * 1024){
+  const handleFileChange = async e => {
+    let _uploadedImages = [...uploadedImages]
+    for(const file of Array.from(e?.target?.files)){
+      if(file && file?.size <= 2 * 1024 * 1024){
         const reader = new FileReader()
         reader.onload = () => {
-          if(uploadedImages.length >= 7)
+          if(_uploadedImages.length >= 7)
             setReachedImageCapacity(true)
-          else
-            setUploadedImages([...uploadedImages, { picture: reader.result }])
-        };
+          else{
+            _uploadedImages.push({ picture: reader.result })
+            setUploadedImages([..._uploadedImages])
+          }
+        }
         reader.readAsDataURL(file)
-        event.target.value = ""
       }else{
         alert("File size exceeds 2MB limit.")
-        event.target.value = ""
+        e.target.value = ""
       }
     }
+    e.target.value = ""
   }
   const removeImage = (clickedImage) => {
     if(uploadedImages.length <= 7)
@@ -61,7 +63,7 @@ const UploadPhotoInput = ({
         return <div className={`imagesHub__container ${className}`}>
           <h4>{title}</h4>
           <div className="imageCarousel__container">
-            <input id="file" type="file" accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
+            <input id="file" type="file" multiple accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
             <label htmlFor="file" className="imageUpload__button">
               <FontAwesomeIcon icon={faCloudArrowUp} color="#408D27" fontSize="1.25rem" />
             </label>

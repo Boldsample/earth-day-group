@@ -11,7 +11,7 @@ import './styles.sass'
 
 const HeaderNotifications = () => {
   const dispatch = useDispatch()
-  const userId = useSelector((state) => state.users.userData.id)
+  const userId = useSelector((state) => state.users.userData?.id)
   const notifications = useSelector((state) => state.users.notifications)
 
   useEffect(() => {

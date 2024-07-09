@@ -60,6 +60,7 @@
 
 .template__listing
   margin-bottom: 3.125rem
+  width: 100%
   .types
     margin-top: 1rem
     text-align: center
@@ -79,9 +80,11 @@
     display: flex
     flex-wrap: wrap
     justify-content: flex-start
-    gap: 1.875rem
+    column-gap: 1.875rem
     margin: 1.875rem 0
     width: 100%
+    &.cards-1, &.cards-2, &.cards-3
+      justify-content: center
     .recycleCompanyCard__container
       background-color: white
       border-radius: 0.625rem

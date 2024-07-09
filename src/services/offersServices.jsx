@@ -31,7 +31,7 @@ export const addImages = async (data) => {
 export const getOffer = async (id) => {
   let filterStr = `o.id=${id}`
   filterStr = encodeURIComponent(filterStr)
-  const { data } = await API.get(`/get/offers&filter=${filterStr}`)
+  const { data } = await API.get(`/get/offers&filter=${filterStr}&single=1`)
   const response = data?.data?.map(offer => {
     let _offer = {...offer}
     return _offer
@@ -45,7 +45,7 @@ export const getOffers = async (filter, page) => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
-  const userFilter = filter?.user || ''
+  const userFilter = filter?.user || filter?.materials
   const { data } = await API.get(`/get/offers&filter=${filterStr}&userfilter=${userFilter}&page=${page.page * page.rows}&rows=${page.rows}`)
   const response = data.data.map(offer => {
     let _offer = {...offer}

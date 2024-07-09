@@ -96,7 +96,7 @@ export const getUser = async (id, user = null) => {
   const type = user ? `&user=${user}` : ''
   let filterStr = isNaN(id) ? `u.username='${id}'` : `u.id='${id}'`
   filterStr = encodeURIComponent(filterStr)
-  const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}`)
+  const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}&single=1`)
   return data.data[0]
 }
 

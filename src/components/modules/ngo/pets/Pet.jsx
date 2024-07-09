@@ -9,10 +9,10 @@ import { setHeader } from "@store/slices/globalSlice"
 
 import "../../profile/profile.sass"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
+import { faBookmark, faPaw, faSignal, faVenusMars, faWeightScale } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
-import { faBookmark, faCartPlus } from "@fortawesome/free-solid-svg-icons"
 import { faBookmark as faBookmarkLine, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 
 const Pet = () => {
@@ -36,7 +36,7 @@ const Pet = () => {
       getPetData()
 		dispatch(setHeader('user'))
   }, [id])
-
+  console.log(pet)
   return <>
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
@@ -49,8 +49,14 @@ const Pet = () => {
             }
           </div>
           <div className="profileInformation__container">
-            <h2>{pet?.name}</h2>
+            <h2>{pet?.name} {pet?.type ? `(${pet?.type})`: ''}</h2>
             <p className="mt-2 mb-4">{pet?.description}</p>
+            <ul className="contact__grid">
+              <li><FontAwesomeIcon icon={faVenusMars}  className='contact__icon'/>{pet?.gender}</li>
+              <li><FontAwesomeIcon icon={faPaw}  className='contact__icon'/>{pet?.breed}</li>
+              <li><FontAwesomeIcon icon={faSignal}  className='contact__icon'/>{pet?.age} years old</li>
+              <li><FontAwesomeIcon icon={faWeightScale}  className='contact__icon'/>{pet?.weight} Kg</li>
+            </ul>
             <div className="buttons__container">
               <Link className="button dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
               <Link to={`/chat/${pet?.username}/`} className="button green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact shelter</span></Link>

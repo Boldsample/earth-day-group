@@ -47,7 +47,7 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
   useEffect(() => {
     loadElements();
     dispatch(setHeader("user"));
-  }, [page, type]);
+  }, [page, type, user]);
   
   if(elements == null || elements?.total == 0)
     return
@@ -69,7 +69,7 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
         {types?.map((listType, key) => <Link key={key} to={listType?.url} className={type == listType?.id ? 'active' : ''}>{listType?.label}</Link>)}
       </div>
     </div>
-    <div className="templateCards_grid">
+    <div className={`templateCards_grid cards-${elements?.data?.length}`}>
       {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
         skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
       || (elements?.total > 0 && 

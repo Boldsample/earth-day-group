@@ -1,29 +1,35 @@
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { InputText } from "primereact/inputtext"
 import { Paginator } from "primereact/paginator"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleChevronRight, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
 
 import Footer from "@ui/footer/Footer"
-import { followUser } from "@services/userServices"
 import { followProduct } from "@services/productServices"
+import { followUserData } from "@store/slices/usersSlice"
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 
 import "../styles.sass"
 
 const CategoryListing = ({content, section, elements, filters, reloadElements = () => false, setFilters = () => false, setReset = () => false, page, setPage = () => false}) => {
+  const dispatch = useDispatch()
   const skeletonPlaceHolder = ["", "", "", ""]
   const user = useSelector((state) => state.users.userData)
 
-  const doFollow = async (id) => {
-    if(elements?.card == 'product' || elements?.card == 'pet')
+  const doFollow = async id => {
+    if(elements?.card == 'product' || elements?.card == 'pet'){
       await followProduct({type: elements?.card, entity: id, follower: user?.id})
-    else
-      await followUser({user: id, follower: user?.id})
-    reloadElements()
+      reloadElements()
+    }else
+      dispatch(followUserData({user: id, follower: user?.id}))
   }
+  
+  useEffect(() => {
+    reloadElements()
+  }, [user])
 
   return <>
     <div className="layout fullwidth hasfooter">
@@ -44,7 +50,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
       }
       <div className="layout autoheight">
         <div className="main__content centerfullwidth pt-8">
-          <div className="template__listing">
+          <div className="template__listing self-center">
             <div className="edg-search mb-1">
               {content.searchLabel && <h3 className="text-center mb-1">{content.searchLabel}</h3>}
               <form onSubmit={reloadElements} className="p-input-icon-left fullwidth">
@@ -63,7 +69,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
             <div className="types">
               {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={section == type?.id ? 'active' : ''}>{type?.label}</Link>)}
             </div>
-            <div className="templateCards_grid">
+            <div className={`templateCards_grid cards-${elements?.data?.length}`}>
               {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
                 skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
               || (elements?.total > 0 && 
