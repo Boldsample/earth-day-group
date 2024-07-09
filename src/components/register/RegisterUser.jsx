@@ -56,12 +56,12 @@ const RegisterUser = () => {
   const onSubmit = async (data) => {
     let response
     setSending(true)
-    if(user.id){
+    if(user?.id){
       if(data.password == ''){
         delete data.password
         }
       delete data.password_confirmation
-      response = await updateUser({ ...data }, {id: user.id})
+      response = await updateUser({ ...data }, {id: user?.id})
     }else{
       delete data.password_confirmation
       response = await createUser({ ...user, ...data })
