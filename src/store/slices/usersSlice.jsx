@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-import { followUser, getNotifications, getUser, getUsers, updateUser as updateUserD } from "@services/userServices"
+import { followUser, getNotifications, getUser, getUsers, updateUser } from "@services/userServices"
 
 const initialState = {
   loading: false,
@@ -25,8 +25,8 @@ export const getUserData = createAsyncThunk("users/getUserData", async (id) => {
 })
 
 export const updateUserData = createAsyncThunk("users/updateUserData", async ({data, filter}) => {
-  const _id = await updateUser(data, filter)
-  const res = await getUser(_id);
+  const _res = await updateUser(data, filter)
+  const res = await getUser(_res?.id);
   delete res.password
   delete res.password_confirmation
   return res;
@@ -60,7 +60,7 @@ const usersSlice = createSlice({
   name: "users",
   reducers: {
     resetState: state => { return {...initialState} },
-    updateUser: (state, action) => state.userData = { ...action.payload },
+    //updateUser: (state, action) => state.userData = { ...action.payload },
   },
   extraReducers(builder) {
     builder.addCase(getUsersList.pending, (state) => {
@@ -101,7 +101,6 @@ const usersSlice = createSlice({
 });
 
 export const {
-  updateUser,
   resetState,
   addUserList,
   addCleanData,

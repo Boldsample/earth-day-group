@@ -97,7 +97,7 @@ export const getUser = async (id, user = null) => {
   let filterStr = isNaN(id) ? `u.username='${id}'` : `u.id='${id}'`
   filterStr = encodeURIComponent(filterStr)
   const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}&single=1`)
-  return data.data[0]
+  return data?.data[0] || []
 }
 
 export const getUsers = async (filter = {}, type = 'min', user = null, page = null) => {

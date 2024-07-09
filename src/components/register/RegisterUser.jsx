@@ -76,7 +76,7 @@ const RegisterUser = () => {
         content: "Your profile has updated successfully!",
       }))
       navigate('/thankyou/')
-    }else if(response.id){
+    }else if(response?.id){
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",
@@ -90,7 +90,7 @@ const RegisterUser = () => {
       setError(response.field, { type: "manual", message: response.message })
       return
     }
-    dispatch(getUserData(response.id))
+    dispatch(getUserData(response?.id))
   }
 
   useEffect(() => {

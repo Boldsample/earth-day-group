@@ -105,7 +105,7 @@ const RegisterVendor = () => {
       }))
       navigate('/thankyou/')
     }
-    dispatch(getUserData(response.id))
+    dispatch(getUserData(response?.id))
   }
 
   useEffect(() => {

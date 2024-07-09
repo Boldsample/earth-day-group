@@ -18,15 +18,13 @@ const ProfileProvider = ({profile, reloadList = () => false, children}) => {
     if(force || user.id !== profile?.id){
       const _response = await getUser(profile?.id, userData?.id)
       setUser({..._response})
+      reloadList()
+      //loadUser(true)
     }
     if(profile)
       setShow(true)
   }
 
-  useEffect(() => {
-    reloadList()
-    loadUser(true)
-  }, [user])
   useEffect(() => {
     loadUser()
   }, [profile])

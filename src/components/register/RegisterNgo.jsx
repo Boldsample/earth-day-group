@@ -40,7 +40,7 @@ const RegisterNgo = () => {
       website: user?.website || "",
       picture: user?.picture || "",
       address: user?.address || "",
-      role: user?.type || "shelter",
+      role: user?.role || "shelter",
       username: user?.username || "",
       description: user?.description || "",
       accept_terms: user?.accept_terms && true || false,
@@ -89,7 +89,7 @@ const RegisterNgo = () => {
     }
     const _sendImages = data.images.map(image => {
       let _image = {...image}
-      _image.entity = response.id
+      _image.entity = response?.id
       return _image
     })
     await addImages(_sendImages)
@@ -113,7 +113,7 @@ const RegisterNgo = () => {
       }))
       navigate('/thankyou/')
     }
-    dispatch(getUserData(response.id))
+    dispatch(getUserData(response?.id))
   }
 
   useEffect(() => {

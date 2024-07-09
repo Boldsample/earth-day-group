@@ -8,9 +8,9 @@ import { faBookmark, faCartPlus, faImage, faTrash } from "@fortawesome/free-soli
 
 import Footer from "@ui/footer/Footer"
 import { setHeader } from "@store/slices/globalSlice"
-import { getProduct } from "@services/productServices"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
+import { followProduct, getProduct } from "@services/productServices"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
 
 import "../../profile/profile.sass"
@@ -26,8 +26,9 @@ const Product = () => {
     await followProduct({type: 'product', entity: id, follower: user?.id})
     getProductData()
   }
+  console.log(product)
   const getProductData = async () => {
-    const _product = await getProduct(id)
+    const _product = await getProduct(id, user?.id)
     setProduct(_product)
   }
 

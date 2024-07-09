@@ -81,7 +81,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         delete _user.password
         delete _user.password_confirmation
       }
-      response = await updateUser({ ..._user }, {id: user.id})
+      response = await updateUser({ ..._user }, {id: user?.id})
     }else{
       delete _user.password_confirmation
       response = await createUser({ ..._user })
@@ -95,13 +95,13 @@ const CompanyDetailedForm = ({ user, setUser }) => {
       return
     const _sendMaterials = user.materials.map(material => {
       let _material = {...material}
-      _material.user = response.id
+      _material.user = response?.id
       return _material
     })
     await addMaterials(_sendMaterials)
     const _sendImages = user.images.map(image => {
       let _image = {...image}
-      _image.entity = response.id
+      _image.entity = response?.id
       return _image
     })
     await addImages(_sendImages)
@@ -115,7 +115,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         content: "Your profile has updated successfully!",
       }))
       navigate('/thankyou/')
-    }else if(response.id){
+    }else if(response?.id){
       dispatch(updateThankyou({
         title: "Congrats!",
         link: "/dashboard/",
@@ -125,7 +125,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
       }))
       navigate('/thankyou/')
     }
-    dispatch(getUserData(response.id))
+    dispatch(getUserData(response?.id))
 	}
   
   return <>

@@ -6,9 +6,9 @@ import { InputText } from 'primereact/inputtext'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { ProfileProvider } from '@modules/'
 import { getUsers } from '@services/userServices'
 import { setHeader } from '@store/slices/globalSlice'
+import { ProfileProvider } from '@components/modules'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 
 const Followers = ({followers = true}) => {
