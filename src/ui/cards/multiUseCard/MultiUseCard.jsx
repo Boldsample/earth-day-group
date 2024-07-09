@@ -141,7 +141,9 @@ const MultiUseCard = ({
           <ProfilePhoto userPhoto={data?.picture} />
           <div>
             <h4 className="font-bold">{data?.name}</h4>
-            <span className="text-gray">{data?.lastchat || data?.description}</span>
+            {data?.lastchat && 
+              <span className="text-gray">{data?.lastchat}</span>
+            }
           </div>
           {/* <Link className="button green-earth" to={`/chat/${data?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> */}
         </Link>

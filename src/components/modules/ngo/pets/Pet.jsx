@@ -36,7 +36,7 @@ const Pet = () => {
       getPetData()
 		dispatch(setHeader('user'))
   }, [id])
-  console.log(pet)
+  
   return <>
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
@@ -57,10 +57,12 @@ const Pet = () => {
               <li><FontAwesomeIcon icon={faSignal}  className='contact__icon'/>{pet?.age} years old</li>
               <li><FontAwesomeIcon icon={faWeightScale}  className='contact__icon'/>{pet?.weight} Kg</li>
             </ul>
-            <div className="buttons__container">
-              <Link className="button dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
-              <Link to={`/chat/${pet?.username}/`} className="button green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact shelter</span></Link>
-            </div>
+            {user?.id != pet?.user && 
+              <div className="buttons__container">
+                <Link className="button dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
+                <Link to={`/chat/${pet?.username}/`} className="button green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact shelter</span></Link>
+              </div>
+            }
           </div>
         </div>
         <ProfileElements type="pets" user={pet?.user} same={user?.id == pet?.user} related={true} />

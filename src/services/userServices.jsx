@@ -114,5 +114,5 @@ export const getUsers = async (filter = {}, type = 'min', user = null, page = nu
 
 export const followUser = async (formData) => {
   const {data} = await API.post(`/follow/`, formData)
-  return data.id
+  return data?.id
 }

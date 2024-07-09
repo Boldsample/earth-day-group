@@ -2,7 +2,7 @@ import { Dialog } from "primereact/dialog"
 import { useEffect, useState } from "react"
 
 import ProfileInfo from "./ProfileInfo"
-import { getUser } from "@services/userServices"
+import { followUser, getUser } from "@services/userServices"
 import { useDispatch, useSelector } from "react-redux"
 import { followUserData } from "@store/slices/usersSlice"
 
@@ -13,7 +13,10 @@ const ProfileProvider = ({profile, reloadList = () => false, children}) => {
   const userData = useSelector((state) => state.users.userData)
 
   const hidePopup = () => setShow(false)
-  const doFollow = () => dispatch(followUserData({user: user.id, follower: userData?.id}))
+  const doFollow = async () => {
+    await followUser({user: user.id, follower: userData?.id})
+    loadUser(true)
+  }
   const loadUser = async (force = false) => {
     if(force || user.id !== profile?.id){
       const _response = await getUser(profile?.id, userData?.id)

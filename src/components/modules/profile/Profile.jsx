@@ -27,7 +27,7 @@ const Profile = ({type = 'products'}) => {
 		dispatch(setHeader('user'))
   }, [])
 
-  return <ProfileListing type={profile?.role == 'shelter' ? 'pet' : type} profile={profile} />
+  return <ProfileListing type={profile?.role == 'shelter' ? 'pet' : type} profile={profile} reloadElements={loadProfile} />
 }
 
 export default Profile

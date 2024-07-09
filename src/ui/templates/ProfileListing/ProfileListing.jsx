@@ -10,7 +10,6 @@ import ProfileInformation from "@components/modules/profile/ProfileInformation"
 import "../styles.sass"
 
 const ProfileListing = ({type, profile, reloadElements = () => false}) => {
-  const dispatch = useDispatch()
   const user = useSelector((state) => state.users.userData)
   const ngoTypes = [
     {
@@ -26,12 +25,10 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
   ]
 
   const doFollow = id => {
-    dispatch(followUser({user: id, follower: user?.id}))
+    followUser({user: id, follower: user?.id})
+    reloadElements()
   }
   
-  useEffect(() => {
-    reloadElements()
-  }, [user])
   if(!profile?.role)
     return
   return <>

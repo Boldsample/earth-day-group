@@ -59,7 +59,7 @@ const ProfileInformation = ({profile, same, doFollow}) => {
             <Link className="button small green-earth self-end" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet</Link>
           }
         </> || 
-          <Button className={'small '+(profile?.followed ? 'red-state' : 'dark-blue')} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? 'Unfollow' : 'Follow'}</span></Button>
+          <Button className={'small '+(profile?.followed ? 'red-state' : 'dark-blue')} onClick={() => doFollow(profile?.id)}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? 'Unfollow' : 'Follow'}</span></Button>
         }
       </div>
     </div>

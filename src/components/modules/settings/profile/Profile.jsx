@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import ProfileInfo from './ProfileInfo'
+import { getUserData } from '@store/slices/usersSlice'
 import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 const ProfileSettings = () => {
@@ -10,6 +11,7 @@ const ProfileSettings = () => {
 
   useEffect(() => {
     dispatch(setHeader('settings'))
+    dispatch(getUserData(user?.id))
     dispatch(setHeaderTitle('Profile'))
   }, [])
 
