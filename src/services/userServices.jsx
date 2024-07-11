@@ -75,8 +75,8 @@ export const addImages = async (formData) => {
   }
 }
 
-export const getNotifications = async (filter) => {
-  const response = await API.get(`/get/notifications&user=${filter.user}&last=${filter.date}`)
+export const getNotifications = async (filter, limit = 0) => {
+  const response = await API.get(`/get/notifications&user=${filter.user}&limit=${limit}`)
   return response?.data?.data
 }
 

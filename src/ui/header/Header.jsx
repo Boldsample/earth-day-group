@@ -10,7 +10,6 @@ import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import HeaderNotifications from "@components/modules/notifications/HeaderNotifications"
 
 const Header = () => {
-  const location = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector((state) => state.users.userData)
@@ -22,7 +21,7 @@ const Header = () => {
       dispatch(resetState())
       navigate('/login/')
     }
-  };
+  }
 
   return <header className={'main_header '+header}>
 

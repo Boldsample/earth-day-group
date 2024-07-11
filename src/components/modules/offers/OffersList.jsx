@@ -32,7 +32,6 @@ const Offers = () => {
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const getUserDetail = async id => {
     const _offer = await getOffer(id)
-    console.log(_offer)
     setDetail({..._offer, show: true})
   }
   const callOffers = async () =>{

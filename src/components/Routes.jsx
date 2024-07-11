@@ -6,28 +6,53 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Header from "@ui/header/Header"
 import Intro from "@components/intro/Intro"
 import { Pet, CreatePet } from "@modules/ngo"
-import { getUserData } from "@store/slices/usersSlice"
 import { Product, CreateProduct } from "@modules/vendor"
 import Profile from "@components/modules/profile/Profile"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
+import { callNotifications, getUserData } from "@store/slices/usersSlice"
 import { Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
 import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, About } from "@components/modules"
 
-
+let notificationsSource = null;
 
 const AppRoutes = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.users.userData)
+  const notifications = useSelector((state) => state.users.notifications)
+
+  const loadNotifications = () => {
+    dispatch(callNotifications({user: user?.id}))
+  }
+  const initializeNotificationsSource = () => {
+    if(notificationsSource)
+      notificationsSource.close()
+    notificationsSource = new EventSource(`https://earth-day-group.boldsample.com/php/testnotif/${user?.id}`)
+    notificationsSource.onmessage = e => loadNotifications()
+    notificationsSource.onerror = (error) => console.error('EventSource error:', error)
+  }
+  const startNotificationsSource = () => {
+    if(!notificationsSource)
+      initializeNotificationsSource()
+  }
+  const stopNotificationsSource = () => {
+    if(notificationsSource){
+      notificationsSource.close()
+      notificationsSource = null
+    }
+  }
 
   useEffect(() => {
     const _id = Cookies.get('edgActiveUser')
     if(!user?.id && _id != 'undefined')
       dispatch(getUserData(_id))
-  }, [])
+    else if(user?.id)
+      startNotificationsSource()
+    return () => stopNotificationsSource()
+  }, [user])
   
-	return <BrowserRouter>
+	return <BrowserRouter basename="">
     <Header />
     <Routes>
       {/*   NO LOGGED USER    */}

@@ -194,7 +194,8 @@ const MultiUseCard = ({
     }
   }
   
-  return <div className={`multiUse__card ${type}`}>{renderCardContent()}</div>;
+  const _type = type == 'notification' && data?.readed == 0 ? 'notification unread' : type
+  return <div className={`multiUse__card ${_type}`}>{renderCardContent()}</div>;
 }
 
 export default MultiUseCard;

@@ -7,7 +7,6 @@ const store = configureStore({
 	reducer: {
 		users: usersReducer,
 		global: globalReducer,
-		
 	},
 });
 

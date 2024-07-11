@@ -26,7 +26,6 @@ const Product = () => {
     await followProduct({type: 'product', entity: id, follower: user?.id})
     getProductData()
   }
-  console.log(product)
   const getProductData = async () => {
     const _product = await getProduct(id, user?.id)
     setProduct(_product)

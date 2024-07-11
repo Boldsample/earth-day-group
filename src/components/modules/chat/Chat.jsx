@@ -11,13 +11,14 @@ import { faFaceSmile, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { getUser } from '@services/userServices'
 import OfferInfo from '@modules/offers/OfferInfo'
 import { ProfileProvider } from '@components/modules'
+import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
+import { callNotifications } from '@store/slices/usersSlice'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 import { getOffer, updateOffer } from '@services/offersServices'
 import { getMessages, sendMessage } from '@services/chatServices'
 import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import './styles.sass'
-import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 
 const Chat = () => {
   let last = 0
@@ -44,7 +45,9 @@ const Chat = () => {
     setCalling(true)
     setSent(false)
     const _last = messages?.length ? messages[messages.length - 1].date : 0
+    console.log('test')
     const _add = await getMessages({user: userId, contact: outgoing?.id, last: _last})
+    dispatch(callNotifications({user: userId}))
     if(_add?.length)
       setMessages(prev => {
         const _prev = prev?.length ? [...prev] : []
@@ -88,9 +91,9 @@ const Chat = () => {
   useEffect(() => {
     if(offer && !offerInfo)
       getOffer(offer).then(data => setOfferInfo(data))
-    if(!calling && outgoing){
+    const newMessage = notifications?.some(n => n?.incoming == outgoing?.id && n.outgoing == userId)
+    if(!calling && outgoing && (messages == null || newMessage))
       callMessages()
-    }
   }, [notifications, sent, outgoing])
   useEffect(() => {
     dispatch(setHeaderTitle(''))
@@ -161,7 +164,7 @@ const Chat = () => {
             value={proposal}
             useGrouping={true}
             placeholder="Your offer proposal*"
-            onValueChange={e => setProposal(e?.value)} />
+            onChange={e => setProposal(e?.value)} />
           <button className={!proposal ? '' : 'dark-blue'} type="submit" disabled={!proposal}>Send offer</button>
           <Link className="button red-state" to={`/chat/${contact}/`}>Cancel</Link>
         </form>
