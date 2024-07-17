@@ -13,7 +13,7 @@ import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { callNotifications, getUserData } from "@store/slices/usersSlice"
 import { Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
-import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, About } from "@components/modules"
+import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, About, DeleteAccount } from "@components/modules"
 
 let notificationsSource = null;
 
@@ -78,6 +78,7 @@ const AppRoutes = () => {
         <Route path="/settings/password" element={<Password />} />
         <Route path="/settings/terms" element={<Terms />} />
         <Route path="/settings/about" element={<About />} />
+        <Route path="/settings/deleteAccount" element={<DeleteAccount />} />
       </>}
 
       {/*   USER    */}

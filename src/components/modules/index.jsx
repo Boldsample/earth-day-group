@@ -13,5 +13,6 @@ import Bookmarks from "./bookmarks/Bookmarks"
 import ProfileSettings from "./settings/profile/Profile"
 import Notifications from "./notifications/Notifications"
 import ProfileProvider from "./settings/profile/ProfileProvider"
+import DeleteAccount from "./settings/DeleteAccount"
 
-export { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, ProfileProvider, Password, Terms, About, Activity }
+export { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, ProfileProvider, Password, Terms, About, Activity, DeleteAccount }
