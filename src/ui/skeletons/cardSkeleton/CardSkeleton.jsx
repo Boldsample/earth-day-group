@@ -2,9 +2,9 @@ import React from 'react'
 import { Skeleton } from 'primereact/skeleton';
 import './cardSkeleton.sass'
 
-const CardSkeleton = () => {
+const CardSkeleton = ({className}) => {
   return (
-      <div className="card__skeleton">
+      <div className={`card__skeleton ${className}`}>
             <div className="">
                 <div className="flex mb-1">
                 <div className='fullwidth'>

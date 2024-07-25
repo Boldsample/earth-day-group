@@ -8,12 +8,15 @@ import { setHeader } from '@store/slices/globalSlice'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CardSkeleton from '@ui/skeletons/cardSkeleton/CardSkeleton'
+
 
 const Chats = () => {
   const [users, setUsers] = useState([])
   const [filters, setFilters] = useState([])
   const [page, setPage] = useState({page: 0, rows: 8})
   const user = useSelector(state => state.users.userData)
+  const skeletonPlaceHolder = ["", "", "", ""]
 
   const updateFilter = filter => {
     setFilters(prev => {
@@ -31,13 +34,14 @@ const Chats = () => {
     setUsers(_users);
   }
 
+
   useEffect(() => {
     getUserList()
   }, [filters])
 	useEffect(() => {
     setHeader('user')
   }, [user])
-  
+  console.log(users.data)
   return <div className="layout">
     <img className="layout__background" src="/assets/user/image-1.svg" />
     <div className="main__content">
@@ -57,12 +61,22 @@ const Chats = () => {
             onChange={(e) => updateFilter(e.target.value)} />
         </div>
       </div>
-      {users?.data?.length > 0 && users?.data?.map(user => 
+      {/* <CardSkeleton className="chatCard__skeleton" /> */}
+          {typeof users?.data == 'undefined' && 
+                skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton className="chatCard__skeleton" key={key} />)
+              || users?.data?.length > 0 && users?.data?.map(user => 
+                <MultiUseCard
+                  type="user"
+                  data={user}
+                  key={user.id} />
+              )}
+            
+      {/* {users?.data?.length > 0 && users?.data?.map(user => 
         <MultiUseCard
           type="user"
           data={user}
           key={user.id} />
-      )}
+      )} */}
     </div>
   </div>
 }

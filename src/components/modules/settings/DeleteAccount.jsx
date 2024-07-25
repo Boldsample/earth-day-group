@@ -61,7 +61,7 @@ const headerContent = (
             onClick={()=> setVisible(true)}
        />
        <Dialog header={headerContent} visible={visible} style={{ width: '50vw', textAlign: 'center' }} onHide={() => {if (!visible) return; setVisible(false); }} footer={footerContent}>
-      <div className="icon trash text-red-state"><FontAwesomeIcon icon={faTrashCan} style={{fontSize: "60px", paddingBottom: "20px"}} /></div>
+      <div className="icon trash"><FontAwesomeIcon icon={faTrashCan} style={{fontSize: "60px", paddingBottom: "20px"}} /></div>
        <p style={{fontSize:'20px', fontWeight: '500'}}>Do you really wish to delete your account? <br /> This process cannot be undone.</p>
        <PasswordInput
             width="50%"
