@@ -45,9 +45,9 @@ const AppRoutes = () => {
 
   useEffect(() => {
     const _id = Cookies.get('edgActiveUser')
-    if(!user?.id && _id != 'undefined')
+    if(!user?.id && _id != 'undefined' && user == null){
       dispatch(getUserData(_id))
-    else if(user?.id)
+    }else if(user?.id)
       startNotificationsSource()
     return () => stopNotificationsSource()
   }, [user])

@@ -158,7 +158,7 @@ const MultiUseCard = ({
             <h5 className="font-bold"><Link to={`/${data?.role}/${data?.username}/`}>{data?.name}</Link></h5>
             <Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
             <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
-            <Link className="button small dark-blue" to={`/${data?.role}/${data?.username}/`}>Ver <FontAwesomeIcon icon={faChevronRight} /></Link>
+            <Link className="button small dark-blue" to={`/${data?.role}/${data?.username}/`}>See more <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
         </div>
       case 'product':
@@ -172,7 +172,7 @@ const MultiUseCard = ({
             <div className="price">{parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
             <h5 className="font-bold"><Link to={`/product/${data?.id}/`}>{data?.name}</Link></h5>
             <Link className="bookmark" onClick={doActionProduct}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></Link>
-            <Link className="button small dark-blue" to={`/product/${data?.id}/`}>Ver <FontAwesomeIcon icon={faChevronRight} /></Link>
+            <Link className="button small dark-blue" to={`/product/${data?.id}/`}>See more <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
         </div>
       case 'pet':
@@ -186,7 +186,7 @@ const MultiUseCard = ({
             <h5 className="font-bold"><Link to={`/pet/${data?.id}/`}>{data?.name}</Link></h5>
             <Link className="bookmark" onClick={doActionPet}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></Link>
             <small>{data?.gender} - {data?.age} Year{data?.age > 1 ? 's' : ''} old</small>
-            <Link className="button small dark-blue" to={`/pet/${data?.id}/`}>Ver <FontAwesomeIcon icon={faChevronRight} /></Link>
+            <Link className="button small dark-blue" to={`/pet/${data?.id}/`}>See more <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
         </div>
       default:
