@@ -145,7 +145,9 @@ const AppRoutes = () => {
         <Route path="/ngo/edit/:username" element={<RegisterNgo />} />
         <Route path="/admins" element={<Users type="admins" />} />
         <Route path="/users" element={<Users type="users" />} />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/reports" element={<Reports />} />
+        <Route path="/chat/:contact/:report" element={<Chat />} />
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/product/edit/:id" element={<CreateProduct />} />

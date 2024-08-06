@@ -65,7 +65,7 @@ const Product = () => {
             </div>
           </div>
         </div>
-        {user?.id != product?.user && 
+        {user?.id != product?.user && user?.role != 'admin' && 
           <ProfileElements user={product?.user} same={user?.id == product?.user} related={true} />
         }
       </div>

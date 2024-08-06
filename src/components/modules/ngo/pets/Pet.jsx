@@ -68,7 +68,9 @@ const Pet = () => {
             </>}
           </div>
         </div>
-        <ProfileElements type="pets" user={pet?.user} same={user?.id == pet?.user} related={true} />
+        {user?.role != 'admin' && 
+          <ProfileElements type="pets" user={pet?.user} same={user?.id == pet?.user} related={true} />
+        }
       </div>
     </div>
     <Footer />

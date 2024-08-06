@@ -40,7 +40,7 @@ const Users = ({type}) => {
       _filter['user'] = type == 'admins' ? `u.role='admin'` : `u.role<>'admin'`
     if(filters?.keyword != '')
       _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%')`
-    const _users = await getUsers(_filter, page)
+    const _users = await getUsers(_filter, 'min', user?.id, page)
     setUsers(_users)
   }
   const renderHeader = () => {
@@ -110,7 +110,7 @@ const Users = ({type}) => {
             }></Column>
             <Column className="actions" header={null} body={u => <>
               <Link className="button small" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon icon={faPencil} /></Link>
-              <Button className="small dark-blue" onClick={() => setProfile({id: user.id, update: new Date()})}><FontAwesomeIcon icon={faUser} /></Button>
+              <Button className="small dark-blue" onClick={() => setProfile({id: u.id, update: new Date()})}><FontAwesomeIcon icon={faUser} /></Button>
               {type == 'users' &&
                 <Link className="button small green-earth" to={`/chat/${u?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
               }

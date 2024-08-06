@@ -37,6 +37,16 @@ export const addImages = async (data) => {
   return true
 }
 
+export const updateReport = async (data, filter) => {
+  let filterStr = ''
+  Object.keys(filter).map(f => {
+    filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
+  })
+  filterStr = encodeURIComponent(filterStr)
+  const response = await API.post(`/update/reports&filter=${filterStr}`, data)
+  return {id: filter.id}
+}
+
 export const getReport = async id => {
   const filterStr = encodeURIComponent(`r.id=${id}`)
   const { data } = await API.get(`/get/reports&filter=${filterStr}&single=1`)

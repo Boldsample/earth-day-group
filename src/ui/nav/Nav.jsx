@@ -6,8 +6,8 @@ import { Tooltip } from "primereact/tooltip"
 import sectionsJSON from "@json/sections.json"
 
 const Nav = () => {
-  const userRole = useSelector((state) => state?.users?.userData?.role);
-  const sections = userRole != 'user' ? sectionsJSON['company'] : sectionsJSON[userRole];
+  const userRole = useSelector((state) => state?.users?.userData?.role)
+  const sections = sectionsJSON[userRole]
 
   return <div className="nav__container">
     <div className="box">

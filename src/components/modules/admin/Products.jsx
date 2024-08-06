@@ -71,8 +71,9 @@ const Products = () => {
           onPage={({page, rows}) => setPage({page, rows})}>
           <Column header="Published by" body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
           <Column header="Name" field="name"></Column>
-          <Column header="Description" field="description"></Column>
-          <Column header="Published" field="date"></Column>
+          <Column header="Price" body={({price}) => <>
+            {parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+          </>}></Column>
           <Column header="State" body={({id, state}) => 
             <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
               {name: "Active", code: "1"},

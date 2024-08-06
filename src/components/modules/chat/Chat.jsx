@@ -19,6 +19,7 @@ import { getMessages, sendMessage } from '@services/chatServices'
 import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import './styles.sass'
+import { getReport, updateReport } from '@services/reportServices'
 
 const Chat = () => {
   let last = 0
@@ -27,7 +28,6 @@ const Chat = () => {
   const navigate = useNavigate()
   const chatWrapper = useRef(null)
   const emojiWrapper = useRef(null)
-  const { contact, offer } = useParams()
   const [open, setOpen] = useState(false)
   const [show, setShow] = useState(false)
   const [sent, setSent] = useState(false)
@@ -37,7 +37,9 @@ const Chat = () => {
   const [messages, setMessages] = useState(null)
   const [proposal, setProposal] = useState(null)
   const [outgoing, setOutgoing] = useState(null)
+  const { contact, offer, report } = useParams()
   const [offerInfo, setOfferInfo] = useState(null)
+  const [reportInfo, setReportInfo] = useState(null)
   const userId = useSelector((state) => state.users.userData.id)
   const notifications = useSelector((state) => state.users.notifications)
   
@@ -90,6 +92,12 @@ const Chat = () => {
   }
 
   useEffect(() => {
+    if(report && !reportInfo)
+      getReport(report).then(data => {
+        setReportInfo(data)
+        if(data?.admin == 'Without answer' && userId)
+          updateReport({admin: userId}, {id: report})
+      })
     if(offer && !offerInfo)
       getOffer(offer).then(data => setOfferInfo(data))
     const newMessage = notifications?.some(n => n?.incoming == outgoing?.id && n.outgoing == userId)

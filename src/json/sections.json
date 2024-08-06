@@ -47,5 +47,115 @@
       "icon": "/assets/icons/settings.svg", 
       "path": "/settings/"
     }
+  ],
+  "vendor": [
+    {
+      "label": "Home", 
+      "icon": "/assets/icons/home.svg", 
+      "path": "/dashboard/"
+    },
+    {
+      "label": "Profile",
+      "icon": "/assets/icons/userProfile.svg",
+      "path": "/profile/"
+    },
+    {
+      "label": "Inbox", 
+      "icon": "/assets/icons/inbox.svg", 
+      "path": "/chat/"
+    },
+    {
+      "label": "Settings", 
+      "icon": "/assets/icons/settings.svg", 
+      "path": "/settings/"
+    }
+  ],
+  "ngo": [
+    {
+      "label": "Home", 
+      "icon": "/assets/icons/home.svg", 
+      "path": "/dashboard/"
+    },
+    {
+      "label": "Profile",
+      "icon": "/assets/icons/userProfile.svg",
+      "path": "/profile/"
+    },
+    {
+      "label": "Inbox", 
+      "icon": "/assets/icons/inbox.svg", 
+      "path": "/chat/"
+    },
+    {
+      "label": "Settings", 
+      "icon": "/assets/icons/settings.svg", 
+      "path": "/settings/"
+    }
+  ],
+  "social": [
+    {
+      "label": "Home", 
+      "icon": "/assets/icons/home.svg", 
+      "path": "/dashboard/"
+    },
+    {
+      "label": "Profile",
+      "icon": "/assets/icons/userProfile.svg",
+      "path": "/profile/"
+    },
+    {
+      "label": "Inbox", 
+      "icon": "/assets/icons/inbox.svg", 
+      "path": "/chat/"
+    },
+    {
+      "label": "Settings", 
+      "icon": "/assets/icons/settings.svg", 
+      "path": "/settings/"
+    }
+  ],
+  "shelter": [
+    {
+      "label": "Home", 
+      "icon": "/assets/icons/home.svg", 
+      "path": "/dashboard/"
+    },
+    {
+      "label": "Profile",
+      "icon": "/assets/icons/userProfile.svg",
+      "path": "/profile/"
+    },
+    {
+      "label": "Inbox", 
+      "icon": "/assets/icons/inbox.svg", 
+      "path": "/chat/"
+    },
+    {
+      "label": "Settings", 
+      "icon": "/assets/icons/settings.svg", 
+      "path": "/settings/"
+    }
+  ],
+  "admin": [
+    {
+      "label": "Home", 
+      "icon": "/assets/icons/home.svg", 
+      "path": "/dashboard/"
+    },
+    {
+      "label": "Profile",
+      "icon": "/assets/icons/userProfile.svg",
+      "path": "/settings/edit/"
+    },
+    {
+      "label": "Inbox", 
+      "icon": "/assets/icons/inbox.svg", 
+      "path": "/chat/"
+    },
+    {
+      "label": "Settings", 
+      "icon": "/assets/icons/settings.svg", 
+      "path": "/settings/"
+    }
   ]
 }

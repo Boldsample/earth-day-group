@@ -14,11 +14,13 @@ import { setHeader } from '@store/slices/globalSlice'
 import { getReport, getReports } from '@services/reportServices'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import ReportInfo from './ReportInfo'
+import { ProfileProvider } from '..'
 
 const Reports = () => {
   const dispatch = useDispatch()
   const [detail, setDetail] = useState({})
   const [reset, setReset] = useState(false)
+  const [profile, setProfile] = useState(null)
   const [reports, setReports] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: 6})
   const user = useSelector((state) => state.users.userData)
@@ -71,36 +73,40 @@ const Reports = () => {
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
       <h1 className="text-defaultCase mb-1">Reports</h1>
-      <ReportInfo show={detail.show} report={detail} onHide={hidePopup}  />
-      {typeof reports?.total == 'undefined' && reports?.data?.length == 0 && 
-        <TableSkeleton />
-      || <>
-        <DataTable paginator stripedRows lazy
-          dataKey="id" 
-          page={page.page} 
-          rows={page.rows} 
-          value={reports?.data} 
-          header={renderHeader} 
-          totalRecords={reports?.total} 
-          onPage={({page, rows}) => setPage({page, rows})}>
-          <Column header="Type" field="type"></Column>
-          <Column header="Reported" field="name"></Column>
-          <Column header="Subject" field="subject"></Column>
-          <Column header="Status" body={({id, status}) => 
-            <Dropdown value={status} options={['Pending', 'In process', 'Resolved']} onChange={() => updateReport(id)} />
-          }></Column>
-          <Column header="Asign to" field="admin"></Column>
-          <Column className="actions" header={null} body={report => <>
-            <Button className="small dark-blue" onClick={() => getReportDetail(report.id)}><FontAwesomeIcon icon={faSearch} /></Button>
-            <Link className="button small green-earth" to={`/chat/${report.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
-          </>}></Column>
-        </DataTable>
-        {reports?.total == 0 && 
-          <div className="mt-2">
-            <p>There's no reports for this filter options.</p>
-          </div>
-        }
-      </>}
+      <ProfileProvider profile={profile} setProfile={setProfile}>
+        <ReportInfo show={detail.show} report={detail} onHide={hidePopup}  />
+        {typeof reports?.total == 'undefined' && reports?.data?.length == 0 && 
+          <TableSkeleton />
+        || <>
+          <DataTable paginator stripedRows lazy
+            dataKey="id" 
+            page={page.page} 
+            rows={page.rows} 
+            value={reports?.data} 
+            header={renderHeader} 
+            totalRecords={reports?.total} 
+            onPage={({page, rows}) => setPage({page, rows})}>
+            <Column header="Type" field="type"></Column>
+            <Column header="Reported" field="name"></Column>
+            <Column header="Subject" field="subject"></Column>
+            <Column header="Status" body={({id, status}) => 
+              <Dropdown value={status} options={['Pending', 'In process', 'Resolved']} onChange={() => updateReport(id)} />
+            }></Column>
+            <Column header="Asign to" field="admin"></Column>
+            <Column className="actions" header={null} body={({id, username, aid}) => <>
+              <Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
+              {(!aid || aid == user?.id) && 
+                <Link className="button small green-earth" to={`/chat/${username}/${id}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
+              }
+            </>}></Column>
+          </DataTable>
+          {reports?.total == 0 && 
+            <div className="mt-2">
+              <p>There's no reports for this filter options.</p>
+            </div>
+          }
+        </>}
+      </ProfileProvider>
     </div>
   </div>
 }
