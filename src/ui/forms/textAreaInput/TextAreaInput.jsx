@@ -2,14 +2,14 @@ import { Controller } from "react-hook-form"
 import { InputTextarea } from "primereact/inputtextarea"
 
 const TextAreaInput = ({
-	className,
-	label,
 	rules,
 	control,
 	disabled,
 	nameInput,
-	showLabel,
+	className,
+	labelName,
 	isRequired,
+	showLabel = true,
 	getFormErrorMessage,
 	placeHolderText = "",
 }) => {
@@ -32,7 +32,7 @@ const TextAreaInput = ({
 
 	return <div className="p-field">
 		{showLabel ? <label htmlFor={nameInput}>
-			{label} {isRequired && <span className="text-red-600">*</span>}
+			{labelName} {isRequired && <span className="text-red-600">*</span>}
 			{renderInput()}
 		</label> : renderInput()}
 	</div>

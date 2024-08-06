@@ -34,7 +34,7 @@ const ProfileProvider = ({profile, reloadList = () => false, children}) => {
   
   return <>
     <Dialog className="profile-content" visible={show} onHide={hidePopup} draggable={false} style={{width: '600px'}} breakpoints={{'700px': 'calc(100% - 40px)'}}>
-      <ProfileInfo type={profile?.type} user={user} doFollow={doFollow} same={user.id === userData?.id} />
+      <ProfileInfo type={profile?.type} user={user} doFollow={doFollow} same={user.id === userData?.id} admin={userData.role == 'admin'} />
     </Dialog>
     {children}
   </>

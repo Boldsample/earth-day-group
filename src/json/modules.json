@@ -70,5 +70,53 @@
     "link": "/pet/new/",
     "icon": "/assets/icons/shelters.svg",
     "description": "Create a pet for adoption."
+  },
+  {
+    "roles": ["admin"],
+    "title": "Reports",
+    "className": "blue-earth",
+    "link": "/reports/",
+    "icon": "/assets/icons/post-offer.svg",
+    "description": "Manage and answer reports."
+  },
+  {
+    "roles": ["admin"],
+    "title": "Admins",
+    "className": "light-green",
+    "link": "/admins/",
+    "icon": "/assets/icons/user.svg",
+    "description": "Create, filter, and disable accounts."
+  },
+  {
+    "roles": ["admin"],
+    "title": "Users",
+    "className": "green-earth",
+    "link": "/users/",
+    "icon": "/assets/icons/social-organization.svg",
+    "description": "Find, filter and disable user accounts."
+  },
+  {
+    "roles": ["admin"],
+    "title": "Offers",
+    "className": "dark-blue",
+    "link": "/offers/",
+    "icon": "/assets/icons/post-offer.svg",
+    "description": "Search and delete offers."
+  },
+  {
+    "roles": ["admin"],
+    "title": "Products",
+    "className": "blue-earth",
+    "link": "/products/",
+    "icon": "/assets/icons/market-place.svg",
+    "description": "Search and disable products."
+  },
+  {
+    "roles": ["admin"],
+    "title": "Pet adoptions",
+    "className": "light-green",
+    "link": "/pets/",
+    "icon": "/assets/icons/shelters.svg",
+    "description": "Search and disable pets."
   }
 ]

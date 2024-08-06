@@ -1,17 +1,36 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'primereact/button'
-import { faHeart, faPerson, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faFlag, faHeart as faHeartFull, faKey, faPencil, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { faHeart, faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { formatExternalURL } from '@utils/formatExternalURL'
 import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCard'
 
 import "../styles.sass"
+import { Tooltip } from 'primereact/tooltip'
+import { recoverUser } from '@services/userServices'
+import { useDispatch } from 'react-redux'
+import { updateThankyou } from '@store/slices/globalSlice'
 
-const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settings'}) => {
+const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settings', admin}) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
+  const sendRecover = async () => {
+    const response = await recoverUser({email: user?.email})
+    if(response?.id){
+      dispatch(updateThankyou({
+        title: "Email sended successfully!",
+        link: `/${user?.role == 'admin' ? 'admins' : 'users'}/`,
+        background: "image-1.svg",
+        button_label: "Go back to the list of users",
+        content: `We send a recover email to ${user?.email}!`,
+      }))
+      navigate('/thankyou/')
+    }
+  }
   const userData = () => {
     switch (user?.role) {
       case 'company':
@@ -37,7 +56,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         <p>{user?.email}</p>
         {user?.role == 'user' && <p className="mb-2">{user?.description}</p>}
       </div>
-      {same && <>
+      {same && !admin && <>
         <div className="followers">
           <Link to="/followers/">
             <span>{user?.followers}</span>
@@ -48,14 +67,23 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
             Following
           </Link>
         </div>
-        <Link to={'/settings/edit/'} className="button dark-blue">Edit</Link>
+        <Link to={'/settings/edit/'} className="button small dark-blue">Edit</Link>
       </> || <>
-        {user?.role != 'user' && 
-          <Link className="button light-green" to={`/${user?.role}/${user?.username}/`}><FontAwesomeIcon icon={faUser} /> View profile</Link>
+        {!admin && 
+          <Button className="small red-state outline" onClick={doFollow}><FontAwesomeIcon icon={user?.followed ? faHeartFull : faHeart} /></Button>
         }
-        <Button className={user?.followed ? 'red-state' : 'dark-blue'} onClick={doFollow}><FontAwesomeIcon icon={faHeart} /> {user?.followed ? 'Unfollow' : 'Follow'}</Button>
-        {type != 'chat' && 
-          <Link to={`/chat/${user?.username}/`} className="button green-earth"><FontAwesomeIcon icon={faPaperPlane} /> Send a message</Link>
+        {user?.role != 'user' && user?.role != 'admin' && 
+          <Link className="button small dark-blue" to={`/${user?.role}/${user?.username}/`}><FontAwesomeIcon icon={faUser} /> <span>View profile</span></Link>
+        }
+        {!same && type != 'chat' && (admin && user?.role != 'admin') && 
+          <Link to={`/chat/${user?.username}/`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Send message</span></Link>
+        }
+        {admin && !same && <>
+          <Link to={`/${user?.role}/edit/${user?.username}/`} className="button small dark-blue outline"><FontAwesomeIcon icon={faPencil} /> <span>Edit</span></Link>
+          <Button className="small green-earth outline" onClick={sendRecover}><span><FontAwesomeIcon icon={faKey} /></span> Recover</Button>
+        </>}
+        {!same && !admin && 
+          <Link className="button small red-state outline hasTooltip" to={`/report/user/${user?.username}/`} data-pr-tooltip="Report user"><FontAwesomeIcon icon={faFlag} /></Link>
         }
       </>}
     </div>
@@ -100,6 +128,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         </>}
       </div>
     </>}
+    <Tooltip target=".hasTooltip" position="top" />
   </>
 }
 export default ProfileInfo

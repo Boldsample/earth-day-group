@@ -3,7 +3,6 @@ import { FacebookProvider } from "react-facebook"
 import { LoadScript } from "@react-google-maps/api"
 import { PrimeReactProvider } from "primereact/api"
 import { GoogleOAuthProvider } from "@react-oauth/google"
-import LoadingContentOverlay from "@ui/spinner/LoadingContentOverlay"
 
 import store from "@store/store"
 

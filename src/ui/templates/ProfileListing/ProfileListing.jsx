@@ -35,7 +35,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
-        <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} />
+        <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} admin={user?.role == 'admin'} />
         {profile?.images?.length > 0 && 
           <PhotoGallery imageCatalog={profile?.images} />
         }

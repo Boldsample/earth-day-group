@@ -2,14 +2,15 @@ import { Link } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, faPlus, faVenusMars, faPaw, faSignal, faWeightScale } from "@fortawesome/free-solid-svg-icons"
+import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, faPlus, faVenusMars, faPaw, faSignal, faWeightScale, faFlag } from "@fortawesome/free-solid-svg-icons"
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCard'
 
 import './profile.sass'
+import { Tooltip } from 'primereact/tooltip'
 
-const ProfileInformation = ({profile, same, doFollow}) => {
+const ProfileInformation = ({profile, same, doFollow, admin}) => {
   return <div className='profileInformation__grid'>
     <div className="image__container">
       <ProfilePhoto className="profile__photo-large" size="12.5rem" userPhoto={profile?.picture}/>
@@ -58,11 +59,16 @@ const ProfileInformation = ({profile, same, doFollow}) => {
           {(profile?.role == 'shelter' || profile?.role == 'ngo') && 
             <Link className="button small green-earth self-end" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet</Link>
           }
-        </> || 
+        </> || <>
           <Button className={'small '+(profile?.followed ? 'red-state' : 'dark-blue')} onClick={() => doFollow(profile?.id)}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? 'Unfollow' : 'Follow'}</span></Button>
-        }
+          <Link className="button small dark-blue outline" to={`/map/${profile?.username}/`}><FontAwesomeIcon icon={faLocationDot} /> <span>View location</span></Link>
+          {!admin && 
+            <Link className="button small red-state outline hasTooltip" to={`/report/user/${profile?.username}/`} data-pr-tooltip="Report user"><FontAwesomeIcon icon={faFlag} /></Link>
+          }
+        </>}
       </div>
     </div>
+    <Tooltip target=".hasTooltip" position="top" />
   </div>
 }
 

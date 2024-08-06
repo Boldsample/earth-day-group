@@ -1,7 +1,8 @@
+import RegisterNgo from './RegisterNgo'
 import RegisterRole from './RegisterRole'
 import RegisterUser from './RegisterUser'
-import RegisterCompany from './registerCompany/RegisterCompany'
+import RegisterAdmin from './RegisterAdmin'
 import RegisterVendor from './RegisterVendor'
-import RegisterNgo from './RegisterNgo'
+import RegisterCompany from './registerCompany/RegisterCompany'
 
-export { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo }
+export { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo, RegisterAdmin }

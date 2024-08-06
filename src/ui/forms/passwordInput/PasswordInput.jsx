@@ -3,14 +3,14 @@ import { Controller } from "react-hook-form"
 import { Password } from "primereact/password"
 
 const PasswordInput = ({
-  label,
   rules,
   control,
   nameInput,
-  showLabel,
+  labelName,
   isRequired,
   maxLength = 50,
   feedback = true,
+  showLabel = true,
   getFormErrorMessage,
   placeHolderText = "",
 }) => {
@@ -39,7 +39,7 @@ const PasswordInput = ({
 
   return <div className="p-field" ref={passwordRef}>
     {showLabel ? <label htmlFor={nameInput}>
-      {label} {isRequired && <span className="text-red-600">*</span>}
+      {labelName} {isRequired && <span className="text-red-600">*</span>}
       {renderInput()}
     </label> : renderInput()}
   </div>

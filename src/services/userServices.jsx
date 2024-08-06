@@ -1,9 +1,7 @@
 import axios from "axios"
 import Cookies from "js-cookie"
-import { toast } from "react-toastify"
 
 import { API } from "./API"
-import { saveJSON, getJSON, getAllJSON } from "@utils/useJSON"
 
 export const getUserGoogle = async (token) => {
   const res = await axios.get(
@@ -28,9 +26,10 @@ export const authUser = async (formData) => {
   }
 }
 
-export const checkUser = async (formData) => {
+export const checkUser = async (formData, id) => {
   try {
-    const {data} = await API.post("/check_user/", formData)
+    const checkData = id ? `&id=${id}` : ''
+    const {data} = await API.post(`/check/user${checkData}`, formData)
     return data
   } catch ({response}) {
     return response.data
@@ -47,14 +46,19 @@ export const createUser = async (formData) => {
   }
 }
 
-export const updateUser = async (data, filter) => {
+export const updateUser = async (data, filter, id) => {
   let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
   })
   filterStr = encodeURIComponent(filterStr)
-  const response = await API.post(`/update/users&filter=${filterStr}`, data)
-  return {id: filter.id}
+  const checkData = id ? `&id=${id}` : ''
+  try {
+    await API.post(`/update/users&filter=${filterStr}${checkData}`, data)
+    return {id: filter?.id}
+  } catch ({response}) {
+    return response.data
+  }
 }
 
 export const addMaterials = async (formData) => {
@@ -85,11 +89,13 @@ export const logoutUser = async () => {
   return true
 }
 
-export const recoverUser = async (data, validate) => {
-  const response = saveJSON("users", data, "update", validate)
-  if (response?.status == 404)
-    toast.error(response.status + ": " + response.data.message)
-  return true
+export const recoverUser = async (formData) => {
+  try {
+    const {data} = await API.post("/recover/", formData)
+    return data
+  } catch ({response}) {
+    return response.data
+  }
 }
 
 export const getUser = async (id, user = null) => {

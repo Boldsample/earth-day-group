@@ -45,12 +45,7 @@ export const getOffers = async (filter, page) => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
-  const userFilter = filter?.user || filter?.materials
+  const userFilter = filter?.user || filter?.materials || ''
   const { data } = await API.get(`/get/offers&filter=${filterStr}&userfilter=${userFilter}&page=${page.page * page.rows}&rows=${page.rows}`)
-  const response = data.data.map(offer => {
-    let _offer = {...offer}
-    _offer.offers = _offer.offers ? JSON.parse(_offer.offers) : null
-    return _offer
-  })
-  return {total: data.total, data: response, materials: data?.materials};
+  return {total: data.total, data: data.data, materials: data?.materials};
 };

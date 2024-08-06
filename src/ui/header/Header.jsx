@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { faBookmark, faChevronLeft, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark, faChevronLeft, faRightFromBracket, faShoppingCart, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
@@ -52,20 +52,18 @@ const Header = () => {
 
     {['map'].some(s => s == header) && <div></div>}
 
-    {!['intro', 'login', 'register'].some(s => s == header) && 
+    {user?.id && 
       <div className="navbar-item right-align icons">
         {!['settings', 'map'].some(s => s == header) && user?.role == 'user' && <>
           <FontAwesomeIcon icon={faShoppingCart} />
           <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
         </>}
         <HeaderNotifications />
-        {!['intro', 'login', 'register'].some(s => s == header) && <>
-          <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
-        </>}
+        <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
       </div>
     }
 
-    {["intro", "register"].some((s) => s == header) && 
+    {!user?.id && 
       <div className="navbar-item right-align">
         <Link className="button dark-blue" to="/login/">Log in</Link>
       </div>

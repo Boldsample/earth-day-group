@@ -45,7 +45,6 @@ const Chat = () => {
     setCalling(true)
     setSent(false)
     const _last = messages?.length ? messages[messages.length - 1].date : 0
-    console.log('test')
     const _add = await getMessages({user: userId, contact: outgoing?.id, last: _last})
     dispatch(callNotifications({user: userId}))
     if(_add?.length)
@@ -54,6 +53,8 @@ const Chat = () => {
         const _new = [..._prev, ..._add]
         return _new
       })
+    else
+      setMessages([])
     setCalling(false)
   }
   const handleEmoji = e => {

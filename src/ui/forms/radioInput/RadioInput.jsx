@@ -8,10 +8,10 @@ function RadioInput({
   rules,
   control,
   labelName,
-  showLabel,
   nameInput,
   isRequired,
   disabled = false,
+  showLabel = true,
 }) {
   const renderInput = () => <div className="radioInput__container">
     {data.map(({ name, value }, key) => <div key={key} className="inline-block">
@@ -32,8 +32,7 @@ function RadioInput({
 
   return <div className="p-field">
     {showLabel && <label htmlFor={nameInput}>
-      {label} {isRequired && <span className="text-red-600">*</span>}
-      {labelName}
+      {labelName} {isRequired && <span className="text-red-600">*</span>}
       {renderInput()}
     </label> || renderInput()}
   </div>

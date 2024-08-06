@@ -9,11 +9,12 @@ import { setHeader } from "@store/slices/globalSlice"
 
 import "../../profile/profile.sass"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
-import { faBookmark, faPaw, faSignal, faVenusMars, faWeightScale } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark, faCartPlus, faFlag, faPaw, faSignal, faTrash, faVenusMars, faWeightScale } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
 import { faBookmark as faBookmarkLine, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
+import { Tooltip } from "primereact/tooltip"
 
 const Pet = () => {
   const { id } = useParams()
@@ -57,18 +58,21 @@ const Pet = () => {
               <li><FontAwesomeIcon icon={faSignal}  className='contact__icon'/>{pet?.age} years old</li>
               <li><FontAwesomeIcon icon={faWeightScale}  className='contact__icon'/>{pet?.weight} Kg</li>
             </ul>
-            {user?.id != pet?.user && 
-              <div className="buttons__container">
-                <Link className="button dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
-                <Link to={`/chat/${pet?.username}/`} className="button green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact shelter</span></Link>
-              </div>
-            }
+            {user?.id != pet?.user && user?.role != 'admin' && <>
+              <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
+              <Link to={`/chat/${pet?.username}/`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact shelter</span></Link>
+              <Link className="button small red-state outline hasTooltip" to={`/report/pet/${pet?.id}/`} data-pr-tooltip="Report pet"><FontAwesomeIcon icon={faFlag} /></Link>
+            </> || <>
+              <Link to={`/pet/edit/${pet?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>Edit</span></Link>
+              <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>Delete</span></Link>
+            </>}
           </div>
         </div>
         <ProfileElements type="pets" user={pet?.user} same={user?.id == pet?.user} related={true} />
       </div>
     </div>
     <Footer />
+    <Tooltip target=".hasTooltip" position="top" />
   </>
 }
 

@@ -34,7 +34,7 @@ const Intro = () => {
 	}
 
 	return <div id="intro">
-		<Carousel value={introItems} numVisible={1} numScroll={1} itemTemplate={IntroTemplate} onPageChange={(e) => setActiveIndex(e.page)} page={activeIndex} />
+		<Carousel value={introItems} numVisible={1} numScroll={1} itemTemplate={IntroTemplate} onPageChange={(e) => setActiveIndex(e.page)} page={activeIndex} showIndicators={false} />
 	</div>
 }
 export default Intro

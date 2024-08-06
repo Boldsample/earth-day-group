@@ -1,0 +1,57 @@
+{
+  "user": [
+    "Harassment or Bullying",
+    "Spam",
+    "Inappropriate Content",
+    "Impersonation",
+    "Hate Speech",
+    "Scams or Fraud",
+    "Violence or Threats",
+    "Privacy Violation",
+    "Misinformation"
+  ],
+  "product": [
+    "Counterfeit Goods",
+    "Misleading Description",
+    "Inappropriate Content",
+    "Dangerous Goods",
+    "Fraudulent Claims",
+    "Spam",
+    "Stolen Goods",
+    "Violates Terms of Service",
+    "Scams or Fraud",
+    "Unauthorized Sales"
+  ],
+  "pet": [
+    "Animal Abuse",
+    "Misleading Information",
+    "Health Risks",
+    "Inappropriate Content",
+    "Scams",
+    "Stolen Pets",
+    "Violation of Terms",
+    "Unauthorized Breeding",
+    "Spam"
+  ],
+  "offer": [
+    "Fraudulent Offer",
+    "Misleading Information",
+    "Illegal Activities",
+    "Inappropriate Content",
+    "Environmental Hazards",
+    "Safety Concerns",
+    "Spam",
+    "Privacy Violations",
+    "Violation of Terms",
+    "Substandard Materials",
+    "Unauthorized Use of Branding",
+    "Unethical Practices",
+    "Incomplete Information",
+    "Expired or Outdated Offer",
+    "Exploitive Offer",
+    "Non-compliance with Recycling Regulations",
+    "Counterfeit Materials",
+    "Conflict of Interest",
+    "Lack of Certification"
+  ]
+}

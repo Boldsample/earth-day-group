@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark as faBookmarkLine } from "@fortawesome/free-regular-svg-icons"
-import { faBookmark, faCartPlus, faImage, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark, faCartPlus, faFlag, faImage, faTrash } from "@fortawesome/free-solid-svg-icons"
 
 import Footer from "@ui/footer/Footer"
 import { setHeader } from "@store/slices/globalSlice"
@@ -14,6 +14,7 @@ import { followProduct, getProduct } from "@services/productServices"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
 
 import "../../profile/profile.sass"
+import { Tooltip } from "primereact/tooltip"
 
 const Product = () => {
   const { id } = useParams()
@@ -53,12 +54,13 @@ const Product = () => {
             <p className="mt-2 mb-4">{product?.description}</p>
             <h4 className="dark-blue">{parseInt(product?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h4>
             <div className="buttons__container">
-              {user?.id != product?.user && <>
-                <Link className="button dark-blue" onClick={doFollow}><FontAwesomeIcon icon={product?.followed ? faBookmark : faBookmarkLine} /></Link>
-                <Link className="button green-earth"><FontAwesomeIcon icon={faCartPlus} /> <span>Add to cart</span></Link>
+              {user?.id != product?.user && user?.role != 'admin' && <>
+                <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={product?.followed ? faBookmark : faBookmarkLine} /></Link>
+                <Link className="button small green-earth"><FontAwesomeIcon icon={faCartPlus} /> <span>Add to cart</span></Link>
+                <Link className="button small red-state outline hasTooltip" to={`/report/product/${product?.id}/`} data-pr-tooltip="Report product"><FontAwesomeIcon icon={faFlag} /></Link>
               </> || <>
-                <Link to={`/product/${product?.id}/`} className="button dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>Edit</span></Link>
-                <Link className="button red-state"><FontAwesomeIcon icon={faTrash} /> <span>Delete</span></Link>
+                <Link to={`/product/edit/${product?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>Edit</span></Link>
+                <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>Delete</span></Link>
               </>}
             </div>
           </div>
@@ -69,6 +71,7 @@ const Product = () => {
       </div>
     </div>
     <Footer />
+    <Tooltip target=".hasTooltip" position="top" />
   </>
 }
 

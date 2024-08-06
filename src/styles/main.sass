@@ -94,11 +94,14 @@ button, .button
   font-weight: 700
   line-height: 1.5em
   padding: 0.5rem 1rem
+  transition: all 300ms
   text-decoration: none !important
+  &:hover:not([disabled])
+    filter: brightness(1.25) saturate(1.25)
   &.small
     font-size: 0.875rem
     font-weight: 400
-    padding: 0.25rem 1rem
+    padding: 0.25rem 0.9rem
   & + button, & + .button
     margin-left: 1.25rem
   &.small + .small
@@ -133,9 +136,13 @@ button, .button
     background-color: var(--green-state)
     border-color: var(--green-state)
     color: var(--green-state)
-  &:not(.outline)
+  &.orange
+    background-color: var(--orange)
+    border-color: var(--orange)
+    color: var(--orange)
+  &:not(.outline), &.outline:hover
     color: white
-  &.outline
+  &.outline:not(:hover)
     background: transparent
   &.Paper
     background-color: var(--dark-blue)
@@ -393,6 +400,9 @@ button, .button
   display: flex !important
   justify-content: space-between
   width: 100%
+.inline-flex
+  display: inline-flex !important
+  vertical-align: middle
 .aligncenter
   align-content: center
   align-items: center
@@ -477,7 +487,7 @@ button, .button
       justify-self: flex-end
       justify-items: flex-end
       padding: 0.75rem 0.5rem
-      .p-multiselect, .p-inputtext
+      .p-dropdown, .p-multiselect, .p-inputtext
         height: 2.5rem
         line-height: 1em
         margin-right: 0.5rem
@@ -518,7 +528,7 @@ button, .button
     width: 1.875rem
   .actions
     text-align: right
-    width: 6.25rem
+    width: 8rem
     button, .button
       padding: 0.25rem 0.5rem
     button.small + .small, .button.small + .small
@@ -588,9 +598,10 @@ button, .button
       min-width: 22.5rem
       width: 22.5rem
       p
-        border-bottom: 1px solid var(--grey)
+        border-bottom: 1px solid var(--light-gray)
         font-size: 1rem
-        padding: 0.5rem 0
+        margin-bottom: 1rem
+        padding-bottom: 0.9rem
         b
           display: inline-block
           width: 8,125rem
@@ -623,6 +634,9 @@ button, .button
 
 .chat__input .emoji .emoji__wrapper button
   padding: 0
+
+.p-dropdown-items
+  padding-left: 0
 
 $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.5em", "6": "3em", "7": "3.5em", "8": "4em")
 @each $name, $space in $spaces

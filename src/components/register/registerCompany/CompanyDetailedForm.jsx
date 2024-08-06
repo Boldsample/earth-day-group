@@ -2,21 +2,22 @@ import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { Button } from "primereact/button"
-import { useNavigate } from "react-router"
+import { InputSwitch } from "primereact/inputswitch"
+import { useNavigate, useParams } from "react-router"
 
 import materials from "@json/recyclableMaterials.json"
 import { getUserData } from "@store/slices/usersSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
+import { NumberInput, DropDownInput, UploadPhotoInput } from "@ui/forms"
 import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
-import { NumberInput, DropDownInput, UploadPhotoInput, SwitchInput } from "@ui/forms"
 import { createUser, addImages, addMaterials, updateUser } from "@services/userServices"
-import { InputSwitch } from "primereact/inputswitch"
 
-const CompanyDetailedForm = ({ user, setUser }) => {
+const CompanyDetailedForm = ({ user, setUser, ID }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [sending, setSending] = useState(false)
   const numberInput = useRef(null)
+  const { username } = useParams()
+  const [sending, setSending] = useState(false)
   const units = [
     { unit: "Kilo", code: "Kg" },
     { unit: "Pound", code: "Lb" },
@@ -38,6 +39,7 @@ const CompanyDetailedForm = ({ user, setUser }) => {
   const setUploadedImages = (images) => {
     setUser({ ...user, images: images })
   }
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const createMaterial = () => {
     let _recyclableMaterials = [...user.materials]
     const inputValue = getValues(["materials", "unit", "unit_price"])
@@ -63,56 +65,49 @@ const CompanyDetailedForm = ({ user, setUser }) => {
     const filteredMaterials = user.materials.filter(material => material.type !== clickedMaterial)
     setUser({ ...user, materials: filteredMaterials })
   };
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const handleRecyclableMaterial = async (data) => {
     createMaterial()
     numberInput.current.getInput().blur()
   }
   const onSubmit = async () => {
     let response
-    let _user = { ...user }
-    delete _user.images
-    delete _user.materials
-    delete _user.followers
-    delete _user.following
+    let data = { ...user }
+    delete data.images
+    delete data.materials
     setSending(true)
-    if(user?.id){
-      if(_user.password == ''){
-        delete _user.password
-        delete _user.password_confirmation
-      }
-      response = await updateUser({ ..._user }, {id: user?.id})
+    if(ID){
+      if(data.password == '')
+        delete data.password
+      delete data.password_confirmation
+      response = await updateUser({ ...data }, {id: ID}, ID)
     }else{
-      delete _user.password_confirmation
-      response = await createUser({ ..._user })
+      delete data.password_confirmation
+      response = await createUser({ ...data })
     }
-    if(response?.field){
-      setFocus(response?.field)
-      setError(response?.field, { type: "manual", message: response?.message })
-      setSending(false)
-      return
-    }else if(!response?.id)
-      return
-    const _sendMaterials = user.materials.map(material => {
-      let _material = {...material}
-      _material.user = response?.id
-      return _material
-    })
-    await addMaterials(_sendMaterials)
-    const _sendImages = user.images.map(image => {
-      let _image = {...image}
-      _image.entity = response?.id
-      return _image
-    })
-    await addImages(_sendImages)
+    if(response?.id){
+      const _sendMaterials = user.materials.map(material => {
+        let _material = {...material}
+        _material.user = response?.id
+        return _material
+      })
+      await addMaterials(_sendMaterials)
+      const _sendImages = user.images.map(image => {
+        let _image = {...image}
+        _image.entity = response?.id
+        return _image
+      })
+      await addImages(_sendImages)
+    }
     setSending(false)
-    if(user?.id && response?.id){
+    if(response?.id == user?.id)
+      dispatch(getUserData(response?.id))
+    if(ID && response?.id){
       dispatch(updateThankyou({
         title: "Updated successfully!",
-        link: "/settings/",
+        link: username ? "/users/" : "/dashboard/",
         background: "image-1.svg",
-        button_label: "Go back to settings",
-        content: "Your profile has updated successfully!",
+        button_label: username ? "Go back to admins" : "Go to dashboard",
+        content: "The profile has been updated successfully!",
       }))
       navigate('/thankyou/')
     }else if(response?.id){
@@ -121,11 +116,14 @@ const CompanyDetailedForm = ({ user, setUser }) => {
         link: "/dashboard/",
         background: "image-1.svg",
         button_label: "Go to dashboard",
-        content: "You’re all signed up! We send you a verification link send your provide email. Please verify your identity.",
+        content: "You’re all signed up! We send you a verification email. Please verify your identity.",
       }))
       navigate('/thankyou/')
+    }else{
+      setFocus(response.field)
+      setError(response.field, { type: "manual", message: response.message })
+      return
     }
-    dispatch(getUserData(response?.id))
 	}
   
   return <>

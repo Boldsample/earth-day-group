@@ -85,12 +85,13 @@ const LoginForm = () => {
         <label htmlFor="email">
           <TextInput
             disabled={false}
-            isRequired={true}
-            labelName="email"
-            getFormErrorMessage={getFormErrorMessage}
             control={control}
+            isRequired={true}
+            labelName="Email"
+            showLabel={false}
             nameInput="email"
             placeHolderText="Email or username"
+            getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 60,
@@ -110,8 +111,9 @@ const LoginForm = () => {
             disabled={false}
             feedback={false}
             control={control}
+            showLabel={false}
             isRequired={true}
-            labelName="password"
+            labelName="Password"
             nameInput="password"
             placeHolderText="Password"
             getFormErrorMessage={getFormErrorMessage}

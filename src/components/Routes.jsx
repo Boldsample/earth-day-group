@@ -12,8 +12,8 @@ import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { callNotifications, getUserData } from "@store/slices/usersSlice"
 import { Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
-import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo } from "@components/register"
-import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, About, DeleteAccount } from "@components/modules"
+import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo, RegisterAdmin } from "@components/register"
+import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, Privacy, About, DeleteAccount, CreateReport, Users, Reports, Products, Pets, AdminOffers } from "@components/modules"
 
 let notificationsSource = null;
 
@@ -28,7 +28,7 @@ const AppRoutes = () => {
   const initializeNotificationsSource = () => {
     if(notificationsSource)
       notificationsSource.close()
-    notificationsSource = new EventSource(`https://earth-day-group.boldsample.com/php/testnotif/${user?.id}`)
+    notificationsSource = new EventSource(`https://earth-day-group.boldsample.com/php/notifications/${user?.id}`)
     notificationsSource.onmessage = e => loadNotifications()
     notificationsSource.onerror = (error) => console.error('EventSource error:', error)
   }
@@ -55,17 +55,16 @@ const AppRoutes = () => {
 	return <BrowserRouter basename="">
     <Header />
     <Routes>
-      {/*   NO LOGGED USER    */}
       {!user?.role && <>
         <Route exact path="/" element={<Intro />} />
         <Route path="/register" element={<RegisterRole />} />
-        <Route path="/register/user" element={<RegisterUser />} />
-        <Route path="/register/company" element={<RegisterCompany />} />
-        <Route path="/register/vendor" element={<RegisterVendor />} />
-        <Route path="/register/ngo" element={<RegisterNgo />} />
+        <Route path="/register/user" element={<RegisterUser create={true} />} />
+        <Route path="/register/company" element={<RegisterCompany create={true} />} />
+        <Route path="/register/vendor" element={<RegisterVendor create={true} />} />
+        <Route path="/register/ngo" element={<RegisterNgo create={true} />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/forgot" element={<Forgot />} />
-        <Route path="/recover" element={<Recover />} />
+        <Route path="/recover/:token" element={<Recover />} />
       </> || <>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/notifications" element={<Notifications />} />
@@ -76,12 +75,11 @@ const AppRoutes = () => {
         <Route path="/settings" element={<Settings />} />
         <Route path="/settings/profile" element={<ProfileSettings />} />
         <Route path="/settings/password" element={<Password />} />
-        <Route path="/settings/terms" element={<Terms />} />
         <Route path="/settings/about" element={<About />} />
         <Route path="/settings/deleteAccount" element={<DeleteAccount />} />
+        <Route path="/report/:type/:entityID" element={<CreateReport />} />
       </>}
 
-      {/*   USER    */}
       {(user?.role == 'user') && <>
         <Route path="/companies" element={<Companies />} />
         <Route path="/offers/new" element={<OfferNew />} />
@@ -101,8 +99,7 @@ const AppRoutes = () => {
         <Route path="/ngo/:id/pets" element={<Profile type="pets" />} />
         <Route path="/map" element={<Map />} />
         <Route path="/settings/edit" element={<RegisterUser />} />
-      </>
-      }
+      </>}
       {(user?.role == 'user' || user?.role == 'company') && <>
         <Route path="/offers" element={<Offers />} />
         <Route path="/chat/:contact/:offer" element={<Chat />} />
@@ -128,6 +125,7 @@ const AppRoutes = () => {
       </>}
        {(user?.role == 'shelter' || user?.role == 'ngo') && <>
         <Route path="/pet/new" element={<CreatePet />} />
+        <Route path="/pet/edit/:id" element={<CreatePet />} />
       </>}
        {(user?.role == 'ngo') && <>
         <Route path="/profile/pets" element={<Profile type="pets" />} />
@@ -136,7 +134,29 @@ const AppRoutes = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings/edit" element={<RegisterNgo />} />
        </>}
+
+      {(user?.role == 'admin') && <>
+        <Route path="/admin/new" element={<RegisterAdmin create={true} />} />
+        <Route path="/settings/edit" element={<RegisterAdmin />} />
+        <Route path="/admin/edit/:username" element={<RegisterAdmin />} />
+        <Route path="/user/edit/:username" element={<RegisterUser />} />
+        <Route path="/company/edit/:username" element={<RegisterCompany />} />
+        <Route path="/vendor/edit/:username" element={<RegisterVendor />} />
+        <Route path="/ngo/edit/:username" element={<RegisterNgo />} />
+        <Route path="/admins" element={<Users type="admins" />} />
+        <Route path="/users" element={<Users type="users" />} />
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/product/edit/:id" element={<CreateProduct />} />
+        <Route path="/pets" element={<Pets />} />
+        <Route path="/pet/:id" element={<Pet />} />
+        <Route path="/pet/edit/:id" element={<CreatePet />} />
+        <Route path="/offers" element={<AdminOffers />} />
+      </>}
       <Route path="/thankyou" element={<ThankYouPage />} />
+      <Route path="/terms-of-service/" element={<Terms />} />
+      <Route path="/privacy-policy/" element={<Privacy />} />
 
       {!user?.role && 
         <Route path="*" element={<LoginForm />} />

@@ -16,9 +16,7 @@ import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { getOffer, getOffers } from '@services/offersServices'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 
-import './style.sass'
-
-const Offers = () => {
+const AdminOffers = () => {
   const dispatch = useDispatch()
   const [detail, setDetail] = useState({})
   const [reset, setReset] = useState(false)
@@ -36,19 +34,8 @@ const Offers = () => {
   }
   const callOffers = async () =>{
     let _filter = {}
-    if(user.role == 'user')
-      _filter['user'] = `o.user=${user?.id}`
     if(filters?.keyword != '')
       _filter['keyword'] = `(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
-    if(filters?.materials?.length > 0){
-      _filter['materials'] = "(o.material='" + filters.materials?.join("' OR o.material='") +"')"
-    }else if(user.role == 'company'){
-      let _materials = user?.materials?.map(material => material.type)
-      if(_materials?.length > 0)
-        _filter['materials'] = "(o.material='" + _materials.join("' OR o.material='") +"')"
-      else
-        return setOffers({total: 0, data: []})
-    }
     const _offers = await getOffers(_filter, page)
     setOffers(_offers)
   }
@@ -117,7 +104,7 @@ const Offers = () => {
           onRowToggle={e => setExpandedRows(e.data)}
           rowExpansionTemplate={rowExpansionTemplate}
           onPage={({page, rows}) => setPage({page, rows})}>
-          {user.role == 'user' && 
+          {user.role != 'company' && 
             <Column expander={({offers}) => offers?.length > 0 } style={{width: "2.5rem"}} /> || null}
           {/* <Column header={null} body={ProfilePhoto}></Column> */}
           {user.role != 'user' && 
@@ -156,4 +143,4 @@ const Offers = () => {
   </div>
 }
 
-export default Offers
+export default AdminOffers

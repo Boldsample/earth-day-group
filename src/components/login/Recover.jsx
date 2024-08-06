@@ -2,20 +2,22 @@ import { useDispatch } from "react-redux"
 import { Button } from "primereact/button"
 import { useState, useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 
 import { PasswordInput } from "@ui/forms"
-import { recoverUser } from "@services/userServices"
-import { setHeader } from "@store/slices/globalSlice"
+import { recoverUser, updateUser } from "@services/userServices"
+import { setHeader, updateThankyou } from "@store/slices/globalSlice"
 
 const Recover = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
+  const { token } = useParams()
 	const [email, setEmail] = useState('')
   const [sending, setSending] = useState(false)
-	let [searchParams, setSearchParams] = useSearchParams()
 	const {
 		control,
+    setError,
+    setFocus,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
@@ -27,8 +29,21 @@ const Recover = () => {
 
 	const onSubmit = async (data) => {
     setSending(true)
-		if(await recoverUser(data, {email: searchParams.get('token')}))
-			navigate('/login/')
+    delete data?.password_confirmation
+		const response = await updateUser(data, {remember_token: token})
+    if(response?.id){
+      dispatch(updateThankyou({
+        title: "Password updated successfully!",
+        link: "/login/",
+        background: "image-1.svg",
+        button_label: "Go back to login",
+        content: "Your password has been registered successfully!",
+      }))
+      navigate('/thankyou/')
+    }else{
+      setFocus(response.field)
+      setError(response.field, { type: "manual", message: response.message })
+    }
     setSending(false)
 	}
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>

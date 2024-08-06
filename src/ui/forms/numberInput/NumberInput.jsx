@@ -51,7 +51,7 @@ const NumberInput = ({
     <div className="p-field">
       {showLabel ? (
         <label htmlFor={nameInput}>
-          {labelName} {isRequired && <span className="text-red-600">{label}*</span>}
+          {labelName} {isRequired && <span className="text-red-600">*</span>}
           {renderInput()}
         </label>
       ) : (
