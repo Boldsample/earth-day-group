@@ -42,7 +42,7 @@ const Shelters = ({type}) => {
       const _vendors = await getUsers(_filter, 'full', user.id, page)
       setElements(_vendors);
     }else if(type == 'pets'){
-      let _filter = {}
+      let _filter = {state: `p.state=1`}
       if(filters?.keyword != '')
         _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
       const _products = await getPets(_filter, page, user?.id)

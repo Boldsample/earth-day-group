@@ -33,13 +33,13 @@ const Bookmarks = ({type}) => {
   const loadElements = async (e) => {
     if(e) e.preventDefault()
     if(type == 'products'){
-      let _filter = { 'bookmarks': `f.type='product' AND f.date IS NOT NULL` }
+      let _filter = { 'bookmarks': `f.type='product' AND f.date IS NOT NULL AND p.state=1` }
       if(filters?.keyword != '')
         _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
       const _products = await getProducts(_filter, page, user?.id)
       setElements(_products)
     }else if(type == 'pets'){
-      let _filter = { 'bookmarks': `f.type='pet' AND f.date IS NOT NULL` }
+      let _filter = { 'bookmarks': `f.type='pet' AND f.date IS NOT NULL AND p.state=1` }
       if(filters?.keyword != '')
         _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
       const _products = await getPets(_filter, page, user?.id)
