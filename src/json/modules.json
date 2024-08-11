@@ -1,6 +1,8 @@
 [
   {
-    "roles": ["user"],
+    "roles": [
+      "user"
+    ],
     "title": "Market Place",
     "className": "blue-earth",
     "link": "/market-place/",
@@ -8,7 +10,9 @@
     "description": "Find products that are eco friendly"
   },
   {
-    "roles": ["user"],
+    "roles": [
+      "user"
+    ],
     "title": "Recycle",
     "className": "light-green",
     "link": "/companies/",
@@ -16,7 +20,9 @@
     "description": "Look for recycle center companies that may interest you"
   },
   {
-    "roles": ["user"],
+    "roles": [
+      "user"
+    ],
     "title": "Post Offer",
     "className": "dark-blue",
     "link": "/offers/",
@@ -24,7 +30,9 @@
     "description": "Post your recyclable material and sell it to the highest bidder"
   },
   {
-    "roles": ["user"],
+    "roles": [
+      "user"
+    ],
     "title": "Shelters",
     "className": "green-earth",
     "link": "/shelters/",
@@ -32,7 +40,9 @@
     "description": "Find animal shelters near your location"
   },
   {
-    "roles": ["user"],
+    "roles": [
+      "user"
+    ],
     "title": "Social Organization",
     "className": "blue-earth",
     "link": "/social-organizations/",
@@ -40,7 +50,13 @@
     "description": "Find social organizations near your location"
   },
   {
-    "roles": ["company", "vendor", "shelter", "social", "ngo"],
+    "roles": [
+      "company",
+      "vendor",
+      "shelter",
+      "social",
+      "ngo"
+    ],
     "title": "Profile",
     "className": "blue-earth",
     "link": "/profile/",
@@ -48,7 +64,9 @@
     "description": "View your profile."
   },
   {
-    "roles": ["company"],
+    "roles": [
+      "company"
+    ],
     "title": "Recycle Materials",
     "className": "light-green",
     "link": "/offers/",
@@ -56,7 +74,11 @@
     "description": "Find recyclable material and buy it."
   },
   {
-    "roles": ["vendor", "social", "ngo"],
+    "roles": [
+      "vendor",
+      "social",
+      "ngo"
+    ],
     "title": "Create Product",
     "className": "light-green",
     "link": "/product/new/",
@@ -64,7 +86,10 @@
     "description": "Create a products that would be excibed on your store."
   },
   {
-    "roles": ["shelter", "ngo"],
+    "roles": [
+      "shelter",
+      "ngo"
+    ],
     "title": "Create Pet",
     "className": "dark-blue",
     "link": "/pet/new/",
@@ -72,7 +97,9 @@
     "description": "Create a pet for adoption."
   },
   {
-    "roles": ["admin"],
+    "roles": [
+      "admin"
+    ],
     "title": "Reports",
     "className": "blue-earth",
     "link": "/reports/",
@@ -80,7 +107,9 @@
     "description": "Manage and answer reports."
   },
   {
-    "roles": ["admin"],
+    "roles": [
+      "admin"
+    ],
     "title": "Admins",
     "className": "light-green",
     "link": "/admins/",
@@ -88,7 +117,9 @@
     "description": "Create, filter, and disable accounts."
   },
   {
-    "roles": ["admin"],
+    "roles": [
+      "admin"
+    ],
     "title": "Users",
     "className": "green-earth",
     "link": "/users/",
@@ -96,7 +127,9 @@
     "description": "Find, filter and disable user accounts."
   },
   {
-    "roles": ["admin"],
+    "roles": [
+      "admin"
+    ],
     "title": "Offers",
     "className": "dark-blue",
     "link": "/offers/",
@@ -104,7 +137,9 @@
     "description": "Search and delete offers."
   },
   {
-    "roles": ["admin"],
+    "roles": [
+      "admin"
+    ],
     "title": "Products",
     "className": "blue-earth",
     "link": "/products/",
@@ -112,11 +147,23 @@
     "description": "Search and disable products."
   },
   {
-    "roles": ["admin"],
+    "roles": [
+      "admin"
+    ],
     "title": "Pet adoptions",
     "className": "light-green",
     "link": "/pets/",
     "icon": "/assets/icons/shelters.svg",
     "description": "Search and disable pets."
+  },
+  {
+    "roles": [
+      "admin"
+    ],
+    "title": "Ads",
+    "className": "dark-blue",
+    "link": "/ads/",
+    "icon": "/assets/icons/shelters.svg",
+    "description": "Configure Ads."
   }
 ]

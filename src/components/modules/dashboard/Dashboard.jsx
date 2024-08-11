@@ -16,7 +16,7 @@ const Dashboard = () => {
 	const dispatch = useDispatch()
 	const [filteredModule, setFilteredModule] = useState([])
   const user = useSelector((state) => state.users.userData)
-	
+	console.log(modules)
 	const filteredModules = modules.filter(module => {
     if(!module?.roles?.some(role => role == user?.role))
       return false

@@ -13,7 +13,7 @@ import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { callNotifications, getUserData } from "@store/slices/usersSlice"
 import { Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo, RegisterAdmin } from "@components/register"
-import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, Privacy, About, DeleteAccount, CreateReport, Users, Reports, Products, Pets, AdminOffers } from "@components/modules"
+import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, Privacy, About, DeleteAccount, CreateReport, Users, Reports, Products, Pets, AdminOffers, ConfigureAds } from "@components/modules"
 
 let notificationsSource = null;
 
@@ -155,6 +155,7 @@ const AppRoutes = () => {
         <Route path="/pet/:id" element={<Pet />} />
         <Route path="/pet/edit/:id" element={<CreatePet />} />
         <Route path="/offers" element={<AdminOffers />} />
+        <Route path="/ads" element={<ConfigureAds />} />
       </>}
       <Route path="/thankyou" element={<ThankYouPage />} />
       <Route path="/terms-of-service/" element={<Terms />} />
