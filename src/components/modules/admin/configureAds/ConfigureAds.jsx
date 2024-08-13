@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from "react-hook-form"
 import { Dialog } from 'primereact/dialog';
+import ContentBox from '@ui/cards/contentBox/ContentBox';
 
-import "./styles.sass"
+import "../styles.sass"
 
 const ConfigureAds = () => {
     const [visible, setVisible] = useState(false);
@@ -72,6 +73,7 @@ const ConfigureAds = () => {
                   getValues={getValues}
                 >Drag and drop the image here to upload.</p>} />
                 </div>
+                <ContentBox/>
             </div>
             <div className='fullwidth mt-3'>
               <div className="flex flex-start mb-1">

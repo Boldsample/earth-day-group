@@ -8,5 +8,7 @@ import CheckBoxInput from "./checkBoxInput"
 import FileUploadInput from "./fileUploadInput"
 import RadioInput from "./radioInput/RadioInput"
 import UploadPhotoInput from "./uploadPhotoInput"
+import MultiSelectInput from "./multiSelectInput"
+import CalendarInput from "./calendarInput"
 
-export { TextInput, RadioInput, NumberInput, SwitchInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput, UploadPhotoInput }
+export { TextInput, RadioInput, NumberInput, SwitchInput, PasswordInput, TextAreaInput, DropDownInput, CheckBoxInput, FileUploadInput, UploadPhotoInput, MultiSelectInput, CalendarInput }
