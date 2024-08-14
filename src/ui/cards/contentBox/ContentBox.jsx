@@ -40,9 +40,9 @@ const onSubmit = async (data) => {
 
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   return (
-      <div className='p-fileupload p-fileupload-advanced p-component'>
+      <div className='p-fileupload p-fileupload-advanced p-component mt-3'>
           <div className='p-fileupload p-fileupload-buttonbar'>
-              <button className='green-earth'>Launch Ad</button>
+              <button className='green-earth'>Create Ad</button>
               <button className='red-state'>Cancel</button>
           </div>
           <div className='p-fileupload-content'>

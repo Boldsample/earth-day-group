@@ -12,6 +12,7 @@ import "../styles.sass"
 const ConfigureAds = () => {
     const [visible, setVisible] = useState(false);
     const user = useSelector((state) => state.users.userData)
+    const [bannerImg, setBannerImg] = useState(null)
     const {
       watch,
       reset,
@@ -40,6 +41,7 @@ const ConfigureAds = () => {
 
       reader.onloadend = function () {
           const base64data = reader.result;
+          setBannerImg(base64data)
           console.log(base64data)
       };
   };
@@ -49,8 +51,6 @@ const ConfigureAds = () => {
     <div className='layout'>
         <img className="layout__background" src="/assets/full-width.svg" />
         <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
-          <div className="ads__container">
-            <div className='fullwidth'>
             <Dialog header="Header" visible={visible} style={{ width: '50vw' }} onHide={() => {if (!visible) return; setVisible(false); }}>
                 <p className="m-0">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -59,6 +59,8 @@ const ConfigureAds = () => {
                     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </Dialog>
+          <div className="ads__container">
+            <div className='fullwidth'>
               <div className="flex flex-start mb-1">
                 <h4 className='title__noWidth'>Main Header Banner</h4>
                 <button className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" /></button>
@@ -73,18 +75,22 @@ const ConfigureAds = () => {
                   getValues={getValues}
                 >Drag and drop the image here to upload.</p>} />
                 </div>
-                <ContentBox/>
+                {/* <ContentBox/> */}
             </div>
             <div className='fullwidth mt-3'>
-              <div className="flex flex-start mb-1">
-                <h4 className='title__noWidth'>Home Menu Banner</h4>
-                <FontAwesomeIcon className='ml-1' color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" />
-              </div>
-                <p>This banner appears as a rectangular menu button on every user's home screen.</p>
-                <div>
-                <FileUpload name="banner_image" customUpload uploadHandler={customBase64Uploader} url={'/api/upload'} accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop the image here to upload.</p>} />
-                </div>
+            <div className="flex flex-start mb-1">
+              <h4 className='title__noWidth'>Home Menu Banner</h4>
+              <FontAwesomeIcon className='ml-1' color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" />
             </div>
+              <p>This banner appears as a rectangular menu button on every user's home screen.</p>
+            {bannerImg == null ? 
+              <div>
+              <FileUpload name="banner_image" customUpload uploadHandler={customBase64Uploader} url={'/api/upload'} accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop the image here to upload.</p>} />
+              </div>
+          :
+          <ContentBox/> 
+        }
+        </div>
           </div>
         </div>
     </div>
