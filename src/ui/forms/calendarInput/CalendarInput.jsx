@@ -15,7 +15,7 @@ function CalendarInput({
   disabled = false,
   showLabel = true,
 }) {
-  const [dates, setDates] = useState(null);
+  // const [dates, setDates] = useState(null);
   const renderInput = () => <div>
       <Controller
         rules={rules}
@@ -26,11 +26,11 @@ function CalendarInput({
           selectionMode="range"
           readOnlyInput 
           hideOnRangeSelection
-          value={dates}
+          value={field.value}
           disabled={disabled}
           inputId={nameInput + "_" + name}
-          onChange={(e) => setDates(e.value)}
-          // onChange={e => field.onChange(e.value)}
+          // onChange={(e) => setDates(e.value)}
+          onChange={e => field.onChange(e.value)}
             />
         } />
       <label htmlFor={nameInput + "_" + name}>{name}</label>
