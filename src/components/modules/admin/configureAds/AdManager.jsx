@@ -73,7 +73,7 @@ const AdManager = () => {
     <div className='fullwidth mt-3'>
             <div className="flex flex-start mb-1">
               <h4 className='title__noWidth'>Home Menu Banner</h4>
-              <FontAwesomeIcon className='ml-1' color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" />
+              <button className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" /></button>
             </div>
               <p>This banner appears as a rectangular menu button on every user's home screen.</p>
             {bannerImg == null ? 
