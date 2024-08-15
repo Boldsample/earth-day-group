@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "./styles.sass"
 import { TextInput, MultiSelectInput, CalendarInput } from "@ui/forms"
 import { Calendar } from 'primereact/calendar';
@@ -12,26 +12,28 @@ import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 const AdManager = () => {
     const [visible, setVisible] = useState(false);
     const user = useSelector((state) => state.users.userData)
-    const [bannerImg, setBannerImg] = useState(null)
     const [date, setDate] = useState(null);
+    const [bannerPreview, setBannerPreview] = useState(null);
     const {
-        watch,
-        reset,
-        control,
-        setValue,
-        setFocus,
-        setError,
-        getValues,
-        handleSubmit,
-        formState: { errors },
+      watch,
+      reset,
+      control,
+      setValue,
+      setFocus,
+      setError,
+      getValues,
+      handleSubmit,
+      formState: { errors },
     } = useForm({
-        defaultValues: {
+      defaultValues: {
         ad_name: "",
         ad_url: "",
         ad_target: "",
         ad_duration: "",
-        },
+        ad_image: null,
+      },
     })
+    const adImage = watch('ad_image'); 
     const modules = [
         { name: 'Users' },
         { name: 'Companies' },
@@ -48,14 +50,45 @@ const AdManager = () => {
   
         reader.onloadend = function () {
             const base64data = reader.result;
-            setBannerImg(base64data)
-            console.log(base64data)
+            // setBannerImg(base64data)
+            setValue("ad_image", base64data)
+            // console.log(base64data)
         };
     };
+
+
+    const convertBannerBlob = () => {
+      const base64Data = getValues("ad_image");
+      if (base64Data) {
+        // Convert base64 string back to a Blob
+        const byteString = atob(base64Data.split(',')[1]);
+        const mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0];
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+    
+        for (let i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+    
+        const blob = new Blob([ab], { type: mimeString });
+        const imageUrl = URL.createObjectURL(blob);
+    
+        setBannerPreview(imageUrl);
+      }
+    };
+
+useEffect(() => {
+  if(adImage !=null ){
+    convertBannerBlob();
+  }
+}, [adImage]);
 
     const onSubmit = async (data) => {
     console.log(data)
     }
+
+// console.log(bannerPreview)
+
 
     const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
@@ -76,7 +109,7 @@ const AdManager = () => {
               <button className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" /></button>
             </div>
               <p>This banner appears as a rectangular menu button on every user's home screen.</p>
-            {bannerImg == null ? 
+            {adImage == null ? 
               <div>
               <FileUpload name="banner_image" customUpload uploadHandler={customBase64Uploader} url={'/api/upload'} accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop the image here to upload.</p>} />
               </div>
@@ -86,9 +119,9 @@ const AdManager = () => {
               <button type='submit' onClick={handleSubmit(onSubmit)} form='ad_form ' className='green-earth'>Create Ad</button>
               <button className='red-state'>Cancel</button>
           </div>
-          <div className='p-fileupload-content'>
+          <div className='p-fileupload-content form__container'>
           <div className="form__width75">
-              <div className="registerInput__container-x2">
+              <div className="registerInput__container-x2 mt-0">
                 <TextInput
                   width="100%"
                   // disabled={ID}
@@ -127,7 +160,7 @@ const AdManager = () => {
                     },
                   }} />
               </div>
-              <div className="registerInput__container-x2">
+              <div className="registerInput__container-x2 mt-0">
                 <MultiSelectInput
                   className=""
                   isEdit={true}
@@ -154,6 +187,13 @@ const AdManager = () => {
                     }} />
                 </div>
                 {/* <button type='submit' className='green-earth'>Create Ad</button> */}
+          </div>
+          <div className="preview-container">
+            <div className='image__preview-container'> 
+            <h5 className='text-center'>Image Uploaded</h5>
+            <img src={bannerPreview} alt="Banner preview" height="160px" />
+
+            </div>
           </div>
           </div>
           </div>
