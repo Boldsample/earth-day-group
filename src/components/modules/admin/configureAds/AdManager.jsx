@@ -14,6 +14,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 const AdManager = () => {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [submitted, setSubmitted] = useState(false);
     const user = useSelector((state) => state.users.userData)
     const [date, setDate] = useState(null);
     const [bannerPreview, setBannerPreview] = useState(null);
@@ -88,6 +89,7 @@ useEffect(() => {
 }, [adImage, loading]);
 
     const onSubmit = async (data) => {
+      setSubmitted(true)
     console.log(data)
     }
 
@@ -123,94 +125,108 @@ useEffect(() => {
               <button type='submit' onClick={handleSubmit(onSubmit)} form='ad_form ' className='green-earth'>Create Ad</button>
               <button className='red-state'>Cancel</button>
           </div>
-          <div className='p-fileupload-content form__container'>
-          <div className="form__width75">
-              <div className="registerInput__container-x2 mt-0">
+          <div className='p-fileupload-content'>
+            {submitted === true ? 
+            <div className="form__container">
+              <h5>Ad Name: Pepsi Campaign</h5>
+              <h5>Ad Link: www.hotmail.com </h5>
+              <h5>Ad Target: Users, NGOs, Companies </h5>
+              <h5>Ad Duration: Users, NGOs, Companies </h5>
+            </div>
+            :
+            <div className='form__container'>
+            <div className="form__width75">
+            <div className="registerInput__container-x2 mt-0">
+              <TextInput
+                width="100%"
+                // disabled={ID}
+                control={control}
+                isRequired={true}
+                labelName="Ad Name"
+                nameInput="ad_name"
+                placeHolderText="Pepsi Summer Campaign*"
+                getFormErrorMessage={getFormErrorMessage}
+                rules={{
+                  maxLength: {
+                    value: 50,
+                    message: "The field exceeds 50 characters.",
+                  },
+                  required: "*The field is required.",
+                  pattern: {
+                    value: /^[a-zA-Z_]+$/,
+                    message: "It must have only letters and underscore.",
+                  },
+                }} />
                 <TextInput
-                  width="100%"
-                  // disabled={ID}
+                control={control}
+                isRequired={true}
+                labelName="Ad URL"
+                nameInput="ad_url"
+                placeHolderText="www.pepsi.com/landing"
+                getFormErrorMessage={getFormErrorMessage}
+                rules={{
+                  maxLength: {
+                    value: 100,
+                    message: "The field exceeds 50 characters.",
+                  },
+                  pattern: {
+                    value: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?(\/[a-zA-Z0-9-_?=&]+)?$/,
+                    message: "Please enter a valid URL",
+                  },
+                }} />
+            </div>
+            <div className="registerInput__container-x2 mt-0">
+              <MultiSelectInput
+                className=""
+                isEdit={true}
+                options={modules}
+                labelName="Who can view this Ad?"
+                nameInput="ad_target"
+                control={control}
+                showLabel={true}
+                isRequired={true}
+                optionLabel="name"
+                optionValue="name"
+                placeHolderText="Select Modules"
+                getFormErrorMessage={getFormErrorMessage}
+                rules={{
+                  required: "*El campo es requerido.",
+                }} />
+                  <CalendarInput
+                  nameInput="ad_duration"
                   control={control}
                   isRequired={true}
-                  labelName="Ad Name"
-                  nameInput="ad_name"
-                  placeHolderText="Pepsi Summer Campaign*"
-                  getFormErrorMessage={getFormErrorMessage}
+                  labelName="Select Ad Duration"
                   rules={{
-                    maxLength: {
-                      value: 50,
-                      message: "The field exceeds 50 characters.",
-                    },
-                    required: "*The field is required.",
-                    pattern: {
-                      value: /^[a-zA-Z_]+$/,
-                      message: "It must have only letters and underscore.",
-                    },
-                  }} />
-                  <TextInput
-                  control={control}
-                  isRequired={true}
-                  labelName="Ad URL"
-                  nameInput="ad_url"
-                  placeHolderText="www.pepsi.com/landing"
-                  getFormErrorMessage={getFormErrorMessage}
-                  rules={{
-                    maxLength: {
-                      value: 100,
-                      message: "The field exceeds 50 characters.",
-                    },
-                    pattern: {
-                      value: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?(\/[a-zA-Z0-9-_?=&]+)?$/,
-                      message: "Please enter a valid URL",
-                    },
+                    required: true,
                   }} />
               </div>
-              <div className="registerInput__container-x2 mt-0">
-                <MultiSelectInput
-                  className=""
-                  isEdit={true}
-                  options={modules}
-                  labelName="Who can view this Ad?"
-                  nameInput="ad_target"
-                  control={control}
-                  showLabel={true}
-                  isRequired={true}
-                  optionLabel="name"
-                  optionValue="name"
-                  placeHolderText="Select Modules"
-                  getFormErrorMessage={getFormErrorMessage}
-                  rules={{
-                    required: "*El campo es requerido.",
-                  }} />
-                    <CalendarInput
-                    nameInput="ad_duration"
-                    control={control}
-                    isRequired={true}
-                    labelName="Select Ad Duration"
-                    rules={{
-                      required: true,
-                    }} />
-                </div>
-                {/* <button type='submit' className='green-earth'>Create Ad</button> */}
-          </div>
-          <div className="preview-container">
-          <div className='image__preview-container' style={loading === true ? {justifyContent: 'center'} : {justifyContent: 'end'}}> 
-            {loading === true ? 
-              <ProgressSpinner 
-                style={{width: '50px', height: '50px'}} 
-                strokeWidth="8" 
-                fill="var(--surface-ground)" 
-                animationDuration=".5s" 
-              /> 
-                : 
-                <>
-              <h5 className='text-center'>Uploaded Image</h5>
-              {/* <FontAwesomeIcon className='confirmation-check' color='var(--dark-blue)' icon={faCircleCheck} fontSize="25px" /> */}
-              <FontAwesomeIcon className={`confirmation-check ${loading === false ? 'showCheck' : ''}`} color='#e0ffe0' icon={faCircleCheck} fontSize="25px" />
-              <img src={bannerPreview} alt="Banner preview" height="70%" />
-                </>
-              }
+              {/* <button type='submit' className='green-earth'>Create Ad</button> */}
+        </div>
+        <div className="preview-container">
+        <div className='image__preview-container' style={loading === true ? {justifyContent: 'center'} : {justifyContent: 'end'}}> 
+          {loading === true ? 
+            <ProgressSpinner 
+              style={{width: '50px', height: '50px'}} 
+              strokeWidth="8" 
+              fill="var(--surface-ground)" 
+              animationDuration=".5s" 
+            /> 
+              : 
+              <>
+            <div className=' title-uploader-container'>
+              <h6 className='text-center'>Uploaded Image</h6>
+              <FontAwesomeIcon className={`confirmation-check ${loading === false ? 'showCheck' : ''}`} color='var(--green-earth)' icon={faCircleCheck} fontSize="15px" />
             </div>
+            <img src={bannerPreview} alt="Banner preview" height="70%" />
+              </>
+            }
           </div>
+        </div>
+
+            </div>
+            }
+          
           </div>
           </div>
         }
