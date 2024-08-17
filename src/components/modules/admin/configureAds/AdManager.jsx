@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import "./styles.sass"
 import { TextInput, MultiSelectInput, CalendarInput } from "@ui/forms"
 import { Calendar } from 'primereact/calendar';
@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Dialog } from 'primereact/dialog';
 import { FileUpload } from 'primereact/fileupload';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleInfo, faCircleCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCircleInfo, faCircleCheck, faRectangleAd, faBullseye, faClock, faLink } from '@fortawesome/free-solid-svg-icons'
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { Toast } from 'primereact/toast';
         
 
 const AdManager = () => {
@@ -18,6 +19,7 @@ const AdManager = () => {
     const user = useSelector((state) => state.users.userData)
     const [date, setDate] = useState(null);
     const [bannerPreview, setBannerPreview] = useState(null);
+    const toast = useRef(null);
     const {
       watch,
       reset,
@@ -43,6 +45,10 @@ const AdManager = () => {
         { name: 'Companies' },
         { name: 'Foundations/NGOs'},
     ];
+
+    const showSuccess = () => {
+      toast.current.show({severity:'success', summary: 'Success', detail:'Ad was created succesfully', life: 20000});
+  }
 
     const customBase64Uploader = async (event) => {
         // convert file to base64 encoded
@@ -79,24 +85,22 @@ const AdManager = () => {
     };
 
 
-useEffect(() => {
-  if(adImage !=null ){
-    setTimeout(() => {
-      setLoading(false)
-    }, "2000");
-    convertBannerBlob();
-  }
-}, [adImage, loading]);
-
-    const onSubmit = async (data) => {
-      setSubmitted(true)
-    console.log(data)
+  useEffect(() => {
+    if(adImage !=null ){
+      setTimeout(() => {
+        setLoading(false)
+      }, "2000");
+      convertBannerBlob();
     }
+  }, [adImage, loading]);
 
-// console.log(bannerPreview)
+  const onSubmit = async (data) => {
+    showSuccess()
+    setSubmitted(true)
+  console.log(data)
+  }
 
-
-    const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
   return (
     <>
@@ -109,6 +113,7 @@ useEffect(() => {
         </p>
     </Dialog>
     <form onSubmit={handleSubmit(onSubmit)}>
+      <Toast ref={toast} />
     <div className='fullwidth mt-3'>
             <div className="flex flex-start mb-1">
               <h4 className='title__noWidth'>Home Menu Banner</h4>
@@ -121,17 +126,42 @@ useEffect(() => {
               </div>
           :
           <div className='p-fileupload p-fileupload-advanced p-component mt-3'>
-          <div className='p-fileupload p-fileupload-buttonbar'>
-              <button type='submit' onClick={handleSubmit(onSubmit)} form='ad_form ' className='green-earth'>Create Ad</button>
-              <button className='red-state'>Cancel</button>
+          <div className='p-fileupload p-fileupload-buttonbar space-between'>
+              <div>
+                {submitted === true ? "" :  <button type='submit' onClick={handleSubmit(onSubmit)} form='ad_form ' className='green-earth'>Create Ad</button>}
+                <button className='red-state'>{submitted === true ? 'Cancel Campaign' : 'Cancel'}</button>
+              </div>
+            {submitted && 
+              <div class="live-container">
+                <div class="live-circle"></div>
+                <div class="live-text">LIVE</div>
+              </div>
+            }
           </div>
           <div className='p-fileupload-content'>
             {submitted === true ? 
             <div className="form__container">
-              <h5>Ad Name: Pepsi Campaign</h5>
-              <h5>Ad Link: www.hotmail.com </h5>
-              <h5>Ad Target: Users, NGOs, Companies </h5>
-              <h5>Ad Duration: Users, NGOs, Companies </h5>
+              <div className='width-50'>
+              <div className="flex">
+                <FontAwesomeIcon  color='var(--dark-blue)' icon={faRectangleAd} fontSize="15px" />
+                <h5><span>Ad Name:</span> Pepsi Campaign</h5>
+              </div>
+              <div className="flex">
+                <FontAwesomeIcon  color='var(--dark-blue' icon={faBullseye} fontSize="15px" />
+                <h5><span>Ad Target:</span> Users, NGOs, Companies </h5>
+              </div>
+              <div className="flex">
+                <FontAwesomeIcon  color='var(--dark-blue)' icon={faClock} fontSize="15px" />
+                <h5> <span>Ad Duration: </span>09/10/2024 to 09/15/2024 </h5>
+              </div>
+              <div className="flex">
+                <FontAwesomeIcon  color='var(--dark-blue)' icon={faLink} fontSize="15px" />
+                <h5><span>Ad Link:</span> www.hotmail.com </h5>  
+              </div>
+              </div>
+              <div className=' title-uploader-container width-50 ad-summary-image'>
+                <img src={bannerPreview} alt="Banner preview" height="200px" />
+            </div>
             </div>
             :
             <div className='form__container'>
