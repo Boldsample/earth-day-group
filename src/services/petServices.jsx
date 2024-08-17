@@ -11,7 +11,7 @@ export const updatePet = async (data, filter) => {
     filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
   })
   filterStr = encodeURIComponent(filterStr)
-  const response = await API.post(`/update/products&filter=${filterStr}`, data)
+  const response = await API.post(`/update/pets&filter=${filterStr}`, data)
   return {id: filter.id}
 }
 

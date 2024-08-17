@@ -11,6 +11,7 @@ import modules from "@json/modules"
 import { setHeader } from '@store/slices/globalSlice'
 
 import "./dashboard.sass"
+import Ad from "@ui/cards/Ad"
 
 const Dashboard = () => {
 	const dispatch = useDispatch()
@@ -41,6 +42,7 @@ const Dashboard = () => {
 				</div>
 			</div>
 			<div className="card__grid">
+				<Ad type="headerBanner"/>
 				{filteredModules.length > 0 ? filteredModules.map((module, key) => <Link key={key} to={module.link}>
 					<Card key={key}
 						icon={module.icon}
