@@ -8,6 +8,7 @@ import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileInformation from "@components/modules/profile/ProfileInformation"
 
 import "../styles.sass"
+import AdBanner from "@ui/banners/AdBanner"
 
 const ProfileListing = ({type, profile, reloadElements = () => false}) => {
   const user = useSelector((state) => state.users.userData)
@@ -36,6 +37,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
         <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} admin={user?.role == 'admin'} />
+        <AdBanner type="headerBanner"/>
         {profile?.images?.length > 0 && 
           <PhotoGallery imageCatalog={profile?.images} />
         }

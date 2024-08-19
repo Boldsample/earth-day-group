@@ -1,7 +1,7 @@
 import { getAd } from "@services/adsServices"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-
+import'./styles.sass'
 const AdBanner = ({location, type}) => {
     const user = useSelector(state => state.users.userData)
     console.log(user.role)
@@ -19,17 +19,20 @@ const AdBanner = ({location, type}) => {
     const renderBanner = () => {
       switch (type) {
         case 'headerBanner':
-          return <img src={adInfo.picture} alt="" />;
+          return <div className="horizontal-banner-container">
+            <img src={adInfo.picture} alt="" />
+          </div>
           case 'dashboardButton':
-          return  <img src={adInfo.picture} alt="" />;;
+          return  <img src={adInfo.picture} alt="" />
         default:
           return 
       }
     };
   return (
-    <div>
+    <>
         {renderBanner()}
-    </div>
+    </>
+
   )
 }
 

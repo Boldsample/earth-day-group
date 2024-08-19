@@ -13,6 +13,7 @@ import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 
 import "../styles.sass"
+import AdBanner from "@ui/banners/AdBanner"
 
 const CategoryListing = ({content, section, elements, filters, reloadElements = () => false, setFilters = () => false, setReset = () => false, page, setPage = () => false}) => {
   const dispatch = useDispatch()
@@ -69,6 +70,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
             <div className="types">
               {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={section == type?.id ? 'active' : ''}>{type?.label}</Link>)}
             </div>
+            <AdBanner type="headerBanner"/>
             <div className={`templateCards_grid cards-${elements?.data?.length}`}>
               {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
                 skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)

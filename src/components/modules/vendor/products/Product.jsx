@@ -15,6 +15,7 @@ import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
 
 import "../../profile/profile.sass"
 import { Tooltip } from "primereact/tooltip"
+import AdBanner from "@ui/banners/AdBanner"
 
 const Product = () => {
   const { id } = useParams()
@@ -65,6 +66,7 @@ const Product = () => {
             </div>
           </div>
         </div>
+        <AdBanner type="headerBanner"/>
         {user?.id != product?.user && user?.role != 'admin' && 
           <ProfileElements user={product?.user} same={user?.id == product?.user} related={true} />
         }
