@@ -231,7 +231,7 @@ const AdManager = ({type}) => {
                 showLabel={true}
                 isRequired={true}
                 optionLabel="name"
-                optionValue="name"
+                optionValue="value"
                 placeHolderText="Select Modules"
                 getFormErrorMessage={getFormErrorMessage}
                 rules={{
