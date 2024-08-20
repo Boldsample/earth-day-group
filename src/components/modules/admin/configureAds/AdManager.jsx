@@ -14,7 +14,7 @@ import { addAd, addImages, getAd, updateAd } from '@services/adsServices';
 import { Button } from 'primereact/button';
         
 
-const AdManager = ({type}) => {
+const AdManager = ({type, adSpecs}) => {
     const [visible, setVisible] = useState(false);
     const [sending, setSending] = useState(false);
     const [update, setUpdate] = useState(null);
@@ -119,14 +119,39 @@ const AdManager = ({type}) => {
 
   return (
     <>
-    <Dialog header="Header" visible={visible} style={{ width: '50vw' }} onHide={() => {if (!visible) return; setVisible(false); }}>
-        <p className="m-0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-    </Dialog>
+    <Dialog header="Ad Format Specs & Recommendations" visible={visible} style={{ width: '50vw' }} onHide={() => {if (!visible) return; setVisible(false); }}>
+        <img src={adSpecs?.image} alt="" width="70%" />
+        <div>
+            <div className='mb-2 mt-2'>
+              <h5 className="mb-1">{adSpecs?.title1}</h5>
+                <p className='pop-up-text-small'>{adSpecs.description}</p>
+            </div>
+            <div className='mb-2'>
+                <h5 className='mb-1'>{adSpecs?.title2}</h5>
+                <ul className='pop-up-text-small'>
+                    {adSpecs.designRecommendations.map((requirement) => (
+                      <li key={requirement}>{requirement}</li>
+                      ))}
+                </ul>
+            </div>
+            <div className='mb-2'>
+                <h5 className='mb-1'>{adSpecs?.title3}</h5>
+                <ul className='pop-up-text-small'>
+                    {adSpecs.techRequirements.map((requirement) => (
+                      <li key={requirement}>{requirement}</li>
+                      ))}
+                </ul>
+            </div>
+            <div>
+                <h5 className='mb-1'>{adSpecs?.title4}</h5>
+                <ul className='pop-up-text-small'>
+                    {adSpecs.placesShown.map((sections) => (
+                      <li key={sections}>{sections}</li>
+                      ))}
+                </ul>
+            </div>
+        </div>
+    </Dialog> 
     <form onSubmit={handleSubmit(onSubmit)}>
       <Toast ref={toast} />
     <div className='fullwidth mt-3'>

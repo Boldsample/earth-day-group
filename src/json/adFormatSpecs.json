@@ -1,0 +1,29 @@
+{
+    "headerBanner": {
+      "title1": "Banner Description",
+      "title2": "Design Recommendations",
+      "title3": "Technical Requirements",
+      "title4": "Sections banner appears in",
+      "className": "blue-earth",
+      "link": "/market-place/",
+      "image": "/assets/adExamples/ad1.png",
+      "description": "This long horizontal format captures users attention due to its size and placement, making it ideal for brand awareness and important announcements.",
+      "techRequirements": ["Maximum File Size: 1.3 MB", "Minimum Width: 600 pixels", "Minimum Height: 300 pixels"],
+      "designRecommendations": ["File Type: JPG or PNG"],
+      "placesShown": ["Product Detail", "Company profile", "Product Catalog", "Company Catalog", "Shop Catalog", "Pet Catalog", "Pet detail", "NGO Catalog", "NGO Detail"]
+    },
+    "dashboardButton": {
+      "title1": "Banner Description",
+      "title2": "Design Recommendations",
+      "title3": "Technical Requirements",
+      "title4": "Sections banner appears in",
+      "className": "blue-earth",
+      "link": "/market-place/",
+      "image": "/assets/adExamples/ad2.png",
+      "description": "Small rectangular banner ideal for branding purposes, particularly for showcasing logos or simple brand messages, but is less suited for ads with extensive text or detailed information.",
+      "techRequirements": ["Maximum File Size: 1.3 MB", "Minimum Width: 600 pixels", "Minimum Height: 300 pixels"],
+      "designRecommendations": ["File Type: JPG or PNG"],
+      "placesShown": ["Home Dashboard"]
+    }
+  }
+  

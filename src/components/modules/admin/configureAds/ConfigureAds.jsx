@@ -8,20 +8,21 @@ import { Dialog } from 'primereact/dialog';
 import ContentBox from '@ui/cards/contentBox/ContentBox';
 import AdManager from './AdManager';
 import "../styles.sass"
+import adSpecs from "@json/adFormatSpecs.json"
 
 const ConfigureAds = () => {
     const [visible, setVisible] = useState(false);
     const user = useSelector((state) => state.users.userData)
     const [bannerImg, setBannerImg] = useState(null)
-    
+  
 
   return (
     <div className='layout'>
         <img className="layout__background" src="/assets/full-width.svg" />
         <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
           <div className="ads__container">
-            <AdManager type="headerBanner"/>
-            <AdManager type="dashboardButton"/>
+            <AdManager type="headerBanner" adSpecs={adSpecs.headerBanner}/>
+            <AdManager type="dashboardButton " adSpecs={adSpecs.dashboardButton}/>
           </div>
         </div>
     </div>
