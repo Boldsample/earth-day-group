@@ -1,13 +1,16 @@
-import React from 'react'
-import './footer.sass'
 import { Link } from 'react-router-dom'
-import { TextInput } from '@ui/forms'
-import { useForm } from "react-hook-form";
-import { Button } from "primereact/button";
+import { useForm } from "react-hook-form"
+import { Button } from "primereact/button"
+import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faInstagram, faTiktok, faFacebook } from "@fortawesome/free-brands-svg-icons"
+import { faInstagram, faTiktok, faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons"
+
+import { TextInput } from '@ui/forms'
+
+import './footer.sass'
 
 const Footer = () => {
+  const [t, i18n] = useTranslation('global')
     const {
         watch,
         control,
@@ -67,9 +70,10 @@ const Footer = () => {
             </div>
         </form>
         <div className="socialMedia__container">
-            <Link><FontAwesomeIcon icon={faInstagram} className='footer__icon'/></Link>
-            <Link><FontAwesomeIcon icon={faFacebook} className='footer__icon'/></Link>
-            <Link><FontAwesomeIcon icon={faTiktok} className='footer__icon'/></Link>
+            <Link to={i18n.language == 'es' ? 'https://www.instagram.com/earthdaygroup' : 'https://www.instagram.com/earthdaygroup_usa'} target="_blank"><FontAwesomeIcon icon={faInstagram} className='footer__icon'/></Link>
+            <Link to="https://www.facebook.com/earthdaygroup" target="_blank"><FontAwesomeIcon icon={faFacebook} className='footer__icon'/></Link>
+            <Link to="https://www.tiktok.com/@earthdaygroup" target="_blank"><FontAwesomeIcon icon={faTiktok} className='footer__icon'/></Link>
+            <Link to="https://x.com/EarthDayGroup2" target="_blank"><FontAwesomeIcon icon={faTwitter} className='footer__icon'/></Link>
         </div>
     </div>
   )

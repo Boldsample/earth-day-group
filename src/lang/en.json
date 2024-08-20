@@ -1,0 +1,24 @@
+{
+  "global": {
+    "skip": "Skip",
+    "next": "Next",
+    "login": "Log In",
+    "hi": "Hi",
+    "settings": "Settings"
+  },
+  "intro": {
+    "slide1_title": "Welcome everybody to Earth Day Group.",
+    "slide1_description": "A Modern Solution For a Sustainable Society.",
+    "slide1_item1": "Make an extra income.",
+    "slide1_item2": "Locate recycling centers near you.",
+    "slide1_item3": "Find social organizations.",
+    "slide1_item4": "Find animal shelters.",
+    "slide1_item5": "Find eco-friendly products.",
+    "locale_recycling_centers": "Locate recycling centers near you",
+    "according_to_your_location": "According to your location EDG will indicate the nearest recycling center and the prices they offer to each type of material.",
+    "help_your_planet": "Help your planet and your pocket",
+    "make_an_extra_income": "Make an extra income with your recycling, you can choose who to sell depending on your interest.",
+    "find_social_organizations": "Find social organizations",
+    "give_a_second_change": "Give a second change to those objects that you think can help someone else."
+  }
+}

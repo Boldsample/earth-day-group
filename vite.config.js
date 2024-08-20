@@ -13,6 +13,7 @@ export default defineConfig({
     alias: {
       "@ui": "/src/ui",
       "@json": "/src/json",
+      "@lang": "/src/lang",
       "@store": "/src/store",
       "@utils": "/src/utils",
       "@styles": "/src/styles",
