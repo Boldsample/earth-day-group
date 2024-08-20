@@ -182,7 +182,7 @@ button, .button
   width: 100%
   z-index: 100
   &:not(.map, .settings)::before
-    background: linear-gradient(to bottom, #FFFBEBFF 50%, #FFFBEBC0 60%, #FFFBEB30 80%, #FFFBEB00 100%)
+    /*background: linear-gradient(to bottom, #FFFBEBFF 50%, #FFFBEBC0 60%, #FFFBEB30 80%, #FFFBEB00 100%)*/
     content: ""
     height: 170%
     pointer-events: none
@@ -308,12 +308,13 @@ button, .button
     overflow: hidden
   .layout__background
     bottom: 0
-    height: 100%
+    height: calc(100vh - 80px)
     left: 0
     object-fit: cover
+    object-position: center top
     pointer-events: none
-    position: absolute
-    width: 100%
+    position: fixed
+    width: 100vw
   .main__content
     align-content: center
     align-self: flex-start
@@ -637,6 +638,9 @@ button, .button
 
 .p-dropdown-items
   padding-left: 0
+
+#intro .layout__background
+  position: absolute
 
 $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.5em", "6": "3em", "7": "3.5em", "8": "4em")
 @each $name, $space in $spaces

@@ -1,7 +1,8 @@
+import { useTranslation } from "react-i18next"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Link, useNavigate, useLocation } from "react-router-dom"
-import { faBookmark, faChevronLeft, faRightFromBracket, faShoppingCart, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark, faChevronLeft, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
@@ -12,6 +13,7 @@ import HeaderNotifications from "@components/modules/notifications/HeaderNotific
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [t, i18n] = useTranslation('global')
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
   const headerTitle = useSelector((state) => state.global.headerTitle)
@@ -25,23 +27,23 @@ const Header = () => {
 
   return <header className={'main_header '+header}>
 
-    {!['intro', 'login', 'register'].some(s => s == header) &&
+    {user?.id &&
       <Nav />
     }
 
     <div className="navbar-item go-back">
-      {!['intro', 'dashboard', 'thankyou'].some((s) => s == header) && 
+      {header != 'intro' && 
         <a onClick={() => navigate(-1)}><FontAwesomeIcon icon={faChevronLeft} /></a>
       }
       {user?.id && !['map'].some((s) => s == header) && <>
         <ProfilePhoto userPhoto={user?.picture} className="left" />
-        <small className="user-name" style={{fontSize: '1rem'}}>Hi, {user?.name}</small>
+        <small className="user-name" style={{fontSize: '1rem'}}>{t(`global.hi`)}, {user?.name}</small>
       </>}
     </div>
 
 
     {['settings'].some(s => s == header) && 
-      <div className="navbar-item"><h4>{headerTitle}</h4></div>
+      <div className="navbar-item"><h4>{t(`global.${headerTitle}`)}</h4></div>
     }
     
     {!['settings', 'map'].some(s => s == header) && 
@@ -59,13 +61,15 @@ const Header = () => {
           <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
         </>}
         <HeaderNotifications />
+        <button onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
         <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
       </div>
     }
 
     {!user?.id && 
       <div className="navbar-item right-align">
-        <Link className="button dark-blue" to="/login/">Log in</Link>
+        <Link className="button dark-blue" to="/login/">{t(`global.login`)}</Link>
+        <button onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
       </div>
     }
   </header>

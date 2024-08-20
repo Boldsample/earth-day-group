@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { Carousel } from 'primereact/carousel'
+import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 
@@ -10,6 +11,7 @@ import { setHeader } from '@store/slices/globalSlice'
 
 const Intro = () => {
 	const dispatch = useDispatch()
+  const [t, i18n] = useTranslation('global')
 	const [activeIndex, setActiveIndex] = useState(0)
 
 	useEffect(() => {
@@ -20,14 +22,14 @@ const Intro = () => {
 		return <div className="layout">
 			<img className="layout__background" src={item?.img} />
 			<div className="main__content verticalcenter-1 xpadding-1" style={item?.wrapperstyle}>
-				<h1 className="text-upperCase mb-1">{item?.title}</h1>
-				<p className="mb-1">{item?.content}</p>
-				{item?.list ? <ul className='mb-1'>{item.list.map((i, key) => <li key={key}>{i}</li>)}</ul> : null}
+				<h1 className="text-upperCase mb-1">{t(`intro.${item?.title}`)}</h1>
+				<p className="mb-1">{t(`intro.${item?.content}`)}</p>
+				{item?.list ? <ul className='mb-1'>{item.list.map((i, key) => <li key={key}>{t(`intro.${i}`)}</li>)}</ul> : null}
 				<div>
 					{activeIndex + 1 < introItems.length ? <>
-						<Link className="button" to="/register/">Skip <FontAwesomeIcon icon={faRightToBracket} /></Link>
-						<button onClick={() => setActiveIndex((prevIndex) => (prevIndex + 1) % introItems.length)} className="dark-blue">Next <FontAwesomeIcon icon={faChevronRight} /></button>
-					</> : <Link className="button dark-blue" to="/register/">Next <FontAwesomeIcon icon={faChevronRight} /></Link>}
+						<Link className="button" to="/register/">{t(`global.skip`)} <FontAwesomeIcon icon={faRightToBracket} /></Link>
+						<button onClick={() => setActiveIndex((prevIndex) => (prevIndex + 1) % introItems.length)} className="dark-blue">{t(`global.next`)} <FontAwesomeIcon icon={faChevronRight} /></button>
+					</> : <Link className="button dark-blue" to="/register/">{t(`global.next`)} <FontAwesomeIcon icon={faChevronRight} /></Link>}
 				</div>
 			</div>
 		</div>

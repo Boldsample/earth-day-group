@@ -1,0 +1,24 @@
+{
+  "global": {
+    "skip": "Saltar",
+    "next": "Siguiente",
+    "login": "Iniciar sesión",
+    "hi": "Hola",
+    "settings": "Configuración"
+  },
+  "intro": {
+    "slide1_title": "Bienvenidos a Earth Day Group.",
+    "slide1_description": "Una solución moderna para una sociedad sostenible.",
+    "slide1_item1": "Genera ingresos extra.",
+    "slide1_item2": "Encuentra centros de reciclaje cerca a tu ubicación.",
+    "slide1_item3": "Encuenta fundaciones.",
+    "slide1_item4": "Encuentra refugios de animales",
+    "slide1_item5": "Encuentra productos ecológicos.",
+    "locale_recycling_centers": "Encuentra centros de reciclaje cerca a tu ubicación",
+    "according_to_your_location": "De acuerdo a tu ubicación, EDG te mostrará los centros de reciclaje cercanos y precios de compra para cualquier tipo de materiales.",
+    "help_your_planet": "Ayuda al planeta y a tu bolsillo",
+    "make_an_extra_income": "Genera un ingreso extra con tu reciclaje, puedes elegir a quién vender dependiendo de tu interés.",
+    "find_social_organizations": "Encuenta fundaciones",
+    "give_a_second_change": "Dale una segunda oportunidad a esos objetos que piensas que pueden ayudar a alguien más."
+  }
+}
