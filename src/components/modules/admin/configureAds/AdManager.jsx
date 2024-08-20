@@ -137,7 +137,7 @@ const AdManager = ({type}) => {
 
             {!ad?.id && watch('image') == null && !loading  ? 
               <div>
-              <FileUpload name="banner_image" customUpload uploadHandler={customBase64Uploader} accept="image/*" maxFileSize={1000000} emptyTemplate={<p className="m-0">Drag and drop the image here to upload.</p>} />
+              <FileUpload name="banner_image" customUpload uploadHandler={customBase64Uploader} accept="image/*" maxFileSize={1300000} emptyTemplate={<p className="m-0">Drag and drop the image here to upload.</p>} />
               </div>
           :
           <div className='p-fileupload p-fileupload-advanced p-component mt-3'>
