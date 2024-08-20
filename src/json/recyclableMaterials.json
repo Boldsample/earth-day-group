@@ -1,38 +1,92 @@
 [
-	{
-		"material": "Paper",
-        "code": 1,
-		"classname": "paperCategory"
-		
-	},
-	{
-		"material": "Glass",
-        "code": 2,
-		"classname": "glassCategory"
-		
-	},
-	{
-		"material": "Plastic",
-        "code": 3,
-		"classname": "plasticCategory"
-
-	},
-	{
-		"material": "E-Waste",
-        "code": 4,
-		"classname": "green-earth"
-
-	},
-	{
-		"material": "Metal",
-        "code": 5,
-		"classname": "metalCategory"
-	
-	},
-    {
-		"material": "Organic",
-        "code": 6,
-		"classname": "eWasteCategory"
-
-	}
+  {
+    "label": "Ferrosos y metálicos",
+    "code": "FM",
+    "items": [
+      {"label": "Hierro y acero"}, 
+      {"label": "Aluminio"},
+      {"label": "Cobre"},
+      {"label": "Oro"},
+      {"label": "plata"},
+      {"label": "Platino"},
+      {"label": "Paladio"}
+    ]
+  },
+  {
+    "label": "Plásticos",
+    "code": "PL",
+    "items": [
+      {"label": "PET (Tereftalato de polietileno)"},
+      {"label": "HDPE (Polietileno de alta densidad)"},
+      {"label": "PVC (Cloruro de polivinilo)"},
+      {"label": "LDPE (Polietileno de baja densidad)"},
+      {"label": "PP (Polipropileno)"},
+      {"label": "PS (Poliestireno)"}
+    ]
+  },
+  {
+    "label": "Vidrio",
+    "code": "VD",
+    "items": [
+      {"label": "Vidrio transparente"},
+      {"label": "Vidrio coloreado"},
+      {"label": "Vidrio templado"},
+      {"label": "Vidrio laminado"}
+    ]
+  },
+  {
+    "label": "Papel y cartón",
+    "code": "PC",
+    "items": [
+      {"label": "Papel blanco"},
+      {"label": "Cartón corrugado"},
+      {"label": "Papel periódico"},
+      {"label": "Papel kraft"},
+      {"label": "Cartón Compacto o Cartulina"},
+      {"label": "Cartón Gris (Cartón Piedra)"}
+    ]
+  },
+  {
+    "label": "Orgánicos",
+    "code": "OR",
+    "items": [
+      {"label": "Restos de alimentos"},
+      {"label": "Hojas, césped y poda"},
+      {"label": "Madera"}
+    ]
+  },
+  {
+    "label": "Textiles",
+    "code": "TX",
+    "items": [
+      {"label": "Algodón"},
+      {"label": "Lana"},
+      {"label": "Poliéster"},
+      {"label": "Nylon"}
+    ]
+  },
+  {
+    "label": "RAEEs",
+    "code": "RA",
+    "items": [
+      {"label": "Electrodoméstico grande"},
+      {"label": "Electrodoméstico pequeño"},
+      {"label": "Equipos de cómputo y telecomunicaciones"},
+      {"label": "Herramientas eléctricas"},
+      {"label": "Consolas de videojuegos, juguetes"},
+      {"label": "Bicicletas y patinetas eléctricas"},
+      {"label": "Luminarias y bombillos"},
+      {"label": "Pilas y baterias"},
+      {"label": "Baterías de plomo"}
+    ]
+  },
+  {
+    "label": "Otros",
+    "code": "OT",
+    "items": [
+      {"label": "Aceites usados"},
+      {"label": "Llantas"},
+      {"label": "RCD - Residuos de construcción y demolición"}
+    ]
+  }
 ]
