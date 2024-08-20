@@ -49,6 +49,7 @@ const AdManager = ({type}) => {
         { name: 'Users', value: 'user' },
         { name: 'Companies', value: 'company' },
         { name: 'Social Organizations/Shelters', value: 'ngo, shelter, social'},
+        { name: 'Vendors', value: 'vendor'},
     ];
     
     const customBase64Uploader = async (event) => {
