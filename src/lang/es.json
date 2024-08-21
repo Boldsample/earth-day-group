@@ -20,5 +20,32 @@
     "make_an_extra_income": "Genera un ingreso extra con tu reciclaje, puedes elegir a quién vender dependiendo de tu interés.",
     "find_social_organizations": "Encuenta fundaciones",
     "give_a_second_change": "Dale una segunda oportunidad a esos objetos que piensas que pueden ayudar a alguien más."
-  }
+  },
+"login": {
+    "forgot": {
+      "title": "¿Olvidaste tu contraseña?",
+      "bodyText": "Ingresa tu correo electrónico registrado y te enviaremos un enlace para restablecer tu contraseña.",
+      "emailInput": "Correo electrónico",
+      "formBtn": "Enviar"
+    },
+    "loginForm":{
+      "mainTitle": "Inicia sesión",
+      "emailPlaceHolderText": "Correo electrónico",
+      "passwordPlaceHolderText": "Contraseña",
+      "formBtn": "Iniciar sesión",
+      "ForgotPassword": "¿Olvidaste tu contraseña?",
+      "signInWith": "O inicia sesión con",
+      "dontHaveAccount": "¿No tienes una cuenta? Regístrate"
+        },
+    "recover": {
+      "mainTitle": "Recuperar",
+      "bodyText": "Por favor, ingresa una nueva contraseña.",
+      "passwordPlaceHolderText": "Contraseña",
+      "passwordConfirmationPlaceHolderText": "Confirmar Contraseña",
+      "formBtn": "Registrarse"
+    }
+    } 
+
+
+  
 }

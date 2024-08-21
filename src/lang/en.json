@@ -20,5 +20,178 @@
     "make_an_extra_income": "Make an extra income with your recycling, you can choose who to sell depending on your interest.",
     "find_social_organizations": "Find social organizations",
     "give_a_second_change": "Give a second change to those objects that you think can help someone else."
-  }
+  },
+  "login":{
+    "forgot": {
+      "title": "Forgot Password?",
+      "bodyText": "Enter your registered Email ID and we’ll send you a link to reset your password.",
+      "emailInput": "Email",
+      "formBtn": "Send"
+    },
+    "loginForm":{
+        "mainTitle": "Login to your Account",
+        "emailPlaceHolderText": "Email",
+        "passwordPlaceHolderText": "Password",
+        "formBtn": "Login",
+        "ForgotPassword": "Forgot Password?",
+        "signInWith": "Or Sign in with",
+        "dontHaveAccount": "Don't have an account? Sign up"
+      },
+      "recover": {
+        "mainTitle": "Recover",
+        "bodyText": "Please enter a new password.",
+        "passwordPlaceHolderText": "Password",
+        "passwordConfirmationPlaceHolderText": "Confirm Password",
+        "formBtn": "Signup"
+      }
+    },
+    "admin":{
+      "configureAds":{
+        "headerBanner":{
+          "title": "Header Banner",
+          "bodyText": "Long horizontal banner format."
+        },
+        "dashboardButtonBanner":{
+          "title": "Home Menu Banner",
+          "bodyText": "Rectangular banner format."
+        },
+        "dialogContentheaderBanner": {
+            "title1": "Banner Description",
+            "title2": "Design Recommendations",
+            "title3": "Technical Requirements",
+            "title4": "Sections banner appears in",
+            "image": "/assets/adExamples/ad1.png",
+            "description": "This long horizontal format captures users attention due to its size and placement, making it ideal for brand awareness and important announcements.",
+            "techRequirements": ["Maximum File Size: 1.3 MB", "Minimum Width: 600 pixels", "Minimum Height: 300 pixels"],
+            "designRecommendations": ["File Type: JPG or PNG"],
+            "placesShown": ["Product Detail", "Company profile", "Product Catalog", "Company Catalog", "Shop Catalog", "Pet Catalog", "Pet detail", "NGO Catalog", "NGO Detail"]
+          },
+          "dialogContentdashboardButton": {
+            "title1": "Banner Description",
+            "title2": "Design Recommendations",
+            "title3": "Technical Requirements",
+            "title4": "Sections banner appears in",
+            "image": "/assets/adExamples/ad2.png",
+            "description": "Small rectangular banner ideal for branding purposes, particularly for showcasing logos or simple brand messages, but is less suited for ads with extensive text or detailed information.",
+            "techRequirements": ["Maximum File Size: 1.3 MB", "Minimum Width: 600 pixels", "Minimum Height: 300 pixels"],
+            "designRecommendations": ["File Type: JPG or PNG"],
+            "placesShown": ["Home Dashboard"]
+          }
+      },
+      "adManager":{
+        "modules": [
+          { "name": "Users", "value": "user" },
+          { "name": "Companies", "value": "company" },
+          { "name": "Social Organizations/Shelters", "value": "ngo, shelter, social" },
+          { "name": "Vendors", "value": "vendor" }
+          ],
+          "chooseBtnText": "Choose",
+          "uploadBtnText": "Upload",
+          "cancelBtnText": "Cancel",
+          "uploadImgPlaceHolderText": "Drag and drop the image here to upload.",
+          "createAdBtnText": "Create Ad",
+          "adNameInputTitle": "Ad Name",
+          "adNameInputPlaceholder": "Pepsi Summer Campaign",
+          "adUrlInputTitle": "Ad URL",
+          "adUrlInputPlaceholder": "www.pepsi.com/landing",
+          "adMultiSelectInputTitle": "Who can view this Ad?",
+          "adMultiSelectInputPlaceholder": "Select Modules",
+          "adDateInputTitle": "Ad Duration",
+          "adDateInputPlaceholder": "Select a range of dates",
+          "cancelCampaignBtnText": "Cancel Campaign",
+          "adTitle": "Ad Name:",
+          "targetTitle": "Ad Target:",
+          "durationTitle": "Ad Duration:",
+          "linkTitle": "Ad Link:",
+          "liveAdText": "LIVE"
+      },
+      "adminOffers":{
+        "inputSearchPlaceHolder": "Keyword Search",
+        "multiSelectInputPlaceHolder": "Filter by Materials",
+        "tableTitleUser": "user",
+        "tableTitleSubject": "Title",
+        "tableTitleMaterial": "Material",
+        "tableTitleQuantity": "Quantity",
+        "tableTitleSellPrice": "Sell Price",
+        "tableTitlePublishedDate": "Published Date",
+        "rowExpansiontitleCompany": "Company",
+        "rowExpansiontitleBid": "Bid",
+        "rowExpansiontitleStatus": "Status",
+        "rowExpansiontitleBiddingDate": "Bidding Date",
+        "statusTextAccepted": "Accepted",
+        "statusTextRejected": "Rejected",
+        "statusTextPending": "Pending",
+        "newOfferTextLink": "NewOffer",
+        "createPostOfferLinkText": "Create Post Offer"
+      },
+      "pets":{
+        "inputSearchPlaceHolder": "Keyword Search",
+        "mainTitle": "Pet List",
+        "tableTitlePublishedBy": "Published By",
+        "tableTitleName": "Name",
+        "tableTitleSpecie": "Specie",
+        "tableTitlePublished": "Published",
+        "tableTitleState": "State",
+        "tableTitlePublishedDate": "Published Date",
+        "stateDropdown": [
+          { "name": "Active", "code": "1" },
+          { "name": "Disable", "code": "2" }
+        ],
+        "noPetsFoundText": "There are no pets that meet the filter criteria."
+      },
+      "products":{
+        "inputSearchPlaceHolder": "Keyword Search",
+        "mainTitle": "Product List",
+        "tableTitlePublishedBy": "Published By",
+        "tableTitleName": "Name",
+        "tableTitlePrice": "Price",
+        "tableTitleState": "State",
+        "stateDropdown": [
+          { "name": "Active", "code": "1" },
+          { "name": "Disable", "code": "2" }
+        ],
+        "noProductsFoundText": "There are no products that meet the filter criteria."
+      },
+      "reportInfo":{
+        "mainTitle": "Report Detail",
+        "productTitle": "Reported Product:",
+        "ownerTitle": "Owner:",
+        "subjectTitle": "Subject:",
+        "descriptionTitle": "Description:",
+        "reportedByTitle": "Reported By:",
+        "viewBtn": "View"
+      },
+      "report": {
+        "SelectInputPlaceHolder": "Select a type",
+        "inputSearchPlaceHolder": "Keyword Search",
+        "mainTitle": "Report",
+        "tableTitleType": "Type",
+        "tableTitleReported": "Reported",
+        "tableTitleSubject": "Subject",
+        "tableTitleStatus": "Status",
+        "stateDropdown": [
+          { "name": "Active", "code": "1" },
+          { "name": "Disable", "code": "2" }
+        ],
+        "tableTitleAssignedTo": "Assigned to",
+        "noProductsFoundText": "There are no reports that meet the filter criteria."
+      },
+      "usersList":{
+        "inputSearchPlaceHolder": "Keyword Search",
+        "SelectInputUsersPlaceHolder": "All",
+        "SelectInputActivePlaceHolder": "Active",
+        "mainTitle": "Users List",
+        "tableTitleUser": "user",
+        "tableTitleRole": "Role",
+        "tableTitleCreatedAt": "Created At",
+        "tableTitleState": "State",
+        "stateDropdown": [
+          { "name": "Active", "code": "1" },
+          { "name": "Disable", "code": "2" }
+        ],
+        
+        "createPostOfferLinkText": "Create Post Offer"
+      }
+      
+    }
 }
