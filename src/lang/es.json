@@ -44,8 +44,156 @@
       "passwordConfirmationPlaceHolderText": "Confirmar Contraseña",
       "formBtn": "Registrarse"
     }
-    } 
-
-
-  
+    },
+    "admin": {
+    "configureAds": {
+        "headerBanner": {
+            "title": "Banner de encabezado",
+            "bodyText": "Formato de banner horizontal."
+        },
+        "dashboardButtonBanner": {
+            "title": "Banner del menú principal",
+            "bodyText": "Formato de banner rectangular."
+        },
+        "dialogContentheaderBanner": {
+            "title1": "Descripción del Banner",
+            "title2": "Recomendaciones de diseño",
+            "title3": "Requisitos técnicos",
+            "title4": "Secciones donde aparece el banner",
+            "image": "/assets/adExamples/ad1.png",
+            "description": "Este formato horizontal largo capta la atención de los usuarios debido a su tamaño y ubicación, lo que lo hace ideal para el reconocimiento de marca y anuncios importantes.",
+            "techRequirements": ["Tamaño máximo de archivo: 1,3 MB", "Ancho mínimo: 600 píxeles", "Altura mínima: 300 píxeles"],
+            "designRecommendations": ["Tipo de archivo: JPG o PNG"],
+            "placesShown": ["Detalle del producto", "Perfil de la empresa", "Catálogo de productos", "Catálogo de empresas", "Catálogo de tiendas", "Catálogo de mascotas", "Detalle de la mascota", "Catálogo de ONGs", "Detalle de ONG"]
+        },
+        "dialogContentdashboardButton": {
+            "title1": "Descripción del Banner",
+            "title2": "Recomendaciones de diseño",
+            "title3": "Requisitos técnicos",
+            "title4": "Secciones donde aparece el banner",
+            "image": "/assets/adExamples/ad2.png",
+            "description": "Banner rectangular pequeño ideal para propósitos de marca, especialmente para mostrar logotipos o mensajes simples de la marca. Es menos adecuado para anuncios con texto extenso o información detallada.",
+            "techRequirements": ["Tamaño máximo de archivo: 1,3 MB", "Ancho mínimo: 600 píxeles", "Altura mínima: 300 píxeles"],
+            "designRecommendations": ["Tipo de archivo: JPG o PNG"],
+            "placesShown": ["Menú principal"]
+        }
+    },
+    "adManager": {
+        "modules": [
+            { "name": "Usuarios", "value": "user" },
+            { "name": "Empresas", "value": "company" },
+            { "name": "Organizaciones Sociales/Refugios", "value": "ngo, shelter, social" },
+            { "name": "Vendedores", "value": "vendor" }
+        ],
+        "chooseBtnText": "Elegir",
+        "uploadBtnText": "Subir",
+        "cancelBtnText": "Cancelar",
+        "uploadImgPlaceHolderText": "Arrastra y suelta la imagen aquí para adjuntarla.",
+        "createAdBtnText": "Crear Anuncio",
+        "adNameInputTitle": "Nombre del Anuncio",
+        "adNameInputPlaceholder": "Campaña de Verano Pepsi",
+        "adUrlInputTitle": "URL del Anuncio",
+        "adUrlInputPlaceholder": "www.pepsi.com/landing",
+        "adMultiSelectInputTitle": "¿Quién puede ver este Anuncio?",
+        "adMultiSelectInputPlaceholder": "Seleccionar Módulos",
+        "adDateInputTitle": "Duración del Anuncio",
+        "adDateInputPlaceholder": "Seleccionar un rango de fechas",
+        "cancelCampaignBtnText": "Cancelar Campaña",
+        "adTitle": "Nombre del Anuncio:",
+        "targetTitle": "Audiencia del Anuncio:",
+        "durationTitle": "Duración del Anuncio:",
+        "linkTitle": "Enlace del Anuncio:",
+        "liveAdText": "EN VIVO"
+    },
+    "adminOffers": {
+        "inputSearchPlaceHolder": "Búsqueda por palabra clave",
+        "multiSelectInputPlaceHolder": "Filtrar por materiales",
+        "tableTitleUser": "Usuario",
+        "tableTitleSubject": "Título",
+        "tableTitleMaterial": "Material",
+        "tableTitleQuantity": "Cantidad",
+        "tableTitleSellPrice": "Precio de Venta",
+        "tableTitlePublishedDate": "Fecha de Publicación",
+        "rowExpansiontitleCompany": "Empresa",
+        "rowExpansiontitleBid": "Oferta",
+        "rowExpansiontitleStatus": "Estado",
+        "rowExpansiontitleBiddingDate": "Fecha de la Oferta",
+        "statusTextAccepted": "Aceptado",
+        "statusTextRejected": "Rechazado",
+        "statusTextPending": "Pendiente",
+        "newOfferTextLink": "Nueva Oferta",
+        "createPostOfferLinkText": "Crear Oferta"
+    },
+    "pets": {
+        "inputSearchPlaceHolder": "Búsqueda por palabra clave",
+        "mainTitle": "Lista de Mascotas",
+        "tableTitlePublishedBy": "Publicado por",
+        "tableTitleName": "Nombre",
+        "tableTitleSpecie": "Especie",
+        "tableTitlePublished": "Publicado",
+        "tableTitleState": "Estado",
+        "tableTitlePublishedDate": "Fecha de Publicación",
+        "stateDropdown": [
+            { "name": "Activo", "code": "1" },
+            { "name": "Desactivado", "code": "2" }
+        ],
+        "noPetsFoundText": "No hay mascotas que cumplan con los criterios deL filtro."
+    },
+    "products": {
+        "inputSearchPlaceHolder": "Búsqueda por palabra clave",
+        "mainTitle": "Lista de Productos",
+        "tableTitlePublishedBy": "Publicado por",
+        "tableTitleName": "Nombre",
+        "tableTitlePrice": "Precio",
+        "tableTitleState": "Estado",
+        "stateDropdown": [
+            { "name": "Activo", "code": "1" },
+            { "name": "Desactivado", "code": "2" }
+        ],
+        "noProductsFoundText": "No hay productos que cumplan con los criterios deL filtro."
+    },
+    "reportInfo": {
+        "mainTitle": "Detalle del Reporte",
+        "productTitle": "Producto Reportado:",
+        "ownerTitle": "Propietario:",
+        "subjectTitle": "Asunto:",
+        "descriptionTitle": "Descripción:",
+        "reportedByTitle": "Reportado por:",
+        "viewBtn": "Ver"
+    },
+    "report": {
+        "SelectInputPlaceHolder": "Seleccionar un tipo",
+        "inputSearchPlaceHolder": "Búsqueda por palabra clave",
+        "mainTitle": "Reporte",
+        "tableTitleType": "Tipo",
+        "tableTitleReported": "Reportado",
+        "tableTitleSubject": "Asunto",
+        "tableTitleStatus": "Estado",
+        "stateDropdown": [
+            { "name": "Activo", "code": "1" },
+            { "name": "Desactivado", "code": "2" }
+        ],
+        "tableTitleAssignedTo": "Asignado a",
+        "noProductsFoundText": "No hay reportes que cumplan con los criterios deL filtro."
+    },
+    "usersList": {
+        "inputSearchPlaceHolder": "Búsqueda por palabra clave",
+        "SelectInputUsersPlaceHolder": "Todos",
+        "SelectInputActivePlaceHolder": "Activo",
+        "mainTitle": "Lista de Usuarios",
+        "tableTitleUser": "Usuario",
+        "tableTitleRole": "Rol",
+        "tableTitleCreatedAt": "Creado en",
+        "tableTitleState": "Estado",
+        "stateDropdown": [
+            { "name": "Activo", "code": "1" },
+            { "name": "Desactivado", "code": "2" }
+        ],
+        "createPostOfferLinkText": "Crear Oferta de Publicación"
+    }
+},
+"bookmarks":{
+      "noProductsSavedText": "Todavia no has guardado ningún producto."
+    }
+   
 }
