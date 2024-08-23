@@ -4,7 +4,12 @@
     "next": "Siguiente",
     "login": "Iniciar sesión",
     "hi": "Hola",
-    "settings": "Configuración"
+    "settings": "Configuración",
+
+    "formErrors": {
+        "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
+        "requiredErrorMessage": "Este campo es obligatorio."
+    }
   },
   "intro": {
     "slide1_title": "Bienvenidos a Earth Day Group.",
@@ -190,10 +195,101 @@
             { "name": "Desactivado", "code": "2" }
         ],
         "createPostOfferLinkText": "Crear Oferta de Publicación"
-    }
-},
-"bookmarks":{
-      "noProductsSavedText": "Todavia no has guardado ningún producto."
-    }
-   
+        }
+    },
+    "bookmarks":{
+        "noProductsSavedText": "Todavia no has guardado ningún producto."
+        },
+    "chat": {
+        "chat": {
+        "sendOfferText": "Estás a punto de enviar una oferta a {offerInfo?.name}. El precio solicitado para esta oferta es",
+        "sendBtnText": "Enviar",
+        "sendOfferBtnText": "Enviar Oferta",
+        "cancelBtnText": "Cancelar"
+        },
+        "chats": {
+        "mainTitle": "Chats",
+        "usersBtnText": "Usuarios",
+        "recyclingBtnText": "Centros de Reciclaje",
+        "vendorsBtnText": "Vendedores",
+        "ngoBtnText": "ONGs",
+        "inputSearchPlaceHolder": "Buscar"
+        }
+    },
+    "dashboard": {
+        "inputSearchTitle": "Descubre",
+        "inputSearchPlaceHolder": "Buscar",
+        "noModulesFoundText": "No pudimos encontrar lo que estás buscando. ¿Te gustaría intentarlo de nuevo?"
+      },
+    "followers": {
+    "mainTitle": "Seguidores : Siguiendo",
+    "followersBtnText": "Seguidores",
+    "followingBtnText": "Siguiendo",
+    "inputSearchPlaceHolder": "Buscar"
+    },
+    "ngo": {
+        "pets": {
+          "createPet": {
+            "species": [
+              { "type": "Gato", "code": "Cat" },
+              { "type": "Perro", "code": "Dog" }
+            ],
+            "genders": [
+              { "gender": "Macho", "value": "Male" },
+              { "gender": "Hembra", "value": "Female" }
+            ],
+            "editPetthankyouPagetitle": "¡Todo listo!",
+            "editPetthankyouPagebackground": "image-1.svg",
+            "editPetthankyouPagebuttonLabel": "Ir a la mascota",
+            "editPetthankyouPagebodyText": "¡La mascota para adopción se ha actualizado con éxito!",
+            "createPetthankyouPagetitle": "¡Todo listo!",
+            "createPetthankyouPagebackground": "image-1.svg",
+            "createPetthankyouPagebuttonLabel": "Ir a la mascota",
+            "createPetthankyouPagebodyText": "¡La mascota para adopción fue creada!",
+            "inputNameTitleText": "Nombre de la Mascota",
+            "namePlaceHolderText": "Max",
+            "inputNamemaxLengthErrorMessage": "Has superado el número máximo de 60 caracteres en este campo",
+            "dropdownSpeciesTitleText": "Especie",
+            "dropdownSpeciesPlaceholderText": "Selecciona una especie",
+            "inputBreedTitleText": "Raza",
+            "breedPlaceHolderText": "Pastor Alemán",
+            "inputAgeTitleText": "Edad",
+            "agePlaceholderText": "5",
+            "inputAgemaxLengthErrorMessage": "Has superado el número máximo de 2 caracteres en este campo",
+            "inputWeightTitleText": "Peso",
+            "weightPlaceholderText": "Peso (Kilos)",
+            "textAreaPetDescriptionTitle": "Detalles de la Mascota",
+            "petDescriptionPlaceholder": "Cuéntanos sobre tu mascota.",
+            "textAreamaxLengthErrorMessage": "Has superado el número máximo de 1000 caracteres en este campo",
+            "petImageUploaderTitle": "Añadir Imágenes de la Mascota",
+            "submitPetbtn": "Actualizar : Crear"   
+
+          },
+          "pet": {
+            "contactShelterBtn": "Contactar refugio",
+            "deletePetBtn" : "Eliminar mascota"
+          }
+        }
+      },
+      "notifications":{
+        "headerNotifications": {},
+        "notifications": {
+            "notifications": {
+            "headerNotifications": {},
+            "notifications": {
+            "mainTitle": "Notificaciones",
+            "noNotificationsFoundText": "No tienes notificaciones en este momento."
+                }
+            }
+        }
+    },
+    "offers": {
+        "offerInfo": {
+          "publishedByTitle": "Publicado por:",
+          "quantityTitle": "Cantidad:",
+          "askingPriceTitle": "Precio solicitado:",
+          "sendOfferBtn": "Enviar oferta"
+        }
+      }
+  
 }

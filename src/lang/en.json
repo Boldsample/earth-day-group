@@ -4,7 +4,12 @@
     "next": "Next",
     "login": "Log In",
     "hi": "Hi",
-    "settings": "Settings"
+    "settings": "Settings",
+
+    "formErrors": {
+      "patternErrorMessage": "The field should not have empty spaces in the beginning.",
+      "requiredErrorMessage": "This field is required."
+    }
   },
   "intro": {
     "slide1_title": "Welcome everybody to Earth Day Group.",
@@ -26,13 +31,13 @@
       "title": "Forgot Password?",
       "bodyText": "Enter your registered Email ID and we’ll send you a link to reset your password.",
       "emailInput": "Email",
-      "formBtn": "Send"
+      "sendformBtnText": "Send"
     },
     "loginForm":{
         "mainTitle": "Login to your Account",
         "emailPlaceHolderText": "Email",
         "passwordPlaceHolderText": "Password",
-        "formBtn": "Login",
+        "loginformBtn": "Login",
         "ForgotPassword": "Forgot Password?",
         "signInWith": "Or Sign in with",
         "dontHaveAccount": "Don't have an account? Sign up"
@@ -42,7 +47,7 @@
         "bodyText": "Please enter a new password.",
         "passwordPlaceHolderText": "Password",
         "passwordConfirmationPlaceHolderText": "Confirm Password",
-        "formBtn": "Signup"
+        "signUpBtnText": "Signup"
       }
     },
     "admin":{
@@ -185,13 +190,104 @@
         "tableTitleRole": "Role",
         "tableTitleCreatedAt": "Created At",
         "tableTitleState": "State",
-        "stateDropdown": [
+        "stateDropdown": [ 
           { "name": "Active", "code": "1" },
           { "name": "Disable", "code": "2" }
         ],
         
         "createPostOfferLinkText": "Create Post Offer"
+      }    
+    },
+    "bookmarks":{
+      "noProductsSavedText": "You have not saved any products."
+    },
+    "chat":{
+      "chat":{
+        "sendOfferText": "You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is",
+        "sendBtnText": "Send",
+        "sendOfferBtnText": "Send Offer",
+        "cancelBtnText": "Cancel"
+
+      },
+      "chats":{
+        "mainTitle": "Chats",
+        "usersBtnText": "Users",
+        "recyclingBtnText": "Recycling Centers",
+        "vendorsBtnText": "Vendors",
+        "ngoBtnText": "NGOs",
+        "inputSearchPlaceHolder": "Search"
       }
-      
+    },
+    "dashboard":{
+      "inputSearchTitle": "Discover",
+      "inputSearchPlaceHolder": "Search",
+      "noModulesFoundText": "We couldn't find what you are looking for. Care to try again."
+
+    },
+    "followers": {
+      "mainTitle": "Followers : Following",
+      "followersBtnText": "Followers",
+      "followingBtnText": "Following",
+      "inputSearchPlaceHolder": "Search"
+    },
+    "ngo":{
+      "pets":{
+        "createPet":{
+          "species": [
+            { "type": "Cat", "code": "Cat" },
+            { "type": "Dog", "code": "Dog" }
+          ],
+          "genders" : [
+            { "gender": "Male", "value": "Male" },
+            { "gender": "Female", "value": "Female" }
+          ],
+          "editPetthankyouPagetitle": "All set!",
+          "editPetthankyouPagebackground": "image-1.svg",
+          "editPetthankyouPagebuttonLabel": "Go to pet",
+          "editPetthankyouPagebodyText": "The pet for adoption has updated successfully!",
+
+          "createPetthankyouPagetitle": "All set!",
+          "createPetthankyouPagebackground": "image-1.svg",
+          "createPetthankyouPagebuttonLabel": "Go to pet",
+          "createPetthankyouPagebodyText": "The pet for adoption was created!",
+
+          "inputNameTitleText": "Pet Name",
+          "namePlaceHolderText": "Max",
+          "inputNamemaxLengthErrorMessage": "You have exceeded the maximum number of 60 characters in this field",
+          "dropdownSpeciesTitleText": "Species",
+          "dropdownSpeciesPlaceholderText": "Select a species",
+          "inputBreedTitleText": "Breed",
+          "breedPlaceHolderText": "German Shepherd",
+          "inputAgeTitleText": "Age",
+          "agePlaceholderText": "5",
+          "inputAgemaxLengthErrorMessage": "You have exceeded the maximum number of 2 characters in this field",
+          "inputWeightTitleText": "Weight",
+          "weightPlaceholderText": "Weight (Kilos)",
+          "textAreaPetDescriptionTitle": "Pet Details",
+          "petDescriptionPlaceholder": "Tell us about your pet.",
+          "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
+          "petImageUploaderTitle": "Add Pet Images",
+          "submitPetbtn": "Update : Create"     
+        },
+        "pet":{
+          "contactShelterBtn": "Contact Shelter",
+          "deletePetBtn" : "Delete Pet"
+        }
+      }
+    },
+    "notifications":{
+      "headerNotifications": {},
+      "notifications": {
+        "mainTitle": "Notifications",
+        "noNotificationsFoundText": "You don't have any notifications at the moment."
+      }
+    },
+    "offers":{
+      "offerInfo": {
+        "publishedByTitle": "Published by:",
+        "quantityTitle": "Quantity:",
+        "askingPriceTitle": "Asking Price:",
+        "sendOfferBtn": "Send an offer"
+      }
     }
 }
