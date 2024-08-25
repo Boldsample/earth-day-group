@@ -5,7 +5,6 @@
     "login": "Log In",
     "hi": "Hi",
     "settings": "Settings",
-
     "formErrors": {
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required."
@@ -26,268 +25,391 @@
     "find_social_organizations": "Find social organizations",
     "give_a_second_change": "Give a second change to those objects that you think can help someone else."
   },
-  "login":{
+  "login": {
     "forgot": {
       "title": "Forgot Password?",
       "bodyText": "Enter your registered Email ID and we’ll send you a link to reset your password.",
       "emailInput": "Email",
       "sendformBtnText": "Send"
     },
-    "loginForm":{
-        "mainTitle": "Login to your Account",
-        "emailPlaceHolderText": "Email",
-        "passwordPlaceHolderText": "Password",
-        "loginformBtn": "Login",
-        "ForgotPassword": "Forgot Password?",
-        "signInWith": "Or Sign in with",
-        "dontHaveAccount": "Don't have an account? Sign up"
+    "loginForm": {
+      "mainTitle": "Login to your Account",
+      "emailPlaceHolderText": "Email",
+      "passwordPlaceHolderText": "Password",
+      "loginformBtn": "Login",
+      "ForgotPassword": "Forgot Password?",
+      "signInWith": "Or Sign in with",
+      "dontHaveAccount": "Don't have an account? Sign up"
+    },
+    "recover": {
+      "mainTitle": "Recover",
+      "bodyText": "Please enter a new password.",
+      "passwordPlaceHolderText": "Password",
+      "passwordConfirmationPlaceHolderText": "Confirm Password",
+      "signUpBtnText": "Signup"
+    }
+  },
+  "admin": {
+    "configureAds": {
+      "headerBanner": {
+        "title": "Header Banner",
+        "bodyText": "Long horizontal banner format."
       },
-      "recover": {
-        "mainTitle": "Recover",
-        "bodyText": "Please enter a new password.",
-        "passwordPlaceHolderText": "Password",
-        "passwordConfirmationPlaceHolderText": "Confirm Password",
-        "signUpBtnText": "Signup"
+      "dashboardButtonBanner": {
+        "title": "Home Menu Banner",
+        "bodyText": "Rectangular banner format."
+      },
+      "dialogContentheaderBanner": {
+        "title1": "Banner Description",
+        "title2": "Design Recommendations",
+        "title3": "Technical Requirements",
+        "title4": "Sections banner appears in",
+        "image": "/assets/adExamples/ad1.png",
+        "description": "This long horizontal format captures users attention due to its size and placement, making it ideal for brand awareness and important announcements.",
+        "techRequirements": [
+          "Maximum File Size: 1.3 MB",
+          "Minimum Width: 600 pixels",
+          "Minimum Height: 300 pixels"
+        ],
+        "designRecommendations": [
+          "File Type: JPG or PNG"
+        ],
+        "placesShown": [
+          "Product Detail",
+          "Company profile",
+          "Product Catalog",
+          "Company Catalog",
+          "Shop Catalog",
+          "Pet Catalog",
+          "Pet detail",
+          "NGO Catalog",
+          "NGO Detail"
+        ]
+      },
+      "dialogContentdashboardButton": {
+        "title1": "Banner Description",
+        "title2": "Design Recommendations",
+        "title3": "Technical Requirements",
+        "title4": "Sections banner appears in",
+        "image": "/assets/adExamples/ad2.png",
+        "description": "Small rectangular banner ideal for branding purposes, particularly for showcasing logos or simple brand messages, but is less suited for ads with extensive text or detailed information.",
+        "techRequirements": [
+          "Maximum File Size: 1.3 MB",
+          "Minimum Width: 600 pixels",
+          "Minimum Height: 300 pixels"
+        ],
+        "designRecommendations": [
+          "File Type: JPG or PNG"
+        ],
+        "placesShown": [
+          "Home Dashboard"
+        ]
       }
     },
-    "admin":{
-      "configureAds":{
-        "headerBanner":{
-          "title": "Header Banner",
-          "bodyText": "Long horizontal banner format."
+    "adManager": {
+      "modules": [
+        {
+          "name": "Users",
+          "value": "user"
         },
-        "dashboardButtonBanner":{
-          "title": "Home Menu Banner",
-          "bodyText": "Rectangular banner format."
+        {
+          "name": "Companies",
+          "value": "company"
         },
-        "dialogContentheaderBanner": {
-            "title1": "Banner Description",
-            "title2": "Design Recommendations",
-            "title3": "Technical Requirements",
-            "title4": "Sections banner appears in",
-            "image": "/assets/adExamples/ad1.png",
-            "description": "This long horizontal format captures users attention due to its size and placement, making it ideal for brand awareness and important announcements.",
-            "techRequirements": ["Maximum File Size: 1.3 MB", "Minimum Width: 600 pixels", "Minimum Height: 300 pixels"],
-            "designRecommendations": ["File Type: JPG or PNG"],
-            "placesShown": ["Product Detail", "Company profile", "Product Catalog", "Company Catalog", "Shop Catalog", "Pet Catalog", "Pet detail", "NGO Catalog", "NGO Detail"]
-          },
-          "dialogContentdashboardButton": {
-            "title1": "Banner Description",
-            "title2": "Design Recommendations",
-            "title3": "Technical Requirements",
-            "title4": "Sections banner appears in",
-            "image": "/assets/adExamples/ad2.png",
-            "description": "Small rectangular banner ideal for branding purposes, particularly for showcasing logos or simple brand messages, but is less suited for ads with extensive text or detailed information.",
-            "techRequirements": ["Maximum File Size: 1.3 MB", "Minimum Width: 600 pixels", "Minimum Height: 300 pixels"],
-            "designRecommendations": ["File Type: JPG or PNG"],
-            "placesShown": ["Home Dashboard"]
-          }
-      },
-      "adManager":{
-        "modules": [
-          { "name": "Users", "value": "user" },
-          { "name": "Companies", "value": "company" },
-          { "name": "Social Organizations/Shelters", "value": "ngo, shelter, social" },
-          { "name": "Vendors", "value": "vendor" }
-          ],
-          "chooseBtnText": "Choose",
-          "uploadBtnText": "Upload",
-          "cancelBtnText": "Cancel",
-          "uploadImgPlaceHolderText": "Drag and drop the image here to upload.",
-          "createAdBtnText": "Create Ad",
-          "adNameInputTitle": "Ad Name",
-          "adNameInputPlaceholder": "Pepsi Summer Campaign",
-          "adUrlInputTitle": "Ad URL",
-          "adUrlInputPlaceholder": "www.pepsi.com/landing",
-          "adMultiSelectInputTitle": "Who can view this Ad?",
-          "adMultiSelectInputPlaceholder": "Select Modules",
-          "adDateInputTitle": "Ad Duration",
-          "adDateInputPlaceholder": "Select a range of dates",
-          "cancelCampaignBtnText": "Cancel Campaign",
-          "adTitle": "Ad Name:",
-          "targetTitle": "Ad Target:",
-          "durationTitle": "Ad Duration:",
-          "linkTitle": "Ad Link:",
-          "liveAdText": "LIVE"
-      },
-      "adminOffers":{
-        "inputSearchPlaceHolder": "Keyword Search",
-        "multiSelectInputPlaceHolder": "Filter by Materials",
-        "tableTitleUser": "user",
-        "tableTitleSubject": "Title",
-        "tableTitleMaterial": "Material",
-        "tableTitleQuantity": "Quantity",
-        "tableTitleSellPrice": "Sell Price",
-        "tableTitlePublishedDate": "Published Date",
-        "rowExpansiontitleCompany": "Company",
-        "rowExpansiontitleBid": "Bid",
-        "rowExpansiontitleStatus": "Status",
-        "rowExpansiontitleBiddingDate": "Bidding Date",
-        "statusTextAccepted": "Accepted",
-        "statusTextRejected": "Rejected",
-        "statusTextPending": "Pending",
-        "newOfferTextLink": "NewOffer",
-        "createPostOfferLinkText": "Create Post Offer"
-      },
-      "pets":{
-        "inputSearchPlaceHolder": "Keyword Search",
-        "mainTitle": "Pet List",
-        "tableTitlePublishedBy": "Published By",
-        "tableTitleName": "Name",
-        "tableTitleSpecie": "Specie",
-        "tableTitlePublished": "Published",
-        "tableTitleState": "State",
-        "tableTitlePublishedDate": "Published Date",
-        "stateDropdown": [
-          { "name": "Active", "code": "1" },
-          { "name": "Disable", "code": "2" }
-        ],
-        "noPetsFoundText": "There are no pets that meet the filter criteria."
-      },
-      "products":{
-        "inputSearchPlaceHolder": "Keyword Search",
-        "mainTitle": "Product List",
-        "tableTitlePublishedBy": "Published By",
-        "tableTitleName": "Name",
-        "tableTitlePrice": "Price",
-        "tableTitleState": "State",
-        "stateDropdown": [
-          { "name": "Active", "code": "1" },
-          { "name": "Disable", "code": "2" }
-        ],
-        "noProductsFoundText": "There are no products that meet the filter criteria."
-      },
-      "reportInfo":{
-        "mainTitle": "Report Detail",
-        "productTitle": "Reported Product:",
-        "ownerTitle": "Owner:",
-        "subjectTitle": "Subject:",
-        "descriptionTitle": "Description:",
-        "reportedByTitle": "Reported By:",
-        "viewBtn": "View"
-      },
-      "report": {
-        "SelectInputPlaceHolder": "Select a type",
-        "inputSearchPlaceHolder": "Keyword Search",
-        "mainTitle": "Report",
-        "tableTitleType": "Type",
-        "tableTitleReported": "Reported",
-        "tableTitleSubject": "Subject",
-        "tableTitleStatus": "Status",
-        "stateDropdown": [
-          { "name": "Active", "code": "1" },
-          { "name": "Disable", "code": "2" }
-        ],
-        "tableTitleAssignedTo": "Assigned to",
-        "noProductsFoundText": "There are no reports that meet the filter criteria."
-      },
-      "usersList":{
-        "inputSearchPlaceHolder": "Keyword Search",
-        "SelectInputUsersPlaceHolder": "All",
-        "SelectInputActivePlaceHolder": "Active",
-        "mainTitle": "Users List",
-        "tableTitleUser": "user",
-        "tableTitleRole": "Role",
-        "tableTitleCreatedAt": "Created At",
-        "tableTitleState": "State",
-        "stateDropdown": [ 
-          { "name": "Active", "code": "1" },
-          { "name": "Disable", "code": "2" }
-        ],
-        
-        "createPostOfferLinkText": "Create Post Offer"
-      }    
-    },
-    "bookmarks":{
-      "noProductsSavedText": "You have not saved any products."
-    },
-    "chat":{
-      "chat":{
-        "sendOfferText": "You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is",
-        "sendBtnText": "Send",
-        "sendOfferBtnText": "Send Offer",
-        "cancelBtnText": "Cancel"
-
-      },
-      "chats":{
-        "mainTitle": "Chats",
-        "usersBtnText": "Users",
-        "recyclingBtnText": "Recycling Centers",
-        "vendorsBtnText": "Vendors",
-        "ngoBtnText": "NGOs",
-        "inputSearchPlaceHolder": "Search"
-      }
-    },
-    "dashboard":{
-      "inputSearchTitle": "Discover",
-      "inputSearchPlaceHolder": "Search",
-      "noModulesFoundText": "We couldn't find what you are looking for. Care to try again."
-
-    },
-    "followers": {
-      "mainTitle": "Followers : Following",
-      "followersBtnText": "Followers",
-      "followingBtnText": "Following",
-      "inputSearchPlaceHolder": "Search"
-    },
-    "ngo":{
-      "pets":{
-        "createPet":{
-          "species": [
-            { "type": "Cat", "code": "Cat" },
-            { "type": "Dog", "code": "Dog" }
-          ],
-          "genders" : [
-            { "gender": "Male", "value": "Male" },
-            { "gender": "Female", "value": "Female" }
-          ],
-          "editPetthankyouPagetitle": "All set!",
-          "editPetthankyouPagebackground": "image-1.svg",
-          "editPetthankyouPagebuttonLabel": "Go to pet",
-          "editPetthankyouPagebodyText": "The pet for adoption has updated successfully!",
-
-          "createPetthankyouPagetitle": "All set!",
-          "createPetthankyouPagebackground": "image-1.svg",
-          "createPetthankyouPagebuttonLabel": "Go to pet",
-          "createPetthankyouPagebodyText": "The pet for adoption was created!",
-
-          "inputNameTitleText": "Pet Name",
-          "namePlaceHolderText": "Max",
-          "inputNamemaxLengthErrorMessage": "You have exceeded the maximum number of 60 characters in this field",
-          "dropdownSpeciesTitleText": "Species",
-          "dropdownSpeciesPlaceholderText": "Select a species",
-          "inputBreedTitleText": "Breed",
-          "breedPlaceHolderText": "German Shepherd",
-          "inputAgeTitleText": "Age",
-          "agePlaceholderText": "5",
-          "inputAgemaxLengthErrorMessage": "You have exceeded the maximum number of 2 characters in this field",
-          "inputWeightTitleText": "Weight",
-          "weightPlaceholderText": "Weight (Kilos)",
-          "textAreaPetDescriptionTitle": "Pet Details",
-          "petDescriptionPlaceholder": "Tell us about your pet.",
-          "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
-          "petImageUploaderTitle": "Add Pet Images",
-          "submitPetbtn": "Update : Create"     
+        {
+          "name": "Social Organizations/Shelters",
+          "value": "ngo, shelter, social"
         },
-        "pet":{
-          "contactShelterBtn": "Contact Shelter",
-          "deletePetBtn" : "Delete Pet"
+        {
+          "name": "Vendors",
+          "value": "vendor"
         }
-      }
+      ],
+      "chooseBtnText": "Choose",
+      "uploadBtnText": "Upload",
+      "cancelBtnText": "Cancel",
+      "uploadImgPlaceHolderText": "Drag and drop the image here to upload.",
+      "createAdBtnText": "Create Ad",
+      "adNameInputTitle": "Ad Name",
+      "adNameInputPlaceholder": "Pepsi Summer Campaign",
+      "adUrlInputTitle": "Ad URL",
+      "adUrlInputPlaceholder": "www.pepsi.com/landing",
+      "adMultiSelectInputTitle": "Who can view this Ad?",
+      "adMultiSelectInputPlaceholder": "Select Modules",
+      "adDateInputTitle": "Ad Duration",
+      "adDateInputPlaceholder": "Select a range of dates",
+      "cancelCampaignBtnText": "Cancel Campaign",
+      "adTitle": "Ad Name:",
+      "targetTitle": "Ad Target:",
+      "durationTitle": "Ad Duration:",
+      "linkTitle": "Ad Link:",
+      "liveAdText": "LIVE"
     },
-    "notifications":{
-      "headerNotifications": {},
-      "notifications": {
-        "mainTitle": "Notifications",
-        "noNotificationsFoundText": "You don't have any notifications at the moment."
-      }
+    "adminOffers": {
+      "inputSearchPlaceHolder": "Keyword Search",
+      "multiSelectInputPlaceHolder": "Filter by Materials",
+      "tableTitleUser": "user",
+      "tableTitleSubject": "Title",
+      "tableTitleMaterial": "Material",
+      "tableTitleQuantity": "Quantity",
+      "tableTitleSellPrice": "Sell Price",
+      "tableTitlePublishedDate": "Published Date",
+      "rowExpansiontitleCompany": "Company",
+      "rowExpansiontitleBid": "Bid",
+      "rowExpansiontitleStatus": "Status",
+      "rowExpansiontitleBiddingDate": "Bidding Date",
+      "statusTextAccepted": "Accepted",
+      "statusTextRejected": "Rejected",
+      "statusTextPending": "Pending",
+      "newOfferTextLink": "NewOffer",
+      "createPostOfferLinkText": "Create Post Offer"
     },
-    "offers":{
-      "offerInfo": {
-        "publishedByTitle": "Published by:",
-        "quantityTitle": "Quantity:",
-        "askingPriceTitle": "Asking Price:",
-        "sendOfferBtn": "Send an offer"
+    "pets": {
+      "inputSearchPlaceHolder": "Keyword Search",
+      "mainTitle": "Pet List",
+      "tableTitlePublishedBy": "Published By",
+      "tableTitleName": "Name",
+      "tableTitleSpecie": "Specie",
+      "tableTitlePublished": "Published",
+      "tableTitleState": "State",
+      "tableTitlePublishedDate": "Published Date",
+      "stateDropdown": [
+        {
+          "name": "Active",
+          "code": "1"
+        },
+        {
+          "name": "Disable",
+          "code": "2"
+        }
+      ],
+      "noPetsFoundText": "There are no pets that meet the filter criteria."
+    },
+    "products": {
+      "inputSearchPlaceHolder": "Keyword Search",
+      "mainTitle": "Product List",
+      "tableTitlePublishedBy": "Published By",
+      "tableTitleName": "Name",
+      "tableTitlePrice": "Price",
+      "tableTitleState": "State",
+      "stateDropdown": [
+        {
+          "name": "Active",
+          "code": "1"
+        },
+        {
+          "name": "Disable",
+          "code": "2"
+        }
+      ],
+      "noProductsFoundText": "There are no products that meet the filter criteria."
+    },
+    "reportInfo": {
+      "mainTitle": "Report Detail",
+      "productTitle": "Reported Product:",
+      "ownerTitle": "Owner:",
+      "subjectTitle": "Subject:",
+      "descriptionTitle": "Description:",
+      "reportedByTitle": "Reported By:",
+      "viewBtn": "View"
+    },
+    "report": {
+      "SelectInputPlaceHolder": "Select a type",
+      "inputSearchPlaceHolder": "Keyword Search",
+      "mainTitle": "Report",
+      "tableTitleType": "Type",
+      "tableTitleReported": "Reported",
+      "tableTitleSubject": "Subject",
+      "tableTitleStatus": "Status",
+      "stateDropdown": [
+        {
+          "name": "Active",
+          "code": "1"
+        },
+        {
+          "name": "Disable",
+          "code": "2"
+        }
+      ],
+      "tableTitleAssignedTo": "Assigned to",
+      "noProductsFoundText": "There are no reports that meet the filter criteria."
+    },
+    "usersList": {
+      "inputSearchPlaceHolder": "Keyword Search",
+      "SelectInputUsersPlaceHolder": "All",
+      "SelectInputActivePlaceHolder": "Active",
+      "mainTitle": "Users List",
+      "tableTitleUser": "user",
+      "tableTitleRole": "Role",
+      "tableTitleCreatedAt": "Created At",
+      "tableTitleState": "State",
+      "stateDropdown": [
+        {
+          "name": "Active",
+          "code": "1"
+        },
+        {
+          "name": "Disable",
+          "code": "2"
+        }
+      ],
+      "createPostOfferLinkText": "Create Post Offer"
+    }
+  },
+  "bookmarks": {
+    "noProductsSavedText": "You have not saved any products."
+  },
+  "chat": {
+    "chat": {
+      "sendOfferText": "You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is",
+      "sendBtnText": "Send",
+      "sendOfferBtnText": "Send Offer",
+      "cancelBtnText": "Cancel"
+    },
+    "chats": {
+      "mainTitle": "Chats",
+      "usersBtnText": "Users",
+      "recyclingBtnText": "Recycling Centers",
+      "vendorsBtnText": "Vendors",
+      "ngoBtnText": "NGOs",
+      "inputSearchPlaceHolder": "Search"
+    }
+  },
+  "dashboard": {
+    "inputSearchTitle": "Discover",
+    "inputSearchPlaceHolder": "Search",
+    "noModulesFoundText": "We couldn't find what you are looking for. Care to try again."
+  },
+  "followers": {
+    "mainTitle": "Followers : Following",
+    "followersBtnText": "Followers",
+    "followingBtnText": "Following",
+    "inputSearchPlaceHolder": "Search"
+  },
+  "ngo": {
+    "pets": {
+      "createPet": {
+        "species": [
+          {
+            "type": "Cat",
+            "code": "Cat"
+          },
+          {
+            "type": "Dog",
+            "code": "Dog"
+          }
+        ],
+        "genders": [
+          {
+            "gender": "Male",
+            "value": "Male"
+          },
+          {
+            "gender": "Female",
+            "value": "Female"
+          }
+        ],
+        "editPetthankyouPagetitle": "All set!",
+        "editPetthankyouPagebackground": "image-1.svg",
+        "editPetthankyouPagebuttonLabel": "Go to pet",
+        "editPetthankyouPagebodyText": "The pet for adoption has updated successfully!",
+        "createPetthankyouPagetitle": "All set!",
+        "createPetthankyouPagebackground": "image-1.svg",
+        "createPetthankyouPagebuttonLabel": "Go to pet",
+        "createPetthankyouPagebodyText": "The pet for adoption was created!",
+        "inputNameTitleText": "Pet Name",
+        "namePlaceHolderText": "Max",
+        "inputNamemaxLengthErrorMessage": "You have exceeded the maximum number of 60 characters in this field",
+        "dropdownSpeciesTitleText": "Species",
+        "dropdownSpeciesPlaceholderText": "Select a species",
+        "inputBreedTitleText": "Breed",
+        "breedPlaceHolderText": "German Shepherd",
+        "inputAgeTitleText": "Age",
+        "agePlaceholderText": "5",
+        "inputAgemaxLengthErrorMessage": "You have exceeded the maximum number of 2 characters in this field",
+        "inputWeightTitleText": "Weight",
+        "weightPlaceholderText": "Weight (Kilos)",
+        "textAreaPetDescriptionTitle": "Pet Details",
+        "petDescriptionPlaceholder": "Tell us about your pet.",
+        "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
+        "petImageUploaderTitle": "Add Pet Images",
+        "submitPetbtn": "Update : Create"
+      },
+      "pet": {
+        "contactShelterBtn": "Contact Shelter",
+        "deletePetBtn": "Delete Pet"
       }
     }
+  },
+  "notifications": {
+    "headerNotifications": {},
+    "notifications": {
+      "mainTitle": "Notifications",
+      "noNotificationsFoundText": "You don't have any notifications at the moment."
+    }
+  },
+  "offers": {
+    "offerInfo": {
+      "publishedByTitle": "Published by:",
+      "quantityTitle": "Quantity:",
+      "askingPriceTitle": "Asking Price:",
+      "sendOfferBtn": "Send an offer"
+    },
+    "offerNew": {
+      "mainTitle": "Post Offer",
+      "inputTitleLabel": "Title",
+      "inputTitlePlaceholderText": "Title*",
+      "inputTitlemaxLengthErrorMessage": "You have exceeded the maximum number of 60 characters in this field",
+      "inputDropdownMaterialLabel": "Select Material",
+      "inputDropdownMaterialPlaceholderText": "Select Material",
+      "optionsMaterial": [
+        {
+          "label": "Paper",
+          "value": "Paper"
+        },
+        {
+          "label": "Glass",
+          "value": "Glass"
+        },
+        {
+          "label": "Plastic",
+          "value": "Plastic"
+        },
+        {
+          "label": "E-Waste",
+          "value": "E-Waste"
+        },
+        {
+          "label": "Metal",
+          "value": "Metal"
+        },
+        {
+          "label": "Organic",
+          "value": "Organic"
+        }
+      ],
+      "inputNumberQuantityLabel": "Quantity",
+      "inputNumberQuantityPlaceholderText": "Quantity*",
+      "inputNumberQuantitymaxLengthErrorMessage": "You have exceeded the maximum number of 7 characters in this field",
+      "inputDropdownUnitLabel": "Select Unit",
+      "inputDropdownUnitPlaceholderText": "Select Unit*",
+      "optionsUnit": [
+        {
+          "label": "Kg",
+          "value": "Kg"
+        },
+        {
+          "label": "cc",
+          "value": "cc"
+        },
+        {
+          "label": "Units",
+          "value": "Units"
+        }
+      ],
+      "inputNumberAskingPriceLabel": "Asking Price",
+      "inputNumberAskingPricePlaceholderText": "Asking Price",
+      "inputNumberAskingPricemaxLengthErrorMessage": "You have exceeded the maximum number of 7 characters in this field"
+    }
+  }
 }
