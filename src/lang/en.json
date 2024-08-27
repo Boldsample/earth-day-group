@@ -410,6 +410,58 @@
       "inputNumberAskingPriceLabel": "Asking Price",
       "inputNumberAskingPricePlaceholderText": "Asking Price",
       "inputNumberAskingPricemaxLengthErrorMessage": "You have exceeded the maximum number of 7 characters in this field"
+    },
+    "offersList":{
+      "SelectInputPlaceHolder": "Filter by Materials",
+      "inputSearchPlaceHolder": "Keyword Search",
+      "newOfferBtn": "New Offer",
+      "rowExpansionCompanyTitle": "Company",
+      "rowExpansionBidTitle": "Bid",
+      "rowExpansionStatusTitle": "Status",
+      "rowExpansionBiddingDateTitle": "Bidding Date",
+      "statusRejectedText": "Rejected",
+      "statusAprovedText": "Accepted",
+      "statusPendingText": "Pending",
+      "tableColumnTitle": "Title",
+      "tableColumnMaterialTitle": "Material",
+      "tableColumnQuantityTitle": "Quantity",
+      "tableColumnSellPriceTitle": "Sell Price",
+      "tableColumnOfferslTitle": "Offers",
+      "tableColumnPublishedDateTitle": "Published Date",
+      "noOffersPostedmessage": "You have not posted any offers yet.",
+      "noOffersForMaterialsMessage": "There's no offers for the materials you are interested in buying",
+      "createOfferBtn": "Create Offer"
+    }
+  },
+  "profile": {
+    "photoGallery":{
+      "mainTitle": "Pictures",
+      "noImagesMessage": "You have not uploaded any images to your profile."
+    },
+    "profile": {
+
+    },
+    "profileInformation": {
+      "pickUpFromHomeText": "Pickup from home",
+      "recyclableGoodsTitle": "Price for Recyclable Goods",
+      "contactBtnText": "Contact",
+      "editProfileBtnText": "Edit Profile",
+      "newProductBtnText": "New Product",
+      "newPetBtnText": "Contact",
+      "viewLocationBtnText": "View Location",
+      "reportUserToolTip": "Report Profile"
+    }
+  },
+  "report": {
+    "createReport":{
+      "inputDropdownSubjectLabel": "Subject",
+      "inputDropdownSubjectPlaceholderText": "Select a reason to report*",
+      "inputDropdownEntityLabel": "Name of type",
+      "inputDropdownUserPlaceholderText": "Select a user*",
+      "textAreaReportDescriptionTitle": "Describe your report",
+      "textAreaReportDescriptionPlaceholder": "Tell us why you want to report type.",
+      "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
+      "createReportBtn": "Create Report"
     }
   }
 }

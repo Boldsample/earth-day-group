@@ -415,6 +415,58 @@
       "inputNumberAskingPriceLabel": "Precio Solicitado",
       "inputNumberAskingPricePlaceholderText": "Precio Solicitado",
       "inputNumberAskingPricemaxLengthErrorMessage": "Has excedido el número máximo de 7 caracteres en este campo"
+    },
+    "offersList": {
+        "SelectInputPlaceHolder": "Filtra por Material",
+        "inputSearchPlaceHolder": "Búsqueda por palabra clave",
+        "newOfferBtn": "Nueva Oferta",
+        "rowExpansionCompanyTitle": "Empresa",
+        "rowExpansionBidTitle": "Oferta",
+        "rowExpansionStatusTitle": "Estado",
+        "rowExpansionBiddingDateTitle": "Fecha de Oferta",
+        "statusRejectedText": "Rechazado",
+        "statusAprovedText": "Aceptado",
+        "statusPendingText": "Pendiente",
+        "tableColumnTitle": "Título",
+        "tableColumnMaterialTitle": "Material",
+        "tableColumnQuantityTitle": "Cantidad",
+        "tableColumnSellPriceTitle": "Precio de Venta",
+        "tableColumnOfferslTitle": "Ofertas",
+        "tableColumnPublishedDateTitle": "Fecha de Publicación",
+        "noOffersPostedmessage": "Aún no has publicado ninguna oferta.",
+        "noOffersForMaterialsMessage": "No hay ofertas para los materiales que te interesa comprar",
+        "createOfferBtn": "Crear Oferta"
+    }
+  },
+  "profile": {
+    "photoGallery":{
+        "mainTitle": "Imágenes",
+        "noImagesMessage": "No has subido ninguna imagen a tu perfil."
+    },
+    "profile": {
+
+    },
+    "profileInformation": {
+        "pickUpFromHomeText": "Recoger en casa",
+        "recyclableGoodsTitle": "Precio de bienes reciclables",
+        "contactBtnText": "Contactar",
+        "editProfileBtnText": "Editar perfil",
+        "newProductBtnText": "Nuevo Producto",
+        "newPetBtnText": "Contactar",
+        "viewLocationBtnText": "Ver ubicación",
+        "reportUserToolTip": "Reportar perfil"
+    }
+  },
+  "report": {
+    "createReport":{
+        "inputDropdownSubjectLabel": "Asunto",
+        "inputDropdownSubjectPlaceholderText": "Selecciona un motivo para reportar*",
+        "inputDropdownEntityLabel": "Nombre del type",
+        "inputDropdownUserPlaceholderText": "Selecciona un usuario*",
+        "textAreaReportDescriptionTitle": "Describe tu reporte",
+        "textAreaReportDescriptionPlaceholder": "Dinos por qué quieres reportar type.",
+        "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
+        "createReportBtn": "Crear Reporte"
     }
   }
 }
