@@ -7,7 +7,8 @@
     "settings": "Configuración",
     "formErrors": {
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
-      "requiredErrorMessage": "Este campo es obligatorio."
+      "requiredErrorMessage": "Este campo es obligatorio.",
+      "passwordPatternErrorMessage": "Debe contener un mínimo de ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número."
     }
   },
   "intro": {
@@ -468,5 +469,81 @@
         "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
         "createReportBtn": "Crear Reporte"
     }
-  }
+  },
+  "settings":{
+    "profile":{
+        "profile":{},
+        "profileInfo": {
+            "followersBtnText": "Seguidores",
+            "followingBtnText": "Siguiendo",
+            "editBtnText": "Editar",
+            "viewProfileBtnText": "Ver Perfil",
+            "sendMessageBtnText": "Enviar Mensaje",
+            "adminEditBtnText": "Editar",
+            "adminRecoverBtnText": "Recuperar",
+            "companyInformationTitle": "Sobre la Organización",
+            "companyPickUpAtHomeTitle": "Recoger en Casa",
+            "companyGalleryTitle": "Galería",
+            "companyMaterialPriceTitle": "Precio del Material"
+          
+        },
+        "profileProvider": {}
+    },
+    "about":{},
+    "activity": {},
+    "deleteAccount": {
+        "dialogDeleteAccountBtnText": "Eliminar mi Cuenta",
+        "dialogCancelDeleteBtnText": "Cancelar",
+        "mainTitle": "Descargo de Responsabilidad: Eliminación de Cuenta",
+        "secondaryTitle": "Al eliminar tu cuenta, aceptas lo siguiente:",
+        "listItem1": "Eliminación Permanente: </b> Tu cuenta y todos los datos asociados se eliminarán de forma permanente y no se podrán recuperar.",
+        "listItem2": "Pérdida de Acceso: </b> Perderás el acceso a todos los servicios, contenido y funciones vinculadas a tu cuenta.",
+        "listItem3": "Responsabilidad de los Datos: </b> Asegúrate de hacer una copia de seguridad de cualquier dato que desees conservar, ya que no somos responsables por la pérdida de datos.",
+        "listItem4": "Transacciones Pendientes: </b> Resuelve cualquier transacción o problema pendiente antes de la eliminación.",
+        "deleteConfirmationText": "Al continuar, aceptas estos términos y entiendes las consecuencias permanentes.",
+        "deleteAccountBtn": "Eliminar Tu Cuenta",
+        "dialogText": "¿Realmente deseas eliminar tu cuenta? <br /> Este proceso no se puede deshacer.",
+        "passwordInputLabel": "Contraseña",
+        "passwordInputPlaceHolderText": "Introduce tu Contraseña",
+        "maxLengthErrorMessage": "Has excedido el número máximo de 20 caracteres en este campo"
+    },
+    "password": {},
+    "privacy": {},
+    "settings": {
+        "profileBtnText": "Mi Perfil",
+        "changePasswordBtnText": "Cambiar Contraseña",
+        "termsAndConditionsBtnText": "Términos y Condiciones",
+        "deleteAccountBtnText": "Eliminar Cuenta",
+        "logOutBtnText": "Cerrar Sesión"
+    },
+    "terms": {}
+  },
+  "user":{
+    "companies": {
+        "companyBannerTitle": "AYUDA AL PLANETA Y AYUDA A TU BOLSILLO",
+        "searchLabelText": "Descubre empresas de reciclaje",
+        "iconTitle1": "100% Reciclado",
+        "iconTitle2": "Ecológico",
+        "iconTitle3": "Economía Sostenible"
+    },
+    "map": {
+        "dialogTitle": "Selecciona tu Ubicación Predeterminada",
+        "dialogHomeLocationBtnText": "Usar ubicación registrada",
+        "dialogCurrentLocationBtnText": "Usar mi ubicación actual",
+        "inputSearchPlaceHolder": "Buscar",
+        "markerDetailMaterialTitle": "Interesado en comprar",
+        "markerDetailPickUpTitle": "Recoger en casa",
+        "markerDetailLearnMoreBtnText": "Más información",
+        "filtersModalTitle": "Elige los materiales que te interesan",
+        "filtersModalCheckBoxText1": "Papel",
+        "filtersModalCheckBoxText2": "Plástico",
+        "filtersModalCheckBoxText3": "Vidrio",
+        "filtersModalCheckBoxText4": "Residuos electrónicos",
+        "filtersModalCheckBoxText5": "Metal",
+        "filtersModalCheckBoxText6": "Orgánico"
+    },
+    "ngo": {},
+    "orders": {},
+    "vendors": {}
+  } 
 }

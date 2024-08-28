@@ -7,7 +7,8 @@
     "settings": "Settings",
     "formErrors": {
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
-      "requiredErrorMessage": "This field is required."
+      "requiredErrorMessage": "This field is required.",
+      "passwordPatternErrorMessage": "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number"
     }
   },
   "intro": {
@@ -463,5 +464,81 @@
       "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
       "createReportBtn": "Create Report"
     }
+  },
+  "settings":{
+    "profile":{
+      "profile":{},
+      "profileInfo": {
+          "followersBtnText": "Followers",
+          "followingBtnText": "Following",
+          "editBtnText": "Edit",
+          "viewProfileBtnText": "View Profile",
+          "sendMessageBtnText": "Send Message",
+          "adminEditBtnText": "Edit",
+          "adminRecoverBtnText": "Recover",
+          "companyInformationTitle": "About The Organization",
+          "companyPickUpAtHomeTitle": "Pickup at Home",
+          "companyGalleryTitle": "Gallery",
+          "companyMaterialPriceTitle": "Material Price"
+      },
+      "profileProvider": {}
+    },
+    "about":{},
+    "activity": {},
+    "deleteAccount": {
+      "dialogDeleteAccountBtnText": "Delete my Account",
+      "dialogCancelDeleteBtnText": "Cancel",
+      "mainTitle": "Disclaimer: Account Deletion",
+      "secondaryTitle": "By deleting your account, you agree to the following:",
+      "listItem1": "Permanent Deletion: </b> Your account and all associated data will be permanently removed and cannot be recovered.",
+      "listItem2": "Loss of Access: </b> You will lose access to all services, content, and features linked to your account.",
+      "listItem3": "Data Responsibility: </b> Ensure you back up any data you want to keep, as we are not liable for any loss of data.",
+      "listItem4": "Outstanding Transactions: </b> Resolve any pending transactions or issues before deletion.",
+      "deleteConfirmationText": "By proceeding, you accept these terms and understand the permanent consequences.",
+      "deleteAccountBtn": "Delete Your Account",
+      "dialogText": "Do you really wish to delete your account? <br /> This process cannot be undone.",
+      "passwordInputLabel": "Password",
+      "passwordInputPlaceHolderText": "Enter your Password",
+      "maxLengthErrorMessage": "You have exceeded the maximum number of 20 characters in this field"
+    },
+    "password": {},
+    "privacy": {},
+    "settings": {
+      "profileBtnText": "My Profile",
+      "changePasswordBtnText": "Change Password",
+      "termsAndConditionsBtnText": "Terms & Conditions",
+      "deleteAccountBtnText": "Delete Account",
+      "logOutBtnText": "Log Out"
+    },
+    "terms": {}
+  },
+  "user":{
+    "companies": {
+      "companyBannerTitle": "HELP THE PLANET AND HELP YOUR POCKET",
+      "searchLabelText": "Discover recycling companies",
+      "iconTitle1": "100% Recycled",
+      "iconTitle2": "Eco Friendly",
+      "iconTitle3": "Sustainable Economy"
+    },
+    "map": {
+      "dialogTitle": "Select your Default Location",
+      "dialogHomeLocationBtnText": "Use registered location",
+      "dialogCurrentLocationBtnText": "Use my current location",
+      "inputSearchPlaceHolder": "Search",
+      "markerDetailMaterialTitle": "Interested in buying",
+      "markerDetailPickUpTitle": "Pick up at home",
+      "markerDetailLearnMoreBtnText": "Learn More",
+      "filtersModalTitle": "Choose Materials that you are interested in",
+      "filtersModalCheckBoxText1": "Paper",
+      "filtersModalCheckBoxText2": "Plastic",
+      "filtersModalCheckBoxText3": "Glass",
+      "filtersModalCheckBoxText4": "E-waste",
+      "filtersModalCheckBoxText5": "Metal",
+      "filtersModalCheckBoxText6": "Organic"
+    },
+    "ngo": {},
+    "orders": {},
+    "vendors": {}
   }
+
 }
