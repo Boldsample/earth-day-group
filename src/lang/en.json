@@ -536,9 +536,48 @@
       "filtersModalCheckBoxText5": "Metal",
       "filtersModalCheckBoxText6": "Organic"
     },
-    "ngo": {},
-    "orders": {},
-    "vendors": {}
+    "ngo": {
+      "organizations": {},
+      "shelters": {
+        "shelterBannerTitle": "SUPPORT THE ONES WITHOUT A HOME",
+        "searchInputTitle": "Discover pets in adoption",
+        "tabLabelShelters": "Shelters",
+        "tabLabelPets": "Pets"
+      }
+    },
+    "orders": {
+      "mainTitle": "My Orders",
+      "filtersTitle": "Filters"
+    },
+    "vendors": {
+      "VendorsBannerTitle": "MARKETPLACE",
+      "searchInputTitle": "Discover Products",
+      "tabLabelVendorsText": "Shops",
+      "tabLabelProductsText": "Products"
+    }
+  },
+  "vendor":{
+    "products":{
+      "createProduct": {
+      "inputTextProductNameLabel": "Product Name",
+      "inputTextProductNamePlaceholderText": "Product Name*",
+      "maxLengthErrorMessage": "You have exceeded the maximum number of 100 characters in this field",
+      "inputDropdownSubjectLabel": "Category",
+      "inputDropdownSubjectPlaceholderText": "Select a Category*",
+      "inputNumberPriceLabel": "Price",
+      "inputNumberPricePlaceholderText": "Add price per unit*",
+      "textAreaProducttDescriptionLabel": "Product Detail",
+      "textAreaProductDescriptionPlaceholder": "Write a short description about the product.",
+      "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
+      "createProductBtn": "Create Product : Update Product"
+    },
+    "product": {
+      "addToCartBtnText": "Add To Cart",
+      "reportProductTooltipText": "Report Product",
+      "editProductBtnText": "Edit Product",
+      "deleteProductBtn": "Delete Product"
+    }
+    }
   }
 
 }

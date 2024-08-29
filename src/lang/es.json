@@ -540,10 +540,49 @@
         "filtersModalCheckBoxText3": "Vidrio",
         "filtersModalCheckBoxText4": "Residuos electrónicos",
         "filtersModalCheckBoxText5": "Metal",
-        "filtersModalCheckBoxText6": "Orgánico"
+        "filtersModalCheckBoxText6": "Orgánicos"
     },
-    "ngo": {},
-    "orders": {},
-    "vendors": {}
-  } 
+    "ngo": {
+        "organizations": {},
+      "shelters": {
+        "shelterBannerTitle": "APOYA A LOS QUE NO TIENEN HOGAR",
+        "searchInputTitle": "Descubre mascotas en adopción",
+        "tabLabelShelters": "Refugios",
+        "tabLabelPets": "Mascotas"
+      }
+    },
+    "orders": {
+        "mainTitle": "Mis Pedidos",
+        "filtersTitle": "Filtros"
+    },
+    "vendors": {
+        "VendorsBannerTitle": "TIENDA",
+        "searchInputTitle": "Descubre Productos",
+        "tabLabelVendorsText": "Tiendas",
+        "tabLabelProductsText": "Productos"
+    }
+  },
+  "vendor":{
+    "products":{
+        "createProduct": {
+        "inputTextProductNameLabel": "Nombre del Producto",
+        "inputTextProductNamePlaceholderText": "Nombre del Producto*",
+        "maxLengthErrorMessage": "Has excedido el número máximo de 100 caracteres en este campo",
+        "inputDropdownSubjectLabel": "Categoría",
+        "inputDropdownSubjectPlaceholderText": "Selecciona una Categoría*",
+        "inputNumberPriceLabel": "Precio",
+        "inputNumberPricePlaceholderText": "Agrega el precio por unidad*",
+        "textAreaProducttDescriptionLabel": "Detalle del Producto",
+        "textAreaProductDescriptionPlaceholder": "Escribe una breve descripción sobre el producto.",
+        "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
+        "creatProductBtn": "Crear Producto : Actualizar Producto"
+    },
+    "product": {
+        "addToCartBtnText": "Añadir al Carrito",
+        "reportProductTooltipText": "Reportar Producto",
+        "editProductBtnText": "Editar Producto",
+        "deleteProductBtn": "Eliminar Producto"
+    }
+    }
+  }
 }
