@@ -8,8 +8,10 @@ import { recoverUser } from '@services/userServices'
 import { setHeader, updateThankyou } from '@store/slices/globalSlice'
 import { useForm } from 'react-hook-form'
 import { TextInput } from '@ui/forms'
+import { useTranslation } from 'react-i18next'
 
 const Forgot = () => {
+  const [t, i18next] = useTranslation('global', { keyPrefix: 'login.forgot' })
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [sending, setSending] = useState(false)
@@ -24,6 +26,9 @@ const Forgot = () => {
       email: ""
     },
   })
+  const forgotTitle = t('title'); // "Forgot Password?"
+
+  console.log(forgotTitle);
 
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
@@ -52,7 +57,7 @@ const Forgot = () => {
   return <div className="layout">
       <img className="layout__background" src="/assets/login/image-1.svg" />
     <form onSubmit={handleSubmit(onSubmit)} className="main__content verticalcenter-2 xpadding-1">
-      <h4 className="mb-1">Recover to your account</h4>
+      <h4 className="mb-1">{t(`title`)}</h4>
       <p>Enter your registered Email and we’ll send you a link to reset your password.</p>
       <div className="p-field mb-1">
         <TextInput
