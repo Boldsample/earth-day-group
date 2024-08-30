@@ -1,28 +1,23 @@
-import React, {useState, useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { FileUpload } from 'primereact/fileupload';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
-import { useForm } from "react-hook-form"
-import { Dialog } from 'primereact/dialog';
-import ContentBox from '@ui/cards/contentBox/ContentBox';
+import React, {useState} from 'react'
+import { useSelector } from 'react-redux'
 import AdManager from './AdManager';
 import "../styles.sass"
 import adSpecs from "@json/adFormatSpecs.json"
+import { useTranslation } from 'react-i18next'
+
 
 const ConfigureAds = () => {
-    const [visible, setVisible] = useState(false);
+    const [t, i18next] = useTranslation('translation', { keyPrefix: 'admin.configureAds' })
+
     const user = useSelector((state) => state.users.userData)
-    const [bannerImg, setBannerImg] = useState(null)
-  
 
   return (
     <div className='layout'>
         <img className="layout__background" src="/assets/full-width.svg" />
         <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
           <div className="ads__container">
-            <AdManager type="headerBanner" adSpecs={adSpecs.headerBanner}/>
-            <AdManager type="dashboardButton " adSpecs={adSpecs.dashboardButton}/>
+            <AdManager bannerTitle={t('headerBanner.title')} bannerDescription={t('headerBanner.bodyText')} type="headerBanner" adSpecs={adSpecs.headerBanner}/>
+            <AdManager bannerTitle={t('dashboardButtonBanner.title')} bannerDescription={t('dashboardButtonBanner.bodyText')} type="dashboardButton " adSpecs={adSpecs.dashboardButton}/>
           </div>
         </div>
     </div>

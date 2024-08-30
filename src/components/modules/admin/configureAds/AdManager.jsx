@@ -14,7 +14,7 @@ import { addAd, addImages, getAd, updateAd } from '@services/adsServices';
 import { Button } from 'primereact/button';
         
 
-const AdManager = ({type, adSpecs}) => {
+const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     const [visible, setVisible] = useState(false);
     const [sending, setSending] = useState(false);
     const [update, setUpdate] = useState(null);
@@ -156,10 +156,10 @@ const AdManager = ({type, adSpecs}) => {
       <Toast ref={toast} />
     <div className='fullwidth mt-3'>
             <div className="flex flex-start mb-1">
-              <h4 className='title__noWidth'>Home Menu Banner</h4>
+              <h4 className='title__noWidth'>{bannerTitle}</h4>
               <button className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" /></button>
             </div>
-              <p>This banner appears as a rectangular menu button on every user's home screen.</p>
+              <p>{bannerDescription}</p>
 
             {!ad?.id && watch('image') == null && !loading  ? 
               <div>
