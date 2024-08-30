@@ -13,7 +13,7 @@ import HeaderNotifications from "@components/modules/notifications/HeaderNotific
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [t, i18n] = useTranslation('global')
+  const [t, i18n] = useTranslation('translation')
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
   const headerTitle = useSelector((state) => state.global.headerTitle)

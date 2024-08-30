@@ -8,7 +8,9 @@
     "formErrors": {
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
       "requiredErrorMessage": "Este campo es obligatorio.",
-      "passwordPatternErrorMessage": "Debe contener un mínimo de ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número."
+      "passwordPatternErrorMessage": "Debe contener un mínimo de ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número.",
+      "validEmailAddressErrorMessage": "Por favor, ingresa un correo electrónico válido.",
+      "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres."
     }
   },
   "intro": {
@@ -31,23 +33,26 @@
       "title": "¿Olvidaste tu contraseña?",
       "bodyText": "Ingresa tu correo electrónico registrado y te enviaremos un enlace para restablecer tu contraseña.",
       "emailInput": "Correo electrónico",
-      "formBtn": "Enviar"
+      "sendformBtnText": "Enviar",
+      "forgotthankyouPagetitle": "¡Correo enviado con éxito!",
+      "forgotthankyouPagebuttonLabel": "Volver al inicio de sesión",
+      "forgotthankyouPagebodyText": "Por favor, revisa tu bandeja de entrada para encontrar el correo con el enlace para restablecer tu contraseña."
     },
     "loginForm": {
       "mainTitle": "Inicia sesión",
       "emailPlaceHolderText": "Correo electrónico",
       "passwordPlaceHolderText": "Contraseña",
-      "formBtn": "Iniciar sesión",
-      "ForgotPassword": "¿Olvidaste tu contraseña?",
-      "signInWith": "O inicia sesión con",
+      "loginformBtn": "Iniciar sesión",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "signInWith": "Inicia sesión con",
       "dontHaveAccount": "¿No tienes una cuenta? Regístrate"
     },
     "recover": {
-      "mainTitle": "Recuperar",
+      "mainTitle": "Recuperar contraseña",
       "bodyText": "Por favor, ingresa una nueva contraseña.",
       "passwordPlaceHolderText": "Contraseña",
       "passwordConfirmationPlaceHolderText": "Confirmar Contraseña",
-      "formBtn": "Registrarse"
+      "submitBtnText": "Actualizar"
     }
   },
   "admin": {
@@ -311,11 +316,9 @@
           }
         ],
         "editPetthankyouPagetitle": "¡Todo listo!",
-        "editPetthankyouPagebackground": "image-1.svg",
         "editPetthankyouPagebuttonLabel": "Ir a la mascota",
         "editPetthankyouPagebodyText": "¡La mascota para adopción se ha actualizado con éxito!",
         "createPetthankyouPagetitle": "¡Todo listo!",
-        "createPetthankyouPagebackground": "image-1.svg",
         "createPetthankyouPagebuttonLabel": "Ir a la mascota",
         "createPetthankyouPagebodyText": "¡La mascota para adopción fue creada!",
         "inputNameTitleText": "Nombre de la Mascota",

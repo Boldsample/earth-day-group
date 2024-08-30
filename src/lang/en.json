@@ -8,7 +8,9 @@
     "formErrors": {
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
-      "passwordPatternErrorMessage": "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number"
+      "passwordPatternErrorMessage": "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+      "validEmailAddressErrorMessage": "Please enter a valid e-mail address",
+      "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit."
     }
   },
   "intro": {
@@ -31,15 +33,18 @@
       "title": "Forgot Password?",
       "bodyText": "Enter your registered Email ID and we’ll send you a link to reset your password.",
       "emailInput": "Email",
-      "sendformBtnText": "Send"
+      "sendformBtnText": "Send",
+      "forgotthankyouPagetitle": "Email sent successfully!",
+      "forgotthankyouPagebuttonLabel": "Go back to login",
+      "forgotthankyouPagebodyText": "Please check your inbox for an email containing the link to reset your password."
     },
     "loginForm": {
       "mainTitle": "Login to your Account",
       "emailPlaceHolderText": "Email",
       "passwordPlaceHolderText": "Password",
       "loginformBtn": "Login",
-      "ForgotPassword": "Forgot Password?",
-      "signInWith": "Or Sign in with",
+      "forgotPassword": "Forgot Password?",
+      "signInWith": "Sign in with",
       "dontHaveAccount": "Don't have an account? Sign up"
     },
     "recover": {
@@ -47,7 +52,7 @@
       "bodyText": "Please enter a new password.",
       "passwordPlaceHolderText": "Password",
       "passwordConfirmationPlaceHolderText": "Confirm Password",
-      "signUpBtnText": "Signup"
+      "submitBtnText": "Submit"
     }
   },
   "admin": {

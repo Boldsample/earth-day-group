@@ -6,13 +6,16 @@ import { Button } from "primereact/button"
 import { useEffect, useState } from "react"
 import { useFacebook } from "react-facebook"
 import { useGoogleLogin } from "@react-oauth/google"
-
+import { useTranslation } from 'react-i18next'
 import { setHeader } from '@store/slices/globalSlice'
 import { TextInput, PasswordInput } from "@ui/forms/"
 import { getUserData } from "@store/slices/usersSlice"
 import { authUser, getUserGoogle } from "@services/userServices"
 
+
 const LoginForm = () => {
+  const [t, i18next] = useTranslation('translation', { keyPrefix: 'login.loginForm' })
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const dispatch = useDispatch()
   const [ fApi, setFApi ] = useState()
   const { isLoading, init } = useFacebook()
@@ -80,7 +83,7 @@ const LoginForm = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/login/image-1.svg" />
     <form onSubmit={handleSubmit(onSubmit)} className="main__content verticalcenter-2 xpadding-1">
-      <h4 className="mb-1">Login to your account</h4>
+      <h4 className="mb-1">{t('mainTitle')}</h4>
       <div className="p-field mb-1">
         <label htmlFor="email">
           <TextInput
@@ -90,17 +93,17 @@ const LoginForm = () => {
             labelName="Email"
             showLabel={false}
             nameInput="email"
-            placeHolderText="Email or username"
+            placeHolderText={t('emailPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 60,
-                message: "El campo supera los 60 caracteres",
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               }
             }} />
         </label>
@@ -115,30 +118,30 @@ const LoginForm = () => {
             isRequired={true}
             labelName="Password"
             nameInput="password"
-            placeHolderText="Password"
+            placeHolderText={t('passwordPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 60,
-                message: "El campo supera los 60 caracteres",
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               }
             }} />
         </label>
       </div>
       <div className="p-field flex mb-1">
-        <Link className="text-xs" to="/register/">Create a new account</Link>
-        <Link className="text-xs" to="/forgot/">Forgot password?</Link>
+        <Link className="text-xs" to="/register/">{t('dontHaveAccount')}</Link>
+        <Link className="text-xs" to="/forgot/">{t('forgotPassword')}</Link>
       </div>
       <div className="p-field mb-2">
-        <Button label="Login" type="submit" disabled={false} className="dark-blue fullwidth" loading={sending} />
+        <Button label={t('loginformBtn')} type="submit" disabled={false} className="dark-blue fullwidth" loading={sending} />
       </div>
       <div className="p-field">
-        <p className="text-center">Or sign in with</p>
+        <p className="text-center">{t('signInWith')}</p>
         <p className="text-center">
           <a className="social-login" onClick={fLogin}><img src="/assets/icons/facebook.svg" alt="Facebook" /></a>
           <a className="social-login" onClick={gLogin}><img src="/assets/icons/google.svg" alt="Google" /></a>

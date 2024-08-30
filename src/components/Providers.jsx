@@ -14,8 +14,8 @@ i18next.init({
   lng: 'es',
   interpolation: { escapeValue: false },
   resources: {
-    es: { global: lang_es },
-    en: { global: lang_en },
+    es: { translation: lang_es },
+    en: { translation: lang_en },
   }
 })
 

@@ -3,12 +3,15 @@ import { Button } from "primereact/button"
 import { useState, useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { useTranslation } from 'react-i18next'
 
 import { PasswordInput } from "@ui/forms"
 import { recoverUser, updateUser } from "@services/userServices"
 import { setHeader, updateThankyou } from "@store/slices/globalSlice"
 
 const Recover = () => {
+	const [t, i18next] = useTranslation('translation', { keyPrefix: 'login.recover' })
+	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
   const { token } = useParams()
@@ -56,8 +59,8 @@ const Recover = () => {
 		<div className="layout">
 			<img className="layout__background" src="/assets/login/image-1.svg" />
 			<div className="main__content verticalcenter-2 xpadding-1">
-				<h1 className="text-upperCase mb-1">Recover</h1>
-				<p>Please enter a new password.</p>
+				<h1 className="text-upperCase mb-1">{t('mainTitle')}</h1>
+				<p>{t('bodyText')}</p>
 				<div className="registerInput__container-x2">
 					<PasswordInput
 						width="100%"
@@ -67,17 +70,17 @@ const Recover = () => {
 						showLabel={false}
 						isRequired={true}
 						nameInput="password"
-						placeHolderText="Enter password"
+						placeHolderText={t('passwordPlaceHolderText')}
 						getFormErrorMessage={getFormErrorMessage}
 						rules={{
 							maxLength: {
-								value: 20,
-								message: "El campo supera los 20 caracteres",
+								value: 60,
+								message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
 							},
-							required: "*El campo es requerido.",
+							required: tGlobal('requiredErrorMessage'),
 							pattern: {
 								value: /^\S/,
-								message: "No debe tener espacios al inicio",
+								message: tGlobal('patternErrorMessage'),
 							},
 						}} />
 					<PasswordInput
@@ -89,22 +92,22 @@ const Recover = () => {
 						isRequired={true}
 						className="noLabel"
 						nameInput="password_confirmation"
-						placeHolderText="Confirm Password"
+						placeHolderText={t('passwordConfirmationPlaceHolderText')}
 						getFormErrorMessage={getFormErrorMessage}
 						rules={{
 							maxLength: {
-								value: 20,
-								message: "El campo supera los 20 caracteres",
+								value: 60,
+								message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
 							},
-							required: "*El campo es requerido.",
+							required: tGlobal('requiredErrorMessage'),
 							pattern: {
 								value: /^\S/,
-								message: "No debe tener espacios al inicio",
+								message: tGlobal('patternErrorMessage'),
 							}
 						}} />
 				</div>
 				<div className="p-field mb-4">
-					<Button className="dark-blue fullwidth" label="Sign up" type="submit" loading={sending} />
+					<Button className="dark-blue fullwidth" label={t('submitBtnText')} type="submit" loading={sending} />
 				</div>
 			</div>
 		</div>

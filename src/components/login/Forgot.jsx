@@ -11,7 +11,8 @@ import { TextInput } from '@ui/forms'
 import { useTranslation } from 'react-i18next'
 
 const Forgot = () => {
-  const [t, i18next] = useTranslation('global', { keyPrefix: 'login.forgot' })
+  const [t, i18next] = useTranslation('translation', { keyPrefix: 'login.forgot' })
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [sending, setSending] = useState(false)
@@ -37,11 +38,11 @@ const Forgot = () => {
     setSending(false)
     if(response?.id){
       dispatch(updateThankyou({
-        title: "Email sended successfully!",
+        title: t('forgotthankyouPagetitle'),
         link: "/login/",
         background: "image-1.svg",
-        button_label: "Go back to login",
-        content: "We send you a recover email!",
+        button_label: t('forgotthankyouPagebuttonLabel'),
+        content: t('forgotthankyouPagebodyText'),
       }))
       navigate('/thankyou/')
     }else{
@@ -58,7 +59,7 @@ const Forgot = () => {
       <img className="layout__background" src="/assets/login/image-1.svg" />
     <form onSubmit={handleSubmit(onSubmit)} className="main__content verticalcenter-2 xpadding-1">
       <h4 className="mb-1">{t(`title`)}</h4>
-      <p>Enter your registered Email and we’ll send you a link to reset your password.</p>
+      <p>{t(`bodyText`)}</p>
       <div className="p-field mb-1">
         <TextInput
           width="100%"
@@ -67,22 +68,22 @@ const Forgot = () => {
           nameInput="email"
           isRequired={true}
           labelName="E-mail"
-          placeHolderText="E-mail*"
+          placeHolderText="johndoe@sample.com"
           getFormErrorMessage={getFormErrorMessage}
           rules={{
             maxLength: {
               value: 60,
-              message: "The field exceeds 60 characters.",
+              message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 60}),
             },
-            required: "*The field is required.",
+            required: tGlobal(`requiredErrorMessage`),
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: "Please enter a valid e-mail address",
+              message: tGlobal(`validEmailAddressErrorMessage`),
             },
           }} />
       </div>
       <div className="p-field mb-2">
-        <Button label="Recover account" type="submit" disabled={false} className="dark-blue fullwidth" loading={sending} />
+        <Button label={t(`sendformBtnText`)} type="submit" disabled={false} className="dark-blue fullwidth" loading={sending} />
       </div>
     </form>
   </div>

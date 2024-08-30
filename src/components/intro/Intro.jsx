@@ -11,7 +11,7 @@ import { setHeader } from '@store/slices/globalSlice'
 
 const Intro = () => {
 	const dispatch = useDispatch()
-  const [t, i18n] = useTranslation('global')
+  const [t, i18n] = useTranslation('translation')
 	const [activeIndex, setActiveIndex] = useState(0)
 
 	useEffect(() => {
