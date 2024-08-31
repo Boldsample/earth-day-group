@@ -12,7 +12,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { Toast } from 'primereact/toast';
 import { addAd, addImages, getAd, updateAd } from '@services/adsServices';
 import { Button } from 'primereact/button';
-        
+import { useTranslation } from 'react-i18next'
 
 const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     const [visible, setVisible] = useState(false);
@@ -23,6 +23,9 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     const user = useSelector((state) => state.users.userData)
     const [date, setDate] = useState(null);
     const toast = useRef(null);
+    const [t] = useTranslation('translation', { keyPrefix: 'admin.adManager' })
+    const appModules = t('modules', { returnObjects: true });
+    const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
    
     const {
       watch,
@@ -44,13 +47,7 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
         image: null
       },
     })
-
-    const modules = [
-        { name: 'Users', value: 'user' },
-        { name: 'Companies', value: 'company' },
-        { name: 'Social Organizations/Shelters', value: 'ngo, shelter, social'},
-        { name: 'Vendors', value: 'vendor'},
-    ];
+console.log(appModules)
     
     const customBase64Uploader = async (event) => {
         setLoading(true)
@@ -108,10 +105,10 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
       await addImages([{type:'ads', entity:response.id, picture: image}])
       setSending(false)
       setUpdate(new Date())
-      toast.current.show({severity:'success', summary: 'Success', detail:'Ad was created succesfully', life: 20000});
+      toast.current.show({severity:'success', summary: t('adSuccessToastTitle'), detail:t('adSuccessToastMsg'), life: 20000});
     }else{
       setSending(false)
-      toast.current.show({severity:'error', summary: 'Error', detail:'Ad failed', life: 20000});
+      toast.current.show({severity:'error', summary: t('adFailedToastTitle'), detail:t('adFailedToastMsg'), life: 20000});
     }
   }
 
@@ -119,7 +116,7 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
 
   return (
     <>
-    <Dialog header="Ad Format Specs & Recommendations" visible={visible} style={{ width: '50vw' }} onHide={() => {if (!visible) return; setVisible(false); }}>
+    <Dialog header={t('dialogMainTitle')} visible={visible} style={{ width: '50vw' }} onHide={() => {if (!visible) return; setVisible(false); }}>
         <img src={adSpecs?.image} alt="" width="70%" />
         <div>
             <div className='mb-2 mt-2'>
@@ -163,19 +160,19 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
 
             {!ad?.id && watch('image') == null && !loading  ? 
               <div>
-              <FileUpload name="banner_image" customUpload uploadHandler={customBase64Uploader} accept="image/*" maxFileSize={1300000} emptyTemplate={<p className="m-0">Drag and drop the image here to upload.</p>} />
+              <FileUpload name="banner_image" uploadLabel={t('uploadBtnText')} cancelLabel={t('cancelBtnText')} chooseLabel={t('chooseBtnText')} customUpload uploadHandler={customBase64Uploader} accept="image/*" maxFileSize={1300000} emptyTemplate={<p className="m-0">{t('uploadImgPlaceHolderText')}</p>} />
               </div>
           :
           <div className='p-fileupload p-fileupload-advanced p-component mt-3'>
           <div className='p-fileupload p-fileupload-buttonbar space-between'>
               <div>
-                {ad?.id ? "" :  <Button loading={sending} type='submit' onClick={handleSubmit(onSubmit)}form='ad_form ' className='green-earth'>Create Ad</Button>}
-                <button type='button' onClick={cancel} className='red-state'>{ad?.id ? 'Cancel Campaign' : 'Cancel'}</button>
+                {ad?.id ? "" :  <Button loading={sending} type='submit' onClick={handleSubmit(onSubmit)}form='ad_form ' className='green-earth'>{t('createAdBtnText')}</Button>}
+                <button type='button' onClick={cancel} className='red-state'>{ad?.id ? t('cancelCampaignBtnText') : t('cancelBtnText')}</button>
               </div>
             {ad?.id && 
               <div className="live-container">
                 <div className="live-circle"></div>
-                <div className="live-text">LIVE</div>
+                <div className="live-text">{t('liveAdText')}</div>
               </div>
             }
           </div>
@@ -185,19 +182,19 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
               <div className='width-50'>
               <div className="flex">
                 <FontAwesomeIcon  color='var(--dark-blue)' icon={faRectangleAd} fontSize="15px" />
-                <h5><span>Ad Name:</span> {ad.name}</h5>
+                <h5><span>{t('adTitle')}</span> {ad.name}</h5>
               </div>
               <div className="flex">
                 <FontAwesomeIcon  color='var(--dark-blue' icon={faBullseye} fontSize="15px" />
-                <h5><span>Ad Target:</span> {ad.target}</h5>
+                <h5><span>{t('targetTitle')}</span> {ad.target}</h5>
               </div>
               <div className="flex">
                 <FontAwesomeIcon  color='var(--dark-blue)' icon={faClock} fontSize="15px" />
-                <h5> <span>Ad Duration: </span> {ad.start_date} to {ad.end_date}</h5>
+                <h5> <span>{t('durationTitle')} </span> {ad.start_date} to {ad.end_date}</h5>
               </div>
               <div className="flex">
                 <FontAwesomeIcon  color='var(--dark-blue)' icon={faLink} fontSize="15px" />
-                <h5><span>Ad Link:</span> {ad.link}</h5>  
+                <h5><span>{t('linkTitle')}</span> {ad.link}</h5>  
               </div>
               </div>
               <div className=' title-uploader-container width-50 ad-summary-image'>
@@ -213,36 +210,37 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
                 // disabled={ID}
                 control={control}
                 isRequired={true}
-                labelName="Ad Name"
+                labelName={t('adNameInputTitle')}
                 nameInput="name"
-                placeHolderText="Pepsi Summer Campaign*"
+                placeHolderText={t('adNameInputPlaceholder')}
                 getFormErrorMessage={getFormErrorMessage}
                 rules={{
                   maxLength: {
-                    value: 50,
-                    message: "The field exceeds 50 characters.",
+                    value: 70,
+                    message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 70}),
                   },
-                  required: "*The field is required.",
+                  required: tGlobal(`requiredErrorMessage`),
                   pattern: {
-                    value: /^[a-zA-Z_]+$/,
-                    message: "It must have only letters and underscore.",
+                    value: /^\S/,
+                    message: tGlobal('patternErrorMessage'),
                   },
                 }} />
                 <TextInput
                 control={control}
                 isRequired={true}
-                labelName="Ad URL"
+                labelName={t('adUrlInputTitle')}
                 nameInput="link"
-                placeHolderText="www.pepsi.com/landing"
+                placeHolderText={t('adUrlInputPlaceholder')}
                 getFormErrorMessage={getFormErrorMessage}
                 rules={{
                   maxLength: {
-                    value: 100,
-                    message: "The field exceeds 50 characters.",
+                    value: 3000,
+                    message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 3000}),
                   },
+                  required: tGlobal(`requiredErrorMessage`),
                   pattern: {
                     value: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?(\/[a-zA-Z0-9-_?=&]+)?$/,
-                    message: "Please enter a valid URL",
+                    message: tGlobal('validEmailAddressErrorMessage'),
                   },
                 }} />
             </div>
@@ -250,26 +248,28 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
               <MultiSelectInput
                 className=""
                 isEdit={true}
-                options={modules}
-                labelName="Who can view this Ad?"
+                options={appModules}
+                labelName={t('adMultiSelectInputTitle')}
                 nameInput="target"
                 control={control}
                 showLabel={true}
                 isRequired={true}
                 optionLabel="name"
                 optionValue="value"
-                placeHolderText="Select Modules"
+                placeHolderText={t('adMultiSelectInputPlaceholder')}
                 getFormErrorMessage={getFormErrorMessage}
                 rules={{
-                  required: "*El campo es requerido.",
+                  required: tGlobal(`requiredErrorMessage`),
                 }} />
                   <CalendarInput
                   nameInput="ad_duration"
                   control={control}
                   isRequired={true}
-                  labelName="Select Ad Duration"
+                  getFormErrorMessage={getFormErrorMessage}
+                  labelName={t('adDateInputTitle')}
+                  placeHolderText={t('adDateInputPlaceholder')}
                   rules={{
-                    required: true,
+                    required: tGlobal(`requiredErrorMessage`),
                   }} />
               </div>
               {/* <button type='submit' className='green-earth'>Create Ad</button> */}
@@ -286,7 +286,7 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
               : 
               <>
             <div className=' title-uploader-container'>
-              <h6 className='text-center'>Uploaded Image</h6>
+              <h6 className='text-center'>{t('bannerPreviewImagetext')}</h6>
               <FontAwesomeIcon className={`confirmation-check ${loading === false ? 'showCheck' : ''}`} color='var(--green-earth)' icon={faCircleCheck} fontSize="15px" />
             </div>
             <img src={watch('image')} alt="Banner preview" height="70%" />

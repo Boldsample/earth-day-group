@@ -7,17 +7,20 @@ import { useTranslation } from 'react-i18next'
 
 
 const ConfigureAds = () => {
-    const [t, i18next] = useTranslation('translation', { keyPrefix: 'admin.configureAds' })
+    const [tTitles] = useTranslation('translation', { keyPrefix: 'admin.configureAds' })
+    const { t } = useTranslation();
+    const headerBannerDialogContent = t('admin.configureAds.dialogContentheaderBanner', { returnObjects: true });
+    const dashboardButtonBannerDialogContent = t('admin.configureAds.dialogContentdashboardButton', { returnObjects: true });
 
     const user = useSelector((state) => state.users.userData)
-
+  
   return (
     <div className='layout'>
         <img className="layout__background" src="/assets/full-width.svg" />
         <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
           <div className="ads__container">
-            <AdManager bannerTitle={t('headerBanner.title')} bannerDescription={t('headerBanner.bodyText')} type="headerBanner" adSpecs={adSpecs.headerBanner}/>
-            <AdManager bannerTitle={t('dashboardButtonBanner.title')} bannerDescription={t('dashboardButtonBanner.bodyText')} type="dashboardButton " adSpecs={adSpecs.dashboardButton}/>
+            <AdManager bannerTitle={tTitles('headerBanner.title')} bannerDescription={tTitles('headerBanner.bodyText')} type="headerBanner" adSpecs={headerBannerDialogContent}/>
+            <AdManager bannerTitle={tTitles('dashboardButtonBanner.title')} bannerDescription={tTitles('dashboardButtonBanner.bodyText')} type="dashboardButton " adSpecs={dashboardButtonBannerDialogContent}/>
           </div>
         </div>
     </div>

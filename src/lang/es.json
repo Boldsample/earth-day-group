@@ -9,7 +9,7 @@
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
       "requiredErrorMessage": "Este campo es obligatorio.",
       "passwordPatternErrorMessage": "Debe contener un mínimo de ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número.",
-      "validEmailAddressErrorMessage": "Por favor, ingresa un correo electrónico válido.",
+      "validEmailAddressErrorMessage": "Por favor, introduce una dirección de correo electrónico válida.",
       "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres."
     }
   },
@@ -33,26 +33,23 @@
       "title": "¿Olvidaste tu contraseña?",
       "bodyText": "Ingresa tu correo electrónico registrado y te enviaremos un enlace para restablecer tu contraseña.",
       "emailInput": "Correo electrónico",
-      "sendformBtnText": "Enviar",
-      "forgotthankyouPagetitle": "¡Correo enviado con éxito!",
-      "forgotthankyouPagebuttonLabel": "Volver al inicio de sesión",
-      "forgotthankyouPagebodyText": "Por favor, revisa tu bandeja de entrada para encontrar el correo con el enlace para restablecer tu contraseña."
+      "formBtn": "Enviar"
     },
     "loginForm": {
       "mainTitle": "Inicia sesión",
       "emailPlaceHolderText": "Correo electrónico",
       "passwordPlaceHolderText": "Contraseña",
-      "loginformBtn": "Iniciar sesión",
-      "forgotPassword": "¿Olvidaste tu contraseña?",
-      "signInWith": "Inicia sesión con",
+      "formBtn": "Iniciar sesión",
+      "ForgotPassword": "¿Olvidaste tu contraseña?",
+      "signInWith": "O inicia sesión con",
       "dontHaveAccount": "¿No tienes una cuenta? Regístrate"
     },
     "recover": {
-      "mainTitle": "Recuperar contraseña",
+      "mainTitle": "Recuperar",
       "bodyText": "Por favor, ingresa una nueva contraseña.",
       "passwordPlaceHolderText": "Contraseña",
       "passwordConfirmationPlaceHolderText": "Confirmar Contraseña",
-      "submitBtnText": "Actualizar"
+      "formBtn": "Registrarse"
     }
   },
   "admin": {
@@ -113,13 +110,18 @@
       }
     },
     "adManager": {
+      "dialogMainTitle": "Especificaciones y Recomendaciones de Formato del Anuncio",
+      "adSuccessToastTitle": "Operación Exitosa",
+      "adFailedToastTitle": "Error",
+      "adSuccessToastMsg": "El anuncio fue creado de manera correcta!",
+      "adFailedToastMsg": "La creación del anuncio ha fallado. Por favor, intentalo de nuevo.",
       "modules": [
         {
           "name": "Usuarios",
           "value": "user"
         },
         {
-          "name": "Empresas",
+          "name": "Empresas de Reciclaje",
           "value": "company"
         },
         {
@@ -127,23 +129,24 @@
           "value": "ngo, shelter, social"
         },
         {
-          "name": "Vendedores",
+          "name": "Tiendas",
           "value": "vendor"
         }
       ],
-      "chooseBtnText": "Elegir",
-      "uploadBtnText": "Subir",
+      "chooseBtnText": "Escoger",
+      "uploadBtnText": "Adjuntar",
       "cancelBtnText": "Cancelar",
       "uploadImgPlaceHolderText": "Arrastra y suelta la imagen aquí para adjuntarla.",
       "createAdBtnText": "Crear Anuncio",
       "adNameInputTitle": "Nombre del Anuncio",
-      "adNameInputPlaceholder": "Campaña de Verano Pepsi",
+      "adNameInputPlaceholder": "Campaña de Verano de Pepsi",
       "adUrlInputTitle": "URL del Anuncio",
       "adUrlInputPlaceholder": "www.pepsi.com/landing",
       "adMultiSelectInputTitle": "¿Quién puede ver este Anuncio?",
-      "adMultiSelectInputPlaceholder": "Seleccionar Módulos",
+      "adMultiSelectInputPlaceholder": "Seleccionar Audiencia",
       "adDateInputTitle": "Duración del Anuncio",
       "adDateInputPlaceholder": "Seleccionar un rango de fechas",
+      "bannerPreviewImagetext": "Vista Previa",
       "cancelCampaignBtnText": "Cancelar Campaña",
       "adTitle": "Nombre del Anuncio:",
       "targetTitle": "Audiencia del Anuncio:",
@@ -316,9 +319,11 @@
           }
         ],
         "editPetthankyouPagetitle": "¡Todo listo!",
+        "editPetthankyouPagebackground": "image-1.svg",
         "editPetthankyouPagebuttonLabel": "Ir a la mascota",
         "editPetthankyouPagebodyText": "¡La mascota para adopción se ha actualizado con éxito!",
         "createPetthankyouPagetitle": "¡Todo listo!",
+        "createPetthankyouPagebackground": "image-1.svg",
         "createPetthankyouPagebuttonLabel": "Ir a la mascota",
         "createPetthankyouPagebodyText": "¡La mascota para adopción fue creada!",
         "inputNameTitleText": "Nombre de la Mascota",
@@ -419,173 +424,6 @@
       "inputNumberAskingPriceLabel": "Precio Solicitado",
       "inputNumberAskingPricePlaceholderText": "Precio Solicitado",
       "inputNumberAskingPricemaxLengthErrorMessage": "Has excedido el número máximo de 7 caracteres en este campo"
-    },
-    "offersList": {
-        "SelectInputPlaceHolder": "Filtra por Material",
-        "inputSearchPlaceHolder": "Búsqueda por palabra clave",
-        "newOfferBtn": "Nueva Oferta",
-        "rowExpansionCompanyTitle": "Empresa",
-        "rowExpansionBidTitle": "Oferta",
-        "rowExpansionStatusTitle": "Estado",
-        "rowExpansionBiddingDateTitle": "Fecha de Oferta",
-        "statusRejectedText": "Rechazado",
-        "statusAprovedText": "Aceptado",
-        "statusPendingText": "Pendiente",
-        "tableColumnTitle": "Título",
-        "tableColumnMaterialTitle": "Material",
-        "tableColumnQuantityTitle": "Cantidad",
-        "tableColumnSellPriceTitle": "Precio de Venta",
-        "tableColumnOfferslTitle": "Ofertas",
-        "tableColumnPublishedDateTitle": "Fecha de Publicación",
-        "noOffersPostedmessage": "Aún no has publicado ninguna oferta.",
-        "noOffersForMaterialsMessage": "No hay ofertas para los materiales que te interesa comprar",
-        "createOfferBtn": "Crear Oferta"
-    }
-  },
-  "profile": {
-    "photoGallery":{
-        "mainTitle": "Imágenes",
-        "noImagesMessage": "No has subido ninguna imagen a tu perfil."
-    },
-    "profile": {
-
-    },
-    "profileInformation": {
-        "pickUpFromHomeText": "Recoger en casa",
-        "recyclableGoodsTitle": "Precio de bienes reciclables",
-        "contactBtnText": "Contactar",
-        "editProfileBtnText": "Editar perfil",
-        "newProductBtnText": "Nuevo Producto",
-        "newPetBtnText": "Contactar",
-        "viewLocationBtnText": "Ver ubicación",
-        "reportUserToolTip": "Reportar perfil"
-    }
-  },
-  "report": {
-    "createReport":{
-        "inputDropdownSubjectLabel": "Asunto",
-        "inputDropdownSubjectPlaceholderText": "Selecciona un motivo para reportar*",
-        "inputDropdownEntityLabel": "Nombre del type",
-        "inputDropdownUserPlaceholderText": "Selecciona un usuario*",
-        "textAreaReportDescriptionTitle": "Describe tu reporte",
-        "textAreaReportDescriptionPlaceholder": "Dinos por qué quieres reportar type.",
-        "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
-        "createReportBtn": "Crear Reporte"
-    }
-  },
-  "settings":{
-    "profile":{
-        "profile":{},
-        "profileInfo": {
-            "followersBtnText": "Seguidores",
-            "followingBtnText": "Siguiendo",
-            "editBtnText": "Editar",
-            "viewProfileBtnText": "Ver Perfil",
-            "sendMessageBtnText": "Enviar Mensaje",
-            "adminEditBtnText": "Editar",
-            "adminRecoverBtnText": "Recuperar",
-            "companyInformationTitle": "Sobre la Organización",
-            "companyPickUpAtHomeTitle": "Recoger en Casa",
-            "companyGalleryTitle": "Galería",
-            "companyMaterialPriceTitle": "Precio del Material"
-          
-        },
-        "profileProvider": {}
-    },
-    "about":{},
-    "activity": {},
-    "deleteAccount": {
-        "dialogDeleteAccountBtnText": "Eliminar mi Cuenta",
-        "dialogCancelDeleteBtnText": "Cancelar",
-        "mainTitle": "Descargo de Responsabilidad: Eliminación de Cuenta",
-        "secondaryTitle": "Al eliminar tu cuenta, aceptas lo siguiente:",
-        "listItem1": "Eliminación Permanente: </b> Tu cuenta y todos los datos asociados se eliminarán de forma permanente y no se podrán recuperar.",
-        "listItem2": "Pérdida de Acceso: </b> Perderás el acceso a todos los servicios, contenido y funciones vinculadas a tu cuenta.",
-        "listItem3": "Responsabilidad de los Datos: </b> Asegúrate de hacer una copia de seguridad de cualquier dato que desees conservar, ya que no somos responsables por la pérdida de datos.",
-        "listItem4": "Transacciones Pendientes: </b> Resuelve cualquier transacción o problema pendiente antes de la eliminación.",
-        "deleteConfirmationText": "Al continuar, aceptas estos términos y entiendes las consecuencias permanentes.",
-        "deleteAccountBtn": "Eliminar Tu Cuenta",
-        "dialogText": "¿Realmente deseas eliminar tu cuenta? <br /> Este proceso no se puede deshacer.",
-        "passwordInputLabel": "Contraseña",
-        "passwordInputPlaceHolderText": "Introduce tu Contraseña",
-        "maxLengthErrorMessage": "Has excedido el número máximo de 20 caracteres en este campo"
-    },
-    "password": {},
-    "privacy": {},
-    "settings": {
-        "profileBtnText": "Mi Perfil",
-        "changePasswordBtnText": "Cambiar Contraseña",
-        "termsAndConditionsBtnText": "Términos y Condiciones",
-        "deleteAccountBtnText": "Eliminar Cuenta",
-        "logOutBtnText": "Cerrar Sesión"
-    },
-    "terms": {}
-  },
-  "user":{
-    "companies": {
-        "companyBannerTitle": "AYUDA AL PLANETA Y AYUDA A TU BOLSILLO",
-        "searchLabelText": "Descubre empresas de reciclaje",
-        "iconTitle1": "100% Reciclado",
-        "iconTitle2": "Ecológico",
-        "iconTitle3": "Economía Sostenible"
-    },
-    "map": {
-        "dialogTitle": "Selecciona tu Ubicación Predeterminada",
-        "dialogHomeLocationBtnText": "Usar ubicación registrada",
-        "dialogCurrentLocationBtnText": "Usar mi ubicación actual",
-        "inputSearchPlaceHolder": "Buscar",
-        "markerDetailMaterialTitle": "Interesado en comprar",
-        "markerDetailPickUpTitle": "Recoger en casa",
-        "markerDetailLearnMoreBtnText": "Más información",
-        "filtersModalTitle": "Elige los materiales que te interesan",
-        "filtersModalCheckBoxText1": "Papel",
-        "filtersModalCheckBoxText2": "Plástico",
-        "filtersModalCheckBoxText3": "Vidrio",
-        "filtersModalCheckBoxText4": "Residuos electrónicos",
-        "filtersModalCheckBoxText5": "Metal",
-        "filtersModalCheckBoxText6": "Orgánicos"
-    },
-    "ngo": {
-        "organizations": {},
-      "shelters": {
-        "shelterBannerTitle": "APOYA A LOS QUE NO TIENEN HOGAR",
-        "searchInputTitle": "Descubre mascotas en adopción",
-        "tabLabelShelters": "Refugios",
-        "tabLabelPets": "Mascotas"
-      }
-    },
-    "orders": {
-        "mainTitle": "Mis Pedidos",
-        "filtersTitle": "Filtros"
-    },
-    "vendors": {
-        "VendorsBannerTitle": "TIENDA",
-        "searchInputTitle": "Descubre Productos",
-        "tabLabelVendorsText": "Tiendas",
-        "tabLabelProductsText": "Productos"
-    }
-  },
-  "vendor":{
-    "products":{
-        "createProduct": {
-        "inputTextProductNameLabel": "Nombre del Producto",
-        "inputTextProductNamePlaceholderText": "Nombre del Producto*",
-        "maxLengthErrorMessage": "Has excedido el número máximo de 100 caracteres en este campo",
-        "inputDropdownSubjectLabel": "Categoría",
-        "inputDropdownSubjectPlaceholderText": "Selecciona una Categoría*",
-        "inputNumberPriceLabel": "Precio",
-        "inputNumberPricePlaceholderText": "Agrega el precio por unidad*",
-        "textAreaProducttDescriptionLabel": "Detalle del Producto",
-        "textAreaProductDescriptionPlaceholder": "Escribe una breve descripción sobre el producto.",
-        "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
-        "creatProductBtn": "Crear Producto : Actualizar Producto"
-    },
-    "product": {
-        "addToCartBtnText": "Añadir al Carrito",
-        "reportProductTooltipText": "Reportar Producto",
-        "editProductBtnText": "Editar Producto",
-        "deleteProductBtn": "Eliminar Producto"
-    }
     }
   }
 }

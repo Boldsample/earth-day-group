@@ -26,7 +26,7 @@
     "help_your_planet": "Help your planet and your pocket",
     "make_an_extra_income": "Make an extra income with your recycling, you can choose who to sell depending on your interest.",
     "find_social_organizations": "Find social organizations",
-    "give_a_second_change": "Give a second change to those objects that you think can help someone else."
+    "give_a_second_change": "Give a second chance to those objects that you think can help someone else."
   },
   "login": {
     "forgot": {
@@ -113,13 +113,18 @@
       }
     },
     "adManager": {
+      "dialogMainTitle": "Ad Format Specs & Recommendations",
+      "adSuccessToastTitle": "Success",
+      "adFailedToastTitle": "Error",
+      "adSuccessToastMsg": "The ad was created succesfully!",
+      "adFailedToastMsg": "Ad creation failed. Please try again",
       "modules": [
         {
           "name": "Users",
           "value": "user"
         },
         {
-          "name": "Companies",
+          "name": "Recycling Companies",
           "value": "company"
         },
         {
@@ -141,9 +146,10 @@
       "adUrlInputTitle": "Ad URL",
       "adUrlInputPlaceholder": "www.pepsi.com/landing",
       "adMultiSelectInputTitle": "Who can view this Ad?",
-      "adMultiSelectInputPlaceholder": "Select Modules",
+      "adMultiSelectInputPlaceholder": "Select Target Audience",
       "adDateInputTitle": "Ad Duration",
       "adDateInputPlaceholder": "Select a range of dates",
+      "bannerPreviewImagetext": "Image Preview",
       "cancelCampaignBtnText": "Cancel Campaign",
       "adTitle": "Ad Name:",
       "targetTitle": "Ad Target:",
@@ -417,7 +423,7 @@
       "inputNumberAskingPricePlaceholderText": "Asking Price",
       "inputNumberAskingPricemaxLengthErrorMessage": "You have exceeded the maximum number of 7 characters in this field"
     },
-    "offersList":{
+    "offersList": {
       "SelectInputPlaceHolder": "Filter by Materials",
       "inputSearchPlaceHolder": "Keyword Search",
       "newOfferBtn": "New Offer",
@@ -440,13 +446,11 @@
     }
   },
   "profile": {
-    "photoGallery":{
+    "photoGallery": {
       "mainTitle": "Pictures",
       "noImagesMessage": "You have not uploaded any images to your profile."
     },
-    "profile": {
-
-    },
+    "profile": {},
     "profileInformation": {
       "pickUpFromHomeText": "Pickup from home",
       "recyclableGoodsTitle": "Price for Recyclable Goods",
@@ -459,7 +463,7 @@
     }
   },
   "report": {
-    "createReport":{
+    "createReport": {
       "inputDropdownSubjectLabel": "Subject",
       "inputDropdownSubjectPlaceholderText": "Select a reason to report*",
       "inputDropdownEntityLabel": "Name of type",
@@ -470,25 +474,25 @@
       "createReportBtn": "Create Report"
     }
   },
-  "settings":{
-    "profile":{
-      "profile":{},
+  "settings": {
+    "profile": {
+      "profile": {},
       "profileInfo": {
-          "followersBtnText": "Followers",
-          "followingBtnText": "Following",
-          "editBtnText": "Edit",
-          "viewProfileBtnText": "View Profile",
-          "sendMessageBtnText": "Send Message",
-          "adminEditBtnText": "Edit",
-          "adminRecoverBtnText": "Recover",
-          "companyInformationTitle": "About The Organization",
-          "companyPickUpAtHomeTitle": "Pickup at Home",
-          "companyGalleryTitle": "Gallery",
-          "companyMaterialPriceTitle": "Material Price"
+        "followersBtnText": "Followers",
+        "followingBtnText": "Following",
+        "editBtnText": "Edit",
+        "viewProfileBtnText": "View Profile",
+        "sendMessageBtnText": "Send Message",
+        "adminEditBtnText": "Edit",
+        "adminRecoverBtnText": "Recover",
+        "companyInformationTitle": "About The Organization",
+        "companyPickUpAtHomeTitle": "Pickup at Home",
+        "companyGalleryTitle": "Gallery",
+        "companyMaterialPriceTitle": "Material Price"
       },
       "profileProvider": {}
     },
-    "about":{},
+    "about": {},
     "activity": {},
     "deleteAccount": {
       "dialogDeleteAccountBtnText": "Delete my Account",
@@ -517,7 +521,7 @@
     },
     "terms": {}
   },
-  "user":{
+  "user": {
     "companies": {
       "companyBannerTitle": "HELP THE PLANET AND HELP YOUR POCKET",
       "searchLabelText": "Discover recycling companies",
@@ -561,28 +565,27 @@
       "tabLabelProductsText": "Products"
     }
   },
-  "vendor":{
-    "products":{
+  "vendor": {
+    "products": {
       "createProduct": {
-      "inputTextProductNameLabel": "Product Name",
-      "inputTextProductNamePlaceholderText": "Product Name*",
-      "maxLengthErrorMessage": "You have exceeded the maximum number of 100 characters in this field",
-      "inputDropdownSubjectLabel": "Category",
-      "inputDropdownSubjectPlaceholderText": "Select a Category*",
-      "inputNumberPriceLabel": "Price",
-      "inputNumberPricePlaceholderText": "Add price per unit*",
-      "textAreaProducttDescriptionLabel": "Product Detail",
-      "textAreaProductDescriptionPlaceholder": "Write a short description about the product.",
-      "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
-      "createProductBtn": "Create Product : Update Product"
-    },
-    "product": {
-      "addToCartBtnText": "Add To Cart",
-      "reportProductTooltipText": "Report Product",
-      "editProductBtnText": "Edit Product",
-      "deleteProductBtn": "Delete Product"
-    }
+        "inputTextProductNameLabel": "Product Name",
+        "inputTextProductNamePlaceholderText": "Product Name*",
+        "maxLengthErrorMessage": "You have exceeded the maximum number of 100 characters in this field",
+        "inputDropdownSubjectLabel": "Category",
+        "inputDropdownSubjectPlaceholderText": "Select a Category*",
+        "inputNumberPriceLabel": "Price",
+        "inputNumberPricePlaceholderText": "Add price per unit*",
+        "textAreaProducttDescriptionLabel": "Product Detail",
+        "textAreaProductDescriptionPlaceholder": "Write a short description about the product.",
+        "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
+        "createProductBtn": "Create Product : Update Product"
+      },
+      "product": {
+        "addToCartBtnText": "Add To Cart",
+        "reportProductTooltipText": "Report Product",
+        "editProductBtnText": "Edit Product",
+        "deleteProductBtn": "Delete Product"
+      }
     }
   }
-
 }

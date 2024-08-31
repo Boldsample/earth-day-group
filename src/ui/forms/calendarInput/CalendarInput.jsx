@@ -14,6 +14,8 @@ function CalendarInput({
   isRequired,
   disabled = false,
   showLabel = true,
+  getFormErrorMessage,
+  placeHolderText
 }) {
   // const [dates, setDates] = useState(null);
   const renderInput = () => <div>
@@ -23,6 +25,7 @@ function CalendarInput({
         control={control}
         render={({ field }) => 
         <Calendar
+          placeholder={placeHolderText}
           selectionMode="range"
           readOnlyInput 
           hideOnRangeSelection
@@ -33,6 +36,7 @@ function CalendarInput({
           onChange={e => field.onChange(e.value)}
             />
         } />
+        {getFormErrorMessage(nameInput)}
       <label htmlFor={nameInput + "_" + name}>{name}</label>
     </div>
 
