@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 import { setHeader } from '@store/slices/globalSlice'
 import { getProducts, updateProduct } from '@services/productServices'
@@ -22,6 +23,9 @@ const Products = () => {
   const [page, setPage] = useState({page: 0, rows: 6})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: ''})
+  const [t] = useTranslation('translation', { keyPrefix: 'admin.products' })
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.genericInputs'})
+  const stateDropDownText = tGlobal('stateDropdown', { returnObjects: true });
 
   const changeState = async (id, state) => {
     await updateProduct({state: state}, {id: id})
@@ -37,7 +41,7 @@ const Products = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
+      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={tGlobal('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callProducts}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
@@ -57,7 +61,7 @@ const Products = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
-      <h1 className="text-defaultCase mb-1">Products</h1>
+      <h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>
       {typeof products?.total == 'undefined' && products?.data?.length == 0 && 
         <TableSkeleton />
       || <>
@@ -69,16 +73,13 @@ const Products = () => {
           header={renderHeader} 
           totalRecords={products?.total} 
           onPage={({page, rows}) => setPage({page, rows})}>
-          <Column header="Published by" body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
-          <Column header="Name" field="name"></Column>
-          <Column header="Price" body={({price}) => <>
+          <Column header={t('tableTitlePublishedBy')} body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
+          <Column header={t('tableTitleName')} field="name"></Column>
+          <Column header={t('tableTitlePrice')} body={({price}) => <>
             {parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
           </>}></Column>
-          <Column header="State" body={({id, state}) => 
-            <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
-              {name: "Active", code: "1"},
-              {name: "Disable", code: "2"}
-            ]} />
+          <Column header={t('tableTitleState')} body={({id, state}) => 
+            <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
           }></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
             <Link className="button small dark-blue" to={`/product/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
@@ -87,7 +88,7 @@ const Products = () => {
         </DataTable>
         {products?.total == 0 && 
           <div className="mt-2">
-            <p>There's no products for this filter options.</p>
+            <p>{t('noProductsFoundText')}</p>
           </div>
         }
       </>}

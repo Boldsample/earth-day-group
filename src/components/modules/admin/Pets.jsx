@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 import { getPets, updatePet } from '@services/petServices'
 import { setHeader } from '@store/slices/globalSlice'
@@ -22,6 +23,9 @@ const Pets = () => {
   const [page, setPage] = useState({page: 0, rows: 6})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: ''})
+  const [t] = useTranslation('translation', { keyPrefix: 'admin.pets' })
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.genericInputs'})
+  const stateDropDownText = t('stateDropdown', { returnObjects: true });
 
   const changeState = async (id, state) => {
     await updatePet({state: state}, {id: id})
@@ -37,7 +41,7 @@ const Pets = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
+      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={tGlobal('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callPets}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
@@ -57,7 +61,7 @@ const Pets = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
-      <h1 className="text-defaultCase mb-1">Adoption pets</h1>
+      <h1 className="text-defaultCase mb-1">{t('mainTitle')} </h1>
       {typeof pets?.total == 'undefined' && pets?.data?.length == 0 && 
         <TableSkeleton />
       || <>
@@ -69,15 +73,12 @@ const Pets = () => {
           header={renderHeader} 
           totalRecords={pets?.total} 
           onPage={({page, rows}) => setPage({page, rows})}>
-          <Column header="Published by" body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
-          <Column header="Name" field="name"></Column>
-          <Column header="Specie" field="specie"></Column>
-          <Column header="Published" field="date"></Column>
-          <Column header="State" body={({id, state}) => 
-            <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
-              {name: "Active", code: "1"},
-              {name: "Disable", code: "2"}
-            ]} />
+          <Column header={t('tableTitlePublishedBy')}  body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
+          <Column header={t('tableTitleName')} field="name"></Column>
+          <Column header={t('tableTitleSpecie')}  field="specie"></Column>
+          <Column header={t('tableTitlePublishedDate')}  field="date"></Column>
+          <Column header={t('tableTitlePublished')}  body={({id, state}) => 
+            <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
           }></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
             <Link className="button small dark-blue" to={`/pet/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
@@ -86,7 +87,7 @@ const Pets = () => {
         </DataTable>
         {pets?.total == 0 && 
           <div className="mt-2">
-            <p>There's no pets for this filter options.</p>
+            <p>{t('noPetsFoundText')} </p>
           </div>
         }
       </>}

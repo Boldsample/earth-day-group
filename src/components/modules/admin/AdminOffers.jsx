@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faPlus, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 import OfferInfo from '@modules/offers/OfferInfo'
 import { setHeader } from '@store/slices/globalSlice'
@@ -25,6 +26,7 @@ const AdminOffers = () => {
   const [expandedRows, setExpandedRows] = useState({})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: '', materials: []})
+  const [t] = useTranslation('translation', { keyPrefix: 'admin.adminOffers' })
 
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
@@ -41,8 +43,8 @@ const AdminOffers = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" placeholder="Filter by materials" />
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
+      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" placeholder={t('multiSelectInputPlaceHolder')} />
+      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
@@ -59,19 +61,19 @@ const AdminOffers = () => {
   const rowExpansionTemplate = data => <div className="p-3">
     <DataTable value={data.offers}>
         <Column header="" body={() => "-"} field="id" className="text-center" style={{width: '2.5rem'}}></Column>
-        <Column header="Company" body={({name, picture}) => <>
+        <Column header={t('rowExpansiontitleCompany')} body={({name, picture}) => <>
           <ProfilePhoto userPhoto={picture} />
           <b>{name}</b>
         </>}></Column>
-        <Column header="Bid" body={({price}) => 
+        <Column header={t('rowExpansiontitleBid')} body={({price}) => 
             <>
                {parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
             </>}></Column>
-        <Column header="Status" body={({id, rejected, accepted}) => (rejected || (accepted != 0 && accepted != id)) && 
-          <span className="text-red-state">Rejected</span> || (accepted == id && 
-          <span className="text-green-state">Accepted</span>) || 
+        <Column header={t('rowExpansiontitleStatus')} body={({id, rejected, accepted}) => (rejected || (accepted != 0 && accepted != id)) && 
+          <span className="text-red-state">{t('statusTextRejected')}</span> || (accepted == id && 
+          <span className="text-green-state">{t('statusTextAccepted')}</span>) || 
           <span>Pending</span>}></Column>
-        <Column header="Bidding Date" body={({date}) => date.split(' ')[0]}></Column>
+        <Column header={t('rowExpansiontitleBiddingDate')} body={({date}) => date.split(' ')[0]}></Column>
         <Column className="actions" header={null} body={offer => 
           <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>}></Column>
     </DataTable>
@@ -88,7 +90,7 @@ const AdminOffers = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
-      <h1 className="text-defaultCase mb-1">Offers</h1>
+      <h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>
       <OfferInfo type={user.role == 'user' ? 'min' : 'full'} show={detail.show} offer={detail} onHide={hidePopup}  />
       {typeof offers?.total == 'undefined' && offers?.data?.length == 0 && 
         <TableSkeleton/>
@@ -108,18 +110,18 @@ const AdminOffers = () => {
             <Column expander={({offers}) => offers?.length > 0 } style={{width: "2.5rem"}} /> || null}
           {/* <Column header={null} body={ProfilePhoto}></Column> */}
           {user.role != 'user' && 
-            <Column header="User" body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
+            <Column header={t('tableTitleUser')} body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
           || null}
-          <Column header="Title" field="title"></Column>
-          <Column header="Material" body={({material}) => 
+          <Column header={t('tableTitleSubject')} field="title"></Column>
+          <Column header={t('tableTitleMaterial')} body={({material}) => 
             <Button label={material} className={'small ' + material} />}></Column>
-          <Column header="Quantity" body={({quantity, unit}) => quantity + ' ' + unit}></Column>
-          <Column header="Sell Price" body={({price}) => 
+          <Column header={t('tableTitleQuantity')} body={({quantity, unit}) => quantity + ' ' + unit}></Column>
+          <Column header={t('tableTitleSellPrice')} body={({price}) => 
            <span className='price__background'>{parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>}></Column>
           {user.role == 'user' && 
             <Column header="Offers" body={({offers}) => offers?.length || 0}></Column>
           || null}
-          <Column header="Published Date" body={({date}) => date.split(' ')[0]}></Column>
+          <Column header={t('tableTitlePublishedDate')} body={({date}) => date.split(' ')[0]}></Column>
           {user.role == 'user' && 
             <Column className="actions" header={null} body={offer => 
               <Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>}></Column> || 
@@ -133,7 +135,7 @@ const AdminOffers = () => {
         </DataTable>
       ) ||
         <div className="mt-2">
-          <p>{user.role == 'user' ? "You have not posted any offers yet." : "There's no offers for the materials you buy"}</p>
+          <p>{user.role == 'user' ? t('noOffersPostedText') : t('noOffersFoundText')}</p>
           {user.role == 'user' && 
             <Link className="button dark-blue mt-1" to="/offers/new">Create post offer</Link>
           || null}

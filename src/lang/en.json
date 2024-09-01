@@ -11,6 +11,19 @@
       "passwordPatternErrorMessage": "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
       "validEmailAddressErrorMessage": "Please enter a valid e-mail address",
       "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit."
+    },
+    "genericInputs": {
+      "inputSearchPlaceHolder": "Keyword Search",
+      "stateDropdown": [
+        {
+          "name": "Active",
+          "code": "1"
+        },
+        {
+          "name": "Disable",
+          "code": "2"
+        }
+      ]
     }
   },
   "intro": {
@@ -158,10 +171,12 @@
       "liveAdText": "LIVE"
     },
     "adminOffers": {
+      "NOTA": "QUEDA PENDIENTE TRADUCIR LOS NOMBRES DE LOS MATERIALES EN LAS TABLAS",
+      "mainTitle": "Offers List",
       "inputSearchPlaceHolder": "Keyword Search",
       "multiSelectInputPlaceHolder": "Filter by Materials",
-      "tableTitleUser": "user",
-      "tableTitleSubject": "Title",
+      "tableTitleUser": "User",
+      "tableTitleSubject": "Subject",
       "tableTitleMaterial": "Material",
       "tableTitleQuantity": "Quantity",
       "tableTitleSellPrice": "Sell Price",
@@ -174,7 +189,9 @@
       "statusTextRejected": "Rejected",
       "statusTextPending": "Pending",
       "newOfferTextLink": "NewOffer",
-      "createPostOfferLinkText": "Create Post Offer"
+      "createPostOfferLinkText": "Create Post Offer",
+      "noOffersFoundText": "There are no offers that meet the filter criteria.",
+      "noOffersPostedText": "You have not posted any offers yet."
     },
     "pets": {
       "inputSearchPlaceHolder": "Keyword Search",
@@ -201,7 +218,7 @@
       "inputSearchPlaceHolder": "Keyword Search",
       "mainTitle": "Product List",
       "tableTitlePublishedBy": "Published By",
-      "tableTitleName": "Name",
+      "tableTitleName": "Product",
       "tableTitlePrice": "Price",
       "tableTitleState": "State",
       "stateDropdown": [

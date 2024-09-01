@@ -11,6 +11,19 @@
       "passwordPatternErrorMessage": "Debe contener un mínimo de ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número.",
       "validEmailAddressErrorMessage": "Por favor, introduce una dirección de correo electrónico válida.",
       "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres."
+    },
+    "genericInputs": {
+      "inputSearchPlaceHolder": "Búsqueda por palabra clave",
+      "stateDropdown": [
+        {
+          "name": "Activo",
+          "code": "1"
+        },
+        {
+          "name": "Desactivado",
+          "code": "2"
+        }
+      ]
     }
   },
   "intro": {
@@ -33,14 +46,17 @@
       "title": "¿Olvidaste tu contraseña?",
       "bodyText": "Ingresa tu correo electrónico registrado y te enviaremos un enlace para restablecer tu contraseña.",
       "emailInput": "Correo electrónico",
-      "formBtn": "Enviar"
+      "sendformBtnText": "Enviar",
+      "forgotthankyouPagetitle": "¡Correo enviado con éxito!",
+      "forgotthankyouPagebuttonLabel": "Volver a iniciar sesión",
+      "forgotthankyouPagebodyText": "Por favor, revise su bandeja de entrada para encontrar el correo electrónico con el enlace para restablecer su contraseña."
     },
     "loginForm": {
       "mainTitle": "Inicia sesión",
       "emailPlaceHolderText": "Correo electrónico",
       "passwordPlaceHolderText": "Contraseña",
-      "formBtn": "Iniciar sesión",
-      "ForgotPassword": "¿Olvidaste tu contraseña?",
+      "loginformBtn": "Iniciar sesión",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
       "signInWith": "O inicia sesión con",
       "dontHaveAccount": "¿No tienes una cuenta? Regístrate"
     },
@@ -155,10 +171,11 @@
       "liveAdText": "EN VIVO"
     },
     "adminOffers": {
+      "mainTitle": "Listado de Ofertas",
       "inputSearchPlaceHolder": "Búsqueda por palabra clave",
       "multiSelectInputPlaceHolder": "Filtrar por materiales",
       "tableTitleUser": "Usuario",
-      "tableTitleSubject": "Título",
+      "tableTitleSubject": "Asunto",
       "tableTitleMaterial": "Material",
       "tableTitleQuantity": "Cantidad",
       "tableTitleSellPrice": "Precio de Venta",
@@ -171,7 +188,9 @@
       "statusTextRejected": "Rechazado",
       "statusTextPending": "Pendiente",
       "newOfferTextLink": "Nueva Oferta",
-      "createPostOfferLinkText": "Crear Oferta"
+      "createPostOfferLinkText": "Crear Oferta",
+      "noOffersFoundText": "No hay ofertas que cumplan con los criterios del filtro.",
+      "noOffersPostedText": "Aún no has publicado ninguna oferta."
     },
     "pets": {
       "inputSearchPlaceHolder": "Búsqueda por palabra clave",
@@ -198,7 +217,7 @@
       "inputSearchPlaceHolder": "Búsqueda por palabra clave",
       "mainTitle": "Lista de Productos",
       "tableTitlePublishedBy": "Publicado por",
-      "tableTitleName": "Nombre",
+      "tableTitleName": "Producto",
       "tableTitlePrice": "Precio",
       "tableTitleState": "Estado",
       "stateDropdown": [
