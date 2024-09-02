@@ -41,7 +41,7 @@ const Pets = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={tGlobal('inputSearchPlaceHolder')} />
+      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callPets}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
@@ -66,6 +66,7 @@ const Pets = () => {
         <TableSkeleton />
       || <>
         <DataTable paginator stripedRows lazy
+          emptyMessage={t('noPetsFoundText')}
           dataKey="id" 
           page={page.page} 
           rows={page.rows} 

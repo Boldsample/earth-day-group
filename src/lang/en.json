@@ -5,25 +5,16 @@
     "login": "Log In",
     "hi": "Hi",
     "settings": "Settings",
+    "all": "All",
+    "active": "Active",
+    "disable": "Disable",
+    "inputSearchPlaceHolder": "Keyword Search",
     "formErrors": {
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
       "passwordPatternErrorMessage": "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
       "validEmailAddressErrorMessage": "Please enter a valid e-mail address",
       "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit."
-    },
-    "genericInputs": {
-      "inputSearchPlaceHolder": "Keyword Search",
-      "stateDropdown": [
-        {
-          "name": "Active",
-          "code": "1"
-        },
-        {
-          "name": "Disable",
-          "code": "2"
-        }
-      ]
     }
   },
   "intro": {
@@ -234,8 +225,9 @@
       "noProductsFoundText": "There are no products that meet the filter criteria."
     },
     "reportInfo": {
+      "NOTA": "AQUI HAY ALGUNOS TEXTOS DE VARIABLES QUE VIENEN DE LA BDS QUE SE VISUALIZAN EN INGLÉS --REVISAR",
       "mainTitle": "Report Detail",
-      "productTitle": "Reported Product:",
+      "reportedEntity": "Reported",
       "ownerTitle": "Owner:",
       "subjectTitle": "Subject:",
       "descriptionTitle": "Description:",
@@ -245,44 +237,42 @@
     "report": {
       "SelectInputPlaceHolder": "Select a type",
       "inputSearchPlaceHolder": "Keyword Search",
-      "mainTitle": "Report",
+      "mainTitle": "Report List",
       "tableTitleType": "Type",
       "tableTitleReported": "Reported",
       "tableTitleSubject": "Subject",
       "tableTitleStatus": "Status",
-      "stateDropdown": [
-        {
-          "name": "Active",
-          "code": "1"
-        },
-        {
-          "name": "Disable",
-          "code": "2"
-        }
-      ],
       "tableTitleAssignedTo": "Assigned to",
+      "all": "All",
+      "allUsers": "Users",
+      "allOffers": "Offers",
+      "allProducts": "Products",
+      "allPets": "Pets",
+      "inProcess": "In Process",
+      "pending": "Pending",
+      "resolved": "Resolved",
       "noProductsFoundText": "There are no reports that meet the filter criteria."
     },
     "usersList": {
+      "newAdminButton": "New Admin",
+      "adminMainTitle": "Admin List",
+      "userMainTitle": "Users List",
       "inputSearchPlaceHolder": "Keyword Search",
       "SelectInputUsersPlaceHolder": "All",
       "SelectInputActivePlaceHolder": "Active",
-      "mainTitle": "Users List",
-      "tableTitleUser": "user",
+      "tableTitleUser": "User",
       "tableTitleRole": "Role",
       "tableTitleCreatedAt": "Created At",
       "tableTitleState": "State",
-      "stateDropdown": [
-        {
-          "name": "Active",
-          "code": "1"
-        },
-        {
-          "name": "Disable",
-          "code": "2"
-        }
-      ],
-      "createPostOfferLinkText": "Create Post Offer"
+      "all": "All",
+      "allUsers": "Users",
+      "allCompanies": "Companies",
+      "allStores": "Stores",
+      "allNgos": "NGOs",
+      "allShelters": "Shelters",
+      "allSocialOrg": "Social Organizations",
+      "createPostOfferLinkText": "Create Post Offer",
+      "noUsersFoundText": "There are no users that meet the filter criteria."
     }
   },
   "bookmarks": {

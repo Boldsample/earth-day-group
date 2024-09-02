@@ -164,15 +164,14 @@ console.log(appModules)
               </div>
           :
           <div className='p-fileupload p-fileupload-advanced p-component mt-3'>
-          <div className='p-fileupload p-fileupload-buttonbar space-between'>
+          <div className='p-fileupload p-fileupload-buttonbar space-between position-relative'>
               <div>
                 {ad?.id ? "" :  <Button loading={sending} type='submit' onClick={handleSubmit(onSubmit)}form='ad_form ' className='green-earth'>{t('createAdBtnText')}</Button>}
                 <button type='button' onClick={cancel} className='red-state'>{ad?.id ? t('cancelCampaignBtnText') : t('cancelBtnText')}</button>
               </div>
             {ad?.id && 
-              <div className="live-container">
-                <div className="live-circle"></div>
-                <div className="live-text">{t('liveAdText')}</div>
+              <div className='btn-str'>
+                <span className='btn-str__text'>{t('liveAdText')}</span>
               </div>
             }
           </div>

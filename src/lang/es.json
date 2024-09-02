@@ -5,25 +5,16 @@
     "login": "Iniciar sesión",
     "hi": "Hola",
     "settings": "Configuración",
+    "all": "Todos",
+    "active": "Activo",
+    "disable": "Inactivo",
+    "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
     "formErrors": {
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
       "requiredErrorMessage": "Este campo es obligatorio.",
       "passwordPatternErrorMessage": "Debe contener un mínimo de ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número.",
       "validEmailAddressErrorMessage": "Por favor, introduce una dirección de correo electrónico válida.",
       "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres."
-    },
-    "genericInputs": {
-      "inputSearchPlaceHolder": "Búsqueda por palabra clave",
-      "stateDropdown": [
-        {
-          "name": "Activo",
-          "code": "1"
-        },
-        {
-          "name": "Desactivado",
-          "code": "2"
-        }
-      ]
     }
   },
   "intro": {
@@ -168,7 +159,7 @@
       "targetTitle": "Audiencia del Anuncio:",
       "durationTitle": "Duración del Anuncio:",
       "linkTitle": "Enlace del Anuncio:",
-      "liveAdText": "EN VIVO"
+      "liveAdText": "AL AIRE"
     },
     "adminOffers": {
       "mainTitle": "Listado de Ofertas",
@@ -230,11 +221,11 @@
           "code": "2"
         }
       ],
-      "noProductsFoundText": "No hay productos que cumplan con los criterios deL filtro."
+      "noProductsFoundText": "No hay productos que cumplan con los criterios del filtro."
     },
     "reportInfo": {
       "mainTitle": "Detalle del Reporte",
-      "productTitle": "Producto Reportado:",
+      "reportedEntity": "Reportado",
       "ownerTitle": "Propietario:",
       "subjectTitle": "Asunto:",
       "descriptionTitle": "Descripción:",
@@ -244,44 +235,42 @@
     "report": {
       "SelectInputPlaceHolder": "Seleccionar un tipo",
       "inputSearchPlaceHolder": "Búsqueda por palabra clave",
-      "mainTitle": "Reporte",
+      "mainTitle": "Lista de Reportes",
       "tableTitleType": "Tipo",
       "tableTitleReported": "Reportado",
       "tableTitleSubject": "Asunto",
       "tableTitleStatus": "Estado",
-      "stateDropdown": [
-        {
-          "name": "Activo",
-          "code": "1"
-        },
-        {
-          "name": "Desactivado",
-          "code": "2"
-        }
-      ],
+      "all": "Todos",
+      "allUsers": "Usarios",
+      "allOffers": "Ofertas",
+      "allProducts": "Produtos",
+      "allPets": "Mascotas",
       "tableTitleAssignedTo": "Asignado a",
-      "noProductsFoundText": "No hay reportes que cumplan con los criterios deL filtro."
+      "inProcess": "En proceso",
+      "pending": "Pendiente",
+      "resolved": "Resuelto",
+      "noProductsFoundText": "No hay reportes que cumplan con los criterios del filtro."
     },
     "usersList": {
+      "newAdminButton": "Nuevo admin",
+      "adminMainTitle": "Lista de Administradores",
+      "userMainTitle": "Lista de Usuarios",
       "inputSearchPlaceHolder": "Búsqueda por palabra clave",
       "SelectInputUsersPlaceHolder": "Todos",
       "SelectInputActivePlaceHolder": "Activo",
-      "mainTitle": "Lista de Usuarios",
       "tableTitleUser": "Usuario",
       "tableTitleRole": "Rol",
-      "tableTitleCreatedAt": "Creado en",
+      "tableTitleCreatedAt": "Fecha de creación",
       "tableTitleState": "Estado",
-      "stateDropdown": [
-        {
-          "name": "Activo",
-          "code": "1"
-        },
-        {
-          "name": "Desactivado",
-          "code": "2"
-        }
-      ],
-      "createPostOfferLinkText": "Crear Oferta de Publicación"
+      "all": "Todos",
+      "allUsers": "Usuarios",
+      "allCompanies": "Empresas",
+      "allStores": "Tiendas",
+      "allNgos": "ONGs",
+      "allShelters": "Refugios",
+      "allSocialOrg": "Organizaciones Sociales",
+      "createPostOfferLinkText": "Crear Oferta de Publicación",
+      "noUsersFoundText": "No hay usuarios que cumplan con los criterios de filtro."
     }
   },
   "bookmarks": {

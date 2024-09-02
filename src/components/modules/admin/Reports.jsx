@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 import { Dropdown } from 'primereact/dropdown'
 import { setHeader } from '@store/slices/globalSlice'
@@ -25,6 +26,7 @@ const Reports = () => {
   const [page, setPage] = useState({page: 0, rows: 6})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({type: "", keyword: ''})
+  const [t] = useTranslation('translation', { keyPrefix: 'admin.report' })
 
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
@@ -45,14 +47,14 @@ const Reports = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <Dropdown value={filters?.role} onChange={e => updateFilters('type', e.value.code)} optionLabel="name" placeholder="Select a type" options={[
-        {name: "All", code: ""},
-        {name: "Users", code: "user"},
-        {name: "Offers", code: "offer"},
-        {name: "Products", code: "product"},
-        {name: "Pets", code: "pet"},
+      <Dropdown value={filters?.role} onChange={e => updateFilters('type', e.value.code)} optionLabel="name" placeholder={t('SelectInputPlaceHolder')} options={[
+        {name: t('all'), code: ""},
+        {name: t('allUsers'), code: "user"},
+        {name: t('allOffers'), code: "offer"},
+        {name: t('allProducts'), code: "product"},
+        {name: t('allPets'), code: "pet"},
       ]} />
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
+      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callReports}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
@@ -72,13 +74,14 @@ const Reports = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
-      <h1 className="text-defaultCase mb-1">Reports</h1>
+      <h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>
       <ProfileProvider profile={profile} setProfile={setProfile}>
         <ReportInfo show={detail.show} report={detail} onHide={hidePopup}  />
         {typeof reports?.total == 'undefined' && reports?.data?.length == 0 && 
           <TableSkeleton />
         || <>
           <DataTable paginator stripedRows lazy
+            emptyMessage={t('noProductsFoundText')}
             dataKey="id" 
             page={page.page} 
             rows={page.rows} 
@@ -86,13 +89,13 @@ const Reports = () => {
             header={renderHeader} 
             totalRecords={reports?.total} 
             onPage={({page, rows}) => setPage({page, rows})}>
-            <Column header="Type" field="type"></Column>
-            <Column header="Reported" field="name"></Column>
-            <Column header="Subject" field="subject"></Column>
-            <Column header="Status" body={({id, status}) => 
-              <Dropdown value={status} options={['Pending', 'In process', 'Resolved']} onChange={() => updateReport(id)} />
+            <Column header={t('tableTitleType')} field="type"></Column>
+            <Column header={t('tableTitleReported')}  field="name"></Column>
+            <Column header={t('tableTitleSubject')}  field="subject"></Column>
+            <Column header={t('tableTitleStatus')}  body={({id, status}) => 
+              <Dropdown value={status} options={[t('inProcess'), t('pending'), t('resolved')]} onChange={() => updateReport(id)} />
             }></Column>
-            <Column header="Asign to" field="admin"></Column>
+            <Column header={t('tableTitleAssignedTo')}  field="admin"></Column>
             <Column className="actions" header={null} body={({id, username, aid}) => <>
               <Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
               {(!aid || aid == user?.id) && 
@@ -100,11 +103,6 @@ const Reports = () => {
               }
             </>}></Column>
           </DataTable>
-          {reports?.total == 0 && 
-            <div className="mt-2">
-              <p>There's no reports for this filter options.</p>
-            </div>
-          }
         </>}
       </ProfileProvider>
     </div>

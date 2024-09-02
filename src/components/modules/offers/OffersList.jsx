@@ -105,8 +105,9 @@ const Offers = () => {
       <OfferInfo type={user.role == 'user' ? 'min' : 'full'} show={detail.show} offer={detail} onHide={hidePopup}  />
       {typeof offers?.total == 'undefined' && offers?.data?.length == 0 && 
         <TableSkeleton/>
-      || (offers?.total > 0 && 
+      || 
         <DataTable paginator stripedRows lazy
+        emptyMessage={t('noOffersFoundText')}
           dataKey="id" 
           page={page.page}
           rows={page.rows} 
@@ -143,14 +144,7 @@ const Offers = () => {
                 <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
               }
             </> || null}></Column>}
-        </DataTable>
-      ) ||
-        <div className="mt-2">
-          <p>{user.role == 'user' ? "You have not posted any offers yet." : "There's no offers for the materials you buy"}</p>
-          {user.role == 'user' && 
-            <Link className="button dark-blue mt-1" to="/offers/new">Create post offer</Link>
-          || null}
-        </div>
+        </DataTable>       
       }
     </div>
   </div>

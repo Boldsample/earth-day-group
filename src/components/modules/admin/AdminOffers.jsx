@@ -50,9 +50,6 @@ const AdminOffers = () => {
         setReset(true)
         setFilters({keyword: '', materials: []})
       }}><FontAwesomeIcon icon={faTrash} /></Button>
-      {user?.role == 'user' && 
-        <Link className="button small green-earth" to="/offers/new/"><FontAwesomeIcon icon={faPlus} /> New Offer</Link>
-      }
     </div>
     // <div className="flex aligncenter">
     //   <h1 className="text-defaultCase">Offers</h1>
@@ -94,8 +91,9 @@ const AdminOffers = () => {
       <OfferInfo type={user.role == 'user' ? 'min' : 'full'} show={detail.show} offer={detail} onHide={hidePopup}  />
       {typeof offers?.total == 'undefined' && offers?.data?.length == 0 && 
         <TableSkeleton/>
-      || (offers?.total > 0 && 
+      || 
         <DataTable paginator stripedRows lazy
+        emptyMessage={t('noOffersFoundText')}
           dataKey="id" 
           page={page.page}
           rows={page.rows} 
@@ -133,13 +131,6 @@ const AdminOffers = () => {
               }
             </> || null}></Column>}
         </DataTable>
-      ) ||
-        <div className="mt-2">
-          <p>{user.role == 'user' ? t('noOffersPostedText') : t('noOffersFoundText')}</p>
-          {user.role == 'user' && 
-            <Link className="button dark-blue mt-1" to="/offers/new">Create post offer</Link>
-          || null}
-        </div>
       }
     </div>
   </div>

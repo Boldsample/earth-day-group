@@ -24,8 +24,18 @@ const Products = () => {
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: ''})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.products' })
-  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.genericInputs'})
-  const stateDropDownText = tGlobal('stateDropdown', { returnObjects: true });
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+
+  const stateDropDownText = [
+    {
+      "name": tGlobal('active'),
+      "code": "1"
+    },
+    {
+      "name": tGlobal('disable'),
+      "code": "2"
+    }
+  ]
 
   const changeState = async (id, state) => {
     await updateProduct({state: state}, {id: id})
@@ -66,6 +76,7 @@ const Products = () => {
         <TableSkeleton />
       || <>
         <DataTable paginator stripedRows lazy
+          emptyMessage={t('noProductsFoundText')}
           dataKey="id" 
           page={page.page} 
           rows={page.rows} 
@@ -86,11 +97,6 @@ const Products = () => {
             <Link className="button small green-earth" to={`/chat/${username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
           </>}></Column>
         </DataTable>
-        {products?.total == 0 && 
-          <div className="mt-2">
-            <p>{t('noProductsFoundText')}</p>
-          </div>
-        }
       </>}
     </div>
   </div>

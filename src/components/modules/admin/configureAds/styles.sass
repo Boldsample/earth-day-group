@@ -66,39 +66,72 @@
     img
         border-radius: 0 0 10px 10px
 
-.live-container
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: center
-    padding: 0.25em
-    background-color: rgb(99, 99, 99)
-    border-radius: 5px
-    width: 85px
+.position-relative
+    position: relative
 
-.live-circle
-    background-color: red
-    width: 1em
-    height: 1em
-    border-radius: 50%
-    animation: ease pulse 2s infinite
-    margin-right: 0.25em
-
-.live-text
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif
-    font-size: 0.75em
-    color: white
-
-@keyframes pulse
-    0%
-        background-color: red
-
+@keyframes dot-anim
+    0%, 100%
+        transform: scale(1)
     50%
-        background-color: #f06c6c
+        transform: scale(1.5)
 
+@keyframes wave-anim
+    0%
+        transform: scale(0.8)
+        opacity: 1
     100%
-        background-color: red
+        transform: scale(1.5)
+        opacity: 0
+
+.btn-str
+    display: flex
+    align-items: center
+    position: absolute
+    z-index: 3
+    color: #fff
+    height: 35px
+    top: 22px
+    right: 19px
+    padding-left: 26px
+    padding-right: 15px
+    background: #080808b7
+    border-radius: 13px
+    border: 1px solid #ffffff
+
+    &__txt
+        display: none
+        font-size: 13px
+        line-height: 23px
+        font-weight: 550
+        text-transform: uppercase
+        position: relative
+        padding-right: 13px
+        padding-left: 2px
+
+    &:before
+        content: ""
+        display: block
+        position: absolute
+        left: 9px
+        top: 11px
+        width: 9px
+        height: 9px
+        border-radius: 5px
+        background: red
+        animation: dot-anim .8s infinite ease-in-out
+
+    &:after
+        content: ""
+        display: block
+        position: absolute
+        box-sizing: border-box
+        left: 6px
+        top: 8px
+        width: 15px
+        height: 15px
+        border-radius: 50%
+        border: 1px solid red
+        animation: wave-anim .8s infinite ease-out
 
 .space-between
     display: flex

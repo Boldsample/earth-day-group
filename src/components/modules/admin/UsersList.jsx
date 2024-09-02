@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faPencil, faPlus, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 import { Dropdown } from 'primereact/dropdown'
 import { getUsers, updateUser } from '@services/userServices'
@@ -24,6 +25,9 @@ const Users = ({type}) => {
   const [page, setPage] = useState({page: 0, rows: 6})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({state: "1", role: "", keyword: ''})
+  const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+
 
   const changeState = async (id, state) => {
     await updateUser({state: state}, {id: id})
@@ -47,28 +51,28 @@ const Users = ({type}) => {
     return <div className="filters">
       {type == 'users' && 
         <Dropdown value={filters?.role} onChange={e => updateFilters('role', e.value)} optionLabel="name" optionValue="code" placeholder="Select a user role" options={[
-          {name: "All", code: ""},
-          {name: "Users", code: "user"},
-          {name: "Companies", code: "company"},
-          {name: "Stores", code: "vendor"},
-          {name: "NGOs", code: "ngo"},
-          {name: "Shelters", code: "shelter"},
-          {name: "Social Organization", code: "social"},
+          {name: t('all'), code: ""},
+          {name: t('allUsers'), code: "user"},
+          {name: t('allCompanies'), code: "company"},
+          {name: t('allStores'), code: "vendor"},
+          {name: t('allNgos'), code: "ngo"},
+          {name: t('allShelters'), code: "shelter"},
+          {name: t('allSocialOrg'), code: "social"},
         ]} />
       }
       <Dropdown value={filters?.state} onChange={e => updateFilters('state', e.value)} optionLabel="name" optionValue="code" placeholder="Select a state" options={[
-        {name: "All", code: ""},
-        {name: "Active", code: "1"},
-        {name: "Disable", code: "2"},
+        {name: tGlobal("all"), code: ""},
+        {name: tGlobal("active"), code: "1"},
+        {name: tGlobal("disable"), code: "2"},
       ]} />
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
+      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callUsers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
         setFilters({state: "1", role: "", keyword: ''})
       }}><FontAwesomeIcon icon={faTrash} /></Button>
       {type == 'admins' && 
-        <Link className="button small green-earth" to="/admin/new/"><FontAwesomeIcon icon={faPlus} /> New Admin</Link>
+        <Link className="button small green-earth" to="/admin/new/"><FontAwesomeIcon icon={faPlus} /> {t('newAdminButton')}</Link>
       }
     </div>
   }
@@ -84,12 +88,13 @@ const Users = ({type}) => {
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
-      <h1 className="text-defaultCase mb-1">{type == 'admins' ? "Admins" : "Users"}</h1>
+      <h1 className="text-defaultCase mb-1">{type == 'admins' ? t('adminMainTitle') : t('userMainTitle')}</h1>
       {typeof users?.total == 'undefined' && users?.data?.length == 0 && 
         <TableSkeleton />
       || 
         <ProfileProvider profile={profile} setProfile={setProfile}>
           <DataTable paginator stripedRows lazy
+            emptyMessage={t('noUsersFoundText')}
             dataKey="id" 
             page={page.page} 
             rows={page.rows} 
@@ -97,15 +102,15 @@ const Users = ({type}) => {
             header={renderHeader} 
             totalRecords={users?.total} 
             onPage={({page, rows}) => setPage({page, rows})}>
-            <Column header="User" body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
+            <Column header={t('tableTitleUser')} body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
             {type == 'users' && 
-              <Column header="Role" field="role"></Column>
+              <Column header={t('tableTitleRole')} field="role"></Column>
             }
-            <Column header="Created at" field="created_at"></Column>
-            <Column header="State" body={({id, state}) => 
+            <Column header={t('tableTitleCreatedAt')} field="created_at"></Column>
+            <Column header={t('tableTitleState')} body={({id, state}) => 
               <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
-                {name: "Active", code: "1"},
-                {name: "Disable", code: "2"}
+                {name: tGlobal("active"), code: "1"},
+                {name: tGlobal("disable"), code: "2"}
               ]} />
             }></Column>
             <Column className="actions" header={null} body={u => <>
@@ -116,14 +121,6 @@ const Users = ({type}) => {
               }
             </>}></Column>
           </DataTable>
-          {users?.total == 0 && 
-            <div className="mt-2">
-              <p>There's no users for this filter options.</p>
-              {type == 'admins' && 
-                <Link className="button dark-blue mt-1" to="/admins/new">Create a new admin user</Link>
-              || null}
-            </div>
-          }
         </ProfileProvider>
       }
     </div>
