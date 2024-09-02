@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getProducts } from "@services/productServices"
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 import { getPets } from "@services/petServices"
+import { useTranslation } from 'react-i18next'
 
 const Bookmarks = ({type}) => {
   const dispatch = useDispatch()
@@ -11,21 +12,22 @@ const Bookmarks = ({type}) => {
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
   const [elements, setElements] = useState({total: 0, data: []})
+  const [t] = useTranslation('translation', { keyPrefix: 'bookmarks' })
   const bookmarksTemplateContent = {
-    title: type == 'products' ? 'Saved products' : 'Favorite pets',
+    title: type == 'products' ? t('savedProductsBannerTitle') : t('favoritePetsBannerTitle'),
     bannerImage: type == 'products' ? 'url(/assets/user/image-8.svg)' : 'url(/assets/user/image-9.svg)',
     types: [
       {
         id: 'products',
         card: 'product',
-        label: 'Saved products',
+        label: t('savedProductsBannerTitle'),
         url: '/products/saved/',
       },
       {
         id: 'pets',
         card: 'products',
         url: '/pets/favorite/',
-        label: 'Favorite pets',
+        label: t('favoritePetsBannerTitle'),
       },
     ]
   }

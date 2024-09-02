@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faPlus, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 import OfferInfo from '@modules/offers/OfferInfo'
 import { setHeader } from '@store/slices/globalSlice'
@@ -27,6 +28,7 @@ const Offers = () => {
   const [expandedRows, setExpandedRows] = useState({})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: '', materials: []})
+  const [t] = useTranslation('translation', { keyPrefix: 'offers.offersList' })
 
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))

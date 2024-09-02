@@ -9,6 +9,7 @@
     "active": "Activo",
     "disable": "Inactivo",
     "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
+    "notfoundErrorMessage": "No pudimos encontrar lo que estás buscando. Por favor intentalo de nuevo.",
     "formErrors": {
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
       "requiredErrorMessage": "Este campo es obligatorio.",
@@ -274,20 +275,24 @@
     }
   },
   "bookmarks": {
-    "noProductsSavedText": "Todavia no has guardado ningún producto."
+    "savedProductsBannerTitle": "Productos guardados",
+    "favoritePetsBannerTitle": "Mascotas favoritas",
+    "noProductsSavedText": "Ups! Parece que todavia no has guardado nada."
   },
   "chat": {
     "chat": {
-      "sendOfferText": "Estás a punto de enviar una oferta a {offerInfo?.name}. El precio solicitado para esta oferta es",
+      "chatBoxPlaceHolderText": "Escribe tu mensaje",
+      "sendOfferText": "Estás a punto de enviar una oferta a {{userName}}. El precio solicitado para esta oferta es",
       "sendBtnText": "Enviar",
       "sendOfferBtnText": "Enviar Oferta",
+      "seeOfferDetailsBtnText": "Ver detalles de la oferta",
       "cancelBtnText": "Cancelar"
     },
     "chats": {
       "mainTitle": "Chats",
       "usersBtnText": "Usuarios",
       "recyclingBtnText": "Centros de Reciclaje",
-      "vendorsBtnText": "Vendedores",
+      "vendorsBtnText": "Tiendas",
       "ngoBtnText": "ONGs",
       "inputSearchPlaceHolder": "Buscar"
     }
@@ -432,6 +437,16 @@
       "inputNumberAskingPriceLabel": "Precio Solicitado",
       "inputNumberAskingPricePlaceholderText": "Precio Solicitado",
       "inputNumberAskingPricemaxLengthErrorMessage": "Has excedido el número máximo de 7 caracteres en este campo"
+    }
+  },
+  "ui": {
+    "cards": {
+      "multiUseCard": {
+        "seeMoreBtnText": "Ver más"
+      }
+    },
+    "templates": {
+      "categoryListing": {}
     }
   }
 }

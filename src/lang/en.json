@@ -9,6 +9,7 @@
     "active": "Active",
     "disable": "Disable",
     "inputSearchPlaceHolder": "Keyword Search",
+    "notfoundErrorMessage": "We couldn't find what you are looking for. Care to try again.",
     "formErrors": {
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
@@ -276,14 +277,18 @@
     }
   },
   "bookmarks": {
-    "noProductsSavedText": "You have not saved any products."
+    "savedProductsBannerTitle": "Saved Products",
+    "favoritePetsBannerTitle": "Favorite Pets",
+    "noProductsSavedText": "Whoops! You have not saved anything yet."
   },
   "chat": {
     "chat": {
-      "sendOfferText": "You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is",
+      "chatBoxPlaceHolderText": "Type your message",
+      "sendOfferText": "You are about to send an offer proposal to {{userName}}. The asking price for this offer is",
       "sendBtnText": "Send",
       "sendOfferBtnText": "Send Offer",
-      "cancelBtnText": "Cancel"
+      "cancelBtnText": "Cancel",
+      "seeOfferDetailsBtnText": "See Offer Details"
     },
     "chats": {
       "mainTitle": "Chats",
@@ -593,6 +598,16 @@
         "editProductBtnText": "Edit Product",
         "deleteProductBtn": "Delete Product"
       }
+    }
+  },
+  "ui": {
+    "cards": {
+      "multiUseCard": {
+        "seeMoreBtnText": "See more"
+      }
+    },
+    "templates": {
+      "categoryListing": {}
     }
   }
 }

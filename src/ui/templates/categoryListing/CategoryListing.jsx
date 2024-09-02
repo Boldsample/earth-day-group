@@ -5,6 +5,7 @@ import { InputText } from "primereact/inputtext"
 import { Paginator } from "primereact/paginator"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleChevronRight, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { useTranslation } from 'react-i18next'
 
 import Footer from "@ui/footer/Footer"
 import { followProduct } from "@services/productServices"
@@ -19,6 +20,8 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
   const dispatch = useDispatch()
   const skeletonPlaceHolder = ["", "", "", ""]
   const user = useSelector((state) => state.users.userData)
+  const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.categoryListing'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 
   const doFollow = async id => {
     if(elements?.card == 'product' || elements?.card == 'pet'){
@@ -57,7 +60,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
               <form onSubmit={reloadElements} className="p-input-icon-left fullwidth">
                 <FontAwesomeIcon icon={faSearch} />
                 <InputText
-                  placeholder={"Search"}
+                  placeholder={tGlobal('inputSearchPlaceHolder')}
                   value={filters.keyword}
                   className="p-inputtext"
                   onChange={e => setFilters(prev => ({...prev, keyword: e.target.value}))} />
@@ -78,7 +81,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
                 elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
               ) ||
                 <div className="fullwidth text-center mt-2">
-                  <p>We couldn't find what you are looking for. Care to try again.</p>
+                  <p>{tGlobal('notfoundErrorMessage')}</p>
                 </div>
               }
               {page?.rows < elements?.total && 

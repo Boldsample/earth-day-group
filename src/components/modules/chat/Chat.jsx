@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceSmile, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 import { getUser } from '@services/userServices'
 import OfferInfo from '@modules/offers/OfferInfo'
@@ -42,6 +43,7 @@ const Chat = () => {
   const [reportInfo, setReportInfo] = useState(null)
   const userId = useSelector((state) => state.users.userData.id)
   const notifications = useSelector((state) => state.users.notifications)
+  const [t] = useTranslation('translation', { keyPrefix: 'chat.chat' })
   
   const callMessages = async () => {
     setCalling(true)
@@ -146,12 +148,12 @@ const Chat = () => {
       </div>
       {!offer && 
         <form className="chat__input" onSubmit={send}>
-          <input ref={input} value={message} type="text" placeholder="Type your message" onChange={e => setMessage(e.target.value)} />
+          <input ref={input} value={message} type="text" placeholder={t('chatBoxPlaceHolderText')} onChange={e => setMessage(e.target.value)} />
           <div className="emoji">
             <FontAwesomeIcon icon={faFaceSmile} onClick={() => setOpen(!open)} />
             <div ref={emojiWrapper} className="emoji__wrapper"><EmojiPicker open={open} onEmojiClick={handleEmoji} /></div>
           </div>
-          <button className={!message ? '' : 'dark-blue'} type="submit" disabled={!message}>Send</button>
+          <button className={!message ? '' : 'dark-blue'} type="submit" disabled={!message}>{t('sendBtnText')}</button>
         </form> 
       || 
         <form className="chat__input" onSubmit={sendOffer}>
@@ -161,8 +163,9 @@ const Chat = () => {
             <Button type="button" label={offerInfo?.material} className={'small ' + offerInfo?.material} />
             <div className="date" style={{fontSize: '0.75rem'}}>{offerInfo?.date}</div>
             <div className="chat__offer__info">
-              <p>You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-              <Button type="button" className="small green-earth" onClick={() => setShow(true)}><FontAwesomeIcon icon={faSearch} /> See Offer Details</Button>
+              {/* <p>You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p> */}
+              <p>{t('sendOfferText', {userName: offerInfo?.name})} {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+              <Button type="button" className="small green-earth" onClick={() => setShow(true)}><FontAwesomeIcon icon={faSearch} /> {t('seeOfferDetailsBtnText')}</Button>
             </div>
           </div>
           <InputNumber
@@ -174,8 +177,8 @@ const Chat = () => {
             useGrouping={true}
             placeholder="Your offer proposal*"
             onChange={e => setProposal(e?.value)} />
-          <button className={!proposal ? '' : 'dark-blue'} type="submit" disabled={!proposal}>Send offer</button>
-          <Link className="button red-state" to={`/chat/${contact}/`}>Cancel</Link>
+          <button className={!proposal ? '' : 'dark-blue'} type="submit" disabled={!proposal}>{t('sendOfferBtnText')}</button>
+          <Link className="button red-state" to={`/chat/${contact}/`}>{t('cancelBtnText')}</Link>
         </form>
       }
     </div>

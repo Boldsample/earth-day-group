@@ -9,7 +9,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CardSkeleton from '@ui/skeletons/cardSkeleton/CardSkeleton'
-
+import { useTranslation } from 'react-i18next'
 
 const Chats = () => {
   const [users, setUsers] = useState([])
@@ -17,6 +17,7 @@ const Chats = () => {
   const [page, setPage] = useState({page: 0, rows: 8})
   const user = useSelector(state => state.users.userData)
   const skeletonPlaceHolder = ["", "", "", ""]
+  const [t] = useTranslation('translation', { keyPrefix: 'chat.chats' })
 
   const updateFilter = filter => {
     setFilters(prev => {
@@ -46,17 +47,17 @@ const Chats = () => {
     <img className="layout__background" src="/assets/user/image-1.svg" />
     <div className="main__content">
       <div className="edg-search mb-0">
-        <h1 className="text-defaultCase mb-1">Chat</h1>
+        <h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>
         <div className="mb-1">
-          <Button label="Users" onClick={() => updateFilter('user')} className={'green-earth small ' + (filters.find(f => f == 'user') ? '' : 'outline')} />
-          <Button label="Recycling Centers" onClick={() => updateFilter('company')} className={'green-earth small ' + (filters.find(f => f == 'company') ? '' : 'outline')} />
-          <Button label="Vendors" onClick={() => updateFilter('vendor')} className={'green-earth small ' + (filters.find(f => f == 'vendor') ? '' : 'outline')} />
-          <Button label="NGO" onClick={() => updateFilter('ngo')} className={'green-earth small ' + (filters.find(f => f == 'ngo') ? '' : 'outline')} />
+          <Button label={t('usersBtnText')} onClick={() => updateFilter('user')} className={'green-earth small ' + (filters.find(f => f == 'user') ? '' : 'outline')} />
+          <Button label={t('recyclingBtnText')} onClick={() => updateFilter('company')} className={'green-earth small ' + (filters.find(f => f == 'company') ? '' : 'outline')} />
+          <Button label={t('vendorsBtnText')} onClick={() => updateFilter('vendor')} className={'green-earth small ' + (filters.find(f => f == 'vendor') ? '' : 'outline')} />
+          <Button label={t('ngoBtnText')} onClick={() => updateFilter('ngo')} className={'green-earth small ' + (filters.find(f => f == 'ngo') ? '' : 'outline')} />
         </div>
         <div className="fullwidth p-input-icon-left">
           <FontAwesomeIcon icon={faSearch} />
           <InputText
-            placeholder="Search"
+            placeholder={t('inputSearchPlaceHolder')}
             className="p-inputtext"
             onChange={(e) => updateFilter(e.target.value)} />
         </div>
