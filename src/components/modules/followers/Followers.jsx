@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { InputText } from 'primereact/inputtext'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useTranslation } from 'react-i18next'
 
 import { getUsers } from '@services/userServices'
 import { setHeader } from '@store/slices/globalSlice'
@@ -18,6 +19,7 @@ const Followers = ({followers = true}) => {
   const [profile, setProfile] = useState(null)
   const [page, setPage] = useState({page: 0, rows: 8})
   const user = useSelector(state => state.users.userData)
+  const [t] = useTranslation('translation', { keyPrefix: 'followers' })
 
   const updateFilter = filter => {
     setFilters(prev => {
@@ -46,15 +48,15 @@ const Followers = ({followers = true}) => {
     <img className="layout__background" src="/assets/user/image-1.svg" />
     <div className="main__content">
       <div className="edg-search mb-0">
-        <h1 className="text-defaultCase mb-1">{followers ? 'Followers' : 'Following'}</h1>
+        <h1 className="text-defaultCase mb-1">{followers ? t('followersMainTitle') : t('followingMainTitle')}</h1>
         <div className="mb-1">
-          <Button label="Followers" onClick={() => navigate('/followers/')} className={'green-earth small ' + (followers ? '' : 'outline')} />
-          <Button label="Following" onClick={() => navigate('/following/')} className={'green-earth small ' + (!followers ? '' : 'outline')} />
+          <Button label={t('followersMainTitle')} onClick={() => navigate('/followers/')} className={'green-earth small ' + (followers ? '' : 'outline')} />
+          <Button label={t('followingMainTitle')} onClick={() => navigate('/following/')} className={'green-earth small ' + (!followers ? '' : 'outline')} />
         </div>
         <div className="fullwidth p-input-icon-left">
           <FontAwesomeIcon icon={faSearch} />
           <InputText
-            placeholder="Search"
+            placeholder={t('inputSearchPlaceHolder')}
             className="p-inputtext"
             onChange={(e) => updateFilter(e.target.value)} />
         </div>

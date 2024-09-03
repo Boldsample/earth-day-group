@@ -3,6 +3,7 @@ import { Button } from "primereact/button"
 import { useNavigate } from "react-router"
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from 'react-i18next'
 
 import { setHeader } from "@store/slices/globalSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
@@ -16,13 +17,15 @@ const CreatePet = () => {
   const [pet, setPet] = useState({})
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
+  const [t] = useTranslation('translation', { keyPrefix: 'ngo.pets.createPet' })
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const species = [
-    { name: "Cat", code: "Cat" },
-    { name: "Dog", code: "Dog" }
+    { name: t('petTypeCatText'), code: "Cat" },
+    { name: t('petTypeDogText'), code: "Dog" }
   ]
   const genders = [
-    { name: "Male", value: 'Male' },
-    { name: "Female", value: 'Female' },
+    { name: t("petGenderMaleText"), value: 'Male' },
+    { name: t("petGenderFemaleText"), value: 'Female' },
   ]
   const {
     watch,
@@ -75,20 +78,20 @@ const CreatePet = () => {
     setSending(false)
     if(pet?.id && response?.id){
       dispatch(updateThankyou({
-        title: "Updated successfully!",
+        title: t('editPetthankyouPagetitle'),
         link: `/pet/${response?.id}/`,
         background: "image-1.svg",
-        button_label: "Go to pet",
-        content: "The pet for adoption has updated successfully!",
+        button_label: t('editPetthankyouPagebuttonLabel'),
+        content: t('editPetthankyouPagebodyText'),
       }))
       navigate('/thankyou/')
     }else if(response.id){
       dispatch(updateThankyou({
-        title: "Congrats!",
+        title: t('createPetthankyouPagetitle'),
         link: `/pet/${response?.id}/`,
         background: "image-1.svg",
-        button_label: "Go to pet",
-        content: "The pet for adoption was created!",
+        button_label: t('createPetthankyouPagebuttonLabel'),
+        content: t('createPetthankyouPagebodyText'),
       }))
       navigate('/thankyou/')
     }
@@ -108,18 +111,18 @@ const CreatePet = () => {
             nameInput="name"
             control={control}
             isRequired={true}
-            labelName="Pet Name"
-            placeHolderText="Pet Name*"
+            labelName={t('inputNameTitleText')}
+            placeHolderText={t('namePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
+                value: 60,
+                message:  tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
             <RadioInput
@@ -127,7 +130,7 @@ const CreatePet = () => {
               showLabel={true}
               control={control}
               isRequired={true}
-              labelName="Gender"
+              labelName={t('inputRadioTitleText')}
               nameInput="gender"
               rules={{
                 required: true,
@@ -142,53 +145,53 @@ const CreatePet = () => {
             optionLabel="name"
             optionValue="code"
             options={species}
-            labelName="Type"
+            labelName={t('dropdownSpeciesTitleText')}
             nameInput="specie"
-            placeHolderText="Select Type"
+            placeHolderText={t('dropdownSpeciesPlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
             }} />
           <TextInput
             width="100%"
             showLabel={true}
             control={control}
             isRequired={true}
-            labelName="Breed"
+            labelName={t('inputBreedTitleText')}
             nameInput="breed"
-            placeHolderText="Breed"
+            placeHolderText={t('breedPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 50,
-                message: "El campo supera los 50 caracteres",
+                value: 80,
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 80}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
         </div>
         <div className="registerInput__container-x2">
           <NumberInput
-            label="Age"
+            label={t('inputAgeTitleText')}
             width="100%"
             nameInput="age"
             control={control}
             showLabel={false}
             isRequired={true}
-            placeHolderText="Age*"
+            placeHolderText={t('agePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 2,
-                message: "El campo supera los 2 caracteres",
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 2})
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
           <NumberInput
@@ -197,18 +200,18 @@ const CreatePet = () => {
             control={control}
             isRequired={true}
             nameInput="weight"
-            label="Weight (Kilos)*"
-            placeHolderText="Weight (Kilos)*"
+            label={t('inputWeightTitleText')}
+            placeHolderText={t('weightPlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 2,
-                message: "El campo supera los 2 caracteres",
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 2}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
         </div>
@@ -217,9 +220,9 @@ const CreatePet = () => {
             showLabel={true}
             control={control}
             isRequired={false}
-            label="Pet Detail*"
+            label={t('textAreaPetDescriptionTitle')}
             nameInput="description"
-            placeHolderText="Tell us about the pet"
+            placeHolderText={t('petDescriptionPlaceholder')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -235,11 +238,11 @@ const CreatePet = () => {
         </div>
         <UploadPhotoInput
           type="imageUpload"
-          title="Add Images"
+          title={t('petImageUploaderTitle')}
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-          <Button className="dark-blue fullwidth" label={pet?.id ? "Update" : "Create"} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={pet?.id ? t('updatePetbtnText') : t('submitPetbtnText')} type="submit" loading={sending} />
         </div>
       </form>
     </div>

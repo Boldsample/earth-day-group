@@ -300,10 +300,43 @@
   "dashboard": {
     "inputSearchTitle": "Descubre",
     "inputSearchPlaceHolder": "Buscar",
-    "noModulesFoundText": "No pudimos encontrar lo que estás buscando. ¿Te gustaría intentarlo de nuevo?"
+    "noModulesFoundText": "No pudimos encontrar lo que estás buscando. ¿Te gustaría intentarlo de nuevo?",
+    "marketPlaceModuleTitleText": "Marketplace",
+    "marketPlaceModuleDescriptionText": "Encuentra una amplia variedad de productos ecológicos",
+    "recycleModuleTitleText": "Recicla",
+    "recycleModuleDescriptionText": "Busca empresas y centros de reciclaje que te puedan interesar",
+    "postOfferModuleTitleText": "Ofertar",
+    "postOfferModuleDescriptionText": "Publica tu material reciclable y véndelo al mejor postor",
+    "sheltersModuleTitleText": "Refugios",
+    "sheltersModuleDescriptionText": "Encuentra refugios de animales cerca de tu ubicación",
+    "socialOrganizationModuleTitleText": "Fundaciones",
+    "socialOrganizationModuleDescriptionText": "Encuentra organizaciones sociales cerca de tu ubicación",
+    "profileModuleTitleText": "Perfil",
+    "profileModuleDescriptionText": "Ver tu perfil.",
+    "recycleMaterialsModuleTitleText": "Materiales Reciclables",
+    "recycleMaterialsModuleDescriptionText": "Encuentra material reciclable y cómpralo.",
+    "createProductModuleTitleText": "Crear Producto",
+    "createProductModuleDescriptionText": "Crea un producto que se exhibirá en tu tienda.",
+    "createPetModuleTitleText": "Crear Mascota",
+    "createPetModuleDescriptionText": "Crea una mascota para publicar en adopción.",
+    "reportsModuleTitleText": "Reportes",
+    "reportsModuleDescriptionText": "Gestiona y responde reportes.",
+    "adminsModuleTitleText": "Admins",
+    "adminsModuleDescriptionText": "Crear, filtrar y desactivar cuentas de admins.",
+    "usersModuleTitleText": "Usuarios",
+    "usersModuleDescriptionText": "Encuentra, filtra y desactiva cuentas de usuarios.",
+    "offersModuleTitleText": "Ofertas",
+    "offersModuleDescriptionText": "Busca, gestiona y elimina ofertas.",
+    "productsModuleTitleText": "Productos",
+    "productsModuleDescriptionText": "Busca, gestiona y desactiva productos.",
+    "petAdoptionsModuleTitleText": "Adopciones de Mascotas",
+    "petAdoptionsModuleDescriptionText": "Busca, gestiona y desactiva mascotas.",
+    "adsModuleTitleText": "Anuncios",
+    "adsModuleDescriptionText": "Configura Anuncios publicitarios."
   },
   "followers": {
-    "mainTitle": "Seguidores : Siguiendo",
+    "followersMainTitle": "Seguidores",
+    "followingMainTitle": "Siguiendo",
     "followersBtnText": "Seguidores",
     "followingBtnText": "Siguiendo",
     "inputSearchPlaceHolder": "Buscar"
@@ -311,68 +344,50 @@
   "ngo": {
     "pets": {
       "createPet": {
-        "species": [
-          {
-            "type": "Gato",
-            "code": "Cat"
-          },
-          {
-            "type": "Perro",
-            "code": "Dog"
-          }
-        ],
-        "genders": [
-          {
-            "gender": "Macho",
-            "value": "Male"
-          },
-          {
-            "gender": "Hembra",
-            "value": "Female"
-          }
-        ],
+        "petTypeDogText": "Perro",
+        "petTypeCatText": "Gato",
+        "petGenderMaleText": "Macho",
+        "petGenderFemaleText": "Hembra",
         "editPetthankyouPagetitle": "¡Todo listo!",
-        "editPetthankyouPagebackground": "image-1.svg",
         "editPetthankyouPagebuttonLabel": "Ir a la mascota",
         "editPetthankyouPagebodyText": "¡La mascota para adopción se ha actualizado con éxito!",
         "createPetthankyouPagetitle": "¡Todo listo!",
-        "createPetthankyouPagebackground": "image-1.svg",
         "createPetthankyouPagebuttonLabel": "Ir a la mascota",
         "createPetthankyouPagebodyText": "¡La mascota para adopción fue creada!",
         "inputNameTitleText": "Nombre de la Mascota",
         "namePlaceHolderText": "Max",
-        "inputNamemaxLengthErrorMessage": "Has superado el número máximo de 60 caracteres en este campo",
+        "inputRadioTitleText": "Genero",
         "dropdownSpeciesTitleText": "Especie",
         "dropdownSpeciesPlaceholderText": "Selecciona una especie",
         "inputBreedTitleText": "Raza",
         "breedPlaceHolderText": "Pastor Alemán",
         "inputAgeTitleText": "Edad",
-        "agePlaceholderText": "5",
-        "inputAgemaxLengthErrorMessage": "Has superado el número máximo de 2 caracteres en este campo",
+        "agePlaceholderText": "Edad",
         "inputWeightTitleText": "Peso",
         "weightPlaceholderText": "Peso (Kilos)",
         "textAreaPetDescriptionTitle": "Detalles de la Mascota",
         "petDescriptionPlaceholder": "Cuéntanos sobre tu mascota.",
-        "textAreamaxLengthErrorMessage": "Has superado el número máximo de 1000 caracteres en este campo",
-        "petImageUploaderTitle": "Añadir Imágenes de la Mascota",
-        "submitPetbtn": "Actualizar : Crear"
+        "petImageUploaderTitle": "Añade Imágenes de la Mascota",
+        "submitPetbtnText": "Crear mascota",
+        "editPetbtnText": "Actualizar mascota"
       },
       "pet": {
+        "petYearsOld": "años de edad",
         "contactShelterBtn": "Contactar refugio",
+        "editPetBtn": "Editar mascota",
         "deletePetBtn": "Eliminar mascota"
       }
     }
   },
   "notifications": {
     "headerNotifications": {},
-    "notifications": {
-      "notifications": {
-        "headerNotifications": {},
-        "notifications": {
-          "mainTitle": "Notificaciones",
-          "noNotificationsFoundText": "No tienes notificaciones en este momento."
-        }
-      }
+    "notification": {
+      "offerTitleText": "Nueva Oferta",
+      "offerBodyText": "te ha enviado una oferta",
+      "messageTitleText": "Nuevo Mensaje ",
+      "messageBodyText": "te ha enviado un mensaje",
+      "mainTitle": "Notificaciones",
+      "noNotificationsFoundText": "No tienes notificaciones en este momento."
     }
   },
   "offers": {
@@ -437,6 +452,170 @@
       "inputNumberAskingPriceLabel": "Precio Solicitado",
       "inputNumberAskingPricePlaceholderText": "Precio Solicitado",
       "inputNumberAskingPricemaxLengthErrorMessage": "Has excedido el número máximo de 7 caracteres en este campo"
+    }
+  },
+  "offersList": {
+    "SelectInputPlaceHolder": "Filtrar por Materiales",
+    "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
+    "newOfferBtn": "Nueva Oferta",
+    "rowExpansionCompanyTitle": "Empresa",
+    "rowExpansionBidTitle": "Oferta",
+    "rowExpansionStatusTitle": "Estado",
+    "rowExpansionBiddingDateTitle": "Fecha de Oferta",
+    "statusRejectedText": "Rechazado",
+    "statusAprovedText": "Aceptado",
+    "statusPendingText": "Pendiente",
+    "tableColumnTitle": "Título",
+    "tableColumnMaterialTitle": "Material",
+    "tableColumnQuantityTitle": "Cantidad",
+    "tableColumnSellPriceTitle": "Precio de Venta",
+    "tableColumnOfferslTitle": "Ofertas",
+    "tableColumnPublishedDateTitle": "Fecha de Publicación",
+    "noOffersPostedmessage": "Aún no has publicado ninguna oferta.",
+    "noOffersForMaterialsMessage": "No hay ofertas para los materiales que te interesan comprar",
+    "createOfferBtn": "Crear Oferta"
+  },
+  "profile": {
+    "photoGallery": {
+      "mainTitle": "Fotos",
+      "noImagesMessage": "No has subido ninguna imagen a tu perfil."
+    },
+    "profile": {},
+    "profileInformation": {
+      "pickUpFromHomeText": "Recoger en casa",
+      "recyclableGoodsTitle": "Precio de Bienes Reciclables",
+      "contactBtnText": "Contactar",
+      "editProfileBtnText": "Editar Perfil",
+      "newProductBtnText": "Nuevo Producto",
+      "newPetBtnText": "Contactar",
+      "viewLocationBtnText": "Ver Ubicación",
+      "reportUserToolTip": "Reportar Perfil"
+    }
+  },
+  "report": {
+    "createReport": {
+      "inputDropdownSubjectLabel": "Asunto",
+      "inputDropdownSubjectPlaceholderText": "Selecciona un motivo para reportar*",
+      "inputDropdownEntityLabel": "Nombre del tipo",
+      "inputDropdownUserPlaceholderText": "Selecciona un usuario*",
+      "textAreaReportDescriptionTitle": "Describe tu reporte",
+      "textAreaReportDescriptionPlaceholder": "Cuéntanos por qué deseas reportar el tipo.",
+      "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
+      "createReportBtn": "Crear Reporte"
+    }
+  },
+  "settings": {
+    "profile": {
+      "profile": {},
+      "profileInfo": {
+        "followersBtnText": "Seguidores",
+        "followingBtnText": "Siguiendo",
+        "editBtnText": "Editar",
+        "viewProfileBtnText": "Ver Perfil",
+        "sendMessageBtnText": "Enviar Mensaje",
+        "adminEditBtnText": "Editar",
+        "adminRecoverBtnText": "Recuperar",
+        "companyInformationTitle": "Acerca de la Organización",
+        "companyPickUpAtHomeTitle": "Recoger en Casa",
+        "companyGalleryTitle": "Galería",
+        "companyMaterialPriceTitle": "Precio del Material"
+      },
+      "profileProvider": {}
+    },
+    "about": {},
+    "activity": {},
+    "deleteAccount": {
+      "dialogDeleteAccountBtnText": "Eliminar mi Cuenta",
+      "dialogCancelDeleteBtnText": "Cancelar",
+      "mainTitle": "Aviso: Eliminación de Cuenta",
+      "secondaryTitle": "Al eliminar tu cuenta, aceptas lo siguiente:",
+      "listItem1": "Eliminación Permanente: </b> Tu cuenta y todos los datos asociados serán eliminados permanentemente y no podrán recuperarse.",
+      "listItem2": "Pérdida de Acceso: </b> Perderás acceso a todos los servicios, contenido y características vinculados a tu cuenta.",
+      "listItem3": "Responsabilidad de los Datos: </b> Asegúrate de respaldar cualquier dato que desees conservar, ya que no nos hacemos responsables por la pérdida de datos.",
+      "listItem4": "Transacciones Pendientes: </b> Resuelve cualquier transacción o problema pendiente antes de la eliminación.",
+      "deleteConfirmationText": "Al continuar, aceptas estos términos y entiendes las consecuencias permanentes.",
+      "deleteAccountBtn": "Eliminar tu Cuenta",
+      "dialogText": "¿Realmente deseas eliminar tu cuenta? <br /> Este proceso no puede deshacerse.",
+      "passwordInputLabel": "Contraseña",
+      "passwordInputPlaceHolderText": "Ingresa tu Contraseña",
+      "maxLengthErrorMessage": "Has excedido el número máximo de 20 caracteres en este campo"
+    },
+    "password": {},
+    "privacy": {},
+    "settings": {
+      "profileBtnText": "Mi Perfil",
+      "changePasswordBtnText": "Cambiar Contraseña",
+      "termsAndConditionsBtnText": "Términos y Condiciones",
+      "deleteAccountBtnText": "Eliminar Cuenta",
+      "logOutBtnText": "Cerrar Sesión"
+    },
+    "terms": {}
+  },
+  "user": {
+    "companies": {
+      "companyBannerTitle": "AYUDA AL PLANETA Y AYUDA A TU BOLSILLO",
+      "searchLabelText": "Descubre empresas de reciclaje",
+      "iconTitle1": "100% Reciclado",
+      "iconTitle2": "Ecológico",
+      "iconTitle3": "Economía Sostenible"
+    },
+    "map": {
+      "dialogTitle": "Selecciona tu Ubicación Predeterminada",
+      "dialogHomeLocationBtnText": "Usar ubicación registrada",
+      "dialogCurrentLocationBtnText": "Usar mi ubicación actual",
+      "inputSearchPlaceHolder": "Buscar",
+      "markerDetailMaterialTitle": "Interesado en comprar",
+      "markerDetailPickUpTitle": "Recoger en casa",
+      "markerDetailLearnMoreBtnText": "Más Información",
+      "filtersModalTitle": "Elige los Materiales que te interesan",
+      "filtersModalCheckBoxText1": "Papel",
+      "filtersModalCheckBoxText2": "Plástico",
+      "filtersModalCheckBoxText3": "Vidrio",
+      "filtersModalCheckBoxText4": "Residuos electrónicos",
+      "filtersModalCheckBoxText5": "Metal",
+      "filtersModalCheckBoxText6": "Orgánico"
+    },
+    "ngo": {
+      "organizations": {},
+      "shelters": {
+        "shelterBannerTitle": "APOYA A LOS QUE NO TIENEN HOGAR",
+        "searchInputTitle": "Descubre mascotas en adopción",
+        "tabLabelShelters": "Refugios",
+        "tabLabelPets": "Mascotas"
+      }
+    },
+    "orders": {
+      "mainTitle": "Mis Pedidos",
+      "filtersTitle": "Filtros"
+    },
+    "vendors": {
+      "VendorsBannerTitle": "MERCADO",
+      "searchInputTitle": "Descubre Productos",
+      "tabLabelVendorsText": "Tiendas",
+      "tabLabelProductsText": "Productos"
+    }
+  },
+  "vendor": {
+    "products": {
+      "createProduct": {
+        "inputTextProductNameLabel": "Nombre del Producto",
+        "inputTextProductNamePlaceholderText": "Nombre del Producto*",
+        "maxLengthErrorMessage": "Has excedido el número máximo de 100 caracteres en este campo",
+        "inputDropdownSubjectLabel": "Categoría",
+        "inputDropdownSubjectPlaceholderText": "Selecciona una Categoría*",
+        "inputNumberPriceLabel": "Precio",
+        "inputNumberPricePlaceholderText": "Agrega precio por unidad*",
+        "textAreaProducttDescriptionLabel": "Detalle del Producto",
+        "textAreaProductDescriptionPlaceholder": "Escribe una breve descripción del producto.",
+        "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
+        "createProductBtn": "Crear Producto : Actualizar Producto"
+      },
+      "product": {
+        "addToCartBtnText": "Agregar al Carrito",
+        "reportProductTooltipText": "Reportar Producto",
+        "editProductBtnText": "Editar Producto",
+        "deleteProductBtn": "Eliminar Producto"
+      }
     }
   },
   "ui": {

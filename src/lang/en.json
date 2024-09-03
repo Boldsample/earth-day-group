@@ -302,10 +302,43 @@
   "dashboard": {
     "inputSearchTitle": "Discover",
     "inputSearchPlaceHolder": "Search",
-    "noModulesFoundText": "We couldn't find what you are looking for. Care to try again."
+    "noModulesFoundText": "We couldn't find what you are looking for. Care to try again.",
+    "marketPlaceModuleTitleText": "Market Place",
+    "marketPlaceModuleDescriptionText": "Find products that are eco friendly",
+    "recycleModuleTitleText": "Recycle",
+    "recycleModuleDescriptionText": "Look for recycle center companies that may interest you",
+    "postOfferModuleTitleText": "Post Offer",
+    "postOfferModuleDescriptionText": "Post your recyclable material and sell it to the highest bidder",
+    "sheltersModuleTitleText": "Shelters",
+    "sheltersModuleDescriptionText": "Find animal shelters near your location",
+    "socialOrganizationModuleTitleText": "Social Organization",
+    "socialOrganizationModuleDescriptionText": "Find social organizations near your location",
+    "profileModuleTitleText": "Profile",
+    "profileModuleDescriptionText": "View your profile.",
+    "recycleMaterialsModuleTitleText": "Recycle Materials",
+    "recycleMaterialsModuleDescriptionText": "Find recyclable material and buy it.",
+    "createProductModuleTitleText": "Create Product",
+    "createProductModuleDescriptionText": "Create a product that would be exhibited in your store.",
+    "createPetModuleTitleText": "Create Pet",
+    "createPetModuleDescriptionText": "Create a pet for adoption.",
+    "reportsModuleTitleText": "Reports",
+    "reportsModuleDescriptionText": "Manage and answer reports.",
+    "adminsModuleTitleText": "Admins",
+    "adminsModuleDescriptionText": "Create, filter, and disable accounts.",
+    "usersModuleTitleText": "Users",
+    "usersModuleDescriptionText": "Find, filter and disable user accounts.",
+    "offersModuleTitleText": "Offers",
+    "offersModuleDescriptionText": "Search and delete offers.",
+    "productsModuleTitleText": "Products",
+    "productsModuleDescriptionText": "Search and disable products.",
+    "petAdoptionsModuleTitleText": "Pet adoptions",
+    "petAdoptionsModuleDescriptionText": "Search and disable pets.",
+    "adsModuleTitleText": "Ads",
+    "adsModuleDescriptionText": "Configure Ads."
   },
   "followers": {
-    "mainTitle": "Followers : Following",
+    "followersMainTitle": "Followers",
+    "followingMainTitle": "Following",
     "followersBtnText": "Followers",
     "followingBtnText": "Following",
     "inputSearchPlaceHolder": "Search"
@@ -313,61 +346,48 @@
   "ngo": {
     "pets": {
       "createPet": {
-        "species": [
-          {
-            "type": "Cat",
-            "code": "Cat"
-          },
-          {
-            "type": "Dog",
-            "code": "Dog"
-          }
-        ],
-        "genders": [
-          {
-            "gender": "Male",
-            "value": "Male"
-          },
-          {
-            "gender": "Female",
-            "value": "Female"
-          }
-        ],
+        "petTypeDogText": "Dog",
+        "petTypeCatText": "Cat",
+        "petGenderMaleText": "Male",
+        "petGenderFemaleText": "Female",
         "editPetthankyouPagetitle": "All set!",
-        "editPetthankyouPagebackground": "image-1.svg",
         "editPetthankyouPagebuttonLabel": "Go to pet",
         "editPetthankyouPagebodyText": "The pet for adoption has updated successfully!",
         "createPetthankyouPagetitle": "All set!",
-        "createPetthankyouPagebackground": "image-1.svg",
         "createPetthankyouPagebuttonLabel": "Go to pet",
         "createPetthankyouPagebodyText": "The pet for adoption was created!",
         "inputNameTitleText": "Pet Name",
         "namePlaceHolderText": "Max",
-        "inputNamemaxLengthErrorMessage": "You have exceeded the maximum number of 60 characters in this field",
-        "dropdownSpeciesTitleText": "Species",
+        "inputRadioTitleText": "Gender",
+        "dropdownSpeciesTitleText": "Specie",
         "dropdownSpeciesPlaceholderText": "Select a species",
         "inputBreedTitleText": "Breed",
         "breedPlaceHolderText": "German Shepherd",
         "inputAgeTitleText": "Age",
-        "agePlaceholderText": "5",
-        "inputAgemaxLengthErrorMessage": "You have exceeded the maximum number of 2 characters in this field",
+        "agePlaceholderText": "Age",
         "inputWeightTitleText": "Weight",
         "weightPlaceholderText": "Weight (Kilos)",
         "textAreaPetDescriptionTitle": "Pet Details",
         "petDescriptionPlaceholder": "Tell us about your pet.",
-        "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
         "petImageUploaderTitle": "Add Pet Images",
-        "submitPetbtn": "Update : Create"
+        "submitPetbtnText": "Create pet",
+        "editPetbtnText": "Update pet"
       },
       "pet": {
+        "petYearsOld": "Years old",
         "contactShelterBtn": "Contact Shelter",
+        "editPetBtn": "Edit Pet",
         "deletePetBtn": "Delete Pet"
       }
     }
   },
   "notifications": {
     "headerNotifications": {},
-    "notifications": {
+    "notification": {
+      "offerTitleText": "New Offer",
+      "offerBodyText": "Sent you and offer",
+      "messageTitleText": "New Message",
+      "messageBodyText": "Sent you a Message",
       "mainTitle": "Notifications",
       "noNotificationsFoundText": "You don't have any notifications at the moment."
     }

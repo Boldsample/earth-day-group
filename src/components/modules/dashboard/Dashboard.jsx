@@ -50,9 +50,10 @@ const Dashboard = () => {
 					<Card key={key}
 						icon={module.icon}
 						link={module.link}
-						title={module.title}
+						// title={module.title}
+						title={t(`${module?.title}`)}
 						cardStyle={module.className}
-						description={module.description} />
+						description={t(`${module?.description}`)} />
 				</Link>) : tGlobal('notfoundErrorMessage')}
 			</div>
 		</div>

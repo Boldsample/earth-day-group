@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useParams } from "react-router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from 'react-i18next'
 
 import Footer from "@ui/footer/Footer"
 import { getPet } from "@services/petServices"
@@ -21,6 +22,7 @@ const Pet = () => {
   const dispatch = useDispatch()
   const [ pet, setPet ] = useState(null)
   const user = useSelector((state) => state.users.userData)
+  const [t] = useTranslation('translation', { keyPrefix: 'ngo.pets.pet' })
 
   const doFollow = async e => {
     e.preventDefault()
@@ -55,16 +57,16 @@ const Pet = () => {
             <ul className="contact__grid">
               <li><FontAwesomeIcon icon={faVenusMars}  className='contact__icon'/>{pet?.gender}</li>
               <li><FontAwesomeIcon icon={faPaw}  className='contact__icon'/>{pet?.breed}</li>
-              <li><FontAwesomeIcon icon={faSignal}  className='contact__icon'/>{pet?.age} years old</li>
+              <li><FontAwesomeIcon icon={faSignal}  className='contact__icon'/>{pet?.age} {t('petYearsOld')}</li>
               <li><FontAwesomeIcon icon={faWeightScale}  className='contact__icon'/>{pet?.weight} Kg</li>
             </ul>
             {user?.id != pet?.user && user?.role != 'admin' && <>
               <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
-              <Link to={`/chat/${pet?.username}/`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Contact shelter</span></Link>
+              <Link to={`/chat/${pet?.username}/`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>{t('contactShelterBtn')}</span></Link>
               <Link className="button small red-state outline hasTooltip" to={`/report/pet/${pet?.id}/`} data-pr-tooltip="Report pet"><FontAwesomeIcon icon={faFlag} /></Link>
             </> || <>
-              <Link to={`/pet/edit/${pet?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>Edit</span></Link>
-              <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>Delete</span></Link>
+              <Link to={`/pet/edit/${pet?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editPetBtn')}</span></Link>
+              <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deletePetBtn')}</span></Link>
             </>}
           </div>
         </div>
