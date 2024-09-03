@@ -1,13 +1,15 @@
 import { Image } from "primereact/image"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
+import { useTranslation } from 'react-i18next'
 
 import "./profile.sass"
 
 const PhotoGallery = ({imageCatalog, type = 'full'}) => {
+  const [t] = useTranslation('translation', { keyPrefix: 'profile.photoGallery'})
   return type == 'full' && <div className="photoGallery__container">
-    <h2 className={'slides-' + imageCatalog?.length}>Pictures</h2>
-    {!imageCatalog?.length ? <p>You have not uploaded any images to your profile.</p> : 
+    <h2 className={'slides-' + imageCatalog?.length}>{t('mainTitle')}</h2>
+    {!imageCatalog?.length ? <p>{t('noImagesMessage')}</p> : 
       <Swiper
         spaceBetween={50}
         modules={[Navigation]}

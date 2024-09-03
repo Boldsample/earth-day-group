@@ -395,85 +395,56 @@
       "publishedByTitle": "Publicado por:",
       "quantityTitle": "Cantidad:",
       "askingPriceTitle": "Precio solicitado:",
-      "sendOfferBtn": "Enviar oferta"
+      "sendOfferBtn": "Enviar oferta",
+      "reportOfferToolTip": "Reportar Oferta"
     },
     "offerNew": {
       "mainTitle": "Publicar Oferta",
       "inputTitleLabel": "Título",
       "inputTitlePlaceholderText": "Título*",
-      "inputTitlemaxLengthErrorMessage": "Has excedido el número máximo de 60 caracteres en este campo",
       "inputDropdownMaterialLabel": "Seleccionar Material",
       "inputDropdownMaterialPlaceholderText": "Seleccionar Material",
-      "optionsMaterial": [
-        {
-          "label": "Papel",
-          "value": "Paper"
-        },
-        {
-          "label": "Vidrio",
-          "value": "Glass"
-        },
-        {
-          "label": "Plástico",
-          "value": "Plastic"
-        },
-        {
-          "label": "Residuos Electrónicos",
-          "value": "E-Waste"
-        },
-        {
-          "label": "Metal",
-          "value": "Metal"
-        },
-        {
-          "label": "Orgánico",
-          "value": "Organic"
-        }
-      ],
+      "paperLabel": "Papel",
+      "glassLabel": "Vidrio",
+      "plasticLabel": "Plastico",
+      "eWasteLabel": "Desechos Electronicos", 
+      "metalLabel": "Metal",
+      "organicLabel": "Organicos",
       "inputNumberQuantityLabel": "Cantidad",
-      "inputNumberQuantityPlaceholderText": "Cantidad*",
-      "inputNumberQuantitymaxLengthErrorMessage": "Has excedido el número máximo de 7 caracteres en este campo",
+      "inputNumberQuantityPlaceholderText": "Cantidad *",
       "inputDropdownUnitLabel": "Seleccionar Unidad",
-      "inputDropdownUnitPlaceholderText": "Seleccionar Unidad*",
-      "optionsUnit": [
-        {
-          "label": "Kg",
-          "value": "Kg"
-        },
-        {
-          "label": "cc",
-          "value": "cc"
-        },
-        {
-          "label": "Unidades",
-          "value": "Units"
-        }
-      ],
-      "inputNumberAskingPriceLabel": "Precio Solicitado",
-      "inputNumberAskingPricePlaceholderText": "Precio Solicitado",
-      "inputNumberAskingPricemaxLengthErrorMessage": "Has excedido el número máximo de 7 caracteres en este campo"
+      "inputDropdownUnitPlaceholderText": "Seleccionar Unidad *",
+      "unitLabelKg": "KG",
+      "unitLabelCc": "CC",
+      "unitLabelUnit": "Units",
+      "inputNumberAskingPriceLabel": "Precio de Venta",
+      "inputNumberAskingPricePlaceholderText": "Precio de Venta",
+      "postOfferBtnText": "Publicar Oferta",
+      "offerImagesTitle": "Imagenes de la oferta"
+    },
+    "offersList": {
+      "mainTitle": "Ofertas Publicadas",
+      "selectInputPlaceHolder": "Filtrar por Materiales",
+      "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
+      "newOfferBtn": "Nueva Oferta",
+      "rowExpansionCompanyTitle": "Empresa",
+      "rowExpansionBidTitle": "Oferta",
+      "rowExpansionStatusTitle": "Estado",
+      "rowExpansionBiddingDateTitle": "Fecha de Oferta",
+      "statusRejectedText": "Rechazado",
+      "statusAprovedText": "Aceptado",
+      "statusPendingText": "Pendiente",
+      "tableColumnTitle": "Descripción",
+      "tableColumnMaterialTitle": "Material",
+      "tableColumnQuantityTitle": "Cantidad",
+      "tableColumnSellPriceTitle": "Precio de Venta",
+      "tableColumnOffersTitle": "Ofertas",
+      "tableColumnPublishedDateTitle": "Fecha de Publicación",
+      "noOffersPostedmessage": "Aún no has publicado ninguna oferta.",
+      "noOffersForMaterialsMessage": "No hay ofertas para los materiales que te interesan comprar",
+      "createOfferBtn": "Crear Oferta",
+      "noOffersFoundText": "No hay ofertas que cumplan con los criterios del filtro."
     }
-  },
-  "offersList": {
-    "SelectInputPlaceHolder": "Filtrar por Materiales",
-    "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
-    "newOfferBtn": "Nueva Oferta",
-    "rowExpansionCompanyTitle": "Empresa",
-    "rowExpansionBidTitle": "Oferta",
-    "rowExpansionStatusTitle": "Estado",
-    "rowExpansionBiddingDateTitle": "Fecha de Oferta",
-    "statusRejectedText": "Rechazado",
-    "statusAprovedText": "Aceptado",
-    "statusPendingText": "Pendiente",
-    "tableColumnTitle": "Título",
-    "tableColumnMaterialTitle": "Material",
-    "tableColumnQuantityTitle": "Cantidad",
-    "tableColumnSellPriceTitle": "Precio de Venta",
-    "tableColumnOfferslTitle": "Ofertas",
-    "tableColumnPublishedDateTitle": "Fecha de Publicación",
-    "noOffersPostedmessage": "Aún no has publicado ninguna oferta.",
-    "noOffersForMaterialsMessage": "No hay ofertas para los materiales que te interesan comprar",
-    "createOfferBtn": "Crear Oferta"
   },
   "profile": {
     "photoGallery": {
@@ -482,14 +453,18 @@
     },
     "profile": {},
     "profileInformation": {
-      "pickUpFromHomeText": "Recoger en casa",
+      "pickUpAvailable": "Disponible",
+      "pickUpNotAvailable": "No Disponible",
+      "pickUpFromHomeText": "Recoger en casa:",
       "recyclableGoodsTitle": "Precio de Bienes Reciclables",
       "contactBtnText": "Contactar",
       "editProfileBtnText": "Editar Perfil",
       "newProductBtnText": "Nuevo Producto",
       "newPetBtnText": "Contactar",
       "viewLocationBtnText": "Ver Ubicación",
-      "reportUserToolTip": "Reportar Perfil"
+      "reportUserToolTip": "Reportar Perfil",
+      "followBtn": "Seguir",
+      "unFollowBtn": "Dejar de Seguir"
     }
   },
   "report": {

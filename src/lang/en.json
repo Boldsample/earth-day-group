@@ -397,66 +397,37 @@
       "publishedByTitle": "Published by:",
       "quantityTitle": "Quantity:",
       "askingPriceTitle": "Asking Price:",
-      "sendOfferBtn": "Send an offer"
+      "sendOfferBtn": "Send an offer",
+      "reportOfferToolTip": "Report Offer"
+
     },
     "offerNew": {
       "mainTitle": "Post Offer",
       "inputTitleLabel": "Title",
       "inputTitlePlaceholderText": "Title*",
-      "inputTitlemaxLengthErrorMessage": "You have exceeded the maximum number of 60 characters in this field",
       "inputDropdownMaterialLabel": "Select Material",
       "inputDropdownMaterialPlaceholderText": "Select Material",
-      "optionsMaterial": [
-        {
-          "label": "Paper",
-          "value": "Paper"
-        },
-        {
-          "label": "Glass",
-          "value": "Glass"
-        },
-        {
-          "label": "Plastic",
-          "value": "Plastic"
-        },
-        {
-          "label": "E-Waste",
-          "value": "E-Waste"
-        },
-        {
-          "label": "Metal",
-          "value": "Metal"
-        },
-        {
-          "label": "Organic",
-          "value": "Organic"
-        }
-      ],
+      "paperLabel": "Paper",
+      "glassLabel": "Glass",
+      "plasticLabel": "Plastic",
+      "eWasteLabel": "E-Waste", 
+      "metalLabel": "Metal",
+      "organicLabel": "Organic",
       "inputNumberQuantityLabel": "Quantity",
       "inputNumberQuantityPlaceholderText": "Quantity*",
-      "inputNumberQuantitymaxLengthErrorMessage": "You have exceeded the maximum number of 7 characters in this field",
       "inputDropdownUnitLabel": "Select Unit",
-      "inputDropdownUnitPlaceholderText": "Select Unit*",
-      "optionsUnit": [
-        {
-          "label": "Kg",
-          "value": "Kg"
-        },
-        {
-          "label": "cc",
-          "value": "cc"
-        },
-        {
-          "label": "Units",
-          "value": "Units"
-        }
-      ],
+      "inputDropdownUnitPlaceholderText": "Select Unit *",
+      "unitLabelKg": "KG",
+      "unitLabelCc": "CC",
+      "unitLabelUnit": "Units",
       "inputNumberAskingPriceLabel": "Asking Price",
       "inputNumberAskingPricePlaceholderText": "Asking Price",
-      "inputNumberAskingPricemaxLengthErrorMessage": "You have exceeded the maximum number of 7 characters in this field"
+      "postOfferBtnText": "Post Offer",
+      "offerImagesTitle": "Offer Images"
     },
     "offersList": {
-      "SelectInputPlaceHolder": "Filter by Materials",
+      "mainTitle": "Published Offers",
+      "selectInputPlaceHolder": "Filter by Materials",
       "inputSearchPlaceHolder": "Keyword Search",
       "newOfferBtn": "New Offer",
       "rowExpansionCompanyTitle": "Company",
@@ -466,15 +437,16 @@
       "statusRejectedText": "Rejected",
       "statusAprovedText": "Accepted",
       "statusPendingText": "Pending",
-      "tableColumnTitle": "Title",
+      "tableColumnTitle": "Description",
       "tableColumnMaterialTitle": "Material",
       "tableColumnQuantityTitle": "Quantity",
       "tableColumnSellPriceTitle": "Sell Price",
-      "tableColumnOfferslTitle": "Offers",
+      "tableColumnOffersTitle": "Offers",
       "tableColumnPublishedDateTitle": "Published Date",
       "noOffersPostedmessage": "You have not posted any offers yet.",
       "noOffersForMaterialsMessage": "There's no offers for the materials you are interested in buying",
-      "createOfferBtn": "Create Offer"
+      "createOfferBtn": "Create Offer",
+      "noOffersFoundText": "There are no offers that meet the filter criteria."
     }
   },
   "profile": {
@@ -484,14 +456,19 @@
     },
     "profile": {},
     "profileInformation": {
-      "pickUpFromHomeText": "Pickup from home",
+      "pickUpFromHomeText": "Pickup from home:",
+      "pickUpAvailable": "Available",
+      "pickUpNotAvailable": "Not Available",
       "recyclableGoodsTitle": "Price for Recyclable Goods",
       "contactBtnText": "Contact",
       "editProfileBtnText": "Edit Profile",
       "newProductBtnText": "New Product",
       "newPetBtnText": "Contact",
       "viewLocationBtnText": "View Location",
-      "reportUserToolTip": "Report Profile"
+      "reportUserToolTip": "Report Profile",
+      "followBtn": "Follow",
+      "unFollowBtn": "Unfollow"
+
     }
   },
   "report": {

@@ -4,6 +4,7 @@ import { Button } from "primereact/button"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from 'react-i18next'
 
 import { setHeader } from "@store/slices/globalSlice"
 import { addImages, createOffer } from "@services/offersServices"
@@ -17,6 +18,8 @@ const OfferNew = () => {
   const [sending, setSending] = useState(false)
   const [uploadedImages, setUploadedImages] = useState([])
   const userId = useSelector((state) => state.users.userData.id)
+  const [t] = useTranslation('translation', { keyPrefix: 'offers.offerNew'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const {
     control,
     handleSubmit,
@@ -59,7 +62,7 @@ const OfferNew = () => {
       <img className="layout__background" src="/assets/user/image-2.svg" />
       <div className="main__content halfwidth">
         <h4 className="text-defaultCase text-dark-blue">
-          <i className="pi pi-tag" /> Post Offer
+          <i className="pi pi-tag" /> {t('mainTitle')}
         </h4>
         <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
           <div className="registerInput__container-x2">
@@ -69,19 +72,19 @@ const OfferNew = () => {
               control={control}
               showLabel={false}
               isRequired={true}
-              labelName="Title"
+              labelName={t('inputTitleLabel')}
               nameInput="title"
-              placeHolderText="Title*"
+              placeHolderText={t('inputTitlePlaceholderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 maxLength: {
-                  value: 20,
-                  message: "El campo supera los 20 caracteres",
+                  value: 60,
+                  message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
                 },
-                required: "*El campo es requerido.",
+                required: tGlobal('requiredErrorMessage'),
                 pattern: {
                   value: /^\S/,
-                  message: "No debe tener espacios al inicio",
+                  message: tGlobal('patternErrorMessage'),
                 },
               }} />
             <DropDownInput
@@ -90,37 +93,41 @@ const OfferNew = () => {
               showLabel={false}
               isRequired={true}
               nameInput="material"
-              labelName="Select Material"
-              placeHolderText="Select Material"
+              labelName={t('inputDropdownMaterialLabel')}
+              placeHolderText={t('inputDropdownMaterialPlaceholderText')}
               getFormErrorMessage={getFormErrorMessage}
               options={[
-                {label: "Paper", value: "Paper"},
-                {label: "Glass", value: "Glass"},
-                {label: "Plastic", value: "Plastic"},
-                {label: "E-Waste", value: "E-Waste"},
-                {label: "Metal", value: "Metal"},
-                {label: "Organic", value: "Organic"},
-              ]} />
+                {label: t('paperLabel'), value: "Paper"},
+                {label: t('glassLabel'), value: "Glass"},
+                {label: t('plasticLabel'), value: "Plastic"},
+                {label: t('eWasteLabel'), value: "E-Waste"},
+                {label:t('metalLabel'), value: "Metal"},
+                {label: t('organicLabel'), value: "Organic"},
+              ]}
+              rules={{
+                required: tGlobal('requiredErrorMessage'),
+              }}
+               />
           </div>
           <div className="registerInput__container-x2">
             <NumberInput
               width="100%"
-              label="Quantity"
+              label={t('inputNumberQuantityLabel')}
               showLabel={false}
               control={control}
               isRequired={true}
               nameInput="quantity"
-              placeHolderText="Quantity*"
+              placeHolderText={t('inputNumberQuantityPlaceholderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 maxLength: {
                   value: 7,
-                  message: "El campo supera los 7 caracteres",
+                  message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 7}),
                 },
-                required: "*El campo es requerido.",
+                required: tGlobal('requiredErrorMessage'),
                 pattern: {
                   value: /^\S/,
-                  message: "No debe tener espacios al inicio",
+                  message: tGlobal('patternErrorMessage'),
                 },
               }} />
             <DropDownInput
@@ -129,14 +136,18 @@ const OfferNew = () => {
               showLabel={false}
               isRequired={true}
               nameInput="unit"
-              labelName="Select Unit"
-              placeHolderText="Select Unit"
+              labelName={t('inputDropdownUnitLabel')}
+              placeHolderText={t('inputDropdownUnitPlaceholderText')}
               getFormErrorMessage={getFormErrorMessage}
+              rules={{
+                required: tGlobal('requiredErrorMessage'),
+              }}
               options={[
-                {label: "Kg", value: "Kg"}, 
-                {label: "cc", value: "cc"},
-                {label: "Units", value: "Units"}
+                {label: t('unitLabelKg'), value: "Kg"}, 
+                {label: t('unitLabelCc'), value: "cc"},
+                {label:  t('unitLabelUnit'), value: "Units"}
               ]} />
+              
           </div>
           <div className="registerInput__container-x2">
           <NumberInput
@@ -146,29 +157,29 @@ const OfferNew = () => {
             control={control}
             nameInput="price"
             isRequired={true}
-            label="Asking price"
-            placeHolderText="Asking Price*"
+            label={t('inputNumberAskingPriceLabel')}
+            placeHolderText={t('inputNumberAskingPricePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 7,
-                message: "El campo supera los 7 caracteres",
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 7}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
           </div>
           <UploadPhotoInput
             type="imageUpload"
-            title="Add Picture"
+            title={t('offerImagesTitle')}
             uploadedImages={uploadedImages}
             setUploadedImages={setUploadedImages}
             className="imagesHub__container-variant mb-1" />
           <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-            <Button className="dark-blue fullwidth" label="Post" type="submit" loading={sending} />
+            <Button className="dark-blue fullwidth" label={t('postOfferBtnText')} type="submit" loading={sending} />
           </div>
         </form>
       </div>

@@ -56,15 +56,15 @@ const Offers = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" placeholder="Filter by materials" />
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder="Keyword Search" />
+      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" placeholder={t('selectInputPlaceHolder')} />
+      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
         setFilters({keyword: '', materials: []})
       }}><FontAwesomeIcon icon={faTrash} /></Button>
       {user?.role == 'user' && 
-        <Link className="button small green-earth" to="/offers/new/"><FontAwesomeIcon icon={faPlus} /> New Offer</Link>
+        <Link className="button small green-earth" to="/offers/new/"><FontAwesomeIcon icon={faPlus} /> {t('newOfferBtn')}</Link>
       }
     </div>
     // <div className="flex aligncenter">
@@ -74,19 +74,19 @@ const Offers = () => {
   const rowExpansionTemplate = data => <div className="p-3">
     <DataTable value={data.offers}>
         <Column header="" body={() => "-"} field="id" className="text-center" style={{width: '2.5rem'}}></Column>
-        <Column header="Company" body={({name, picture}) => <>
+        <Column header={t('rowExpansionCompanyTitle')} body={({name, picture}) => <>
           <ProfilePhoto userPhoto={picture} />
           <b>{name}</b>
         </>}></Column>
-        <Column header="Bid" body={({price}) => 
+        <Column header={t('rowExpansionBidTitle')} body={({price}) => 
             <>
                {parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
             </>}></Column>
-        <Column header="Status" body={({id, rejected, accepted}) => (rejected || (accepted != 0 && accepted != id)) && 
-          <span className="text-red-state">Rejected</span> || (accepted == id && 
-          <span className="text-green-state">Accepted</span>) || 
-          <span>Pending</span>}></Column>
-        <Column header="Bidding Date" body={({date}) => date.split(' ')[0]}></Column>
+        <Column header={t('rowExpansionStatusTitle')} body={({id, rejected, accepted}) => (rejected || (accepted != 0 && accepted != id)) && 
+          <span className="text-red-state">{t('statusRejectedText')}</span> || (accepted == id && 
+          <span className="text-green-state">{t('statusAprovedText')}</span>) || 
+          <span>{t('statusPendingText')}</span>}></Column>
+        <Column header={t('rowExpansionBiddingDateTitle')} body={({date}) => date.split(' ')[0]}></Column>
         <Column className="actions" header={null} body={offer => 
           <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>}></Column>
     </DataTable>
@@ -103,7 +103,7 @@ const Offers = () => {
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth ' + (user.role == 'user' ? 'useroffers' : '')}>
-      <h1 className="text-defaultCase mb-1">Offers</h1>
+      <h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>
       <OfferInfo type={user.role == 'user' ? 'min' : 'full'} show={detail.show} offer={detail} onHide={hidePopup}  />
       {typeof offers?.total == 'undefined' && offers?.data?.length == 0 && 
         <TableSkeleton/>
@@ -126,16 +126,16 @@ const Offers = () => {
           {user.role != 'user' && 
             <Column header="User" body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
           || null}
-          <Column header="Title" field="title"></Column>
-          <Column header="Material" body={({material}) => 
+          <Column header={t('tableColumnTitle')} field="title"></Column>
+          <Column header={t('tableColumnMaterialTitle')} body={({material}) => 
             <Button label={material} className={'small ' + material} />}></Column>
-          <Column header="Quantity" body={({quantity, unit}) => quantity + ' ' + unit}></Column>
-          <Column header="Sell Price" body={({price}) => 
+          <Column header={t('tableColumnQuantityTitle')} body={({quantity, unit}) => quantity + ' ' + unit}></Column>
+          <Column header={t('tableColumnSellPriceTitle')} body={({price}) => 
            <span className='price__background'>{parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>}></Column>
           {user.role == 'user' && 
-            <Column header="Offers" body={({offers}) => offers?.length || 0}></Column>
+            <Column header={t('tableColumnOffersTitle')} body={({offers}) => offers?.length || 0}></Column>
           || null}
-          <Column header="Published Date" body={({date}) => date.split(' ')[0]}></Column>
+          <Column header={t('tableColumnPublishedDateTitle')} body={({date}) => date.split(' ')[0]}></Column>
           {user.role == 'user' && 
             <Column className="actions" header={null} body={offer => 
               <Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>}></Column> || 
