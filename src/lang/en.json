@@ -557,13 +557,21 @@
       "dialogHomeLocationBtnText": "Use registered location",
       "dialogCurrentLocationBtnText": "Use my current location",
       "inputSearchPlaceHolder": "Search",
-      "markerDetailMaterialTitle": "Interested in buying",
+      "markerDetailMaterialTitle": "Interested in buying:",
       "markerDetailPickUpTitle": "Pick up at home",
+      "available": "Available",
+      "notAvailable": "Not Available",
       "markerDetailLearnMoreBtnText": "Learn More",
+      "filerByMaterialTitle": "Filter by:",
       "filtersModalTitle": "Choose Materials that you are interested in",
+      "filtersModalCheckBoxRecycleCompany": "Recycle Companies",
+      "filtersModalCheckBoxShelters": "Shelters",
+      "filtersModalCheckBoxShops": "Shops",
+      "filtersModalCheckBoxSocialOrg": "Social Organizations",
+
       "filtersModalCheckBoxText1": "Paper",
-      "filtersModalCheckBoxText2": "Plastic",
-      "filtersModalCheckBoxText3": "Glass",
+      "filtersModalCheckBoxText2": "Glass",
+      "filtersModalCheckBoxText3": "Plastic",
       "filtersModalCheckBoxText4": "E-waste",
       "filtersModalCheckBoxText5": "Metal",
       "filtersModalCheckBoxText6": "Organic"
@@ -593,15 +601,15 @@
       "createProduct": {
         "inputTextProductNameLabel": "Product Name",
         "inputTextProductNamePlaceholderText": "Product Name*",
-        "maxLengthErrorMessage": "You have exceeded the maximum number of 100 characters in this field",
         "inputDropdownSubjectLabel": "Category",
         "inputDropdownSubjectPlaceholderText": "Select a Category*",
         "inputNumberPriceLabel": "Price",
         "inputNumberPricePlaceholderText": "Add price per unit*",
         "textAreaProducttDescriptionLabel": "Product Detail",
         "textAreaProductDescriptionPlaceholder": "Write a short description about the product.",
-        "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
-        "createProductBtn": "Create Product : Update Product"
+        "createProductBtn": "Create Product",
+        "updateProductBtn": "Update Product"
+
       },
       "product": {
         "addToCartBtnText": "Add To Cart",

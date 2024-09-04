@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from 'react-i18next'
 
 import { getUsers } from "@services/userServices"
 import { setHeader } from "@store/slices/globalSlice"
@@ -12,22 +13,23 @@ const Vendors = ({type}) => {
   const [page, setPage] = useState({page: 0, rows: 8})
   const [elements, setElements] = useState({data: []})
   const [filters, setFilters] = useState({keyword: ''})
+  const [t] = useTranslation('translation', { keyPrefix: 'user.vendors'})
   const user = useSelector((state) => state.users.userData)
   const vendorTemplateContent = {
-    title: 'MARKET PLACE',
-    searchLabel: 'Discover products',
+    title: t('VendorsBannerTitle'),
+    searchLabel: t('searchInputTitle'),
     bannerImage: 'url(/assets/user/image-7.svg)',
     types: [
       {
         id: 'vendors',
         card: 'company',
         url: '/market-place/',
-        label: 'Vendors',
+        label: t('tabLabelVendorsText'),
       },
       {
         id: 'products',
         card: 'product',
-        label: 'Products',
+        label:  t('tabLabelProductsText'),
         url: '/products/',
       },
     ],

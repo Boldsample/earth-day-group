@@ -13,6 +13,7 @@ import { getUsers } from '@services/userServices'
 import { setHeader } from '@store/slices/globalSlice'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { updateUserData } from '@store/slices/usersSlice'
+import { useTranslation } from 'react-i18next'
 
 import './style.sass'
 import { RadioButton } from 'primereact/radiobutton'
@@ -29,6 +30,7 @@ const Map = () => {
   const [current, setCurrent] = useState({lat: 0, lng: 0})
   const user = useSelector((state) => state.users.userData)
   const [ filters, setFilters ] = useState({role: [], material: []})
+  const [t] = useTranslation('translation', { keyPrefix: 'user.map'})
 
   const updateFilter = e => {
     setFilters(_prev => {
@@ -122,9 +124,9 @@ const Map = () => {
     {!user?.default_location && 
       <Dialog className="no-close" visible={true} onHide={changeDefault} draggable={false}>
         <div className="text-center">
-          <h4 className="mb-2">Select your default location</h4>
-          <Button className="green-earth" onClick={() => changeDefault('home')}><FontAwesomeIcon icon={faHouse} /> Use address location</Button>
-          <Button className="dark-blue" onClick={() => changeDefault('current')}><FontAwesomeIcon icon={faLocationCrosshairs} /> Use my current location</Button>
+          <h4 className="mb-2">{t('dialogTitle')}</h4>
+          <Button className="green-earth" onClick={() => changeDefault('home')}><FontAwesomeIcon icon={faHouse} /> {t('dialogHomeLocationBtnText')}</Button>
+          <Button className="dark-blue" onClick={() => changeDefault('current')}><FontAwesomeIcon icon={faLocationCrosshairs} /> {t('dialogCurrentLocationBtnText')}</Button>
         </div>
       </Dialog>
     || null}
@@ -132,7 +134,7 @@ const Map = () => {
       <div className="edg-search">
         <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
           <InputText
-            placeholder="Search"
+            placeholder={t('inputSearchPlaceHolder')}
             className="p-inputtext" />
         </Autocomplete>
         <a onClick={() => toCurrentLocation('home')}><FontAwesomeIcon icon={faHouse} /></a>
@@ -149,7 +151,7 @@ const Map = () => {
       <p className="small">{show.description}</p>
       <p className="small">&nbsp;</p>
       {show?.materials?.length > 0 && <>
-        <h5 className="font-bold mb-1">Interested in buying:</h5>
+        <h5 className="font-bold mb-1">{t('markerDetailMaterialTitle')}</h5>
         <div>
           {show?.materials?.map(({type}, key) => 
             <Button key={key} label={type} className={'small mb-1 ' + type} />
@@ -158,26 +160,26 @@ const Map = () => {
       </>}
       <p className="small">&nbsp;</p>
       {show.role == 'companies' && <>
-        <h5 className="font-bold">Pickup at Home: <span className="text-gray font-regular">{show.pick_up_from_home ? 'Available' : 'Unavailable'}</span></h5>
+        <h5 className="font-bold">{t('markerDetailPickUpTitle')} <span className="text-gray font-regular">{show.pick_up_from_home ? t('available') : t('notAvailable')}</span></h5>
         <p className="small">&nbsp;</p>
       </>}
-      <Link to={`/company/${show.id}`} className="button dark-blue">Learn more</Link>
+      <Link to={`/company/${show.id}`} className="button dark-blue">{t('markerDetailLearnMoreBtnText')}</Link>
     </div>}
     <div className={'map__filters '+(showFilters ? 'show' : '')}>
       <a className="open" onClick={() => setShowFilters(prev => !prev)}><FontAwesomeIcon icon={showFilters ? faChevronDown : faChevronUp} /></a>
-      <h5 className="text-dark-blue fullwidth font-bold">Filter by:</h5>
-      <div className="radio"><Checkbox inputId="role_company" name="role" value="company" checked={filters?.role.includes('company')} onChange={updateFilter} /> <label htmlFor="role_company">Recycle companies</label></div>
-      <div className="radio"><Checkbox inputId="role_shelter" name="role" value="shelter" checked={filters?.role.includes('shelter')} onChange={updateFilter} /> <label htmlFor="role_shelter">Shelters</label></div>
-      <div className="radio"><Checkbox inputId="role_vendor" name="role" value="vendor" checked={filters?.role.includes('vendor')} onChange={updateFilter} /> <label htmlFor="role_vendor">Shops</label></div>
-      <div className="radio"><Checkbox inputId="role_social" name="role" value="social" checked={filters?.role.includes('social')} onChange={updateFilter} /> <label htmlFor="role_social">Social organizations</label></div>
+      <h5 className="text-dark-blue fullwidth font-bold">{t('filerByMaterialTitle')}</h5>
+      <div className="radio"><Checkbox inputId="role_company" name="role" value="company" checked={filters?.role.includes('company')} onChange={updateFilter} /> <label htmlFor="role_company">{t('filtersModalCheckBoxRecycleCompany')}</label></div>
+      <div className="radio"><Checkbox inputId="role_shelter" name="role" value="shelter" checked={filters?.role.includes('shelter')} onChange={updateFilter} /> <label htmlFor="role_shelter">{t('filtersModalCheckBoxShelters')}</label></div>
+      <div className="radio"><Checkbox inputId="role_vendor" name="role" value="vendor" checked={filters?.role.includes('vendor')} onChange={updateFilter} /> <label htmlFor="role_vendor">{t('filtersModalCheckBoxShops')}</label></div>
+      <div className="radio"><Checkbox inputId="role_social" name="role" value="social" checked={filters?.role.includes('social')} onChange={updateFilter} /> <label htmlFor="role_social">{t('filtersModalCheckBoxSocialOrg')}</label></div>
       {filters?.role.includes('company') && <>
-      <h5 className="text-dark-blue fullwidth font-bold mt-2">Choose a material:</h5>
-      <div className="radio"><Checkbox inputId="material_paper" name="material" value="Paper" checked={filters?.material.includes('Paper')} onChange={updateFilter} /> <label htmlFor="material_paper">Paper</label></div>
-      <div className="radio"><Checkbox inputId="material_glass" name="material" value="Glass" checked={filters?.material.includes('Glass')} onChange={updateFilter} /> <label htmlFor="material_glass">Glass</label></div>
-      <div className="radio"><Checkbox inputId="material_plastic" name="material" value="Plastic" checked={filters?.material.includes('Plastic')} onChange={updateFilter} /> <label htmlFor="material_plastic">Plastic</label></div>
-      <div className="radio"><Checkbox inputId="material_e-waste" name="material" value="E-Waste" checked={filters?.material.includes('E-Waste')} onChange={updateFilter} /> <label htmlFor="material_e-waste">E-Waste</label></div>
-      <div className="radio"><Checkbox inputId="material_metal" name="material" value="Metal" checked={filters?.material.includes('Metal')} onChange={updateFilter} /> <label htmlFor="material_metal">Metal</label></div>
-      <div className="radio"><Checkbox inputId="material_organic" name="material" value="Organic" checked={filters?.material.includes('Organic')} onChange={updateFilter} /> <label htmlFor="material_organic">Organic</label></div>
+      <h5 className="text-dark-blue fullwidth font-bold mt-2">{t('filtersModalTitle')}</h5>
+      <div className="radio"><Checkbox inputId="material_paper" name="material" value="Paper" checked={filters?.material.includes('Paper')} onChange={updateFilter} /> <label htmlFor="material_paper">{t('filtersModalCheckBoxText1')}</label></div>
+      <div className="radio"><Checkbox inputId="material_glass" name="material" value="Glass" checked={filters?.material.includes('Glass')} onChange={updateFilter} /> <label htmlFor="material_glass">{t('filtersModalCheckBoxText2')}</label></div>
+      <div className="radio"><Checkbox inputId="material_plastic" name="material" value="Plastic" checked={filters?.material.includes('Plastic')} onChange={updateFilter} /> <label htmlFor="material_plastic">{t('filtersModalCheckBoxText3')}</label></div>
+      <div className="radio"><Checkbox inputId="material_e-waste" name="material" value="E-Waste" checked={filters?.material.includes('E-Waste')} onChange={updateFilter} /> <label htmlFor="material_e-waste">{t('filtersModalCheckBoxText4')}</label></div>
+      <div className="radio"><Checkbox inputId="material_metal" name="material" value="Metal" checked={filters?.material.includes('Metal')} onChange={updateFilter} /> <label htmlFor="material_metal">{t('filtersModalCheckBoxText5')}</label></div>
+      <div className="radio"><Checkbox inputId="material_organic" name="material" value="Organic" checked={filters?.material.includes('Organic')} onChange={updateFilter} /> <label htmlFor="material_organic">{t('filtersModalCheckBoxText6')}</label></div>
       </>}
     </div>
     <GoogleMap

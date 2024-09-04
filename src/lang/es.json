@@ -556,8 +556,16 @@
       "inputSearchPlaceHolder": "Buscar",
       "markerDetailMaterialTitle": "Interesado en comprar",
       "markerDetailPickUpTitle": "Recoger en casa",
+      "available": "Disponible",
+      "notAvailable": "No Disponible",
       "markerDetailLearnMoreBtnText": "Más Información",
+      "filerByMaterialTitle": "Filtra por:",
       "filtersModalTitle": "Elige los Materiales que te interesan",
+      "filtersModalCheckBoxRecycleCompany": "Empresas de Reciclaje",
+      "filtersModalCheckBoxShelters": "Refugios",
+      "filtersModalCheckBoxShops": "Tiendas",
+      "filtersModalCheckBoxSocialOrg": "Fundaciones",
+
       "filtersModalCheckBoxText1": "Papel",
       "filtersModalCheckBoxText2": "Plástico",
       "filtersModalCheckBoxText3": "Vidrio",
@@ -579,7 +587,7 @@
       "filtersTitle": "Filtros"
     },
     "vendors": {
-      "VendorsBannerTitle": "MERCADO",
+      "VendorsBannerTitle": "MARKETPLACE",
       "searchInputTitle": "Descubre Productos",
       "tabLabelVendorsText": "Tiendas",
       "tabLabelProductsText": "Productos"
@@ -598,7 +606,8 @@
         "textAreaProducttDescriptionLabel": "Detalle del Producto",
         "textAreaProductDescriptionPlaceholder": "Escribe una breve descripción del producto.",
         "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
-        "createProductBtn": "Crear Producto : Actualizar Producto"
+        "createProductBtn": "Crear Producto",
+        "updateProductBtn": "Actualizar Producto"
       },
       "product": {
         "addToCartBtnText": "Agregar al Carrito",

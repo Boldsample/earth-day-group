@@ -8,6 +8,7 @@ import { setHeader } from "@store/slices/globalSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
 import { addImages, addProduct, updateProduct } from "@services/productServices"
 import { TextInput, NumberInput, UploadPhotoInput, TextAreaInput, DropDownInput } from "@ui/forms"
+import { useTranslation } from 'react-i18next'
 
 const CreateProduct = () => {
   const dispatch = useDispatch()
@@ -16,6 +17,8 @@ const CreateProduct = () => {
   const [product, setProduct] = useState({})
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
+  const [t] = useTranslation('translation', { keyPrefix: 'vendor.products.createProduct'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const categories = [
     { name: "Self care", code: "Self care" }
   ]
@@ -100,18 +103,18 @@ const CreateProduct = () => {
             nameInput="name"
             control={control}
             isRequired={true}
-            labelName="Product Name"
-            placeHolderText="Product Name*"
+            labelName={t('inputTextProductNameLabel')}
+            placeHolderText={t('inputTextProductNamePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 100,
-                message: "El campo supera los 100 caracteres",
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 100}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
           <DropDownInput
@@ -122,12 +125,12 @@ const CreateProduct = () => {
             optionLabel="name"
             optionValue="code"
             options={categories}
-            labelName="Category"
+            labelName={t('inputDropdownSubjectLabel')}
             nameInput="category"
-            placeHolderText="Select Category"
+            placeHolderText={t('inputDropdownSubjectPlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
             }} />
         </div>
         <div className="registerInput__container-x1">
@@ -138,18 +141,18 @@ const CreateProduct = () => {
             nameInput="price"
             isRequired={true}
             inputRef={numberInput}
-            labelName="Unit Price"
-            placeHolderText="Add Price per unit"
+            labelName={t('inputNumberPriceLabel')}
+            placeHolderText={t('inputNumberPricePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 3,
-                message: "El campo supera los 3 caracteres",
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 3}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
         </div>
@@ -158,19 +161,19 @@ const CreateProduct = () => {
             showLabel={true}
             control={control}
             isRequired={false}
-            label="Product Detail*"
+            label={t('textAreaProducttDescriptionLabel')}
             nameInput="description"
-            placeHolderText="Tell us about the product"
+            placeHolderText={t('textAreaProductDescriptionPlaceholder')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 1000,
-                message: "El campo supera los 1000 caracteres",
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 100}),
               },
-              required: "*El campo es requerido.",
+              required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: "No debe tener espacios al inicio",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
         </div>
@@ -180,7 +183,7 @@ const CreateProduct = () => {
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-          <Button className="dark-blue fullwidth" label={product?.id ? "Update" : "Create"} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={product?.id ? t('updateProductBtn') : t('createProductBtn')} type="submit" loading={sending} />
         </div>
       </form>
     </div>

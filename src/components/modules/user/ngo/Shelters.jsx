@@ -5,6 +5,7 @@ import { getPets } from '@services/petServices'
 import { getUsers } from "@services/userServices"
 import { setHeader } from "@store/slices/globalSlice"
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
+import { useTranslation } from 'react-i18next'
 
 const Shelters = ({type}) => {
   const dispatch = useDispatch()
@@ -12,22 +13,23 @@ const Shelters = ({type}) => {
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
   const [elements, setElements] = useState({data: []})
+  const [t] = useTranslation('translation', { keyPrefix: 'user.ngo.shelters'})
   const vendorTemplateContent = {
-    searchLabel: 'Discover pets in adoption',
+    searchLabel: t('searchInputTitle'),
     bannerImage: 'url(/assets/user/image-9.svg)',
-    title: <div style={{maxWidth: '20rem'}}>SUPPORT THE ONES WITHOUT A HOME</div>,
+    title: <div style={{maxWidth: '20rem'}}>{t('shelterBannerTitle')}</div>,
     types: [
       {
         id: 'shelters',
         card: 'company',
         url: '/shelters/',
-        label: 'Shelters',
+        label: t('tabLabelShelters'),
       },
       {
         id: 'pets',
         url: '/pets/',
         card: 'product',
-        label: 'Pets Adoptions',
+        label: t('tabLabelPets'),
       },
     ]
   }
