@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark as faBookmarkLine } from "@fortawesome/free-regular-svg-icons"
 import { faBookmark, faCartPlus, faFlag, faImage, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { useTranslation } from 'react-i18next'
 
 import Footer from "@ui/footer/Footer"
 import { setHeader } from "@store/slices/globalSlice"
@@ -22,6 +23,7 @@ const Product = () => {
   const dispatch = useDispatch()
   const [ product, setProduct ] = useState(null)
   const user = useSelector((state) => state.users.userData)
+  const [t] = useTranslation('translation', { keyPrefix: 'vendor.products.createProduct'})
 
   const doFollow = async e => {
     e.preventDefault()
@@ -57,11 +59,11 @@ const Product = () => {
             <div className="buttons__container">
               {user?.id != product?.user && user?.role != 'admin' && <>
                 <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={product?.followed ? faBookmark : faBookmarkLine} /></Link>
-                <Link className="button small green-earth"><FontAwesomeIcon icon={faCartPlus} /> <span>Add to cart</span></Link>
-                <Link className="button small red-state outline hasTooltip" to={`/report/product/${product?.id}/`} data-pr-tooltip="Report product"><FontAwesomeIcon icon={faFlag} /></Link>
+                <Link className="button small green-earth"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('addToCartBtnText')}</span></Link>
+                <Link className="button small red-state outline hasTooltip" to={`/report/product/${product?.id}/`} data-pr-tooltip={t('reportProductTooltipText')}><FontAwesomeIcon icon={faFlag} /></Link>
               </> || <>
-                <Link to={`/product/edit/${product?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>Edit</span></Link>
-                <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>Delete</span></Link>
+                <Link to={`/product/edit/${product?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editProductBtnText')}</span></Link>
+                <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deleteProductBtnText')}</span></Link>
               </>}
             </div>
           </div>

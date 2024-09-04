@@ -10,6 +10,9 @@
     "disable": "Disable",
     "inputSearchPlaceHolder": "Keyword Search",
     "notfoundErrorMessage": "We couldn't find what you are looking for. Care to try again.",
+    "categoryListingiconTitle1": "100% Recycled",
+    "categoryListingiconTitle2": "Eco Friendly",
+    "categoryListingiconTitle3": "Sustainable Economy",
     "formErrors": {
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
@@ -568,7 +571,6 @@
       "filtersModalCheckBoxShelters": "Shelters",
       "filtersModalCheckBoxShops": "Shops",
       "filtersModalCheckBoxSocialOrg": "Social Organizations",
-
       "filtersModalCheckBoxText1": "Paper",
       "filtersModalCheckBoxText2": "Glass",
       "filtersModalCheckBoxText3": "Plastic",
@@ -609,7 +611,6 @@
         "textAreaProductDescriptionPlaceholder": "Write a short description about the product.",
         "createProductBtn": "Create Product",
         "updateProductBtn": "Update Product"
-
       },
       "product": {
         "addToCartBtnText": "Add To Cart",

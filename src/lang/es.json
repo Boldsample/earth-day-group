@@ -8,6 +8,9 @@
     "all": "Todos",
     "active": "Activo",
     "disable": "Inactivo",
+    "categoryListingiconTitle1": "100% Recyclado",
+    "categoryListingiconTitle2": "Ecológico",
+    "categoryListingiconTitle3": "Economía Sostenible",
     "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
     "notfoundErrorMessage": "No pudimos encontrar lo que estás buscando. Por favor intentalo de nuevo.",
     "formErrors": {
@@ -565,7 +568,6 @@
       "filtersModalCheckBoxShelters": "Refugios",
       "filtersModalCheckBoxShops": "Tiendas",
       "filtersModalCheckBoxSocialOrg": "Fundaciones",
-
       "filtersModalCheckBoxText1": "Papel",
       "filtersModalCheckBoxText2": "Plástico",
       "filtersModalCheckBoxText3": "Vidrio",

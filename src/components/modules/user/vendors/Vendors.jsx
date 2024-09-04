@@ -6,6 +6,7 @@ import { getUsers } from "@services/userServices"
 import { setHeader } from "@store/slices/globalSlice"
 import { getProducts } from '@services/productServices'
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
+const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 
 const Vendors = ({type}) => {
   const dispatch = useDispatch()
@@ -35,15 +36,15 @@ const Vendors = ({type}) => {
     ],
     secondary: [
       {
-        title: '100% Recycled',
+        title: t('categoryListingiconTitle1'),
         icon: '/assets/icons/recycleCompanyIcon1.svg',
       },
       {
-        title: 'Eco Friendly',
+        title: t('categoryListingiconTitle2'),
         icon: '/assets/icons/recycleCompanyIcon2.svg',
       },
       {
-        title: 'Sustainable Economy',
+        title: t('categoryListingiconTitle3'),
         icon: '/assets/icons/recycleCompanyIcon3.svg',
       },
     ]

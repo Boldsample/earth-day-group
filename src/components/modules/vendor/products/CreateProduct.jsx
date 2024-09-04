@@ -19,6 +19,7 @@ const CreateProduct = () => {
   const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'vendor.products.createProduct'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  
   const categories = [
     { name: "Self care", code: "Self care" }
   ]
