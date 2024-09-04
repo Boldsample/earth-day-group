@@ -407,7 +407,7 @@
       "paperLabel": "Papel",
       "glassLabel": "Vidrio",
       "plasticLabel": "Plastico",
-      "eWasteLabel": "Desechos Electronicos", 
+      "eWasteLabel": "Desechos Electronicos",
       "metalLabel": "Metal",
       "organicLabel": "Organicos",
       "inputNumberQuantityLabel": "Cantidad",
@@ -471,12 +471,15 @@
     "createReport": {
       "inputDropdownSubjectLabel": "Asunto",
       "inputDropdownSubjectPlaceholderText": "Selecciona un motivo para reportar*",
-      "inputDropdownEntityLabel": "Nombre del tipo",
+      "inputDropdownEntityLabel": "Nombre del {{userType}}",
       "inputDropdownUserPlaceholderText": "Selecciona un usuario*",
       "textAreaReportDescriptionTitle": "Describe tu reporte",
-      "textAreaReportDescriptionPlaceholder": "Cuéntanos por qué deseas reportar el tipo.",
-      "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
-      "createReportBtn": "Crear Reporte"
+      "textAreaReportDescriptionPlaceholder": "Cuéntanos por qué deseas reportar al {{userType}}.",
+      "createReportBtn": "Crear Reporte",
+      "ReportImagesTitle": "Adjunta Evidencias",
+      "reportCreatedthankyouPagetitle": "¡Gracias!",
+      "reportCreatedthankyouPagebuttonLabel": "Volver al dashboard",
+      "reportCreatedthankyouPagebodyText": "¡Tu reporte ha sido enviado! Nos pondremos en contacto contigo pronto para resolver tus inquietudes"
     }
   },
   "settings": {

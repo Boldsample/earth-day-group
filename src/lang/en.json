@@ -399,7 +399,6 @@
       "askingPriceTitle": "Asking Price:",
       "sendOfferBtn": "Send an offer",
       "reportOfferToolTip": "Report Offer"
-
     },
     "offerNew": {
       "mainTitle": "Post Offer",
@@ -410,7 +409,7 @@
       "paperLabel": "Paper",
       "glassLabel": "Glass",
       "plasticLabel": "Plastic",
-      "eWasteLabel": "E-Waste", 
+      "eWasteLabel": "E-Waste",
       "metalLabel": "Metal",
       "organicLabel": "Organic",
       "inputNumberQuantityLabel": "Quantity",
@@ -468,19 +467,22 @@
       "reportUserToolTip": "Report Profile",
       "followBtn": "Follow",
       "unFollowBtn": "Unfollow"
-
     }
   },
   "report": {
     "createReport": {
+      "NOTA": "FALTA ANEXAR EN ESTE MODULO LAS TRADUCCIONES DEL DROPDOWN DE LA RAZON PARA REPORTAR",
       "inputDropdownSubjectLabel": "Subject",
       "inputDropdownSubjectPlaceholderText": "Select a reason to report*",
-      "inputDropdownEntityLabel": "Name of type",
+      "inputDropdownEntityLabel": "Name of {{userType}}",
       "inputDropdownUserPlaceholderText": "Select a user*",
       "textAreaReportDescriptionTitle": "Describe your report",
-      "textAreaReportDescriptionPlaceholder": "Tell us why you want to report type.",
-      "textAreamaxLengthErrorMessage": "You have exceeded the maximum number of 1000 characters in this field",
-      "createReportBtn": "Create Report"
+      "textAreaReportDescriptionPlaceholder": "Tell us why you want to report this {{userType}}.",
+      "createReportBtn": "Create Report",
+      "ReportImagesTitle": "Attach Evidence",
+      "reportCreatedthankyouPagetitle": "Thank you!",
+      "reportCreatedthankyouPagebuttonLabel": "Go back to dashboard",
+      "reportCreatedthankyouPagebodyText": "Your report has been submitted. We will be in touch soon to address your concerns."
     }
   },
   "settings": {

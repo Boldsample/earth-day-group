@@ -62,7 +62,7 @@ const ProfileInformation = ({profile, same, doFollow, admin}) => {
             <Link className="button small green-earth self-end" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> {t('newPetBtnText')}</Link>
           }
         </> || <>
-          <Button className={'small '+(profile?.followed ? 'red-state' : 'dark-blue')} onClick={() => doFollow(profile?.id)}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? t('unFollowBtn') : t('FollowBtn')}</span></Button>
+          <Button className={'small '+(profile?.followed ? 'red-state' : 'dark-blue')} onClick={() => doFollow(profile?.id)}><FontAwesomeIcon icon={faHeart} /> <span>{profile?.followed ? t('unFollowBtn') : t('followBtn')}</span></Button>
           <Link className="button small dark-blue outline" to={`/map/${profile?.username}/`}><FontAwesomeIcon icon={faLocationDot} /> <span>{t('viewLocationBtnText')}</span></Link>
           {!admin && 
             <Link className="button small red-state outline hasTooltip" to={`/report/user/${profile?.username}/`} data-pr-tooltip={t('reportUserToolTip')}><FontAwesomeIcon icon={faFlag} /></Link>
