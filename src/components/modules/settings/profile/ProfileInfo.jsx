@@ -3,6 +3,7 @@ import { Button } from 'primereact/button'
 import { faFlag, faHeart as faHeartFull, faKey, faPencil, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { formatExternalURL } from '@utils/formatExternalURL'
@@ -17,6 +18,7 @@ import { updateThankyou } from '@store/slices/globalSlice'
 const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settings', admin}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [t] = useTranslation('translation', { keyPrefix: 'settings.profile.profileInfo'})
 
   const sendRecover = async () => {
     const response = await recoverUser({email: user?.email})
@@ -35,15 +37,15 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
     switch (user?.role) {
       case 'company':
         return [
-          { key: 'Phone Number', value: user?.phone },
-          { key: 'NIT', value: user?.nit },
-          { key: 'Website', value: <a href={formatExternalURL(user?.website)} target="_blank">{user?.website}</a> },
-          { key: 'Address', value: user?.address }
+          { key: t('userPhoneNumberTitle'), value: user?.phone },
+          { key: t('userNitNumberTitle'), value: user?.nit },
+          { key: t('userWebsiteNumberTitle'), value: <a href={formatExternalURL(user?.website)} target="_blank">{user?.website}</a> },
+          { key: t('userAddressTitle'), value: user?.address }
         ]
       default:
         return [
-          { key: 'Phone Number', value: user?.phone },
-          { key: 'Address', value: user?.address }
+          { key: t('userPhoneNumberTitle'), value: user?.phone },
+          { key:  t('userAddressTitle'), value: user?.address }
         ]
     }
   }
@@ -60,30 +62,30 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         <div className="followers">
           <Link to="/followers/">
             <span>{user?.followers}</span>
-            Followers
+            {t('followersBtnText')}
           </Link>
           <Link to="/following/">
             <span>{user?.following}</span>
-            Following
+            {t('followingBtnText')}
           </Link>
         </div>
-        <Link to={'/settings/edit/'} className="button small dark-blue">Edit</Link>
+        <Link to={'/settings/edit/'} className="button small dark-blue">{t('editBtnText')}</Link>
       </> || <>
         {!admin && 
           <Button className="small red-state outline" onClick={doFollow}><FontAwesomeIcon icon={user?.followed ? faHeartFull : faHeart} /></Button>
         }
         {user?.role != 'user' && user?.role != 'admin' && 
-          <Link className="button small dark-blue" to={`/${user?.role}/${user?.username}/`}><FontAwesomeIcon icon={faUser} /> <span>View profile</span></Link>
+          <Link className="button small dark-blue" to={`/${user?.role}/${user?.username}/`}><FontAwesomeIcon icon={faUser} /> <span>{t('viewProfileBtnText')}</span></Link>
         }
         {!same && type != 'chat' && (admin && user?.role != 'admin') && 
-          <Link to={`/chat/${user?.username}/`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>Send message</span></Link>
+          <Link to={`/chat/${user?.username}/`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>{t('sendMessageBtnText')}</span></Link>
         }
         {admin && !same && <>
-          <Link to={`/${user?.role}/edit/${user?.username}/`} className="button small dark-blue outline"><FontAwesomeIcon icon={faPencil} /> <span>Edit</span></Link>
-          <Button className="small green-earth outline" onClick={sendRecover}><span><FontAwesomeIcon icon={faKey} /></span> Recover</Button>
+          <Link to={`/${user?.role}/edit/${user?.username}/`} className="button small dark-blue outline"><FontAwesomeIcon icon={faPencil} /> <span>{t('adminEditBtnText')}</span></Link>
+          <Button className="small green-earth outline" onClick={sendRecover}><span><FontAwesomeIcon icon={faKey} /></span> {t('adminRecoverBtnText')}</Button>
         </>}
         {!same && !admin && 
-          <Link className="button small red-state outline hasTooltip" to={`/report/user/${user?.username}/`} data-pr-tooltip="Report user"><FontAwesomeIcon icon={faFlag} /></Link>
+          <Link className="button small red-state outline hasTooltip" to={`/report/user/${user?.username}/`} data-pr-tooltip={t('reportUserBtnText')}><FontAwesomeIcon icon={faFlag} /></Link>
         }
       </>}
     </div>
@@ -97,16 +99,16 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
     }
     {user?.role == 'company' && <>
       <div className="settings__card">
-        <h4 className="internal mb-1">About Organization</h4>
+        <h4 className="internal mb-1">{t('companyInformationTitle')}</h4>
         <p className="small mb-1">{user?.description}</p>
       </div>
       <div className="settings__card">
         <div className="settings__table">
-          <h4 className="internal">Pickup at Home</h4>
-          <p>{user?.pick_up_from_home ? 'Available' : 'Unavailable'}</p>
+          <h4 className="internal">{t('companyPickUpAtHomeTitle')}</h4>
+          <p>{user?.pick_up_from_home ? t('pickUpAvailable') : t('pickUpNotAvailable')}</p>
         </div>
         {user?.images?.length > 0 && <>
-          <h4 className="internal text-left">Gallery</h4>
+          <h4 className="internal text-left">{t('companyGalleryTitle')}</h4>
           <div className="gallery mb-2">
             {user.images.map(image => 
               <img key={image.id} src={image.picture} />
@@ -114,7 +116,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
           </div>
         </>}
         {user?.materials?.length > 0 && <>
-          <h4 className="internal text-left">Material Price</h4>
+          <h4 className="internal text-left">{t('companyMaterialPriceTitle')}</h4>
           <div className="materials">
             {user.materials.map(material => 
               <RecycleMaterialCard

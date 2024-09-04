@@ -6,9 +6,11 @@ import { PasswordInput } from '@ui/forms';
 import { useForm } from 'react-hook-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan} from '@fortawesome/free-solid-svg-icons'
-
+import { useTranslation } from 'react-i18next'
 
 const DeleteAccount = () => {
+  const [t] = useTranslation('translation', { keyPrefix: 'settings.deleteAccount'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
 const [visible, setVisible] = useState(false);
 const {
     control,
@@ -27,8 +29,8 @@ const {
 
 const footerContent = (
     <div>
-        <Button className='red-state' label="Delete my account" icon="pi pi-check" onClick={() => setVisible(false)} autoFocus />
-        <Button label="Cancel" icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
+        <Button className='red-state' label={t('dialogDeleteAccountBtnText')} icon="pi pi-check" onClick={() => setVisible(false)} autoFocus />
+        <Button label={t('dialogCancelDeleteBtnText')} icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
     </div>
 );
 
@@ -45,45 +47,36 @@ const headerContent = (
     <div className="layout" style={{background: 'white'}}>
     <div className="main__content centerwidth alignttop">
     <div className="settings__card">
-        <h4 className='mb-2 text-green-earth'>Disclaimer: Account Deletion</h4>
-        <p className='text-left mb-2'>By deleting your account, you agree to the following:</p>
+        <h4 className='mb-2 text-green-earth'>{t('mainTitle')}</h4>
+        <p className='text-left mb-2'>{t('secondaryTitle')}</p>
         <ul className='text-left ml-1'>
-            <li className='mb-1'><b className='text-green-earth'>Permanent Deletion:</b> Your account and all associated data will be permanently removed and cannot be recovered.</li>
-            <li  className='mb-1'><b className='text-green-earth'>Loss of Access:</b> You will lose access to all services, content, and features linked to your account.</li>
-            <li  className='mb-1'><b className='text-green-earth'>Data Responsibility:</b> Ensure you back up any data you want to keep, as we are not liable for any loss of data.</li>
-            <li  className='mb-1'><b className='text-green-earth'>Outstanding Transactions:</b> Resolve any pending transactions or issues before deletion.</li>
+            <li className='mb-1'><b className='text-green-earth'>{t('listItem1Title')}</b> {t('listItem1')}</li>
+            <li  className='mb-1'><b className='text-green-earth'>{t('listItem2Title')}</b> {t('listItem2')}</li>
+            <li  className='mb-1'><b className='text-green-earth'>{t('listItem3Title')}</b> {t('listItem3')}</li>
+            <li  className='mb-1'><b className='text-green-earth'>{t('listItem4Title')}</b> {t('listItem4')}.</li>
         </ul>
-        <p className='text-left mt-2'>By proceeding, you accept these terms and understand the permanent consequences.</p>
+        <p className='text-left mt-2'>{t('deleteConfirmationText')}</p>
         {/* <Link  to={'/settings/edit/'} className="button red-state">Delete your account</Link> */}
        <Button
             className='red-state'
-            label='Delete your account'
+            label={t('deleteAccountBtn')}
             onClick={()=> setVisible(true)}
        />
        <Dialog header={headerContent} visible={visible} style={{ width: '50vw', textAlign: 'center' }} onHide={() => {if (!visible) return; setVisible(false); }} footer={footerContent}>
       <div className="icon trash"><FontAwesomeIcon icon={faTrashCan} style={{fontSize: "60px", paddingBottom: "20px"}} /></div>
-       <p style={{fontSize:'20px', fontWeight: '500'}}>Do you really wish to delete your account? <br /> This process cannot be undone.</p>
+       <p style={{fontSize:'20px', fontWeight: '500'}}> {t('dialogText1')} <br /> {t('dialogText2')}</p>
        <PasswordInput
             width="50%"
             maxLength={20}
-            label="Password"
+            label={t('passwordInputLabel')}
             showLabel={false}
             control={control}
             nameInput="password"
             isRequired={true}
-            placeHolderText="Enter your password"
+            placeHolderText={t('passwordInputPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
-              maxLength : {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
-              },
-              required:  "*El campo es requerido.",
-              pattern:  {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                message:
-                  "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
-              },
+              required:  tGlobal(`requiredErrorMessage`),
             }} />
             </Dialog>
     </div>
