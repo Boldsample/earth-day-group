@@ -4,11 +4,13 @@ import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
 import { useEffect, useState } from "react"
 import { Autocomplete } from "@react-google-maps/api"
-
+import { useTranslation } from 'react-i18next'
 import { checkUser } from "@services/userServices"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput } from "@ui/forms"
 
 const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
+  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const { username } = useParams()
   const [sending, setSending] = useState(false)
   const {
@@ -103,10 +105,10 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
-            value: 50,
-            message: "The field exceeds 50 characters.",
+            value: 80,
+            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 80}),
           },
-          required: "*The field is required.",
+          required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[a-zA-Z_]+$/,
             message: "It must have only letters and underscore.",
@@ -121,10 +123,10 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
-            value: 60,
-            message: "The field exceeds 60 characters.",
+            value: 100,
+            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
           },
-          required: "*The field is required.",
+          required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             message: "Please enter a valid e-mail address",
@@ -142,9 +144,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         rules={{
           maxLength: {
             value: 100,
-            message: "The field exceeds 100 characters.",
+            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
           },
-          required: "*The field is required.",
+          required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^\S/,
             message: "It must not have spaces at the beginning.",
@@ -159,10 +161,10 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
-            value: 16,
-            message: "The field exceeds 16 characters.",
+            value: 10,
+            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 10}),
           },
-          required: "*The field is required.",
+          required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[0-9+]+$/,
             message: "Please enter a valid phone number.",
@@ -181,10 +183,10 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           getFormErrorMessage={getFormErrorMessage}
           onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
           rules={{
-            required: "*The field is required.",
+            required: tGlobal(`requiredErrorMessage`),
             pattern: {
               value: /^\S/,
-              message: "It must not have spaces at the beginning.",
+              message: tGlobal('patternErrorMessage'),
             },
           }} />
       </Autocomplete>
@@ -200,9 +202,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         rules={{
           maxLength: {
             value: 20,
-            message: "The field exceeds 20 characters.",
+            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20}),
           },
-          required: "*The field is required.",
+          required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[0-9]+/,
             message: "Please enter a valid NIT number.",
@@ -218,7 +220,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         rules={{
           maxLength: {
             value: 100,
-            message: "The field exceeds 50 characters.",
+            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
           },
           pattern: {
             value: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?(\/[a-zA-Z0-9-_?=&]+)?$/,
@@ -236,11 +238,11 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         rules={{
           maxLength: {
             value: 1000,
-            message: "The field exceeds 1000 characters.",
+            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
           },
           pattern: {
             value: /^\S/,
-            message: "It must not have spaces at the beginning.",
+            message: tGlobal('patternErrorMessage'),
           },
         }} />
     </div>
@@ -257,9 +259,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           rules={{
             maxLength: {
               value: 20,
-              message: "The field exceeds 20 characters.",
+              message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20}),
             },
-            required: username ? undefined : "*The field is required.",
+            required: username ? undefined : tGlobal(`requiredErrorMessage`),
             pattern: {
               value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
               message:
@@ -278,7 +280,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           placeHolderText="Confirm Password"
           getFormErrorMessage={getFormErrorMessage}
           rules={{
-            required: user?.id ? undefined : "*El campo es requerido.",
+            required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
             validate: value => value === getValues().password || "The password doesn't match",
           }} />
       </div>

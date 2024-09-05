@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
 import { Link } from "react-router-dom"
 import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import Card from "@ui/cards/Card"
 import userRoles from '@json/roles.json'
 import { setHeader } from '@store/slices/globalSlice'
 
 const RegisterRole = () => {
+  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
   const dispatch = useDispatch()
 
   useEffect(() => {

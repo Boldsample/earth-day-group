@@ -71,20 +71,20 @@ const CreateProduct = () => {
     setSending(false)
     if(product?.id && response?.id){
       dispatch(updateThankyou({
-        title: "Updated successfully!",
+        title: t('editProductthankyouPagetitle'),
         link: `/product/${response?.id}/`,
         background: "image-1.svg",
-        button_label: "Go to product",
-        content: "Your product has updated successfully!",
+        button_label: t('editProductthankyouPagebuttonLabel'),
+        content: t('editProductthankyouPagebodyText'),
       }))
       navigate('/thankyou/')
     }else if(response.id){
       dispatch(updateThankyou({
-        title: "Congrats!",
+        title: t('createProductthankyouPagetitle'),
         link: `/product/${response?.id}/`,
         background: "image-1.svg",
-        button_label: "Go to product",
-        content: "Your product was created!",
+        button_label: t('createProductthankyouPagebuttonLabel'),
+        content: t('createProductthankyouPagebodyText'),
       }))
       navigate('/thankyou/')
     }

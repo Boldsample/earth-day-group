@@ -579,7 +579,10 @@
       "filtersModalCheckBoxText6": "Organic"
     },
     "ngo": {
-      "organizations": {},
+      "organizations": {
+        "bannerTitle": "TOGETHER WE WILL BE THE CHANGE",
+        "bannerSubTitle": "We are on a mission to reshape the world through the power of recycling"
+      },
       "shelters": {
         "shelterBannerTitle": "SUPPORT THE ONES WITHOUT A HOME",
         "searchInputTitle": "Discover pets in adoption",
@@ -601,6 +604,12 @@
   "vendor": {
     "products": {
       "createProduct": {
+        "createProductthankyouPagetitle": "All set!",
+        "createProductthankyouPagebuttonLabel": "Go to product",
+        "createProductthankyouPagebodyText": "The product was created successfully!",
+        "editProductthankyouPagetitle": "All set!",
+        "editProductthankyouPagebuttonLabel": "Go to product",
+        "editProductthankyouPagebodyText": "The product has been updated successfully!",
         "inputTextProductNameLabel": "Product Name",
         "inputTextProductNamePlaceholderText": "Product Name*",
         "inputDropdownSubjectLabel": "Category",

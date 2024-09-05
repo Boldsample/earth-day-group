@@ -576,7 +576,10 @@
       "filtersModalCheckBoxText6": "Orgánico"
     },
     "ngo": {
-      "organizations": {},
+      "organizations": {
+        "bannerTitle": "JUNTOS SEREMOS EL CAMBIO",
+        "bannerSubTitle": "Estamos en una misión para transformar el mundo a través del poder del reciclaje"
+      },
       "shelters": {
         "shelterBannerTitle": "APOYA A LOS QUE NO TIENEN HOGAR",
         "searchInputTitle": "Descubre mascotas en adopción",
@@ -598,6 +601,12 @@
   "vendor": {
     "products": {
       "createProduct": {
+        "createProductthankyouPagetitle": "¡Todo listo!",
+        "createProductthankyouPagebuttonLabel": "Ir al producto",
+        "createProductthankyouPagebodyText": "¡El producto se creó exitosamente!",
+        "editProductthankyouPagetitle": "¡Todo listo!",
+        "editProductthankyouPagebuttonLabel": "Ir al producto",
+        "editProductthankyouPagebodyText": "¡El producto ha sido actualizado exitosamente!",
         "inputTextProductNameLabel": "Nombre del Producto",
         "inputTextProductNamePlaceholderText": "Nombre del Producto*",
         "maxLengthErrorMessage": "Has excedido el número máximo de 100 caracteres en este campo",

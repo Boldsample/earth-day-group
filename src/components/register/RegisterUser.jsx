@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { Autocomplete } from "@react-google-maps/api"
 import { useNavigate, useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from 'react-i18next'
 
 import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
@@ -15,6 +16,8 @@ import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, Up
 import "./style.sass"
 
 const RegisterUser = ({create = false}) => {
+  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { username } = useParams()
@@ -143,10 +146,10 @@ const RegisterUser = ({create = false}) => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 50,
-                message: "The field exceeds 50 characters.",
+                value: 80,
+                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 80}),
               },
-              required: "*The field is required.",
+              required: tGlobal(`requiredErrorMessage`),
               pattern: {
                 value: /^[a-zA-Z_]+$/,
                 message: "It must have only letters and underscore.",
@@ -161,10 +164,10 @@ const RegisterUser = ({create = false}) => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 60,
-                message: "The field exceeds 60 characters.",
+                value: 100,
+                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
               },
-              required: "*The field is required.",
+              required: tGlobal(`requiredErrorMessage`),
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                 message: "Please enter a valid e-mail address.",
@@ -182,12 +185,12 @@ const RegisterUser = ({create = false}) => {
             rules={{
               maxLength: {
                 value: 100,
-                message: "The field exceeds 100 characters.",
+                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
               },
-              required: "*The field is required.",
+              required: tGlobal(`requiredErrorMessage`),
               pattern: {
                 value: /^\S/,
-                message: "It must not have spaces at the beginning.",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
           <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
@@ -201,10 +204,10 @@ const RegisterUser = ({create = false}) => {
               getFormErrorMessage={getFormErrorMessage}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
-                required: "*The field is required.",
+                required: tGlobal(`requiredErrorMessage`),
                 pattern: {
                   value: /^\S/,
-                  message: "It must not have spaces at the beginning.",
+                  message: tGlobal('patternErrorMessage'),
                 },
               }} />
           </Autocomplete>
@@ -219,10 +222,10 @@ const RegisterUser = ({create = false}) => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 16,
-                message: "The field exceeds 16 characters.",
+                value: 10,
+                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 10}),
               },
-              required: "*The field is required.",
+              required: tGlobal(`requiredErrorMessage`),
               pattern: {
                 value: /^[0-9+]+$/,
                 message: "Please enter a valid phone number.",
@@ -239,12 +242,12 @@ const RegisterUser = ({create = false}) => {
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
-                value: 230,
-                message: "The field exceeds 230 characters.",
+                value: 1000,
+                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 1000}),
               },
               pattern: {
                 value: /^\S/,
-                message: "It must not have spaces at the beginning.",
+                message: tGlobal('patternErrorMessage'),
               },
             }} />
         </div>
@@ -261,9 +264,9 @@ const RegisterUser = ({create = false}) => {
               rules={{
                 maxLength: {
                   value: 20,
-                  message: "The field exceeds 20 characters.",
+                  message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20}),
                 },
-                required: username ? undefined : "*The field is required.",
+                required: username ? undefined : tGlobal(`requiredErrorMessage`),
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
                   message:
@@ -282,7 +285,7 @@ const RegisterUser = ({create = false}) => {
               placeHolderText="Confirm Password"
               getFormErrorMessage={getFormErrorMessage}
               rules={{
-                required: user?.id ? undefined : "*El campo es requerido.",
+                required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
                 validate: value => value === getValues().password || "The password doesn't match",
               }} />
           </div>

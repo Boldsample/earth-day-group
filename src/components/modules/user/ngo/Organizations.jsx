@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux"
+import { useTranslation } from 'react-i18next'
 
 import { getUsers } from "@services/userServices"
 import { setHeader } from "@store/slices/globalSlice"
@@ -12,12 +13,13 @@ const Organizations = ({type}) => {
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
   const [elements, setElements] = useState({total: 0, data: []})
+  const [t] = useTranslation('translation', { keyPrefix: 'user.ngo.organizations'})
   const vendorTemplateContent = {
-    title: 'TOGETHER WE WILL BE THE CHANGE',
+    title: t('bannerTitle'),
     bannerImage: 'url(/assets/user/image-10.svg)',
     secondary: [
       {
-        title: 'We are on a mission to reshape the world through the power of recycling',
+        title: t('bannerSubTitle'),
         icon: '/assets/icons/socialOrganizationIcon1.svg',
       },
     ],

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 import { Button } from "primereact/button"
 import { InputSwitch } from "primereact/inputswitch"
 import { useNavigate, useParams } from "react-router"
+import { useTranslation } from 'react-i18next'
 
 import materials from "@json/recyclableMaterials.json"
 import { getUserData } from "@store/slices/usersSlice"
@@ -13,6 +14,8 @@ import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCa
 import { createUser, addImages, addMaterials, updateUser } from "@services/userServices"
 
 const CompanyDetailedForm = ({ user, setUser, ID }) => {
+  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const numberInput = useRef(null)
@@ -144,7 +147,7 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
           placeHolderText="Select Material"
           getFormErrorMessage={getFormErrorMessage}
           rules={{
-            required: "*El campo es requerido.",
+            required: tGlobal(`requiredErrorMessage`),
           }} />
         <DropDownInput
           className=""
@@ -160,7 +163,7 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
           placeHolderText="Select Unit"
           getFormErrorMessage={getFormErrorMessage}
           rules={{
-            required: "*El campo es requerido.",
+            required: tGlobal(`requiredErrorMessage`),
           }} />
       </div>
       <div className="registerInput__container-x2">
@@ -178,12 +181,12 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
           rules={{
             maxLength: {
               value: 3,
-              message: "El campo supera los 3 caracteres",
+              message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 3}),
             },
-            required: "*El campo es requerido.",
+            required: tGlobal(`requiredErrorMessage`),
             pattern: {
               value: /^\S/,
-              message: "No debe tener espacios al inicio",
+              message: tGlobal('patternErrorMessage'),
             },
           }} />
         <Button

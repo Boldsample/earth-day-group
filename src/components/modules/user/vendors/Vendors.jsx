@@ -6,7 +6,6 @@ import { getUsers } from "@services/userServices"
 import { setHeader } from "@store/slices/globalSlice"
 import { getProducts } from '@services/productServices'
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
-const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 
 const Vendors = ({type}) => {
   const dispatch = useDispatch()
@@ -15,6 +14,7 @@ const Vendors = ({type}) => {
   const [elements, setElements] = useState({data: []})
   const [filters, setFilters] = useState({keyword: ''})
   const [t] = useTranslation('translation', { keyPrefix: 'user.vendors'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
   const user = useSelector((state) => state.users.userData)
   const vendorTemplateContent = {
     title: t('VendorsBannerTitle'),
@@ -36,15 +36,15 @@ const Vendors = ({type}) => {
     ],
     secondary: [
       {
-        title: t('categoryListingiconTitle1'),
+        title: tGlobal('categoryListingiconTitle1'),
         icon: '/assets/icons/recycleCompanyIcon1.svg',
       },
       {
-        title: t('categoryListingiconTitle2'),
+        title: tGlobal('categoryListingiconTitle2'),
         icon: '/assets/icons/recycleCompanyIcon2.svg',
       },
       {
-        title: t('categoryListingiconTitle3'),
+        title: tGlobal('categoryListingiconTitle3'),
         icon: '/assets/icons/recycleCompanyIcon3.svg',
       },
     ]
