@@ -1,160 +1,160 @@
 {
   "user": [
     {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
+      "label": "homeNavBtn",
+      "icon": "/assets/icons/home.svg",
       "path": "/dashboard/"
     },
     {
-      "label": "Map", 
-      "icon": "/assets/icons/location.svg", 
+      "label": "mapNavBtn",
+      "icon": "/assets/icons/location.svg",
       "path": "/map/"
     },
     {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
+      "label": "inboxNavBtn",
+      "icon": "/assets/icons/inbox.svg",
       "path": "/chat/"
     },
     {
-      "label": "Shop", 
-      "icon": "/assets/icons/shop.svg", 
+      "label": "shopNavBtn",
+      "icon": "/assets/icons/shop.svg",
       "path": "/market-place/"
     },
     {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
+      "label": "settingsNavBtn",
+      "icon": "/assets/icons/settings.svg",
       "path": "/settings/"
     }
   ],
   "company": [
     {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
+      "label": "homeNavBtn",
+      "icon": "/assets/icons/home.svg",
       "path": "/dashboard/"
     },
     {
-      "label": "Profile",
+      "label": "profileNavBtn",
       "icon": "/assets/icons/userProfile.svg",
       "path": "/profile/"
     },
     {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
+      "label": "inboxNavBtn",
+      "icon": "/assets/icons/inbox.svg",
       "path": "/chat/"
     },
     {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
+      "label": "settingsNavBtn",
+      "icon": "/assets/icons/settings.svg",
       "path": "/settings/"
     }
   ],
   "vendor": [
     {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
+      "label": "homeNavBtn",
+      "icon": "/assets/icons/home.svg",
       "path": "/dashboard/"
     },
     {
-      "label": "Profile",
+      "label": "profileNavBtn",
       "icon": "/assets/icons/userProfile.svg",
       "path": "/profile/"
     },
     {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
+      "label": "inboxNavBtn",
+      "icon": "/assets/icons/inbox.svg",
       "path": "/chat/"
     },
     {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
+      "label": "settingsNavBtn",
+      "icon": "/assets/icons/settings.svg",
       "path": "/settings/"
     }
   ],
   "ngo": [
     {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
+      "label": "homeNavBtn",
+      "icon": "/assets/icons/home.svg",
       "path": "/dashboard/"
     },
     {
-      "label": "Profile",
+      "label": "profileNavBtn",
       "icon": "/assets/icons/userProfile.svg",
       "path": "/profile/"
     },
     {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
+      "label": "inboxNavBtn",
+      "icon": "/assets/icons/inbox.svg",
       "path": "/chat/"
     },
     {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
+      "label": "settingsNavBtn",
+      "icon": "/assets/icons/settings.svg",
       "path": "/settings/"
     }
   ],
   "social": [
     {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
+      "label": "homeNavBtn",
+      "icon": "/assets/icons/home.svg",
       "path": "/dashboard/"
     },
     {
-      "label": "Profile",
+      "label": "profileNavBtn",
       "icon": "/assets/icons/userProfile.svg",
       "path": "/profile/"
     },
     {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
+      "label": "inboxNavBtn",
+      "icon": "/assets/icons/inbox.svg",
       "path": "/chat/"
     },
     {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
+      "label": "settingsNavBtn",
+      "icon": "/assets/icons/settings.svg",
       "path": "/settings/"
     }
   ],
   "shelter": [
     {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
+      "label": "homeNavBtn",
+      "icon": "/assets/icons/home.svg",
       "path": "/dashboard/"
     },
     {
-      "label": "Profile",
+      "label": "profileNavBtn",
       "icon": "/assets/icons/userProfile.svg",
       "path": "/profile/"
     },
     {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
+      "label": "inboxNavBtn",
+      "icon": "/assets/icons/inbox.svg",
       "path": "/chat/"
     },
     {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
+      "label": "settingsNavBtn",
+      "icon": "/assets/icons/settings.svg",
       "path": "/settings/"
     }
   ],
   "admin": [
     {
-      "label": "Home", 
-      "icon": "/assets/icons/home.svg", 
+      "label": "homeNavBtn",
+      "icon": "/assets/icons/home.svg",
       "path": "/dashboard/"
     },
     {
-      "label": "Profile",
+      "label": "profileNavBtn",
       "icon": "/assets/icons/userProfile.svg",
       "path": "/settings/edit/"
     },
     {
-      "label": "Inbox", 
-      "icon": "/assets/icons/inbox.svg", 
+      "label": "inboxNavBtn",
+      "icon": "/assets/icons/inbox.svg",
       "path": "/chat/"
     },
     {
-      "label": "Settings", 
-      "icon": "/assets/icons/settings.svg", 
+      "label": "settingsNavBtn",
+      "icon": "/assets/icons/settings.svg",
       "path": "/settings/"
     }
   ]

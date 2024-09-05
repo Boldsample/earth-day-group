@@ -11,14 +11,49 @@
     "categoryListingiconTitle1": "100% Recyclado",
     "categoryListingiconTitle2": "Ecológico",
     "categoryListingiconTitle3": "Economía Sostenible",
+    "userNameInputLabel": "Nombre de usuario",
+    "userNamePlaceHolderText": "Eco_Juan54",
+    "userEmailInputLabel": "Correo electrónico *",
+    "userEmailPlaceHolderText": "juanperez1990@eco.com",
+    "userAddressInputLabel": "Dirección *",
+    "userAddressPlaceHolderText": " Carrera 89 44B-57",
+    "userWebsiteInputLabel": "Sitio web *",
+    "userWebsitePlaceHolderText": "www.ecoprojectos.com/",
+    "userPhoneNumberInputLabel": "Número de teléfono *",
+    "userPhoneNumberPlaceHolderText": "(954) 987-69-17",
+    "userPasswordInputLabel": "Contraseña *",
+    "userPasswordPlaceHolderText": "Introduce tu contraseña",
+    "userConfirmPasswordInputLabel": "Confirmar contraseña *",
+    "userConfirmPasswordPlaceHolderText": "Confirmar contraseña",
     "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
     "notfoundErrorMessage": "No pudimos encontrar lo que estás buscando. Por favor intentalo de nuevo.",
+    "acceptTermsText1": "He leído y acepto",
+    "acceptTermsText2": "los Términos y Condiciones",
+    "acceptTermsText3": "las Política de Privacidad",
+    "submitBtnText": "Crear",
+    "saveBtnText": "Guardar",
+    "signUpBtnText": "Registrar",
+    "updateUserTitleThankYouPage": "¡Todo listo!",
+    "updateUserBtnLabelThankYouPage": "Regresar a administradores",
+    "updateUserBtnLabelThankYouPage2": "Regresar al dashboard",
+    "updateUsercontentText": "¡El perfil se ha actualizado con éxito!",
+    "createUserTitleThankYouPage": "¡Felicidades!",
+    "createUserBtnLabelThankYouPage2": "Regresar al dashboard",
+    "createUsercontentText": "¡La cuenta se ha creado con éxito!",
+    "newUserContentText": "¡Te has registrado con éxito! Te hemos enviado un correo electrónico de verificación. Por favor, verifica tu identidad.",
+    "newAdminContentText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico.",
     "formErrors": {
+      "passwordDoNotMatchErrorMessage": "La contraseña no coincide",
+      "invalidNitErrorMessage": "Por favor, ingresa un NIT válido.",
+      "invalidWebAddressErrorMessage": "Por favor, ingresa un enlace de URL válido.",
+      "validEmailAddressErrorMessage": "Por favor, introduce una dirección de correo electrónico válida.",
+      "validPhoneErrorMessage": "Por favor, introduce un número de teléfono válido.",
+      "lettersandUnderscoreOnlyErrorMessage": "Este campo solo puede incluir letras y guiones bajos, no espacios.",
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
       "requiredErrorMessage": "Este campo es obligatorio.",
       "passwordPatternErrorMessage": "Debe contener un mínimo de ocho caracteres, al menos una letra mayúscula, una letra minúscula y un número.",
-      "validEmailAddressErrorMessage": "Por favor, introduce una dirección de correo electrónico válida.",
-      "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres."
+      "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres.",
+      "newAdminContextText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico."
     }
   },
   "intro": {
@@ -628,6 +663,34 @@
       }
     }
   },
+  "register":{
+    "registerCompany":{
+      "companyDetailedForm":{
+
+      },
+      "companyStandardForm":{
+        "companyNameTitle": "Nombre de la Empresa",
+        "companyNamePlaceHolderText": "Eco Nova"
+      }
+    },
+    "registerAdmin":{
+
+    },
+    "registerNgo":{
+
+    },
+    "registerRole":{
+
+    },
+    "registerUser":{
+      "userNameInputLabel": "Usuario *",
+      "userNamePlaceHolderText": "Eco_Juan54"
+
+    },
+    "registerVendor":{
+      
+    }
+  },
   "ui": {
     "cards": {
       "multiUseCard": {
@@ -636,6 +699,14 @@
     },
     "templates": {
       "categoryListing": {}
+    },
+    "nav":{
+      "homeNavBtn": "Inicio",
+      "mapNavBtn": "Mapa",
+      "inboxNavBtn": "Inbox",
+      "shopNavBtn": "Marketplace",
+      "settingsNavBtn": "Configuraciones",
+      "profileNavBtn": "Mi perfil"
     }
   }
 }

@@ -9,8 +9,9 @@ import { checkUser } from "@services/userServices"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput } from "@ui/forms"
 
 const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyStandardForm'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const { username } = useParams()
   const [sending, setSending] = useState(false)
   const {
@@ -99,9 +100,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         // disabled={ID}
         control={control}
         isRequired={true}
-        labelName="Username"
+        labelName={tGlobal2('userNameInputLabel')}
         nameInput="username"
-        placeHolderText="Username*"
+        placeHolderText={tGlobal2('userNamePlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
@@ -111,7 +112,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[a-zA-Z_]+$/,
-            message: "It must have only letters and underscore.",
+            message: tGlobal('lettersandUnderscoreOnlyErrorMessage'),
           },
         }} />
       <TextInput
@@ -119,7 +120,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         nameInput="email"
         isRequired={true}
         labelName="E-mail"
-        placeHolderText="E-mail*"
+        placeHolderText={tGlobal2('userEmailPlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
@@ -129,7 +130,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            message: "Please enter a valid e-mail address",
+            message: t('validEmailAddressErrorMessage'),
           },
         }} />
     </div>
@@ -138,8 +139,8 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         nameInput="name"
         control={control}
         isRequired={true}
-        labelName="Company Name"
-        placeHolderText="Company Name*"
+        labelName={t('companyNameTitle')}
+        placeHolderText={t('companyNamePlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
@@ -149,15 +150,15 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^\S/,
-            message: "It must not have spaces at the beginning.",
+            message: tGlobal('patternErrorMessage'),
           },
         }} />
       <NumberInput
         isRequired={true}
         control={control}
         nameInput="phone"
-        labelName="Phone Number"
-        placeHolderText="Phone Number*"
+        labelName={tGlobal2('userPhoneNumberInputLabel')}
+        placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
@@ -167,7 +168,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[0-9+]+$/,
-            message: "Please enter a valid phone number.",
+            message: tGlobal('validPhoneErrorMessage'),
           },
         }} />
     </div>
@@ -207,7 +208,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[0-9]+/,
-            message: "Please enter a valid NIT number.",
+            message: tGlobal('invalidNitErrorMessage'),
           },
         }} />
       <TextInput
@@ -224,7 +225,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           },
           pattern: {
             value: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?(\/[a-zA-Z0-9-_?=&]+)?$/,
-            message: "Please enter a valid website url",
+            message: tGlobal('invalidWebAddressErrorMessage'),
           },
         }} />
     </div>
@@ -265,7 +266,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
             pattern: {
               value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
               message:
-                "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+                tGlobal('passwordPatternErrorMessage'),
             },
           }} />
         <PasswordInput
@@ -281,7 +282,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           getFormErrorMessage={getFormErrorMessage}
           rules={{
             required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
-            validate: value => value === getValues().password || "The password doesn't match",
+            validate: value => value === getValues().password || tGlobal('passwordDoNotMatchErrorMessage'),
           }} />
       </div>
     </>}
@@ -293,7 +294,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
             nameInput="accept_terms"
             rules={{ required: "Accept is required." }}
             getFormErrorMessage={getFormErrorMessage}
-            checkBoxText={<span>I've read and accept the <Link to="/terms-of-service/" target="_blank">Terms of Service</Link>.</span>} />
+            checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
         </div>
         <div>
           <CheckBoxInput
@@ -301,7 +302,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
             nameInput="accept_policy"
             rules={{ required: "Accept is required." }}
             getFormErrorMessage={getFormErrorMessage}
-            checkBoxText={<span>I've read and accept the <Link to="/privacy-policy/" target="_blank">Privacy Policy</Link>.</span>} />
+            checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
         </div>
       </div>
     }

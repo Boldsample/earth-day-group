@@ -13,11 +13,46 @@
     "categoryListingiconTitle1": "100% Recycled",
     "categoryListingiconTitle2": "Eco Friendly",
     "categoryListingiconTitle3": "Sustainable Economy",
+    "userNameInputLabel": "Username",
+    "userNamePlaceHolderText": "Eco_John54",
+    "userEmailInputLabel": "E-mail *",
+    "userEmailPlaceHolderText": "johndoe1990@eco.com",
+    "userAddressInputLabel": "Address *",
+    "userAddressPlaceHolderText": "15205 North Kierland Blvd",
+    "userWebsiteInputLabel": "Website *",
+    "userWebsitePlaceHolderText": "www.ecoprojects.com/",
+    "userPhoneNumberInputLabel": "Phone Number *",
+    "userPhoneNumberPlaceHolderText": "(954)987-69-17",
+    "userPasswordInputLabel": "Password *",
+    "userPasswordPlaceHolderText": "Enter your Password",
+    "userConfirmPasswordInputLabel": "Confirm Password *",
+    "userConfirmPasswordPlaceHolderText": "Confirm Password",
+    
+    "acceptTermsText1": "I've read and accept the",
+    "acceptTermsText2": "Terms of Service",
+    "acceptTermsText3": "Privacy Policy",
+    "submitBtnText": "Submit",
+    "saveBtnText": "Save",
+    "signUpBtnText": "Sign up",
+    "updateUserTitleThankYouPage": "All Set!",
+    "updateUserBtnLabelThankYouPage": "Go back to admins",
+    "updateUserBtnLabelThankYouPage2": "Go back to dashboard",
+    "updateUsercontentText": "The profile has been updated successfully!",
+    "createUserTitleThankYouPage": "Congrats!",
+    "createUserBtnLabelThankYouPage2": "Go back to dashboard",
+    "createUsercontentText": "The account has been created successfully!",
+    "newAdminContentText": "You have registered a new admin user! We have sent an email verification link.",
+    "newUserContentText": "You’re all signed up! We send you a verification email. Please verify your identity.",
     "formErrors": {
+      "passwordDoNotMatchErrorMessage": "Passwords do not match",
+      "invalidNitErrorMessage": "Please enter a valid NIT number",
+      "invalidWebAddressErrorMessage": "Please enter a valid Web URL",
+      "validPhoneErrorMessage": "Please enter a valid phone number.",
+      "validEmailAddressErrorMessage": "Please enter a valid e-mail address",
+      "lettersandUnderscoreOnlyErrorMessage": "This field may only include letters and underscores, not spaces.",
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
       "passwordPatternErrorMessage": "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
-      "validEmailAddressErrorMessage": "Please enter a valid e-mail address",
       "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit."
     }
   },
@@ -629,6 +664,33 @@
       }
     }
   },
+  "register":{
+    "registerCompany":{
+      "companyDetailedForm":{
+
+      },
+      "companyStandardForm":{
+        "companyNameTitle": "Company Name",
+        "companyNamePlaceHolderText": "Eco Nova"
+      }
+    },
+    "registerAdmin":{
+
+    },
+    "registerNgo":{
+
+    },
+    "registerRole":{
+
+    },
+    "registerUser":{
+      "userNameInputLabel": "Username *",
+      "userNamePlaceHolderText": "Eco_John54"
+    },
+    "registerVendor":{
+
+    }
+  },
   "ui": {
     "cards": {
       "multiUseCard": {
@@ -637,6 +699,14 @@
     },
     "templates": {
       "categoryListing": {}
+    },
+    "nav":{
+      "homeNavBtn": "Home",
+      "mapNavBtn": "Map",
+      "inboxNavBtn": "Inbox",
+      "shopNavBtn": "Marketplace",
+      "settingsNavBtn": "Settings",
+      "profileNavBtn": "My profile"
     }
   }
 }

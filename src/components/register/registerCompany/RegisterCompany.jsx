@@ -54,14 +54,14 @@ const RegisterCompany = ({create = false}) => {
     <div className="layout">
       <img className="layout__background" src="/assets/register/image-2.svg" />
       <div className="main__content xpadding-1">
-        {/* <TabView className="fullwidth" activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
+        <TabView className="fullwidth" activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
           <TabPanel header={activeIndex == 1 ? "Edit previous form" : ""} leftIcon={activeIndex == 1 ? "pi pi-angle-left" : ""}>
             <CompanyStandardForm user={userData} setUser={setUserData} ID={ID} setActiveIndex={setActiveIndex} />
           </TabPanel>
-          <TabPanel disabled={isDisabled}> */}
+          <TabPanel disabled={isDisabled}>
             <CompanyDetailedForm user={userData} setUser={setUserData} ID={ID} />
-          {/* </TabPanel>
-        </TabView> */}
+          </TabPanel>
+        </TabView>
       </div>
     </div>
   );

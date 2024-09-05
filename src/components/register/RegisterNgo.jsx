@@ -18,6 +18,7 @@ import "./style.sass"
 const RegisterNgo = ({create = false}) => {
   const [t] = useTranslation('translation', { keyPrefix: 'register.'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { username } = useParams()
@@ -96,20 +97,20 @@ const RegisterNgo = ({create = false}) => {
       dispatch(getUserData(response?.id))
     if(ID && response?.id){
       dispatch(updateThankyou({
-        title: "Updated successfully!",
+        title: tGlobal2('updateUserTitleThankYouPage'),
         link: username ? "/users/" : "/dashboard/",
         background: "image-1.svg",
-        button_label: username ? "Go back to admins" : "Go to dashboard",
-        content: "The profile has been updated successfully!",
+        button_label: username ? tGlobal2('updateUserBtnLabelThankYouPage') : tGlobal2('updateUserBtnLabelThankYouPage2'),
+        content: tGlobal2('updateUsercontentText'),
       }))
       navigate('/thankyou/')
     }else if(response?.id){
       dispatch(updateThankyou({
-        title: "Congrats!",
+        title: tGlobal2('createUserTitleThankYouPage'),
         link: "/dashboard/",
         background: "image-1.svg",
-        button_label: "Go to dashboard",
-        content: "You’re all signed up! We send you a verification email. Please verify your identity.",
+        button_label: tGlobal2('createUserBtnLabelThankYouPage2'),
+        content: tGlobal2('newUserContentText'),
       }))
       navigate('/thankyou/')
     }else{
@@ -173,7 +174,7 @@ const RegisterNgo = ({create = false}) => {
               required: tGlobal(`requiredErrorMessage`),
               pattern: {
                 value: /^[a-zA-Z_]+$/,
-                message: "It must have only letters and underscore.",
+                message: tGlobal('lettersandUnderscoreOnlyErrorMessage'),
               },
             }} />
           <TextInput
@@ -191,7 +192,7 @@ const RegisterNgo = ({create = false}) => {
               required: tGlobal(`requiredErrorMessage`),
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "Please enter a valid e-mail address.",
+                message: tGlobal('validEmailAddressErrorMessage'),
               },
             }} />
         </div>
@@ -248,7 +249,7 @@ const RegisterNgo = ({create = false}) => {
               },
               pattern: {
                 value: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?(\/[a-zA-Z0-9-_?=&]+)?$/,
-                message: "Please enter a valid website url",
+                message: tGlobal('invalidWebAddressErrorMessage'),
               },
             }} />
           <NumberInput
@@ -266,7 +267,7 @@ const RegisterNgo = ({create = false}) => {
               required: tGlobal(`requiredErrorMessage`),
               pattern: {
                 value: /^[0-9+]+$/,
-                message: "Please enter a valid phone number.",
+                message: tGlobal('validPhoneErrorMessage'),
               },
             }} />
         </div>
@@ -324,7 +325,7 @@ const RegisterNgo = ({create = false}) => {
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
                   message:
-                    "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+                    tGlobal('passwordPatternErrorMessage'),
                 },
               }} />
             <PasswordInput
@@ -340,7 +341,7 @@ const RegisterNgo = ({create = false}) => {
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
-                validate: value => value === getValues().password || "The password doesn't match",
+                validate: value => value === getValues().password || tGlobal('passwordDoNotMatchErrorMessage'),
               }} />
           </div>
           {!ID && 
@@ -351,7 +352,7 @@ const RegisterNgo = ({create = false}) => {
                   nameInput="accept_terms"
                   rules={{ required: "Accept is required." }}
                   getFormErrorMessage={getFormErrorMessage}
-                  checkBoxText={<span>I've read and accept the <Link to="/terms-of-service/" target="_blank">Terms of Service</Link>.</span>} />
+                  checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
               </div>
               <div>
                 <CheckBoxInput
@@ -359,13 +360,13 @@ const RegisterNgo = ({create = false}) => {
                   nameInput="accept_policy"
                   rules={{ required: "Accept is required." }}
                   getFormErrorMessage={getFormErrorMessage}
-                  checkBoxText={<span>I've read and accept the <Link to="/privacy-policy/" target="_blank">Privacy Policy</Link>.</span>} />
+                  checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
               </div>
             </div>
           }
         </>}
         <div className="p-field" style={{ marginBottom: "24px" }}>
-          <Button className="dark-blue fullwidth" label={user?.id ? "Save" : "Sign up"} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={user?.id ? tGlobal2('saveBtnText') : tGlobal2('signUpBtnText')} type="submit" loading={sending} />
         </div>
       </form>
     </div>

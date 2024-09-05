@@ -16,6 +16,7 @@ import { createUser, addImages, addMaterials, updateUser } from "@services/userS
 const CompanyDetailedForm = ({ user, setUser, ID }) => {
   const [t] = useTranslation('translation', { keyPrefix: 'register.'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const numberInput = useRef(null)
@@ -106,20 +107,20 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
       dispatch(getUserData(response?.id))
     if(ID && response?.id){
       dispatch(updateThankyou({
-        title: "Updated successfully!",
+        title: tGlobal2('updateUserTitleThankYouPage'),
         link: username ? "/users/" : "/dashboard/",
         background: "image-1.svg",
-        button_label: username ? "Go back to admins" : "Go to dashboard",
-        content: "The profile has been updated successfully!",
+        button_label: username ? tGlobal2('updateUserBtnLabelThankYouPage') : tGlobal2('updateUserBtnLabelThankYouPage2'),
+        content: tGlobal2('updateUsercontentText'),
       }))
       navigate('/thankyou/')
     }else if(response?.id){
       dispatch(updateThankyou({
-        title: "Congrats!",
+        title: tGlobal2('createUserTitleThankYouPage'),
         link: "/dashboard/",
         background: "image-1.svg",
-        button_label: "Go to dashboard",
-        content: "You’re all signed up! We send you a verification email. Please verify your identity.",
+        button_label: tGlobal2('createUserBtnLabelThankYouPage2'),
+        content: tGlobal2('createUsercontentText'),
       }))
       navigate('/thankyou/')
     }else{

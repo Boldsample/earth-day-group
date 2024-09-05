@@ -16,6 +16,7 @@ import "./style.sass"
 const RegisterAdmin = ({create = false}) => {
   const [t] = useTranslation('translation', { keyPrefix: 'register.'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { username } = useParams()
@@ -63,20 +64,20 @@ const RegisterAdmin = ({create = false}) => {
       dispatch(getUserData(response?.id))
     if(ID && response?.id){
       dispatch(updateThankyou({
-        title: "Updated successfully!",
+        title: tGlobal2('updateUserTitleThankYouPage'),
         link: username ? "/admins/" : "/dashboard/",
         background: "image-1.svg",
-        button_label: username ? "Go back to admins" : "Go to dashboard",
-        content: "The profile has been updated successfully!",
+        button_label: username ? tGlobal2('updateUserBtnLabelThankYouPage') : tGlobal2('updateUserBtnLabelThankYouPage2'),
+        content: tGlobal2('updateUsercontentText'),
       }))
       navigate('/thankyou/')
     }else if(response?.id){
       dispatch(updateThankyou({
-        title: "Congrats!",
+        title: tGlobal2('createUserTitleThankYouPage'),
         link: "/dashboard/",
         background: "image-1.svg",
-        button_label: "Go back to admins",
-        content: "You register a new admin user! We send an email verification link.",
+        button_label: tGlobal2('updateUserBtnLabelThankYouPage'),
+        content: tGlobal2('newAdminContextText'),
       }))
       navigate('/thankyou/')
     }else{
@@ -134,7 +135,7 @@ const RegisterAdmin = ({create = false}) => {
               required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^[a-zA-Z_]+$/,
-                message: "It must have only letters and underscore.",
+                message: tGlobal('lettersandUnderscoreOnlyErrorMessage'),
               },
             }} />
           <TextInput
@@ -153,7 +154,7 @@ const RegisterAdmin = ({create = false}) => {
               required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "Please enter a valid e-mail address.",
+                message: tGlobal2('validEmailAddressErrorMessage'),
               },
             }} />
         </div>
@@ -193,7 +194,7 @@ const RegisterAdmin = ({create = false}) => {
               required: tGlobal('requiredErrorMessage'),
               pattern: {
                 value: /^[0-9+]+$/,
-                message: "Please enter a valid phone number.",
+                message: tGlobal('validPhoneErrorMessage'),
               },
             }} />
         </div>
@@ -217,7 +218,7 @@ const RegisterAdmin = ({create = false}) => {
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
                   message:
-                    "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+                    tGlobal('passwordPatternErrorMessage'),
                 },
               }} />
             <PasswordInput
@@ -233,12 +234,12 @@ const RegisterAdmin = ({create = false}) => {
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 required: ID ? undefined : tGlobal('requiredErrorMessage'),
-                validate: value => value === getValues().password || "The password doesn't match",
+                validate: value => value === getValues().password || tGlobal('passwordDoNotMatchErrorMessage'),
               }} />
           </div>
         }
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-          <Button className="dark-blue fullwidth" label={user?.id ? "Save" : "Sign up"} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={user?.id ? tGlobal2('saveBtnText') : tGlobal2('signUpBtnText')} type="submit" loading={sending} />
         </div>
       </form>
     </div>
