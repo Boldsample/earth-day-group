@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCloudArrowUp, faClose } from "@fortawesome/free-solid-svg-icons"
+import { useTranslation } from 'react-i18next'
 
 import FileUploadInput from "../fileUploadInput"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
@@ -19,6 +20,7 @@ const UploadPhotoInput = ({
   setUploadedImages,
 }) => {
   const [reachedImageCapacity, setReachedImageCapacity] = useState(false)
+  const [t] = useTranslation('translation', {keyPrefix: 'global'})
 
   const handleFileChange = async e => {
     let _uploadedImages = [...uploadedImages]
@@ -55,8 +57,8 @@ const UploadPhotoInput = ({
             <ProfilePhoto userPhoto={getValues("picture")} />
           </div>
           <div className="profileUpload__container">
-            <h5 className="profileUpload__title text-defaultCase">Profile Picture</h5>
-            <FileUploadInput watch={watch} control={control} nameInput="picture" setValue={setValue} />
+            <h5 className="profileUpload__title text-defaultCase">{t('profileUploadLabel')}</h5>
+            <FileUploadInput labelName={t('profileUploadBtn')} watch={watch} control={control} nameInput="picture" setValue={setValue} />
           </div>
         </div>
       case "imageUpload":

@@ -13,18 +13,20 @@
     "categoryListingiconTitle1": "100% Recycled",
     "categoryListingiconTitle2": "Eco Friendly",
     "categoryListingiconTitle3": "Sustainable Economy",
+    "profileUploadLabel": "Profile Picture",
+    "profileUploadBtn": "Click to Upload",
     "userNameInputLabel": "Username",
     "userNamePlaceHolderText": "Eco_John54",
     "userEmailInputLabel": "E-mail *",
     "userEmailPlaceHolderText": "johndoe1990@eco.com",
-    "userAddressInputLabel": "Address *",
+    "userAddressInputLabel": "Address",
     "userAddressPlaceHolderText": "15205 North Kierland Blvd",
-    "userWebsiteInputLabel": "Website *",
+    "userWebsiteInputLabel": "Website",
     "userWebsitePlaceHolderText": "www.ecoprojects.com/",
-    "userPhoneNumberInputLabel": "Phone Number *",
+    "userPhoneNumberInputLabel": "Phone Number",
     "userPhoneNumberPlaceHolderText": "(954)987-69-17",
     "userPasswordInputLabel": "Password *",
-    "userPasswordPlaceHolderText": "Enter your Password",
+    "userPasswordPlaceHolderText": "Enter a Password",
     "userConfirmPasswordInputLabel": "Confirm Password *",
     "userConfirmPasswordPlaceHolderText": "Confirm Password",
     
@@ -667,11 +669,31 @@
   "register":{
     "registerCompany":{
       "companyDetailedForm":{
-
+        "dropDownKiloOption": "Kilo",
+        "dropDownPoundOption": "Pound",
+        "formDisclaimerTitle": "This form is optional and can be filled out later. If you’d like to skip it for now, just click 'Sign Up.'",
+        "materialInputsTitle": "Recycable Material",
+        "selectMaterialLabel": "Material",
+        "SelectMaterialPlaceHolder": "Select Material",
+        "selectUnitlLabel": "Unit",
+        "selectUnitPlaceHolder": "Select Unit",
+        "addPricelLabel": "Price per Unit",
+        "addPricePlaceHolder": "Add Price per Unit",
+        "addCompanyImgsLabel": "Add Company Images",
+        "pickUpFromHomeLabel": "Pick up from home",
+        "addMaterialBtnText": "Add Material",
+        "signUpBtnText": "Sign up",
+        "saveBtnText": "Guardar"
       },
       "companyStandardForm":{
         "companyNameTitle": "Company Name",
-        "companyNamePlaceHolderText": "Eco Nova"
+        "companyNamePlaceHolderText": "Eco Nova",
+        "companyNitTitle": "NIT",
+        "companyNitPlaceHolderText": "112456787",
+        "textAreaCompanyDescriptionLabel": "Description",
+        "textAreaCompanyDescriptionPlaceholder": "Write a short description about your company.",
+        "continueBtnText": "Continue"
+        
       }
     },
     "registerAdmin":{
@@ -685,7 +707,7 @@
     },
     "registerUser":{
       "userNameInputLabel": "Username *",
-      "userNamePlaceHolderText": "Eco_John54"
+      "userNamePlaceHolderText": "Eco_John"
     },
     "registerVendor":{
 

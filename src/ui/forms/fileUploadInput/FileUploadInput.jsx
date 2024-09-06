@@ -4,6 +4,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const FileUploadInput = ({
+	labelName,
 	watch,
 	control,
 	setValue,
@@ -30,7 +31,7 @@ const FileUploadInput = ({
 	}
 
 	return <div>
-		<label htmlFor="fileUpload" className="fileupload__label" style={selectedFile && { display: "none" }}>Click to upload</label>
+		<label htmlFor="fileUpload" className="fileupload__label" style={selectedFile && { display: "none" }}>{labelName}</label>
 		<input id="fileUpload" type="file" accept="image/*" onChange={handleFileChange} style={{ display: "none" }} />
 		<Controller
 			name={nameInput}

@@ -130,7 +130,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            message: t('validEmailAddressErrorMessage'),
+            message: tGlobal('validEmailAddressErrorMessage'),
           },
         }} />
     </div>
@@ -178,9 +178,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           control={control}
           isRequired={true}
           autocomplete="off"
-          labelName="Address"
+          labelName={tGlobal2('userAddressInputLabel')}
           nameInput="address"
-          placeHolderText="Address*"
+          placeHolderText={tGlobal2('userAddressPlaceHolderText')}
           getFormErrorMessage={getFormErrorMessage}
           onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
           rules={{
@@ -194,11 +194,11 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
     </div>
     <div className="registerInput__container-x2">
       <TextInput
-        labelName="NIT"
+        labelName={t('companyNitTitle')}
         nameInput="nit"
         control={control}
         isRequired={true}
-        placeHolderText="NIT*"
+        placeHolderText={t('companyNitPlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
@@ -214,9 +214,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
       <TextInput
         control={control}
         isRequired={true}
-        labelName="Website"
+        labelName={tGlobal2('userWebsiteInputLabel')}
         nameInput="website"
-        placeHolderText="Website"
+        placeHolderText={tGlobal2('userWebsitePlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
@@ -232,10 +232,10 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
     <div className="registerInput__container-x1">
       <TextAreaInput
         control={control}
-        labelName="Description"
+        labelName={t('textAreaCompanyDescriptionLabel')}
         nameInput="description"
         getFormErrorMessage={getFormErrorMessage}
-        placeHolderText="Tell us about your company"
+        placeHolderText={t('textAreaCompanyDescriptionPlaceholder')}
         rules={{
           maxLength: {
             value: 1000,
@@ -253,9 +253,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           maxLength={20}
           isRequired={!ID}
           control={control}
-          labelName="Password"
+          labelName={tGlobal2('userPasswordInputLabel')}
           nameInput="password"
-          placeHolderText="Enter password"
+          placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
           getFormErrorMessage={getFormErrorMessage}
           rules={{
             maxLength: {
@@ -276,9 +276,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           isRequired={!ID}
           control={control}
           className="noLabel"
-          labelName="Confirm pasword"
+          labelName={tGlobal2('userConfirmPasswordInputLabel')}
           nameInput="password_confirmation"
-          placeHolderText="Confirm Password"
+          placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
           getFormErrorMessage={getFormErrorMessage}
           rules={{
             required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
@@ -307,7 +307,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
       </div>
     }
     <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-      <Button className="dark-blue fullwidth" label="Continue" type="submit" name="submit" loading={sending} />
+      <Button className="dark-blue fullwidth" label={t('continueBtnText')} type="submit" name="submit" loading={sending} />
     </div>
   </form>
 }

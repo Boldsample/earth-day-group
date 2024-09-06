@@ -14,7 +14,7 @@ import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCa
 import { createUser, addImages, addMaterials, updateUser } from "@services/userServices"
 
 const CompanyDetailedForm = ({ user, setUser, ID }) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyDetailedForm'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const dispatch = useDispatch()
@@ -23,8 +23,8 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
   const { username } = useParams()
   const [sending, setSending] = useState(false)
   const units = [
-    { unit: "Kilo", code: "Kg" },
-    { unit: "Pound", code: "Lb" },
+    { unit: t('dropDownKiloOption'), code: "Kg" },
+    { unit: t('dropDownPoundOption'), code: "Lb" },
   ]
   const {
     reset,
@@ -132,8 +132,8 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
   
   return <>
     <form onSubmit={handleSubmit(handleRecyclableMaterial)}>
-      <h5 className="recycableMaterialForm__title">This form is optional and can be completed later. If you prefer to skip it, click "Sign Up."</h5>
-      <h4>Recyclable Material</h4>
+      <h5 className="recycableMaterialForm__title">{t('formDisclaimerTitle')}</h5>
+      <h4>{t('materialInputsTitle')}</h4>
       <div className="registerInput__container-x2">
         <DropDownInput
           isEdit={true}
@@ -141,11 +141,11 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
           showLabel={false}
           isRequired={true}
           options={materials}
-          labelName="Material"
+          labelName={t('selectMaterialLabel')}
           nameInput="materials"
           optionLabel="material"
           optionValue="material"
-          placeHolderText="Select Material"
+          placeHolderText={t('SelectMaterialPlaceHolder')}
           getFormErrorMessage={getFormErrorMessage}
           rules={{
             required: tGlobal(`requiredErrorMessage`),
@@ -154,14 +154,14 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
           className=""
           isEdit={true}
           options={units}
-          labelName="Unit"
+          labelName={t('selectUnitlLabel')}
           nameInput="unit"
           control={control}
           showLabel={false}
           isRequired={true}
           optionLabel="unit"
           optionValue="code"
-          placeHolderText="Select Unit"
+          placeHolderText={t('selectUnitPlaceHolder')}
           getFormErrorMessage={getFormErrorMessage}
           rules={{
             required: tGlobal(`requiredErrorMessage`),
@@ -174,10 +174,10 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
           control={control}
           showLabel={false}
           isRequired={true}
-          label="Unit Price"
+          label={t('addPricelLabel')}
           inputRef={numberInput}
           nameInput="unit_price"
-          placeHolderText="Add Price per unit"
+          placeHolderText={t('addPricePlaceHolder')}
           getFormErrorMessage={getFormErrorMessage}
           rules={{
             maxLength: {
@@ -192,7 +192,7 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
           }} />
         <Button
           name="add"
-          label="Add"
+          label={t('addMaterialBtnText')}
           type="submit"
           style={{ paddingLeft: "1.375rem" }}
           className="green-earth fullwidth text-left" />
@@ -211,17 +211,17 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
     </div>
     <UploadPhotoInput
       type="imageUpload"
-      title="Add Images"
+      title={t('addCompanyImgsLabel')}
       uploadedImages={user.images}
       setUploadedImages={setUploadedImages} />
     <div className="registerInput__container-x2">
       <InputSwitch
         id="pick_up_from_home"
         checked={!!user?.pick_up_from_home}
-        onChange={e => setUser(prev => { return {...prev, pick_up_from_home: !user?.pick_up_from_home} })} /> Pick up from home
+        onChange={e => setUser(prev => { return {...prev, pick_up_from_home: !user?.pick_up_from_home} })} /> {t('pickUpFromHomeLabel')}
     </div>
     <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-      <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? 'Save' : 'Sign up'} name="submit" loading={sending} />
+      <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? t('saveBtnText') : t('signUpBtnText')} name="submit" loading={sending} />
     </div>
   </>
 }
