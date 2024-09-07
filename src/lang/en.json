@@ -16,7 +16,9 @@
     "profileUploadLabel": "Profile Picture",
     "profileUploadBtn": "Click to Upload",
     "userNameInputLabel": "Username",
-    "userNamePlaceHolderText": "Eco_John54",
+    "userFullNameInputLabel": "Name",
+    "userFullNamePlaceholderText": "John Doe",
+    "userNamePlaceHolderText": "Eco_John",
     "userEmailInputLabel": "E-mail *",
     "userEmailPlaceHolderText": "johndoe1990@eco.com",
     "userAddressInputLabel": "Address",
@@ -29,7 +31,6 @@
     "userPasswordPlaceHolderText": "Enter a Password",
     "userConfirmPasswordInputLabel": "Confirm Password *",
     "userConfirmPasswordPlaceHolderText": "Confirm Password",
-    
     "acceptTermsText1": "I've read and accept the",
     "acceptTermsText2": "Terms of Service",
     "acceptTermsText3": "Privacy Policy",
@@ -666,9 +667,9 @@
       }
     }
   },
-  "register":{
-    "registerCompany":{
-      "companyDetailedForm":{
+  "register": {
+    "registerCompany": {
+      "companyDetailedForm": {
         "dropDownKiloOption": "Kilo",
         "dropDownPoundOption": "Pound",
         "formDisclaimerTitle": "This form is optional and can be filled out later. If you’d like to skip it for now, just click 'Sign Up.'",
@@ -685,7 +686,7 @@
         "signUpBtnText": "Sign up",
         "saveBtnText": "Guardar"
       },
-      "companyStandardForm":{
+      "companyStandardForm": {
         "companyNameTitle": "Company Name",
         "companyNamePlaceHolderText": "Eco Nova",
         "companyNitTitle": "NIT",
@@ -693,25 +694,16 @@
         "textAreaCompanyDescriptionLabel": "Description",
         "textAreaCompanyDescriptionPlaceholder": "Write a short description about your company.",
         "continueBtnText": "Continue"
-        
       }
     },
-    "registerAdmin":{
-
-    },
-    "registerNgo":{
-
-    },
-    "registerRole":{
-
-    },
-    "registerUser":{
+    "registerAdmin": {},
+    "registerNgo": {},
+    "registerRole": {},
+    "registerUser": {
       "userNameInputLabel": "Username *",
       "userNamePlaceHolderText": "Eco_John"
     },
-    "registerVendor":{
-
-    }
+    "registerVendor": {}
   },
   "ui": {
     "cards": {
@@ -722,7 +714,7 @@
     "templates": {
       "categoryListing": {}
     },
-    "nav":{
+    "nav": {
       "homeNavBtn": "Home",
       "mapNavBtn": "Map",
       "inboxNavBtn": "Inbox",

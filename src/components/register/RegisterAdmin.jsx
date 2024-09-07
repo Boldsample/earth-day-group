@@ -14,7 +14,7 @@ import { TextInput, NumberInput, PasswordInput, UploadPhotoInput } from "@ui/for
 import "./style.sass"
 
 const RegisterAdmin = ({create = false}) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [t] = useTranslation('translation', { keyPrefix: 'register.registerAdmin'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const dispatch = useDispatch()
@@ -123,9 +123,9 @@ const RegisterAdmin = ({create = false}) => {
             disabled={ID}
             control={control}
             isRequired={true}
-            labelName="Username"
+            labelName={tGlobal2('userNameInputLabel')}
             nameInput="username"
-            placeHolderText="Username*"
+            placeHolderText={tGlobal2('userNamePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -143,8 +143,8 @@ const RegisterAdmin = ({create = false}) => {
             control={control}
             nameInput="email"
             isRequired={true}
-            labelName="E-mail"
-            placeHolderText="E-mail*"
+            labelName={tGlobal2('userEmailInputLabel')}
+            placeHolderText={tGlobal2('userEmailPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -161,11 +161,11 @@ const RegisterAdmin = ({create = false}) => {
         <div className="registerInput__container-x2">
           <TextInput
             width="100%"
-            labelName="Name"
+            labelName={tGlobal2('userFullNameInputLabel')}
             nameInput="name"
             control={control}
             isRequired={true}
-            placeHolderText="Complete Name*"
+            placeHolderText={tGlobal2('userFullNamePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -183,8 +183,8 @@ const RegisterAdmin = ({create = false}) => {
             isRequired={true}
             control={control}
             nameInput="phone"
-            labelName="Phone Number"
-            placeHolderText="Phone Number*"
+            labelName={tGlobal2('userPhoneNumberInputLabel')}
+            placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -205,9 +205,9 @@ const RegisterAdmin = ({create = false}) => {
               maxLength={20}
               isRequired={!ID}
               control={control}
-              labelName="Password"
+              labelName={tGlobal2('userPasswordInputLabel')}
               nameInput="password"
-              placeHolderText="Enter password"
+              placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 maxLength: {
@@ -228,9 +228,9 @@ const RegisterAdmin = ({create = false}) => {
               isRequired={!ID}
               control={control}
               className="noLabel"
-              labelName="Confirm pasword"
+              labelName={tGlobal2('userConfirmPasswordInputLabel')}
               nameInput="password_confirmation"
-              placeHolderText="Confirm Password"
+              placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 required: ID ? undefined : tGlobal('requiredErrorMessage'),

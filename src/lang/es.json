@@ -13,6 +13,8 @@
     "categoryListingiconTitle3": "Economía Sostenible",
     "profileUploadLabel": "Foto de Perfil",
     "profileUploadBtn": "Haz click para adjuntar",
+    "userFullNameInputLabel": "Nombre",
+    "userFullNamePlaceholderText": "Juan Perez",
     "userNameInputLabel": "Nombre de Usuario",
     "userNamePlaceHolderText": "Eco_Juan",
     "userEmailInputLabel": "Correo electrónico",
@@ -665,9 +667,9 @@
       }
     }
   },
-  "register":{
-    "registerCompany":{
-      "companyDetailedForm":{
+  "register": {
+    "registerCompany": {
+      "companyDetailedForm": {
         "dropDownKiloOption": "Kilo",
         "dropDownPoundOption": "Libras",
         "formDisclaimerTitle": "Este formulario es opcional y se puede completar más tarde. Si prefieres omitirlo, haz clic en 'Registrarse'.",
@@ -681,9 +683,9 @@
         "addCompanyImgsLabel": "Añadir Imágenes de la Empresa",
         "pickUpFromHomeLabel": "Recoger en casa",
         "addMaterialBtnText": "Agregar Material",
-        "signUpBtnText": "Registrarse" 
+        "signUpBtnText": "Registrarse"
       },
-      "companyStandardForm":{
+      "companyStandardForm": {
         "companyNameTitle": "Nombre de la Empresa",
         "companyNamePlaceHolderText": "Eco Nova",
         "companyNitTitle": "NIT",
@@ -693,23 +695,14 @@
         "continueBtnText": "Continuar"
       }
     },
-    "registerAdmin":{
-
-    },
-    "registerNgo":{
-
-    },
-    "registerRole":{
-
-    },
-    "registerUser":{
+    "registerAdmin": {},
+    "registerNgo": {},
+    "registerRole": {},
+    "registerUser": {
       "userNameInputLabel": "Usuario *",
       "userNamePlaceHolderText": "Eco_Juan54"
-
     },
-    "registerVendor":{
-      
-    }
+    "registerVendor": {}
   },
   "ui": {
     "cards": {
@@ -720,7 +713,7 @@
     "templates": {
       "categoryListing": {}
     },
-    "nav":{
+    "nav": {
       "homeNavBtn": "Inicio",
       "mapNavBtn": "Mapa",
       "inboxNavBtn": "Inbox",
