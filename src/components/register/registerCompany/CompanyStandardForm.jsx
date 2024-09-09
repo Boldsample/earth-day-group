@@ -292,7 +292,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           <CheckBoxInput
             control={control}
             nameInput="accept_terms"
-            rules={{ required: "Accept is required." }}
+            rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
             getFormErrorMessage={getFormErrorMessage}
             checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
         </div>
@@ -300,7 +300,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           <CheckBoxInput
             control={control}
             nameInput="accept_policy"
-            rules={{ required: "Accept is required." }}
+            rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
             getFormErrorMessage={getFormErrorMessage}
             checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
         </div>

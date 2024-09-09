@@ -8,6 +8,8 @@
     "all": "All",
     "active": "Active",
     "disable": "Disable",
+    "yes": "YES",
+    "no": "NO",
     "inputSearchPlaceHolder": "Keyword Search",
     "notfoundErrorMessage": "We couldn't find what you are looking for. Care to try again.",
     "categoryListingiconTitle1": "100% Recycled",
@@ -16,9 +18,9 @@
     "profileUploadLabel": "Profile Picture",
     "profileUploadBtn": "Click to Upload",
     "userNameInputLabel": "Username",
+    "userNamePlaceHolderText": "Eco_John",
     "userFullNameInputLabel": "Name",
     "userFullNamePlaceholderText": "John Doe",
-    "userNamePlaceHolderText": "Eco_John",
     "userEmailInputLabel": "E-mail *",
     "userEmailPlaceHolderText": "johndoe1990@eco.com",
     "userAddressInputLabel": "Address",
@@ -27,9 +29,9 @@
     "userWebsitePlaceHolderText": "www.ecoprojects.com/",
     "userPhoneNumberInputLabel": "Phone Number",
     "userPhoneNumberPlaceHolderText": "(954)987-69-17",
-    "userPasswordInputLabel": "Password *",
+    "userPasswordInputLabel": "Password",
     "userPasswordPlaceHolderText": "Enter a Password",
-    "userConfirmPasswordInputLabel": "Confirm Password *",
+    "userConfirmPasswordInputLabel": "Confirm Password",
     "userConfirmPasswordPlaceHolderText": "Confirm Password",
     "acceptTermsText1": "I've read and accept the",
     "acceptTermsText2": "Terms of Service",
@@ -47,6 +49,8 @@
     "newAdminContentText": "You have registered a new admin user! We have sent an email verification link.",
     "newUserContentText": "You’re all signed up! We send you a verification email. Please verify your identity.",
     "formErrors": {
+      "acceptCheckboxErrorMessage": "You are required to accept the terms and conditions.",
+      "acceptCheckboxErrorMessage2": "You are required to accept the privacy policy.",
       "passwordDoNotMatchErrorMessage": "Passwords do not match",
       "invalidNitErrorMessage": "Please enter a valid NIT number",
       "invalidWebAddressErrorMessage": "Please enter a valid Web URL",
@@ -697,13 +701,41 @@
       }
     },
     "registerAdmin": {},
-    "registerNgo": {},
-    "registerRole": {},
-    "registerUser": {
-      "userNameInputLabel": "Username *",
-      "userNamePlaceHolderText": "Eco_John"
+    "registerNgo": {
+      "organizationImgsTitle": "Organization Images",
+      "textAreaIniciativeDescriptionTitle": "Iniciative",
+      "iniciativeDescriptionPlaceholder": "Tell us about your inicitative",
+      "organizationTypeLabel": "Organization Type",
+      "organizationNameInputTitle": "Organization Name",
+      "organizationNamePlaceHolderText": "John's animal shelter",
+      "shelterRadioOption": "Shelter",
+      "socialOrgRadioOption": "Social Organization",
+      "bothRadioOption": "Both"
     },
-    "registerVendor": {}
+    "registerRole": {
+      "mainTitleText": "Register as:",
+      "userLabel": "User:",
+      "userLabelDescription": "Explore the marketplace and connect with companies and charity homes.",
+      "recyclingCenterLabel": "Recycling Center:",
+      "recyclingCenterLabelDescription": "Register your recycling center or company and extend your operation area.",
+      "socialOrganizationAnimalShelterLabel": "Social Organization Animal Shelter:",
+      "socialOrganizationAnimalShelterLabelDescription": "Register your social organization and let many more people know about your work.",
+      "ecoCommerceLabel": "Eco-Commerce:",
+      "ecoCommerceLabelDescription": "Register your Eco-Commerce and let more people know about your environmentally friendly products."
+    },
+    "registerUser": {
+      "textAreaBioDescriptionTitle": "Bio",
+      "bioDescriptionPlaceholder": "Share a little about yourself"
+    },
+    "registerVendor": {
+      "deliveryLabel": "Delivery Available ",
+      "deliveryChargesPlaceHolder": "Delivery Charges*",
+      "selfPickUpLabel": "Self Pick up",
+      "shopNameInputTitle": "Shop Name",
+      "shopNamePlaceHolderText": "John's Shop",
+      "textAreaIniciativeDescriptionTitle": "Shop Description",
+      "iniciativeDescriptionPlaceholder": "Tell us about your shop"
+    }
   },
   "ui": {
     "cards": {
@@ -712,7 +744,21 @@
       }
     },
     "templates": {
-      "categoryListing": {}
+      "categoryListing": {},
+      "profileListing": {
+        "profileElements": {
+          "newProductBtnText": "New Product",
+          "newPetBtnText": "New Pet",
+          "productsTitle1": "Related products",
+          "adoptPetTitle1": "Here are some 'friends' you may like",
+          "productsTitle2": "Discover our Products",
+          "adoptPetTitle2": "Want to adopt a new 'friend'?"
+        },
+        "profileListing": {
+          "petLabel": "Pet Adoptions",
+          "productLabel": "Products"
+        }
+      }
     },
     "nav": {
       "homeNavBtn": "Home",

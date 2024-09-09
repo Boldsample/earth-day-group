@@ -6,21 +6,25 @@ import ProfileElements from "./ProfileElements"
 import { followUser } from "@services/userServices"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileInformation from "@components/modules/profile/ProfileInformation"
+import { useTranslation } from 'react-i18next'
+
 
 import "../styles.sass"
 import AdBanner from "@ui/banners/AdBanner"
 
 const ProfileListing = ({type, profile, reloadElements = () => false}) => {
   const user = useSelector((state) => state.users.userData)
+  const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileListing'})
+
   const ngoTypes = [
     {
       id: 'products',
-      label: 'Products',
+      label: t('productLabel'),
       url: user?.id == profile?.id ? '/profile/' : `/${profile?.role}/${profile?.username}/`,
     },
     {
       id: 'pets',
-      label: 'Pets Adoptions',
+      label:  t('petLabel'),
       url: user?.id == profile?.id ? '/profile/pets/' : `/${profile?.role}/${profile?.username}/pets/`,
     },
   ]

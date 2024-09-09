@@ -23,7 +23,7 @@ const Product = () => {
   const dispatch = useDispatch()
   const [ product, setProduct ] = useState(null)
   const user = useSelector((state) => state.users.userData)
-  const [t] = useTranslation('translation', { keyPrefix: 'vendor.products.createProduct'})
+  const [t] = useTranslation('translation', { keyPrefix: 'vendor.products.product'})
 
   const doFollow = async e => {
     e.preventDefault()

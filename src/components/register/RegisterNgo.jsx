@@ -16,7 +16,7 @@ import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, Uploa
 import "./style.sass"
 
 const RegisterNgo = ({create = false}) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [t] = useTranslation('translation', { keyPrefix: 'register.registerNgo'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const dispatch = useDispatch()
@@ -63,9 +63,9 @@ const RegisterNgo = ({create = false}) => {
     setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
   }
   const radioData = [
-    { name: "Shelters", value: 'shelter' },
-    { name: "Social Organization", value: 'social' },
-    { name: "Both", value: 'ngo' },
+    { name: t('shelterRadioOption'), value: 'shelter' },
+    { name: t('socialOrgRadioOption'), value: 'social' },
+    { name: t('bothRadioOption'), value: 'ngo' },
   ]
   
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
@@ -162,9 +162,9 @@ const RegisterNgo = ({create = false}) => {
             disabled={ID}
             control={control}
             isRequired={true}
-            labelName="Username"
+            labelName={tGlobal2('userNameInputLabel')}
             nameInput="username"
-            placeHolderText="Username*"
+            placeHolderText={tGlobal2('userNamePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -181,8 +181,8 @@ const RegisterNgo = ({create = false}) => {
             control={control}
             nameInput="email"
             isRequired={true}
-            labelName="E-mail"
-            placeHolderText="E-mail*"
+            labelName={tGlobal2('userEmailInputLabel')}
+            placeHolderText={tGlobal2('userEmailPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -201,8 +201,8 @@ const RegisterNgo = ({create = false}) => {
             nameInput="name"
             control={control}
             isRequired={true}
-            labelName="Organization Name"
-            placeHolderText="Organization Name*"
+            labelName={t('organizationNameInputTitle')}
+            placeHolderText={t('organizationNamePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -220,9 +220,9 @@ const RegisterNgo = ({create = false}) => {
               control={control}
               isRequired={true}
               autocomplete="off"
-              labelName="Address"
+              labelName={tGlobal2('userAddressInputLabel')}
               nameInput="address"
-              placeHolderText="Address*"
+              placeHolderText={tGlobal2('userAddressPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
@@ -238,9 +238,9 @@ const RegisterNgo = ({create = false}) => {
           <TextInput
             control={control}
             isRequired={true}
-            labelName="Website"
+            labelName={tGlobal2('userWebsiteInputLabel')}
             nameInput="website"
-            placeHolderText="Website"
+            placeHolderText={tGlobal2('userWebsitePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -256,8 +256,8 @@ const RegisterNgo = ({create = false}) => {
             isRequired={true}
             control={control}
             nameInput="phone"
-            labelName="Phone Number"
-            placeHolderText="Phone Number*"
+            labelName={tGlobal2('userPhoneNumberInputLabel')}
+            placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -277,7 +277,7 @@ const RegisterNgo = ({create = false}) => {
             nameInput="role"
             control={control}
             isRequired={true}
-            labelName="Organization Type"
+            labelName={t('organizationTypeLabel')}
             rules={{
               required: true,
             }} />
@@ -286,9 +286,9 @@ const RegisterNgo = ({create = false}) => {
           <TextAreaInput
             control={control}
             isRequired={false}
-            labelName="Iniciative"
+            labelName={t('textAreaIniciativeDescriptionTitle')}
             nameInput="description"
-            placeHolderText="Tell us about the your inicitative"
+            placeHolderText={t('iniciativeDescriptionPlaceholder')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -303,7 +303,7 @@ const RegisterNgo = ({create = false}) => {
         </div>
         <UploadPhotoInput
           type="imageUpload"
-          title="Add Images"
+          title={t('organizationImgsTitle')}
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
         {!username && <>
@@ -312,9 +312,9 @@ const RegisterNgo = ({create = false}) => {
               maxLength={20}
               isRequired={!ID}
               control={control}
-              labelName="Password"
+              labelName={tGlobal2('userPasswordInputLabel')}
               nameInput="password"
-              placeHolderText="Enter password"
+              placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 maxLength: {
@@ -335,9 +335,9 @@ const RegisterNgo = ({create = false}) => {
               isRequired={!ID}
               control={control}
               className="noLabel"
-              labelName="Confirm pasword"
+              labelName={tGlobal2('userConfirmPasswordInputLabel')}
               nameInput="password_confirmation"
-              placeHolderText="Confirm Password"
+              placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
@@ -350,7 +350,7 @@ const RegisterNgo = ({create = false}) => {
                 <CheckBoxInput
                   control={control}
                   nameInput="accept_terms"
-                  rules={{ required: "Accept is required." }}
+                  rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
                   getFormErrorMessage={getFormErrorMessage}
                   checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
               </div>
@@ -358,7 +358,7 @@ const RegisterNgo = ({create = false}) => {
                 <CheckBoxInput
                   control={control}
                   nameInput="accept_policy"
-                  rules={{ required: "Accept is required." }}
+                  rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
                   getFormErrorMessage={getFormErrorMessage}
                   checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
               </div>

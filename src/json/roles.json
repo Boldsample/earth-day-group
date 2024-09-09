@@ -1,30 +1,30 @@
 [
 	{
-		"title": "User:",
+		"title": "userLabel",
 		"className": "blue-earth",
 		"link": "/register/user/",
 		"icon": "/assets/icons/user.svg",
-		"description": "Explore the marketplace and connect with companies and charity homes."
+		"description": "userLabelDescription"
 	},
 	{
-		"title": "Recycling Center:",
+		"title": "recyclingCenterLabel",
 		"className": "light-green",
 		"link": "/register/company/",
 		"icon": "/assets/icons/reciclyng-center.svg",
-		"description": "Register your recycling center or company and extend your operation area."
+		"description": "recyclingCenterLabelDescription"
 	},
 	{
-		"title": "Social Organization Animal Shelter:",
+		"title": "socialOrganizationAnimalShelterLabel",
 		"className": "dark-blue",
 		"link": "/register/ngo",
 		"icon": "/assets/icons/social-organization.svg",
-		"description": "Register your social organization and let many more people know about your work."
+		"description": "socialOrganizationAnimalShelterLabelDescription"
 	},
 	{
-		"title": "Eco-Commerce:",
+		"title": "ecoCommerceLabel",
 		"className": "green-earth",
 		"link": "/register/vendor",
 		"icon": "/assets/icons/eco-commerce.svg",
-		"description": "Register your Eco-Commerce and let more people know about your enviromentally friendly products."
+		"description": "ecoCommerceLabelDescription"
 	}
 ]

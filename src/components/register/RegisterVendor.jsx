@@ -16,7 +16,7 @@ import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, Uploa
 import "./style.sass"
 
 const RegisterVendor = ({create = false}) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [t] = useTranslation('translation', { keyPrefix: 'register.registerVendor'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const dispatch = useDispatch()
@@ -65,8 +65,8 @@ const RegisterVendor = ({create = false}) => {
     setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
   }
   const radioData = [
-    { name: "YES", value: 1 },
-    { name: "NO", value: 0 },
+    { name: tGlobal2('yes'), value: 1 },
+    { name: tGlobal2('no'), value: 0 },
   ]
   
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
@@ -154,9 +154,9 @@ const RegisterVendor = ({create = false}) => {
             disabled={ID}
             control={control}
             isRequired={true}
-            labelName="Username"
+            labelName={tGlobal2('userNameInputLabel')}
             nameInput="username"
-            placeHolderText="Username*"
+            placeHolderText={tGlobal2('userNamePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -193,8 +193,8 @@ const RegisterVendor = ({create = false}) => {
             nameInput="name"
             control={control}
             isRequired={true}
-            labelName="Shop Name"
-            placeHolderText="Shop Name*"
+            labelName={t('shopNameInputTitle')}
+            placeHolderText={t('shopNamePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -212,9 +212,9 @@ const RegisterVendor = ({create = false}) => {
               control={control}
               isRequired={true}
               autocomplete="off"
-              labelName="Address"
+              labelName={tGlobal2('userAddressInputLabel')}
               nameInput="address"
-              placeHolderText="Address*"
+              placeHolderText={tGlobal2('userAddressPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
@@ -230,9 +230,9 @@ const RegisterVendor = ({create = false}) => {
           <TextInput
             control={control}
             isRequired={true}
-            labelName="Website"
+            labelName={tGlobal2('userWebsiteInputLabel')}
             nameInput="website"
-            placeHolderText="Website"
+            placeHolderText={tGlobal2('userWebsitePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -248,8 +248,8 @@ const RegisterVendor = ({create = false}) => {
             isRequired={true}
             control={control}
             nameInput="phone"
-            labelName="Phone Number"
-            placeHolderText="Phone Number*"
+            labelName={tGlobal2('userPhoneNumberInputLabel')}
+            placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -269,7 +269,7 @@ const RegisterVendor = ({create = false}) => {
               data={radioData}
               control={control}
               isRequired={true}
-              labelName="Delivery Available"
+              labelName={t('deliveryLabel')}
               nameInput="delivery_available"
               rules={{
                 required: true,
@@ -280,7 +280,7 @@ const RegisterVendor = ({create = false}) => {
                 control={control}
                 label="Delivery Charges"
                 nameInput="delivery_charges"
-                placeHolderText="Delivery Charges*"
+                placeHolderText={t('deliveryChargesPlaceHolder')}
                 isRequired={watch('delivery_available')}
                 getFormErrorMessage={getFormErrorMessage}
                 rules={{
@@ -302,7 +302,7 @@ const RegisterVendor = ({create = false}) => {
               showLabel={true}
               control={control}
               isRequired={true}
-              labelName="Self Pickup"
+              labelName={t('selfPickUpLabel')}
               nameInput="pick_up_from_home"
               rules={{
                 required: true,
@@ -313,9 +313,9 @@ const RegisterVendor = ({create = false}) => {
           <TextAreaInput
             control={control}
             isRequired={false}
-            labelName="Shop Detail"
+            labelName={t('textAreaIniciativeDescriptionTitle')}
             nameInput="description"
-            placeHolderText="Tell us about the shop"
+            placeHolderText={t('iniciativeDescriptionPlaceholder')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -334,9 +334,9 @@ const RegisterVendor = ({create = false}) => {
               maxLength={20}
               isRequired={!ID}
               control={control}
-              labelName="Password"
+              labelName={tGlobal2('userPasswordInputLabel')}
               nameInput="password"
-              placeHolderText="Enter password"
+              placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 maxLength: {
@@ -357,9 +357,9 @@ const RegisterVendor = ({create = false}) => {
               isRequired={!ID}
               control={control}
               className="noLabel"
-              labelName="Confirm pasword"
+              labelName={tGlobal2('userConfirmPasswordInputLabel')}
               nameInput="password_confirmation"
-              placeHolderText="Confirm Password"
+              placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
@@ -372,7 +372,7 @@ const RegisterVendor = ({create = false}) => {
                 <CheckBoxInput
                   control={control}
                   nameInput="accept_terms"
-                  rules={{ required: "Accept is required." }}
+                  rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
                   getFormErrorMessage={getFormErrorMessage}
                   checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
               </div>
@@ -380,7 +380,7 @@ const RegisterVendor = ({create = false}) => {
                 <CheckBoxInput
                   control={control}
                   nameInput="accept_policy"
-                  rules={{ required: "Accept is required." }}
+                  rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
                   getFormErrorMessage={getFormErrorMessage}
                   checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
               </div>

@@ -8,6 +8,8 @@
     "all": "Todos",
     "active": "Activo",
     "disable": "Inactivo",
+    "yes": "SÍ",
+    "no": "NO",
     "categoryListingiconTitle1": "100% Recyclado",
     "categoryListingiconTitle2": "Ecológico",
     "categoryListingiconTitle3": "Economía Sostenible",
@@ -47,6 +49,8 @@
     "newUserContentText": "¡Te has registrado con éxito! Te hemos enviado un correo electrónico de verificación. Por favor, verifica tu identidad.",
     "newAdminContentText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico.",
     "formErrors": {
+      "acceptCheckboxErrorMessage": "Es obligatorio aceptar los términos y condiciones.",
+      "acceptCheckboxErrorMessage2": "Es obligatorio aceptar la política de privacidad.",
       "passwordDoNotMatchErrorMessage": "La contraseña no coincide",
       "invalidNitErrorMessage": "Por favor, ingresa un NIT válido.",
       "invalidWebAddressErrorMessage": "Por favor, ingresa un enlace de URL válido.",
@@ -696,13 +700,41 @@
       }
     },
     "registerAdmin": {},
-    "registerNgo": {},
-    "registerRole": {},
-    "registerUser": {
-      "userNameInputLabel": "Usuario *",
-      "userNamePlaceHolderText": "Eco_Juan54"
+    "registerNgo": {
+      "organizationImgsTitle": "Imágenes de la organización",
+      "textAreaIniciativeDescriptionTitle": "Iniciativa",
+      "iniciativeDescriptionPlaceholder": "Cuéntanos sobre tu iniciativa",
+      "organizationTypeLabel": "Tipo de Organización",
+      "organizationNameInputTitle": "Nombre de la organización",
+      "organizationNamePlaceHolderText": "El refugio de Juan",
+      "shelterRadioOption": "Refugio",
+      "socialOrgRadioOption": "Organización Social",
+      "bothRadioOption": "Ambos"
     },
-    "registerVendor": {}
+    "registerRole": {
+      "mainTitleText": "Registrate como:",
+      "userLabel": "Usuario:",
+      "userLabelDescription": "Explora el mercado y conéctate con empresas de reciclaje, tiendas y fundaciones.",
+      "recyclingCenterLabel": "Centro de Reciclaje:",
+      "recyclingCenterLabelDescription": "Registra tu centro de reciclaje o empresa y amplía tu área de operación.",
+      "socialOrganizationAnimalShelterLabel": "Organización Social Refugio de Animales:",
+      "socialOrganizationAnimalShelterLabelDescription": "Registra tu organización social y permite que más personas conozcan tu trabajo.",
+      "ecoCommerceLabel": "Eco-Comercio:",
+      "ecoCommerceLabelDescription": "Registra tu Eco-Comercio y permite que más personas conozcan tus productos ecológicos."
+    },
+    "registerUser": {
+      "textAreaBioDescriptionTitle": "Bio",
+      "bioDescriptionPlaceholder": "Comparte un poco sobre ti"
+    },
+    "registerVendor": {
+      "deliveryLabel": "Entrega a Domicilio ",
+      "deliveryChargesPlaceHolder": "Precio de domicilio*",
+      "selfPickUpLabel": "Recoger en Tienda",
+      "shopNameInputTitle": "Nombre de la Tienda",
+      "shopNamePlaceHolderText": "La tienda de Juan",
+      "textAreaIniciativeDescriptionTitle": "Descripción de la tienda",
+      "iniciativeDescriptionPlaceholder": "Cuéntanos sobre tu tienda"
+    }
   },
   "ui": {
     "cards": {
@@ -711,7 +743,21 @@
       }
     },
     "templates": {
-      "categoryListing": {}
+      "categoryListing": {},
+      "profileListing": {
+        "profileElements": {
+          "newProductBtnText": "Nuevo Producto",
+          "newPetBtnText": "Nueva Mascota",
+          "productsTitle1": "Productos relacionados",
+          "adoptPetTitle1": "Aquí hay algunos 'peluditos' que te pueden gustar",
+          "productsTitle2": "Descubre nuestros productos",
+          "adoptPetTitle2": "¿Quieres adoptar un nuevo 'peludito'?"
+        },
+        "profileListing": {
+          "petLabel": "Mascotas en adopción",
+          "productLabel": "Productos"
+        }
+      }
     },
     "nav": {
       "homeNavBtn": "Inicio",

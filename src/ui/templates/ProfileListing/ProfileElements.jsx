@@ -5,6 +5,7 @@ import { Paginator } from "primereact/paginator"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCircleChevronRight, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons"
+import { useTranslation } from 'react-i18next'
 
 import { setHeader } from "@store/slices/globalSlice"
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
@@ -19,6 +20,8 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
   const [filters, setFilters] = useState({keyword: ''})
   const userId = useSelector((state) => state.users.userData.id)
   const [page, setPage] = useState({page: 0, rows: related ? 4 : 8})
+  const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileElements'})
+  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
 
   const doFollow = async (id) => {
     const _type = type == 'products' ? 'product' : 'pet'
@@ -53,12 +56,12 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
     return
   return <div className="template__listing fullwidth">
     <div className="edg-search mb-1">
-      <h3 className="text-center mb-1">{related && (type == 'products' ? 'Related products' : `Here are some 'friends you may like'`) || (type == 'products' ? 'Discover our products' : 'Want to adopt a new friend?')}</h3>
+      <h3 className="text-center mb-1">{related && (type == 'products' ? t('productsTitle1') : t('adoptPetTitle1')) || (type == 'products' ? t('productsTitle2')  : t('adoptPetTitle2'))}</h3>
       {!related && (typeof elements?.total == 'undefined' || elements?.total > 0) && 
         <form onSubmit={loadElements} className="p-input-icon-left fullwidth">
           <FontAwesomeIcon icon={faSearch} />
           <InputText
-            placeholder={"Search"}
+            placeholder={tGlobal2('inputSearchPlaceHolder')}
             value={filters.keyword}
             className="p-inputtext"
             onChange={(e) => setFilters(prev => ({...prev, keyword: e.target.value}))} />
@@ -76,7 +79,7 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
         elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
       ) ||
         <div className="fullwidth text-center mt-2">
-          <p>We couldn't find what you are looking for. Care to try again.</p>
+          <p>{tGlobal2('notfoundErrorMessage')}</p>
         </div>
       }
       {!related && page?.rows < elements?.total && 
@@ -85,8 +88,8 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
       {same && 
         <div className="fullwidth text-center">
           {type == 'products' && 
-            <Link className="button small blue-earth self-center" to="/product/new/"><FontAwesomeIcon icon={faPlus} /> New product</Link> ||
-            <Link className="button small green-earth self-center" to="/pet/new/"><FontAwesomeIcon icon={faPlus} /> New pet</Link>
+            <Link className="button small blue-earth self-center" to="/product/new/"><FontAwesomeIcon icon={faPlus} />{t('newProductBtnText')}</Link> ||
+            <Link className="button small green-earth self-center" to="/pet/new/"><FontAwesomeIcon icon={faPlus} />{t('newPetBtnText')}</Link>
           }
         </div>
       }

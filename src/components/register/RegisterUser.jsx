@@ -16,7 +16,7 @@ import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, Up
 import "./style.sass"
 
 const RegisterUser = ({create = false}) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'register.'})
+  const [t] = useTranslation('translation', { keyPrefix: 'register.registerUser'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const dispatch = useDispatch()
@@ -141,9 +141,9 @@ const RegisterUser = ({create = false}) => {
             disabled={ID}
             control={control}
             isRequired={true}
-            labelName="Username"
+            labelName={tGlobal2('userNameInputLabel')}
             nameInput="username"
-            placeHolderText="Username*"
+            placeHolderText={tGlobal2('userNamePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -161,7 +161,7 @@ const RegisterUser = ({create = false}) => {
             nameInput="email"
             isRequired={true}
             labelName="E-mail"
-            placeHolderText="E-mail*"
+            placeHolderText={tGlobal2('userEmailPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -178,10 +178,10 @@ const RegisterUser = ({create = false}) => {
         <div className="registerInput__container-x2">
           <TextInput
             nameInput="name"
-            labelName="Name"
+            labelName={tGlobal2('userFullNameInputLabel')}
             control={control}
             isRequired={true}
-            placeHolderText="Complete Name*"
+            placeHolderText={tGlobal2('userFullNamePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -199,9 +199,9 @@ const RegisterUser = ({create = false}) => {
               control={control}
               isRequired={true}
               autocomplete="off"
-              labelName="Address"
+              labelName={tGlobal2('userAddressInputLabel')}
               nameInput="address"
-              placeHolderText="Address*"
+              placeHolderText={tGlobal2('userAddressPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
@@ -218,8 +218,8 @@ const RegisterUser = ({create = false}) => {
             isRequired={true}
             control={control}
             nameInput="phone"
-            labelName="Phone Number"
-            placeHolderText="Phone Number*"
+            labelName={tGlobal2('userPhoneNumberInputLabel')}
+            placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -235,11 +235,11 @@ const RegisterUser = ({create = false}) => {
         </div>
         <div className="registerInput__container-x1">
           <TextAreaInput
-            labelName="Bio"
+            labelName={t('textAreaBioDescriptionTitle')}
             control={control}
             isRequired={false}
             nameInput="description"
-            placeHolderText="Tell us about yourself"
+            placeHolderText={t('bioDescriptionPlaceholder')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -258,9 +258,9 @@ const RegisterUser = ({create = false}) => {
               maxLength={20}
               isRequired={!ID}
               control={control}
-              labelName="Password"
+              labelName={tGlobal2('userPasswordInputLabel')}
               nameInput="password"
-              placeHolderText="Enter password"
+              placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 maxLength: {
@@ -281,9 +281,9 @@ const RegisterUser = ({create = false}) => {
               isRequired={!ID}
               control={control}
               className="noLabel"
-              labelName="Confirm pasword"
+              labelName={tGlobal2('userConfirmPasswordInputLabel')}
               nameInput="password_confirmation"
-              placeHolderText="Confirm Password"
+              placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
                 required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
@@ -296,7 +296,7 @@ const RegisterUser = ({create = false}) => {
                 <CheckBoxInput
                   control={control}
                   nameInput="accept_terms"
-                  rules={{ required: "Accept is required." }}
+                  rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
                   getFormErrorMessage={getFormErrorMessage}
                   checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
               </div>
@@ -304,7 +304,7 @@ const RegisterUser = ({create = false}) => {
                 <CheckBoxInput
                   control={control}
                   nameInput="accept_policy"
-                  rules={{ required: "Accept is required." }}
+                  rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
                   getFormErrorMessage={getFormErrorMessage}
                   checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
               </div>
