@@ -1,7 +1,7 @@
 import Chat from "./chat/Chat"
 import Pets from "./admin/Pets"
 import Chats from "./chat/Chats"
-import About from "./settings/About"
+import PrivacyPolicy from "./settings/PrivacyPolicy"
 import Terms from "./settings/Terms"
 import Reports from "./admin/Reports"
 import Users from "./admin/UsersList"
@@ -23,4 +23,4 @@ import ProfileSettings from "./settings/profile/Profile"
 import Notifications from "./notifications/Notifications"
 import ProfileProvider from "./settings/profile/ProfileProvider"
 
-export { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, ProfileProvider, Password, Terms, Privacy, About, Activity, DeleteAccount, CreateReport, Users, Reports, AdminOffers, Products, Pets, ConfigureAds }
+export { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, ProfileProvider, Password, Terms, Privacy, PrivacyPolicy, Activity, DeleteAccount, CreateReport, Users, Reports, AdminOffers, Products, Pets, ConfigureAds }

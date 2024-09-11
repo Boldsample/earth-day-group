@@ -589,6 +589,7 @@
       "profileBtnText": "Mi Perfil",
       "changePasswordBtnText": "Cambiar Contraseña",
       "termsAndConditionsBtnText": "Términos y Condiciones",
+      "privacyPolicyBtnText": "Política de Privacidad",
       "deleteAccountBtnText": "Eliminar Cuenta",
       "logOutBtnText": "Cerrar Sesión"
     },

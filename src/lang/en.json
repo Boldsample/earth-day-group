@@ -591,6 +591,7 @@
       "profileBtnText": "My Profile",
       "changePasswordBtnText": "Change Password",
       "termsAndConditionsBtnText": "Terms & Conditions",
+      "privacyPolicyBtnText": "Privacy Policy",
       "deleteAccountBtnText": "Delete Account",
       "logOutBtnText": "Log Out"
     },

@@ -5,7 +5,7 @@ import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import "./styles.sass"
 
-const About = () => {
+const PrivacyPolicy = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const About = () => {
   </div>
 }
 
-export default About
+export default PrivacyPolicy
