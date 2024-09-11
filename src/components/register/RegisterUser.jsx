@@ -269,7 +269,7 @@ const RegisterUser = ({create = false}) => {
                 },
                 required: username ? undefined : tGlobal(`requiredErrorMessage`),
                 pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/,
                   message:
                     tGlobal('passwordPatternErrorMessage'),
                 },
