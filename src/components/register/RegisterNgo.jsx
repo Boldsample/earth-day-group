@@ -14,6 +14,7 @@ import { addImages, createUser, getUser, updateUser } from "@services/userServic
 import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
 
 import "./style.sass"
+import PasswordRequirements from "@ui/templates/PasswordRequirements"
 
 const RegisterNgo = ({create = false}) => {
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerNgo'})
@@ -309,6 +310,7 @@ const RegisterNgo = ({create = false}) => {
         {!username && <>
           <div className="registerInput__container-x2">
             <PasswordInput
+            passwordRequirementsPopUp={PasswordRequirements}
               maxLength={20}
               isRequired={!ID}
               control={control}

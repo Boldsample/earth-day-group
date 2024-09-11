@@ -14,6 +14,7 @@ import { createUser, getUser, updateUser } from "@services/userServices"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput } from "@ui/forms"
 
 import "./style.sass"
+import PasswordRequirements from "@ui/templates/PasswordRequirements"
 
 const RegisterUser = ({create = false}) => {
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerUser'})
@@ -255,6 +256,7 @@ const RegisterUser = ({create = false}) => {
         {!username && <>
           <div className="registerInput__container-x2">
             <PasswordInput
+            passwordRequirementsPopUp={PasswordRequirements}
               maxLength={20}
               isRequired={!ID}
               control={control}

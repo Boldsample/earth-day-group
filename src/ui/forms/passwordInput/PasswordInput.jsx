@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react"
 import { Controller } from "react-hook-form"
 import { Password } from "primereact/password"
-
+import { useTranslation } from "react-i18next"
 const PasswordInput = ({
+  passwordRequirementsPopUp,
   rules,
   control,
   nameInput,
@@ -15,6 +16,9 @@ const PasswordInput = ({
   placeHolderText = "",
 }) => {
   const passwordRef = useRef(null)
+  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+  const headerTitle = <div className="font-bold mb-3">{tGlobal2('passwordRequirementTitle2')}</div>;
+  
 
   const renderInput = () => <>
     <Controller
@@ -23,6 +27,8 @@ const PasswordInput = ({
       control={control}
       render={({ field }) => (
         <Password
+          header={headerTitle}
+          footer={passwordRequirementsPopUp}
           toggleMask
           id={field.name}
           feedback={feedback}

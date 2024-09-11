@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
+import PasswordRequirements from "@ui/templates/PasswordRequirements"
 
 import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
@@ -201,6 +202,7 @@ const RegisterAdmin = ({create = false}) => {
         {!username && 
           <div className="registerInput__container-x2">
             <PasswordInput
+              passwordRequirementsPopUp={PasswordRequirements}
               width="100%"
               maxLength={20}
               isRequired={!ID}

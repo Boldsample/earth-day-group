@@ -6,7 +6,7 @@ import { Autocomplete } from "@react-google-maps/api"
 import { useNavigate, useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
-
+import PasswordRequirements from "@ui/templates/PasswordRequirements"
 import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
@@ -331,6 +331,7 @@ const RegisterVendor = ({create = false}) => {
         {!username && <>
           <div className="registerInput__container-x2">
             <PasswordInput
+              passwordRequirementsPopUp={PasswordRequirements}
               maxLength={20}
               isRequired={!ID}
               control={control}

@@ -7,6 +7,7 @@ import { Autocomplete } from "@react-google-maps/api"
 import { useTranslation } from 'react-i18next'
 import { checkUser } from "@services/userServices"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput } from "@ui/forms"
+import PasswordRequirements from "@ui/templates/PasswordRequirements"
 
 const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyStandardForm'})
@@ -44,6 +45,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
       password_confirmation: "",
     }
   })
+  
 
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
   const onPlaceChanged = e => {
@@ -250,6 +252,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
     {!username && <>
       <div className="registerInput__container-x2">
         <PasswordInput
+          passwordRequirementsPopUp={PasswordRequirements}
           maxLength={20}
           isRequired={!ID}
           control={control}
