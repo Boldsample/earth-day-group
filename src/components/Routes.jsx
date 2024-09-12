@@ -76,7 +76,7 @@ const AppRoutes = () => {
         <Route path="/settings" element={<Settings />} />
         <Route path="/settings/profile" element={<ProfileSettings />} />
         <Route path="/settings/password" element={<Password />} />
-        <Route path="/settings/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/settings/privacy-policy/" element={<PrivacyPolicy />} />
         <Route path="/settings/deleteAccount" element={<DeleteAccount />} />
         <Route path="/report/:type/:entityID" element={<CreateReport />} />
       </>}
@@ -160,7 +160,7 @@ const AppRoutes = () => {
       </>}
       <Route path="/thankyou" element={<ThankYouPage />} />
       <Route path="/terms-of-service/" element={<Terms />} />
-      <Route path="/privacy-policy/" element={<Privacy />} />
+      <Route path="/privacy-policy/" element={<PrivacyPolicy />} />
 
       {!user?.role && 
         <Route path="*" element={<LoginForm />} />

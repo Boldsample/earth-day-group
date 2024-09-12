@@ -71,6 +71,8 @@ const Reports = () => {
     dispatch(setHeader('user'))
   }, [user])
   
+  console.log(reports.data[0].type)
+
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
