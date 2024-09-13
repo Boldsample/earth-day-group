@@ -9,6 +9,7 @@ import { faSearch, faTrash, faPaw, faEnvelopeOpenText, faUser, faTags } from '@f
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane} from '@fortawesome/free-regular-svg-icons'
 import { useTranslation } from 'react-i18next'
+import { Avatar } from 'primereact/avatar';
 
 import { Dropdown } from 'primereact/dropdown'
 import { setHeader } from '@store/slices/globalSlice'
@@ -90,6 +91,12 @@ const Reports = () => {
     }
 };
 
+function keepFirstLetters(inputString) {
+  const words = inputString.split(' ');
+  const firstLetters = words.map(word => word[0]).join('');
+  return firstLetters;
+}
+
   useEffect(() => {
     callReports()
     setReset(false)
@@ -98,7 +105,7 @@ const Reports = () => {
     dispatch(setHeader('user'))
   }, [user])
   
-
+console.log(reports)
 
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
@@ -119,8 +126,14 @@ const Reports = () => {
             totalRecords={reports?.total} 
             onPage={({page, rows}) => setPage({page, rows})}>
             <Column header={t('tableTitleType')} field="type" body={typeColumnBodyTemplate}></Column>
-            <Column header={t('tableTitleReported')}  field="name"></Column>
             <Column header={t('tableTitleSubject')}  field="subject"></Column>
+            <Column header={t('tableTitleReported')}  field="name" body={({name, epicture})=>{
+              const initials = keepFirstLetters(name)
+              return <div className="flex">
+                <Avatar label={initials} style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} image={epicture} shape="circle" />
+                <p className='ml-1'>{name}</p>
+              </div>;
+            }}></Column>
             <Column header={t('tableTitleStatus')}  body={({id, status}) => 
               <Dropdown value={status} options={[t('inProcess'), t('pending'), t('resolved')]} onChange={() => updateReport(id)} />
             }></Column>
