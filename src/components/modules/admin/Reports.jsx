@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
-import { faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faTrash, faPaw, faEnvelopeOpenText, faUser, faTags } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { faPaperPlane} from '@fortawesome/free-regular-svg-icons'
 import { useTranslation } from 'react-i18next'
 
 import { Dropdown } from 'primereact/dropdown'
@@ -63,6 +63,33 @@ const Reports = () => {
     </div>
   }
 
+  const typeColumnBodyTemplate = (columnItem) => {
+    switch (columnItem.type) {
+        case 'offer':
+            return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faEnvelopeOpenText}/>
+            <p className='ml-1 mb-0'>{columnItem.type}</p>
+            </div>;
+
+        case 'user':
+            return <div className="flex"><FontAwesomeIcon  color='var(--dark-blue)' icon={faUser}/>
+            <p className='ml-1'>{columnItem.type}</p>
+            </div>;
+
+        case 'product':
+            return <div className="flex"><FontAwesomeIcon  color='var(--dark-blue)' icon={faTags}/>
+            <p className='ml-1'>{columnItem.type}</p>
+            </div>;
+        
+        case 'pet':
+          return <div className="flex"><FontAwesomeIcon  color='var(--dark-blue)' icon={faPaw}/>
+          <p className='ml-1'>{columnItem.type}</p>
+          </div>;
+
+        default:
+            return null;
+    }
+};
+
   useEffect(() => {
     callReports()
     setReset(false)
@@ -71,7 +98,7 @@ const Reports = () => {
     dispatch(setHeader('user'))
   }, [user])
   
-  console.log(reports.data[0].type)
+
 
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
@@ -91,7 +118,7 @@ const Reports = () => {
             header={renderHeader} 
             totalRecords={reports?.total} 
             onPage={({page, rows}) => setPage({page, rows})}>
-            <Column header={t('tableTitleType')} field="type"></Column>
+            <Column header={t('tableTitleType')} field="type" body={typeColumnBodyTemplate}></Column>
             <Column header={t('tableTitleReported')}  field="name"></Column>
             <Column header={t('tableTitleSubject')}  field="subject"></Column>
             <Column header={t('tableTitleStatus')}  body={({id, status}) => 
