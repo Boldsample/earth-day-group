@@ -7,7 +7,7 @@ import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPencil, faPlus, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faPlus, faTrash, faUser, faEnvelope, faPersonShelter, faRecycle, faShop  } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 import { InputSwitch } from 'primereact/inputswitch'
 import { useForm } from "react-hook-form"
@@ -29,19 +29,6 @@ const Users = ({type}) => {
   const [filters, setFilters] = useState({state: "1", role: "", keyword: ''})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
-  const {
-    reset,
-    control,
-    getValues,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      unit: "",
-      materials: "",
-      unit_price: "",
-    },
-  })
 
   const changeState = async (id, state) => {
     await updateUser({state: state}, {id: id})
@@ -61,7 +48,35 @@ const Users = ({type}) => {
     const _users = await getUsers(_filter, 'min', user?.id, page)
     setUsers(_users)
   }
-  console.log(users)
+
+  
+  const roleColumnBodyTemplate = (columnItem) => {
+    switch (columnItem.role) {
+        case 'user':
+            return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faUser}/>
+            <p className='ml-1 mb-0'>{columnItem.role}</p>
+            </div>;
+
+        case 'shelter':
+            return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faPersonShelter}/>
+            <p className='ml-1 mb-0'>{columnItem.role}</p>
+            </div>;
+
+        case 'company':
+            return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faRecycle}/>
+            <p className='ml-1 mb-0'>{columnItem.role}</p>
+            </div>;
+        
+        case 'vendor':
+          return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faShop}/>
+          <p className='ml-1 mb-0'>{columnItem.role}</p>
+          </div>;
+
+        default:
+            return null;
+    }
+};
+
   const renderHeader = () => {
     return <div className="filters">
       {type == 'users' && 
@@ -99,7 +114,8 @@ const Users = ({type}) => {
   useEffect(() => {
     dispatch(setHeader('user'))
   }, [user])
-  
+  console.log(users)
+
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
@@ -117,11 +133,11 @@ const Users = ({type}) => {
             header={renderHeader} 
             totalRecords={users?.total} 
             onPage={({page, rows}) => setPage({page, rows})}>
-            <Column header={t('tableTitleUser')} body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
+            <Column headerClassName='table-header-styles' header={t('tableTitleUser')} bodyClassName='table-body-styles' body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
             {type == 'users' && 
-              <Column header={t('tableTitleRole')} field="role"></Column>
+              <Column header={t('tableTitleRole')} field="role" body={roleColumnBodyTemplate}></Column>
             }
-            <Column header={t('tableTitleEmail')} field="email"></Column>
+            <Column header={t('tableTitleEmail')} field="email" body={ type == 'admins' ? ({email})=> <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faEnvelope}/><p className='ml-1 mb-0'>{email}</p></div> :  undefined }></Column>
             <Column header={t('tableTitleState')} body={({id, state}) => 
                   <InputSwitch/>
               // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
@@ -130,7 +146,7 @@ const Users = ({type}) => {
               // ]} />
             }></Column>
             <Column className="actions" header={null} body={u => <>
-              <Link className="button small" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon icon={faPencil} /></Link>
+              <Link className="button small orange" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon  icon={faPencil} /></Link>
               <Button className="small dark-blue" onClick={() => setProfile({id: u.id, update: new Date()})}><FontAwesomeIcon icon={faUser} /></Button>
               {type == 'users' &&
                 <Link className="button small green-earth" to={`/chat/${u?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
