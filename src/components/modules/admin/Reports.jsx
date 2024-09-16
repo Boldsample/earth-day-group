@@ -72,18 +72,18 @@ const Reports = () => {
             </div>;
 
         case 'user':
-            return <div className="flex"><FontAwesomeIcon  color='var(--dark-blue)' icon={faUser}/>
-            <p className='ml-1'>{columnItem.type}</p>
+            return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faUser}/>
+            <p className='ml-1 mb-0'>{columnItem.type}</p>
             </div>;
 
         case 'product':
-            return <div className="flex"><FontAwesomeIcon  color='var(--dark-blue)' icon={faTags}/>
-            <p className='ml-1'>{columnItem.type}</p>
+            return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faTags}/>
+            <p className='ml-1 mb-0'>{columnItem.type}</p>
             </div>;
         
         case 'pet':
-          return <div className="flex"><FontAwesomeIcon  color='var(--dark-blue)' icon={faPaw}/>
-          <p className='ml-1'>{columnItem.type}</p>
+          return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faPaw}/>
+          <p className='ml-1 mb-0'>{columnItem.type}</p>
           </div>;
 
         default:
@@ -125,19 +125,21 @@ console.log(reports)
             header={renderHeader} 
             totalRecords={reports?.total} 
             onPage={({page, rows}) => setPage({page, rows})}>
-            <Column header={t('tableTitleType')} field="type" body={typeColumnBodyTemplate}></Column>
+            <Column headerClassName='table-header-styles' header={t('tableTitleType')} field="type" bodyClassName='table-body-styles' body={typeColumnBodyTemplate}></Column>
             <Column header={t('tableTitleSubject')}  field="subject"></Column>
             <Column header={t('tableTitleReported')}  field="name" body={({name, epicture})=>{
               const initials = keepFirstLetters(name)
-              return <div className="flex">
-                <Avatar label={initials} style={{ backgroundColor: '#9c27b0', color: '#ffffff' }} image={epicture} shape="circle" />
-                <p className='ml-1'>{name}</p>
+              return <div className="flex aligncenter">
+                <Avatar label={initials} style={{ backgroundColor: 'var(--orange)', color: '#ffffff', width: '20%' }} image={epicture} shape="circle" />
+                <p className='ml-1 mb-0'>{name}</p>
               </div>;
             }}></Column>
             <Column header={t('tableTitleStatus')}  body={({id, status}) => 
               <Dropdown value={status} options={[t('inProcess'), t('pending'), t('resolved')]} onChange={() => updateReport(id)} />
             }></Column>
-            <Column header={t('tableTitleAssignedTo')}  field="admin"></Column>
+            <Column header={t('tableTitleAssignedTo')}  field="admin" body={({admin})=>{
+              return <span className='table-item__background'>{admin}</span>
+            }}></Column>
             <Column className="actions" header={null} body={({id, username, aid}) => <>
               <Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
               {(!aid || aid == user?.id) && 

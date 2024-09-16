@@ -119,9 +119,10 @@ const Offers = () => {
           totalRecords={offers?.total} 
           onRowToggle={e => setExpandedRows(e.data)}
           rowExpansionTemplate={rowExpansionTemplate}
-          onPage={({page, rows}) => setPage({page, rows})}>
+          onPage={({page, rows}) => setPage({page, rows})}
+          >
           {user.role == 'user' && 
-            <Column expander={({offers}) => offers?.length > 0 } style={{width: "2.5rem"}} /> || null}
+            <Column  expander={({offers}) => offers?.length > 0 } style={{width: "2.5rem"}} /> || null}
           {/* <Column header={null} body={ProfilePhoto}></Column> */}
           {user.role != 'user' && 
             <Column header="User" body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>

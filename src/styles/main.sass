@@ -170,7 +170,6 @@ button, .button
   &.p-multiselect-items
     padding-left: 0
 
-
 /*  HEADER START  */
 .main_header
   align-items: center
@@ -287,7 +286,6 @@ button, .button
     padding: 0 1.25rem
 /*  HEADER END  */
 
-
 /*  LAYOUT START  */
 .layout
   display: flex
@@ -367,6 +365,15 @@ button, .button
       width: 100% !important
 /*  LAYOUT END  */
 
+// DATATABLE STYLES
+
+.table-item__background
+  // background-color: #fddcf4
+  // background-color: var(--yellow)
+  background-color: #efefff
+  border-radius: 10px
+  padding: 5px 5px
+  border: 1px solid lightgrey
 
 .p-carousel-prev, .p-carousel-next
   display: none
@@ -505,6 +512,7 @@ button, .button
   .p-datatable-thead > tr > th
     color: black
     padding: 0.75rem 0.5rem
+
   .p-datatable-tbody > tr > td
     color: var(--gray)
     padding: 0.75rem 0.5rem
@@ -538,6 +546,12 @@ button, .button
     padding: 0
   .p-paginator
     background: white
+.table-header-styles
+  color: black !important
+  padding: 0.75rem 1rem !important
+.table-body-styles
+  color: var(--gray) !important
+  padding: 0.75rem 1rem !important
 
 .p-dialog
   &.no-close .p-dialog-header-close
@@ -621,7 +635,7 @@ button, .button
         padding-top: 0
       &:last-child
         border: none
-        padding-bottom:0
+        padding-bottom: 0
 
 .p-image-preview-indicator
   background: #00000099
