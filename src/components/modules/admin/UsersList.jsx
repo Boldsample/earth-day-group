@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faPencil, faPlus, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
+import { InputSwitch } from 'primereact/inputswitch'
+import { useForm } from "react-hook-form"
 
 import { Dropdown } from 'primereact/dropdown'
 import { getUsers, updateUser } from '@services/userServices'
@@ -19,7 +21,7 @@ import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 
 const Users = ({type}) => {
   const dispatch = useDispatch()
-  const [reset, setReset] = useState(false)
+  const [resetFields, setResetFields] = useState(false)
   const [profile, setProfile] = useState(null)
   const [users, setUsers] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: 6})
@@ -27,11 +29,23 @@ const Users = ({type}) => {
   const [filters, setFilters] = useState({state: "1", role: "", keyword: ''})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
-
+  const {
+    reset,
+    control,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      unit: "",
+      materials: "",
+      unit_price: "",
+    },
+  })
 
   const changeState = async (id, state) => {
     await updateUser({state: state}, {id: id})
-    setReset(true)
+    setResetFields(true)
   }
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callUsers = async () =>{
@@ -47,6 +61,7 @@ const Users = ({type}) => {
     const _users = await getUsers(_filter, 'min', user?.id, page)
     setUsers(_users)
   }
+  console.log(users)
   const renderHeader = () => {
     return <div className="filters">
       {type == 'users' && 
@@ -68,7 +83,7 @@ const Users = ({type}) => {
       <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callUsers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
-        setReset(true)
+        setResetFields(true)
         setFilters({state: "1", role: "", keyword: ''})
       }}><FontAwesomeIcon icon={faTrash} /></Button>
       {type == 'admins' && 
@@ -79,8 +94,8 @@ const Users = ({type}) => {
 
   useEffect(() => {
     callUsers()
-    setReset(false)
-  }, [page, reset])
+    setResetFields(false)
+  }, [page, resetFields])
   useEffect(() => {
     dispatch(setHeader('user'))
   }, [user])
@@ -106,12 +121,13 @@ const Users = ({type}) => {
             {type == 'users' && 
               <Column header={t('tableTitleRole')} field="role"></Column>
             }
-            <Column header={t('tableTitleCreatedAt')} field="created_at"></Column>
+            <Column header={t('tableTitleEmail')} field="email"></Column>
             <Column header={t('tableTitleState')} body={({id, state}) => 
-              <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
-                {name: tGlobal("active"), code: "1"},
-                {name: tGlobal("disable"), code: "2"}
-              ]} />
+                  <InputSwitch/>
+              // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
+              //   {name: tGlobal("active"), code: "1"},
+              //   {name: tGlobal("disable"), code: "2"}
+              // ]} />
             }></Column>
             <Column className="actions" header={null} body={u => <>
               <Link className="button small" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon icon={faPencil} /></Link>
