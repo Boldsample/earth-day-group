@@ -15,6 +15,8 @@ import { getProducts, updateProduct } from '@services/productServices'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import { Dropdown } from 'primereact/dropdown'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
+import { InputSwitch } from 'primereact/inputswitch'
+import { Avatar } from 'primereact/avatar'
 
 const Products = () => {
   const dispatch = useDispatch()
@@ -37,6 +39,13 @@ const Products = () => {
     }
   ]
 
+  function keepFirstLetters(inputString) {
+    const words = inputString.split(' ');
+    const firstLetters = words.map(word => word[0]).join('');
+    return firstLetters;
+  }
+  
+
   const changeState = async (id, state) => {
     await updateProduct({state: state}, {id: id})
     setReset(true)
@@ -49,6 +58,7 @@ const Products = () => {
     const _products = await getProducts(_filter, page)
     setProducts(_products)
   }
+  console.log(products)
   const renderHeader = () => {
     return <div className="filters">
       <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={tGlobal('inputSearchPlaceHolder')} />
@@ -84,13 +94,20 @@ const Products = () => {
           header={renderHeader} 
           totalRecords={products?.total} 
           onPage={({page, rows}) => setPage({page, rows})}>
-          <Column header={t('tableTitlePublishedBy')} body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
-          <Column header={t('tableTitleName')} field="name"></Column>
+          <Column headerClassName='table-header-styles' header={t('tableTitlePublishedBy')} bodyClassName='table-body-styles' body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
+          <Column header={t('tableTitleName')} field="name" body={({name, picture})=>{
+            const initials = keepFirstLetters(name)
+            return <div className="flex aligncenter">
+              <Avatar label={initials} style={{ backgroundColor: 'var(--orange)', color: '#ffffff', width: '16%' }} image={picture} shape="circle" />
+              <p className='ml-1 mb-0'>{name}</p>
+            </div>;
+          }}></Column>
           <Column header={t('tableTitlePrice')} body={({price}) => <>
-            {parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+            <span className='table-item__background'>{parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
           </>}></Column>
           <Column header={t('tableTitleState')} body={({id, state}) => 
-            <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
+          <InputSwitch/>
+            // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
           }></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
             <Link className="button small dark-blue" to={`/product/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>

@@ -15,6 +15,7 @@ import { setHeader } from '@store/slices/globalSlice'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { Dropdown } from 'primereact/dropdown'
+import { InputSwitch } from 'primereact/inputswitch'
 
 const Pets = () => {
   const dispatch = useDispatch()
@@ -58,6 +59,8 @@ const Pets = () => {
     dispatch(setHeader('user'))
   }, [user])
   
+
+
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
@@ -74,12 +77,13 @@ const Pets = () => {
           header={renderHeader} 
           totalRecords={pets?.total} 
           onPage={({page, rows}) => setPage({page, rows})}>
-          <Column header={t('tableTitlePublishedBy')}  body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
-          <Column header={t('tableTitleName')} field="name"></Column>
+          <Column headerClassName='table-header-styles' header={t('tableTitleName')} bodyClassName='table-body-styles' field="name"></Column>
           <Column header={t('tableTitleSpecie')}  field="specie"></Column>
-          <Column header={t('tableTitlePublishedDate')}  field="date"></Column>
-          <Column header={t('tableTitlePublished')}  body={({id, state}) => 
-            <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
+          <Column header={t('tableTitleAge')}  field="age"></Column>
+          <Column header={t('tableTitlePublishedBy')}  body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
+          <Column header={t('tableTitleState')}  body={({id, state}) => 
+           <InputSwitch/>
+            // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
           }></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
             <Link className="button small dark-blue" to={`/pet/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
