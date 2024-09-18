@@ -94,7 +94,7 @@ const Products = () => {
           header={renderHeader} 
           totalRecords={products?.total} 
           onPage={({page, rows}) => setPage({page, rows})}>
-          <Column headerClassName='table-header-styles' header={t('tableTitlePublishedBy')} bodyClassName='table-body-styles' body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
+          <Column headerClassName='table-header-styles' header={t('tableTitlePublishedBy')} bodyClassName='table-body-styles' body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleName')} field="name" body={({name, picture})=>{
             const initials = keepFirstLetters(name)
             return <div className="flex aligncenter">

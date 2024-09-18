@@ -45,11 +45,11 @@ const Users = ({type}) => {
       _filter['user'] = type == 'admins' ? `u.role='admin'` : `u.role<>'admin'`
     if(filters?.keyword != '')
       _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%')`
-    const _users = await getUsers(_filter, 'min', user?.id, page)
+    const _users = await getUsers(_filter, 'full', user?.id, page)
     setUsers(_users)
   }
 
-  
+  console.log(page)
   const roleColumnBodyTemplate = (columnItem) => {
     switch (columnItem.role) {
         case 'user':

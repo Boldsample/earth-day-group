@@ -80,7 +80,7 @@ const Pets = () => {
           <Column headerClassName='table-header-styles' header={t('tableTitleName')} bodyClassName='table-body-styles' field="name"></Column>
           <Column header={t('tableTitleSpecie')}  field="specie"></Column>
           <Column header={t('tableTitleAge')}  field="age"></Column>
-          <Column header={t('tableTitlePublishedBy')}  body={({username, picture}) => <><ProfilePhoto userPhoto={picture} /> {username}</>}></Column>
+          <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleState')}  body={({id, state}) => 
            <InputSwitch/>
             // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
