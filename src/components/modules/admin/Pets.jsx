@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
-import { faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faTrash, faPaw, faCakeCandles } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { useTranslation } from 'react-i18next'
@@ -16,6 +16,7 @@ import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { Dropdown } from 'primereact/dropdown'
 import { InputSwitch } from 'primereact/inputswitch'
+import { Avatar } from 'primereact/avatar'
 
 const Pets = () => {
   const dispatch = useDispatch()
@@ -59,7 +60,7 @@ const Pets = () => {
     dispatch(setHeader('user'))
   }, [user])
   
-
+console.log(pets)
 
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
@@ -77,9 +78,19 @@ const Pets = () => {
           header={renderHeader} 
           totalRecords={pets?.total} 
           onPage={({page, rows}) => setPage({page, rows})}>
-          <Column headerClassName='table-header-styles' header={t('tableTitleName')} bodyClassName='table-body-styles' field="name"></Column>
+          <Column headerClassName='table-header-styles' header={t('tableTitleName')} bodyClassName='table-body-styles' field="name" body={({name, picture}) =>{
+             return <div className="flex aligncenter">
+             <Avatar icon={<FontAwesomeIcon  color='#fff' icon={faPaw}/>} style={{ backgroundColor: 'var(--dark-blue)', color: '#ffffff', width: '19%' }}  image={picture} shape="circle" />
+             <p className='ml-1 mb-0'>{name}</p>
+           </div>;
+          }}></Column>
           <Column header={t('tableTitleSpecie')}  field="specie"></Column>
-          <Column header={t('tableTitleAge')}  field="age"></Column>
+          <Column header={t('tableTitleAge')}  field="age" body={({age})=>{
+            return <div>
+              <FontAwesomeIcon  color='var(--dark-blue)' icon={faCakeCandles}/>
+              <span className='ml-1'>{age}</span>
+            </div>
+          }}></Column>
           <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleState')}  body={({id, state}) => 
            <InputSwitch/>

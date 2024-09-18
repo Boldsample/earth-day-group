@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
-import { faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faTrash, faTags } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { useTranslation } from 'react-i18next'
@@ -94,17 +94,17 @@ const Products = () => {
           header={renderHeader} 
           totalRecords={products?.total} 
           onPage={({page, rows}) => setPage({page, rows})}>
-          <Column headerClassName='table-header-styles' header={t('tableTitlePublishedBy')} bodyClassName='table-body-styles' body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
-          <Column header={t('tableTitleName')} field="name" body={({name, picture})=>{
+          <Column headerClassName='table-header-styles' header={t('tableTitleName')} field="name" bodyClassName='table-body-styles' body={({name, picture})=>{
             const initials = keepFirstLetters(name)
             return <div className="flex aligncenter">
-              <Avatar label={initials} style={{ backgroundColor: 'var(--orange)', color: '#ffffff', width: '16%' }} image={picture} shape="circle" />
+              <Avatar  icon={<FontAwesomeIcon  color='#fff' icon={faTags}/>} style={{ backgroundColor: 'var(--dark-blue)', color: '#ffffff', width: '16%' }} image={picture} shape="circle" />
               <p className='ml-1 mb-0'>{name}</p>
             </div>;
           }}></Column>
           <Column header={t('tableTitlePrice')} body={({price}) => <>
             <span className='table-item__background'>{parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
           </>}></Column>
+          <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleState')} body={({id, state}) => 
           <InputSwitch/>
             // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />

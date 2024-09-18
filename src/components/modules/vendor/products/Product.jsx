@@ -63,7 +63,7 @@ const Product = () => {
                 <Link className="button small red-state outline hasTooltip" to={`/report/product/${product?.id}/`} data-pr-tooltip={t('reportProductTooltipText')}><FontAwesomeIcon icon={faFlag} /></Link>
               </> || <>
                 <Link to={`/product/edit/${product?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editProductBtnText')}</span></Link>
-                <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deleteProductBtnText')}</span></Link>
+                <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deleteProductBtn')}</span></Link>
               </>}
             </div>
           </div>

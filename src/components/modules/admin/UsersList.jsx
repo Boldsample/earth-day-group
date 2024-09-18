@@ -7,7 +7,7 @@ import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPencil, faPlus, faTrash, faUser, faEnvelope, faPersonShelter, faRecycle, faShop  } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faPlus, faTrash, faUser, faEnvelope, faPersonShelter, faRecycle, faShop, faHouse, faBuildingNgo  } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 import { InputSwitch } from 'primereact/inputswitch'
 import { useForm } from "react-hook-form"
@@ -58,7 +58,7 @@ const Users = ({type}) => {
             </div>;
 
         case 'shelter':
-            return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faPersonShelter}/>
+            return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faHouse}/>
             <p className='ml-1 mb-0'>{columnItem.role}</p>
             </div>;
 
@@ -69,6 +69,16 @@ const Users = ({type}) => {
         
         case 'vendor':
           return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faShop}/>
+          <p className='ml-1 mb-0'>{columnItem.role}</p>
+          </div>;
+
+        case 'ngo':
+          return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faBuildingNgo}/>
+          <p className='ml-1 mb-0'>{columnItem.role}</p>
+          </div>;
+
+        case 'social':
+          return <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)' icon={faPersonShelter}/>
           <p className='ml-1 mb-0'>{columnItem.role}</p>
           </div>;
 
