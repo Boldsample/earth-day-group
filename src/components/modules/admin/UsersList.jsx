@@ -29,6 +29,7 @@ const Users = ({type}) => {
   const [filters, setFilters] = useState({state: "1", role: "", keyword: ''})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+  const [enabled, setEnabled] = useState(1);
 
   const changeState = async (id, state) => {
     await updateUser({state: state}, {id: id})
@@ -126,6 +127,11 @@ const Users = ({type}) => {
   }, [user])
   console.log(users)
 
+  // const disableUser = async (id, data) =>{
+  //   const data = enabled
+  //   await updateUser({ ...data }, {id: id}, id)
+  // }
+
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
@@ -149,7 +155,7 @@ const Users = ({type}) => {
             }
             <Column header={t('tableTitleEmail')} field="email" body={ type == 'admins' ? ({email})=> <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faEnvelope}/><p className='ml-1 mb-0'>{email}</p></div> :  undefined }></Column>
             <Column header={t('tableTitleState')} body={({id, state}) => 
-                  <InputSwitch/>
+                  <InputSwitch checked={users?.state} onChange={(e) => setEnabled(e.value)}/>
               // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
               //   {name: tGlobal("active"), code: "1"},
               //   {name: tGlobal("disable"), code: "2"}
