@@ -93,8 +93,7 @@ console.log(pets)
           }}></Column>
           <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleState')}  body={({id, state}) => 
-           <InputSwitch/>
-            // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
+             <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/>
           }></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
             <Link className="button small dark-blue" to={`/pet/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>

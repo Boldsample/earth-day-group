@@ -29,7 +29,6 @@ const Users = ({type}) => {
   const [filters, setFilters] = useState({state: "1", role: "", keyword: ''})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
-  const [enabled, setEnabled] = useState(1);
 
   const changeState = async (id, state) => {
     await updateUser({state: state}, {id: id})
@@ -50,7 +49,6 @@ const Users = ({type}) => {
     setUsers(_users)
   }
 
-  console.log(page)
   const roleColumnBodyTemplate = (columnItem) => {
     switch (columnItem.role) {
         case 'user':
@@ -151,10 +149,6 @@ const Users = ({type}) => {
             <Column header={t('tableTitleEmail')} field="email" body={ type == 'admins' ? ({email})=> <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faEnvelope}/><p className='ml-1 mb-0'>{email}</p></div> :  undefined }></Column>
             <Column header={t('tableTitleState')} body={({id, state}) => 
                   <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/>
-              // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
-              //   {name: tGlobal("active"), code: "1"},
-              //   {name: tGlobal("disable"), code: "2"}
-              // ]} />
             }></Column>
             <Column className="actions" header={null} body={u => <>
               <Link className="button small orange" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon  icon={faPencil} /></Link>

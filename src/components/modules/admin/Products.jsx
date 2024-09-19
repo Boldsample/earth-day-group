@@ -28,17 +28,6 @@ const Products = () => {
   const [t] = useTranslation('translation', { keyPrefix: 'admin.products' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 
-  const stateDropDownText = [
-    {
-      "name": tGlobal('active'),
-      "code": "1"
-    },
-    {
-      "name": tGlobal('disable'),
-      "code": "2"
-    }
-  ]
-
   function keepFirstLetters(inputString) {
     const words = inputString.split(' ');
     const firstLetters = words.map(word => word[0]).join('');
@@ -106,8 +95,7 @@ const Products = () => {
           </>}></Column>
           <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleState')} body={({id, state}) => 
-          <InputSwitch/>
-            // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={stateDropDownText} />
+          <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/>
           }></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
             <Link className="button small dark-blue" to={`/product/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
