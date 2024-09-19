@@ -125,12 +125,7 @@ const Users = ({type}) => {
   useEffect(() => {
     dispatch(setHeader('user'))
   }, [user])
-  console.log(users)
-
-  // const disableUser = async (id, data) =>{
-  //   const data = enabled
-  //   await updateUser({ ...data }, {id: id}, id)
-  // }
+  
 
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />
@@ -155,7 +150,7 @@ const Users = ({type}) => {
             }
             <Column header={t('tableTitleEmail')} field="email" body={ type == 'admins' ? ({email})=> <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faEnvelope}/><p className='ml-1 mb-0'>{email}</p></div> :  undefined }></Column>
             <Column header={t('tableTitleState')} body={({id, state}) => 
-                  <InputSwitch checked={users?.state} onChange={(e) => setEnabled(e.value)}/>
+                  <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/>
               // <Dropdown value={state} onChange={e => changeState(id, e.value)} optionLabel="name" optionValue="code" options={[
               //   {name: tGlobal("active"), code: "1"},
               //   {name: tGlobal("disable"), code: "2"}
