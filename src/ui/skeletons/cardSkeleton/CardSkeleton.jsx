@@ -18,7 +18,7 @@ const CardSkeleton = ({className}) => {
                 </div>
                 <Skeleton width="100%" height="9.375rem"></Skeleton>
                 <div className="flex justify-content-between mt-2">
-                    <Skeleton width="2.5rem" height="1.25rem"></Skeleton>
+                    <Skeleton  width="2.5rem" height="1.25rem"></Skeleton>
                     <Skeleton width="2.5rem" height="1.25rem"></Skeleton>
                 </div>
             </div>
