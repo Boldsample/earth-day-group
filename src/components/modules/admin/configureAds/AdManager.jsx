@@ -22,6 +22,8 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     const [loading, setLoading] = useState(false);
     const [firstRender, setFirstRender] = useState(false);
     const [ad, setAd] = useState(null);
+    const [adExpiration, setAdExpiration] = useState(null);
+    const [adDates, setAdDates] = useState({})
     const user = useSelector((state) => state.users.userData)
     const [date, setDate] = useState(null);
     const toast = useRef(null);
@@ -85,15 +87,35 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     }
   }
 
+  const adCountDownRemoval = () =>{
+   const start = adDates.startDate
+   const end  = adDates.endDate
+   const expiration = (end - start) / (1000 * 60 * 60 * 24);
+  setAdExpiration(expiration)
+  
+  }
   
   useEffect(() => {
     setFirstRender(true)
     getAd(type).then(data => {
       setAd(data)
       setFirstRender(false)
+      setAdDates({startDate: new Date(data?.start_date), endDate: new Date(data?.end_date)})
+      if (adDates.startDate && adDates.endDate) {
+        console.log("going in")
+        adCountDownRemoval();
+    }
     })
     
   }, [update]);
+
+//   useEffect(() => {
+//     if (adDates.startDate && adDates.endDate) {
+//         adCountDownRemoval();
+//     }
+// }, [adDates]);
+  
+  console.log(adExpiration)
 
   const onSubmit = async (data) => {
     let response 
