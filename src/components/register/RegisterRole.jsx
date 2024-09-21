@@ -15,8 +15,8 @@ const RegisterRole = () => {
     dispatch(setHeader('register'))
   }, [])
   
-  return <div className="layout">
-    <img className="layout__background hide__mobile" src="/assets/register/image-1.svg" />
+  return <div id="registerRole" className="layout">
+    <img className="layout__background" src="/assets/register/image-1.svg" />
     <div className="main__content absoluteleft width58">
       <h2 className="text-center mb-3">{t('mainTitleText')}</h2>
       <div className="card__grid">

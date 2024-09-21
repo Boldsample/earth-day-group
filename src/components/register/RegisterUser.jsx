@@ -195,26 +195,6 @@ const RegisterUser = ({create = false}) => {
                 message: tGlobal('patternErrorMessage'),
               },
             }} />
-          <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
-            <TextInput
-              control={control}
-              isRequired={true}
-              autocomplete="off"
-              labelName={tGlobal2('userAddressInputLabel')}
-              nameInput="address"
-              placeHolderText={tGlobal2('userAddressPlaceHolderText')}
-              getFormErrorMessage={getFormErrorMessage}
-              onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
-              rules={{
-                required: tGlobal(`requiredErrorMessage`),
-                pattern: {
-                  value: /^\S/,
-                  message: tGlobal('patternErrorMessage'),
-                },
-              }} />
-          </Autocomplete>
-        </div>
-        <div className="registerInput__container-x1">
           <NumberInput
             isRequired={true}
             control={control}
@@ -233,6 +213,26 @@ const RegisterUser = ({create = false}) => {
                 message: tGlobal('validPhoneErrorMessage'),
               },
             }} />
+        </div>
+        <div className="registerInput__container-x1">
+          <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
+            <TextInput
+              control={control}
+              isRequired={true}
+              autocomplete="off"
+              labelName={tGlobal2('userAddressInputLabel')}
+              nameInput="address"
+              placeHolderText={tGlobal2('userAddressPlaceHolderText')}
+              getFormErrorMessage={getFormErrorMessage}
+              onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
+              rules={{
+                required: tGlobal(`requiredErrorMessage`),
+                pattern: {
+                  value: /^\S/,
+                  message: tGlobal('patternErrorMessage'),
+                },
+              }} />
+          </Autocomplete>
         </div>
         <div className="registerInput__container-x1">
           <TextAreaInput

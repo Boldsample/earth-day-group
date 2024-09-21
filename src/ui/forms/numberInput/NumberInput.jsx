@@ -47,18 +47,12 @@ const NumberInput = ({
     </>
   );
 
-  return (
-    <div className="p-field">
-      {showLabel ? (
-        <label htmlFor={nameInput}>
-          {labelName} {isRequired && <span className="text-red-600">*</span>}
-          {renderInput()}
-        </label>
-      ) : (
-        renderInput()
-      )}
-    </div>
-  );
-};
+  return <div className="p-field">
+    {showLabel ? <label htmlFor={nameInput}>
+      {labelName} {isRequired && <span className="text-red-600">*</span>}
+      {renderInput()}
+    </label> : renderInput()}
+  </div>
+}
 
-export default NumberInput;
+export default NumberInput

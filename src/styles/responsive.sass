@@ -1,0 +1,201 @@
+@media (min-width: 768px)
+  #intro
+    .layout
+      background-image: none !important
+@media (max-width: 767px)
+  .main_header
+    .navbar-item
+      &.go-back
+        .user-name
+          display: none
+      &.logo
+        width: 8.2rem
+        img
+          height: 2.5rem
+      &.right-align
+        flex-wrap: wrap
+        width: 70px
+        button, .button
+          display: block
+          line-height: 1.2em
+          & + button, & + .button
+            margin-left: 0
+            margin-top: 1rem
+          &.small + .small
+            margin-left: 0
+            margin-top: 0.4rem
+      &.icons
+        gap: 0.7rem
+        .lang, .logout
+          display: none
+    .nav__container
+      bottom: 0
+      height: auto
+      left: 0
+      position: fixed
+      top: auto
+      width: 100%
+      z-index: 10
+      .box
+        border-radius: 0
+        flex-direction: row
+        gap: 1.875rem
+        padding: 1rem 1.875rem
+        width: 100%
+    &:not(.intro, .login, .register) + .layout:not(.hasfooter)
+      padding-bottom: 4rem
+  .layout
+    .layout__background
+      height: 90vw
+      margin: -15vw -1.25rem 0
+      max-width: initial
+      object-fit: cover
+      object-position: left bottom
+      order: 2
+      position: relative
+      width: 100vw
+      z-index: 0
+    .main__content
+      order: 1
+      padding-bottom: 0 !important
+      z-index: 1
+      &.verticalcenter-2
+        min-height: 0
+    .dashboard-content
+      .card
+        width: 100%
+    .template__top .template__banner
+      background-position: left bottom
+      background-size: 170vw
+      height: auto
+      padding: 8.75rem 2rem 12.5rem 2rem
+      text-align: right
+    .features
+      gap: 1rem
+      .icon img
+        height: 2.5rem
+        width: 2.5rem
+  h1
+    font-size: 2.5rem
+  h2
+    font-size: 2rem
+  h3
+    font-size: 1.6rem
+  h4
+    font-size: 1.2rem
+  #intro
+    .layout
+      background-position: center bottom
+      background-repeat: no-repeat
+      background-size: contain
+      height: 210vw
+    .layout__background
+      display: none
+  #registerRole
+    .layout__background
+      object-position: right bottom
+  .registerInput__container-x2
+    flex-wrap: wrap
+    & > .p-field, & > .input__wrapper
+      width: 100%
+  .p-datatable
+    .p-datatable-header
+      .filters
+        flex-wrap: wrap
+        justify-self: flex-start
+        justify-items: flex-start
+        .p-dropdown, .p-multiselect, .p-inputtext
+          margin-bottom: 0.5rem
+          width: 100%
+        button
+          font-size: 0.9rem
+          height: 2.5rem
+          line-height: 1em
+          margin: 0 0.5rem 0 0
+          padding: 0 0.75rem
+          vertical-align: top
+          &:last-child
+            margin-right: 0
+    .p-datatable-thead
+      display: none
+    .p-datatable-tbody
+      & > tr
+        display: flex
+        flex-wrap: wrap
+        width: 100%
+        & > td
+          display: block
+          width: 100%
+          &::before
+            font-weight: 700
+        & > td:nth-child(2)
+          width: calc(100% - 2.5rem)
+        & > td:nth-child(3)::before
+          content: 'Material: '
+        & > td:nth-child(4)::before
+          content: 'Cantidad: '
+        & > td:nth-child(5)::before
+          content: 'Precio de venta: '
+        & > td:nth-child(6)::before
+          content: 'Ofertas: '
+        & > td:nth-child(7)::before
+          content: 'Publicación: '
+      .p-datatable-row-expansion
+        td:nth-child(3)::before
+          content: 'Oferta: '
+        td:nth-child(4)::before
+          content: 'Estado: '
+        td:nth-child(5)::before
+          content: 'Fecha: '
+  .chat__scroll
+    height: calc(100vh - 17rem)
+  .chat__input
+    padding: 0
+  .insection_header
+    left: 1rem
+    margin: 0
+    width: calc(100% - 4rem)
+  .map__filters
+    bottom: -5rem
+    width: 100%
+    &.show
+      bottom: 8rem
+  .multiUse__card
+    &.company, &.product, &.pet
+      max-width: initial
+      .main__container a .profile__photo
+        height: 55vw
+  .footer__grid
+    flex-wrap: wrap
+    grid-template-columns: initial
+    height: auto
+    margin-bottom: 4rem
+    padding: 2rem
+    text-align: center
+    & > *
+      width: 100%
+  .profileInformation__grid
+    grid-template-columns: initial
+    .image__container
+      display: flex
+      justify-content: center
+      margin: 0 0 2rem
+      text-align: center
+      width: 100%
+    .contact__grid
+      grid-template-columns: initial
+    .buttons__container
+      display: flex
+      flex-wrap: wrap
+      gap: 1rem
+      button, .button
+        margin-left: 0
+  .settings__card
+    .settings__table
+      flex-wrap: wrap
+      h4
+        min-width: initial
+        margin-bottom: 0.5rem
+        width: 100%
+      p
+        text-align: left
