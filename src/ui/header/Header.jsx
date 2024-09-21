@@ -32,7 +32,7 @@ const Header = () => {
     }
 
     <div className="navbar-item go-back">
-      {header != 'intro' && 
+      {header != 'intro' || (user?.id && !['login', 'register'].some(s => s == header)) &&
         <a onClick={() => navigate(-1)}><FontAwesomeIcon icon={faChevronLeft} /></a>
       }
       {user?.id && !['map'].some((s) => s == header) && <>
@@ -61,15 +61,15 @@ const Header = () => {
           <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
         </>}
         <HeaderNotifications />
-        <button onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
-        <a onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
+        <button className="lang" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
+        <a className="logout" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
       </div>
     }
 
     {!user?.id && 
       <div className="navbar-item right-align">
-        <Link className="button dark-blue" to="/login/">{t(`global.login`)}</Link>
-        <button onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
+        <Link className="button small dark-blue" to="/login/">{t(`global.login`)}</Link>
+        <button class="small" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
       </div>
     }
   </header>

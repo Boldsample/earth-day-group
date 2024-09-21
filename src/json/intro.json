@@ -1,6 +1,7 @@
 [
 	{
 		"img": "/assets/intro/image-1.svg",
+		"img_mobile": "/assets/responsive/intro/image-1.svg",
 		"title": "slide1_title",
 		"content": "slide1_description",
 		"list": [
@@ -13,18 +14,21 @@
 	},
 	{
 		"img": "/assets/intro/image-2.svg",
+		"img_mobile": "/assets/responsive/intro/image-2.svg",
     "wrapperstyle": {"paddingRight": "10.625rem"},
 		"title": "locale_recycling_centers",
 		"content": "according_to_your_location"
 	},
 	{
 		"img": "/assets/intro/image-3.svg",
+		"img_mobile": "/assets/responsive/intro/image-3.svg",
     "wrapperstyle": {"paddingRight": "7.5rem"},
 		"title": "help_your_planet",
 		"content": "make_an_extra_income"
 	},
 	{
 		"img": "/assets/intro/image-4.svg",
+		"img_mobile": "/assets/responsive/intro/image-4.svg",
 		"title": "find_social_organizations",
     "wrapperstyle": {"paddingRight": "6.25rem"},
 		"content": "give_a_second_change"

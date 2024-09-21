@@ -19,7 +19,7 @@ const Intro = () => {
 	}, [])
 
 	const IntroTemplate = (item) => {
-		return <div className="layout">
+		return <div className="layout" style={{ backgroundImage: `url(${item?.img_mobile}` }}>
 			<img className="layout__background" src={item?.img} />
 			<div className="main__content verticalcenter-1 xpadding-1" style={item?.wrapperstyle}>
 				<h1 className="text-upperCase mb-1">{t(`intro.${item?.title}`)}</h1>
