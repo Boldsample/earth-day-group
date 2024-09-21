@@ -24,7 +24,23 @@ export const addAd = async (data) => {
   }
   
   export const getAd = async (type) => {
-    let filterStr = `a.type='${type}' AND a.state = 1`
+    let filterStr = `a.type='${type}'`
+    filterStr = encodeURIComponent(filterStr)
     const { data } = await API.get(`/get/ads&filter=${filterStr}&single=1`)
-    return data?.data[0];
+    let returningData = {...data.data[0]}
+    const startDate = new Date(returningData?.start_date);
+      const endDate = new Date(returningData?.end_date);
+      
+      const currentTime = new Date();
+      const timeDiffInMilliseconds =  endDate - currentTime ;
+      
+      if (returningData.state == 1 && timeDiffInMilliseconds <= 0) {
+        console.log(returningData.id)
+        await updateAd({state:2}, {id: returningData.id})
+       
+
+        returningData.state = 2
+      }
+
+    return returningData;
   }

@@ -22,8 +22,6 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     const [loading, setLoading] = useState(false);
     const [firstRender, setFirstRender] = useState(false);
     const [ad, setAd] = useState(null);
-    const [adExpiration, setAdExpiration] = useState(null);
-    const [adDates, setAdDates] = useState({})
     const user = useSelector((state) => state.users.userData)
     const [date, setDate] = useState(null);
     const toast = useRef(null);
@@ -80,43 +78,29 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
         link: "",
         image: null
       })
-      await updateAd({state:2}, {id:ad.id})
+      await updateAd({state:3}, {id:ad.id})
+      setLoading(false)
       setUpdate(new Date())
     }else{
       setValue('image', null)
     }
   }
-
-  const adCountDownRemoval = () =>{
-   const start = adDates.startDate
-   const end  = adDates.endDate
-   const expiration = (end - start) / (1000 * 60 * 60 * 24);
-  setAdExpiration(expiration)
-  
-  }
-  
   useEffect(() => {
-    setFirstRender(true)
+    setFirstRender(true);
     getAd(type).then(data => {
-      setAd(data)
-      setFirstRender(false)
-      setAdDates({startDate: new Date(data?.start_date), endDate: new Date(data?.end_date)})
-      if (adDates.startDate && adDates.endDate) {
-        console.log("going in")
-        adCountDownRemoval();
-    }
-    })
+
+        if(data.state < 3){
+            setLoading(true)
+            setAd(data);
+        }
     
-  }, [update]);
-
-//   useEffect(() => {
-//     if (adDates.startDate && adDates.endDate) {
-//         adCountDownRemoval();
-//     }
-// }, [adDates]);
+      
+      setFirstRender(false);
+    });
   
-  console.log(adExpiration)
-
+  }, [update]); 
+  
+console.log("id", ad?.id)
   const onSubmit = async (data) => {
     let response 
     setSending(true)
@@ -195,7 +179,7 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
             <p>{bannerDescription}</p>
             { firstRender ? (
                 <CardSkeleton className="chatCard__skeleton" />
-            ) : !ad?.id && watch('image') == null && !loading ? (
+            ) : (!ad?.id || ad?.state == 3) && watch('image') == null && !loading ? (
                 <div>
                     <FileUpload
                         name="banner_image"
@@ -218,13 +202,18 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
                                     {t('createAdBtnText')}
                                 </Button>
                             )}
-                            <button type='button' onClick={cancel} className='red-state'>
+                              {ad?.state == 2  && (
+                                <Button loading={sending} type='submit' onClick={cancel} form='ad_form' className='green-earth'>
+                                    {t('createAdBtnText')}
+                                </Button>
+                            )}
+                            {ad?.state == 1 &&  <button type='button' onClick={cancel} className='red-state'>
                                 {ad?.id ? t('cancelCampaignBtnText') : t('cancelBtnText')}
-                            </button>
+                            </button>}
                         </div>
                         {ad?.id && (
-                            <div className='btn-str'>
-                                <span className='btn-str__text'>{t('liveAdText')}</span>
+                            <div className={'btn-str' + ( ad?.state == 1 ?  ' ad-offline' : '')}>
+                                <span className='btn-str__text'>{ad?.state == 1 ? t('liveAdText') : t('offline')}</span>
                             </div>
                         )}
                     </div>
