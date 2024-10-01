@@ -42,8 +42,9 @@ const Chat = () => {
   const [offerInfo, setOfferInfo] = useState(null)
   const [reportInfo, setReportInfo] = useState(null)
   const userId = useSelector((state) => state.users.userData.id)
-  const notifications = useSelector((state) => state.users.notifications)
   const [t] = useTranslation('translation', { keyPrefix: 'chat.chat' })
+  const notifications = useSelector((state) => state.users.notifications)
+  const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
   
   const callMessages = async () => {
     setCalling(true)
@@ -160,7 +161,7 @@ const Chat = () => {
           <OfferInfo type="min" show={show} offer={offerInfo} onHide={hidePopup}  />
           <div className="chat__offer">
             <h5>{offerInfo?.title}</h5>
-            <Button type="button" label={offerInfo?.material} className={'small ' + offerInfo?.material} />
+            <Button type="button" label={tMaterial(offerInfo?.material)} className={'small ' + offerInfo?.material} />
             <div className="date" style={{fontSize: '0.75rem'}}>{offerInfo?.date}</div>
             <div className="chat__offer__info">
               {/* <p>You are about to send an offer proposal to {offerInfo?.name}. The asking price for this offer is {parseInt(offerInfo?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p> */}

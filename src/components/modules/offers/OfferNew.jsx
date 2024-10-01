@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
 
 import { setHeader } from "@store/slices/globalSlice"
+import materials from "@json/recyclableMaterials.json"
 import { addImages, createOffer } from "@services/offersServices"
 import { TextInput, NumberInput, DropDownInput, UploadPhotoInput } from "@ui/forms"
 
@@ -19,6 +20,7 @@ const OfferNew = () => {
   const [uploadedImages, setUploadedImages] = useState([])
   const userId = useSelector((state) => state.users.userData.id)
   const [t] = useTranslation('translation', { keyPrefix: 'offers.offerNew'})
+  const [tMaterial] = useTranslation('translation', {keyPrefix: 'materials'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const {
     control,
@@ -33,6 +35,14 @@ const OfferNew = () => {
       quantity: "",
     },
   })
+  const translatedMaterials = materials.map(group => ({
+    ...group,
+    label: tMaterial(group.label),
+    items: group.items.map(item => ({
+      ...item,
+      label: tMaterial(item.label),
+    }))
+  }));
 
   const getFormErrorMessage = (fieldName) =>
     errors[fieldName] && (
@@ -92,18 +102,15 @@ const OfferNew = () => {
               control={control}
               showLabel={false}
               isRequired={true}
+			  optionLabel="label"
+			  optionValue="label"
               nameInput="material"
+			  optionGroupLabel="label"
+			  optionGroupChildren="items"
+              options={translatedMaterials}
               labelName={t('inputDropdownMaterialLabel')}
               placeHolderText={t('inputDropdownMaterialPlaceholderText')}
               getFormErrorMessage={getFormErrorMessage}
-              options={[
-                {label: t('paperLabel'), value: "Paper"},
-                {label: t('glassLabel'), value: "Glass"},
-                {label: t('plasticLabel'), value: "Plastic"},
-                {label: t('eWasteLabel'), value: "E-Waste"},
-                {label:t('metalLabel'), value: "Metal"},
-                {label: t('organicLabel'), value: "Organic"},
-              ]}
               rules={{
                 required: tGlobal('requiredErrorMessage'),
               }}

@@ -43,7 +43,9 @@ const Header = () => {
 
 
     {['settings'].some(s => s == header) && 
-      <div className="navbar-item"><h4>{t(`global.${headerTitle}`)}</h4></div>
+      	<div className="navbar-item">
+			{headerTitle && <h4>{t(`global.${headerTitle}`)}</h4>}
+		</div>
     }
     
     {!['settings', 'map'].some(s => s == header) && 
@@ -69,7 +71,7 @@ const Header = () => {
     {!user?.id && 
       <div className="navbar-item right-align">
         <Link className="button small dark-blue" to="/login/">{t(`global.login`)}</Link>
-        <button class="small" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
+        <button className="small" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
       </div>
     }
   </header>

@@ -38,6 +38,11 @@
       "path": "/profile/"
     },
     {
+      "label": "mapNavBtn",
+      "icon": "/assets/icons/location.svg",
+      "path": "/map/"
+    },
+    {
       "label": "inboxNavBtn",
       "icon": "/assets/icons/inbox.svg",
       "path": "/chat/"

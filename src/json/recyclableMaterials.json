@@ -1,92 +1,92 @@
 [
   {
-    "label": "Ferrosos y metálicos",
+    "label": "Ferrous and metallic",
     "code": "FM",
     "items": [
-      {"label": "Hierro y acero"}, 
-      {"label": "Aluminio"},
-      {"label": "Cobre"},
-      {"label": "Oro"},
-      {"label": "plata"},
-      {"label": "Platino"},
-      {"label": "Paladio"}
+      {"label": "Iron and steel"}, 
+      {"label": "Aluminum"},
+      {"label": "Copper"},
+      {"label": "Gold"},
+      {"label": "Silver"},
+      {"label": "Platinum"},
+      {"label": "Palladium"}
     ]
   },
   {
-    "label": "Plásticos",
+    "label": "Plastics",
     "code": "PL",
     "items": [
-      {"label": "PET (Tereftalato de polietileno)"},
-      {"label": "HDPE (Polietileno de alta densidad)"},
-      {"label": "PVC (Cloruro de polivinilo)"},
-      {"label": "LDPE (Polietileno de baja densidad)"},
-      {"label": "PP (Polipropileno)"},
-      {"label": "PS (Poliestireno)"}
+      {"label": "PET (Polyethylene terephthalate)"},
+      {"label": "HDPE (High density polyethylene)"},
+      {"label": "PVC (Polyvinyl chloride)"},
+      {"label": "LDPE (Low density polyethylene)"},
+      {"label": "PP (Polypropylene)"},
+      {"label": "PS (Polystyrene)"}
     ]
   },
   {
-    "label": "Vidrio",
+    "label": "Glass",
     "code": "VD",
     "items": [
-      {"label": "Vidrio transparente"},
-      {"label": "Vidrio coloreado"},
-      {"label": "Vidrio templado"},
-      {"label": "Vidrio laminado"}
+      {"label": "Clear glass"},
+      {"label": "Colored glass"},
+      {"label": "Tempered glass"},
+      {"label": "Laminated glass"}
     ]
   },
   {
-    "label": "Papel y cartón",
+    "label": "Paper and cardboard",
     "code": "PC",
     "items": [
-      {"label": "Papel blanco"},
-      {"label": "Cartón corrugado"},
-      {"label": "Papel periódico"},
-      {"label": "Papel kraft"},
-      {"label": "Cartón Compacto o Cartulina"},
-      {"label": "Cartón Gris (Cartón Piedra)"}
+      {"label": "White paper"},
+      {"label": "Corrugated cardboard"},
+      {"label": "Newspaper"},
+      {"label": "Kraft paper"},
+      {"label": "Compact cardboard or cardboard"},
+      {"label": "Gray cardboard (Paper stone)"}
     ]
   },
   {
-    "label": "Orgánicos",
+    "label": "Organic",
     "code": "OR",
     "items": [
-      {"label": "Restos de alimentos"},
-      {"label": "Hojas, césped y poda"},
-      {"label": "Madera"}
+      {"label": "Food waste"},
+      {"label": "Leaves, grass and pruning"},
+      {"label": "Wood"}
     ]
   },
   {
     "label": "Textiles",
     "code": "TX",
     "items": [
-      {"label": "Algodón"},
-      {"label": "Lana"},
-      {"label": "Poliéster"},
+      {"label": "Cotton"},
+      {"label": "Wool"},
+      {"label": "Polyester"},
       {"label": "Nylon"}
     ]
   },
   {
-    "label": "RAEEs",
+    "label": "WEEE",
     "code": "RA",
     "items": [
-      {"label": "Electrodoméstico grande"},
-      {"label": "Electrodoméstico pequeño"},
-      {"label": "Equipos de cómputo y telecomunicaciones"},
-      {"label": "Herramientas eléctricas"},
-      {"label": "Consolas de videojuegos, juguetes"},
-      {"label": "Bicicletas y patinetas eléctricas"},
-      {"label": "Luminarias y bombillos"},
-      {"label": "Pilas y baterias"},
-      {"label": "Baterías de plomo"}
+      {"label": "Large appliance"},
+      {"label": "Small appliance"},
+      {"label": "Computer equipment and telecommunications"},
+      {"label": "Power tools"},
+      {"label": "Video game consoles, toys"},
+      {"label": "Electric bicycles and scooters"},
+      {"label": "Lighting and bulbs"},
+      {"label": "Batteries"},
+      {"label": "Lead batteries"}
     ]
   },
   {
-    "label": "Otros",
+    "label": "Others",
     "code": "OT",
     "items": [
-      {"label": "Aceites usados"},
-      {"label": "Llantas"},
-      {"label": "RCD - Residuos de construcción y demolición"}
+      {"label": "Used oils"},
+      {"label": "Tires"},
+      {"label": "RCD - Construction and demolition waste"}
     ]
   }
 ]

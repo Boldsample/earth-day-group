@@ -69,7 +69,7 @@
     ],
     "title": "recycleMaterialsModuleTitleText",
     "className": "light-green",
-    "link": "/offers/",
+    "link": "/offers/search/",
     "icon": "/assets/icons/post-offer.svg",
     "description": "recycleMaterialsModuleDescriptionText"
   },

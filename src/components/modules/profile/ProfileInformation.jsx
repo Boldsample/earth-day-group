@@ -12,7 +12,9 @@ import './profile.sass'
 import { Tooltip } from 'primereact/tooltip'
 
 const ProfileInformation = ({profile, same, doFollow, admin}) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'profile.profileInformation'})
+	const [tMaterial] = useTranslation('translation', { keyPrefix: 'material'})
+	const [t] = useTranslation('translation', { keyPrefix: 'profile.profileInformation'})
+
   return <div className='profileInformation__grid'>
     <div className="image__container">
       <ProfilePhoto className="profile__photo-large" size="12.5rem" userPhoto={profile?.picture}/>
@@ -41,7 +43,7 @@ const ProfileInformation = ({profile, same, doFollow, admin}) => {
             {profile?.materials?.map((material) => 
               <RecycleMaterialCard
                 key={material.id}
-                material={material.type}
+                material={tMaterial(material.type)}
                 unit={material.unit}
                 price={material.price}
                 color={material.color} />

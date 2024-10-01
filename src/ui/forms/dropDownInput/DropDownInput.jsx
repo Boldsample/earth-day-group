@@ -12,7 +12,9 @@ const DropDownInput = ({
   optionLabel,
   optionValue,
   labelName = "",
+  optionGroupLabel,
   showLabel = true,
+  optionGroupChildren,
   getFormErrorMessage,
   placeHolderText = "",
 }) => {
@@ -29,6 +31,8 @@ const DropDownInput = ({
             disabled={disabled}
             optionLabel={optionLabel}
             optionValue={optionValue}
+            optionGroupLabel={optionGroupLabel}
+            optionGroupChildren={optionGroupChildren}
             filter
             placeholder={placeHolderText}
             {...field}

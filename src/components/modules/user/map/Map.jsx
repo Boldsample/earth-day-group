@@ -31,6 +31,7 @@ const Map = () => {
   const user = useSelector((state) => state.users.userData)
   const [ filters, setFilters ] = useState({role: [], material: []})
   const [t] = useTranslation('translation', { keyPrefix: 'user.map'})
+  const [tMaterial] = useTranslation('translation', { keyPrefix: 'material'})
 
   const updateFilter = e => {
     setFilters(_prev => {
@@ -74,6 +75,8 @@ const Map = () => {
     const ne = update?.bounds.getNorthEast()
     const sw = update?.bounds.getSouthWest()
     let _filter = {users: `u.role<>'user'`}
+    if(user?.role == 'company')
+      _filter = {users: `u.role='company' AND u.id<>${user?.id}`}
     if(filters?.role?.length > 0){
       let _role = [...filters?.role]
       if(_role.includes('shelter') || _role.includes('social'))
@@ -154,7 +157,7 @@ const Map = () => {
         <h5 className="font-bold mb-1">{t('markerDetailMaterialTitle')}</h5>
         <div>
           {show?.materials?.map(({type}, key) => 
-            <Button key={key} label={type} className={'small mb-1 ' + type} />
+            <Button key={key} label={tMaterial(type)} className={'small mb-1 ' + type} />
         )}
         </div>
       </>}
@@ -167,19 +170,21 @@ const Map = () => {
     </div>}
     <div className={'map__filters '+(showFilters ? 'show' : '')}>
       <a className="open" onClick={() => setShowFilters(prev => !prev)}><FontAwesomeIcon icon={showFilters ? faChevronDown : faChevronUp} /></a>
-      <h5 className="text-dark-blue fullwidth font-bold">{t('filerByMaterialTitle')}</h5>
-      <div className="radio"><Checkbox inputId="role_company" name="role" value="company" checked={filters?.role.includes('company')} onChange={updateFilter} /> <label htmlFor="role_company">{t('filtersModalCheckBoxRecycleCompany')}</label></div>
-      <div className="radio"><Checkbox inputId="role_shelter" name="role" value="shelter" checked={filters?.role.includes('shelter')} onChange={updateFilter} /> <label htmlFor="role_shelter">{t('filtersModalCheckBoxShelters')}</label></div>
-      <div className="radio"><Checkbox inputId="role_vendor" name="role" value="vendor" checked={filters?.role.includes('vendor')} onChange={updateFilter} /> <label htmlFor="role_vendor">{t('filtersModalCheckBoxShops')}</label></div>
-      <div className="radio"><Checkbox inputId="role_social" name="role" value="social" checked={filters?.role.includes('social')} onChange={updateFilter} /> <label htmlFor="role_social">{t('filtersModalCheckBoxSocialOrg')}</label></div>
-      {filters?.role.includes('company') && <>
-      <h5 className="text-dark-blue fullwidth font-bold mt-2">{t('filtersModalTitle')}</h5>
-      <div className="radio"><Checkbox inputId="material_paper" name="material" value="Paper" checked={filters?.material.includes('Paper')} onChange={updateFilter} /> <label htmlFor="material_paper">{t('filtersModalCheckBoxText1')}</label></div>
-      <div className="radio"><Checkbox inputId="material_glass" name="material" value="Glass" checked={filters?.material.includes('Glass')} onChange={updateFilter} /> <label htmlFor="material_glass">{t('filtersModalCheckBoxText2')}</label></div>
-      <div className="radio"><Checkbox inputId="material_plastic" name="material" value="Plastic" checked={filters?.material.includes('Plastic')} onChange={updateFilter} /> <label htmlFor="material_plastic">{t('filtersModalCheckBoxText3')}</label></div>
-      <div className="radio"><Checkbox inputId="material_e-waste" name="material" value="E-Waste" checked={filters?.material.includes('E-Waste')} onChange={updateFilter} /> <label htmlFor="material_e-waste">{t('filtersModalCheckBoxText4')}</label></div>
-      <div className="radio"><Checkbox inputId="material_metal" name="material" value="Metal" checked={filters?.material.includes('Metal')} onChange={updateFilter} /> <label htmlFor="material_metal">{t('filtersModalCheckBoxText5')}</label></div>
-      <div className="radio"><Checkbox inputId="material_organic" name="material" value="Organic" checked={filters?.material.includes('Organic')} onChange={updateFilter} /> <label htmlFor="material_organic">{t('filtersModalCheckBoxText6')}</label></div>
+      {user?.role == 'user' && <>
+        <h5 className="text-dark-blue fullwidth font-bold">{t('filerByMaterialTitle')}</h5>
+        <div className="radio"><Checkbox inputId="role_company" name="role" value="company" checked={filters?.role.includes('company')} onChange={updateFilter} /> <label htmlFor="role_company">{t('filtersModalCheckBoxRecycleCompany')}</label></div>
+        <div className="radio"><Checkbox inputId="role_shelter" name="role" value="shelter" checked={filters?.role.includes('shelter')} onChange={updateFilter} /> <label htmlFor="role_shelter">{t('filtersModalCheckBoxShelters')}</label></div>
+        <div className="radio"><Checkbox inputId="role_vendor" name="role" value="vendor" checked={filters?.role.includes('vendor')} onChange={updateFilter} /> <label htmlFor="role_vendor">{t('filtersModalCheckBoxShops')}</label></div>
+        <div className="radio"><Checkbox inputId="role_social" name="role" value="social" checked={filters?.role.includes('social')} onChange={updateFilter} /> <label htmlFor="role_social">{t('filtersModalCheckBoxSocialOrg')}</label></div>
+	  </>}
+      {(filters?.role.includes('company') || user?.role == 'company') && <>
+        <h5 className="text-dark-blue fullwidth font-bold mt-2">{t('filtersModalTitle')}</h5>
+        <div className="radio"><Checkbox inputId="material_paper" name="material" value="Paper" checked={filters?.material.includes('Paper')} onChange={updateFilter} /> <label htmlFor="material_paper">{t('filtersModalCheckBoxText1')}</label></div>
+        <div className="radio"><Checkbox inputId="material_glass" name="material" value="Glass" checked={filters?.material.includes('Glass')} onChange={updateFilter} /> <label htmlFor="material_glass">{t('filtersModalCheckBoxText2')}</label></div>
+        <div className="radio"><Checkbox inputId="material_plastic" name="material" value="Plastic" checked={filters?.material.includes('Plastic')} onChange={updateFilter} /> <label htmlFor="material_plastic">{t('filtersModalCheckBoxText3')}</label></div>
+        <div className="radio"><Checkbox inputId="material_e-waste" name="material" value="E-Waste" checked={filters?.material.includes('E-Waste')} onChange={updateFilter} /> <label htmlFor="material_e-waste">{t('filtersModalCheckBoxText4')}</label></div>
+        <div className="radio"><Checkbox inputId="material_metal" name="material" value="Metal" checked={filters?.material.includes('Metal')} onChange={updateFilter} /> <label htmlFor="material_metal">{t('filtersModalCheckBoxText5')}</label></div>
+        <div className="radio"><Checkbox inputId="material_organic" name="material" value="Organic" checked={filters?.material.includes('Organic')} onChange={updateFilter} /> <label htmlFor="material_organic">{t('filtersModalCheckBoxText6')}</label></div>
       </>}
     </div>
     <GoogleMap
@@ -192,7 +197,7 @@ const Map = () => {
       mapContainerStyle={{ width: '100vw', height: '100vh' }}>
       <MarkerClustererF>
         {clusterer => <div>
-          {markers.map((marker, key) => {
+          {markers?.map((marker, key) => {
             return marker?.lat && marker?.lng && 
               <MarkerF key={key} data-key={key} position={{lat: parseFloat(marker?.lat), lng: parseFloat(marker?.lng)}} icon={{
                   url: getIcon(marker.role),

@@ -17,6 +17,7 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyDetailedForm'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+  const [tMaterial] = useTranslation('translation', {keyPrefix: 'materials'})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const numberInput = useRef(null)
@@ -39,6 +40,14 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
       unit_price: "",
     },
   })
+  const translatedMaterials = materials.map(group => ({
+    ...group,
+    label: tMaterial(group.label),
+    items: group.items.map(item => ({
+      ...item,
+      label: tMaterial(item.label),
+    }))
+  }));
 
   const setUploadedImages = (images) => {
     setUser({ ...user, images: images })
@@ -140,13 +149,15 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
           control={control}
           showLabel={false}
           isRequired={true}
-          options={materials}
-          labelName={t('selectMaterialLabel')}
+          optionLabel="label"
+          optionValue="label"
           nameInput="materials"
-          optionLabel="material"
-          optionValue="material"
-          placeHolderText={t('SelectMaterialPlaceHolder')}
+          optionGroupLabel="label"
+          optionGroupChildren="items"
+          options={translatedMaterials}
+          labelName={t('selectMaterialLabel')}
           getFormErrorMessage={getFormErrorMessage}
+          placeHolderText={t('SelectMaterialPlaceHolder')}
           rules={{
             required: tGlobal(`requiredErrorMessage`),
           }} />

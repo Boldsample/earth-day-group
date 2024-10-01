@@ -215,7 +215,6 @@
       "liveAdText": "LIVE"
     },
     "adminOffers": {
-      "NOTA": "QUEDA PENDIENTE TRADUCIR LOS NOMBRES DE LOS MATERIALES EN LAS TABLAS",
       "mainTitle": "Offers List",
       "inputSearchPlaceHolder": "Keyword Search",
       "multiSelectInputPlaceHolder": "Filter by Materials",
@@ -285,7 +284,8 @@
       "subjectTitle": "Subject:",
       "descriptionTitle": "Description:",
       "reportedByTitle": "Reported By:",
-      "viewBtn": "View"
+      "viewBtn": "View",
+	  "respondReport": "Respond to the report"
     },
     "report": {
       "SelectInputPlaceHolder": "Select a type",
@@ -301,9 +301,9 @@
       "allOffers": "Offers",
       "allProducts": "Products",
       "allPets": "Pets",
-      "inProcess": "In Process",
-      "pending": "Pending",
-      "resolved": "Resolved",
+      "In Process": "In Process",
+      "Pending": "Pending",
+      "Resolved": "Resolved",
       "noProductsFoundText": "There are no reports that meet the filter criteria."
     },
     "usersList": {
@@ -477,7 +477,8 @@
       "offerImagesTitle": "Offer Images"
     },
     "offersList": {
-      "mainTitle": "Published Offers",
+      "mainTitle": "Find recycle materials",
+      "ownerTitle": "My offers",
       "selectInputPlaceHolder": "Filter by Materials",
       "inputSearchPlaceHolder": "Keyword Search",
       "newOfferBtn": "New Offer",
@@ -776,5 +777,57 @@
       "settingsNavBtn": "Settings",
       "profileNavBtn": "My profile"
     }
+  },
+  "materials": {
+    "Ferrous and metallic": "Ferrous and metallic",
+    "Iron and steel": "Iron and steel",
+    "Aluminum": "Aluminum",
+    "Copper": "Copper",
+    "Gold": "Gold",
+    "Silver": "Silver",
+    "Platinum": "Platinum",
+    "Palladium": "Palladium",
+    "Plastics": "Plastics",
+    "PET (Polyethylene terephthalate)": "PET (Polyethylene terephthalate)",
+    "HDPE (High density polyethylene)": "HDPE (High density polyethylene)",
+    "PVC (Polyvinyl chloride)": "PVC (Polyvinyl chloride)",
+    "LDPE (Low density polyethylene)": "LDPE (Low density polyethylene)",
+    "PP (Polypropylene)": "PP (Polypropylene)",
+    "PS (Polystyrene)": "PS (Polystyrene)",
+    "Glass": "Glass",
+    "Clear glass": "Clear glass",
+    "Colored glass": "Colored glass",
+    "Tempered glass": "Tempered glass",
+    "Laminated glass": "Laminated glass",
+    "Paper and cardboard": "Paper and cardboard",
+    "White paper": "White paper",
+    "Corrugated cardboard": "Corrugated cardboard",
+    "Newspaper": "Newspaper",
+    "Kraft paper": "Kraft paper",
+    "Compact cardboard or cardboard": "Compact cardboard or cardboard",
+    "Gray cardboard (Paper stone)": "Gray cardboard (Paper stone)",
+    "Organic": "Organic",
+    "Food waste": "Food waste",
+    "Leaves, grass and pruning": "Leaves, grass and pruning",
+    "Wood": "Wood",
+    "Textiles": "Textiles",
+    "Cotton": "Cotton",
+    "Wool": "Wool",
+    "Polyester": "Polyester",
+    "Nylon": "Nylon",
+    "WEEE": "WEEE",
+    "Large appliance": "Large appliance",
+    "Small appliance": "Small appliance",
+    "Computer equipment and telecommunications": "Computer equipment and telecommunications",
+    "Power tools": "Power tools",
+    "Video game consoles, toys": "Video game consoles, toys",
+    "Electric bicycles and scooters": "Electric bicycles and scooters",
+    "Lighting and bulbs": "Lighting and bulbs",
+    "Batteries": "Batteries",
+    "Lead batteries": "Lead batteries",
+    "Others": "Others",
+    "Used oils": "Used oils",
+    "Tires": "Tires",
+    "RCD - Construction and demolition waste": "RCD - Construction and demolition waste"
   }
 }

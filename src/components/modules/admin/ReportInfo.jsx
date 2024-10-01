@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Dialog } from "primereact/dialog"
 import { Button } from "primereact/button"
 import { Galleria } from "primereact/galleria"
@@ -7,33 +7,151 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 import { Tooltip } from "primereact/tooltip"
 import { useTranslation } from 'react-i18next'
+import { DropDownInput, TextAreaInput, TextInput } from "@ui/forms"
+import { useSelector } from "react-redux"
+import { useForm } from "react-hook-form"
+import { sendMessage } from "@services/chatServices"
+import { updateReport } from "@services/reportServices"
+import { updateUser } from "@services/userServices"
+import { updateOffer } from "@services/offersServices"
+import { updatePet } from "@services/petServices"
+import { updateProduct } from "@services/productServices"
 
 const ReportInfo = ({ show, report, onHide }) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
- 
-  return <Dialog visible={show} onHide={onHide} draggable={false}>
-    {report?.images?.length && 
-      <Galleria value={report?.images} numVisible={5}
-        item={({picture}) => <img src={picture} />}
-        thumbnail={({picture}) => <img src={picture} />} /> || 
-      <div className="default-image"><FontAwesomeIcon icon={faImage} /></div>
-    }
-    <div className="content">
-      <h4>{t('mainTitle')}</h4>
-      <div className="fullwidth mb-4" style={{fontSize: '0.75rem'}}>{report?.date}</div>
-      <p><b>{t('reportedEntity')} {report?.type}:</b> <Link to={`/${report?.type}/${report?.entity}/`}>{report?.name}</Link></p>
-      {(report?.type == 'product' || report?.type == 'pet') && 
-        <p><b>{t('ownerTitle')}</b> <Link to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></p>
-      }
-      <p><b>{t('subjectTitle')}</b> {report?.subject}</p>
-      <p><b>{t('descriptionTitle')}</b> {report?.description}</p>
-      <div><b>{t('reportedByTitle')}</b> <Link to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></div>
-      <div className="mt-3 fullwidth">
-        <Link className="button small dark-blue" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
-      </div>
-    </div>
-    <Tooltip target=".hasTooltip" position="top" />
-  </Dialog>
+	const navigate = useNavigate()
+	const user = useSelector((state) => state.users.userData)
+	const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
+	const [t] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
+	const types = { 'user': 'User', 'product': 'Product', 'pet': 'Pet', 'offer': 'Offer' }
+	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+	const {
+		watch,
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			message: "",
+			admin: user?.username,
+			user: report?.username,
+		},
+	})
+
+	const onSubmit = async data => {
+		const message = data?.message != 'custom' ? data?.message : data?.custom_message
+		if(data?.action == 'solved'){
+			await updateReport({admin: user?.id, status: 'Resolved'}, {id: report?.id})
+			onHide(true)
+		}else if(await sendMessage({ message, incoming: user?.id, outgoing: report?.oid })){
+			if(data?.action == 'delete' && report?.type == 'user')
+				await updateUser({state: 2}, {id: report?.entity})
+			else if(data?.action == 'delete' && report?.type == 'product')
+				await updateProduct({state: 2}, {id: report?.entity})
+			else if(data?.action == 'delete' && report?.type == 'pet')
+				await updatePet({state: 2}, {id: report?.entity})
+			else if(data?.action == 'delete' && report?.type == 'offer')
+				await updateOffer({state: 2}, {id: report?.entity})
+			await updateReport({admin: user?.id, status: 'In Process'}, {id: report?.id})
+			navigate(`/chat/${report?.owner}/`)
+		}
+	}
+	
+	return <Dialog visible={show} onHide={onHide} draggable={false}>
+		{report?.images?.length && 
+			<Galleria value={report?.images} numVisible={5}
+				item={({picture}) => <img src={picture} />}
+				thumbnail={({picture}) => <img src={picture} />} /> || 
+			<div className="default-image"><FontAwesomeIcon icon={faImage} /></div>
+		}
+		<div className="content">
+			<h4>{t('mainTitle')}</h4>
+			<div className="fullwidth mb-4" style={{fontSize: '0.75rem'}}>{report?.date}</div>
+			<p><b>{t('reportedEntity')} {report?.type}:</b> <Link to={`/${report?.type}/${report?.entity}/`}>{report?.name}</Link></p>
+			{(report?.type == 'product' || report?.type == 'pet') && 
+				<p><b>{t('ownerTitle')}</b> <Link to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></p>
+			}
+			<p><b>{t('subjectTitle')}</b> {report?.subject}</p>
+			<p><b>{t('descriptionTitle')}</b> {report?.description}</p>
+			<div><b>{t('reportedByTitle')}</b> <Link to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></div>
+			<div className="mt-3 fullwidth">
+				<Link className="button small dark-blue" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
+			</div>
+		</div>
+		{report?.status != 'Resolved' && (!report?.aid || report?.aid == user?.id) &&
+			<form className="respond" onSubmit={handleSubmit(onSubmit)}>
+				<h4 className="mb-1">{t('respondReport')}</h4>
+				<div className={watch('action') == 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
+					<DropDownInput
+						isEdit={true}
+						control={control}
+						showLabel={true}
+						isRequired={true}
+						optionLabel="label"
+						optionValue="value"
+						nameInput="action"
+						options={[
+							{ label: `Enviar mensaje}`, value: 'message' },
+							{ label: `Eliminar ${types[report?.type]}`, value: 'delete' },
+							{ label: `Marcar reporte como resuelto`, value: 'solved' },
+						]}
+						labelName={'Acción'}
+						getFormErrorMessage={getFormErrorMessage}
+						placeHolderText={'Seleccione una opción'}
+						rules={{
+							required: tGlobal(`requiredErrorMessage`),
+						}} />
+					{watch('action') != 'solved' && 
+						<DropDownInput
+							isEdit={true}
+							control={control}
+							showLabel={true}
+							isRequired={true}
+							optionLabel="label"
+							optionValue="value"
+							nameInput="message"
+							options={[
+								{ label: 'Mensaje personalizado', value: 'custom' },
+								{ label: 'Mensaje automatico 1', value: 'template1' },
+								{ label: 'Mensaje automatico 2', value: 'template2' },
+								{ label: 'Mensaje automatico 3', value: 'template3' },
+								{ label: 'Mensaje automatico 4', value: 'template4' }
+							]}
+							labelName={'Mensaje'}
+							getFormErrorMessage={getFormErrorMessage}
+							placeHolderText={'Seleccione una opción'}
+							rules={{
+								required: tGlobal(`requiredErrorMessage`),
+							}} />
+					}
+				</div>
+				{watch('action') != 'solved' && watch('message') == 'custom' && 
+					<div className="registerInput__container-x1">
+						<TextAreaInput
+							control={control}
+							isRequired={true}
+							nameInput="custom_message"
+							labelName={'Mensaje personalizado'}
+							getFormErrorMessage={getFormErrorMessage}
+							placeHolderText={'Ingrese el mensaje que desea enviar'}
+							rules={{
+								maxLength: {
+									value: 500,
+									message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 500}),
+								},
+								required: tGlobal(`requiredErrorMessage`),
+							}} />
+					</div>
+				}
+				<div className="p-field">
+					<Button className="dark-blue" label={watch('action') == 'solved' ? 'Resolver reporte' : 'Enviar mensaje'+(report?.aid == 0 ? ' y asignarme como agente' : '')} type="submit" />
+					{report?.aid == user?.id && 
+						<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
+					}
+				</div>
+			</form>
+		}
+		<Tooltip target=".hasTooltip" position="top" />
+	</Dialog>
 }
 
 export default ReportInfo

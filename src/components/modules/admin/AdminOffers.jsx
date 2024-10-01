@@ -27,6 +27,7 @@ const AdminOffers = () => {
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: '', materials: []})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.adminOffers' })
+  const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
 
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
@@ -38,12 +39,13 @@ const AdminOffers = () => {
     let _filter = {}
     if(filters?.keyword != '')
       _filter['keyword'] = `(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
-    const _offers = await getOffers(_filter, page)
+	let _offers = await getOffers(_filter, page)
+	_offers.materials = _offers.materials.map(({material}) => ({label: tMaterial(material), value: material}));
     setOffers(_offers)
   }
   const renderHeader = () => {
     return <div className="filters">
-      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="value" placeholder={t('multiSelectInputPlaceHolder')} />
+      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="label" placeholder={t('multiSelectInputPlaceHolder')} />
       <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
       <Button className="small dark-blue" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
       <Button className="small red-state" type="button" onClick={() => {
@@ -112,7 +114,7 @@ const AdminOffers = () => {
           || null}
           <Column header={t('tableTitleSubject')} field="title"></Column>
           <Column header={t('tableTitleMaterial')} body={({material}) => 
-            <Button label={material} className={'small ' + material} />}></Column>
+            <Button label={tMaterial(material)} className={'small ' + material} />}></Column>
           <Column header={t('tableTitleQuantity')} body={({quantity, unit}) => quantity + ' ' + unit}></Column>
           <Column header={t('tableTitleSellPrice')} body={({price}) => 
            <span className='price__background'>{parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>}></Column>

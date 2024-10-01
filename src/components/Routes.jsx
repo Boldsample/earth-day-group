@@ -83,8 +83,6 @@ const AppRoutes = () => {
 
       {(user?.role == 'user') && <>
         <Route path="/companies" element={<Companies />} />
-        <Route path="/offers/new" element={<OfferNew />} />
-        <Route path="/company/:id" element={<Profile />} />
         <Route path="/market-place" element={<Vendors type="vendors" />} />
         <Route path="/vendor/:id" element={<Profile />} />
         <Route path="/products" element={<Vendors type="products" />} />
@@ -98,12 +96,14 @@ const AppRoutes = () => {
         <Route path="/social/:id" element={<Profile />} />
         <Route path="/ngo/:id" element={<Profile />} />
         <Route path="/ngo/:id/pets" element={<Profile type="pets" />} />
-        <Route path="/map" element={<Map />} />
         <Route path="/settings/edit" element={<RegisterUser />} />
       </>}
       {(user?.role == 'user' || user?.role == 'company') && <>
-        <Route path="/offers" element={<Offers />} />
+        <Route path="/company/:id" element={<Profile />} />
+        <Route path="/offers/new" element={<OfferNew />} />
+        <Route path="/offers/" element={<Offers  />} />
         <Route path="/chat/:contact/:offer" element={<Chat />} />
+        <Route path="/map" element={<Map />} />
       </>}
       {(user?.role == 'user' || user?.role == 'vendor' || user?.role == 'social' || user?.role == 'ngo') && <>
         <Route path="/orders" element={<Orders />} />
@@ -114,6 +114,7 @@ const AppRoutes = () => {
       </>}
        {user?.role == 'company' && <>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/offers/search" element={<Offers type="search" />} />
         <Route path="/settings/edit" element={<RegisterCompany />} />
        </>}
        {user?.role == 'vendor' && <>

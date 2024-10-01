@@ -18,6 +18,7 @@ import { updateThankyou } from '@store/slices/globalSlice'
 const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settings', admin}) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [tMaterial] = useTranslation('translation', { keyPrefix: 'material'})
   const [t] = useTranslation('translation', { keyPrefix: 'settings.profile.profileInfo'})
 
   const sendRecover = async () => {
@@ -121,7 +122,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
             {user.materials.map(material => 
               <RecycleMaterialCard
                 key={material.id}
-                material={material.type}
+                material={tMaterial(material.type)}
                 unit={material.unit}
                 price={material.price}
                 color={material.color} />

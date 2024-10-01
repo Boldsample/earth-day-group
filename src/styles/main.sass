@@ -491,10 +491,12 @@ button, .button
     justify-content: flex-end
     width: 100%
     .filters
+      align-items: center
       display: flex
       justify-self: flex-end
       justify-items: flex-end
       padding: 0.75rem 0.5rem
+      width: 100%
       .p-dropdown, .p-multiselect, .p-inputtext
         height: 2.5rem
         line-height: 1em
@@ -570,7 +572,7 @@ button, .button
       height: 1rem
       width: 1rem
   .p-dialog-content
-    column-gap: 1.875rem
+    gap: 1.875rem
     display: flex
     flex-wrap: wrap
     padding: 2rem 1.5rem
@@ -622,6 +624,8 @@ button, .button
         b
           display: inline-block
           width: 8,125rem
+    .respond
+      width: calc(46.875rem)
   &.profile-content
     .p-dialog-header
       padding-bottom: 0
