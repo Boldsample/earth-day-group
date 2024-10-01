@@ -16,8 +16,8 @@ import { updateUserData } from '@store/slices/usersSlice'
 import { useTranslation } from 'react-i18next'
 
 import './style.sass'
-import { RadioButton } from 'primereact/radiobutton'
 import { Checkbox } from 'primereact/checkbox'
+import materials from "@json/recyclableMaterials.json"
 
 const Map = () => {
   const dispatch = useDispatch()
@@ -31,15 +31,17 @@ const Map = () => {
   const user = useSelector((state) => state.users.userData)
   const [ filters, setFilters ] = useState({role: [], material: []})
   const [t] = useTranslation('translation', { keyPrefix: 'user.map'})
-  const [tMaterial] = useTranslation('translation', { keyPrefix: 'material'})
+  const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials'})
 
   const updateFilter = e => {
     setFilters(_prev => {
-      if(e?.checked)
-        _prev[e?.target?.name].push(e?.value)
-      else
-        _prev[e?.target?.name].splice(_prev[e?.target?.name]?.indexOf(e?.value), 1)
-      return {..._prev}
+		if(e?.checked)
+			_prev[e?.target?.name].push(e?.value)
+		else
+			_prev[e?.target?.name].splice(_prev[e?.target?.name]?.indexOf(e?.value), 1)
+		if(!_prev?.role.includes('company'))
+			_prev.material = []
+		return {..._prev}
     })
     setUpdate(_prev => ({..._prev, date: new Date()}))
   }
@@ -83,8 +85,10 @@ const Map = () => {
         _role.push('ngo')
       _filter.role = "(u.role='"+_role.join("' OR u.role='")+"')"
     }
-    if(filters?.material?.length > 0)
-      _filter.material = "EXISTS (SELECT 1 FROM materials m WHERE (m.type='"+filters?.material.join("' OR m.type='")+"') AND m.user=u.id)"
+    if(filters?.material?.length > 0){
+		const _materials = materials.flatMap(m => filters?.material.some(fm => fm == m.label) ? [m.label, ...m.items.map(im => im.label)] : [])
+		_filter.material = "EXISTS (SELECT 1 FROM materials m WHERE (m.type='"+_materials.join("' OR m.type='")+"') AND m.user=u.id)"
+	}
     _filter['bounds'] = `u.lat BETWEEN ${sw.lat()} AND ${ne.lat()} AND u.lng BETWEEN ${sw.lng()} AND ${ne.lng()}`
     let _response = await getUsers(_filter, 'full', user?.id)
     setMarkers(_response?.data)
@@ -179,12 +183,9 @@ const Map = () => {
 	  </>}
       {(filters?.role.includes('company') || user?.role == 'company') && <>
         <h5 className="text-dark-blue fullwidth font-bold mt-2">{t('filtersModalTitle')}</h5>
-        <div className="radio"><Checkbox inputId="material_paper" name="material" value="Paper" checked={filters?.material.includes('Paper')} onChange={updateFilter} /> <label htmlFor="material_paper">{t('filtersModalCheckBoxText1')}</label></div>
-        <div className="radio"><Checkbox inputId="material_glass" name="material" value="Glass" checked={filters?.material.includes('Glass')} onChange={updateFilter} /> <label htmlFor="material_glass">{t('filtersModalCheckBoxText2')}</label></div>
-        <div className="radio"><Checkbox inputId="material_plastic" name="material" value="Plastic" checked={filters?.material.includes('Plastic')} onChange={updateFilter} /> <label htmlFor="material_plastic">{t('filtersModalCheckBoxText3')}</label></div>
-        <div className="radio"><Checkbox inputId="material_e-waste" name="material" value="E-Waste" checked={filters?.material.includes('E-Waste')} onChange={updateFilter} /> <label htmlFor="material_e-waste">{t('filtersModalCheckBoxText4')}</label></div>
-        <div className="radio"><Checkbox inputId="material_metal" name="material" value="Metal" checked={filters?.material.includes('Metal')} onChange={updateFilter} /> <label htmlFor="material_metal">{t('filtersModalCheckBoxText5')}</label></div>
-        <div className="radio"><Checkbox inputId="material_organic" name="material" value="Organic" checked={filters?.material.includes('Organic')} onChange={updateFilter} /> <label htmlFor="material_organic">{t('filtersModalCheckBoxText6')}</label></div>
+		{materials?.map(category => 
+        	<div key={category?.code} className="radio"><Checkbox inputId={`material_${category?.code}`} name="material" value={category?.label} checked={filters?.material.includes(category?.label)} onChange={updateFilter} /> <label htmlFor={`material_${category?.code}`}>{tMaterial(category?.label)}</label></div>
+		)}
       </>}
     </div>
     <GoogleMap

@@ -54,8 +54,8 @@ export const updateUser = async (data, filter, id) => {
   filterStr = encodeURIComponent(filterStr)
   const checkData = id ? `&id=${id}` : ''
   try {
-    await API.post(`/update/users&filter=${filterStr}${checkData}`, data)
-    return {id: filter?.id}
+    const response = await API.post(`/update/users&filter=${filterStr}${checkData}`, data)
+    return {id: filter?.id, response: response.data.response}
   } catch ({response}) {
     return response.data
   }

@@ -110,7 +110,7 @@
       "bodyText": "Por favor, ingresa una nueva contraseña.",
       "passwordPlaceHolderText": "Contraseña",
       "passwordConfirmationPlaceHolderText": "Confirmar Contraseña",
-      "formBtn": "Registrarse"
+	  "submitBtnText": "Enviar"
     }
   },
   "admin": {

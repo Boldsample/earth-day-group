@@ -10,13 +10,12 @@ import { recoverUser, updateUser } from "@services/userServices"
 import { setHeader, updateThankyou } from "@store/slices/globalSlice"
 
 const Recover = () => {
-	const [t, i18next] = useTranslation('translation', { keyPrefix: 'login.recover' })
-	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+	const { token } = useParams()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-  const { token } = useParams()
-	const [email, setEmail] = useState('')
-  const [sending, setSending] = useState(false)
+	const [sending, setSending] = useState(false)
+	const [t] = useTranslation('translation', { keyPrefix: 'login.recover' })
+	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
 	const {
 		control,
     setError,
@@ -31,23 +30,24 @@ const Recover = () => {
 	})
 
 	const onSubmit = async (data) => {
-    setSending(true)
-    delete data?.password_confirmation
+		setSending(true)
+		delete data?.password_confirmation
 		const response = await updateUser(data, {remember_token: token})
-    if(response?.id){
-      dispatch(updateThankyou({
-        title: "Password updated successfully!",
-        link: "/login/",
-        background: "image-1.svg",
-        button_label: "Go back to login",
-        content: "Your password has been registered successfully!",
-      }))
-      navigate('/thankyou/')
-    }else{
-      setFocus(response.field)
-      setError(response.field, { type: "manual", message: response.message })
-    }
-    setSending(false)
+		console.log(response)
+		if(response?.response == 'Ok'){
+			dispatch(updateThankyou({
+				title: "Password updated successfully!",
+				link: "/login/",
+				background: "image-1.svg",
+				button_label: "Go back to login",
+				content: "Your password has been registered successfully!",
+			}))
+			navigate('/thankyou/')
+		}else{
+			setFocus(response.field)
+			setError(response.field, { type: "manual", message: response.message })
+		}
+		setSending(false)
 	}
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 
