@@ -59,8 +59,6 @@ const Pets = () => {
   useEffect(() => {
     dispatch(setHeader('user'))
   }, [user])
-  
-console.log(pets)
 
   return <div className="layout">
     <img className="layout__background" src="/assets/full-width.svg" />

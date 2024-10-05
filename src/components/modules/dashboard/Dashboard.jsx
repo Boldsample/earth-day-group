@@ -17,10 +17,9 @@ import AdBanner from "@ui/banners/AdBanner"
 const Dashboard = () => {
 	const dispatch = useDispatch()
 	const [filteredModule, setFilteredModule] = useState([])
-  const user = useSelector((state) => state.users.userData)
-  const [t] = useTranslation('translation', { keyPrefix: 'dashboard' })
-  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
-	console.log(modules)
+	const user = useSelector((state) => state.users.userData)
+	const [t] = useTranslation('translation', { keyPrefix: 'dashboard' })
+	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 	const filteredModules = modules.filter(module => {
     if(!module?.roles?.some(role => role == user?.role))
       return false

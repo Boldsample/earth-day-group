@@ -47,7 +47,6 @@ const Products = () => {
     const _products = await getProducts(_filter, page)
     setProducts(_products)
   }
-  console.log(products)
   const renderHeader = () => {
     return <div className="filters">
       <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={tGlobal('inputSearchPlaceHolder')} />

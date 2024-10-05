@@ -100,7 +100,6 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
   
   }, [update]); 
   
-console.log("id", ad?.id)
   const onSubmit = async (data) => {
     let response 
     setSending(true)

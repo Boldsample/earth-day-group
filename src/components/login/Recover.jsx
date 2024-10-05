@@ -33,7 +33,6 @@ const Recover = () => {
 		setSending(true)
 		delete data?.password_confirmation
 		const response = await updateUser(data, {remember_token: token})
-		console.log(response)
 		if(response?.response == 'Ok'){
 			dispatch(updateThankyou({
 				title: "Password updated successfully!",

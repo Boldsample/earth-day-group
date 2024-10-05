@@ -36,12 +36,14 @@ const AdminOffers = () => {
     setDetail({..._offer, show: true})
   }
   const callOffers = async () =>{
-    let _filter = {}
-    if(filters?.keyword != '')
-      _filter['keyword'] = `(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
+	let _filter = {}
+	if(filters?.keyword != '')
+		_filter['keyword'] = `(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
+	if(filters?.materials?.length > 0)
+		_filter['materials'] = "(o.material='" + filters.materials?.join("' OR o.material='") +"')"
 	let _offers = await getOffers(_filter, page)
 	_offers.materials = _offers.materials.map(({material}) => ({label: tMaterial(material), value: material}));
-    setOffers(_offers)
+	setOffers(_offers)
   }
   const renderHeader = () => {
     return <div className="filters">
@@ -53,9 +55,6 @@ const AdminOffers = () => {
         setFilters({keyword: '', materials: []})
       }}><FontAwesomeIcon icon={faTrash} /></Button>
     </div>
-    // <div className="flex aligncenter">
-    //   <h1 className="text-defaultCase">Offers</h1>
-    // </div>
   }
   const rowExpansionTemplate = data => <div className="p-3">
     <DataTable value={data.offers}>

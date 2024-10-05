@@ -29,8 +29,6 @@ const Forgot = () => {
   })
   const forgotTitle = t('title'); // "Forgot Password?"
 
-  console.log(forgotTitle);
-
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
     setSending(true)

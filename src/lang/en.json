@@ -54,7 +54,11 @@
     "createUserBtnLabelThankYouPage2": "Go back to dashboard",
     "createUsercontentText": "The account has been created successfully!",
     "newAdminContentText": "You have registered a new admin user! We have sent an email verification link.",
-    "newUserContentText": "You’re all signed up! We send you a verification email. Please verify your identity.",
+    "newUserContentText": "You’re all signed up! You’re all signed up! Please verify your identity with the verification link that we sent to the email address you provided.",
+	"adWithUs": "Advertise with us:",
+	"adSubject": "I want to advertise my business",
+	"adMessage": "I want to promote my business on the Earth Day Group app.",
+	"contact": "Conctact us",
     "formErrors": {
       "acceptCheckboxErrorMessage": "You are required to accept the terms and conditions.",
       "acceptCheckboxErrorMessage2": "You are required to accept the privacy policy.",
@@ -369,10 +373,10 @@
     "profileModuleDescriptionText": "View your profile.",
     "recycleMaterialsModuleTitleText": "Recycle Materials",
     "recycleMaterialsModuleDescriptionText": "Find recyclable material and buy it.",
-    "createProductModuleTitleText": "Create Product",
-    "createProductModuleDescriptionText": "Create a product that would be exhibited in your store.",
-    "createPetModuleTitleText": "Create Pet",
-    "createPetModuleDescriptionText": "Create a pet for adoption.",
+    "createProductModuleTitleText": "Add Product",
+    "createProductModuleDescriptionText": "Add products that would be sold on your store’s site.",
+    "createPetModuleTitleText": "Add Pet",
+    "createPetModuleDescriptionText": "Add a pet for adoption.",
     "reportsModuleTitleText": "Reports",
     "reportsModuleDescriptionText": "Manage and answer reports.",
     "adminsModuleTitleText": "Admins",
@@ -694,7 +698,7 @@
         "addPricelLabel": "Price per Unit",
         "addPricePlaceHolder": "Add Price per Unit",
         "addCompanyImgsLabel": "Add Company Images",
-        "pickUpFromHomeLabel": "Pick up from home",
+        "pickUpFromHomeLabel": "Recycle materials pick up from home service.",
         "addMaterialBtnText": "Add Material",
         "signUpBtnText": "Sign up",
         "saveBtnText": "Guardar"
@@ -712,7 +716,7 @@
     "registerAdmin": {},
     "registerNgo": {
       "organizationImgsTitle": "Organization Images",
-      "textAreaIniciativeDescriptionTitle": "Iniciative",
+      "textAreaIniciativeDescriptionTitle": "Initiative",
       "iniciativeDescriptionPlaceholder": "Tell us about your inicitative",
       "organizationTypeLabel": "Organization Type",
       "organizationNameInputTitle": "Organization Name",
@@ -753,7 +757,9 @@
       }
     },
     "templates": {
-      "categoryListing": {},
+      "categoryListing": {
+        "search": "Search"
+      },
       "profileListing": {
         "profileElements": {
           "newProductBtnText": "New Product",

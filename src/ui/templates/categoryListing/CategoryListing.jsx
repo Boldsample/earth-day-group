@@ -1,10 +1,10 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { InputText } from "primereact/inputtext"
 import { Paginator } from "primereact/paginator"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleChevronRight, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faChevronDown, faCircleChevronRight, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
 
 import Footer from "@ui/footer/Footer"
@@ -18,6 +18,7 @@ import AdBanner from "@ui/banners/AdBanner"
 
 const CategoryListing = ({content, section, elements, filters, reloadElements = () => false, setFilters = () => false, setReset = () => false, page, setPage = () => false}) => {
   const dispatch = useDispatch()
+  const bannerScroll = useRef(null)
   const skeletonPlaceHolder = ["", "", "", ""]
   const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.categoryListing'})
@@ -30,6 +31,13 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
     }else
       dispatch(followUserData({user: id, follower: user?.id}))
   }
+  const doScroll = (e) => {
+	e.preventDefault()
+	window.scrollTo({
+		behavior: 'smooth',
+		top: bannerScroll.current.offsetTop,
+	})
+  }
   
   useEffect(() => {
     reloadElements()
@@ -40,10 +48,11 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
       <div className="template__top fullwidth">
         <div className="template__banner" style={{backgroundImage: content.bannerImage}}>
           <h1 className="text-upperCase">{content.title}</h1>
+		  <a className="scroll" href="#" onClick={doScroll}><FontAwesomeIcon icon={faChevronDown} /></a>
         </div>
       </div>
       {content?.secondary?.length > 0 && 
-        <div className="features">
+        <div ref={bannerScroll} className="features">
           {content?.secondary?.map((data, key) => 
             <div key={key} className="icon">
               <img src={data.icon} alt={data.title} />
@@ -52,7 +61,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
           )}
         </div>
       }
-      <div className="layout autoheight">
+      <div ref={content?.secondary?.length == 0 ? bannerScroll : null} className="layout autoheight">
         <div className="main__content centerfullwidth pt-8">
           <div className="template__listing self-center">
             <div className="edg-search mb-1">
@@ -67,7 +76,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
                 {filters?.keyword && 
                   <Link className="reset" onClick={() => { setReset(true); setFilters({keyword: ''}) }}><FontAwesomeIcon icon={faTimes} /></Link>
                 }
-                <Link onClick={reloadElements}><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
+                <button className="green-earth ml-1" onClick={reloadElements}>{t('search')}</button>
               </form>
             </div>
             <div className="types">

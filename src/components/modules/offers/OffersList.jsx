@@ -40,17 +40,17 @@ const Offers = ({type}) => {
 	const callOffers = async () =>{
 		let _filter = {}
 		if(type != 'search')
-		_filter['user'] = `o.user=${user?.id}`
+			_filter['user'] = `o.user=${user?.id}`
 		if(filters?.keyword != '')
-		_filter['keyword'] = `(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
-		if(filters?.materials?.length > 0){
-		_filter['materials'] = "(o.material='" + filters.materials?.join("' OR o.material='") +"')"
-		}else if(type == 'search'){
-		let _materials = user?.materials?.map(material => material.type)
-		if(_materials?.length > 0)
-			_filter['materials'] = "(o.material='" + _materials.join("' OR o.material='") +"')"
-		else
-			return setOffers({total: 0, data: []})
+			_filter['keyword'] = `(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
+		if(filters?.materials?.length > 0)
+			_filter['materials'] = "(o.material='" + filters.materials?.join("' OR o.material='") +"')"
+		else if(type == 'search'){
+			let _materials = user?.materials?.map(material => material.type)
+			if(_materials?.length > 0)
+				_filter['materials'] = "(o.material='" + _materials.join("' OR o.material='") +"')"
+			else
+				return setOffers({total: 0, data: []})
 		}
 		let _offers = await getOffers(_filter, page)
 		_offers.materials = _offers.materials.map(({material}) => ({label: tMaterial(material), value: material}));

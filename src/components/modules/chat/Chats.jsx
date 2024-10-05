@@ -42,7 +42,7 @@ const Chats = () => {
 	useEffect(() => {
     setHeader('user')
   }, [user])
-  console.log(users.data)
+  
   return <div className="layout">
     <img className="layout__background" src="/assets/user/image-1.svg" />
     <div className="main__content">

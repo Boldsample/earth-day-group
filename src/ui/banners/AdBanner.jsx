@@ -5,17 +5,13 @@ import { Link } from "react-router-dom"
 import'./styles.sass'
 const AdBanner = ({location, type}) => {
   const user = useSelector(state => state.users.userData)
-  console.log(user.role)
   const [adInfo, setAdInfo] = useState(null)
   useEffect(()=>{
     getAd(type).then(data => {
-      console.log(data, user.role)
       if(data.target.split(", ").some(target => target == user.role))
       setAdInfo(data)
   })
 }, [user])
-console.log(adInfo?.link)
-    console.log(adInfo)
     if(adInfo == null)
     return null
     const renderBanner = () => {

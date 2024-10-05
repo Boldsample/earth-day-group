@@ -55,6 +55,10 @@
     "createUsercontentText": "¡La cuenta se ha creado con éxito!",
     "newUserContentText": "¡Te has registrado con éxito! Te hemos enviado un correo electrónico de verificación. Por favor, verifica tu identidad.",
     "newAdminContentText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico.",
+	"adWithUs": "Pauta con nosotros:",
+	"adSubject": "Quiero pautar mi empresa",
+	"adMessage": "Deseo promocionar mi empresa en la aplicación de Earth Day Group.",
+	"contact": "Conctáctanos",
     "formErrors": {
       "acceptCheckboxErrorMessage": "Es obligatorio aceptar los términos y condiciones.",
       "acceptCheckboxErrorMessage2": "Es obligatorio aceptar la política de privacidad.",
@@ -369,10 +373,10 @@
     "profileModuleDescriptionText": "Ver tu perfil.",
     "recycleMaterialsModuleTitleText": "Materiales Reciclables",
     "recycleMaterialsModuleDescriptionText": "Encuentra material reciclable y cómpralo.",
-    "createProductModuleTitleText": "Crear Producto",
-    "createProductModuleDescriptionText": "Crea un producto que se exhibirá en tu tienda.",
-    "createPetModuleTitleText": "Crear Mascota",
-    "createPetModuleDescriptionText": "Crea una mascota para publicar en adopción.",
+    "createProductModuleTitleText": "Añadir Producto",
+    "createProductModuleDescriptionText": "Añadir un producto que se exhibirá para la venta en tu tienda.",
+    "createPetModuleTitleText": "Añadir Mascota",
+    "createPetModuleDescriptionText": "Añadir una mascota para publicar en adopción.",
     "reportsModuleTitleText": "Reportes",
     "reportsModuleDescriptionText": "Gestiona y responde reportes.",
     "adminsModuleTitleText": "Admins",
@@ -695,7 +699,7 @@
         "addPricelLabel": "Precio por Unidad",
         "addPricePlaceHolder": "Añadir Precio por Unidad",
         "addCompanyImgsLabel": "Añadir Imágenes de la Empresa",
-        "pickUpFromHomeLabel": "Recoger en casa",
+        "pickUpFromHomeLabel": "Servicio de recogida en casa de materiales reciclables.",
         "addMaterialBtnText": "Agregar Material",
         "signUpBtnText": "Registrarse"
       },
@@ -753,7 +757,9 @@
       }
     },
     "templates": {
-      "categoryListing": {},
+      "categoryListing": {
+        "search": "Search"
+      },
       "profileListing": {
         "profileElements": {
           "newProductBtnText": "Nuevo Producto",

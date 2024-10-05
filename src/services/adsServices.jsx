@@ -35,10 +35,7 @@ export const addAd = async (data) => {
       const timeDiffInMilliseconds =  endDate - currentTime ;
       
       if (returningData.state == 1 && timeDiffInMilliseconds <= 0) {
-        console.log(returningData.id)
         await updateAd({state:2}, {id: returningData.id})
-       
-
         returningData.state = 2
       }
 
