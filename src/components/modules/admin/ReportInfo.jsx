@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Dialog } from "primereact/dialog"
 import { Button } from "primereact/button"
@@ -20,6 +21,7 @@ import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 
 const ReportInfo = ({ show, report, onHide }) => {
+	const [responseType,  setResponseType] = useState('')
 	const navigate = useNavigate()
 	const user = useSelector((state) => state.users.userData)
 	const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
@@ -58,7 +60,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 		}
 	}
 	
-	return <Dialog visible={show} onHide={onHide} draggable={false}>
+	return <Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header='Gestión de Reporte'>
 		<Stepper>
 		<StepperPanel header="Resumen del reporte">
 			{report?.images?.length && 
@@ -72,18 +74,25 @@ const ReportInfo = ({ show, report, onHide }) => {
 				<div className="fullwidth mb-4" style={{fontSize: '0.75rem'}}>{report?.date}</div>
 				<p><b>{t('reportedEntity')} {report?.type}:</b> <Link to={`/${report?.type}/${report?.entity}/`}>{report?.name}</Link></p>
 				{(report?.type == 'product' || report?.type == 'pet') && 
-					<p><b>{t('ownerTitle')}</b> <Link to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></p>
+					<p className="reported-by-styles"><b>{t('ownerTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></p>
 				}
 				<p><b>{t('subjectTitle')}</b> {report?.subject}</p>
 				<p><b>{t('descriptionTitle')}</b> {report?.description}</p>
-				<div><b>{t('reportedByTitle')}</b> <Link to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></div>
+				<div className="reported-by-styles"><b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></div>
 				<div className="mt-3 fullwidth">
-					<Link className="button small dark-blue" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
+					<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
 				</div>
 			</div> 
 		</StepperPanel>
 		<StepperPanel header="Gestionar reporte">
-			{report?.status != 'Resolved' && (!report?.aid || report?.aid == user?.id) &&
+			<div className="flex-flow">
+				<h4 className="mb-2">How would you like to handle this report?</h4>
+				<div className="flex">
+					<Button className="dark-blue" label="Automated Response" onClick={()=> setResponseType('automated')}/>
+					<Button label="Manual Response" onClick={()=> setResponseType('manual')}/>
+				</div>
+			</div>
+			{ responseType == 'automated' && report?.status != 'Resolved' && (!report?.aid || report?.aid == user?.id) &&
 				<form className="respond" onSubmit={handleSubmit(onSubmit)}>
 					<h4 className="mb-1">{t('respondReport')}</h4>
 					<div className={watch('action') == 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
