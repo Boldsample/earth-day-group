@@ -63,38 +63,41 @@ const ReportInfo = ({ show, report, onHide }) => {
 	return <Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header='Gestión de Reporte'>
 		<Stepper>
 		<StepperPanel header="Resumen del reporte">
-			{report?.images?.length && 
-				<Galleria value={report?.images} numVisible={5}
-					item={({picture}) => <img src={picture} />}
-					thumbnail={({picture}) => <img src={picture} />} /> || 
-				<div className="default-image"><FontAwesomeIcon icon={faImage} /></div>
-			}
-			<div className="content">
-				<h4>{t('mainTitle')}</h4>
-				<div className="fullwidth mb-4" style={{fontSize: '0.75rem'}}>{report?.date}</div>
-				<p><b>{t('reportedEntity')} {report?.type}:</b> <Link to={`/${report?.type}/${report?.entity}/`}>{report?.name}</Link></p>
-				{(report?.type == 'product' || report?.type == 'pet') && 
-					<p className="reported-by-styles"><b>{t('ownerTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></p>
+			<div className="panel-1">
+				{report?.images?.length && 
+					<Galleria value={report?.images} numVisible={5}
+						item={({picture}) => <img src={picture} />}
+						thumbnail={({picture}) => <img src={picture} />} /> || 
+					<div className="default-image"><FontAwesomeIcon icon={faImage} /></div>
 				}
-				<p><b>{t('subjectTitle')}</b> {report?.subject}</p>
-				<p><b>{t('descriptionTitle')}</b> {report?.description}</p>
-				<div className="reported-by-styles"><b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></div>
-				<div className="mt-3 fullwidth">
-					<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
-				</div>
-			</div> 
+				<div className="content">
+					<h4>{t('mainTitle')}</h4>
+					<div className="fullwidth mb-4" style={{fontSize: '0.75rem'}}>{report?.date}</div>
+					<p><b>{t('reportedEntity')} {report?.type}:</b> <Link to={`/${report?.type}/${report?.entity}/`}>{report?.name}</Link></p>
+					{(report?.type == 'product' || report?.type == 'pet') && 
+						<p className="reported-by-styles"><b>{t('ownerTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></p>
+					}
+					<p><b>{t('subjectTitle')}</b> {report?.subject}</p>
+					<p><b>{t('descriptionTitle')}</b> {report?.description}</p>
+					<div className="reported-by-styles"><b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></div>
+					<div className="mt-3 fullwidth">
+						<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
+					</div>
+				</div> 
+			</div>
 		</StepperPanel>
 		<StepperPanel header="Gestionar reporte">
+		<div className="panel-2">
 			<div className="flex-flow">
 				<h4 className="mb-2">How would you like to handle this report?</h4>
-				<div className="flex">
+				<div className="flex mb-2">
 					<Button className="dark-blue" label="Automated Response" onClick={()=> setResponseType('automated')}/>
 					<Button label="Manual Response" onClick={()=> setResponseType('manual')}/>
 				</div>
 			</div>
 			{ responseType == 'automated' && report?.status != 'Resolved' && (!report?.aid || report?.aid == user?.id) &&
 				<form className="respond" onSubmit={handleSubmit(onSubmit)}>
-					<h4 className="mb-1">{t('respondReport')}</h4>
+					{/* <h4 className="mb-1">{t('respondReport')}</h4> */}
 					<div className={watch('action') == 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
 						<DropDownInput
 							isEdit={true}
@@ -166,6 +169,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 				</form>
 			}
 			<Tooltip target=".hasTooltip" position="top" />
+		</div>
 		</StepperPanel>
 		</Stepper>
 	</Dialog>
