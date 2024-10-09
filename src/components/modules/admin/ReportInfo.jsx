@@ -88,9 +88,9 @@ const ReportInfo = ({ show, report, onHide }) => {
 		</StepperPanel>
 		<StepperPanel header="Gestionar reporte">
 		<div className="panel-2">
-			<div className="flex-flow">
-				<h4 className="mb-2">How would you like to handle this report?</h4>
-				<div className="flex mb-2">
+			<div className="flex-column aligncenter">
+				<h4 className="mb-2 text-center">How would you like to handle this report?</h4>
+				<div className="mb-2">
 					<Button className="dark-blue" label="Automated Response" onClick={()=> setResponseType('automated')}/>
 					<Button label="Manual Response" onClick={()=> setResponseType('manual')}/>
 				</div>
@@ -160,15 +160,42 @@ const ReportInfo = ({ show, report, onHide }) => {
 								}} />
 						</div>
 					}
-					<div className="p-field">
+					{/* <div className="p-field">
 						<Button className="dark-blue" label={watch('action') == 'solved' ? 'Resolver reporte' : 'Enviar mensaje'+(report?.aid == 0 ? ' y asignarme como agente' : '')} type="submit" />
 						{report?.aid == user?.id && 
 							<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
 						}
-					</div>
+					</div> */}
 				</form>
 			}
+			{responseType == 'manual' && 
+				<div className="registerInput__container-x1">
+				<TextAreaInput
+					control={control}
+					isRequired={true}
+					nameInput="custom_message"
+					labelName={'Mensaje personalizado'}
+					getFormErrorMessage={getFormErrorMessage}
+					placeHolderText={'Ingrese el mensaje que desea enviar'}
+					rules={{
+						maxLength: {
+							value: 500,
+							message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 500}),
+						},
+						required: tGlobal(`requiredErrorMessage`),
+					}} />
+			</div>
+			}
 			<Tooltip target=".hasTooltip" position="top" />
+			{responseType != '' &&
+				<div className="p-field">
+				<Button className="dark-blue" label={watch('action') == 'solved' ? 'Resolver reporte' : 'Enviar mensaje'+(report?.aid == 0 ? ' y asignarme como agente' : '')} type="submit" />
+				{report?.aid == user?.id && 
+					<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
+				}
+				<Button label="Mark as resolved "/>
+			</div>
+			}
 		</div>
 		</StepperPanel>
 		</Stepper>
