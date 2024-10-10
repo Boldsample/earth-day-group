@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Dialog } from "primereact/dialog"
 import { Button } from "primereact/button"
@@ -19,6 +19,7 @@ import { updatePet } from "@services/petServices"
 import { updateProduct } from "@services/productServices"
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
+import { RadioInput } from "@ui/forms"
 
 const ReportInfo = ({ show, report, onHide }) => {
 	const [responseType,  setResponseType] = useState('')
@@ -26,9 +27,11 @@ const ReportInfo = ({ show, report, onHide }) => {
 	const user = useSelector((state) => state.users.userData)
 	const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
+	const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
 	const types = { 'user': 'User', 'product': 'Product', 'pet': 'Pet', 'offer': 'Offer' }
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const {
+		setValue,
 		watch,
 		control,
 		handleSubmit,
@@ -40,6 +43,19 @@ const ReportInfo = ({ show, report, onHide }) => {
 			user: report?.username,
 		},
 	})
+
+	useEffect(()=>{
+		if(watch('message') != ''){
+			const message = watch('message') 
+
+			setValue('custom_message', message);
+		}
+	}, [watch('message')])
+
+	const radioData = [
+		{ name: tGlobal2('yes'), value: 1 },
+		{ name: tGlobal2('no'), value: 0 },
+	  ]
 
 	const onSubmit = async data => {
 		const message = data?.message != 'custom' ? data?.message : data?.custom_message
@@ -88,18 +104,14 @@ const ReportInfo = ({ show, report, onHide }) => {
 		</StepperPanel>
 		<StepperPanel header="Gestionar reporte">
 		<div className="panel-2">
-			<div className="flex-column aligncenter">
+			<div className="flex-column">
 				<h4 className="mb-2 text-center">How would you like to handle this report?</h4>
-				<div className="mb-2">
-					<Button className="dark-blue" label="Automated Response" onClick={()=> setResponseType('automated')}/>
-					<Button label="Manual Response" onClick={()=> setResponseType('manual')}/>
-				</div>
 			</div>
-			{ responseType == 'automated' && report?.status != 'Resolved' && (!report?.aid || report?.aid == user?.id) &&
+			{ report?.status != 'Resolved' && (!report?.aid || report?.aid == user?.id) &&
 				<form className="respond" onSubmit={handleSubmit(onSubmit)}>
 					{/* <h4 className="mb-1">{t('respondReport')}</h4> */}
 					<div className={watch('action') == 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
-						<DropDownInput
+						{/* <DropDownInput
 							isEdit={true}
 							control={control}
 							showLabel={true}
@@ -117,7 +129,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 							placeHolderText={'Seleccione una opción'}
 							rules={{
 								required: tGlobal(`requiredErrorMessage`),
-							}} />
+							}} /> */}
 						{watch('action') != 'solved' && 
 							<DropDownInput
 								isEdit={true}
@@ -134,15 +146,25 @@ const ReportInfo = ({ show, report, onHide }) => {
 									{ label: 'Mensaje automatico 3', value: 'template3' },
 									{ label: 'Mensaje automatico 4', value: 'template4' }
 								]}
-								labelName={'Mensaje'}
+								labelName={'Tipo de mensaje'}
 								getFormErrorMessage={getFormErrorMessage}
 								placeHolderText={'Seleccione una opción'}
 								rules={{
 									required: tGlobal(`requiredErrorMessage`),
-								}} />
+								}} />		
 						}
+						 <RadioInput
+								data={radioData}
+								showLabel={true}
+								control={control}
+								isRequired={true}
+								labelName={`Eliminar ${types[report?.type]}?`}
+								nameInput="pick_up_from_home"
+								rules={{
+									required: true,
+								}} />
 					</div>
-					{watch('action') != 'solved' && watch('message') == 'custom' && 
+					{watch('action') != 'solved' && watch('message') != '' && 
 						<div className="registerInput__container-x1">
 							<TextAreaInput
 								control={control}
@@ -160,12 +182,13 @@ const ReportInfo = ({ show, report, onHide }) => {
 								}} />
 						</div>
 					}
-					{/* <div className="p-field">
+					<div className="p-field">
 						<Button className="dark-blue" label={watch('action') == 'solved' ? 'Resolver reporte' : 'Enviar mensaje'+(report?.aid == 0 ? ' y asignarme como agente' : '')} type="submit" />
 						{report?.aid == user?.id && 
 							<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
 						}
-					</div> */}
+						<Button label="Mark as resolved "/>
+					</div>
 				</form>
 			}
 			{responseType == 'manual' && 
@@ -187,15 +210,6 @@ const ReportInfo = ({ show, report, onHide }) => {
 			</div>
 			}
 			<Tooltip target=".hasTooltip" position="top" />
-			{responseType != '' &&
-				<div className="p-field">
-				<Button className="dark-blue" label={watch('action') == 'solved' ? 'Resolver reporte' : 'Enviar mensaje'+(report?.aid == 0 ? ' y asignarme como agente' : '')} type="submit" />
-				{report?.aid == user?.id && 
-					<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
-				}
-				<Button label="Mark as resolved "/>
-			</div>
-			}
 		</div>
 		</StepperPanel>
 		</Stepper>
