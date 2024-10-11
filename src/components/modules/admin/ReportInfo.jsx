@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { Dialog } from "primereact/dialog"
 import { Button } from "primereact/button"
@@ -20,8 +20,10 @@ import { updateProduct } from "@services/productServices"
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { RadioInput } from "@ui/forms"
+import { InputSwitch } from "primereact/inputswitch"
 
-const ReportInfo = ({ show, report, onHide }) => {
+const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
+	const stepperRef = useRef(null); 
 	const [responseType,  setResponseType] = useState('')
 	const navigate = useNavigate()
 	const user = useSelector((state) => state.users.userData)
@@ -77,7 +79,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 	}
 	
 	return <Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header='Gestión de Reporte'>
-		<Stepper>
+		<Stepper ref={stepperRef} >
 		<StepperPanel header="Resumen del reporte">
 			<div className="panel-1">
 				{report?.images?.length && 
@@ -98,6 +100,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 					<div className="reported-by-styles"><b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></div>
 					<div className="mt-3 fullwidth">
 						<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
+						<Button className="button small" label="Gestionar reporte" onClick={() => stepperRef.current.nextCallback()}/>
 					</div>
 				</div> 
 			</div>
@@ -136,7 +139,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 								control={control}
 								showLabel={true}
 								isRequired={true}
-								optionLabel="label"
+								optionLabel="label" 
 								optionValue="value"
 								nameInput="message"
 								options={[
@@ -153,7 +156,8 @@ const ReportInfo = ({ show, report, onHide }) => {
 									required: tGlobal(`requiredErrorMessage`),
 								}} />		
 						}
-						 <RadioInput
+						{/* <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/> */}
+						 {/* <RadioInput
 								data={radioData}
 								showLabel={true}
 								control={control}
@@ -162,7 +166,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 								nameInput="pick_up_from_home"
 								rules={{
 									required: true,
-								}} />
+								}} /> */}
 					</div>
 					{watch('action') != 'solved' && watch('message') != '' && 
 						<div className="registerInput__container-x1">

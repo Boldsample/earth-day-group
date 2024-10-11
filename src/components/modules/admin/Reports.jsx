@@ -21,6 +21,7 @@ import { Tag } from 'primereact/tag'
 
 const Reports = () => {
 	const dispatch = useDispatch()
+	const [solved, setSolved] = useState(false)
 	const [detail, setDetail] = useState({})
 	const [reset, setReset] = useState(false)
 	const [profile, setProfile] = useState(null)
@@ -110,7 +111,7 @@ const Reports = () => {
 		<div className={'main__content fullwidth'}>
 			<h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>
 			<ProfileProvider profile={profile} setProfile={setProfile}>
-				<ReportInfo show={detail.show} report={detail} onHide={hidePopup}  />
+				<ReportInfo show={detail.show} report={detail} onHide={hidePopup} solved={solved} setSolved={setSolved}  />
 				{typeof reports?.total == 'undefined' && reports?.data?.length == 0 && 
 					<TableSkeleton />
 				|| <>
