@@ -59,7 +59,7 @@ const RegisterCompany = ({create = false}) => {
             <CompanyStandardForm user={userData} setUser={setUserData} ID={ID} setActiveIndex={setActiveIndex} />
           </TabPanel>
           <TabPanel disabled={isDisabled}>
-            <CompanyDetailedForm user={userData} setUser={setUserData} ID={ID} />
+            <CompanyDetailedForm user={userData} setUser={setUserData} ID={ID} currentUserID={user?.id} />
           </TabPanel>
         </TabView>
       </div>

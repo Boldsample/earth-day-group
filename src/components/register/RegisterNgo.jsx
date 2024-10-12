@@ -75,6 +75,8 @@ const RegisterNgo = ({create = false}) => {
   }
   const onSubmit = async (data) => {
     let response
+	  const _images = data?.images
+    delete data.images
     setSending(true)
     if(ID){
       if(data.password == '')
@@ -86,7 +88,7 @@ const RegisterNgo = ({create = false}) => {
       response = await createUser({ ...data })
     }
     if(response?.id){
-      const _sendImages = data.images.map(image => {
+      const _sendImages = _images.map(image => {
         let _image = {...image}
         _image.entity = response?.id
         return _image
@@ -307,7 +309,7 @@ const RegisterNgo = ({create = false}) => {
           title={t('organizationImgsTitle')}
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
-        {!username && <>
+        {create && <>
           <div className="registerInput__container-x2">
             <PasswordInput
             passwordRequirementsPopUp={PasswordRequirements}

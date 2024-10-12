@@ -249,7 +249,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           },
         }} />
     </div>
-    {!username && <>
+    {!user?.username && <>
       <div className="registerInput__container-x2">
         <PasswordInput
           passwordRequirementsPopUp={PasswordRequirements}

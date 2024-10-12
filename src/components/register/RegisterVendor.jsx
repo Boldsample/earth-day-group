@@ -328,7 +328,7 @@ const RegisterVendor = ({create = false}) => {
               },
             }} />
         </div>
-        {!username && <>
+        {create && <>
           <div className="registerInput__container-x2">
             <PasswordInput
               passwordRequirementsPopUp={PasswordRequirements}

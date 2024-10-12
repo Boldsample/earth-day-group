@@ -22,6 +22,7 @@
     "passwordRequirement5": "Mínimo 8 caracteres",
     "profileUploadLabel": "Foto de Perfil",
     "profileUploadBtn": "Haz click para adjuntar",
+    "profileUploadAsDefault": "Usar como principal",
     "userFullNameInputLabel": "Nombre",
     "userFullNamePlaceholderText": "Juan Perez",
     "userNameInputLabel": "Nombre de Usuario",
@@ -30,7 +31,7 @@
     "userEmailPlaceHolderText": "juanperez1990@eco.com",
     "userAddressInputLabel": "Dirección",
     "userAddressPlaceHolderText": " Carrera 89 44B-57",
-    "userWebsiteInputLabel": "Sitio web",
+    "userWebsiteInputLabel": "Página web/Red social",
     "userWebsitePlaceHolderText": "www.ecoproyectos.com/",
     "userPhoneNumberInputLabel": "Número de Teléfono",
     "userPhoneNumberPlaceHolderText": "(954) 987-69-17",
@@ -566,7 +567,7 @@
         "companyMaterialPriceTitle": "Precio del Material",
         "userPhoneNumberTitle": "Número de teléfono",
         "userNitTitle": "NIT",
-        "userWebsiteTitle": "Página Web",
+        "userWebsiteTitle": "Página Web/Red social",
         "userAddressTitle": "Dirección"
       },
       "profileProvider": {}
@@ -680,7 +681,15 @@
         "textAreaProductDescriptionPlaceholder": "Escribe una breve descripción del producto.",
         "textAreamaxLengthErrorMessage": "Has excedido el número máximo de 1000 caracteres en este campo",
         "createProductBtn": "Crear Producto",
-        "updateProductBtn": "Actualizar Producto"
+        "updateProductBtn": "Actualizar Producto",
+        "food": "Alimentos",
+        "care": "Cuidado personal",
+        "home": "Hogar y jardín",
+        "fashion": "Moda y accesorios",
+        "babies": "Bebés y niños",
+        "health": "Salud y bienestar",
+        "transportation": "Transporte",
+        "office": "Papelería y oficina"
       },
       "product": {
         "addToCartBtnText": "Agregar al Carrito",
@@ -706,7 +715,8 @@
         "addCompanyImgsLabel": "Añadir Imágenes de la Empresa",
         "pickUpFromHomeLabel": "Servicio de recogida en casa de materiales reciclables.",
         "addMaterialBtnText": "Agregar Material",
-        "signUpBtnText": "Registrarse"
+        "signUpBtnText": "Registrarse",
+        "saveBtnText": "Guardar"
       },
       "companyStandardForm": {
         "companyNameTitle": "Nombre de la Empresa",
@@ -769,6 +779,8 @@
         "profileElements": {
           "newProductBtnText": "Nuevo Producto",
           "newPetBtnText": "Nueva Mascota",
+          "productsTitle0": "Mis productos",
+          "adoptPetTitle0": "Mis mascotas en adopción",
           "productsTitle1": "Productos relacionados",
           "adoptPetTitle1": "Aquí hay algunos 'peluditos' que te pueden gustar",
           "productsTitle2": "Descubre nuestros productos",
