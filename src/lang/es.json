@@ -55,10 +55,10 @@
     "createUsercontentText": "¡La cuenta se ha creado con éxito!",
     "newUserContentText": "¡Te has registrado con éxito! Te hemos enviado un correo electrónico de verificación. Por favor, verifica tu identidad.",
     "newAdminContentText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico.",
-	"adWithUs": "Pauta con nosotros:",
-	"adSubject": "Quiero pautar mi empresa",
-	"adMessage": "Deseo promocionar mi empresa en la aplicación de Earth Day Group.",
-	"contact": "Conctáctanos",
+    "adWithUs": "Pauta con nosotros:",
+    "adSubject": "Quiero pautar mi empresa",
+    "adMessage": "Deseo promocionar mi empresa en la aplicación de Earth Day Group.",
+    "contact": "Conctáctanos",
     "formErrors": {
       "acceptCheckboxErrorMessage": "Es obligatorio aceptar los términos y condiciones.",
       "acceptCheckboxErrorMessage2": "Es obligatorio aceptar la política de privacidad.",
@@ -114,7 +114,7 @@
       "bodyText": "Por favor, ingresa una nueva contraseña.",
       "passwordPlaceHolderText": "Contraseña",
       "passwordConfirmationPlaceHolderText": "Confirmar Contraseña",
-	  "submitBtnText": "Enviar"
+      "submitBtnText": "Enviar"
     }
   },
   "admin": {
@@ -289,7 +289,12 @@
       "descriptionTitle": "Descripción:",
       "reportedByTitle": "Reportado por:",
       "viewBtn": "Ver",
-	  "respondReport": "Respond to the report"
+      "respondReport": "Respond to the report",
+      "newCaseMessage": "Asunto: Notificación de Reporte Recibido\n\nEstimado [Nombre del Usuario/Compañía],\n\nHemos recibido un reporte sobre tu Usuario, Producto, Mascota en adopción, Oferta en nuestra plataforma, relacionado con Uso indebido, SPAM, Contenido inapropiado, etc. Queremos informarte que estamos revisando el caso en conformidad con nuestros Términos y Condiciones de uso.\n\nDurante este proceso, evaluaremos el contenido reportado para determinar si se ha producido alguna infracción de nuestras políticas. En caso de que sea necesaria alguna acción, te lo notificaremos de inmediato.\n\nSi tienes alguna duda o información adicional que quieras compartir mientras realizamos esta revisión, no dudes en contactarnos a través de este chat.\n\nAgradecemos tu paciencia y colaboración mientras resolvemos este asunto.\n\nAtentamente,\nEarth Day Group – Equipo de Soporte",
+      "followUpCaseMessage": "Asunto: Actualización sobre el Reporte Recibido\n\nEstimado [Nombre del Usuario/Compañía],\n\nQueremos informarte que seguimos revisando el reporte relacionado con tu [Usuario, Producto, Mascota en adopción, Oferta] en nuestra plataforma, por [Uso indebido, SPAM, Contenido inapropiado, etc.]. Estamos llevando a cabo una evaluación minuciosa para asegurar que se cumplan nuestros Términos y Condiciones de uso.\n\nUna vez que hayamos completado el proceso de investigación, te informaremos sobre los resultados y cualquier acción que pueda ser necesaria.\n\nAgradecemos tu paciencia mientras resolvemos este caso. Si tienes alguna duda o información adicional que desees compartir, no dudes en contactarnos a través de este chat.\n\nAtentamente,\nEarth Day Group – Equipo de Soporte",
+      "negativeClosingCaseMessage": "Asunto: Resultado de la Investigación sobre el Reporte\n\nEstimado [Nombre del Usuario/Compañía],\n\nTras una investigación exhaustiva sobre tu [Usuario, Producto, Mascota en adopción, Oferta], relacionada con [Uso indebido, SPAM, Contenido inapropiado, etc.], hemos determinado que se ha producido una violación de nuestros Términos y Condiciones.\n\nEspecíficamente, se ha encontrado que el contenido reportado no cumple con nuestras políticas. Como resultado, tomaremos las siguientes medidas: [Describir la acción tomada, como la eliminación del contenido, restricción de la cuenta, etc.].\n\nTe pedimos que, a futuro, sigas nuestras normas para evitar sanciones adicionales que podrían incluir la suspensión o eliminación definitiva de tu cuenta.\n\nSi consideras que esta decisión no es justa, puedes ponerte en contacto con nuestro equipo de soporte para solicitar una revisión del caso.\n\nAtentamente,\nEarth Day Group – Equipo de Soporte",
+      "positiveClosingCaseMessage": "Asunto: Resultado de la Investigación: No se Encontraron Infracciones\n\nEstimado [Nombre del Usuario/Compañía],\n\nDespués de llevar a cabo una revisión detallada sobre el reporte recibido en relación con tu [Usuario, Producto, Mascota en adopción, Oferta], hemos concluido que no se ha producido ninguna infracción de nuestros Términos y Condiciones.\n\nNo será necesaria ninguna acción adicional, por lo que puedes continuar utilizando nuestra plataforma con normalidad. Agradecemos tu cumplimiento con nuestras políticas y te invitamos a seguir disfrutando de nuestros servicios.\n\nSi tienes cualquier duda o sugerencia, nuestro equipo de soporte está disponible para ayudarte.\n\nAtentamente,\nEarth Day Group – Equipo de Soporte",
+      "customCaseMessage": ""
     },
     "report": {
       "SelectInputPlaceHolder": "Seleccionar un tipo",

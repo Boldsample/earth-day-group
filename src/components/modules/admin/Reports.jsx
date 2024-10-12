@@ -21,7 +21,7 @@ import { Tag } from 'primereact/tag'
 
 const Reports = () => {
 	const dispatch = useDispatch()
-	const [solved, setSolved] = useState(false)
+	const [solved, setSolved] = useState(0)
 	const [detail, setDetail] = useState({})
 	const [reset, setReset] = useState(false)
 	const [profile, setProfile] = useState(null)

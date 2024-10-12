@@ -55,10 +55,10 @@
     "createUsercontentText": "The account has been created successfully!",
     "newAdminContentText": "You have registered a new admin user! We have sent an email verification link.",
     "newUserContentText": "You’re all signed up! You’re all signed up! Please verify your identity with the verification link that we sent to the email address you provided.",
-	"adWithUs": "Advertise with us:",
-	"adSubject": "I want to advertise my business",
-	"adMessage": "I want to promote my business on the Earth Day Group app.",
-	"contact": "Conctact us",
+    "adWithUs": "Advertise with us:",
+    "adSubject": "I want to advertise my business",
+    "adMessage": "I want to promote my business on the Earth Day Group app.",
+    "contact": "Conctact us",
     "formErrors": {
       "acceptCheckboxErrorMessage": "You are required to accept the terms and conditions.",
       "acceptCheckboxErrorMessage2": "You are required to accept the privacy policy.",
@@ -289,7 +289,12 @@
       "descriptionTitle": "Description:",
       "reportedByTitle": "Reported By:",
       "viewBtn": "View",
-	  "respondReport": "Respond to the report"
+      "respondReport": "Respond to the report",
+      "newCaseMessage": "Subject: Notification of Received Report\n\nDear [User/Company Name],\n\nWe have received a report regarding your User, Product, Adoptable Pet, Offer on our platform, related to Misuse, SPAM, Inappropriate Content, etc. We want to inform you that we are reviewing the case in accordance with our Terms and Conditions.\n\nDuring this process, we will evaluate the reported content to determine if any violation of our policies has occurred. If any action is necessary, we will notify you immediately.\n\nIf you have any questions or additional information you would like to share while we conduct this review, please feel free to contact us through this chat.\n\nWe appreciate your patience and cooperation as we resolve this matter.\n\nSincerely,\nEarth Day Group – Support Team",
+      "followUpCaseMessage": "Subject: Update on the Received Report\n\nDear [User/Company Name],\n\nWe want to inform you that we are still reviewing the report related to your [User, Product, Adoptable Pet, Offer] on our platform, due to [Misuse, SPAM, Inappropriate Content, etc.]. We are conducting a thorough evaluation to ensure compliance with our Terms and Conditions.\n\nOnce we have completed the investigation process, we will inform you of the results and any necessary actions.\n\nWe appreciate your patience while we resolve this case. If you have any questions or additional information you would like to share, please feel free to contact us through this chat.\n\nSincerely,\nEarth Day Group – Support Team",
+      "negativeClosingCaseMessage": "Subject: Investigation Result on the Report\n\nDear [User/Company Name],\n\nAfter a thorough investigation of your [User, Product, Adoptable Pet, Offer], related to [Misuse, SPAM, Inappropriate Content, etc.], we have determined that a violation of our Terms and Conditions has occurred.\n\nSpecifically, the reported content has been found to be non-compliant with our policies. As a result, we will take the following measures: [Describe the action taken, such as content removal, account restriction, etc.].\n\nWe ask that in the future you adhere to our rules to avoid further penalties that could include the suspension or permanent deletion of your account.\n\nIf you believe this decision is unfair, you can contact our support team to request a review of the case.\n\nSincerely,\nEarth Day Group – Support Team",
+      "positiveClosingCaseMessage": "Subject: Investigation Result: No Violations Found\n\nDear [User/Company Name],\n\nAfter conducting a detailed review of the received report regarding your [User, Product, Adoptable Pet, Offer], we have concluded that no violation of our Terms and Conditions has occurred.\n\nNo further action is necessary, so you may continue using our platform normally. We appreciate your compliance with our policies and invite you to continue enjoying our services.\n\nIf you have any questions or suggestions, our support team is available to assist you.\n\nSincerely,\nEarth Day Group – Support Team",
+      "customCaseMessage": ""
     },
     "report": {
       "SelectInputPlaceHolder": "Select a type",

@@ -58,7 +58,7 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 		{ name: tGlobal2('yes'), value: 1 },
 		{ name: tGlobal2('no'), value: 0 },
 	  ]
-
+	  
 	const onSubmit = async data => {
 		const message = data?.message != 'custom' ? data?.message : data?.custom_message
 		if(data?.action == 'solved'){
@@ -101,6 +101,8 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 					<div className="mt-3 fullwidth">
 						<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
 						<Button className="button small" label="Gestionar reporte" onClick={() => stepperRef.current.nextCallback()}/>
+						
+
 					</div>
 				</div> 
 			</div>
@@ -143,11 +145,11 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 								optionValue="value"
 								nameInput="message"
 								options={[
-									{ label: 'Mensaje personalizado', value: 'custom' },
-									{ label: 'Mensaje automatico 1', value: 'template1' },
-									{ label: 'Mensaje automatico 2', value: 'template2' },
-									{ label: 'Mensaje automatico 3', value: 'template3' },
-									{ label: 'Mensaje automatico 4', value: 'template4' }
+									{ label: 'Mensaje apertura', value: t('newCaseMessage') },
+									{ label: 'Mensaje seguimiento', value: t('followUpCaseMessage') },
+									{ label: 'Mensaje negativo', value: t('negativeClosingCaseMessage') },
+									{ label: 'Mensaje positivo', value: t('positiveClosingCaseMessage') },
+									{ label: 'Mensaje personalizado', value: t('customCaseMessage') }
 								]}
 								labelName={'Tipo de mensaje'}
 								getFormErrorMessage={getFormErrorMessage}
@@ -156,7 +158,26 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 									required: tGlobal(`requiredErrorMessage`),
 								}} />		
 						}
-						{/* <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/> */}
+						{(watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage')) && (
+								<div className="p-field">
+									<label htmlFor="solvedReport">Mark as resolved</label>
+									<InputSwitch
+										name="solvedReport"
+										checked={solved === 0 ? false : true}
+										onChange={() => setSolved(solved === 0 ? 1 : 0)}
+									/>
+								</div>
+							)}
+							{watch('message') === t('negativeClosingCaseMessage') &&
+								(<div className="p-field">
+								<label htmlFor="solvedReport">{`Eliminar ${types[report?.type]}`}</label>
+								<InputSwitch
+									name="solvedReport"
+									checked={solved === 0 ? false : true}
+									onChange={() => setSolved(solved === 0 ? 1 : 0)}
+								/>
+							</div>
+							)}
 						 {/* <RadioInput
 								data={radioData}
 								showLabel={true}
@@ -191,7 +212,7 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 						{report?.aid == user?.id && 
 							<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
 						}
-						<Button label="Mark as resolved "/>
+						{/* <Button label="Mark as resolved "/> */}
 					</div>
 				</form>
 			}
