@@ -24,6 +24,7 @@
     "passwordRequirement5": "Minimum 8 characters",
     "profileUploadLabel": "Profile Picture",
     "profileUploadBtn": "Click to Upload",
+    "profileUploadAsDefault": "Use as default",
     "userNameInputLabel": "Username",
     "userNamePlaceHolderText": "Eco_John",
     "userFullNameInputLabel": "Name",
@@ -32,7 +33,7 @@
     "userEmailPlaceHolderText": "johndoe1990@eco.com",
     "userAddressInputLabel": "Address",
     "userAddressPlaceHolderText": "15205 North Kierland Blvd",
-    "userWebsiteInputLabel": "Website",
+    "userWebsiteInputLabel": "Website/Social network",
     "userWebsitePlaceHolderText": "www.ecoprojects.com/",
     "userPhoneNumberInputLabel": "Phone Number",
     "userPhoneNumberPlaceHolderText": "(954)987-69-17",
@@ -567,7 +568,7 @@
         "companyMaterialPriceTitle": "Material Price",
         "userPhoneNumberTitle": "Phone Number",
         "userNitTitle": "NIT",
-        "userWebsiteTitle": "Website",
+        "userWebsiteTitle": "Website/Social network",
         "userAddressTitle": "Address"
       },
       "profileProvider": {}
@@ -679,7 +680,15 @@
         "textAreaProducttDescriptionLabel": "Product Detail",
         "textAreaProductDescriptionPlaceholder": "Write a short description about the product.",
         "createProductBtn": "Create Product",
-        "updateProductBtn": "Update Product"
+        "updateProductBtn": "Update Product",
+        "food": "Food",
+        "care": "Personal care",
+        "home": "Home and garden",
+        "fashion": "Fashion and accessories",
+        "babies": "Babies and children",
+        "health": "Health and well-being",
+        "transportation": "Transportation",
+        "office": "Stationery and office"
       },
       "product": {
         "addToCartBtnText": "Add To Cart",
@@ -706,7 +715,7 @@
         "pickUpFromHomeLabel": "Recycle materials pick up from home service.",
         "addMaterialBtnText": "Add Material",
         "signUpBtnText": "Sign up",
-        "saveBtnText": "Guardar"
+        "saveBtnText": "Save"
       },
       "companyStandardForm": {
         "companyNameTitle": "Company Name",
@@ -769,6 +778,8 @@
         "profileElements": {
           "newProductBtnText": "New Product",
           "newPetBtnText": "New Pet",
+          "productsTitle0": "My products",
+          "adoptPetTitle0": "My pets for adoption",
           "productsTitle1": "Related products",
           "adoptPetTitle1": "Here are some 'friends' you may like",
           "productsTitle2": "Discover our Products",

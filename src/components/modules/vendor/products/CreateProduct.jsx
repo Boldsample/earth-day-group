@@ -21,7 +21,14 @@ const CreateProduct = () => {
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   
   const categories = [
-    { name: "Self care", code: "Self care" }
+    { name: t("food"), code: "food" },
+    { name: t("care"), code: "care" },
+    { name: t("home"), code: "home" },
+    { name: t("fashion"), code: "fashion" },
+    { name: t("babies"), code: "babies" },
+    { name: t("health"), code: "health" },
+    { name: t("transportation"), code: "transportation" },
+    { name: t("office"), code: "office" },
   ]
   const {
     watch,

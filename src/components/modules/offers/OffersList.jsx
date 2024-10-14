@@ -53,7 +53,8 @@ const Offers = ({type}) => {
 				return setOffers({total: 0, data: []})
 		}
 		let _offers = await getOffers(_filter, page)
-		_offers.materials = _offers.materials.map(({material}) => ({label: tMaterial(material), value: material}));
+		if(_offers.materials)
+			_offers.materials = _offers?.materials.map(({material}) => ({label: tMaterial(material), value: material}));
 		setOffers(_offers)
 	}
 	const renderHeader = () => {

@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCloudArrowUp, faClose } from "@fortawesome/free-solid-svg-icons"
+import { faCloudArrowUp, faClose, faUser, faMapPin } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
 
 import FileUploadInput from "../fileUploadInput"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 
 import "./uploadprofilephotoinput.sass"
+import { faBookmark } from "@fortawesome/free-regular-svg-icons"
 
 const UploadPhotoInput = ({
   type,
@@ -49,6 +50,9 @@ const UploadPhotoInput = ({
     const filteredImages = uploadedImages.filter((image, key) => key !== clickedImage)
     setUploadedImages(filteredImages)
   }
+  const markAsDefault = (clickedImage) => {
+	
+  }
   const renderContent = () => {
     switch (type) {
       case "profilePhotoUpload":
@@ -71,7 +75,8 @@ const UploadPhotoInput = ({
             </label>
             {uploadedImages?.length && uploadedImages?.map((image, key) => 
               <div key={key} className="image__container">
-                <button type="button" className="close__btn" onClick={() => removeImage(key)}><FontAwesomeIcon icon={faClose} color="green" fontSize="0.625rem" /></button>
+                <button type="button" className="close__btn" onClick={() => removeImage(key)}><FontAwesomeIcon icon={faClose} color="green" fontSize="1rem" /></button>
+				<button type="button" className="as__default" onClick={() => markAsDefault(key)}><FontAwesomeIcon icon={faBookmark} /><br />{t('profileUploadAsDefault')}</button>
                 <img className="uploadedImage" src={image.picture} alt="" />
               </div>
             ) || null}

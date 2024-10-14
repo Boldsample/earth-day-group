@@ -13,7 +13,7 @@ import { NumberInput, DropDownInput, UploadPhotoInput } from "@ui/forms"
 import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
 import { createUser, addImages, addMaterials, updateUser } from "@services/userServices"
 
-const CompanyDetailedForm = ({ user, setUser, ID }) => {
+const CompanyDetailedForm = ({ user, setUser, ID, currentUserID }) => {
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyDetailedForm'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
@@ -112,7 +112,7 @@ const CompanyDetailedForm = ({ user, setUser, ID }) => {
       await addImages(_sendImages)
     }
     setSending(false)
-    if(response?.id == user?.id)
+    if(response?.id == currentUserID)
       dispatch(getUserData(response?.id))
     if(ID && response?.id){
       dispatch(updateThankyou({
