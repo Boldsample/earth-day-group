@@ -4,6 +4,7 @@ import { InputTextarea } from "primereact/inputtextarea"
 const TextAreaInput = ({
 	rules,
 	control,
+	rowCount = 5,
 	disabled,
 	nameInput,
 	className,
@@ -13,6 +14,7 @@ const TextAreaInput = ({
 	getFormErrorMessage,
 	placeHolderText = "",
 }) => {
+	console.log(rowCount)
 	const renderInput = () => <>
 		<Controller
 			rules={rules}
@@ -20,7 +22,7 @@ const TextAreaInput = ({
 			control={control}
 			render={({ field }) => <InputTextarea
 				className={className}
-				rows={5}
+				rows={rowCount}
 				cols={30}
 				id={field.name}
 				disabled={disabled}

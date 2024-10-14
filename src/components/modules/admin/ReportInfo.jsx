@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 import { Tooltip } from "primereact/tooltip"
 import { useTranslation } from 'react-i18next'
-import { DropDownInput, TextAreaInput, TextInput } from "@ui/forms"
+import { DropDownInput, TextAreaInput } from "@ui/forms"
 import { useSelector } from "react-redux"
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { sendMessage } from "@services/chatServices"
 import { updateReport } from "@services/reportServices"
 import { updateUser } from "@services/userServices"
@@ -22,9 +22,8 @@ import { StepperPanel } from 'primereact/stepperpanel';
 import { RadioInput } from "@ui/forms"
 import { InputSwitch } from "primereact/inputswitch"
 
-const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
+const ReportInfo = ({ show, report, onHide }) => {
 	const stepperRef = useRef(null); 
-	const [responseType,  setResponseType] = useState('')
 	const navigate = useNavigate()
 	const user = useSelector((state) => state.users.userData)
 	const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
@@ -43,35 +42,36 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 			message: "",
 			admin: user?.username,
 			user: report?.username,
+			deleteElement: false,
+			reportResolved: null
 		},
 	})
 
 	useEffect(()=>{
 		if(watch('message') != ''){
 			const message = watch('message') 
-
-			setValue('custom_message', message);
+			if(message ==  "admin.reportInfo.customCaseMessage"){
+				setValue('custom_message', "");
+			}else{
+				setValue('custom_message', message);
+			}
 		}
 	}, [watch('message')])
 
-	const radioData = [
-		{ name: tGlobal2('yes'), value: 1 },
-		{ name: tGlobal2('no'), value: 0 },
-	  ]
-	  
 	const onSubmit = async data => {
+		console.log(data)
 		const message = data?.message != 'custom' ? data?.message : data?.custom_message
-		if(data?.action == 'solved'){
+		if(data?.reportResolved == true){
 			await updateReport({admin: user?.id, status: 'Resolved'}, {id: report?.id})
 			onHide(true)
 		}else if(await sendMessage({ message, incoming: user?.id, outgoing: report?.oid })){
-			if(data?.action == 'delete' && report?.type == 'user')
+			if(data?.deleteElement && report?.type == 'user')
 				await updateUser({state: 2}, {id: report?.entity})
-			else if(data?.action == 'delete' && report?.type == 'product')
+			else if(data?.deleteElement && report?.type == 'product')
 				await updateProduct({state: 2}, {id: report?.entity})
-			else if(data?.action == 'delete' && report?.type == 'pet')
+			else if(data?.deleteElement && report?.type == 'pet')
 				await updatePet({state: 2}, {id: report?.entity})
-			else if(data?.action == 'delete' && report?.type == 'offer')
+			else if(data?.deleteElement && report?.type == 'offer')
 				await updateOffer({state: 2}, {id: report?.entity})
 			await updateReport({admin: user?.id, status: 'In Process'}, {id: report?.id})
 			navigate(`/chat/${report?.owner}/`)
@@ -101,8 +101,6 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 					<div className="mt-3 fullwidth">
 						<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
 						<Button className="button small" label="Gestionar reporte" onClick={() => stepperRef.current.nextCallback()}/>
-						
-
 					</div>
 				</div> 
 			</div>
@@ -116,26 +114,6 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 				<form className="respond" onSubmit={handleSubmit(onSubmit)}>
 					{/* <h4 className="mb-1">{t('respondReport')}</h4> */}
 					<div className={watch('action') == 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
-						{/* <DropDownInput
-							isEdit={true}
-							control={control}
-							showLabel={true}
-							isRequired={true}
-							optionLabel="label"
-							optionValue="value"
-							nameInput="action"
-							options={[
-								{ label: `Enviar mensaje}`, value: 'message' },
-								{ label: `Eliminar ${types[report?.type]}`, value: 'delete' },
-								{ label: `Marcar reporte como resuelto`, value: 'solved' },
-							]}
-							labelName={'Acción'}
-							getFormErrorMessage={getFormErrorMessage}
-							placeHolderText={'Seleccione una opción'}
-							rules={{
-								required: tGlobal(`requiredErrorMessage`),
-							}} /> */}
-						{watch('action') != 'solved' && 
 							<DropDownInput
 								isEdit={true}
 								control={control}
@@ -157,82 +135,85 @@ const ReportInfo = ({ show, report, onHide, solved, setSolved }) => {
 								rules={{
 									required: tGlobal(`requiredErrorMessage`),
 								}} />		
-						}
-						{(watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage')) && (
-								<div className="p-field">
-									<label htmlFor="solvedReport">Mark as resolved</label>
-									<InputSwitch
-										name="solvedReport"
-										checked={solved === 0 ? false : true}
-										onChange={() => setSolved(solved === 0 ? 1 : 0)}
-									/>
-								</div>
-							)}
-							{watch('message') === t('negativeClosingCaseMessage') &&
-								(<div className="p-field">
-								<label htmlFor="solvedReport">{`Eliminar ${types[report?.type]}`}</label>
-								<InputSwitch
-									name="solvedReport"
-									checked={solved === 0 ? false : true}
-									onChange={() => setSolved(solved === 0 ? 1 : 0)}
-								/>
+								
+						{(watch('message') === t('negativeClosingCaseMessage') || 
+						watch('message') === t('positiveClosingCaseMessage') || 
+						watch('message') === t('customCaseMessage')) && 
+						<div className="switches-container">
+							<div className="labels-container">
+							<label htmlFor="solvedReport">Mark as resolved</label>
+							{watch('message') != t('positiveClosingCaseMessage') &&
+								<label htmlFor="delete">{`Eliminar ${types[report?.type]}`}</label>
+							}
 							</div>
-							)}
-						 {/* <RadioInput
-								data={radioData}
-								showLabel={true}
+							<div className="inputSwitches-container">
+							<Controller
+								name="reportResolved"
 								control={control}
-								isRequired={true}
-								labelName={`Eliminar ${types[report?.type]}?`}
-								nameInput="pick_up_from_home"
-								rules={{
-									required: true,
-								}} /> */}
+								render={({ field }) => (
+								<InputSwitch
+									id={field.name}
+									inputId="solvedReport"
+									checked={watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage') ? true : field.value}
+									onChange={(e) => {
+									if (watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage')) {
+										setValue('message', "");
+										setValue('custom_message', "");
+									}
+									field.onChange(e.value);
+									}}
+								/>
+								)}
+							/>
+							{watch('message') != t('positiveClosingCaseMessage') &&
+								<Controller
+									name="deleteElement"
+									control={control}
+									render={({ field }) => (
+									<InputSwitch
+										id={field.name}
+										inputId="delete"
+										checked={watch('message') === t('negativeClosingCaseMessage') ? true : field.value}
+										onChange={(e) => {
+										if (watch('message') === t('negativeClosingCaseMessage')) {
+											setValue('message', "");
+											setValue('custom_message', "");
+										}
+										field.onChange(e.value);
+										}}
+									/>
+									)}
+								/>
+							}
+							</div>
+						</div>
+						}
+
 					</div>
-					{watch('action') != 'solved' && watch('message') != '' && 
 						<div className="registerInput__container-x1">
 							<TextAreaInput
+								rowCount={18}
 								control={control}
 								isRequired={true}
 								nameInput="custom_message"
-								labelName={'Mensaje personalizado'}
+								labelName={'Mensaje'}
 								getFormErrorMessage={getFormErrorMessage}
 								placeHolderText={'Ingrese el mensaje que desea enviar'}
 								rules={{
 									maxLength: {
-										value: 500,
-										message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 500}),
+										value: 1000,
+										message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 1000}),
 									},
 									required: tGlobal(`requiredErrorMessage`),
 								}} />
 						</div>
-					}
 					<div className="p-field">
 						<Button className="dark-blue" label={watch('action') == 'solved' ? 'Resolver reporte' : 'Enviar mensaje'+(report?.aid == 0 ? ' y asignarme como agente' : '')} type="submit" />
 						{report?.aid == user?.id && 
 							<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
 						}
-						{/* <Button label="Mark as resolved "/> */}
 					</div>
 				</form>
-			}
-			{responseType == 'manual' && 
-				<div className="registerInput__container-x1">
-				<TextAreaInput
-					control={control}
-					isRequired={true}
-					nameInput="custom_message"
-					labelName={'Mensaje personalizado'}
-					getFormErrorMessage={getFormErrorMessage}
-					placeHolderText={'Ingrese el mensaje que desea enviar'}
-					rules={{
-						maxLength: {
-							value: 500,
-							message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 500}),
-						},
-						required: tGlobal(`requiredErrorMessage`),
-					}} />
-			</div>
 			}
 			<Tooltip target=".hasTooltip" position="top" />
 		</div>
