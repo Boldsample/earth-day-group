@@ -19,7 +19,6 @@ import { updatePet } from "@services/petServices"
 import { updateProduct } from "@services/productServices"
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
-import { RadioInput } from "@ui/forms"
 import { InputSwitch } from "primereact/inputswitch"
 
 const ReportInfo = ({ show, report, onHide }) => {
@@ -36,6 +35,8 @@ const ReportInfo = ({ show, report, onHide }) => {
 		watch,
 		control,
 		handleSubmit,
+		setError,
+		clearErrors,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
@@ -48,6 +49,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 	})
 
 	useEffect(()=>{
+		const clearSwitchInputErrorMessages = clearErrors()
 		if(watch('message') != ''){
 			const message = watch('message') 
 			if(message ==  "admin.reportInfo.customCaseMessage"){
@@ -55,6 +57,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 			}else{
 				setValue('custom_message', message);
 			}
+			clearSwitchInputErrorMessages
 		}
 	}, [watch('message')])
 
@@ -77,149 +80,169 @@ const ReportInfo = ({ show, report, onHide }) => {
 			navigate(`/chat/${report?.owner}/`)
 		}
 	}
-	
-	return <Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header='Gestión de Reporte'>
-		<Stepper ref={stepperRef} >
-		<StepperPanel header="Resumen del reporte">
-			<div className="panel-1">
-				{report?.images?.length && 
-					<Galleria value={report?.images} numVisible={5}
-						item={({picture}) => <img src={picture} />}
-						thumbnail={({picture}) => <img src={picture} />} /> || 
-					<div className="default-image"><FontAwesomeIcon icon={faImage} /></div>
-				}
+	return (
+		<Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header='Gestión de Reporte'>
+		  <Stepper ref={stepperRef}>
+			<StepperPanel header="Resumen del reporte">
+			  <div className="panel-1">
+				{report?.images?.length ? (
+				  <Galleria
+					value={report?.images}
+					numVisible={5}
+					item={({ picture }) => <img src={picture} />}
+					thumbnail={({ picture }) => <img src={picture} />}
+				  />
+				) : (
+				  <div className="default-image">
+					<FontAwesomeIcon icon={faImage} />
+				  </div>
+				)}
 				<div className="content">
-					<h4>{t('mainTitle')}</h4>
-					<div className="fullwidth mb-4" style={{fontSize: '0.75rem'}}>{report?.date}</div>
-					<p><b>{t('reportedEntity')} {report?.type}:</b> <Link to={`/${report?.type}/${report?.entity}/`}>{report?.name}</Link></p>
-					{(report?.type == 'product' || report?.type == 'pet') && 
-						<p className="reported-by-styles"><b>{t('ownerTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></p>
-					}
-					<p><b>{t('subjectTitle')}</b> {report?.subject}</p>
-					<p><b>{t('descriptionTitle')}</b> {report?.description}</p>
-					<div className="reported-by-styles"><b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link></div>
-					<div className="mt-3 fullwidth">
-						<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span></Link>
-						<Button className="button small" label="Gestionar reporte" onClick={() => stepperRef.current.nextCallback()}/>
-					</div>
-				</div> 
-			</div>
-		</StepperPanel>
-		<StepperPanel header="Gestionar reporte">
-		<div className="panel-2">
-			<div className="flex-column">
-				<h4 className="mb-2 text-center">How would you like to handle this report?</h4>
-			</div>
-			{ report?.status != 'Resolved' && (!report?.aid || report?.aid == user?.id) &&
-				<form className="respond" onSubmit={handleSubmit(onSubmit)}>
+				  <h4>{t('mainTitle')}</h4>
+				  <div className="fullwidth mb-4" style={{ fontSize: '0.75rem' }}>
+					{report?.date}
+				  </div>
+				  <p>
+					<b>{t('reportedEntity')} {report?.type}:</b> <Link to={`/${report?.type}/${report?.entity}/`}>{report?.name}</Link>
+				  </p>
+				  {(report?.type === 'product' || report?.type === 'pet') && (
+					<p className="reported-by-styles">
+					  <b>{t('ownerTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link>
+					</p>
+				  )}
+				  <p>
+					<b>{t('subjectTitle')}</b> {report?.subject}
+				  </p>
+				  <p>
+					<b>{t('descriptionTitle')}</b> {report?.description}
+				  </p>
+				  <div className="reported-by-styles">
+					<b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link>
+				  </div>
+				  <div className="mt-3 fullwidth">
+					<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}>
+					  <FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span>
+					</Link>
+					<Button className="button small" label="Gestionar reporte" onClick={() => stepperRef.current.nextCallback()} />
+				  </div>
+				</div>
+			  </div>
+			</StepperPanel>
+			<StepperPanel header="Gestionar reporte">
+			  <div className="panel-2">
+				<div className="flex-column">
+				  <h4 className="mb-2 text-center">How would you like to handle this report?</h4>
+				</div>
+				{report?.status !== 'Resolved' && (!report?.aid || report?.aid === user?.id) && (
+				  <form className="respond" onSubmit={handleSubmit(onSubmit)}>
 					{/* <h4 className="mb-1">{t('respondReport')}</h4> */}
-					<div className={watch('action') == 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
-							<DropDownInput
-								isEdit={true}
-								control={control}
-								showLabel={true}
-								isRequired={true}
-								optionLabel="label" 
-								optionValue="value"
-								nameInput="message"
-								options={[
-									{ label: 'Mensaje apertura', value: t('newCaseMessage') },
-									{ label: 'Mensaje seguimiento', value: t('followUpCaseMessage') },
-									{ label: 'Mensaje negativo', value: t('negativeClosingCaseMessage') },
-									{ label: 'Mensaje positivo', value: t('positiveClosingCaseMessage') },
-									{ label: 'Mensaje personalizado', value: t('customCaseMessage') }
-								]}
-								labelName={'Tipo de mensaje'}
-								getFormErrorMessage={getFormErrorMessage}
-								placeHolderText={'Seleccione una opción'}
-								rules={{
-									required: tGlobal(`requiredErrorMessage`),
-								}} />		
-								
-						{(watch('message') === t('negativeClosingCaseMessage') || 
+					<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
+					  <DropDownInput
+						isEdit={true}
+						control={control}
+						showLabel={true}
+						isRequired={true}
+						optionLabel="label"
+						optionValue="value"
+						nameInput="message"
+						options={[
+						  { label: 'Mensaje apertura', value: t('newCaseMessage') },
+						  { label: 'Mensaje seguimiento', value: t('followUpCaseMessage') },
+						  { label: 'Mensaje negativo', value: t('negativeClosingCaseMessage') },
+						  { label: 'Mensaje positivo', value: t('positiveClosingCaseMessage') },
+						  { label: 'Mensaje personalizado', value: t('customCaseMessage') }
+						]}
+						labelName={'Tipo de mensaje'}
+						getFormErrorMessage={getFormErrorMessage}
+						placeHolderText={'Seleccione una opción'}
+						rules={{
+						  required: tGlobal(`requiredErrorMessage`),
+						}}
+					  />
+					  {(watch('message') === t('negativeClosingCaseMessage') || 
 						watch('message') === t('positiveClosingCaseMessage') || 
-						watch('message') === t('customCaseMessage')) && 
+						watch('message') === t('customCaseMessage')) && (
 						<div className="switches-container">
-							<div className="labels-container">
+						  <div className="labels-container">
 							<label htmlFor="solvedReport">Mark as resolved</label>
-							{watch('message') != t('positiveClosingCaseMessage') &&
-								<label htmlFor="delete">{`Eliminar ${types[report?.type]}`}</label>
-							}
-							</div>
-							<div className="inputSwitches-container">
+							{watch('message') !== t('positiveClosingCaseMessage') && (
+							  <label htmlFor="delete">{`Eliminar ${types[report?.type]}`}</label>
+							)}
+						  </div>
+						  <div className="inputSwitches-container">
 							<Controller
-								name="reportResolved"
-								control={control}
-								render={({ field }) => (
+							  name="reportResolved"
+							  control={control}
+							  render={({ field }) => (
 								<InputSwitch
-									id={field.name}
-									inputId="solvedReport"
-									checked={watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage') ? true : field.value}
-									onChange={(e) => {
+								  id={field.name}
+								  inputId="solvedReport"
+								  checked={watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage') ? true : field.value}
+								  onChange={(e) => {
 									if (watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage')) {
-										setValue('message', "");
-										setValue('custom_message', "");
+									  setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a negative message" });
 									}
 									field.onChange(e.value);
-									}}
+								  }}
 								/>
-								)}
+							  )}
 							/>
-							{watch('message') != t('positiveClosingCaseMessage') &&
-								<Controller
-									name="deleteElement"
-									control={control}
-									render={({ field }) => (
-									<InputSwitch
-										id={field.name}
-										inputId="delete"
-										checked={watch('message') === t('negativeClosingCaseMessage') ? true : field.value}
-										onChange={(e) => {
-										if (watch('message') === t('negativeClosingCaseMessage')) {
-											setValue('message', "");
-											setValue('custom_message', "");
-										}
-										field.onChange(e.value);
-										}}
-									/>
-									)}
-								/>
-							}
-							</div>
-						</div>
-						}
-
-					</div>
-						<div className="registerInput__container-x1">
-							<TextAreaInput
-								rowCount={18}
+							{watch('message') !== t('positiveClosingCaseMessage') && (
+							  <Controller
+								name="deleteElement"
 								control={control}
-								isRequired={true}
-								nameInput="custom_message"
-								labelName={'Mensaje'}
-								getFormErrorMessage={getFormErrorMessage}
-								placeHolderText={'Ingrese el mensaje que desea enviar'}
-								rules={{
-									maxLength: {
-										value: 1000,
-										message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 1000}),
-									},
-									required: tGlobal(`requiredErrorMessage`),
-								}} />
+								render={({ field }) => (
+								  <InputSwitch
+									id={field.name}
+									inputId="delete"
+									checked={watch('message') === t('negativeClosingCaseMessage') ? true : field.value}
+									onChange={(e) => {
+									  if (watch('message') === t('negativeClosingCaseMessage')) {
+										setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a close case message. Try with a custom message type." });
+									  }
+									  field.onChange(e.value);
+									}}
+								  />
+								)}
+							  />
+							)}
+						  </div>
+						  {errors.reportResolved && <small className="p-error ml-3">{errors.reportResolved.message}</small>}
 						</div>
-					<div className="p-field">
-						<Button className="dark-blue" label={watch('action') == 'solved' ? 'Resolver reporte' : 'Enviar mensaje'+(report?.aid == 0 ? ' y asignarme como agente' : '')} type="submit" />
-						{report?.aid == user?.id && 
-							<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
-						}
+					  )}
 					</div>
-				</form>
-			}
-			<Tooltip target=".hasTooltip" position="top" />
-		</div>
-		</StepperPanel>
-		</Stepper>
-	</Dialog>
+					<div className="registerInput__container-x1">
+					  <TextAreaInput
+						rowCount={18}
+						control={control}
+						isRequired={true}
+						nameInput="custom_message"
+						labelName={'Mensaje'}
+						getFormErrorMessage={getFormErrorMessage}
+						placeHolderText={'Ingrese el mensaje que desea enviar'}
+						rules={{
+						  maxLength: {
+							value: 1000,
+							message: tGlobal(`inputMaxLengthErrorMessage`, { maxLength: 1000 }),
+						  },
+						  required: tGlobal(`requiredErrorMessage`),
+						}}
+					  />
+					</div>
+					<div className="p-field">
+					  <Button className="dark-blue" label={watch('action') === 'solved' ? 'Resolver reporte' : 'Enviar mensaje' + (report?.aid === 0 ? ' y asignarme como agente' : '')} type="submit" />
+					  {report?.aid === user?.id && (
+						<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
+					  )}
+					</div>
+				  </form>
+				)}
+				<Tooltip target=".hasTooltip" position="top" />
+			  </div>
+			</StepperPanel>
+		  </Stepper>
+		</Dialog>
+	  );
 }
 
 export default ReportInfo
