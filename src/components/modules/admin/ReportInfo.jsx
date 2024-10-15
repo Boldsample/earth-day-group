@@ -47,23 +47,27 @@ const ReportInfo = ({ show, report, onHide }) => {
 			reportResolved: null
 		},
 	})
+	const message = watch('message') 
 
 	useEffect(()=>{
-		const clearSwitchInputErrorMessages = clearErrors()
-		if(watch('message') != ''){
-			const message = watch('message') 
-			if(message ==  "admin.reportInfo.customCaseMessage"){
-				setValue('custom_message', "");
-			}else{
-				setValue('custom_message', message);
-			}
-			clearSwitchInputErrorMessages
+		report?.admin === "Without answer" ?  setValue('message', t('newCaseMessage')) : setValue('message', t('customCaseMessage'));
+	}, [report, onHide])
+	
+	useEffect(()=>{
+		const clearAllInputErrorMessages = clearErrors()
+
+		if(message ==  "admin.reportInfo.customCaseMessage"){
+			setValue('custom_message', "");
+		}else{
+			setValue('custom_message', message);
 		}
+		clearAllInputErrorMessages
+		
 	}, [watch('message')])
 
 	const onSubmit = async data => {
-		console.log(data)
-		const message = data?.message != 'custom' ? data?.message : data?.custom_message
+		// const message = data?.message != 'custom' ? data?.message : data?.custom_message
+		const message = data?.message === data?.custom_message ? data?.message : data?.custom_message
 		if(data?.reportResolved == true){
 			await updateReport({admin: user?.id, status: 'Resolved'}, {id: report?.id})
 			onHide(true)
@@ -135,7 +139,6 @@ const ReportInfo = ({ show, report, onHide }) => {
 				</div>
 				{report?.status !== 'Resolved' && (!report?.aid || report?.aid === user?.id) && (
 				  <form className="respond" onSubmit={handleSubmit(onSubmit)}>
-					{/* <h4 className="mb-1">{t('respondReport')}</h4> */}
 					<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
 					  <DropDownInput
 						isEdit={true}
@@ -213,7 +216,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 					</div>
 					<div className="registerInput__container-x1">
 					  <TextAreaInput
-						rowCount={18}
+						rowCount={message ==  "admin.reportInfo.customCaseMessage" ? 8 : 18}
 						control={control}
 						isRequired={true}
 						nameInput="custom_message"
@@ -230,6 +233,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 					  />
 					</div>
 					<div className="p-field">
+					  <Button label="Volver al resumen" onClick={() => stepperRef.current.prevCallback()}/>
 					  <Button className="dark-blue" label={watch('action') === 'solved' ? 'Resolver reporte' : 'Enviar mensaje' + (report?.aid === 0 ? ' y asignarme como agente' : '')} type="submit" />
 					  {report?.aid === user?.id && (
 						<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
