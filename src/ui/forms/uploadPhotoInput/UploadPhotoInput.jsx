@@ -32,7 +32,7 @@ const UploadPhotoInput = ({
           if(_uploadedImages.length >= 7)
             setReachedImageCapacity(true)
           else{
-            _uploadedImages.push({ picture: reader.result })
+            _uploadedImages.push({ picture: reader.result, is_main:  _uploadedImages.length ? 0 : 1})
             setUploadedImages([..._uploadedImages])
           }
         }
@@ -50,8 +50,9 @@ const UploadPhotoInput = ({
     const filteredImages = uploadedImages.filter((image, key) => key !== clickedImage)
     setUploadedImages(filteredImages)
   }
-  const markAsDefault = (clickedImage) => {
-	
+  const markAsMain = (clickedImage) => {
+    const _uploadedImages = uploadedImages.map((image, key) => ({...image, is_main: key == clickedImage ? 1 : 0}))
+    setUploadedImages(_uploadedImages)
   }
   const renderContent = () => {
     switch (type) {
@@ -66,8 +67,8 @@ const UploadPhotoInput = ({
           </div>
         </div>
       case "imageUpload":
-        return <div className={`imagesHub__container ${className}`}>
-          <h4>{title}</h4>
+        return <div className={`imagesHub__container p-field ${className || ''}`}>
+          <label>{title}</label>
           <div className="imageCarousel__container">
             <input id="file" type="file" multiple accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
             <label htmlFor="file" className="imageUpload__button">
@@ -76,8 +77,12 @@ const UploadPhotoInput = ({
             {uploadedImages?.length && uploadedImages?.map((image, key) => 
               <div key={key} className="image__container">
                 <button type="button" className="close__btn" onClick={() => removeImage(key)}><FontAwesomeIcon icon={faClose} color="green" fontSize="1rem" /></button>
-				<button type="button" className="as__default" onClick={() => markAsDefault(key)}><FontAwesomeIcon icon={faBookmark} /><br />{t('profileUploadAsDefault')}</button>
-                <img className="uploadedImage" src={image.picture} alt="" />
+                {image?.is_main == 1 ? 
+                  <button type="button" className="is__main">{t('profileUploadMain')}</button>
+                : 
+				          <button type="button" className="as__main" onClick={() => markAsMain(key)}><FontAwesomeIcon icon={faBookmark} /><br />{t('profileUploadAsMain')}</button>
+                }
+                <img className="uploadedImage" src={image?.picture} alt="" />
               </div>
             ) || null}
           </div>
@@ -89,7 +94,7 @@ const UploadPhotoInput = ({
         return null
     }
   }
-
+  
   return <div className="">{renderContent()}</div>
 }
 

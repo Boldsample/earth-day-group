@@ -22,7 +22,8 @@
     "passwordRequirement5": "Mínimo 8 caracteres",
     "profileUploadLabel": "Foto de Perfil",
     "profileUploadBtn": "Haz click para adjuntar",
-    "profileUploadAsDefault": "Usar como principal",
+    "profileUploadMain": "Principal",
+    "profileUploadAsMain": "Usar como principal",
     "userFullNameInputLabel": "Nombre",
     "userFullNamePlaceholderText": "Juan Perez",
     "userNameInputLabel": "Nombre de Usuario",
@@ -497,7 +498,7 @@
         "petDescriptionPlaceholder": "Cuéntanos sobre tu mascota.",
         "petImageUploaderTitle": "Añade Imágenes de la Mascota",
         "submitPetbtnText": "Crear mascota",
-        "editPetbtnText": "Actualizar mascota"
+        "updatePetbtnText": "Actualizar mascota"
       },
       "pet": {
         "petYearsOld": "años de edad",

@@ -1,20 +1,19 @@
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
-import { useNavigate } from "react-router"
-import { useEffect, useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
+import { useEffect, useRef, useState } from "react"
+import { useNavigate, useParams } from "react-router"
+import { useDispatch, useSelector } from "react-redux"
 
 import { setHeader } from "@store/slices/globalSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
-import { addImages, addPet, updatePet } from "@services/petServices"
+import { addImages, addPet, getPet, updatePet } from "@services/petServices"
 import { TextInput, NumberInput, UploadPhotoInput, TextAreaInput, DropDownInput, RadioInput } from "@ui/forms"
 
 const CreatePet = () => {
+  const { id } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const numberInput = useRef(null)
-  const [pet, setPet] = useState({})
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'ngo.pets.createPet' })
@@ -29,6 +28,7 @@ const CreatePet = () => {
   ]
   const {
     watch,
+    reset,
     control,
     setValue,
     setFocus,
@@ -38,14 +38,14 @@ const CreatePet = () => {
   } = useForm({
     defaultValues: {
       weight: "",
+      age: "",
+      name: "",
+      breed: "",
+      specie: "",
+      gender: "",
+      images: [],
       user: user?.id,
-      age: pet?.age || "",
-      name: pet?.name || "",
-      breed: pet?.breed || "",
-      specie: pet?.specie || "",
-      gender: pet?.gender || "",
-      images: pet?.images || [],
-      description: pet?.description || "",
+      description: "",
     },
   })
 
@@ -55,11 +55,11 @@ const CreatePet = () => {
   }
   const onSubmit = async (data) => {
     let response
-    let _pet = { ...pet, ...data }
+    let _pet = { ...data }
     delete _pet.images
     setSending(true)
-    if(pet?.id)
-      response = await updatePet({ ..._pet }, {id: pet.id})
+    if(_pet?.id)
+      response = await updatePet({ ..._pet }, {id: _pet.id})
     else
       response = await addPet({ ..._pet })
     if(response.field){
@@ -76,7 +76,7 @@ const CreatePet = () => {
     })
     await addImages(_sendImages)
     setSending(false)
-    if(pet?.id && response?.id){
+    if(_pet?.id && response?.id){
       dispatch(updateThankyou({
         title: t('editPetthankyouPagetitle'),
         link: `/pet/${response?.id}/`,
@@ -98,13 +98,32 @@ const CreatePet = () => {
   }
 
   useEffect(() => {
-      dispatch(setHeader("user"));
+    dispatch(setHeader("user"));
+    if(id){
+      getPet(id, user?.id).then(data => {
+        if(user?.id != data.user)
+          navigate(-1)
+        else
+          reset({
+            id: data?.id || null,
+            age: data?.age || "",
+            name: data?.name || "",
+            breed: data?.breed || "",
+            weight: data?.weight || "",
+            specie: data?.specie || "",
+            gender: data?.gender || "",
+            images: data?.images || [],
+            description: data?.description || ""
+          })
+      })
+    }
   }, []);
 
   return <div className="layout">
     <img className="layout__background" src="/assets/register/image-2.svg" />
     <div className="main__content xpadding-1">
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
+        <h2>{watch('id') ? t('updatePetbtnText') : t('submitPetbtnText')}</h2>
         <div className="registerInput__container-x2">
           <TextInput
             width="100%"
@@ -175,12 +194,12 @@ const CreatePet = () => {
         </div>
         <div className="registerInput__container-x2">
           <NumberInput
-            label={t('inputAgeTitleText')}
             width="100%"
             nameInput="age"
+            showLabel={true}
             control={control}
-            showLabel={false}
             isRequired={true}
+            labelName={t('inputAgeTitleText')}
             placeHolderText={t('agePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
@@ -196,11 +215,11 @@ const CreatePet = () => {
             }} />
           <NumberInput
             width="100%"
-            showLabel={false}
+            showLabel={true}
             control={control}
             isRequired={true}
             nameInput="weight"
-            label={t('inputWeightTitleText')}
+            labelName={t('inputWeightTitleText')}
             placeHolderText={t('weightPlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
@@ -220,8 +239,8 @@ const CreatePet = () => {
             showLabel={true}
             control={control}
             isRequired={false}
-            label={t('textAreaPetDescriptionTitle')}
             nameInput="description"
+            labelName={t('textAreaPetDescriptionTitle')}
             placeHolderText={t('petDescriptionPlaceholder')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
@@ -242,7 +261,7 @@ const CreatePet = () => {
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-          <Button className="dark-blue fullwidth" label={pet?.id ? t('updatePetbtnText') : t('submitPetbtnText')} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={id ? t('updatePetbtnText') : t('submitPetbtnText')} type="submit" loading={sending} />
         </div>
       </form>
     </div>

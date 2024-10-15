@@ -123,7 +123,7 @@ const AppRoutes = () => {
        </>}
       {(user?.role == 'vendor' || user?.role == 'social' || user?.role == 'ngo') && <>
         <Route path="/product/new" element={<CreateProduct />} />
-        <Route path="/product/:id" element={<CreateProduct />} />
+        <Route path="/product/edit/:id" element={<CreateProduct />} />
       </>}
        {(user?.role == 'shelter' || user?.role == 'ngo') && <>
         <Route path="/pet/new" element={<CreatePet />} />

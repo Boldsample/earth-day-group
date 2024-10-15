@@ -31,7 +31,7 @@
   margin-bottom: 1.25rem
   .imageCarousel__container
     display: block
-    margin: 0.625rem 0 0 0
+    margin: 0.2rem 0 0 0
     .imageUpload__button
       align-items: center
       background: transparent
@@ -39,17 +39,19 @@
       border-radius: 0.5rem
       cursor: pointer
       display: inline-flex
-      height: 7rem
+      height: 6.6rem
       justify-content: center
-      margin-right: calc((100% - 28rem) / 3)
+      margin-right: calc((100% - 26.4rem) / 3)
       margin-bottom: 1rem
       vertical-align: top
-      width: 7rem
+      width: 6.6rem
     .image__container
       display: inline-block
-      margin-right: calc((100% - 28rem) / 3)
+      height: 6.6rem
+      margin-right: calc((100% - 26.4rem) / 3)
       margin-bottom: 1rem
       position: relative
+      width: 6.6rem
       &:nth-child(4n+1)
         margin-right: 0
       .close__btn
@@ -67,8 +69,9 @@
         z-index: 2
         cursor: pointer
         border-color: green
-      .as__default
+      .as__main, .is__main
         background: rgba(0,0,0,0.8)
+        border-radius: 0.5rem
         height: 100%
         left: 0
         line-height: 1.2em
@@ -79,14 +82,20 @@
         position: absolute
         transition: all 300ms
         width: 100%
-      &:hover .as__default
+      &:hover .as__main
         opacity: 1
         pointer-events: all
+      .is__main
+        border-radius: 0 0 0.5rem 0.5rem
+        bottom: 0
+        height: auto
+        padding: 0.2rem
+        opacity: 1
       .uploadedImage
         border-radius: 0.5rem
-        height: 7rem
+        height: 100%
         object-fit: cover
-        width: 7rem
+        width: 100%
 
 .imagesHub__container-variant
   margin: 1.25rem 0

@@ -1,7 +1,7 @@
 import { Image } from "primereact/image"
+import { useTranslation } from 'react-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
-import { useTranslation } from 'react-i18next'
 
 import "./profile.sass"
 
@@ -14,7 +14,6 @@ const PhotoGallery = ({imageCatalog, type = 'full'}) => {
         spaceBetween={50}
         modules={[Navigation]}
         loop={imageCatalog?.length > 3}
-        rewind={imageCatalog?.length > 3}
         navigation={imageCatalog?.length > 3}
         centeredSlides={imageCatalog?.length > 3}
         className={'slides-' + imageCatalog?.length}
@@ -27,15 +26,15 @@ const PhotoGallery = ({imageCatalog, type = 'full'}) => {
   </div> || 
   <Swiper
     loop={true}
-    rewind={true}
+    navigation={true}
     slidesPerView={1}
     className="minimal"
     centeredSlides={true}
-    modules={[Pagination]}
-    pagination={{ clickable: true }} >
-      {imageCatalog?.map((image, key) => 
-        <SwiperSlide key={key}><Image src={image?.picture} preview /></SwiperSlide>
-      )}
+    pagination={{ clickable: true }}
+    modules={[Navigation,Pagination]} >
+    {imageCatalog?.map((image, key) => 
+      <SwiperSlide key={key}><Image src={image?.picture} preview /></SwiperSlide>
+    )}
   </Swiper>
 }
 

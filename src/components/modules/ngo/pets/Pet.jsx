@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
 
 import Footer from "@ui/footer/Footer"
-import { getPet } from "@services/petServices"
+import { getPet, updatePet } from "@services/petServices"
 import { setHeader } from "@store/slices/globalSlice"
 
 import "../../profile/profile.sass"
@@ -32,6 +32,9 @@ const Pet = () => {
   const getPetData = async () => {
     const _pet = await getPet(id)
     setPet(_pet)
+  }
+  const deletePet = async () => {
+	await updatePet({state: 2}, {id: id})
   }
 
   useEffect(() => {
@@ -66,7 +69,7 @@ const Pet = () => {
               <Link className="button small red-state outline hasTooltip" to={`/report/pet/${pet?.id}/`} data-pr-tooltip="Report pet"><FontAwesomeIcon icon={faFlag} /></Link>
             </> || <>
               <Link to={`/pet/edit/${pet?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editPetBtn')}</span></Link>
-              <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deletePetBtn')}</span></Link>
+              <a onClick={deletePet} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deletePetBtn')}</span></a>
             </>}
           </div>
         </div>

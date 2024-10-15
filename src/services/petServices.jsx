@@ -22,9 +22,10 @@ export const addImages = async (data) => {
   return true
 }
 
-export const getPet = async (id) => {
+export const getPet = async (id, user = null) => {
   let filterStr = `p.id=${id}`
-  const { data } = await API.get(`/get/pets&filter=${filterStr}&single=1`)
+  user = user ? `&user=${user}` : ''
+  const { data } = await API.get(`/get/pets&filter=${filterStr}${user}&single=1`)
   return data?.data[0];
 }
 

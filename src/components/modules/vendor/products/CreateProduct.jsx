@@ -1,25 +1,23 @@
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
-import { useNavigate } from "react-router"
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from "react"
+import { useNavigate, useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
 
 import { setHeader } from "@store/slices/globalSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
-import { addImages, addProduct, updateProduct } from "@services/productServices"
+import { addImages, addProduct, getProduct, updateProduct } from "@services/productServices"
 import { TextInput, NumberInput, UploadPhotoInput, TextAreaInput, DropDownInput } from "@ui/forms"
-import { useTranslation } from 'react-i18next'
 
 const CreateProduct = () => {
+  const { id } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const numberInput = useRef(null)
-  const [product, setProduct] = useState({})
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'vendor.products.createProduct'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
-  
   const categories = [
     { name: t("food"), code: "food" },
     { name: t("care"), code: "care" },
@@ -32,6 +30,7 @@ const CreateProduct = () => {
   ]
   const {
     watch,
+    reset,
     control,
     setValue,
     setFocus,
@@ -40,12 +39,12 @@ const CreateProduct = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
+      name: "",
+      price: "",
+      images: [],
+      category: "",
       user: user?.id,
-      name: product?.name || "",
-      price: product?.price || "",
-      images: product?.images || [],
-      category: product?.category || "",
-      description: product?.description || ""
+      description: ""
     },
   })
 
@@ -55,11 +54,11 @@ const CreateProduct = () => {
   }
   const onSubmit = async (data) => {
     let response
-    let _product = { ...product, ...data }
+    let _product = { ...data }
     delete _product.images
     setSending(true)
-    if(product?.id)
-      response = await updateProduct({ ..._product }, {id: product.id})
+    if(_product?.id)
+      response = await updateProduct({ ..._product }, {id: _product.id})
     else
       response = await addProduct({ ..._product })
     if(response.field){
@@ -76,7 +75,7 @@ const CreateProduct = () => {
     })
     await addImages(_sendImages)
     setSending(false)
-    if(product?.id && response?.id){
+    if(_product?.id && response?.id){
       dispatch(updateThankyou({
         title: t('editProductthankyouPagetitle'),
         link: `/product/${response?.id}/`,
@@ -98,13 +97,29 @@ const CreateProduct = () => {
   }
 
   useEffect(() => {
-      dispatch(setHeader("user"));
+    dispatch(setHeader("user"));
+    if(id){
+      getProduct(id, user?.id).then(data => {
+        if(user?.id != data.user)
+          navigate(-1)
+        else
+          reset({
+            id: data?.id || null,
+            name: data?.name || "",
+            price: data?.price || "",
+            images: data?.images || [],
+            category: data?.category || "",
+            description: data?.description || ""
+          })
+      })
+    }
   }, []);
 
   return <div className="layout">
     <img className="layout__background" src="/assets/register/image-2.svg" />
     <div className="main__content xpadding-1">
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
+        <h2>{watch('id') ? t('updateProductBtn') : t('createProductBtn')}</h2>
         <div className="registerInput__container-x2">
           <TextInput
             width="100%"
@@ -148,7 +163,6 @@ const CreateProduct = () => {
             control={control}
             nameInput="price"
             isRequired={true}
-            inputRef={numberInput}
             labelName={t('inputNumberPriceLabel')}
             placeHolderText={t('inputNumberPricePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
@@ -169,8 +183,8 @@ const CreateProduct = () => {
             showLabel={true}
             control={control}
             isRequired={false}
-            label={t('textAreaProducttDescriptionLabel')}
             nameInput="description"
+            labelName={t('textAreaProducttDescriptionLabel')}
             placeHolderText={t('textAreaProductDescriptionPlaceholder')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
@@ -191,7 +205,7 @@ const CreateProduct = () => {
           uploadedImages={watch('images')}
           setUploadedImages={setUploadedImages} />
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-          <Button className="dark-blue fullwidth" label={product?.id ? t('updateProductBtn') : t('createProductBtn')} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={watch('id') ? t('updateProductBtn') : t('createProductBtn')} type="submit" loading={sending} />
         </div>
       </form>
     </div>

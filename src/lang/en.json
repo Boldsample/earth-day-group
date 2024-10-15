@@ -24,7 +24,8 @@
     "passwordRequirement5": "Minimum 8 characters",
     "profileUploadLabel": "Profile Picture",
     "profileUploadBtn": "Click to Upload",
-    "profileUploadAsDefault": "Use as default",
+    "profileUploadMain": "Main",
+    "profileUploadAsMain": "Use as main image",
     "userNameInputLabel": "Username",
     "userNamePlaceHolderText": "Eco_John",
     "userFullNameInputLabel": "Name",
@@ -497,7 +498,7 @@
         "petDescriptionPlaceholder": "Tell us about your pet.",
         "petImageUploaderTitle": "Add Pet Images",
         "submitPetbtnText": "Create pet",
-        "editPetbtnText": "Update pet"
+        "updatePetbtnText": "Update pet"
       },
       "pet": {
         "petYearsOld": "Years old",
