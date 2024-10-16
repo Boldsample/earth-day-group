@@ -44,7 +44,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 			admin: user?.username,
 			user: report?.username,
 			deleteElement: false,
-			reportResolved: null
+			reportResolved: false
 		},
 	})
 	const message = watch('message') 
@@ -55,7 +55,36 @@ const ReportInfo = ({ show, report, onHide }) => {
 	
 	useEffect(()=>{
 		const clearAllInputErrorMessages = clearErrors()
-
+		setValue('reportResolved', false);
+		setValue('deleteElement', false);
+		// switch (message) {
+		// 	case t('negativeClosingCaseMessage'):
+		// 	  setValue('negativeClosingCaseMessage', message);
+		// 	  setValue('reportResolved', true);
+		// 	  setValue('deleteElement', true);
+		// 	  break;
+		// 	case t('positiveClosingCaseMessage'):
+		// 	  setValue('positiveClosingCaseMessage', message);
+		// 	  setValue('reportResolved', true);
+		// 	  break;
+		  
+		// 	case "admin.reportInfo.customCaseMessage":
+		// 	  setValue('custom_message', "");
+		// 	  break;
+		  
+		// 	default:
+		// 	  setValue('custom_message', message);
+		// 	  break;
+		//   }
+		
+		if(message ==  t('negativeClosingCaseMessage')){
+			setValue('reportResolved', true);
+			setValue('deleteElement', true);
+			console.log('hi')
+		}
+		if( message ==  t('positiveClosingCaseMessage')){
+			setValue('reportResolved', true);
+		}
 		if(message ==  "admin.reportInfo.customCaseMessage"){
 			setValue('custom_message', "");
 		}else{
@@ -67,6 +96,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 
 	const onSubmit = async data => {
 		// const message = data?.message != 'custom' ? data?.message : data?.custom_message
+		console.log(data)
 		const message = data?.message === data?.custom_message ? data?.message : data?.custom_message
 		if(data?.reportResolved == true){
 			await updateReport({admin: user?.id, status: 'Resolved'}, {id: report?.id})
@@ -198,6 +228,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 								  <InputSwitch
 									id={field.name}
 									inputId="delete"
+									// checked={field.value}
 									checked={watch('message') === t('negativeClosingCaseMessage') ? true : field.value}
 									onChange={(e) => {
 									  if (watch('message') === t('negativeClosingCaseMessage')) {
