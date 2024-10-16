@@ -20,6 +20,7 @@ import { updateProduct } from "@services/productServices"
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { InputSwitch } from "primereact/inputswitch"
+import { Message } from 'primereact/message';
 
 const ReportInfo = ({ show, report, onHide }) => {
 	const stepperRef = useRef(null); 
@@ -57,30 +58,10 @@ const ReportInfo = ({ show, report, onHide }) => {
 		const clearAllInputErrorMessages = clearErrors()
 		setValue('reportResolved', false);
 		setValue('deleteElement', false);
-		// switch (message) {
-		// 	case t('negativeClosingCaseMessage'):
-		// 	  setValue('negativeClosingCaseMessage', message);
-		// 	  setValue('reportResolved', true);
-		// 	  setValue('deleteElement', true);
-		// 	  break;
-		// 	case t('positiveClosingCaseMessage'):
-		// 	  setValue('positiveClosingCaseMessage', message);
-		// 	  setValue('reportResolved', true);
-		// 	  break;
-		  
-		// 	case "admin.reportInfo.customCaseMessage":
-		// 	  setValue('custom_message', "");
-		// 	  break;
-		  
-		// 	default:
-		// 	  setValue('custom_message', message);
-		// 	  break;
-		//   }
-		
+	
 		if(message ==  t('negativeClosingCaseMessage')){
 			setValue('reportResolved', true);
 			setValue('deleteElement', true);
-			console.log('hi')
 		}
 		if( message ==  t('positiveClosingCaseMessage')){
 			setValue('reportResolved', true);
@@ -88,12 +69,12 @@ const ReportInfo = ({ show, report, onHide }) => {
 		if(message ==  "admin.reportInfo.customCaseMessage"){
 			setValue('custom_message', "");
 		}else{
-			setValue('custom_message', message);
+			setValue('custom_message', t(message, {userName: report?.name, reported:report?.type, reason:report?.subject }));
 		}
 		clearAllInputErrorMessages
 		
 	}, [watch('message')])
-
+console.log(report)
 	const onSubmit = async data => {
 		// const message = data?.message != 'custom' ? data?.message : data?.custom_message
 		console.log(data)
@@ -179,12 +160,13 @@ const ReportInfo = ({ show, report, onHide }) => {
 						optionValue="value"
 						nameInput="message"
 						options={[
-						  { label: 'Mensaje apertura', value: t('newCaseMessage') },
-						  { label: 'Mensaje seguimiento', value: t('followUpCaseMessage') },
-						  { label: 'Mensaje negativo', value: t('negativeClosingCaseMessage') },
-						  { label: 'Mensaje positivo', value: t('positiveClosingCaseMessage') },
-						  { label: 'Mensaje personalizado', value: t('customCaseMessage') }
+						  { label: 'Mensaje apertura', value: 'newCaseMessage' },
+						  { label: 'Mensaje seguimiento', value: 'followUpCaseMessage' },
+						  { label: 'Mensaje negativo', value: 'negativeClosingCaseMessage' },
+						  { label: 'Mensaje positivo', value: 'positiveClosingCaseMessage' },
+						  { label: 'Mensaje personalizado', value: 'customCaseMessage' }
 						]}
+						
 						labelName={'Tipo de mensaje'}
 						getFormErrorMessage={getFormErrorMessage}
 						placeHolderText={'Seleccione una opción'}
@@ -192,9 +174,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 						  required: tGlobal(`requiredErrorMessage`),
 						}}
 					  />
-					  {(watch('message') === t('negativeClosingCaseMessage') || 
-						watch('message') === t('positiveClosingCaseMessage') || 
-						watch('message') === t('customCaseMessage')) && (
+					  {(watch('message') === t('customCaseMessage')) && (
 						<div className="switches-container">
 						  <div className="labels-container">
 							<label htmlFor="solvedReport">Mark as resolved</label>
@@ -262,6 +242,9 @@ const ReportInfo = ({ show, report, onHide }) => {
 						  required: tGlobal(`requiredErrorMessage`),
 						}}
 					  />
+					  {(watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') &&
+					  <Message severity="warn" text="Warning: This template closing message will mark the report as resolved and delete the item. If you do not want to proceed with these actions, please select a different option from the message type dropdown." />
+					  }
 					</div>
 					<div className="p-field">
 					  <Button label="Volver al resumen" onClick={() => stepperRef.current.prevCallback()}/>
