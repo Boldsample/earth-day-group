@@ -20,6 +20,7 @@ const CreateReport = () => {
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'report.createReport' })
+  const [tDropDown] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const {
     watch,
@@ -90,6 +91,8 @@ const CreateReport = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
         <div className="registerInput__container-x2">
           <DropDownInput
+            optionValue="value"
+            optionLabel="label"
             className=""
             control={control}
             isRequired={true}
@@ -97,7 +100,7 @@ const CreateReport = () => {
             labelName={t('inputDropdownSubjectLabel')}
             getFormErrorMessage={getFormErrorMessage}
             placeHolderText={t('inputDropdownSubjectPlaceholderText')}
-            options={reasons[type]}
+            options={reasons[type].map(reason => ({label: tDropDown(reason), value: reason})) }
             rules={{
               required: tGlobal(`requiredErrorMessage`),
             }} />

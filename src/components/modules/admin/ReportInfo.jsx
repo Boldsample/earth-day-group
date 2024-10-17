@@ -69,7 +69,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 		if(message ==  "admin.reportInfo.customCaseMessage"){
 			setValue('custom_message', "");
 		}else{
-			setValue('custom_message', t(message, {userName: report?.name, reported:report?.type, reason:report?.subject }));
+			setValue('custom_message', t(message, {userName: report?.oname, reported:t(report?.type), reason:t(report?.subject )}));
 		}
 		clearAllInputErrorMessages
 		
@@ -126,7 +126,7 @@ console.log(report)
 					</p>
 				  )}
 				  <p>
-					<b>{t('subjectTitle')}</b> {report?.subject}
+					<b>{t('subjectTitle')}</b> {t(report?.subject)}
 				  </p>
 				  <p>
 					<b>{t('descriptionTitle')}</b> {report?.description}

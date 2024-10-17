@@ -29,6 +29,7 @@ const Reports = () => {
 	const user = useSelector((state) => state.users.userData)
 	const [filters, setFilters] = useState({type: "", keyword: ''})
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.report' })
+	const [tSubjects] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
 	const states = { 'In Process': 'info', 'Pending': 'danger', 'Resolved': 'success' }
 	
 	const hidePopup = reload => {
@@ -124,7 +125,7 @@ const Reports = () => {
 						totalRecords={reports?.total} 
 						onPage={({page, rows}) => setPage({page, rows})}>
 						<Column headerClassName='table-header-styles' header={t('tableTitleType')} field="type" bodyClassName='table-body-styles' body={typeColumnBodyTemplate}></Column>
-						<Column header={t('tableTitleSubject')}  field="subject"></Column>
+						<Column header={t('tableTitleSubject')}  body={({subject})=> tSubjects(subject)}></Column>
 						<Column header={t('tableTitleReported')}  field="name" body={({name, epicture})=>{
 							const initials = keepFirstLetters(name)
 							return <div className="flex aligncenter">
