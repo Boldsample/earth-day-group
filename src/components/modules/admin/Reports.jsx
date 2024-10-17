@@ -31,7 +31,7 @@ const Reports = () => {
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.report' })
 	const [tSubjects] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
 	const states = { 'In Process': 'info', 'Pending': 'danger', 'Resolved': 'success' }
-	
+	console.log(reports)
 	const hidePopup = reload => {
 		setDetail({...detail, show: false})
 		if(reload)
@@ -139,7 +139,8 @@ const Reports = () => {
 						<Column header={t('tableTitleAssignedTo')}  field="admin" body={({admin})=>{
 							return <span className='table-item__background'>{admin}</span>
 						}}></Column>
-						<Column className="actions" header={null} body={({id, username, aid}) => <>
+						<Column className="actions" header={null} body={({id, username, aid, oname}) => <>
+							<Link className="button small green-earth" to={`/chat/${username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
 							<Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
 						</>}></Column>
 					</DataTable>

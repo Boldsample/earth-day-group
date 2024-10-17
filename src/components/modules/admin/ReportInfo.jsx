@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { Dialog } from "primereact/dialog"
 import { Button } from "primereact/button"
 import { Galleria } from "primereact/galleria"
-import { faFlag, faImage, faSearch } from "@fortawesome/free-solid-svg-icons"
+import { faFlag, faImage, faSearch, faFileImport, faArrowLeft, faComments } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 import { Tooltip } from "primereact/tooltip"
@@ -21,6 +21,7 @@ import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { InputSwitch } from "primereact/inputswitch"
 import { Message } from 'primereact/message';
+import { Tag } from 'primereact/tag'
 
 const ReportInfo = ({ show, report, onHide }) => {
 	const stepperRef = useRef(null); 
@@ -28,6 +29,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 	const user = useSelector((state) => state.users.userData)
 	const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
+	const [tStatus] = useTranslation('translation', { keyPrefix: 'admin.report' })
 	const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
 	const types = { 'user': 'User', 'product': 'Product', 'pet': 'Pet', 'offer': 'Offer' }
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
@@ -48,7 +50,9 @@ const ReportInfo = ({ show, report, onHide }) => {
 			reportResolved: false
 		},
 	})
-	const message = watch('message') 
+	const message = watch('message')
+
+	const states = { 'In Process': 'info', 'Pending': 'danger', 'Resolved': 'success' }
 
 	useEffect(()=>{
 		report?.admin === "Without answer" ?  setValue('message', t('newCaseMessage')) : setValue('message', t('customCaseMessage'));
@@ -126,6 +130,9 @@ console.log(report)
 					</p>
 				  )}
 				  <p>
+					<b>{t('statusTitle')}</b> <Tag value={tStatus(report?.status)} severity={states[report?.status]} />
+				  </p>
+				  <p>
 					<b>{t('subjectTitle')}</b> {t(report?.subject)}
 				  </p>
 				  <p>
@@ -134,130 +141,134 @@ console.log(report)
 				  <div className="reported-by-styles">
 					<b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link>
 				  </div>
+				  
 				  <div className="mt-3 fullwidth">
 					<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}>
 					  <FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span>
 					</Link>
-					<Button className="button small" label="Gestionar reporte" onClick={() => stepperRef.current.nextCallback()} />
+					<Button icon={<FontAwesomeIcon icon={faFileImport}/>} className="button small" label="Gestionar reporte" onClick={() => stepperRef.current.nextCallback()}  />
 				  </div>
 				</div>
 			  </div>
 			</StepperPanel>
-			<StepperPanel header="Gestionar reporte">
-			  <div className="panel-2">
-				<div className="flex-column">
-				  <h4 className="mb-2 text-center">How would you like to handle this report?</h4>
-				</div>
-				{report?.status !== 'Resolved' && (!report?.aid || report?.aid === user?.id) && (
-				  <form className="respond" onSubmit={handleSubmit(onSubmit)}>
-					<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
-					  <DropDownInput
-						isEdit={true}
-						control={control}
-						showLabel={true}
-						isRequired={true}
-						optionLabel="label"
-						optionValue="value"
-						nameInput="message"
-						options={[
-						  { label: 'Mensaje apertura', value: 'newCaseMessage' },
-						  { label: 'Mensaje seguimiento', value: 'followUpCaseMessage' },
-						  { label: 'Mensaje negativo', value: 'negativeClosingCaseMessage' },
-						  { label: 'Mensaje positivo', value: 'positiveClosingCaseMessage' },
-						  { label: 'Mensaje personalizado', value: 'customCaseMessage' }
-						]}
-						
-						labelName={'Tipo de mensaje'}
-						getFormErrorMessage={getFormErrorMessage}
-						placeHolderText={'Seleccione una opción'}
-						rules={{
-						  required: tGlobal(`requiredErrorMessage`),
-						}}
-					  />
-					  {(watch('message') === t('customCaseMessage')) && (
-						<div className="switches-container">
-						  <div className="labels-container">
-							<label htmlFor="solvedReport">Mark as resolved</label>
-							{watch('message') !== t('positiveClosingCaseMessage') && (
-							  <label htmlFor="delete">{`Eliminar ${types[report?.type]}`}</label>
-							)}
-						  </div>
-						  <div className="inputSwitches-container">
-							<Controller
-							  name="reportResolved"
-							  control={control}
-							  render={({ field }) => (
-								<InputSwitch
-								  id={field.name}
-								  inputId="solvedReport"
-								  checked={watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage') ? true : field.value}
-								  onChange={(e) => {
-									if (watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage')) {
-									  setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a negative message" });
-									}
-									field.onChange(e.value);
-								  }}
-								/>
-							  )}
-							/>
-							{watch('message') !== t('positiveClosingCaseMessage') && (
-							  <Controller
-								name="deleteElement"
+			{report?.status !== 'Resolved' && (!report?.aid || report?.aid === user?.id) && (
+				<StepperPanel header="Gestionar reporte">
+				<div className="panel-2">
+					<div className="flex-column">
+					<h4 className="mb-2 text-center">How would you like to handle this report?</h4>
+					</div>
+					<form className="respond" onSubmit={handleSubmit(onSubmit)}>
+						<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
+						<DropDownInput
+							isEdit={true}
+							control={control}
+							showLabel={true}
+							isRequired={true}
+							optionLabel="label"
+							optionValue="value"
+							nameInput="message"
+							options={[
+							{ label: 'Mensaje apertura', value: 'newCaseMessage' },
+							{ label: 'Mensaje seguimiento', value: 'followUpCaseMessage' },
+							{ label: 'Mensaje negativo', value: 'negativeClosingCaseMessage' },
+							{ label: 'Mensaje positivo', value: 'positiveClosingCaseMessage' },
+							{ label: 'Mensaje personalizado', value: 'customCaseMessage' }
+							]}
+							
+							labelName={'Tipo de mensaje'}
+							getFormErrorMessage={getFormErrorMessage}
+							placeHolderText={'Seleccione una opción'}
+							rules={{
+							required: tGlobal(`requiredErrorMessage`),
+							}}
+						/>
+						{(watch('message') === t('customCaseMessage')) && (
+							<div className="switches-container">
+							<div className="labels-container">
+								<label htmlFor="solvedReport">Mark as resolved</label>
+								{watch('message') !== t('positiveClosingCaseMessage') && (
+								<label htmlFor="delete">{`Eliminar ${types[report?.type]}`}</label>
+								)}
+							</div>
+							<div className="inputSwitches-container">
+								<Controller
+								name="reportResolved"
 								control={control}
 								render={({ field }) => (
-								  <InputSwitch
+									<InputSwitch
 									id={field.name}
-									inputId="delete"
-									// checked={field.value}
-									checked={watch('message') === t('negativeClosingCaseMessage') ? true : field.value}
+									inputId="solvedReport"
+									checked={watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage') ? true : field.value}
 									onChange={(e) => {
-									  if (watch('message') === t('negativeClosingCaseMessage')) {
-										setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a close case message. Try with a custom message type." });
-									  }
-									  field.onChange(e.value);
+										if (watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage')) {
+										setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a negative message" });
+										}
+										field.onChange(e.value);
 									}}
-								  />
+									/>
 								)}
-							  />
-							)}
-						  </div>
-						  {errors.reportResolved && <small className="p-error ml-3">{errors.reportResolved.message}</small>}
+								/>
+								{watch('message') !== t('positiveClosingCaseMessage') && (
+								<Controller
+									name="deleteElement"
+									control={control}
+									render={({ field }) => (
+									<InputSwitch
+										id={field.name}
+										inputId="delete"
+										// checked={field.value}
+										checked={watch('message') === t('negativeClosingCaseMessage') ? true : field.value}
+										onChange={(e) => {
+										if (watch('message') === t('negativeClosingCaseMessage')) {
+											setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a close case message. Try with a custom message type." });
+										}
+										field.onChange(e.value);
+										}}
+									/>
+									)}
+								/>
+								)}
+							</div>
+							{errors.reportResolved && <small className="p-error ml-3">{errors.reportResolved.message}</small>}
+							</div>
+						)}
 						</div>
-					  )}
-					</div>
-					<div className="registerInput__container-x1">
-					  <TextAreaInput
-						rowCount={message ==  "admin.reportInfo.customCaseMessage" ? 8 : 18}
-						control={control}
-						isRequired={true}
-						nameInput="custom_message"
-						labelName={'Mensaje'}
-						getFormErrorMessage={getFormErrorMessage}
-						placeHolderText={'Ingrese el mensaje que desea enviar'}
-						rules={{
-						  maxLength: {
-							value: 1000,
-							message: tGlobal(`inputMaxLengthErrorMessage`, { maxLength: 1000 }),
-						  },
-						  required: tGlobal(`requiredErrorMessage`),
-						}}
-					  />
-					  {(watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') &&
-					  <Message severity="warn" text="Warning: This template closing message will mark the report as resolved and delete the item. If you do not want to proceed with these actions, please select a different option from the message type dropdown." />
-					  }
-					</div>
-					<div className="p-field">
-					  <Button label="Volver al resumen" onClick={() => stepperRef.current.prevCallback()}/>
-					  <Button className="dark-blue" label={watch('action') === 'solved' ? 'Resolver reporte' : 'Enviar mensaje' + (report?.aid === 0 ? ' y asignarme como agente' : '')} type="submit" />
-					  {report?.aid === user?.id && (
-						<Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
-					  )}
-					</div>
-				  </form>
+						<div className="registerInput__container-x1">
+						<TextAreaInput
+							rowCount={message ==  "admin.reportInfo.customCaseMessage" ? 8 : 18}
+							control={control}
+							isRequired={true}
+							nameInput="custom_message"
+							labelName={'Mensaje'}
+							getFormErrorMessage={getFormErrorMessage}
+							placeHolderText={'Ingrese el mensaje que desea enviar'}
+							rules={{
+							maxLength: {
+								value: 1000,
+								message: tGlobal(`inputMaxLengthErrorMessage`, { maxLength: 1000 }),
+							},
+							required: tGlobal(`requiredErrorMessage`),
+							}}
+						/>
+						{(watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') &&
+						<Message severity="warn" text={watch('message') !== 'negativeClosingCaseMessage' ? "Warning: This template closing message will mark the report as resolved. If you do not want to proceed with this action, please select a different option from the message type dropdown." : "Warning: This template closing message will mark the report as resolved and delete the item. If you do not want to proceed with these actions, please select a different option from the message type dropdown."} />
+						}
+						</div>
+						<div className="p-field">
+						<Button icon={<FontAwesomeIcon icon={faArrowLeft}/>}  label="Volver al resumen" onClick={() => stepperRef.current.prevCallback()}/>
+						<Button icon={<FontAwesomeIcon icon={faPaperPlane}/>} className="dark-blue" label={watch('action') === 'solved' ? 'Resolver reporte' : 'Enviar mensaje' + (report?.aid === 0 ? ' y asignarme como agente' : '')} type="submit" />
+						{report?.aid === user?.id && (
+							<Link className="button green-earth" to={`/chat/${report?.owner}`}>
+							<FontAwesomeIcon icon={faComments} /> <span>Ir al chat</span>
+						  </Link>
+							// <Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
+						)}
+						</div>
+					</form>
+					<Tooltip target=".hasTooltip" position="top" />
+				</div>
+				</StepperPanel>
 				)}
-				<Tooltip target=".hasTooltip" position="top" />
-			  </div>
-			</StepperPanel>
 		  </Stepper>
 		</Dialog>
 	  );
