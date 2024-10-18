@@ -100,9 +100,9 @@ console.log(report)
 		}
 	}
 	return (
-		<Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header='Gestión de Reporte'>
+		<Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")}>
 		  <Stepper ref={stepperRef}>
-			<StepperPanel header="Resumen del reporte">
+			<StepperPanel header={t("reportSummaryTitle")}>
 			  <div className="panel-1">
 				{report?.images?.length ? (
 				  <Galleria
@@ -146,16 +146,16 @@ console.log(report)
 					<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}>
 					  <FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span>
 					</Link>
-					<Button icon={<FontAwesomeIcon icon={faFileImport}/>} className="button small" label="Gestionar reporte" onClick={() => stepperRef.current.nextCallback()}  />
+					<Button icon={<FontAwesomeIcon icon={faFileImport}/>} className="button small" label={t("handleReportBtn")} onClick={() => stepperRef.current.nextCallback()}  />
 				  </div>
 				</div>
 			  </div>
 			</StepperPanel>
 			{report?.status !== 'Resolved' && (!report?.aid || report?.aid === user?.id) && (
-				<StepperPanel header="Gestionar reporte">
+				<StepperPanel header={t("manageReportTitle")}>
 				<div className="panel-2">
 					<div className="flex-column">
-					<h4 className="mb-2 text-center">How would you like to handle this report?</h4>
+					<h4 className="mb-2 text-center">{t("handleReportTitle")}</h4>
 					</div>
 					<form className="respond" onSubmit={handleSubmit(onSubmit)}>
 						<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
@@ -168,16 +168,16 @@ console.log(report)
 							optionValue="value"
 							nameInput="message"
 							options={[
-							{ label: 'Mensaje apertura', value: 'newCaseMessage' },
-							{ label: 'Mensaje seguimiento', value: 'followUpCaseMessage' },
-							{ label: 'Mensaje negativo', value: 'negativeClosingCaseMessage' },
-							{ label: 'Mensaje positivo', value: 'positiveClosingCaseMessage' },
-							{ label: 'Mensaje personalizado', value: 'customCaseMessage' }
+							{ label: t("reportNotificationOptionLabel"), value: 'newCaseMessage' },
+							{ label: t("reportFollowUpOptionLabel"), value: 'followUpCaseMessage' },
+							{ label: t("closeReportInfringementOptionLabel"), value: 'negativeClosingCaseMessage' },
+							{ label: t("closeReportComplianceOptionLabel"), value: 'positiveClosingCaseMessage' },
+							{ label: t( "customMessageOptionLabel"), value: 'customCaseMessage' }
 							]}
 							
-							labelName={'Tipo de mensaje'}
+							labelName={t("messageTypeInput")}
 							getFormErrorMessage={getFormErrorMessage}
-							placeHolderText={'Seleccione una opción'}
+							placeHolderText={t("messageTypeInputPlaceHolder")}
 							rules={{
 							required: tGlobal(`requiredErrorMessage`),
 							}}
@@ -185,9 +185,9 @@ console.log(report)
 						{(watch('message') === t('customCaseMessage')) && (
 							<div className="switches-container">
 							<div className="labels-container">
-								<label htmlFor="solvedReport">Mark as resolved</label>
+								<label htmlFor="solvedReport">{t( "resolveReportInputTitle")}</label>
 								{watch('message') !== t('positiveClosingCaseMessage') && (
-								<label htmlFor="delete">{`Eliminar ${types[report?.type]}`}</label>
+								<label htmlFor="delete">{t("deleteItemInputTitle", {item: types[report?.type]})}</label>
 								)}
 							</div>
 							<div className="inputSwitches-container">
@@ -239,9 +239,9 @@ console.log(report)
 							control={control}
 							isRequired={true}
 							nameInput="custom_message"
-							labelName={'Mensaje'}
+							labelName={t("messagePreviewTextAreaTitle")}
 							getFormErrorMessage={getFormErrorMessage}
-							placeHolderText={'Ingrese el mensaje que desea enviar'}
+							placeHolderText={t( "messagePreviewTextAreaPlaceHolder")}
 							rules={{
 							maxLength: {
 								value: 1000,
@@ -251,15 +251,15 @@ console.log(report)
 							}}
 						/>
 						{(watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') &&
-						<Message severity="warn" text={watch('message') !== 'negativeClosingCaseMessage' ? "Warning: This template closing message will mark the report as resolved. If you do not want to proceed with this action, please select a different option from the message type dropdown." : "Warning: This template closing message will mark the report as resolved and delete the item. If you do not want to proceed with these actions, please select a different option from the message type dropdown."} />
+						<Message severity="warn" text={watch('message') !== 'negativeClosingCaseMessage' ? t("positiveClosingCaseWarningMessage") : t("negativeClosingCaseWarningMessage", {item: report?.type})} />
 						}
 						</div>
 						<div className="p-field">
-						<Button icon={<FontAwesomeIcon icon={faArrowLeft}/>}  label="Volver al resumen" onClick={() => stepperRef.current.prevCallback()}/>
-						<Button icon={<FontAwesomeIcon icon={faPaperPlane}/>} className="dark-blue" label={watch('action') === 'solved' ? 'Resolver reporte' : 'Enviar mensaje' + (report?.aid === 0 ? ' y asignarme como agente' : '')} type="submit" />
+						<Button icon={<FontAwesomeIcon icon={faArrowLeft}/>}  label={t("backToReportSummaryBtn")} onClick={() => stepperRef.current.prevCallback()}/>
+						<Button icon={<FontAwesomeIcon icon={faPaperPlane}/>} className="dark-blue" label={t("sendMessageBtn")} type="submit" />
 						{report?.aid === user?.id && (
 							<Link className="button green-earth" to={`/chat/${report?.owner}`}>
-							<FontAwesomeIcon icon={faComments} /> <span>Ir al chat</span>
+							<FontAwesomeIcon icon={faComments} /> <span>{t("goToChatBtn")}</span>
 						  </Link>
 							// <Link className="button green-earth" to={`/chat/${report?.owner}`}>Ir al chat</Link>
 						)}

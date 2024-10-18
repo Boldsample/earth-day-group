@@ -139,8 +139,10 @@ const Reports = () => {
 						<Column header={t('tableTitleAssignedTo')}  field="admin" body={({admin})=>{
 							return <span className='table-item__background'>{admin}</span>
 						}}></Column>
-						<Column className="actions" header={null} body={({id, username, aid, oname}) => <>
-							<Link className="button small green-earth" to={`/chat/${username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
+						<Column className="actions" header={null} body={({id, username, aid, oname, status, owner }) => <>
+						{status !== 'Resolved' && (aid || aid === id) && (
+							<Link className="button small green-earth" to={`/chat/${owner}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
+						)}
 							<Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
 						</>}></Column>
 					</DataTable>
