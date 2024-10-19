@@ -31,7 +31,7 @@ const Reports = () => {
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.report' })
 	const [tSubjects] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
 	const states = { 'In Process': 'info', 'Pending': 'danger', 'Resolved': 'success' }
-	console.log(reports)
+
 	const hidePopup = reload => {
 		setDetail({...detail, show: false})
 		if(reload)
@@ -68,7 +68,7 @@ const Reports = () => {
 			}}><FontAwesomeIcon icon={faTrash} /></Button>
 		</div>
 	}
-	
+	console.log(reports.aid == reports.id)
 	const typeColumnBodyTemplate = (columnItem) => {
 		switch (columnItem.type) {
 			case 'offer':
@@ -140,7 +140,7 @@ const Reports = () => {
 							return <span className='table-item__background'>{admin}</span>
 						}}></Column>
 						<Column className="actions" header={null} body={({id, username, aid, oname, status, owner }) => <>
-						{status !== 'Resolved' && (aid || aid === id) && (
+						{aid === user.id && (
 							<Link className="button small green-earth" to={`/chat/${owner}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
 						)}
 							<Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>

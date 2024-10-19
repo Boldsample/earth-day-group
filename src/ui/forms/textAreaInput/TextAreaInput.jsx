@@ -14,7 +14,6 @@ const TextAreaInput = ({
 	getFormErrorMessage,
 	placeHolderText = "",
 }) => {
-	console.log(rowCount)
 	const renderInput = () => <>
 		<Controller
 			rules={rules}

@@ -53,24 +53,24 @@ const ReportInfo = ({ show, report, onHide }) => {
 	const message = watch('message')
 
 	const states = { 'In Process': 'info', 'Pending': 'danger', 'Resolved': 'success' }
-
-	useEffect(()=>{
-		report?.admin === "Without answer" ?  setValue('message', t('newCaseMessage')) : setValue('message', t('customCaseMessage'));
-	}, [report, onHide])
 	
+	useEffect(()=>{
+		report?.aid == null ?  setValue('message', 'newCaseMessage') : setValue('message', 'customCaseMessage');
+	}, [report, onHide])
+	console.log(report)
 	useEffect(()=>{
 		const clearAllInputErrorMessages = clearErrors()
 		setValue('reportResolved', false);
 		setValue('deleteElement', false);
 	
-		if(message ==  t('negativeClosingCaseMessage')){
+		if(message ==  'negativeClosingCaseMessage'){
 			setValue('reportResolved', true);
 			setValue('deleteElement', true);
 		}
-		if( message ==  t('positiveClosingCaseMessage')){
+		if( message ==  'positiveClosingCaseMessage'){
 			setValue('reportResolved', true);
 		}
-		if(message ==  "admin.reportInfo.customCaseMessage"){
+		if(message ==  "customCaseMessage"){
 			setValue('custom_message', "");
 		}else{
 			setValue('custom_message', t(message, {userName: report?.oname, reported:t(report?.type), reason:t(report?.subject )}));
@@ -78,7 +78,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 		clearAllInputErrorMessages
 		
 	}, [watch('message')])
-console.log(report)
+
 	const onSubmit = async data => {
 		// const message = data?.message != 'custom' ? data?.message : data?.custom_message
 		console.log(data)
@@ -146,7 +146,27 @@ console.log(report)
 					<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}>
 					  <FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span>
 					</Link>
-					<Button icon={<FontAwesomeIcon icon={faFileImport}/>} className="button small" label={t("handleReportBtn")} onClick={() => stepperRef.current.nextCallback()}  />
+					{
+					report?.status === "Resolved" && report?.aid === user?.id ? (
+						<Link className="button green-earth small" to={`/chat/${report?.owner}`}>
+						<FontAwesomeIcon icon={faComments} /> <span>{t("goToChatBtn")}</span>
+						</Link>
+					) : report?.aid === null ? (
+						<Button
+						icon={<FontAwesomeIcon icon={faFileImport} />}
+						className="button small"
+						label={t("handleReportBtn")}
+						onClick={() => stepperRef.current.nextCallback()}
+						/>
+					) : report?.aid === user?.id ? (
+						<Button
+						icon={<FontAwesomeIcon icon={faFileImport} />}
+						className="button small"
+						label={t("handleReportBtn")}
+						onClick={() => stepperRef.current.nextCallback()}
+						/>
+					) : null
+					}
 				  </div>
 				</div>
 			  </div>
@@ -182,11 +202,11 @@ console.log(report)
 							required: tGlobal(`requiredErrorMessage`),
 							}}
 						/>
-						{(watch('message') === t('customCaseMessage')) && (
+						{(watch('message') === 'customCaseMessage') && (
 							<div className="switches-container">
 							<div className="labels-container">
 								<label htmlFor="solvedReport">{t( "resolveReportInputTitle")}</label>
-								{watch('message') !== t('positiveClosingCaseMessage') && (
+								{watch('message') !== 'positiveClosingCaseMessage' && (
 								<label htmlFor="delete">{t("deleteItemInputTitle", {item: types[report?.type]})}</label>
 								)}
 							</div>
@@ -198,9 +218,9 @@ console.log(report)
 									<InputSwitch
 									id={field.name}
 									inputId="solvedReport"
-									checked={watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage') ? true : field.value}
+									checked={watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage' ? true : field.value}
 									onChange={(e) => {
-										if (watch('message') === t('negativeClosingCaseMessage') || watch('message') === t('positiveClosingCaseMessage')) {
+										if (watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') {
 										setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a negative message" });
 										}
 										field.onChange(e.value);
@@ -217,9 +237,9 @@ console.log(report)
 										id={field.name}
 										inputId="delete"
 										// checked={field.value}
-										checked={watch('message') === t('negativeClosingCaseMessage') ? true : field.value}
+										checked={watch('message') === 'negativeClosingCaseMessage' ? true : field.value}
 										onChange={(e) => {
-										if (watch('message') === t('negativeClosingCaseMessage')) {
+										if (watch('message') === 'negativeClosingCaseMessage') {
 											setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a close case message. Try with a custom message type." });
 										}
 										field.onChange(e.value);
@@ -235,7 +255,7 @@ console.log(report)
 						</div>
 						<div className="registerInput__container-x1">
 						<TextAreaInput
-							rowCount={message ==  "admin.reportInfo.customCaseMessage" ? 8 : 18}
+							rowCount={message ==  "customCaseMessage" ? 8 : 18}
 							control={control}
 							isRequired={true}
 							nameInput="custom_message"
