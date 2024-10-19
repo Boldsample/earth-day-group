@@ -127,7 +127,7 @@ const MultiUseCard = ({
                   <Button className="small green-state" style={{width: '6.25rem'}} onClick={() => data?.replyOffer(data?.offer, data?.id)}><FontAwesomeIcon icon={faCheck} /> Pay</Button>
                 </div> 
               || null}
-            </div>) || data?.message
+            </div>) || <div className="pre-line">{data?.message}</div>
           }
           <div className="date">{data?.date}</div>
         </div>

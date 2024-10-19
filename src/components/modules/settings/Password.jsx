@@ -66,7 +66,29 @@ const Password = () => {
 	return <div className="layout" style={{background: 'white'}}>
 		<div className="main__content centerwidth">
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
-        <div className="registerInput__container-x2">
+        <div className="password-container">
+        <PasswordInput
+            width="100%"
+            maxLength={20}
+            label="Password"
+            showLabel={true}
+            control={control}
+            nameInput="password"
+            isRequired={!user?.id}
+            placeHolderText="Enter your password"
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: user?.id ? undefined : {
+                value: 20,
+                message: "El campo supera los 20 caracteres",
+              },
+              required: user?.id ? undefined : "*El campo es requerido.",
+              pattern: user?.id ? undefined : {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                message:
+                  "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+              },
+            }} />
           <PasswordInput
             width="100%"
             maxLength={20}
@@ -75,7 +97,7 @@ const Password = () => {
             control={control}
             nameInput="password"
             isRequired={!user?.id}
-            placeHolderText="Enter password"
+            placeHolderText="Enter new password"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: user?.id ? undefined : {
@@ -98,7 +120,7 @@ const Password = () => {
             control={control}
             className="noLabel"
             isRequired={!user?.id}
-            nameInput="password_confirmation"
+            nameInput="Confirm new password"
             placeHolderText="Confirm Password"
             getFormErrorMessage={getFormErrorMessage}
             rules={{

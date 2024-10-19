@@ -5,9 +5,9 @@ import { Button } from 'primereact/button';
 import { PasswordInput } from '@ui/forms';
 import { useForm } from 'react-hook-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan} from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faCircleExclamation} from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
-
+import ConfirmationModal from '@ui/modals/ConfirmationModal';
 const DeleteAccount = () => {
   const [t] = useTranslation('translation', { keyPrefix: 'settings.deleteAccount'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
@@ -26,20 +26,6 @@ const {
   })
 
   const getFormErrorMessage = fieldName => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
-
-const footerContent = (
-    <div>
-        <Button className='red-state' label={t('dialogDeleteAccountBtnText')} icon="pi pi-check" onClick={() => setVisible(false)} autoFocus />
-        <Button label={t('dialogCancelDeleteBtnText')} icon="pi pi-times" onClick={() => setVisible(false)} className="p-button-text" />
-    </div>
-);
-
-const headerContent = (
-  <div>
-   {/* <div className="icon trash text-red-state"><FontAwesomeIcon icon={faTrashCan} style={{fontSize: "60px"}} /></div> */}
-  </div>
-);
-
 
 
 
@@ -62,7 +48,8 @@ const headerContent = (
             label={t('deleteAccountBtn')}
             onClick={()=> setVisible(true)}
        />
-       <Dialog header={headerContent} visible={visible} style={{ width: '50vw', textAlign: 'center' }} onHide={() => {if (!visible) return; setVisible(false); }} footer={footerContent}>
+       <ConfirmationModal visible={visible} setVisible={setVisible} icon={faCircleExclamation}/>
+       {/* <Dialog header={headerContent} visible={visible} style={{ width: '50vw', textAlign: 'center' }} onHide={() => {if (!visible) return; setVisible(false); }} footer={footerContent}>
       <div className="icon trash"><FontAwesomeIcon icon={faTrashCan} style={{fontSize: "60px", paddingBottom: "20px"}} /></div>
        <p style={{fontSize:'20px', fontWeight: '500'}}> {t('dialogText1')} <br /> {t('dialogText2')}</p>
        <PasswordInput
@@ -78,7 +65,7 @@ const headerContent = (
             rules={{
               required:  tGlobal(`requiredErrorMessage`),
             }} />
-            </Dialog>
+            </Dialog> */}
     </div>
     </div>
   </div>

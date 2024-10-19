@@ -27,10 +27,9 @@ const ReportInfo = ({ show, report, onHide }) => {
 	const stepperRef = useRef(null); 
 	const navigate = useNavigate()
 	const user = useSelector((state) => state.users.userData)
-	const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
 	const [tStatus] = useTranslation('translation', { keyPrefix: 'admin.report' })
-	const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+	const [tErrorMessages] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
 	const types = { 'user': 'User', 'product': 'Product', 'pet': 'Pet', 'offer': 'Offer' }
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const {
@@ -51,15 +50,14 @@ const ReportInfo = ({ show, report, onHide }) => {
 		},
 	})
 	const message = watch('message')
-
 	const states = { 'In Process': 'info', 'Pending': 'danger', 'Resolved': 'success' }
 	
 	useEffect(()=>{
+		clearErrors()
 		report?.aid == null ?  setValue('message', 'newCaseMessage') : setValue('message', 'customCaseMessage');
 	}, [report, onHide])
-	console.log(report)
+
 	useEffect(()=>{
-		const clearAllInputErrorMessages = clearErrors()
 		setValue('reportResolved', false);
 		setValue('deleteElement', false);
 	
@@ -75,7 +73,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 		}else{
 			setValue('custom_message', t(message, {userName: report?.oname, reported:t(report?.type), reason:t(report?.subject )}));
 		}
-		clearAllInputErrorMessages
+		clearErrors()
 		
 	}, [watch('message')])
 
@@ -100,7 +98,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 		}
 	}
 	return (
-		<Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")}>
+		<Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")} >
 		  <Stepper ref={stepperRef}>
 			<StepperPanel header={t("reportSummaryTitle")}>
 			  <div className="panel-1">
@@ -199,7 +197,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 							getFormErrorMessage={getFormErrorMessage}
 							placeHolderText={t("messageTypeInputPlaceHolder")}
 							rules={{
-							required: tGlobal(`requiredErrorMessage`),
+							required: tErrorMessages('requiredErrorMessage'),
 							}}
 						/>
 						{(watch('message') === 'customCaseMessage') && (
@@ -265,9 +263,9 @@ const ReportInfo = ({ show, report, onHide }) => {
 							rules={{
 							maxLength: {
 								value: 1000,
-								message: tGlobal(`inputMaxLengthErrorMessage`, { maxLength: 1000 }),
+								message: tErrorMessages(`inputMaxLengthErrorMessage`, { maxLength: 1000 }),
 							},
-							required: tGlobal(`requiredErrorMessage`),
+							required: tErrorMessages('requiredErrorMessage'),
 							}}
 						/>
 						{(watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') &&
