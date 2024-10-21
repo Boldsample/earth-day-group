@@ -68,7 +68,7 @@ const Reports = () => {
 			}}><FontAwesomeIcon icon={faTrash} /></Button>
 		</div>
 	}
-	console.log(reports.aid == reports.id)
+	
 	const typeColumnBodyTemplate = (columnItem) => {
 		switch (columnItem.type) {
 			case 'offer':
@@ -125,12 +125,12 @@ const Reports = () => {
 						totalRecords={reports?.total} 
 						onPage={({page, rows}) => setPage({page, rows})}>
 						<Column headerClassName='table-header-styles' header={t('tableTitleType')} field="type" bodyClassName='table-body-styles' body={typeColumnBodyTemplate}></Column>
-						<Column header={t('tableTitleSubject')}  body={({subject})=> tSubjects(subject)}></Column>
+						<Column header={t('tableTitleSubject')}  body={({subject})=> <div className='hide-cell-length'>{tSubjects(subject)}</div>}></Column>
 						<Column header={t('tableTitleReported')}  field="name" body={({name, epicture})=>{
 							const initials = keepFirstLetters(name)
 							return <div className="flex aligncenter">
-								<Avatar label={initials} style={{ backgroundColor: 'var(--orange)', color: '#ffffff', width: '20%' }} image={epicture} shape="circle" />
-								<p className='ml-1 mb-0'>{name}</p>
+								<Avatar label={initials} style={{ backgroundColor: 'var(--orange)', color: '#ffffff', width: '15%' }} image={epicture} shape="circle" />
+								<p className='ml-1 mb-0 table-body-styles'>{name}</p>
 							</div>;
 						}}></Column>
 						<Column header={t('tableTitleStatus')}  body={({id, status}) => 

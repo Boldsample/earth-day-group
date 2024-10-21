@@ -120,8 +120,8 @@ const Password = () => {
             control={control}
             className="noLabel"
             isRequired={!user?.id}
-            nameInput="Confirm new password"
-            placeHolderText="Confirm Password"
+            nameInput="password_confirmation"
+            placeHolderText="Confirm new Password"
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               required: user?.id ? undefined : "*El campo es requerido.",
