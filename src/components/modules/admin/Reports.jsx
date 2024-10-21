@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane} from '@fortawesome/free-regular-svg-icons'
 import { useTranslation } from 'react-i18next'
 import { Avatar } from 'primereact/avatar';
+import { Tooltip } from 'primereact/tooltip';
 
 import { Dropdown } from 'primereact/dropdown'
 import { setHeader } from '@store/slices/globalSlice'
@@ -125,7 +126,7 @@ const Reports = () => {
 						totalRecords={reports?.total} 
 						onPage={({page, rows}) => setPage({page, rows})}>
 						<Column headerClassName='table-header-styles' header={t('tableTitleType')} field="type" bodyClassName='table-body-styles' body={typeColumnBodyTemplate}></Column>
-						<Column header={t('tableTitleSubject')}  body={({subject})=> <div className='hide-cell-length'>{tSubjects(subject)}</div>}></Column>
+						<Column header={t('tableTitleSubject')}  body={({subject})=> <div className='hide-cell-length' data-pr-tooltip={t(subject)}>{tSubjects(subject)}</div>}><Tooltip target=".hide-cell-length" /></Column>
 						<Column header={t('tableTitleReported')}  field="name" body={({name, epicture})=>{
 							const initials = keepFirstLetters(name)
 							return <div className="flex aligncenter">

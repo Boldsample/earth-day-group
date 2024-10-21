@@ -33,8 +33,7 @@ const Chats = () => {
     if(filters?.length > 0)
       _filter['role'] = "(role='" + filters.join("' OR role='") + "')"
     const _users = await getUsers(_filter, 'min', user?.id, page)
-    // setUsers(_users);
-    setUsers(undefined);
+    setUsers(_users);
   }
 
 

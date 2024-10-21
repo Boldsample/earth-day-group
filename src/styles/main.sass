@@ -368,14 +368,52 @@ button, .button
 // DATATABLE STYLES
 
 .hide-cell-length
-  max-width: 100px
-  white-space: nowrap
-  overflow: hidden
-  text-overflow: ellipsis
+    position: relative
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    max-width: 150px
+ 
 
-.hide-cell-length:hover
-  overflow: visible
-  white-space: normal
+// .hide-cell-length:hover::after
+//     max-height: auto
+//     overflow: visible
+//     white-space: normal
+
+   
+
+// .hide-cell-length
+//   display: block
+//   max-width: 100px
+//   white-space: nowrap
+//   overflow: hidden
+//   text-overflow: ellipsis
+  // transition: max-width 0.3s ease-in-out
+
+// .hide-cell-length:hover
+//   max-height: auto
+//   overflow: visible
+//   white-space: normal
+//   animation: expandCell 1s 
+
+// .hide-cell-length::after
+//   content: "..." 
+//   position: absolute
+//   right: 10px
+//   background-color: white
+//   display: inline-block
+
+.hide-cell-length:hover::after
+    content: ""
+  
+@keyframes expandCell 
+  from 
+    max-width: 150px
+
+  to
+    max-width: 500px
+
+
 
 .table-item__background
   // background-color: #fddcf4

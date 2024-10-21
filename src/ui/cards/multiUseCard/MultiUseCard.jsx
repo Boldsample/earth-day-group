@@ -132,6 +132,9 @@ const MultiUseCard = ({
           <div className="date">{data?.date}</div>
         </div>
       case 'user':
+        function shortenChatString(str, maxLength) {
+            return str.slice(0, maxLength) + "...";
+        }
         let link = typeof action != 'function' && `/chat/${data?.username}` || null
         const doActionUser = e => {
           if(typeof action == 'function'){
@@ -144,7 +147,7 @@ const MultiUseCard = ({
           <div>
             <h4 className="font-bold">{data?.name}</h4>
             {data?.lastchat && 
-              <span className="text-gray">{data?.lastchat}</span>
+              <span className="text-gray lastChat-textStyles">{data?.lastchat.length > 50 ? shortenChatString(data?.lastchat, 50) : data?.lastchat}</span>
             }
           </div>
           {/* <Link className="button green-earth" to={`/chat/${data?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> */}
