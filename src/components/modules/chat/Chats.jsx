@@ -10,6 +10,7 @@ import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CardSkeleton from '@ui/skeletons/cardSkeleton/CardSkeleton'
 import { useTranslation } from 'react-i18next'
+import ChatSkeleton from '@ui/skeletons/chatSkeleton/ChatSkeleton'
 
 const Chats = () => {
   const [users, setUsers] = useState([])
@@ -32,7 +33,8 @@ const Chats = () => {
     if(filters?.length > 0)
       _filter['role'] = "(role='" + filters.join("' OR role='") + "')"
     const _users = await getUsers(_filter, 'min', user?.id, page)
-    setUsers(_users);
+    // setUsers(_users);
+    setUsers(undefined);
   }
 
 
@@ -64,7 +66,7 @@ const Chats = () => {
       </div>
       {/* <CardSkeleton className="chatCard__skeleton" /> */}
           {typeof users?.data == 'undefined' && 
-                skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton className="chatCard__skeleton" key={key} />)
+                skeletonPlaceHolder.map((skeleton, key) =>  <ChatSkeleton className="" key={key} />)
               || users?.data?.length > 0 && users?.data?.map(user => 
                 <MultiUseCard
                   type="user"
