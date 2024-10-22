@@ -126,7 +126,15 @@ const Reports = () => {
 						totalRecords={reports?.total} 
 						onPage={({page, rows}) => setPage({page, rows})}>
 						<Column headerClassName='table-header-styles' header={t('tableTitleType')} field="type" bodyClassName='table-body-styles' body={typeColumnBodyTemplate}></Column>
-						<Column header={t('tableTitleSubject')}  body={({subject})=> <div className='hide-cell-length' data-pr-tooltip={t(subject)}>{tSubjects(subject)}</div>}><Tooltip target=".hide-cell-length" /></Column>
+						<Column header={t('tableTitleSubject')}  body={({subject})=> {
+							return (
+								<>
+									<Tooltip target=".hide-cell-length" />
+									<div className='hide-cell-length' data-pr-tooltip={tSubjects(subject)}>
+										{tSubjects(subject)}
+									</div>
+								</>
+							)}}></Column>
 						<Column header={t('tableTitleReported')}  field="name" body={({name, epicture})=>{
 							const initials = keepFirstLetters(name)
 							return <div className="flex aligncenter">
