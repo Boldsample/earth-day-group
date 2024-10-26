@@ -26,7 +26,7 @@ const UploadPhotoInput = ({
   const handleFileChange = async e => {
     let _uploadedImages = [...uploadedImages]
     for(const file of Array.from(e?.target?.files)){
-      if(file && file?.size <= 2 * 1024 * 1024){
+      if(file && file?.size <= 10 * 1024 * 1024){
         const reader = new FileReader()
         reader.onload = () => {
           if(_uploadedImages.length >= 7)
@@ -38,7 +38,7 @@ const UploadPhotoInput = ({
         }
         reader.readAsDataURL(file)
       }else{
-        alert("File size exceeds 2MB limit.")
+        alert("File size exceeds 10MB limit.")
         e.target.value = ""
       }
     }

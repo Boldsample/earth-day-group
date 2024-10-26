@@ -164,8 +164,8 @@ const CreateProduct = () => {
             nameInput="price"
             isRequired={true}
             labelName={t('inputNumberPriceLabel')}
-            placeHolderText={t('inputNumberPricePlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
+            placeHolderText={t('inputNumberPricePlaceholderText')}
             rules={{
               maxLength: {
                 value: 3,

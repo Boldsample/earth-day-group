@@ -15,7 +15,7 @@ const FileUploadInput = ({
 	const handleFileChange = (event) => {
 		const file = event.target.files[0]
 		if(file){
-			if(file.size <= 2 * 1024 * 1024){
+			if(file.size <= 10 * 1024 * 1024){
 				setSelectedFile(file)
 				const reader = new FileReader()
 				reader.onload = () => {
@@ -23,7 +23,7 @@ const FileUploadInput = ({
 				}
 				reader.readAsDataURL(file)
 			}else
-				alert("File size exceeds 2MB limit.")
+				alert("File size exceeds 10MB limit.")
 		}
 	}
 	const handleCancelButton = (e) => {

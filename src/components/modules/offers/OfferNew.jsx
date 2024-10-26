@@ -67,105 +67,63 @@ const OfferNew = () => {
     dispatch(setHeader("user"))
   }, [])
 
-  return (
-    <div className="layout">
-      <img className="layout__background" src="/assets/user/image-2.svg" />
-      <div className="main__content halfwidth">
-        <h4 className="text-defaultCase text-dark-blue">
-          <i className="pi pi-tag" /> {t('mainTitle')}
-        </h4>
-        <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
-          <div className="registerInput__container-x2">
-            <TextInput
-              width="100%"
-              isEdit={true}
-              control={control}
-              showLabel={false}
-              isRequired={true}
-              labelName={t('inputTitleLabel')}
-              nameInput="title"
-              placeHolderText={t('inputTitlePlaceholderText')}
-              getFormErrorMessage={getFormErrorMessage}
-              rules={{
-                maxLength: {
-                  value: 60,
-                  message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
-                },
-                required: tGlobal('requiredErrorMessage'),
-                pattern: {
-                  value: /^\S/,
-                  message: tGlobal('patternErrorMessage'),
-                },
-              }} />
-            <DropDownInput
-              isEdit={true}
-              control={control}
-              showLabel={false}
-              isRequired={true}
-			  optionLabel="label"
-			  optionValue="label"
-              nameInput="material"
-			  optionGroupLabel="label"
-			  optionGroupChildren="items"
-              options={translatedMaterials}
-              labelName={t('inputDropdownMaterialLabel')}
-              placeHolderText={t('inputDropdownMaterialPlaceholderText')}
-              getFormErrorMessage={getFormErrorMessage}
-              rules={{
-                required: tGlobal('requiredErrorMessage'),
-              }}
-               />
-          </div>
-          <div className="registerInput__container-x2">
-            <NumberInput
-              width="100%"
-              label={t('inputNumberQuantityLabel')}
-              showLabel={false}
-              control={control}
-              isRequired={true}
-              nameInput="quantity"
-              placeHolderText={t('inputNumberQuantityPlaceholderText')}
-              getFormErrorMessage={getFormErrorMessage}
-              rules={{
-                maxLength: {
-                  value: 7,
-                  message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 7}),
-                },
-                required: tGlobal('requiredErrorMessage'),
-                pattern: {
-                  value: /^\S/,
-                  message: tGlobal('patternErrorMessage'),
-                },
-              }} />
-            <DropDownInput
-              isEdit={true}
-              control={control}
-              showLabel={false}
-              isRequired={true}
-              nameInput="unit"
-              labelName={t('inputDropdownUnitLabel')}
-              placeHolderText={t('inputDropdownUnitPlaceholderText')}
-              getFormErrorMessage={getFormErrorMessage}
-              rules={{
-                required: tGlobal('requiredErrorMessage'),
-              }}
-              options={[
-                {label: t('unitLabelKg'), value: "Kg"}, 
-                {label: t('unitLabelCc'), value: "cc"},
-                {label:  t('unitLabelUnit'), value: "Units"}
-              ]} />
-              
-          </div>
-          <div className="registerInput__container-x2">
+  return <div className="layout">
+    <img className="layout__background" src="/assets/user/image-2.svg" />
+    <div className="main__content xpadding-1">
+      <h4 className="text-defaultCase text-dark-blue">
+        <i className="pi pi-tag" /> {t('mainTitle')}
+      </h4>
+      <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
+        <div className="registerInput__container-x2">
+          <TextInput
+            width="100%"
+            isEdit={true}
+            control={control}
+            showLabel={false}
+            isRequired={true}
+            labelName={t('inputTitleLabel')}
+            nameInput="title"
+            placeHolderText={t('inputTitlePlaceholderText')}
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 60,
+                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
+              },
+              required: tGlobal('requiredErrorMessage'),
+              pattern: {
+                value: /^\S/,
+                message: tGlobal('patternErrorMessage'),
+              },
+            }} />
+          <DropDownInput
+            isEdit={true}
+            control={control}
+            showLabel={false}
+            isRequired={true}
+      optionLabel="label"
+      optionValue="label"
+            nameInput="material"
+      optionGroupLabel="label"
+      optionGroupChildren="items"
+            options={translatedMaterials}
+            labelName={t('inputDropdownMaterialLabel')}
+            placeHolderText={t('inputDropdownMaterialPlaceholderText')}
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              required: tGlobal('requiredErrorMessage'),
+            }}
+              />
+        </div>
+        <div className="registerInput__container-x2">
           <NumberInput
             width="100%"
-            mode="currency"
-            showLabel={false}
             control={control}
-            nameInput="price"
+            showLabel={false}
             isRequired={true}
-            label={t('inputNumberAskingPriceLabel')}
-            placeHolderText={t('inputNumberAskingPricePlaceholderText')}
+            nameInput="quantity"
+            label={t('inputNumberQuantityLabel')}
+            placeHolderText={t('inputNumberQuantityPlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
@@ -178,20 +136,60 @@ const OfferNew = () => {
                 message: tGlobal('patternErrorMessage'),
               },
             }} />
-          </div>
-          <UploadPhotoInput
-            type="imageUpload"
-            title={t('offerImagesTitle')}
-            uploadedImages={uploadedImages}
-            setUploadedImages={setUploadedImages}
-            className="imagesHub__container-variant mb-1" />
-          <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-            <Button className="dark-blue fullwidth" label={t('postOfferBtnText')} type="submit" loading={sending} />
-          </div>
-        </form>
-      </div>
+          <DropDownInput
+            isEdit={true}
+            control={control}
+            showLabel={false}
+            isRequired={true}
+            nameInput="unit"
+            labelName={t('inputDropdownUnitLabel')}
+            placeHolderText={t('inputDropdownUnitPlaceholderText')}
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              required: tGlobal('requiredErrorMessage'),
+            }}
+            options={[
+              {label: t('unitLabelKg'), value: "Kg"}, 
+              {label: t('unitLabelCc'), value: "cc"},
+              {label:  t('unitLabelUnit'), value: "Units"}
+            ]} />
+            
+        </div>
+        <div className="registerInput__container-x2">
+        <NumberInput
+          width="100%"
+          mode="currency"
+          showLabel={false}
+          control={control}
+          nameInput="price"
+          isRequired={true}
+          label={t('inputNumberAskingPriceLabel')}
+          placeHolderText={t('inputNumberAskingPricePlaceholderText')}
+          getFormErrorMessage={getFormErrorMessage}
+          rules={{
+            maxLength: {
+              value: 7,
+              message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 7}),
+            },
+            required: tGlobal('requiredErrorMessage'),
+            pattern: {
+              value: /^\S/,
+              message: tGlobal('patternErrorMessage'),
+            },
+          }} />
+        </div>
+        <UploadPhotoInput
+          type="imageUpload"
+          title={t('offerImagesTitle')}
+          uploadedImages={uploadedImages}
+          setUploadedImages={setUploadedImages}
+          className="imagesHub__container-variant mb-1" />
+        <div className="p-field" style={{ marginBottom: "1.5rem" }}>
+          <Button className="dark-blue fullwidth" label={t('postOfferBtnText')} type="submit" loading={sending} />
+        </div>
+      </form>
     </div>
-  );
-};
+  </div>
+}
 
-export default OfferNew;
+export default OfferNew
