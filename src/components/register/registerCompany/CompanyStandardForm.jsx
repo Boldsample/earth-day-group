@@ -9,12 +9,12 @@ import { checkUser } from "@services/userServices"
 import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput } from "@ui/forms"
 import PasswordRequirements from "@ui/templates/PasswordRequirements"
 
-const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
-  const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyStandardForm'})
-  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
-  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
   const { username } = useParams()
   const [sending, setSending] = useState(false)
+  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyStandardForm'})
   const {
     watch,
     reset,
@@ -57,7 +57,7 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
   const onSubmit = async (data) => {
     setSending(true)
     const { email, username } = getValues()
-    const response = await checkUser({ email, username }, ID)
+    const response = await checkUser({ email, username }, data?.id)
     setSending(false)
     if(response?.field){
       setFocus(response.field)
@@ -68,19 +68,17 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
     setActiveIndex(1)
   }
 
-
   useEffect(() => {
     if(user?.username)
       reset({
-        password: "",
         role: "company",
+        id: user?.id || "",
         lat: user?.lat || "",
         lng: user?.lng || "",
         nit: user?.nit || "",
         name: user?.name || "",
         phone: user?.phone || "",
         email: user?.email || "",
-        password_confirmation: "",
         picture: user?.picture || "",
         address: user?.address || "",
         website: user?.website || "",
@@ -99,17 +97,17 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
       type="profilePhotoUpload" />
     <div className="registerInput__container-x2">
       <TextInput
-        // disabled={ID}
         control={control}
         isRequired={true}
-        labelName={tGlobal2('userNameInputLabel')}
+        disabled={user?.id}
         nameInput="username"
-        placeHolderText={tGlobal2('userNamePlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
+        labelName={tGlobal2('userNameInputLabel')}
+        placeHolderText={tGlobal2('userNamePlaceHolderText')}
         rules={{
           maxLength: {
             value: 80,
-            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 80}),
+            message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 80})
           },
           required: tGlobal(`requiredErrorMessage`),
           pattern: {
@@ -121,9 +119,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         control={control}
         nameInput="email"
         isRequired={true}
-        labelName="E-mail"
-        placeHolderText={tGlobal2('userEmailPlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
+        labelName={tGlobal2('userEmailInputLabel')}
+        placeHolderText={tGlobal2('userEmailPlaceHolderText')}
         rules={{
           maxLength: {
             value: 100,
@@ -142,8 +140,8 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         control={control}
         isRequired={true}
         labelName={t('companyNameTitle')}
-        placeHolderText={t('companyNamePlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
+        placeHolderText={t('companyNamePlaceHolderText')}
         rules={{
           maxLength: {
             value: 100,
@@ -159,9 +157,9 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
         isRequired={true}
         control={control}
         nameInput="phone"
+        getFormErrorMessage={getFormErrorMessage}
         labelName={tGlobal2('userPhoneNumberInputLabel')}
         placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}
-        getFormErrorMessage={getFormErrorMessage}
         rules={{
           maxLength: {
             value: 10,
@@ -180,10 +178,10 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           control={control}
           isRequired={true}
           autocomplete="off"
-          labelName={tGlobal2('userAddressInputLabel')}
           nameInput="address"
-          placeHolderText={tGlobal2('userAddressPlaceHolderText')}
           getFormErrorMessage={getFormErrorMessage}
+          labelName={tGlobal2('userAddressInputLabel')}
+          placeHolderText={tGlobal2('userAddressPlaceHolderText')}
           onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
           rules={{
             required: tGlobal(`requiredErrorMessage`),
@@ -252,20 +250,20 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
     {!user?.username && <>
       <div className="registerInput__container-x2">
         <PasswordInput
-          passwordRequirementsPopUp={PasswordRequirements}
           maxLength={20}
-          isRequired={!ID}
           control={control}
-          labelName={tGlobal2('userPasswordInputLabel')}
+          isRequired={true}
           nameInput="password"
-          placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
           getFormErrorMessage={getFormErrorMessage}
+          labelName={tGlobal2('userPasswordInputLabel')}
+          passwordRequirementsPopUp={PasswordRequirements}
+          placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
           rules={{
             maxLength: {
               value: 20,
               message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20}),
             },
-            required: username ? undefined : tGlobal(`requiredErrorMessage`),
+            required: tGlobal(`requiredErrorMessage`),
             pattern: {
               value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/,
               message:
@@ -276,39 +274,37 @@ const CompanyStandardForm = ({ user, setUser, ID, setActiveIndex }) => {
           maxLength={20}
           feedback={false}
           showLabel={true}
-          isRequired={!ID}
           control={control}
+          isRequired={true}
           className="noLabel"
-          labelName={tGlobal2('userConfirmPasswordInputLabel')}
           nameInput="password_confirmation"
-          placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
           getFormErrorMessage={getFormErrorMessage}
+          labelName={tGlobal2('userConfirmPasswordInputLabel')}
+          placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
           rules={{
-            required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
+            required: tGlobal(`requiredErrorMessage`),
             validate: value => value === getValues().password || tGlobal('passwordDoNotMatchErrorMessage'),
           }} />
       </div>
-    </>}
-    {!ID && 
       <div className="p-field mb-2">
         <div className="mb-1">
           <CheckBoxInput
             control={control}
             nameInput="accept_terms"
-            rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
             getFormErrorMessage={getFormErrorMessage}
+            rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
             checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
         </div>
         <div>
           <CheckBoxInput
             control={control}
             nameInput="accept_policy"
-            rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
             getFormErrorMessage={getFormErrorMessage}
+            rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
             checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
         </div>
       </div>
-    }
+    </>}
     <div className="p-field" style={{ marginBottom: "1.5rem" }}>
       <Button className="dark-blue fullwidth" label={t('continueBtnText')} type="submit" name="submit" loading={sending} />
     </div>

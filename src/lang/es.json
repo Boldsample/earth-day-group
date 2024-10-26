@@ -2,6 +2,7 @@
   "global": {
     "skip": "Saltar",
     "next": "Siguiente",
+    "prev": "Anterior",
     "login": "Iniciar sesión",
     "hi": "Hola",
     "settings": "Configuración",
@@ -49,11 +50,11 @@
     "saveBtnText": "Guardar",
     "signUpBtnText": "Registrar",
     "updateUserTitleThankYouPage": "¡Todo listo!",
-    "updateUserBtnLabelThankYouPage": "Regresar a administradores",
-    "updateUserBtnLabelThankYouPage2": "Regresar al dashboard",
+    "updateUserBtnLabelThankYouPage": "Regresar al listado",
+    "updateUserBtnLabelThankYouPage2": "Regresar al perfil",
     "updateUsercontentText": "¡El perfil se ha actualizado con éxito!",
     "createUserTitleThankYouPage": "¡Felicidades!",
-    "createUserBtnLabelThankYouPage2": "Regresar al dashboard",
+    "createUserBtnLabelThankYouPage": "Regresar al inicio de sesión",
     "createUsercontentText": "¡La cuenta se ha creado con éxito!",
     "newUserContentText": "¡Te has registrado con éxito! Te hemos enviado un correo electrónico de verificación. Por favor, verifica tu identidad.",
     "newAdminContentText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico.",
@@ -109,7 +110,8 @@
       "loginformBtn": "Iniciar sesión",
       "forgotPassword": "¿Olvidaste tu contraseña?",
       "signInWith": "O inicia sesión con",
-      "dontHaveAccount": "¿No tienes una cuenta? Regístrate"
+      "dontHaveAccount": "¿No tienes una cuenta? Regístrate",
+      "emailVerified": "Su correo electrónico ha sido verificado exitosamente."
     },
     "recover": {
       "mainTitle": "Recuperar",
@@ -475,6 +477,11 @@
       "createPet": {
         "petTypeDogText": "Perro",
         "petTypeCatText": "Gato",
+        "petTypeFishText": "Pez",
+        "petTypeBirdText": "Ave",
+        "petTypeRodentText": "Roedor",
+        "petTypeReptileText": "Reptil",
+        "petTypeFarmAnimalText": "Animal de granja",
         "petGenderMaleText": "Macho",
         "petGenderFemaleText": "Hembra",
         "editPetthankyouPagetitle": "¡Todo listo!",
@@ -916,6 +923,22 @@
     "Others": "Otros",
     "Used oils": "Aceites usados",
     "Tires": "Llantas",
-    "RCD - Construction and demolition waste": "RCD - Residuos de construcción y demolición"
+    "RCD - Construction and demolition waste": "RCD - Residuos de construcción y demolición",
+	"tons": "Tonelada(s)",
+	"pounds": "Libra(s)",
+	"kilograms": "Kilogramo(s)",
+	"grams": "Gramo(s)",
+	"troy ounces": "Onza(s) troy",
+	"gallons": "Galon(es)",
+	"liters": "Litro(s)",
+	"units": "Unidad(es)",
+	"tons_min": "t",
+	"pounds_min": "lb",
+	"kilograms_min": "kg",
+	"grams_min": "g",
+	"troy ounces_min": "oz t",
+	"gallons_min": "gal",
+	"liters_min": "L",
+	"units_min": "unid"
   }
 }

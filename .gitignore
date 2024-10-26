@@ -11,6 +11,7 @@ api
 php
 edg_api_backup
 node_modules
+old
 dist
 dist-ssr
 *.local

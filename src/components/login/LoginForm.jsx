@@ -1,25 +1,29 @@
 import { toast } from "react-toastify"
-import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { Button } from "primereact/button"
 import { useEffect, useState } from "react"
 import { useFacebook } from "react-facebook"
+import { useTranslation } from "react-i18next"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useGoogleLogin } from "@react-oauth/google"
-import { useTranslation } from 'react-i18next'
-import { setHeader } from '@store/slices/globalSlice'
+
+import { setHeader } from "@store/slices/globalSlice"
 import { TextInput, PasswordInput } from "@ui/forms/"
 import { getUserData } from "@store/slices/usersSlice"
-import { authUser, getUserGoogle } from "@services/userServices"
-
+import { authUser, getUser, getUserGoogle, updateUser } from "@services/userServices"
+import { Message } from "primereact/message"
 
 const LoginForm = () => {
-  const [t, i18next] = useTranslation('translation', { keyPrefix: 'login.loginForm' })
-  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+	const {token} = useParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [ fApi, setFApi ] = useState()
-  const { isLoading, init } = useFacebook()
+  const [fApi, setFApi] = useState()
+  const {isLoading, init} = useFacebook()
   const [sending, setSending] = useState(false)
+  const [verification, setVerification] = useState(false)
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [t] = useTranslation('translation', { keyPrefix: 'login.loginForm' })
   const {
     control,
     setError,
@@ -63,8 +67,20 @@ const LoginForm = () => {
       toast.error('User cancelled login or did not fully authorize.');
     });
   }
+  const tokenLogin = async () => {
+    if(token){
+      setSending(true)
+      const response = await updateUser({email_verified_at: 1, remember_token: ''}, {remember_token: token})
+      if(response?.response == 'Ok'){
+        setVerification(true)
+        navigate('/login/')
+      }
+      setSending(false)
+    }
+  }
   
   useEffect(() => {
+    tokenLogin()
     if(!isLoading){
       if(!fApi)
         init()
@@ -84,6 +100,9 @@ const LoginForm = () => {
     <img className="layout__background" src="/assets/login/image-1.svg" />
     <form onSubmit={handleSubmit(onSubmit)} className="main__content verticalcenter-2 xpadding-1">
       <h4 className="mb-1">{t('mainTitle')}</h4>
+      {verification && 
+        <Message severity="success" text={t('emailVerified')} className="mb-2" />
+      }
       <div className="p-field mb-1">
         <label htmlFor="email">
           <TextInput

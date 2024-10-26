@@ -64,6 +64,7 @@ const AppRoutes = () => {
         <Route path="/register/vendor" element={<RegisterVendor create={true} />} />
         <Route path="/register/ngo" element={<RegisterNgo create={true} />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/login/:token" element={<LoginForm />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/recover/:token" element={<Recover />} />
       </> || <>

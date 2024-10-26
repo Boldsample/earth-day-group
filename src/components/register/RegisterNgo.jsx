@@ -17,15 +17,14 @@ import "./style.sass"
 import PasswordRequirements from "@ui/templates/PasswordRequirements"
 
 const RegisterNgo = ({create = false}) => {
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const { username } = useParams()
+	const [sending, setSending] = useState(false)
+	const user = useSelector((state) => state.users.userData)
+	const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerNgo'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
-  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { username } = useParams()
-  const [ID, setID] = useState(null)
-  const [sending, setSending] = useState(false)
-  const user = useSelector((state) => state.users.userData)
   const {
     watch,
     reset,
@@ -78,12 +77,9 @@ const RegisterNgo = ({create = false}) => {
 	  const _images = data?.images
     delete data.images
     setSending(true)
-    if(ID){
-      if(data.password == '')
-        delete data.password
-      delete data.password_confirmation
-      response = await updateUser({ ...data }, {id: ID}, ID)
-    }else{
+    if(data?.id)
+      response = await updateUser({ ...data }, {id: data?.id}, data?.id)
+    else{
       delete data.password_confirmation
       response = await createUser({ ...data })
     }
@@ -98,10 +94,10 @@ const RegisterNgo = ({create = false}) => {
     setSending(false)
     if(response?.id == user?.id)
       dispatch(getUserData(response?.id))
-    if(ID && response?.id){
+    if(data?.id && response?.id){
       dispatch(updateThankyou({
         title: tGlobal2('updateUserTitleThankYouPage'),
-        link: username ? "/users/" : "/dashboard/",
+        link: username ? '/dashboard/' : '/settings/profile/',
         background: "image-1.svg",
         button_label: username ? tGlobal2('updateUserBtnLabelThankYouPage') : tGlobal2('updateUserBtnLabelThankYouPage2'),
         content: tGlobal2('updateUsercontentText'),
@@ -110,9 +106,9 @@ const RegisterNgo = ({create = false}) => {
     }else if(response?.id){
       dispatch(updateThankyou({
         title: tGlobal2('createUserTitleThankYouPage'),
-        link: "/dashboard/",
+        link: "/login/",
         background: "image-1.svg",
-        button_label: tGlobal2('createUserBtnLabelThankYouPage2'),
+        button_label: tGlobal2('createUserBtnLabelThankYouPage'),
         content: tGlobal2('newUserContentText'),
       }))
       navigate('/thankyou/')
@@ -128,10 +124,8 @@ const RegisterNgo = ({create = false}) => {
     if(!create){
       const _username = username || user?.username
       getUser(_username, user?.id).then(data => {
-        setID(data?.id)
         reset({
-          password: "",
-          role: "shelter",
+          id: data?.id || "",
           lat: data?.lat || "",
           lng: data?.lng || "",
           name: data?.name || "",
@@ -142,6 +136,7 @@ const RegisterNgo = ({create = false}) => {
           website: data?.website || "",
           picture: data?.picture || "",
           address: data?.address || "",
+          role: data?.role || "shelter",
           username: data?.username || "",
           description: data?.description || "",
         })
@@ -162,13 +157,13 @@ const RegisterNgo = ({create = false}) => {
           type="profilePhotoUpload" />
         <div className="registerInput__container-x2">
           <TextInput
-            disabled={ID}
             control={control}
             isRequired={true}
-            labelName={tGlobal2('userNameInputLabel')}
             nameInput="username"
-            placeHolderText={tGlobal2('userNamePlaceHolderText')}
+            disabled={watch('id')}
             getFormErrorMessage={getFormErrorMessage}
+            labelName={tGlobal2('userNameInputLabel')}
+            placeHolderText={tGlobal2('userNamePlaceHolderText')}
             rules={{
               maxLength: {
                 value: 80,
@@ -184,9 +179,9 @@ const RegisterNgo = ({create = false}) => {
             control={control}
             nameInput="email"
             isRequired={true}
+            getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal2('userEmailInputLabel')}
             placeHolderText={tGlobal2('userEmailPlaceHolderText')}
-            getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 100,
@@ -204,9 +199,9 @@ const RegisterNgo = ({create = false}) => {
             nameInput="name"
             control={control}
             isRequired={true}
+            getFormErrorMessage={getFormErrorMessage}
             labelName={t('organizationNameInputTitle')}
             placeHolderText={t('organizationNamePlaceHolderText')}
-            getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 100,
@@ -223,10 +218,10 @@ const RegisterNgo = ({create = false}) => {
               control={control}
               isRequired={true}
               autocomplete="off"
-              labelName={tGlobal2('userAddressInputLabel')}
               nameInput="address"
-              placeHolderText={tGlobal2('userAddressPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
+              labelName={tGlobal2('userAddressInputLabel')}
+              placeHolderText={tGlobal2('userAddressPlaceHolderText')}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
                 required: tGlobal(`requiredErrorMessage`),
@@ -241,10 +236,10 @@ const RegisterNgo = ({create = false}) => {
           <TextInput
             control={control}
             isRequired={true}
-            labelName={tGlobal2('userWebsiteInputLabel')}
             nameInput="website"
-            placeHolderText={tGlobal2('userWebsitePlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
+            labelName={tGlobal2('userWebsiteInputLabel')}
+            placeHolderText={tGlobal2('userWebsitePlaceHolderText')}
             rules={{
               maxLength: {
                 value: 100,
@@ -259,9 +254,9 @@ const RegisterNgo = ({create = false}) => {
             isRequired={true}
             control={control}
             nameInput="phone"
+            getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal2('userPhoneNumberInputLabel')}
             placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}
-            getFormErrorMessage={getFormErrorMessage}
             rules={{
               maxLength: {
                 value: 10,
@@ -289,10 +284,10 @@ const RegisterNgo = ({create = false}) => {
           <TextAreaInput
             control={control}
             isRequired={false}
-            labelName={t('textAreaIniciativeDescriptionTitle')}
             nameInput="description"
-            placeHolderText={t('iniciativeDescriptionPlaceholder')}
             getFormErrorMessage={getFormErrorMessage}
+            labelName={t('textAreaIniciativeDescriptionTitle')}
+            placeHolderText={t('iniciativeDescriptionPlaceholder')}
             rules={{
               maxLength: {
                 value: 1000,
@@ -306,26 +301,26 @@ const RegisterNgo = ({create = false}) => {
         </div>
         <UploadPhotoInput
           type="imageUpload"
-          title={t('organizationImgsTitle')}
           uploadedImages={watch('images')}
+          title={t('organizationImgsTitle')}
           setUploadedImages={setUploadedImages} />
         {create && <>
           <div className="registerInput__container-x2">
             <PasswordInput
-            passwordRequirementsPopUp={PasswordRequirements}
               maxLength={20}
-              isRequired={!ID}
               control={control}
-              labelName={tGlobal2('userPasswordInputLabel')}
+              isRequired={true}
               nameInput="password"
-              placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
+              labelName={tGlobal2('userPasswordInputLabel')}
+              passwordRequirementsPopUp={PasswordRequirements}
+              placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
               rules={{
                 maxLength: {
                   value: 20,
-                  message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20}),
+                  message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20})
                 },
-                required: username ? undefined : tGlobal(`requiredErrorMessage`),
+                required: tGlobal(`requiredErrorMessage`),
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/,
                   message:
@@ -336,40 +331,38 @@ const RegisterNgo = ({create = false}) => {
               maxLength={20}
               feedback={false}
               showLabel={true}
-              isRequired={!ID}
               control={control}
+              isRequired={true}
               className="noLabel"
-              labelName={tGlobal2('userConfirmPasswordInputLabel')}
               nameInput="password_confirmation"
-              placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
               getFormErrorMessage={getFormErrorMessage}
+              labelName={tGlobal2('userConfirmPasswordInputLabel')}
+              placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
               rules={{
-                required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
+                required: tGlobal(`requiredErrorMessage`),
                 validate: value => value === getValues().password || tGlobal('passwordDoNotMatchErrorMessage'),
               }} />
           </div>
-          {!ID && 
-            <div className="p-field mb-2">
-              <div className="mb-1">
-                <CheckBoxInput
-                  control={control}
-                  nameInput="accept_terms"
-                  rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
-                  getFormErrorMessage={getFormErrorMessage}
-                  checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
-              </div>
-              <div>
-                <CheckBoxInput
-                  control={control}
-                  nameInput="accept_policy"
-                  rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
-                  getFormErrorMessage={getFormErrorMessage}
-                  checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
-              </div>
+          <div className="p-field mb-2">
+            <div className="mb-1">
+              <CheckBoxInput
+                control={control}
+                nameInput="accept_terms"
+                rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
+                getFormErrorMessage={getFormErrorMessage}
+                checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
             </div>
-          }
+            <div>
+              <CheckBoxInput
+                control={control}
+                nameInput="accept_policy"
+                rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
+                getFormErrorMessage={getFormErrorMessage}
+                checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
+            </div>
+          </div>
         </>}
-        <div className="p-field" style={{ marginBottom: "24px" }}>
+        <div className="p-field">
           <Button className="dark-blue fullwidth" label={user?.id ? tGlobal2('saveBtnText') : tGlobal2('signUpBtnText')} type="submit" loading={sending} />
         </div>
       </form>

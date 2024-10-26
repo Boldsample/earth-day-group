@@ -2,6 +2,7 @@
   "global": {
     "skip": "Skip",
     "next": "Next",
+    "prev": "Previous",
     "login": "Log In",
     "hi": "Hi",
     "settings": "Settings",
@@ -49,11 +50,11 @@
     "saveBtnText": "Save",
     "signUpBtnText": "Sign up",
     "updateUserTitleThankYouPage": "All Set!",
-    "updateUserBtnLabelThankYouPage": "Go back to admins",
-    "updateUserBtnLabelThankYouPage2": "Go back to dashboard",
+    "updateUserBtnLabelThankYouPage": "Go back to list",
+    "updateUserBtnLabelThankYouPage2": "Go back to profile",
     "updateUsercontentText": "The profile has been updated successfully!",
     "createUserTitleThankYouPage": "Congrats!",
-    "createUserBtnLabelThankYouPage2": "Go back to dashboard",
+    "createUserBtnLabelThankYouPage": "Go back to login",
     "createUsercontentText": "The account has been created successfully!",
     "newAdminContentText": "You have registered a new admin user! We have sent an email verification link.",
     "newUserContentText": "You’re all signed up! You’re all signed up! Please verify your identity with the verification link that we sent to the email address you provided.",
@@ -108,7 +109,8 @@
       "loginformBtn": "Login",
       "forgotPassword": "Forgot Password?",
       "signInWith": "Sign in with",
-      "dontHaveAccount": "Don't have an account? Sign up"
+      "dontHaveAccount": "Don't have an account? Sign up",
+      "emailVerified": "Your email was verified succesfully."
     },
     "recover": {
       "mainTitle": "Recover",
@@ -475,6 +477,11 @@
       "createPet": {
         "petTypeDogText": "Dog",
         "petTypeCatText": "Cat",
+        "petTypeFishText": "Fish",
+        "petTypeBirdText": "Bird",
+        "petTypeRodentText": "Rodent",
+        "petTypeReptileText": "Reptile",
+        "petTypeFarmAnimalText": "Farm animal",
         "petGenderMaleText": "Male",
         "petGenderFemaleText": "Female",
         "editPetthankyouPagetitle": "All set!",
@@ -915,6 +922,22 @@
     "Others": "Others",
     "Used oils": "Used oils",
     "Tires": "Tires",
-    "RCD - Construction and demolition waste": "RCD - Construction and demolition waste"
+    "RCD - Construction and demolition waste": "RCD - Construction and demolition waste",
+	"tons": "Ton(s)",
+	"pounds": "Pound(s)",
+	"kilograms": "Kilogram(s)",
+	"grams": "Gram(s)",
+	"troy ounces": "Troy ounce(s)",
+	"gallons": "Gallon(s)",
+	"liters": "Liter(s)",
+	"units": "Unit(s)",
+	"tons_min": "t",
+	"pounds_min": "lbs",
+	"kilograms_min": "kg",
+	"grams_min": "g",
+	"troy ounces_min": "oz t",
+	"gallons_min": "gal",
+	"liters_min": "L",
+	"units_min": "units"
   }
 }

@@ -10,7 +10,6 @@ import { getUser } from "@services/userServices"
 const RegisterCompany = ({create = false}) => {
   const dispatch = useDispatch()
   const { username } = useParams()
-  const [ID, setID] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [isDisabled, setIsDisabled] = useState(true)
   const user = useSelector((state) => state.users.userData)
@@ -24,17 +23,15 @@ const RegisterCompany = ({create = false}) => {
     if(!create){
       const _username = username || user?.username
       getUser(_username, user?.id).then(data => {
-        setID(data?.id)
         setUserData({
-          password: "",
           role: "company",
+          id: data?.id || "",
           lat: data?.lat || "",
           lng: data?.lng || "",
           nit: data?.nit || "",
           name: data?.name || "",
           phone: data?.phone || "",
           email: data?.email || "",
-          password_confirmation: "",
           images: data?.images || [],
           picture: data?.picture || "",
           address: data?.address || "",
@@ -56,10 +53,10 @@ const RegisterCompany = ({create = false}) => {
       <div className="main__content xpadding-1">
         <TabView className="fullwidth" activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
           <TabPanel header={activeIndex == 1 ? "Edit previous form" : ""} leftIcon={activeIndex == 1 ? "pi pi-angle-left" : ""}>
-            <CompanyStandardForm user={userData} setUser={setUserData} ID={ID} setActiveIndex={setActiveIndex} />
+            <CompanyStandardForm user={userData} setUser={setUserData} setActiveIndex={setActiveIndex} />
           </TabPanel>
           <TabPanel disabled={isDisabled}>
-            <CompanyDetailedForm user={userData} setUser={setUserData} ID={ID} currentUserID={user?.id} />
+            <CompanyDetailedForm user={userData} setUser={setUserData} currentUserID={user?.id} />
           </TabPanel>
         </TabView>
       </div>
