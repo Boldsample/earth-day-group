@@ -20,7 +20,12 @@ const CreatePet = () => {
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const species = [
     { name: t('petTypeCatText'), code: "Cat" },
-    { name: t('petTypeDogText'), code: "Dog" }
+    { name: t('petTypeDogText'), code: "Dog" },
+	{ name: t('petTypeFishText'), code: "Fish" },
+	{ name: t('petTypeBirdText'), code: "Bird" },
+	{ name: t('petTypeRodentText'), code: "Rodent" },
+	{ name: t('petTypeReptileText'), code: "Reptile" },
+	{ name: t('petTypeFarmAnimalText'), code: "FarmAnimal" }
   ]
   const genders = [
     { name: t("petGenderMaleText"), value: 'Male' },
