@@ -6,7 +6,6 @@ import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, f
 import { useTranslation } from 'react-i18next'
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
-import RecycleMaterialCard from '@ui/cards/recycleMaterialCard/RecycleMaterialCard'
 
 import './profile.sass'
 import { Tooltip } from 'primereact/tooltip'
@@ -36,21 +35,6 @@ const ProfileInformation = ({profile, same, doFollow, admin}) => {
           <li><FontAwesomeIcon icon={faHouse}  className='contact__icon'/> {t('pickUpFromHomeText')} {profile?.pick_up_from_home == true ? t('pickUpAvailable') : t('pickUNotpAvailable')}</li>
         }
       </ul>
-      {profile?.materials?.length > 0 && 
-        <div className="recycableGoods__container"> 
-          <h4>{t('recyclableGoodsTitle')}</h4>
-          <div className='materialsCard__grid'>
-            {profile?.materials?.map((material) => 
-              <RecycleMaterialCard
-                key={material.id}
-                material={tMaterial(material.type)}
-                unit={material.unit}
-                price={material.price}
-                color={material.color} />
-            )}
-          </div>
-        </div>
-      }
       <div className="buttons__container">
         {!same && 
           <Link className="button small green-earth" to={`/chat/${profile?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> <span>{t('contactBtnText')}</span></Link>

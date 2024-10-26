@@ -3,90 +3,90 @@
     "label": "Ferrous and metallic",
     "code": "FM",
     "items": [
-      {"label": "Iron and steel"}, 
-      {"label": "Aluminum"},
-      {"label": "Copper"},
-      {"label": "Gold"},
-      {"label": "Silver"},
-      {"label": "Platinum"},
-      {"label": "Palladium"}
+      {"label": "Iron and steel", "units": ["tons", "pounds", "kilograms"]},
+      {"label": "Aluminum", "units": ["tons", "pounds", "kilograms"]},
+      {"label": "Copper", "units": ["tons", "pounds", "kilograms"]},
+      {"label": "Gold", "units": ["grams", "troy ounces", "kilograms"]},
+      {"label": "Silver", "units": ["grams", "troy ounces", "kilograms"]},
+      {"label": "Platinum", "units": ["grams", "troy ounces", "kilograms"]},
+      {"label": "Palladium", "units": ["grams", "troy ounces", "kilograms"]}
     ]
   },
   {
     "label": "Plastics",
     "code": "PL",
     "items": [
-      {"label": "PET (Polyethylene terephthalate)"},
-      {"label": "HDPE (High density polyethylene)"},
-      {"label": "PVC (Polyvinyl chloride)"},
-      {"label": "LDPE (Low density polyethylene)"},
-      {"label": "PP (Polypropylene)"},
-      {"label": "PS (Polystyrene)"}
+      {"label": "PET (Polyethylene terephthalate)", "units": ["tons", "kilograms"]},
+      {"label": "HDPE (High density polyethylene)", "units": ["tons", "kilograms"]},
+      {"label": "PVC (Polyvinyl chloride)", "units": ["tons", "kilograms"]},
+      {"label": "LDPE (Low density polyethylene)", "units": ["tons", "kilograms"]},
+      {"label": "PP (Polypropylene)", "units": ["tons", "kilograms"]},
+      {"label": "PS (Polystyrene)", "units": ["tons", "kilograms"]}
     ]
   },
   {
     "label": "Glass",
     "code": "VD",
     "items": [
-      {"label": "Clear glass"},
-      {"label": "Colored glass"},
-      {"label": "Tempered glass"},
-      {"label": "Laminated glass"}
+      {"label": "Clear glass", "units": ["tons", "kilograms"]},
+      {"label": "Colored glass", "units": ["tons", "kilograms"]},
+      {"label": "Tempered glass", "units": ["tons", "kilograms"]},
+      {"label": "Laminated glass", "units": ["tons", "kilograms"]}
     ]
   },
   {
     "label": "Paper and cardboard",
     "code": "PC",
     "items": [
-      {"label": "White paper"},
-      {"label": "Corrugated cardboard"},
-      {"label": "Newspaper"},
-      {"label": "Kraft paper"},
-      {"label": "Compact cardboard or cardboard"},
-      {"label": "Gray cardboard (Paper stone)"}
+      {"label": "White paper", "units": ["tons", "kilograms"]},
+      {"label": "Corrugated cardboard", "units": ["tons", "kilograms"]},
+      {"label": "Newspaper", "units": ["tons", "kilograms"]},
+      {"label": "Kraft paper", "units": ["tons", "kilograms"]},
+      {"label": "Compact cardboard or cardboard", "units": ["tons", "kilograms"]},
+      {"label": "Gray cardboard (Paper stone)", "units": ["tons", "kilograms"]}
     ]
   },
   {
     "label": "Organic",
     "code": "OR",
     "items": [
-      {"label": "Food waste"},
-      {"label": "Leaves, grass and pruning"},
-      {"label": "Wood"}
+      {"label": "Food waste", "units": ["tons", "kilograms"]},
+      {"label": "Leaves, grass and pruning", "units": ["tons", "kilograms"]},
+      {"label": "Wood", "units": ["tons", "kilograms"]}
     ]
   },
   {
     "label": "Textiles",
     "code": "TX",
     "items": [
-      {"label": "Cotton"},
-      {"label": "Wool"},
-      {"label": "Polyester"},
-      {"label": "Nylon"}
+      {"label": "Cotton", "units": ["tons", "kilograms"]},
+      {"label": "Wool", "units": ["tons", "kilograms"]},
+      {"label": "Polyester", "units": ["tons", "kilograms"]},
+      {"label": "Nylon", "units": ["tons", "kilograms"]}
     ]
   },
   {
     "label": "WEEE",
     "code": "RA",
     "items": [
-      {"label": "Large appliance"},
-      {"label": "Small appliance"},
-      {"label": "Computer equipment and telecommunications"},
-      {"label": "Power tools"},
-      {"label": "Video game consoles, toys"},
-      {"label": "Electric bicycles and scooters"},
-      {"label": "Lighting and bulbs"},
-      {"label": "Batteries"},
-      {"label": "Lead batteries"}
+      {"label": "Large appliance", "units": ["units", "tons", "kilograms"]},
+      {"label": "Small appliance", "units": ["units", "tons", "kilograms"]},
+      {"label": "Computer equipment and telecommunications", "units": ["units", "tons", "kilograms"]},
+      {"label": "Power tools", "units": ["units", "tons", "kilograms"]},
+      {"label": "Video game consoles, toys", "units": ["units", "tons", "kilograms"]},
+      {"label": "Electric bicycles and scooters", "units": ["units", "tons", "kilograms"]},
+      {"label": "Lighting and bulbs", "units": ["units", "tons", "kilograms"]},
+      {"label": "Batteries", "units": ["tons", "kilograms"]},
+      {"label": "Lead batteries", "units": ["tons", "kilograms"]}
     ]
   },
   {
     "label": "Others",
     "code": "OT",
     "items": [
-      {"label": "Used oils"},
-      {"label": "Tires"},
-      {"label": "RCD - Construction and demolition waste"}
+      {"label": "Used oils", "units": ["gallons", "liters"]},
+      {"label": "Tires", "units": ["units", "tons", "kilograms"]},
+      {"label": "RCD - Construction and demolition waste", "units": ["tons", "kilograms"]}
     ]
   }
 ]

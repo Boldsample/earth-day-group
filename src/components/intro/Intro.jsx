@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Carousel } from 'primereact/carousel'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 
 import introItems from '@json/intro.json'
 import { setHeader } from '@store/slices/globalSlice'
@@ -26,10 +26,13 @@ const Intro = () => {
 				<p className="mb-1">{t(`intro.${item?.content}`)}</p>
 				{item?.list ? <ul className='mb-1'>{item.list.map((i, key) => <li key={key}>{t(`intro.${i}`)}</li>)}</ul> : null}
 				<div>
-					{activeIndex + 1 < introItems.length ? <>
-						<Link className="button" to="/register/">{t(`global.skip`)} <FontAwesomeIcon icon={faRightToBracket} /></Link>
-						<button onClick={() => setActiveIndex((prevIndex) => (prevIndex + 1) % introItems.length)} className="dark-blue">{t(`global.next`)} <FontAwesomeIcon icon={faChevronRight} /></button>
-					</> : <Link className="button dark-blue" to="/register/">{t(`global.next`)} <FontAwesomeIcon icon={faChevronRight} /></Link>}
+					{activeIndex > 0 && 
+						<Link className="button small dark-blue" onClick={e => setActiveIndex((prevIndex) => prevIndex - 1)}><FontAwesomeIcon icon={faChevronLeft} /> {t(`global.prev`)}</Link>
+					}
+					<Link className="button small dark-blue" to={activeIndex + 1 < introItems.length ? '' : '/register/'} onClick={activeIndex + 1 < introItems.length ? e => { e.preventDefault(); setActiveIndex((prevIndex) => prevIndex + 1)} : null}>{t(`global.next`)} <FontAwesomeIcon icon={faChevronRight} /></Link>
+					{activeIndex + 1 < introItems.length && 
+						<Link className="button small" to="/register/">{t(`global.skip`)} <FontAwesomeIcon icon={faRightToBracket} /></Link>
+					}
 				</div>
 			</div>
 		</div>

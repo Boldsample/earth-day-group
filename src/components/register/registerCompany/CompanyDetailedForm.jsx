@@ -201,12 +201,11 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
       </div>
     </form>
     <div className="materialsCard__grid">
-      {user?.materials?.map((material) => 
+      {user?.materials?.map(material => 
         <RecycleMaterialCard
           key={material?.type}
-          color={material.color}
-          price={material?.price}
           unit={material?.unit}
+          price={material?.price}
           material={material.type}
           removeMaterial={removeMaterial} />
       )}

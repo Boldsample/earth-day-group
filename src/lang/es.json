@@ -593,7 +593,6 @@
       "pickUpAvailable": "Disponible",
       "pickUpNotAvailable": "No Disponible",
       "pickUpFromHomeText": "Recoger en casa:",
-      "recyclableGoodsTitle": "Precio de Bienes Reciclables",
       "contactBtnText": "Contactar",
       "editProfileBtnText": "Editar Perfil",
       "newProductBtnText": "Nuevo Producto",
@@ -860,7 +859,10 @@
         },
         "profileListing": {
           "petLabel": "Mascotas en adopción",
-          "productLabel": "Productos"
+          "productLabel": "Productos",
+          "LessMaterials": "Menos materiales",
+          "MoreMaterials": "Más materiales",
+          "recyclableGoodsTitle": "Precio de Bienes Reciclables"
         }
       }
     },

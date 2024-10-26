@@ -593,7 +593,6 @@
       "pickUpFromHomeText": "Pickup from home:",
       "pickUpAvailable": "Available",
       "pickUpNotAvailable": "Not Available",
-      "recyclableGoodsTitle": "Price for Recyclable Goods",
       "contactBtnText": "Contact",
       "editProfileBtnText": "Edit Profile",
       "newProductBtnText": "New Product",
@@ -859,7 +858,10 @@
         },
         "profileListing": {
           "petLabel": "Pet Adoptions",
-          "productLabel": "Products"
+          "productLabel": "Products",
+          "LessMaterials": "Less materials",
+          "MoreMaterials": "More materials",
+          "recyclableGoodsTitle": "Price for Recyclable Goods"
         }
       }
     },
