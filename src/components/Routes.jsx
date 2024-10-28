@@ -159,7 +159,8 @@ const AppRoutes = () => {
         <Route path="/pets" element={<Pets />} />
         <Route path="/pet/:id" element={<Pet />} />
         <Route path="/pet/edit/:id" element={<CreatePet />} />
-        <Route path="/offers" element={<AdminOffers />} />
+        <Route path="/offers/search" element={<AdminOffers type="search" />} />
+		<Route path="/offers/search/:offer" element={<Offers type="search" />} />
         <Route path="/ads" element={<ConfigureAds />} />
       </>}
       <Route path="/thankyou" element={<ThankYouPage />} />
