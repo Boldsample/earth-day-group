@@ -19,48 +19,73 @@ import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import ReportInfo from './ReportInfo'
 import { ProfileProvider } from '..'
 import { Tag } from 'primereact/tag'
+import { getUsers } from '@services/userServices'
 
 const Reports = () => {
 	const dispatch = useDispatch()
 	const [detail, setDetail] = useState({})
+	const [admins, setAdmins] = useState([])
 	const [reset, setReset] = useState(false)
 	const [profile, setProfile] = useState(null)
+	const [loading, setLoading] = useState(false)
 	const [reports, setReports] = useState({data: []})
-	const [page, setPage] = useState({page: 0, rows: 6})
 	const user = useSelector((state) => state.users.userData)
-	const [filters, setFilters] = useState({type: "", keyword: ''})
+	const [page, setPage] = useState({first: 0, page: 0, rows: 6})
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.report' })
+	const [filters, setFilters] = useState({type: "", status: "", admin: "", keyword: ''})
 	const [tSubjects] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
-	const states = { 'In Process': 'info', 'Pending': 'danger', 'Resolved': 'success' }
 
 	const hidePopup = reload => {
 		setDetail({...detail, show: false})
 		if(reload)
 			callReports()
 	}
-	const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
+	const updateFilters = (name, value) => {
+		setFilters(prev => ({...prev, [name]: value}))
+		setPage({first: 0, page: 0, rows: 6})
+		setReset(true)
+	}
 	const getReportDetail = async id => {
 		const _report = await getReport(id)
 		setDetail({..._report, show: true})
 	}
 	const callReports = async () =>{
+		setLoading(true)
 		let _filter = {}
 		if(filters?.type != '')
 			_filter['type'] = `r.type='${filters.type}'`
+		if(filters?.status != '')
+			_filter['status'] = `r.status='${filters.status}'`
+		if(filters?.admin !== '')
+			_filter['admin'] = `r.admin='${filters.admin}'`
 		if(filters?.keyword != '')
 			_filter['keyword'] = `(r.description LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
 		const _reports = await getReports(_filter, page)
+		setLoading(false)
 		setReports(_reports)
 	}
 	const renderHeader = () => {
 		return <div className="filters">
-			<Dropdown value={filters?.role} onChange={e => updateFilters('type', e.value.code)} optionLabel="name" placeholder={t('SelectInputPlaceHolder')} options={[
-				{name: t('all'), code: ""},
-				{name: t('allUsers'), code: "user"},
-				{name: t('allOffers'), code: "offer"},
-				{name: t('allProducts'), code: "product"},
-				{name: t('allPets'), code: "pet"},
+			<Dropdown value={filters?.type} onChange={e => updateFilters('type', e.value)} optionLabel="name" optionValue="value" placeholder={t('all')} options={[
+				{name: t('all'), value: ""},
+				{name: t('allUsers'), value: "user"},
+				{name: t('allOffers'), value: "offer"},
+				{name: t('allProducts'), value: "product"},
+				{name: t('allPets'), value: "pet"},
 			]} />
+			<Dropdown value={filters?.status} onChange={e => updateFilters('status', e.value)} optionLabel="name" optionValue="value" placeholder={t('allStatuses')} options={[
+				{name: t('allStatuses'), value: ""},
+				{name: t('info'), value: "info"},
+				{name: t('danger'), value: "danger"},
+				{name: t('success'), value: "success"},
+			]} />
+			{filters?.status != 'danger' && 
+				<Dropdown value={filters?.admin} onChange={e => updateFilters('admin', e.value)} optionLabel="name" optionValue="value" placeholder={t('allAdmins')} options={[
+					{name: t('allAdmins'), value: ""},
+					{name: t('unassigned'), value: 0},
+					...admins.map(({id, name}) => ({name, value: id}))
+				]} />
+			}
 			<InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
 			<Button className="small dark-blue" type="button" onClick={callReports}><FontAwesomeIcon icon={faPaperPlane} /></Button>
 			<Button className="small red-state" type="button" onClick={() => {
@@ -69,7 +94,6 @@ const Reports = () => {
 			}}><FontAwesomeIcon icon={faTrash} /></Button>
 		</div>
 	}
-	
 	const typeColumnBodyTemplate = (columnItem) => {
 		switch (columnItem.type) {
 			case 'offer':
@@ -92,11 +116,10 @@ const Reports = () => {
 				return null;
 		}
 	};
-	
-	function keepFirstLetters(inputString) {
+	const keepFirstLetters = inputString => {
 		const words = inputString.split(' ');
 		const firstLetters = words.map(word => word[0]).join('');
-		return firstLetters;
+		return firstLetters.slice(0, 2);
 	}
 	
 	useEffect(() => {
@@ -104,8 +127,9 @@ const Reports = () => {
 		setReset(false)
 	}, [page, reset])
 	useEffect(() => {
+		getUsers({role: `u.role='admin'`, state: `u.state=1`}, 'full').then(({data}) => setAdmins(data))
 		dispatch(setHeader('user'))
-	}, [user])
+	}, [])
 	
 	return <div className="layout">
 		<img className="layout__background" src="/assets/full-width.svg" />
@@ -117,14 +141,16 @@ const Reports = () => {
 					<TableSkeleton />
 				|| <>
 					<DataTable paginator stripedRows lazy
-						emptyMessage={t('noProductsFoundText')}
 						dataKey="id" 
 						page={page.page} 
 						rows={page.rows} 
+						loading={loading} 
+						first={page.first} 
 						value={reports?.data} 
 						header={renderHeader} 
 						totalRecords={reports?.total} 
-						onPage={({page, rows}) => setPage({page, rows})}>
+						emptyMessage={t('noProductsFoundText')}
+						onPage={({first, page, rows}) => setPage({first, page, rows})}>
 						<Column headerClassName='table-header-styles' header={t('tableTitleType')} field="type" bodyClassName='table-body-styles' body={typeColumnBodyTemplate}></Column>
 						<Column header={t('tableTitleSubject')}  body={({subject})=> {
 							return (
@@ -135,19 +161,16 @@ const Reports = () => {
 									</div>
 								</>
 							)}}></Column>
-						<Column header={t('tableTitleReported')}  field="name" body={({name, epicture})=>{
-							const initials = keepFirstLetters(name)
-							return <div className="flex aligncenter">
-								<Avatar label={initials} style={{ backgroundColor: 'var(--orange)', color: '#ffffff', width: '15%' }} image={epicture} shape="circle" />
-								<p className='ml-1 mb-0 table-body-styles'>{name}</p>
-							</div>;
-						}}></Column>
+						<Column header={t('tableTitleReported')}  field="name" body={({name, epicture}) => <>
+							<Avatar className="profile__photo text-upperCase" label={keepFirstLetters(name)} style={{ backgroundColor: 'var(--orange)', color: '#ffffff' }} image={epicture} shape="circle" />
+							{name}
+						</>}></Column>
 						<Column header={t('tableTitleStatus')}  body={({id, status}) => 
-							<Tag value={t(status)} severity={states[status]} />
+							<Tag value={t(status)} severity={status} />
 						}></Column>
-						<Column header={t('tableTitleAssignedTo')}  field="admin" body={({admin})=>{
-							return <span className='table-item__background'>{admin}</span>
-						}}></Column>
+						<Column header={t('tableTitleAssignedTo')}  field="admin" body={({aid, admin})=>
+							<span className='table-item__background'>{aid ? admin : t(admin) }</span>
+						}></Column>
 						<Column className="actions" header={null} body={({id, username, aid, oname, status, owner }) => <>
 						{aid === user.id && (
 							<Link className="button small green-earth" to={`/chat/${owner}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>

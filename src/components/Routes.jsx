@@ -79,6 +79,7 @@ const AppRoutes = () => {
         <Route path="/settings/password" element={<Password />} />
         <Route path="/settings/delete-account" element={<DeleteAccount />} />
         <Route path="/report/:type/:entityID" element={<CreateReport />} />
+        <Route path="/report/:type/:entityID/:username" element={<CreateReport />} />
       </>}
 
       {(user?.role == 'user') && <>
@@ -101,7 +102,8 @@ const AppRoutes = () => {
       {(user?.role == 'user' || user?.role == 'company') && <>
         <Route path="/company/:id" element={<Profile />} />
         <Route path="/offers/new" element={<OfferNew />} />
-        <Route path="/offers/" element={<Offers  />} />
+        <Route path="/offers/" element={<Offers />} />
+        <Route path="/offers/:offer" element={<Offers />} />
         <Route path="/chat/:contact/:offer" element={<Chat />} />
         <Route path="/map" element={<Map />} />
       </>}
@@ -115,6 +117,7 @@ const AppRoutes = () => {
        {user?.role == 'company' && <>
         <Route path="/profile" element={<Profile />} />
         <Route path="/offers/search" element={<Offers type="search" />} />
+        <Route path="/offers/search/:offer" element={<Offers type="search" />} />
         <Route path="/settings/edit" element={<RegisterCompany />} />
        </>}
        {user?.role == 'vendor' && <>

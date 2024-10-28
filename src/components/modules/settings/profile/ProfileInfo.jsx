@@ -86,7 +86,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
           <Button className="small green-earth outline" onClick={sendRecover}><span><FontAwesomeIcon icon={faKey} /></span> {t('adminRecoverBtnText')}</Button>
         </>}
         {!same && !admin && 
-          <Link className="button small red-state outline hasTooltip" to={`/report/user/${user?.username}/`} data-pr-tooltip={t('reportUserBtnText')}><FontAwesomeIcon icon={faFlag} /></Link>
+          <Link className="button small red-state outline hasTooltip" to={`/report/${user?.role}/${user?.username}/`} data-pr-tooltip={t('reportUserBtnText')}><FontAwesomeIcon icon={faFlag} /></Link>
         }
       </>}
     </div>

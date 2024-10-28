@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { Column } from 'primereact/column'
 import { useEffect, useState } from 'react'
@@ -20,7 +20,9 @@ import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import './style.sass'
 
 const Offers = ({type}) => {
+	const { offer } = useParams()
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 	const [detail, setDetail] = useState({})
 	const [reset, setReset] = useState(false)
 	const [offers, setOffers] = useState({data: []})
@@ -31,9 +33,11 @@ const Offers = ({type}) => {
 	const [t] = useTranslation('translation', { keyPrefix: 'offers.offersList' })
 	const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
 
-	const hidePopup = () => setDetail({...detail, show: false})
+	const hidePopup = () => {
+		navigate(`/offers${type == 'search' ? '/search' : ''}/`)
+	}
 	const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
-	const getUserDetail = async id => {
+	const getOfferDetail = async id => {
 		const _offer = await getOffer(id)
 		setDetail({..._offer, show: true})
 	}
@@ -59,7 +63,9 @@ const Offers = ({type}) => {
 	}
 	const renderHeader = () => {
 		return <div className="filters">
-			<Link to={'/offers/' + (type != 'search' ? 'search/' : '')} style={{margin: '0 auto 0 0'}}>{type != 'search' ? t('mainTitle') : t('ownerTitle')}</Link>
+			{user?.role == 'company' && 
+				<Link to={'/offers/' + (type != 'search' ? 'search/' : '')} style={{margin: '0 auto 0 0'}}>{type != 'search' ? t('mainTitle') : t('ownerTitle')}</Link>
+			}
 			<MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="label" placeholder={t('selectInputPlaceHolder')} />
 			<InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
 			<Button className="small dark-blue" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
@@ -91,10 +97,14 @@ const Offers = ({type}) => {
 	useEffect(() => {
 		callOffers()
 		setReset(false)
-	}, [page, reset])
+	}, [page, reset, type])
 	useEffect(() => {
 		dispatch(setHeader('user'))
-	}, [user])
+		if(offer)
+			getOfferDetail(offer)
+		else
+			setDetail({...detail, show: false})
+	}, [user, offer])
 	
 	return <div className="layout">
 		<img className="layout__background" src="/assets/full-width.svg" />
@@ -137,10 +147,10 @@ const Offers = ({type}) => {
 					<Column header={t('tableColumnPublishedDateTitle')} body={({date}) => date.split(' ')[0]}></Column>
 					{type != 'search' && 
 						<Column className="actions" header={null} body={offer => 
-							<Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>}>
+							<Link className="button small dark-blue" to={`/offers${type == 'search' ? '/search' : ''}/${offer?.id}/`}><FontAwesomeIcon icon={faSearch} /></Link>}>
 						</Column> || 
 						<Column className="actions" header={null} body={offer => <>
-							<Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>
+							<Link className="button small dark-blue" to={`/offers${type == 'search' ? '/search' : ''}/${offer?.id}/`}><FontAwesomeIcon icon={faSearch} /></Link>
 							{offer.status == 0 && 
 								<Link className="button small green-earth" to={`/chat/${offer.username}/${offer.id}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> || 
 								<Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>

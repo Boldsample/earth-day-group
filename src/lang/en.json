@@ -292,9 +292,12 @@
       "noProductsFoundText": "There are no products that meet the filter criteria."
     },
     "reportInfo": {
-      "NOTA": "AQUI HAY ALGUNOS TEXTOS DE VARIABLES QUE VIENEN DE LA BDS QUE SE VISUALIZAN EN INGLÉS --REVISAR",
       "mainTitle": "Report Detail",
-      "reportedEntity": "Reported",
+      "view": "View",
+      "reporteduser": "Reported user",
+      "reportedoffer": "Reported offer",
+      "reportedproduct": "Reported product",
+      "reportedpet": "Reported pet",
       "ownerTitle": "Owner:",
       "subjectTitle": "Subject:",
       "statusTitle": "Staus:",
@@ -372,7 +375,6 @@
       "lackOfCertificationReportDropDownOption": "Lack Of Certification"
     },
     "report": {
-      "SelectInputPlaceHolder": "Select a type",
       "inputSearchPlaceHolder": "Keyword Search",
       "mainTitle": "Report List",
       "tableTitleType": "Type",
@@ -380,14 +382,17 @@
       "tableTitleSubject": "Subject",
       "tableTitleStatus": "Status",
       "tableTitleAssignedTo": "Assigned to",
-      "all": "All",
+      "all": "All types",
       "allUsers": "Users",
       "allOffers": "Offers",
       "allProducts": "Products",
       "allPets": "Pets",
-      "In Process": "In Process",
-      "Pending": "Pending",
-      "Resolved": "Resolved",
+	  "allStatuses": "All statuses",
+      "info": "In Process",
+      "danger": "Pending",
+      "success": "Resolved",
+	  "allAdmins": "All reports",
+	  "unassigned": "Unassigned",
       "noProductsFoundText": "There are no reports that meet the filter criteria."
     },
     "usersList": {
@@ -623,7 +628,7 @@
       "createReportBtn": "Create Report",
       "ReportImagesTitle": "Attach Evidence",
       "reportCreatedthankyouPagetitle": "Thank you!",
-      "reportCreatedthankyouPagebuttonLabel": "Go back to dashboard",
+      "reportCreatedthankyouPagebuttonLabel": "Go back",
       "reportCreatedthankyouPagebodyText": "Your report has been submitted. We will be in touch soon to address your concerns."
     }
   },

@@ -98,8 +98,6 @@ const Chat = () => {
     if(report && !reportInfo)
       getReport(report).then(data => {
         setReportInfo(data)
-        if(data?.admin == 'Without answer' && userId)
-          updateReport({admin: userId}, {id: report})
       })
     if(offer && !offerInfo)
       getOffer(offer).then(data => setOfferInfo(data))

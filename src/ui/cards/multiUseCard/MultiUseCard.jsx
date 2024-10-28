@@ -18,6 +18,8 @@ const MultiUseCard = ({
   action = null,
 }) => {
   const [t] = useTranslation('translation', { keyPrefix: 'ui.cards.multiUseCard'})
+	const [tReport] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
+
   const renderCardContent = () => {
     switch (type) {
       case 'notification':
@@ -129,6 +131,13 @@ const MultiUseCard = ({
               || null}
             </div>) || <div className="pre-line">{data?.message}</div>
           }
+          {data?.type == 'report' && <div className="fullwidth mt-1 mb-1">
+            {data?.report_type === 'offer' && 
+              <Link className="button dark-blue" onClick={e => {e.preventDefault(); getUserDetail(data?.report_entity);}}>{tReport('view') + ' ' + tReport('reported'+data?.report_type).toLowerCase()}</Link>
+            || 
+              <Link className="button dark-blue" to={`/${data?.report_type == 'user' ? 'profile' : data?.report_type}/${data?.report_type == 'user' ? data?.report_owner : data?.report_entity}/`}>{tReport('view') + ' ' + tReport('reported'+data?.report_type).toLowerCase()}</Link>
+            }
+          </div>}
           <div className="date">{data?.date}</div>
         </div>
       case 'user':

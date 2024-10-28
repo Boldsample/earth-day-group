@@ -143,7 +143,6 @@ const OfferNew = () => {
             labelName={t('inputDropdownUnitLabel')}
             getFormErrorMessage={getFormErrorMessage}
             placeHolderText={t('inputDropdownUnitPlaceholderText')}
-			maxFractionDigits={watch('delivery_currency') == 'cop' ? 0 : 2}
             rules={{
               required: tGlobalErrors('requiredErrorMessage'),
             }}
@@ -158,6 +157,7 @@ const OfferNew = () => {
             getFormErrorMessage={getFormErrorMessage}
             labelName={t('inputNumberAskingPriceLabel')}
             placeHolderText={t('inputNumberAskingPricePlaceholderText')}
+			maxFractionDigits={watch('delivery_currency') == 'cop' ? 0 : 2}
             rules={{
               maxLength: {
                 value: 7,

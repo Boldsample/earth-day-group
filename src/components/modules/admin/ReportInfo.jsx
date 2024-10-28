@@ -14,7 +14,7 @@ import { useForm, Controller } from "react-hook-form"
 import { sendMessage } from "@services/chatServices"
 import { updateReport } from "@services/reportServices"
 import { updateUser } from "@services/userServices"
-import { updateOffer } from "@services/offersServices"
+import { getOffer, updateOffer } from "@services/offersServices"
 import { updatePet } from "@services/petServices"
 import { updateProduct } from "@services/productServices"
 import { Stepper } from 'primereact/stepper';
@@ -22,35 +22,40 @@ import { StepperPanel } from 'primereact/stepperpanel';
 import { InputSwitch } from "primereact/inputswitch"
 import { Message } from 'primereact/message';
 import { Tag } from 'primereact/tag'
+import OfferInfo from "../offers/OfferInfo"
 
 const ReportInfo = ({ show, report, onHide }) => {
-	const stepperRef = useRef(null); 
 	const navigate = useNavigate()
+	const stepperRef = useRef(null)
+	const [detail, setDetail] = useState({})
 	const user = useSelector((state) => state.users.userData)
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
 	const [tStatus] = useTranslation('translation', { keyPrefix: 'admin.report' })
-	const [tErrorMessages] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
 	const types = { 'user': 'User', 'product': 'Product', 'pet': 'Pet', 'offer': 'Offer' }
+	const [tErrorMessages] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const {
-		setValue,
 		watch,
 		control,
-		handleSubmit,
+		setValue,
 		setError,
 		clearErrors,
+		handleSubmit,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
 			message: "",
+			deleteElement: false,
+			reportResolved: false,
 			admin: user?.username,
 			user: report?.username,
-			deleteElement: false,
-			reportResolved: false
 		},
 	})
-	const message = watch('message')
-	const states = { 'In Process': 'info', 'Pending': 'danger', 'Resolved': 'success' }
+	const hidePopup = () => setDetail({...detail, show: false})
+	const getUserDetail = async id => {
+		const _offer = await getOffer(id)
+		setDetail({..._offer, show: true})
+	}
 	
 	useEffect(()=>{
 		clearErrors()
@@ -61,18 +66,16 @@ const ReportInfo = ({ show, report, onHide }) => {
 		setValue('reportResolved', false);
 		setValue('deleteElement', false);
 	
-		if(message ==  'negativeClosingCaseMessage'){
-			setValue('reportResolved', true);
-			setValue('deleteElement', true);
+		if(watch('message') ==  'negativeClosingCaseMessage'){
+			setValue('reportResolved', true)
+			setValue('deleteElement', true)
 		}
-		if( message ==  'positiveClosingCaseMessage'){
-			setValue('reportResolved', true);
-		}
-		if(message ==  "customCaseMessage"){
-			setValue('custom_message', "");
-		}else{
-			setValue('custom_message', t(message, {userName: report?.oname, reported:t(report?.type), reason:t(report?.subject )}));
-		}
+		if(watch('message') ==  'positiveClosingCaseMessage')
+			setValue('reportResolved', true)
+		if(watch('message') ==  "customCaseMessage")
+			setValue('custom_message', "")
+		else
+			setValue('custom_message', t(watch('message'), {userName: report?.oname, reported:t(report?.type), reason:t(report?.subject )}))
 		clearErrors()
 		
 	}, [watch('message')])
@@ -80,9 +83,9 @@ const ReportInfo = ({ show, report, onHide }) => {
 	const onSubmit = async data => {
 		const message = data?.message === data?.custom_message ? data?.message : data?.custom_message
 		if(data?.reportResolved == true){
-			await updateReport({admin: user?.id, status: 'Resolved'}, {id: report?.id})
+			await updateReport({admin: user?.id, status: 'success'}, {id: report?.id})
 			onHide(true)
-		}else if(await sendMessage({ message, incoming: user?.id, outgoing: report?.oid })){
+		}else if(await sendMessage({ message, incoming: user?.id, outgoing: report?.oid, type: 'report', offer: report?.id })){
 			if(data?.deleteElement && report?.type == 'user')
 				await updateUser({state: 2}, {id: report?.entity})
 			else if(data?.deleteElement && report?.type == 'product')
@@ -91,11 +94,12 @@ const ReportInfo = ({ show, report, onHide }) => {
 				await updatePet({state: 2}, {id: report?.entity})
 			else if(data?.deleteElement && report?.type == 'offer')
 				await updateOffer({state: 2}, {id: report?.entity})
-			await updateReport({admin: user?.id, status: 'In Process'}, {id: report?.id})
+			await updateReport({admin: user?.id, status: 'info'}, {id: report?.id})
 			navigate(`/chat/${report?.owner}/`)
 		}
 	}
-	return (
+	return <>
+		<OfferInfo type="full" show={detail.show} offer={detail} onHide={hidePopup}  />
 		<Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")} >
 		  <Stepper ref={stepperRef}>
 			<StepperPanel header={t("reportSummaryTitle")}>
@@ -113,61 +117,65 @@ const ReportInfo = ({ show, report, onHide }) => {
 				  </div>
 				)}
 				<div className="content">
-				  <h4>{t('mainTitle')}</h4>
-				  <div className="fullwidth mb-4" style={{ fontSize: '0.75rem' }}>
-					{report?.date}
-				  </div>
-				  <p>
-					<b>{t('reportedEntity')} {report?.type}:</b> <Link to={`/${report?.type}/${report?.entity}/`}>{report?.name}</Link>
-				  </p>
-				  {(report?.type === 'product' || report?.type === 'pet') && (
-					<p className="reported-by-styles">
-					  <b>{t('ownerTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.owner}/`}>{report?.oname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link>
+					<h4>{t('mainTitle')}</h4>
+					<div className="fullwidth mb-4" style={{ fontSize: '0.75rem' }}>
+						{report?.date}
+					</div>
+					{report?.type === 'offer' && <p>
+						<b>{t('reported'+report?.type)}:</b> <Link onClick={e => {e.preventDefault(); getUserDetail(report?.entity);}}>{report?.name}</Link>
+					</p>}
+					{report?.type !== 'offer' && <p>
+						<b>{t('reported'+report?.type)}:</b> <Link to={`/${report?.type == 'user' ? 'profile' : report?.type}/${report?.type == 'user' ? report?.owner : report?.entity}/`}>{report?.name}</Link>
+					</p>}
+					{report?.type !== 'user' && <p className="reported-by-styles">
+						<b>{t('ownerTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.owner}/`}>{report?.oname}</Link>
+					</p>}
+					<p>
+						<b>{t('statusTitle')}</b> <Tag value={tStatus(report?.status)} severity={report?.status} />
 					</p>
-				  )}
-				  <p>
-					<b>{t('statusTitle')}</b> <Tag value={tStatus(report?.status)} severity={states[report?.status]} />
-				  </p>
-				  <p>
-					<b>{t('subjectTitle')}</b> {t(report?.subject)}
-				  </p>
-				  <p>
-					<b>{t('descriptionTitle')}</b> {report?.description}
-				  </p>
-				  <div className="reported-by-styles">
-					<b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname} <span className="text-dark-blue"><FontAwesomeIcon icon={faPaperPlane} /></span></Link>
-				  </div>
-				  
-				  <div className="mt-3 fullwidth">
-					<Link className="button small dark-blue in-line-flex" to={`/${report?.type}/${report?.entity}/`}>
-					  <FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {report?.type}</span>
-					</Link>
-					{
-					report?.status === "Resolved" && report?.aid === user?.id ? (
-						<Link className="button green-earth small" to={`/chat/${report?.owner}`}>
-						<FontAwesomeIcon icon={faComments} /> <span>{t("goToChatBtn")}</span>
-						</Link>
-					) : report?.aid === null ? (
-						<Button
-						icon={<FontAwesomeIcon icon={faFileImport} />}
-						className="button small"
-						label={t("handleReportBtn")}
-						onClick={() => stepperRef.current.nextCallback()}
-						/>
-					) : report?.aid === user?.id ? (
-						<Button
-						icon={<FontAwesomeIcon icon={faFileImport} />}
-						className="button small"
-						label={t("handleReportBtn")}
-						onClick={() => stepperRef.current.nextCallback()}
-						/>
-					) : null
-					}
-				  </div>
+					<p>
+						<b>{t('subjectTitle')}</b> {t(report?.subject)}
+					</p>
+					<p>
+						<b>{t('descriptionTitle')}</b> {report?.description}
+					</p>
+					<div className="reported-by-styles">
+						<b>{t('reportedByTitle')}</b> <Link className="reported-by-styles" to={`/profile/${report?.username}/`}>{report?.uname}</Link>
+					</div>
+					
+					<div className="mt-3 fullwidth">
+						{report?.type === 'offer' && 
+							<Link className="button small dark-blue in-line-flex" onClick={e => {e.preventDefault(); getUserDetail(report?.entity);}}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {t(report?.type)}</span></Link>
+						}
+						{report?.type !== 'offer' && 
+							<Link className="button small dark-blue in-line-flex" to={`/${report?.type == 'user' ? 'profile' : report?.type}/${report?.type == 'user' ? report?.owner : report?.entity}/`}><FontAwesomeIcon icon={faSearch} /> <span>{t('viewBtn')} {t(report?.type)}</span></Link>
+						}
+						{
+						report?.status === "success" && report?.aid === user?.id ? (
+							<Link className="button green-earth small" to={`/chat/${report?.owner}`}>
+							<FontAwesomeIcon icon={faComments} /> <span>{t("goToChatBtn")}</span>
+							</Link>
+						) : report?.aid === null ? (
+							<Button
+							icon={<FontAwesomeIcon icon={faFileImport} />}
+							className="button small"
+							label={t("handleReportBtn")}
+							onClick={() => stepperRef.current.nextCallback()}
+							/>
+						) : report?.aid === user?.id ? (
+							<Button
+							icon={<FontAwesomeIcon icon={faFileImport} />}
+							className="button small"
+							label={t("handleReportBtn")}
+							onClick={() => stepperRef.current.nextCallback()}
+							/>
+						) : null
+						}
+					</div>
 				</div>
 			  </div>
 			</StepperPanel>
-			{report?.status !== 'Resolved' && (!report?.aid || report?.aid === user?.id) && (
+			{report?.status !== 'success' && (!report?.aid || report?.aid === user?.id) && (
 				<StepperPanel header={t("manageReportTitle")}>
 				<div className="panel-2">
 					<div className="flex-column">
@@ -251,13 +259,13 @@ const ReportInfo = ({ show, report, onHide }) => {
 						</div>
 						<div className="registerInput__container-x1">
 						<TextAreaInput
-							rowCount={message ==  "customCaseMessage" ? 8 : 18}
 							control={control}
 							isRequired={true}
 							nameInput="custom_message"
-							labelName={t("messagePreviewTextAreaTitle")}
 							getFormErrorMessage={getFormErrorMessage}
+							labelName={t("messagePreviewTextAreaTitle")}
 							placeHolderText={t( "messagePreviewTextAreaPlaceHolder")}
+							rowCount={watch('message') == "customCaseMessage" ? 8 : 18}
 							rules={{
 							maxLength: {
 								value: 1000,
@@ -287,7 +295,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 				)}
 		  </Stepper>
 		</Dialog>
-	  );
+	</>;
 }
 
 export default ReportInfo

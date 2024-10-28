@@ -512,8 +512,10 @@ button, .button
   justify-content: center
   text-align: center
 .text-right
+  justify-content: flex-end
   text-align: right
 .text-left
+  justify-content: flex-start
   text-align: left
 .text-xs
   font-size: 0.75rem
@@ -584,7 +586,9 @@ button, .button
         height: 2.5rem
         line-height: 1em
         margin-right: 0.5rem
-        min-width: 11.875rem
+        .p-dropdown-label
+          margin-right: 0
+          padding: 0.75rem 0 0.75rem 0.75rem
       button
         font-size: 0.9rem
         height: 2.5rem

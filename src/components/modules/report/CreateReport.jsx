@@ -19,9 +19,22 @@ const CreateReport = () => {
   const [entity, setEntity] = useState([])
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
+  const article = ['offer', 'pet'].some(t => t == type) ? 'la' : 'el'
   const [t] = useTranslation('translation', { keyPrefix: 'report.createReport' })
-  const [tDropDown] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [tDropDown] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
+  const simpleType = ['offer', 'product', 'pet'].some(t => t == type) ? type : 'user'
+  const returnURL = {
+    user: `/chat/${entityID}/`,
+    company: `/company/${entityID}/`,
+    vendor: `/vendor/${entityID}/`,
+    ngo: `/ngo/${entityID}/`,
+    shelter: `/shelter/${entityID}/`,
+    social: `/social/${entityID}/`,
+    offer: `/offers/${entityID}/`,
+    product: `/${type}/${entityID}/`,
+    pet: `/${type}/${entityID}/`
+  }
   const {
     watch,
     control,
@@ -30,11 +43,11 @@ const CreateReport = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      type: type,
       images: [],
       subject: "",
       user: user?.id,
       description: "",
+      type: simpleType,
       entity: entityID,
     },
   })
@@ -67,7 +80,7 @@ const CreateReport = () => {
     if(response.id){
       dispatch(updateThankyou({
         title: t('reportCreatedthankyouPagetitle'),
-        link: `/dashboard/`,
+        link: returnURL[type],
         background: "image-1.svg",
         button_label: t('reportCreatedthankyouPagebuttonLabel'),
         content: t('reportCreatedthankyouPagebodyText'),
@@ -79,9 +92,11 @@ const CreateReport = () => {
   useEffect(() => {
       dispatch(setHeader("user"));
       if(entity?.length <= 0)
-        getEntity(type, entityID).then(data => {
-          setValue('entity', data[0].id)
-          setEntity(data)
+        getEntity(simpleType, entityID).then(data => {
+          if(data){
+            setValue('entity', data[0]?.id)
+            setEntity(data)
+          }
         })
   }, []);
 
@@ -100,7 +115,7 @@ const CreateReport = () => {
             labelName={t('inputDropdownSubjectLabel')}
             getFormErrorMessage={getFormErrorMessage}
             placeHolderText={t('inputDropdownSubjectPlaceholderText')}
-            options={reasons[type].map(reason => ({label: tDropDown(reason), value: reason})) }
+            options={reasons[simpleType]?.map(reason => ({label: tDropDown(reason), value: reason})) }
             rules={{
               required: tGlobal(`requiredErrorMessage`),
             }} />
@@ -113,10 +128,9 @@ const CreateReport = () => {
             isRequired={true}
             nameInput="entity"
             optionLabel="name"
-            // labelName={`Name of ${type}`}
-            labelName={t(`inputDropdownEntityLabel`, {userType: type})}
-            placeHolderText={t('inputDropdownSubjectLabel')}
             getFormErrorMessage={getFormErrorMessage}
+            placeHolderText={t('inputDropdownSubjectLabel')}
+            labelName={t(`inputDropdownEntityLabel`, {article: article, userType: tDropDown(simpleType)})}
             rules={{
               required: tGlobal(`requiredErrorMessage`),
             }} />
@@ -128,9 +142,8 @@ const CreateReport = () => {
             isRequired={false}
             nameInput="description"
             label="Describe your report*"
-            // placeHolderText={`Tell why you want to report this ${type}.`}
-            placeHolderText={t(`textAreaReportDescriptionPlaceholder`, {userType: type})}
             getFormErrorMessage={getFormErrorMessage}
+            placeHolderText={t(`textAreaReportDescriptionPlaceholder`, {article: article, userType: tDropDown(simpleType)})}
             rules={{
               maxLength: {
                 value: 1000,

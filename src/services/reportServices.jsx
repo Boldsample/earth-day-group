@@ -59,6 +59,6 @@ export const getReports = async (filter, page) => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
-  const { data } = await API.get(`/get/reports&filter=${filterStr}&page=${page.page}&rows=${page.rows}`)
+  const { data } = await API.get(`/get/reports&filter=${filterStr}&page=${page.first}&rows=${page.rows}`)
   return {total: data.total, data: data.data, card: 'report'};
 }
