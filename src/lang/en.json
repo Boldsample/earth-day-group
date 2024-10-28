@@ -62,6 +62,9 @@
     "adSubject": "I want to advertise my business",
     "adMessage": "I want to promote my business on the Earth Day Group app.",
     "contact": "Conctact us",
+	"currency": "Currency",
+	"cop": "COP $ (Colombian peso)",
+	"usd": "USD $ (US Dolar)",
     "formErrors": {
       "acceptCheckboxErrorMessage": "You are required to accept the terms and conditions.",
       "acceptCheckboxErrorMessage2": "You are required to accept the privacy policy.",
@@ -500,12 +503,13 @@
         "inputAgeTitleText": "Age",
         "agePlaceholderText": "Age",
         "inputWeightTitleText": "Weight",
-        "weightPlaceholderText": "Weight (Kilos)",
         "textAreaPetDescriptionTitle": "Pet Details",
         "petDescriptionPlaceholder": "Tell us about your pet.",
         "petImageUploaderTitle": "Add Pet Images",
         "submitPetbtnText": "Create pet",
-        "updatePetbtnText": "Update pet"
+        "updatePetbtnText": "Update pet",
+		"months": "Mes(es)",
+		"years": "Año(s)"
       },
       "pet": {
         "petYearsOld": "Years old",
@@ -772,8 +776,6 @@
   "register": {
     "registerCompany": {
       "companyDetailedForm": {
-        "dropDownKiloOption": "Kilo",
-        "dropDownPoundOption": "Pound",
         "formDisclaimerTitle": "This form is optional and can be filled out later. If you’d like to skip it for now, just click 'Sign Up.'",
         "materialInputsTitle": "Recycable Material",
         "selectMaterialLabel": "Material",

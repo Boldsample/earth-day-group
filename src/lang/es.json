@@ -62,6 +62,9 @@
     "adSubject": "Quiero pautar mi empresa",
     "adMessage": "Deseo promocionar mi empresa en la aplicación de Earth Day Group.",
     "contact": "Conctáctanos",
+	"currency": "Moneda",
+	"cop": "COP $ (Peso colombiano)",
+	"usd": "USD $ (Dolar estadounidense)",
     "formErrors": {
       "acceptCheckboxErrorMessage": "Es obligatorio aceptar los términos y condiciones.",
       "acceptCheckboxErrorMessage2": "Es obligatorio aceptar la política de privacidad.",
@@ -500,12 +503,13 @@
         "inputAgeTitleText": "Edad",
         "agePlaceholderText": "Edad",
         "inputWeightTitleText": "Peso",
-        "weightPlaceholderText": "Peso (Kilos)",
         "textAreaPetDescriptionTitle": "Detalles de la Mascota",
         "petDescriptionPlaceholder": "Cuéntanos sobre tu mascota.",
         "petImageUploaderTitle": "Añade Imágenes de la Mascota",
         "submitPetbtnText": "Crear mascota",
-        "updatePetbtnText": "Actualizar mascota"
+        "updatePetbtnText": "Actualizar mascota",
+		"months": "Month(s)",
+		"years": "Year(s)"
       },
       "pet": {
         "petYearsOld": "años de edad",
@@ -773,8 +777,6 @@
   "register": {
     "registerCompany": {
       "companyDetailedForm": {
-        "dropDownKiloOption": "Kilo",
-        "dropDownPoundOption": "Libras",
         "formDisclaimerTitle": "Este formulario es opcional y se puede completar más tarde. Si prefieres omitirlo, haz clic en 'Registrarse'.",
         "materialInputsTitle": "Material Reciclable",
         "selectMaterialLabel": "Material",

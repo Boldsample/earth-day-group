@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useForm } from "react-hook-form"
-import { Button } from "primereact/button"
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faInstagram, faTiktok, faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons"
-
-import { TextInput } from '@ui/forms'
 
 import './footer.sass'
 

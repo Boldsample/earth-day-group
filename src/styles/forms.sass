@@ -29,6 +29,7 @@
 .input__wrapper
   width: 100%
 .p-field
+  align-content: flex-end
   width: 100%
   &.noLabel label
     color: transparent
@@ -44,7 +45,7 @@
     border: 1px solid var(--grey)
     border-radius: 0.5rem
     font-size: 0.75rem
-    padding: 1rem 1.375rem
+    padding: 1rem
     width: 100%
   .p-calendar
     width: 100%
@@ -60,7 +61,7 @@
     .p-dropdown-label
       font-size: 0.75rem
       line-height: 1.2em
-      padding: 1rem 1.375rem
+      padding: 1rem 0 1rem 1rem
       width: 100%
   .p-password
     display: block
@@ -113,11 +114,22 @@
 .registerInput__container-x2
   display: flex
   flex-direction: row
+  flex-wrap: wrap
   margin: 1.25rem 0
-  gap: 0.9375rem
+  gap: 0 0.9375rem
   width: 100%
-  & > .p-field, & > .input__wrapper
+  & > .p-field, & > .input__wrapper, & > button, & > .button
+    width: calc((100% - 0.9375rem) / 2)
+  .registerInput__container-age, .registerInput__container-weight
+    display: flex
+    flex-direction: row
+    margin: 0
+    gap: 0.9375rem
     width: 50%
+    .p-field:first-child
+      width: 40%
+    .p-field:last-child
+      width: 60%
 .registerInput__container-x1
   display: flex
   flex-direction: column

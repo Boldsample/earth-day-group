@@ -1,11 +1,9 @@
-import { Controller } from "react-hook-form";
-import { InputNumber } from "primereact/inputnumber";
+import { Controller } from "react-hook-form"
+import { useTranslation } from "react-i18next"
+import { InputNumber } from "primereact/inputnumber"
 
 const NumberInput = ({
-  label,
   rules,
-  width,
-  height,
   control,
   disabled,
   inputRef,
@@ -17,31 +15,28 @@ const NumberInput = ({
   showLabel = true,
   getFormErrorMessage,
   placeHolderText = "",
+  maxFractionDigits = 2,
 }) => {
-  const inputWidth = {
-    width: width,
-    height: height,
-  };
+	const { i18n } = useTranslation('translation')
   const renderInput = () => (
     <>
       <Controller
-        rules={rules}
+        //rules={rules}
         name={nameInput}
         control={control}
         render={({ field }) => <InputNumber
           mode={mode}
-          locale="en-US"
-          currency="USD"
           ref={inputRef}
           id={field.name}
-          style={inputWidth}
           disabled={disabled}
           onBlur={field.onBlur}
           maxLength={maxLength}
           value={field.value || null}
           placeholder={placeHolderText}
-          useGrouping={mode != 'decimal'}
-          onValueChange={(e) => field.onChange(e)} />
+          maxFractionDigits={maxFractionDigits}
+          onValueChange={(e) => field.onChange(e)}
+          currency={i18n.language == 'es' ? 'COP' : 'USD'}
+          locale={i18n.language == 'es' ? 'es-CO' : 'en-US'} />
         } />
       {getFormErrorMessage(nameInput)}
     </>

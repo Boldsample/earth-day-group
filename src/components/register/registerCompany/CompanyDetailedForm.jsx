@@ -19,10 +19,10 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
   const numberInput = useRef(null)
   const { username } = useParams()
   const [sending, setSending] = useState(false)
-  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
   const [tMaterial] = useTranslation('translation', {keyPrefix: 'materials'})
-  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
-  const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyDetailedForm'})
+  const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [t, i18n] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyDetailedForm'})
   const {
     reset,
     watch,
@@ -35,6 +35,7 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
       unit: "",
       materials: "",
       unit_price: "",
+      currency: i18n.language == 'es' ? 'cop' : 'usd',
     },
   })
 
@@ -44,17 +45,18 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const createMaterial = () => {
     let _recyclableMaterials = [...user.materials]
-    const inputValue = getValues(["materials", "unit", "unit_price"])
+    const inputValue = getValues(["materials", "unit", "unit_price", "currency"])
     let selectedMaterial = {
       type: inputValue[0],
       unit: inputValue[1],
-      price: inputValue[2]
+      price: inputValue[2],
+      currency: inputValue[3]
     }
     const duplicateIndex = _recyclableMaterials.findIndex(material => material.type == inputValue[0])
     if(duplicateIndex != -1){
       _recyclableMaterials = _recyclableMaterials.map((material, index) => {
         if(index === duplicateIndex)
-          return { ...material, unit: inputValue[1], price: inputValue[2] }
+          return { ...material, unit: inputValue[1], price: inputValue[2], currency: inputValue[3] }
         return material
       })
     }else
@@ -101,20 +103,20 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
       dispatch(getUserData(response?.id))
     if(data?.id && response?.id){
       dispatch(updateThankyou({
-        title: tGlobal2('updateUserTitleThankYouPage'),
+        title: tGlobal('updateUserTitleThankYouPage'),
         link: username ? '/dashboard/' : '/settings/profile/',
         background: "image-1.svg",
-        button_label: username ? tGlobal2('updateUserBtnLabelThankYouPage') : tGlobal2('updateUserBtnLabelThankYouPage2'),
-        content: tGlobal2('updateUsercontentText'),
+        button_label: username ? tGlobal('updateUserBtnLabelThankYouPage') : tGlobal('updateUserBtnLabelThankYouPage2'),
+        content: tGlobal('updateUsercontentText'),
       }))
       navigate('/thankyou/')
     }else if(response?.id){
       dispatch(updateThankyou({
-        title: tGlobal2('createUserTitleThankYouPage'),
+        title: tGlobal('createUserTitleThankYouPage'),
         link: "/login/",
         background: "image-1.svg",
-        button_label: tGlobal2('createUserBtnLabelThankYouPage'),
-        content: tGlobal2('newUserContentText'),
+        button_label: tGlobal('createUserBtnLabelThankYouPage'),
+        content: tGlobal('newUserContentText'),
       }))
       navigate('/thankyou/')
     }else{
@@ -132,7 +134,6 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
         <DropDownInput
           isEdit={true}
           control={control}
-          showLabel={false}
           isRequired={true}
           optionLabel="label"
           optionValue="value"
@@ -151,14 +152,13 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
             }))
           }))}
           rules={{
-            required: tGlobal(`requiredErrorMessage`),
+            required: tGlobalErrors(`requiredErrorMessage`),
           }} />
         <DropDownInput
           className=""
           isEdit={true}
           nameInput="unit"
           control={control}
-          showLabel={false}
           isRequired={true}
           optionLabel="label"
           optionValue="value"
@@ -167,37 +167,57 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
           placeHolderText={t('selectUnitPlaceHolder')}
           options={materials?.flatMap(category => category?.items)?.find(item => item.label === watch('materials'))?.units?.map(unit => ({label: tMaterial(unit), value: unit})) || []}
           rules={{
-            required: tGlobal(`requiredErrorMessage`),
+            required: tGlobalErrors(`requiredErrorMessage`),
           }} />
       </div>
       <div className="registerInput__container-x2">
         <NumberInput
+          mode="currency"
           disabled={false}
           control={control}
-          showLabel={false}
           isRequired={true}
           inputRef={numberInput}
           nameInput="unit_price"
-          label={t('addPricelLabel')}
+          labelName={t('addPricelLabel')}
           getFormErrorMessage={getFormErrorMessage}
           placeHolderText={t('addPricePlaceHolder')}
+          maxFractionDigits={watch('currency') == 'cop' ? 0 : 2}
           rules={{
             maxLength: {
               value: 3,
-              message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 3}),
+              message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 3}),
             },
-            required: tGlobal(`requiredErrorMessage`),
+            required: tGlobalErrors(`requiredErrorMessage`),
             pattern: {
               value: /^\S/,
-              message: tGlobal('patternErrorMessage'),
+              message: tGlobalErrors('patternErrorMessage'),
             },
           }} />
+        <DropDownInput
+          isEdit={true}
+          control={control}
+          isRequired={true}
+          optionLabel="label"
+          optionValue="value"
+          nameInput="currency"
+          labelName={tGlobal('currency')}
+          placeHolderText={tGlobal('currency')}
+          getFormErrorMessage={getFormErrorMessage}
+          rules={{
+            required: tGlobalErrors('requiredErrorMessage'),
+          }}
+          options={[
+            {label: tGlobal('cop'), value: 'cop'},
+            {label: tGlobal('usd'), value: 'usd'}
+          ]} />
+      </div>
+      <div className="registerInput__container-x2">
         <Button
           name="add"
-          label={t('addMaterialBtnText')}
           type="submit"
+          label={t('addMaterialBtnText')}
           style={{ paddingLeft: "1.375rem" }}
-          className="green-earth fullwidth text-left" />
+          className="green-earth text-left" />
       </div>
     </form>
     <div className="materialsCard__grid">
@@ -207,6 +227,7 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
           unit={material?.unit}
           price={material?.price}
           material={material.type}
+          currency={material?.currency}
           removeMaterial={removeMaterial} />
       )}
     </div>

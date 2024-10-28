@@ -11,7 +11,7 @@ import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
 import { createUser, getUser, updateUser } from "@services/userServices"
-import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
+import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput, DropDownInput } from "@ui/forms"
 
 import "./style.sass"
 
@@ -21,9 +21,9 @@ const RegisterVendor = ({create = false}) => {
 	const { username } = useParams()
 	const [sending, setSending] = useState(false)
 	const user = useSelector((state) => state.users.userData)
-	const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
-	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
-  const [t] = useTranslation('translation', { keyPrefix: 'register.registerVendor'})
+	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+	const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [t, i18n] = useTranslation('translation', { keyPrefix: 'register.registerVendor'})
   const {
     watch,
     reset,
@@ -54,6 +54,7 @@ const RegisterVendor = ({create = false}) => {
       pick_up_from_home: 0,
       delivery_available: 0,
       password_confirmation: "",
+      currency: i18n.language == 'es' ? 'cop' : 'usd'
     },
   })
 
@@ -64,8 +65,8 @@ const RegisterVendor = ({create = false}) => {
     setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
   }
   const radioData = [
-    { name: tGlobal2('yes'), value: 1 },
-    { name: tGlobal2('no'), value: 0 },
+    { name: tGlobal('yes'), value: 1 },
+    { name: tGlobal('no'), value: 0 },
   ]
   
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
@@ -83,20 +84,20 @@ const RegisterVendor = ({create = false}) => {
       dispatch(getUserData(response?.id))
     if(data?.id && response?.id){
       dispatch(updateThankyou({
-        title: tGlobal2('updateUserTitleThankYouPage'),
+        title: tGlobal('updateUserTitleThankYouPage'),
         link: username ? '/dashboard/' : '/settings/profile/',
         background: "image-1.svg",
-        button_label: username ? tGlobal2('updateUserBtnLabelThankYouPage') : tGlobal2('updateUserBtnLabelThankYouPage2'),
-        content: tGlobal2('updateUsercontentText'),
+        button_label: username ? tGlobal('updateUserBtnLabelThankYouPage') : tGlobal('updateUserBtnLabelThankYouPage2'),
+        content: tGlobal('updateUsercontentText'),
       }))
       navigate('/thankyou/')
     }else if(response?.id){
       dispatch(updateThankyou({
-        title: tGlobal2('createUserTitleThankYouPage'),
+        title: tGlobal('createUserTitleThankYouPage'),
         link: "/login/",
         background: "image-1.svg",
-        button_label: tGlobal2('createUserBtnLabelThankYouPage'),
-        content: tGlobal2('newUserContentText'),
+        button_label: tGlobal('createUserBtnLabelThankYouPage'),
+        content: tGlobal('newUserContentText'),
       }))
       navigate('/thankyou/')
     }else{
@@ -150,17 +151,17 @@ const RegisterVendor = ({create = false}) => {
             nameInput="username"
             disabled={watch('id')}
             getFormErrorMessage={getFormErrorMessage}
-            labelName={tGlobal2('userNameInputLabel')}
-            placeHolderText={tGlobal2('userNamePlaceHolderText')}
+            labelName={tGlobal('userNameInputLabel')}
+            placeHolderText={tGlobal('userNamePlaceHolderText')}
             rules={{
               maxLength: {
                 value: 80,
-                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 80}),
+                message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 80}),
               },
-              required: tGlobal(`requiredErrorMessage`),
+              required: tGlobalErrors(`requiredErrorMessage`),
               pattern: {
                 value: /^[a-zA-Z_]+$/,
-                message: tGlobal('lettersandUnderscoreOnlyErrorMessage'),
+                message: tGlobalErrors('lettersandUnderscoreOnlyErrorMessage'),
               },
             }} />
           <TextInput
@@ -168,17 +169,17 @@ const RegisterVendor = ({create = false}) => {
             nameInput="email"
             isRequired={true}
             getFormErrorMessage={getFormErrorMessage}
-            labelName={tGlobal2('userEmailInputLabel')}
-            placeHolderText={tGlobal2('userEmailPlaceHolderText')}
+            labelName={tGlobal('userEmailInputLabel')}
+            placeHolderText={tGlobal('userEmailPlaceHolderText')}
             rules={{
               maxLength: {
                 value: 100,
-                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
+                message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 100}),
               },
-              required: tGlobal(`requiredErrorMessage`),
+              required: tGlobalErrors(`requiredErrorMessage`),
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: tGlobal('validEmailAddressErrorMessage'),
+                message: tGlobalErrors('validEmailAddressErrorMessage'),
               },
             }} />
         </div>
@@ -193,12 +194,12 @@ const RegisterVendor = ({create = false}) => {
             rules={{
               maxLength: {
                 value: 100,
-                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
+                message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 100}),
               },
-              required: tGlobal(`requiredErrorMessage`),
+              required: tGlobalErrors(`requiredErrorMessage`),
               pattern: {
                 value: /^\S/,
-                message: tGlobal('patternErrorMessage'),
+                message: tGlobalErrors('patternErrorMessage'),
               },
             }} />
           <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
@@ -208,14 +209,14 @@ const RegisterVendor = ({create = false}) => {
               autocomplete="off"
               nameInput="address"
               getFormErrorMessage={getFormErrorMessage}
-              labelName={tGlobal2('userAddressInputLabel')}
-              placeHolderText={tGlobal2('userAddressPlaceHolderText')}
+              labelName={tGlobal('userAddressInputLabel')}
+              placeHolderText={tGlobal('userAddressPlaceHolderText')}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
-                required: tGlobal(`requiredErrorMessage`),
+                required: tGlobalErrors(`requiredErrorMessage`),
                 pattern: {
                   value: /^\S/,
-                  message: tGlobal('patternErrorMessage'),
+                  message: tGlobalErrors('patternErrorMessage'),
                 },
               }} />
           </Autocomplete>
@@ -226,16 +227,16 @@ const RegisterVendor = ({create = false}) => {
             isRequired={true}
             nameInput="website"
             getFormErrorMessage={getFormErrorMessage}
-            labelName={tGlobal2('userWebsiteInputLabel')}
-            placeHolderText={tGlobal2('userWebsitePlaceHolderText')}
+            labelName={tGlobal('userWebsiteInputLabel')}
+            placeHolderText={tGlobal('userWebsitePlaceHolderText')}
             rules={{
               maxLength: {
                 value: 100,
-                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
+                message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 100}),
               },
               pattern: {
                 value: /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?(\/[a-zA-Z0-9-_?=&]+)?$/,
-                message: tGlobal('invalidWebAddressErrorMessage'),
+                message: tGlobalErrors('invalidWebAddressErrorMessage'),
               },
             }} />
           <NumberInput
@@ -243,65 +244,79 @@ const RegisterVendor = ({create = false}) => {
             nameInput="phone"
             isRequired={true}
             getFormErrorMessage={getFormErrorMessage}
-            labelName={tGlobal2('userPhoneNumberInputLabel')}
-            placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}
+            labelName={tGlobal('userPhoneNumberInputLabel')}
+            placeHolderText={tGlobal('userPhoneNumberPlaceHolderText')}
             rules={{
               maxLength: {
                 value: 10,
-                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 10}),
+                message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 10}),
               },
-              required: tGlobal(`requiredErrorMessage`),
+              required: tGlobalErrors(`requiredErrorMessage`),
               pattern: {
                 value: /^[0-9+]+$/,
-                message: tGlobal('validPhoneErrorMessage'),
+                message: tGlobalErrors('validPhoneErrorMessage'),
               },
             }} />
         </div>
         <div className="registerInput__container-x2">
-          <div className="fullwidth">
-            <RadioInput
-              data={radioData}
+          <RadioInput
+            data={radioData}
+            control={control}
+            isRequired={true}
+            labelName={t('deliveryLabel')}
+            nameInput="delivery_available"
+            rules={{
+              required: true,
+            }} />
+          <RadioInput
+            data={radioData}
+            showLabel={true}
+            control={control}
+            isRequired={true}
+            nameInput="pick_up_from_home"
+            labelName={t('selfPickUpLabel')}
+            rules={{
+              required: true,
+            }} />
+          {!!watch('delivery_available') && <>
+            <NumberInput
+              mode="currency"
+              control={control}
+              nameInput="delivery_charges"
+              isRequired={watch('delivery_available')}
+              getFormErrorMessage={getFormErrorMessage}
+              labelName={t('deliveryChargesPlaceHolder')}
+              placeHolderText={t('deliveryChargesPlaceHolder')}
+              maxFractionDigits={watch('currency') == 'cop' ? 0 : 2}
+              rules={{
+                maxLength: {
+                  value: 12,
+                  message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 12}),
+                },
+                required: watch('delivery_available') ? "*El campo es requerido." : false,
+                pattern: {
+                  value: /^\S/,
+                  message: tGlobalErrors('patternErrorMessage'),
+                },
+              }} />
+            <DropDownInput
+              isEdit={true}
               control={control}
               isRequired={true}
-              labelName={t('deliveryLabel')}
-              nameInput="delivery_available"
+              optionLabel="label"
+              optionValue="value"
+              nameInput="currency"
+              labelName={tGlobal('currency')}
+              placeHolderText={tGlobal('currency')}
+              getFormErrorMessage={getFormErrorMessage}
               rules={{
-                required: true,
-              }} />
-            {!!watch('delivery_available') && 
-              <NumberInput
-                showLabel={false}
-                control={control}
-                label="Delivery Charges"
-                nameInput="delivery_charges"
-                isRequired={watch('delivery_available')}
-                getFormErrorMessage={getFormErrorMessage}
-                placeHolderText={t('deliveryChargesPlaceHolder')}
-                rules={{
-                  maxLength: {
-                    value: 12,
-                    message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 12}),
-                  },
-                  required: watch('delivery_available') ? "*El campo es requerido." : false,
-                  pattern: {
-                    value: /^\S/,
-                    message: tGlobal('patternErrorMessage'),
-                  },
-                }} />
-            }
-          </div>
-          <div className="fullwidth">
-            <RadioInput
-              data={radioData}
-              showLabel={true}
-              control={control}
-              isRequired={true}
-              nameInput="pick_up_from_home"
-              labelName={t('selfPickUpLabel')}
-              rules={{
-                required: true,
-              }} />
-          </div>
+                required: tGlobalErrors('requiredErrorMessage'),
+              }}
+              options={[
+                {label: tGlobal('cop'), value: 'cop'},
+                {label: tGlobal('usd'), value: 'usd'}
+              ]} />
+          </>}
         </div>
         <div className="registerInput__container-x1">
           <TextAreaInput
@@ -314,11 +329,11 @@ const RegisterVendor = ({create = false}) => {
             rules={{
               maxLength: {
                 value: 1000,
-                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 1000}),
+                message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 1000}),
               },
               pattern: {
                 value: /^\S/,
-                message: tGlobal('patternErrorMessage'),
+                message: tGlobalErrors('patternErrorMessage'),
               },
             }} />
         </div>
@@ -330,19 +345,19 @@ const RegisterVendor = ({create = false}) => {
               isRequired={true}
               nameInput="password"
               getFormErrorMessage={getFormErrorMessage}
-              labelName={tGlobal2('userPasswordInputLabel')}
+              labelName={tGlobal('userPasswordInputLabel')}
               passwordRequirementsPopUp={PasswordRequirements}
-              placeHolderText={tGlobal2('userPasswordPlaceHolderText')}
+              placeHolderText={tGlobal('userPasswordPlaceHolderText')}
               rules={{
                 maxLength: {
                   value: 20,
-                  message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20})
+                  message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 20})
                 },
-                required: tGlobal(`requiredErrorMessage`),
+                required: tGlobalErrors(`requiredErrorMessage`),
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/,
                   message:
-                    tGlobal('passwordPatternErrorMessage'),
+                    tGlobalErrors('passwordPatternErrorMessage'),
                 },
               }} />
             <PasswordInput
@@ -354,11 +369,11 @@ const RegisterVendor = ({create = false}) => {
               className="noLabel"
               nameInput="password_confirmation"
               getFormErrorMessage={getFormErrorMessage}
-              labelName={tGlobal2('userConfirmPasswordInputLabel')}
-              placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
+              labelName={tGlobal('userConfirmPasswordInputLabel')}
+              placeHolderText={tGlobal('userConfirmPasswordPlaceHolderText')}
               rules={{
-                required: user?.id ? undefined : tGlobal(`requiredErrorMessage`),
-                validate: value => value === getValues().password || tGlobal('passwordDoNotMatchErrorMessage'),
+                required: user?.id ? undefined : tGlobalErrors(`requiredErrorMessage`),
+                validate: value => value === getValues().password || tGlobalErrors('passwordDoNotMatchErrorMessage'),
               }} />
           </div>
           <div className="p-field mb-2">
@@ -366,22 +381,22 @@ const RegisterVendor = ({create = false}) => {
               <CheckBoxInput
                 control={control}
                 nameInput="accept_terms"
-                rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
+                rules={{ required: tGlobalErrors('acceptCheckboxErrorMessage') }}
                 getFormErrorMessage={getFormErrorMessage}
-                checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
+                checkBoxText={<span>{tGlobal('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal('acceptTermsText2')}</Link>.</span>} />
             </div>
             <div>
               <CheckBoxInput
                 control={control}
                 nameInput="accept_policy"
-                rules={{ required: tGlobal('acceptCheckboxErrorMessage2') }}
+                rules={{ required: tGlobalErrors('acceptCheckboxErrorMessage2') }}
                 getFormErrorMessage={getFormErrorMessage}
-                checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal2('acceptTermsText3')}</Link>.</span>} />
+                checkBoxText={<span>{tGlobal('acceptTermsText1')} <Link to="/privacy-policy/" target="_blank">{tGlobal('acceptTermsText3')}</Link>.</span>} />
             </div>
           </div>
         </>}
         <div className="p-field">
-          <Button className="dark-blue fullwidth" label={user?.id ? tGlobal2('saveBtnText') : tGlobal2('signUpBtnText')} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={user?.id ? tGlobal('saveBtnText') : tGlobal('signUpBtnText')} type="submit" loading={sending} />
         </div>
       </form>
     </div>

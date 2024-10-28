@@ -172,9 +172,9 @@ const RegisterAdmin = ({create = false}) => {
               },
             }} />
           <NumberInput
-            isRequired={true}
             control={control}
             nameInput="phone"
+            isRequired={true}
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal2('userPhoneNumberInputLabel')}
             placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}

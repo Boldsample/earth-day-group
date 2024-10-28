@@ -32,7 +32,7 @@ const Header = () => {
     }
 
     <div className="navbar-item go-back">
-      {header != 'intro' || (user?.id && !['login', 'register'].some(s => s == header)) &&
+      {user?.id && 
         <a onClick={() => navigate(-1)}><FontAwesomeIcon icon={faChevronLeft} /></a>
       }
       {user?.id && !['map'].some((s) => s == header) && <>

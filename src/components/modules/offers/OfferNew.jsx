@@ -19,10 +19,12 @@ const OfferNew = () => {
   const [sending, setSending] = useState(false)
   const [uploadedImages, setUploadedImages] = useState([])
   const userId = useSelector((state) => state.users.userData.id)
-  const [t] = useTranslation('translation', { keyPrefix: 'offers.offerNew'})
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
   const [tMaterial] = useTranslation('translation', {keyPrefix: 'materials'})
-  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [t, i18n] = useTranslation('translation', { keyPrefix: 'offers.offerNew'})
+  const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const {
+    watch,
     control,
     handleSubmit,
     formState: { errors },
@@ -33,16 +35,9 @@ const OfferNew = () => {
       user: userId,
       material: "",
       quantity: "",
+      delivery_currency: i18n.language == 'es' ? 'cop' : 'usd'
     },
   })
-  const translatedMaterials = materials.map(group => ({
-    ...group,
-    label: tMaterial(group.label),
-    items: group.items.map(item => ({
-      ...item,
-      label: tMaterial(item.label),
-    }))
-  }));
 
   const getFormErrorMessage = (fieldName) =>
     errors[fieldName] && (
@@ -76,10 +71,8 @@ const OfferNew = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
         <div className="registerInput__container-x2">
           <TextInput
-            width="100%"
             isEdit={true}
             control={control}
-            showLabel={false}
             isRequired={true}
             labelName={t('inputTitleLabel')}
             nameInput="title"
@@ -88,95 +81,111 @@ const OfferNew = () => {
             rules={{
               maxLength: {
                 value: 60,
-                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
+                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 60}),
               },
-              required: tGlobal('requiredErrorMessage'),
+              required: tGlobalErrors('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: tGlobal('patternErrorMessage'),
+                message: tGlobalErrors('patternErrorMessage'),
               },
             }} />
           <DropDownInput
             isEdit={true}
             control={control}
-            showLabel={false}
             isRequired={true}
-      optionLabel="label"
-      optionValue="label"
+            optionLabel="label"
+            optionValue="value"
             nameInput="material"
-      optionGroupLabel="label"
-      optionGroupChildren="items"
-            options={translatedMaterials}
+            optionGroupLabel="label"
+            optionGroupChildren="items"
+            options={materials?.map(group => ({
+              ...group,
+              label: tMaterial(group?.label),
+              items: group?.items.map(item => ({
+                label: tMaterial(item?.label),
+                value: item?.label
+              }))
+            }))}
             labelName={t('inputDropdownMaterialLabel')}
             placeHolderText={t('inputDropdownMaterialPlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
-              required: tGlobal('requiredErrorMessage'),
+              required: tGlobalErrors('requiredErrorMessage'),
             }}
               />
         </div>
         <div className="registerInput__container-x2">
           <NumberInput
-            width="100%"
             control={control}
-            showLabel={false}
             isRequired={true}
             nameInput="quantity"
-            label={t('inputNumberQuantityLabel')}
-            placeHolderText={t('inputNumberQuantityPlaceholderText')}
+            labelName={t('inputNumberQuantityLabel')}
             getFormErrorMessage={getFormErrorMessage}
+            placeHolderText={t('inputNumberQuantityPlaceholderText')}
             rules={{
               maxLength: {
                 value: 7,
-                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 7}),
+                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 7}),
               },
-              required: tGlobal('requiredErrorMessage'),
+              required: tGlobalErrors('requiredErrorMessage'),
               pattern: {
                 value: /^\S/,
-                message: tGlobal('patternErrorMessage'),
+                message: tGlobalErrors('patternErrorMessage'),
+              },
+            }} />
+          <DropDownInput
+            isEdit={true}
+            nameInput="unit"
+            control={control}
+            isRequired={true}
+            optionLabel="label"
+            optionValue="value"
+            labelName={t('inputDropdownUnitLabel')}
+            getFormErrorMessage={getFormErrorMessage}
+            placeHolderText={t('inputDropdownUnitPlaceholderText')}
+			maxFractionDigits={watch('delivery_currency') == 'cop' ? 0 : 2}
+            rules={{
+              required: tGlobalErrors('requiredErrorMessage'),
+            }}
+            options={materials?.flatMap(category => category?.items)?.find(item => item?.label == watch('material'))?.units?.map(unit => ({label: tMaterial(unit), value: unit})) || []} />
+        </div>
+        <div className="registerInput__container-x2">
+          <NumberInput
+            mode="currency"
+            control={control}
+            nameInput="price"
+            isRequired={true}
+            getFormErrorMessage={getFormErrorMessage}
+            labelName={t('inputNumberAskingPriceLabel')}
+            placeHolderText={t('inputNumberAskingPricePlaceholderText')}
+            rules={{
+              maxLength: {
+                value: 7,
+                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 7}),
+              },
+              required: tGlobalErrors('requiredErrorMessage'),
+              pattern: {
+                value: /^\S/,
+                message: tGlobalErrors('patternErrorMessage'),
               },
             }} />
           <DropDownInput
             isEdit={true}
             control={control}
-            showLabel={false}
             isRequired={true}
-            nameInput="unit"
-            labelName={t('inputDropdownUnitLabel')}
-            placeHolderText={t('inputDropdownUnitPlaceholderText')}
+            optionLabel="label"
+            optionValue="value"
+            nameInput="delivery_currency"
+            labelName={tGlobal('currency')}
+            placeHolderText={tGlobal('currency')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
-              required: tGlobal('requiredErrorMessage'),
+              required: tGlobalErrors('requiredErrorMessage'),
             }}
             options={[
-              {label: t('unitLabelKg'), value: "Kg"}, 
-              {label: t('unitLabelCc'), value: "cc"},
-              {label:  t('unitLabelUnit'), value: "Units"}
+              {label: tGlobal('cop'), value: 'cop'},
+              {label: tGlobal('usd'), value: 'usd'}
             ]} />
-            
-        </div>
-        <div className="registerInput__container-x2">
-        <NumberInput
-          width="100%"
-          mode="currency"
-          showLabel={false}
-          control={control}
-          nameInput="price"
-          isRequired={true}
-          label={t('inputNumberAskingPriceLabel')}
-          placeHolderText={t('inputNumberAskingPricePlaceholderText')}
-          getFormErrorMessage={getFormErrorMessage}
-          rules={{
-            maxLength: {
-              value: 7,
-              message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 7}),
-            },
-            required: tGlobal('requiredErrorMessage'),
-            pattern: {
-              value: /^\S/,
-              message: tGlobal('patternErrorMessage'),
-            },
-          }} />
         </div>
         <UploadPhotoInput
           type="imageUpload"

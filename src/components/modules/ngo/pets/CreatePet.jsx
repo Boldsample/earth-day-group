@@ -16,21 +16,9 @@ const CreatePet = () => {
   const navigate = useNavigate()
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
-  const [t] = useTranslation('translation', { keyPrefix: 'ngo.pets.createPet' })
+  const [tMaterials] = useTranslation('translation', { keyPrefix: 'materials' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
-  const species = [
-    { name: t('petTypeCatText'), code: "Cat" },
-    { name: t('petTypeDogText'), code: "Dog" },
-	{ name: t('petTypeFishText'), code: "Fish" },
-	{ name: t('petTypeBirdText'), code: "Bird" },
-	{ name: t('petTypeRodentText'), code: "Rodent" },
-	{ name: t('petTypeReptileText'), code: "Reptile" },
-	{ name: t('petTypeFarmAnimalText'), code: "FarmAnimal" }
-  ]
-  const genders = [
-    { name: t("petGenderMaleText"), value: 'Male' },
-    { name: t("petGenderFemaleText"), value: 'Female' },
-  ]
+  const [t, i18n] = useTranslation('translation', { keyPrefix: 'ngo.pets.createPet' })
   const {
     watch,
     reset,
@@ -51,6 +39,8 @@ const CreatePet = () => {
       images: [],
       user: user?.id,
       description: "",
+      age_unit: "months",
+      weight_unit: i18n.language == 'es' ? "kilograms" : "pounds",
     },
   })
 
@@ -118,7 +108,9 @@ const CreatePet = () => {
             specie: data?.specie || "",
             gender: data?.gender || "",
             images: data?.images || [],
-            description: data?.description || ""
+            age_unit: data?.unit || "months",
+            description: data?.description || "",
+            weight_unit: data?.unit || i18n.language == 'es' ? "kilograms" : "pounds",
           })
       })
     }
@@ -131,7 +123,6 @@ const CreatePet = () => {
         <h2>{watch('id') ? t('updatePetbtnText') : t('submitPetbtnText')}</h2>
         <div className="registerInput__container-x2">
           <TextInput
-            width="100%"
             nameInput="name"
             control={control}
             isRequired={true}
@@ -150,12 +141,15 @@ const CreatePet = () => {
               },
             }} />
             <RadioInput
-              data={genders}
               showLabel={true}
               control={control}
               isRequired={true}
-              labelName={t('inputRadioTitleText')}
               nameInput="gender"
+              labelName={t('inputRadioTitleText')}
+              data={[
+                { name: t("petGenderMaleText"), value: 'Male' },
+                { name: t("petGenderFemaleText"), value: 'Female' },
+              ]}
               rules={{
                 required: true,
               }} />
@@ -166,23 +160,30 @@ const CreatePet = () => {
             isEdit={true}
             control={control}
             isRequired={true}
+            nameInput="specie"
             optionLabel="name"
             optionValue="code"
-            options={species}
             labelName={t('dropdownSpeciesTitleText')}
-            nameInput="specie"
-            placeHolderText={t('dropdownSpeciesPlaceholderText')}
             getFormErrorMessage={getFormErrorMessage}
+            placeHolderText={t('dropdownSpeciesPlaceholderText')}
+            options={[
+              { name: t('petTypeCatText'), code: "Cat" },
+              { name: t('petTypeDogText'), code: "Dog" },
+              { name: t('petTypeFishText'), code: "Fish" },
+              { name: t('petTypeBirdText'), code: "Bird" },
+              { name: t('petTypeRodentText'), code: "Rodent" },
+              { name: t('petTypeReptileText'), code: "Reptile" },
+              { name: t('petTypeFarmAnimalText'), code: "FarmAnimal" }
+            ]}
             rules={{
               required: tGlobal('requiredErrorMessage'),
             }} />
           <TextInput
-            width="100%"
             showLabel={true}
             control={control}
+            nameInput="breed"
             isRequired={true}
             labelName={t('inputBreedTitleText')}
-            nameInput="breed"
             placeHolderText={t('breedPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
@@ -198,46 +199,82 @@ const CreatePet = () => {
             }} />
         </div>
         <div className="registerInput__container-x2">
-          <NumberInput
-            width="100%"
-            nameInput="age"
-            showLabel={true}
-            control={control}
-            isRequired={true}
-            labelName={t('inputAgeTitleText')}
-            placeHolderText={t('agePlaceholderText')}
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: {
-                value: 2,
-                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 2})
-              },
-              required: tGlobal('requiredErrorMessage'),
-              pattern: {
-                value: /^\S/,
-                message: tGlobal('patternErrorMessage'),
-              },
-            }} />
-          <NumberInput
-            width="100%"
-            showLabel={true}
-            control={control}
-            isRequired={true}
-            nameInput="weight"
-            labelName={t('inputWeightTitleText')}
-            placeHolderText={t('weightPlaceholderText')}
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: {
-                value: 2,
-                message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 2}),
-              },
-              required: tGlobal('requiredErrorMessage'),
-              pattern: {
-                value: /^\S/,
-                message: tGlobal('patternErrorMessage'),
-              },
-            }} />
+          <div className="registerInput__container-age">
+            <NumberInput
+              maxLength={2}
+              nameInput="age"
+              showLabel={true}
+              control={control}
+              isRequired={true}
+              maxFractionDigits={0}
+              labelName={t('inputAgeTitleText')}
+              placeHolderText={t('agePlaceholderText')}
+              getFormErrorMessage={getFormErrorMessage}
+              rules={{
+                maxLength: {
+                  value: 2,
+                  message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 2})
+                },
+                required: tGlobal('requiredErrorMessage'),
+                pattern: {
+                  value: /^\S/,
+                  message: tGlobal('patternErrorMessage'),
+                },
+              }} />
+            <DropDownInput
+              isEdit={true}
+              control={control}
+              showLabel={false}
+              isRequired={true}
+              optionLabel="name"
+              optionValue="value"
+              nameInput="age_unit"
+              getFormErrorMessage={getFormErrorMessage}
+              options={[
+                {name: t('months'), value: 'months'},
+                {name: t('years'), value: 'years'}
+              ]}
+              rules={{
+                required: tGlobal('requiredErrorMessage'),
+              }} />
+          </div>
+          <div className="registerInput__container-weight">
+            <NumberInput
+              showLabel={true}
+              control={control}
+              isRequired={true}
+              nameInput="weight"
+              labelName={t('inputWeightTitleText')}
+              getFormErrorMessage={getFormErrorMessage}
+              placeHolderText={t('inputWeightTitleText')}
+              rules={{
+                maxLength: {
+                  value: 2,
+                  message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 2}),
+                },
+                required: tGlobal('requiredErrorMessage'),
+                pattern: {
+                  value: /^\S/,
+                  message: tGlobal('patternErrorMessage'),
+                },
+              }} />
+            <DropDownInput
+              isEdit={true}
+              control={control}
+              showLabel={false}
+              isRequired={true}
+              optionLabel="name"
+              optionValue="value"
+              nameInput="weight_unit"
+              getFormErrorMessage={getFormErrorMessage}
+              options={[
+                {name: tMaterials('pounds'), value: 'pounds'},
+                {name: tMaterials('kilograms'), value: 'kilograms'}
+              ]}
+              rules={{
+                required: tGlobal('requiredErrorMessage'),
+              }} />
+          </div>
         </div>
         <div className="registerInput__container-x1">
           <TextAreaInput
