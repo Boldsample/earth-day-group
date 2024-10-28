@@ -364,10 +364,9 @@ const RegisterVendor = ({create = false}) => {
             <PasswordInput
               maxLength={20}
               feedback={false}
-              showLabel={true}
+              showLabel={false}
               control={control}
               isRequired={true}
-              className="noLabel"
               nameInput="password_confirmation"
               getFormErrorMessage={getFormErrorMessage}
               labelName={tGlobal('userConfirmPasswordInputLabel')}

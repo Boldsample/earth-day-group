@@ -14,8 +14,9 @@ const Recover = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [sending, setSending] = useState(false)
+	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 	const [t] = useTranslation('translation', { keyPrefix: 'login.recover' })
-	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+	const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
 	const {
 		control,
     setError,
@@ -35,11 +36,11 @@ const Recover = () => {
 		const response = await updateUser(data, {remember_token: token})
 		if(response?.response == 'Ok'){
 			dispatch(updateThankyou({
-				title: "Password updated successfully!",
-				link: "/login/",
+				title: tGlobal('updateUserTitleThankYouPage'),
+				link: username ? '/dashboard/' : '/settings/profile/',
 				background: "image-1.svg",
-				button_label: "Go back to login",
-				content: "Your password has been registered successfully!",
+				button_label: tGlobal('updateUserBtnLabelThankYouPage3'),
+				content: tGlobal('updateUsercontentText'),
 			}))
 			navigate('/thankyou/')
 		}else{
@@ -74,12 +75,12 @@ const Recover = () => {
 						rules={{
 							maxLength: {
 								value: 60,
-								message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
+								message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 60}),
 							},
-							required: tGlobal('requiredErrorMessage'),
+							required: tGlobalErrors('requiredErrorMessage'),
 							pattern: {
 								value: /^\S/,
-								message: tGlobal('patternErrorMessage'),
+								message: tGlobalErrors('patternErrorMessage'),
 							},
 						}} />
 					<PasswordInput
@@ -89,19 +90,18 @@ const Recover = () => {
 						control={control}
 						showLabel={false}
 						isRequired={true}
-						className="noLabel"
 						nameInput="password_confirmation"
 						placeHolderText={t('passwordConfirmationPlaceHolderText')}
 						getFormErrorMessage={getFormErrorMessage}
 						rules={{
 							maxLength: {
 								value: 60,
-								message: tGlobal('inputMaxLengthErrorMessage', {maxLength: 60}),
+								message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 60}),
 							},
-							required: tGlobal('requiredErrorMessage'),
+							required: tGlobalErrors('requiredErrorMessage'),
 							pattern: {
 								value: /^\S/,
-								message: tGlobal('patternErrorMessage'),
+								message: tGlobalErrors('patternErrorMessage'),
 							}
 						}} />
 				</div>

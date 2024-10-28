@@ -109,11 +109,10 @@ const LoginForm = () => {
             disabled={false}
             control={control}
             isRequired={true}
-            labelName="Email"
-            showLabel={false}
             nameInput="email"
-            placeHolderText={t('emailPlaceHolderText')}
+            labelName={t('emailPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
+            placeHolderText={t('emailPlaceHolderText')}
             rules={{
               maxLength: {
                 value: 60,
@@ -133,12 +132,11 @@ const LoginForm = () => {
             disabled={false}
             feedback={false}
             control={control}
-            showLabel={false}
             isRequired={true}
-            labelName="Password"
             nameInput="password"
-            placeHolderText={t('passwordPlaceHolderText')}
+            labelName={t('passwordPlaceHolderText')}
             getFormErrorMessage={getFormErrorMessage}
+            placeHolderText={t('passwordPlaceHolderText')}
             rules={{
               maxLength: {
                 value: 60,

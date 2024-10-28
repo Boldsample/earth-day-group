@@ -50,7 +50,6 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
           <div className={'materialsCard__grid ' + (moreMaterials ? 'show' : 'hide')}>
             {materials?.map(category => {
               const _categoryMaterials = profile?.materials?.filter(material => category?.items?.some(item => item?.label == material?.type))
-              console.log(category?.label, _categoryMaterials)
               if(_categoryMaterials?.length > 0)
                 return <div className="materialCategory">
                   <h6>{category?.label}</h6>

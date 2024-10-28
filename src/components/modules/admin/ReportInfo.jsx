@@ -78,8 +78,6 @@ const ReportInfo = ({ show, report, onHide }) => {
 	}, [watch('message')])
 
 	const onSubmit = async data => {
-		// const message = data?.message != 'custom' ? data?.message : data?.custom_message
-		console.log(data)
 		const message = data?.message === data?.custom_message ? data?.message : data?.custom_message
 		if(data?.reportResolved == true){
 			await updateReport({admin: user?.id, status: 'Resolved'}, {id: report?.id})

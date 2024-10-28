@@ -8,7 +8,6 @@ import './styles.sass'
 // import { faTrashCan} from '@fortawesome/free-solid-svg-icons'
 
 const ConfirmationModal = ({title, text, handleConfirmation, type, visible, setVisible, icon}) => {
-    console.log(visible, setVisible)
     const [t] = useTranslation('translation', { keyPrefix: 'settings.deleteAccount'})
     const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
     const footerContent = (

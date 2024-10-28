@@ -274,10 +274,9 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         <PasswordInput
           maxLength={20}
           feedback={false}
-          showLabel={true}
           control={control}
+          showLabel={false}
           isRequired={true}
-          className="noLabel"
           nameInput="password_confirmation"
           getFormErrorMessage={getFormErrorMessage}
           labelName={tGlobal2('userConfirmPasswordInputLabel')}

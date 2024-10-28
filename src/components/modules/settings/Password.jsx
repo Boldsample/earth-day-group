@@ -6,43 +6,50 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { resetState } from '@store/slices/usersSlice'
-import { logoutUser, updateUser } from '@services/userServices'
+import { authUser, logoutUser, updateUser } from '@services/userServices'
 import { setHeader, setHeaderTitle, updateThankyou } from '@store/slices/globalSlice'
 
 import "./styles.sass"
+import { useTranslation } from 'react-i18next'
+import PasswordRequirements from '@ui/templates/PasswordRequirements'
 
 const Password = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [sending, setSending] = useState(false)
+	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+	const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const user = useSelector((state) => state.users.userData)
   const {
+    watch,
     control,
     setFocus,
     setError,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
       password: "",
+      new_password: "",
       password_confirmation: "",
     },
   })
   
   const getFormErrorMessage = fieldName => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
+    let response
     setSending(true)
-    delete data.password_confirmation
-    const response = await updateUser({ ...data }, {id: user.id})
+    response = await authUser({email: user?.username, password: data.password})
+    if(response?.id)
+      response = await updateUser({ password: data.new_password }, {id: response?.id})
     setSending(false)
-    if(response.id){
+    if(response?.id){
       dispatch(updateThankyou({
-        title: "Updated successfully!",
-        link: "/settings/",
+        title: tGlobal('updateUserTitleThankYouPage'),
+        link: '/settings/',
         background: "image-1.svg",
-        button_label: "Go back to settings",
-        content: "Your password has updated successfully!",
+        button_label: tGlobal('updateUserBtnLabelThankYouPage3'),
+        content: tGlobal('updateUsercontentText'),
       }))
       navigate('/thankyou/')
     }else{
@@ -67,65 +74,60 @@ const Password = () => {
 		<div className="main__content centerwidth">
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
         <div className="password-container">
-        <PasswordInput
-            width="100%"
-            maxLength={20}
-            label="Password"
-            showLabel={true}
+          <PasswordInput
+            disabled={false}
+            feedback={false}
             control={control}
+            isRequired={true}
             nameInput="password"
-            isRequired={!user?.id}
-            placeHolderText="Enter your password"
             getFormErrorMessage={getFormErrorMessage}
+            labelName={tGlobal('userPasswordInputLabel')}
+            placeHolderText={tGlobal('userPasswordInputLabel')}
             rules={{
-              maxLength: user?.id ? undefined : {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
+              maxLength: {
+                value: 60,
+                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 60}),
               },
-              required: user?.id ? undefined : "*El campo es requerido.",
-              pattern: user?.id ? undefined : {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+              required: tGlobalErrors('requiredErrorMessage'),
+              pattern: {
+                value: /^\S/,
+                message: tGlobalErrors('patternErrorMessage'),
+              }
+            }} />
+          <PasswordInput
+            maxLength={20}
+            control={control}
+            isRequired={true}
+            nameInput="new_password"
+            getFormErrorMessage={getFormErrorMessage}
+            passwordRequirementsPopUp={PasswordRequirements}
+            labelName={tGlobal('userNewPasswordPlaceHolderText')}
+            placeHolderText={tGlobal('userPasswordPlaceHolderText')}
+            rules={{
+              maxLength: {
+                value: 20,
+                message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 20})
+              },
+              required: tGlobalErrors('requiredErrorMessage'),
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/,
                 message:
-                  "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
+                  tGlobalErrors('passwordPatternErrorMessage'),
               },
             }} />
           <PasswordInput
-            width="100%"
-            maxLength={20}
-            label="Password"
-            showLabel={true}
-            control={control}
-            nameInput="password"
-            isRequired={!user?.id}
-            placeHolderText="Enter new password"
-            getFormErrorMessage={getFormErrorMessage}
-            rules={{
-              maxLength: user?.id ? undefined : {
-                value: 20,
-                message: "El campo supera los 20 caracteres",
-              },
-              required: user?.id ? undefined : "*El campo es requerido.",
-              pattern: user?.id ? undefined : {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                message:
-                  "Must contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number",
-              },
-            }} />
-          <PasswordInput
-            width="100%"
-            label="&nbsp;"
             maxLength={20}
             feedback={false}
             showLabel={true}
             control={control}
-            className="noLabel"
-            isRequired={!user?.id}
+            isRequired={true}
             nameInput="password_confirmation"
-            placeHolderText="Confirm new Password"
             getFormErrorMessage={getFormErrorMessage}
+            labelName={tGlobal('userConfirmPasswordInputLabel')}
+            placeHolderText={tGlobal('userConfirmPasswordPlaceHolderText')}
             rules={{
-              required: user?.id ? undefined : "*El campo es requerido.",
-              validate: value => value === getValues().password || "The password doesn't match",
+              required: tGlobalErrors('requiredErrorMessage'),
+              validate: value => value === watch('new_password') || tGlobalErrors('passwordDoNotMatchErrorMessage'),
             }} />
         </div>
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
