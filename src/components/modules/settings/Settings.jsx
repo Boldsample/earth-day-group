@@ -35,7 +35,7 @@ const Settings = () => {
 				<Link className="button outline" to="/settings/password/"><div className="icon"><FontAwesomeIcon icon={faLock} /></div> {t('changePasswordBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
 				<Link className="button outline" to="/terms-of-service/"><div className="icon"><FontAwesomeIcon icon={faShieldHalved} /></div>{t('termsAndConditionsBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
 				<Link className="button outline" to="/privacy-policy/"><div className="icon"><FontAwesomeIcon icon={faCheck} /></div>{t('privacyPolicyBtnText')}<FontAwesomeIcon icon={faChevronRight} /></Link>
-				<Link className="button outline" to="/settings/deleteAccount/"><div className="icon trash"><FontAwesomeIcon icon={faTrashCan} /></div> {t('deleteAccountBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/settings/delete-account/"><div className="icon trash"><FontAwesomeIcon icon={faTrashCan} /></div> {t('deleteAccountBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
 				{/* <Link className="button outline" to="/settings/activity/"><div className="icon"><FontAwesomeIcon icon={faList} /></div> My Activity <FontAwesomeIcon icon={faChevronRight} /></Link> */}
 			</div>
 			<div className="fullwidth text-center mt-3">

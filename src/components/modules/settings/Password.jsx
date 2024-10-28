@@ -3,15 +3,14 @@ import { PasswordInput } from '@ui/forms'
 import { Button } from 'primereact/button'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { resetState } from '@store/slices/usersSlice'
-import { authUser, logoutUser, updateUser } from '@services/userServices'
+import { authUser, updateUser } from '@services/userServices'
+import PasswordRequirements from '@ui/templates/PasswordRequirements'
 import { setHeader, setHeaderTitle, updateThankyou } from '@store/slices/globalSlice'
 
 import "./styles.sass"
-import { useTranslation } from 'react-i18next'
-import PasswordRequirements from '@ui/templates/PasswordRequirements'
 
 const Password = () => {
   const dispatch = useDispatch()
@@ -58,12 +57,6 @@ const Password = () => {
       return
     }
   }
-
-  const logout = async (e) => {
-    if(await logoutUser())
-      dispatch(resetState())
-      navigate('/login/')
-  };
 
 	useEffect(() => {
 		dispatch(setHeader('settings'))
@@ -131,7 +124,7 @@ const Password = () => {
             }} />
         </div>
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-          <Button className="dark-blue fullwidth" label={user.id ? "Save" : "Sign up"} type="submit" loading={sending} />
+          <Button className="dark-blue fullwidth" label={tGlobal('saveBtnText')} type="submit" loading={sending} />
         </div>
       </form>
 		</div>

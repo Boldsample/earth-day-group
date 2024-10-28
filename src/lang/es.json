@@ -42,6 +42,8 @@
     "userNewPasswordPlaceHolderText": "Escribe una nueva contraseña",
     "userConfirmPasswordInputLabel": "Confirmar contraseña",
     "userConfirmPasswordPlaceHolderText": "Confirma la contraseña",
+    "userDeletedAccount": "Su cuenta se ha eliminado, si tiene alguna duda comuníquese con nosotros al correo electrónico info@earthdaygroup.com.",
+    "exit": "Salir",
     "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
     "notfoundErrorMessage": "No pudimos encontrar lo que estás buscando. Por favor intentalo de nuevo.",
     "acceptTermsText1": "He leído y acepto",

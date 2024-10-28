@@ -44,6 +44,8 @@
     "userNewPasswordPlaceHolderText": "Enter a new Password",
     "userConfirmPasswordInputLabel": "Confirm Password",
     "userConfirmPasswordPlaceHolderText": "Confirm Password",
+    "userDeletedAccount": "Your account has been deleted, if you have any questions please contact us at info@earthdaygroup.com.",
+    "exit": "Exit",
     "acceptTermsText1": "I've read and accept the",
     "acceptTermsText2": "Terms of Service",
     "acceptTermsText3": "Privacy Policy",

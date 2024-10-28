@@ -77,7 +77,7 @@ const AppRoutes = () => {
         <Route path="/settings" element={<Settings />} />
         <Route path="/settings/profile" element={<ProfileSettings />} />
         <Route path="/settings/password" element={<Password />} />
-        <Route path="/settings/deleteAccount" element={<DeleteAccount />} />
+        <Route path="/settings/delete-account" element={<DeleteAccount />} />
         <Route path="/report/:type/:entityID" element={<CreateReport />} />
       </>}
 
