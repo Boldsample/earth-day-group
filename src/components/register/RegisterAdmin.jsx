@@ -175,6 +175,7 @@ const RegisterAdmin = ({create = false}) => {
             control={control}
             nameInput="phone"
             isRequired={true}
+            useGrouping={false}
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal2('userPhoneNumberInputLabel')}
             placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}

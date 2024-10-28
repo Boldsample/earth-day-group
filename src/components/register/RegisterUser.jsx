@@ -193,6 +193,7 @@ const RegisterUser = ({create = false}) => {
             isRequired={true}
             control={control}
             nameInput="phone"
+            useGrouping={false}
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal2('userPhoneNumberInputLabel')}
             placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}

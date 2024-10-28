@@ -243,6 +243,7 @@ const RegisterVendor = ({create = false}) => {
             control={control}
             nameInput="phone"
             isRequired={true}
+            useGrouping={false}
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal('userPhoneNumberInputLabel')}
             placeHolderText={tGlobal('userPhoneNumberPlaceHolderText')}

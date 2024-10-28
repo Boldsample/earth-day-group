@@ -60,7 +60,7 @@ const Password = () => {
 
 	useEffect(() => {
 		dispatch(setHeader('settings'))
-		dispatch(setHeaderTitle('Change Password'))
+		dispatch(setHeaderTitle('changePasswordBtnText'))
 	}, [])
 
 	return <div className="layout" style={{background: 'white'}}>

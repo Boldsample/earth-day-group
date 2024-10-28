@@ -13,6 +13,7 @@ const NumberInput = ({
   maxLength = 10,
   mode = 'decimal',
   showLabel = true,
+  useGrouping = true,
   getFormErrorMessage,
   placeHolderText = "",
   maxFractionDigits = 2,
@@ -31,6 +32,7 @@ const NumberInput = ({
           disabled={disabled}
           onBlur={field.onBlur}
           maxLength={maxLength}
+          useGrouping={useGrouping}
           value={field.value || null}
           placeholder={placeHolderText}
           maxFractionDigits={maxFractionDigits}

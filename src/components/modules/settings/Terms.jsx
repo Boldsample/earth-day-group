@@ -11,7 +11,7 @@ const Terms = () => {
 
   useEffect(() => {
     dispatch(setHeader('settings'))
-    dispatch(setHeaderTitle('Terms of Service'))
+    dispatch(setHeaderTitle('termsAndConditionsBtnText'))
   }, [])
 
   return <div className="layout">

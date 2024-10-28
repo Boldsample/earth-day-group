@@ -44,7 +44,7 @@ const Header = () => {
 
     {['settings'].some(s => s == header) && 
       	<div className="navbar-item">
-			{headerTitle && <h4>{t(`global.${headerTitle}`)}</h4>}
+			{headerTitle && <h4>{t(`settings.settings.${headerTitle}`)}</h4>}
 		</div>
     }
     

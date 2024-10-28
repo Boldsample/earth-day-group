@@ -13,7 +13,7 @@ import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { callNotifications, getUserData } from "@store/slices/usersSlice"
 import { Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo, RegisterAdmin } from "@components/register"
-import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, Privacy, PrivacyPolicy, DeleteAccount, CreateReport, Users, Reports, Products, Pets, AdminOffers, ConfigureAds } from "@components/modules"
+import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Terms, PrivacyPolicy, DeleteAccount, CreateReport, Users, Reports, Products, Pets, AdminOffers, ConfigureAds } from "@components/modules"
 
 
 let notificationsSource = null;
@@ -77,7 +77,6 @@ const AppRoutes = () => {
         <Route path="/settings" element={<Settings />} />
         <Route path="/settings/profile" element={<ProfileSettings />} />
         <Route path="/settings/password" element={<Password />} />
-        <Route path="/settings/privacy-policy/" element={<PrivacyPolicy />} />
         <Route path="/settings/deleteAccount" element={<DeleteAccount />} />
         <Route path="/report/:type/:entityID" element={<CreateReport />} />
       </>}

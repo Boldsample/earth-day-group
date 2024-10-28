@@ -12,7 +12,7 @@ const ProfileSettings = () => {
   useEffect(() => {
     dispatch(setHeader('settings'))
     dispatch(getUserData(user?.id))
-    dispatch(setHeaderTitle('Profile'))
+    dispatch(setHeaderTitle('profileBtnText'))
   }, [])
 
   return <div className="layout" style={{background: 'white'}}>

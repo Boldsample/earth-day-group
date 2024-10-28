@@ -25,7 +25,7 @@ const Settings = () => {
 
 	useEffect(() => {
 		dispatch(setHeader('settings'))
-		dispatch(setHeaderTitle('Settings'))
+		dispatch(setHeaderTitle('settings'))
 	}, [])
 
 	return <div className="layout" style={{background: 'white'}}>
@@ -33,8 +33,8 @@ const Settings = () => {
 			<div className="settings">
 				<Link className="button outline" to="/settings/profile/"><div className="icon"><FontAwesomeIcon icon={faUser} /></div> {t('profileBtnText')} <FontAwesomeIcon icon={faChevronRight} /></Link>
 				<Link className="button outline" to="/settings/password/"><div className="icon"><FontAwesomeIcon icon={faLock} /></div> {t('changePasswordBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
-				<Link className="button outline" to="/settings/terms/"><div className="icon"><FontAwesomeIcon icon={faShieldHalved} /></div>{t('termsAndConditionsBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
-				<Link className="button outline" to="/settings/privacy-policy/"><div className="icon"><FontAwesomeIcon icon={faCheck} /></div>{t('privacyPolicyBtnText')}<FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/terms-of-service/"><div className="icon"><FontAwesomeIcon icon={faShieldHalved} /></div>{t('termsAndConditionsBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/privacy-policy/"><div className="icon"><FontAwesomeIcon icon={faCheck} /></div>{t('privacyPolicyBtnText')}<FontAwesomeIcon icon={faChevronRight} /></Link>
 				<Link className="button outline" to="/settings/deleteAccount/"><div className="icon trash"><FontAwesomeIcon icon={faTrashCan} /></div> {t('deleteAccountBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
 				{/* <Link className="button outline" to="/settings/activity/"><div className="icon"><FontAwesomeIcon icon={faList} /></div> My Activity <FontAwesomeIcon icon={faChevronRight} /></Link> */}
 			</div>

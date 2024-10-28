@@ -673,6 +673,7 @@
     "password": {},
     "privacy": {},
     "settings": {
+      "settings": "Configuración",
       "profileBtnText": "Mi Perfil",
       "changePasswordBtnText": "Cambiar Contraseña",
       "termsAndConditionsBtnText": "Términos y Condiciones",

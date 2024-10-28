@@ -674,6 +674,7 @@
     "password": {},
     "privacy": {},
     "settings": {
+      "settings": "Settings",
       "profileBtnText": "My Profile",
       "changePasswordBtnText": "Change Password",
       "termsAndConditionsBtnText": "Terms & Conditions",
