@@ -21,7 +21,6 @@ let notificationsSource = null;
 const AppRoutes = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.users.userData)
-  const notifications = useSelector((state) => state.users.notifications)
 
   const loadNotifications = () => {
     dispatch(callNotifications({user: user?.id}))
@@ -46,11 +45,11 @@ const AppRoutes = () => {
 
   useEffect(() => {
     const _id = Cookies.get('edgActiveUser')
-    if(!user?.id && _id != 'undefined' && user == null){
+    if(!user?.id && _id != 'undefined' && user == null)
       dispatch(getUserData(_id))
-    }else if(user?.id)
-      startNotificationsSource()
-    return () => stopNotificationsSource()
+    //else if(user?.id)
+    //  startNotificationsSource()
+    //return () => stopNotificationsSource()
   }, [user])
   
 	return <BrowserRouter basename="">
