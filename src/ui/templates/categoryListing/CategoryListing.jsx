@@ -62,8 +62,9 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
         </div>
       }
       <div ref={content?.secondary?.length == 0 ? bannerScroll : null} className="layout autoheight">
-        <div className="main__content centerfullwidth pt-8">
+        <div className="main__content centerfullwidth pt-4">
           <div className="template__listing self-center">
+			<AdBanner type="headerBanner" />
             <div className="edg-search mb-1">
               {content.searchLabel && <h3 className="text-center mb-1">{content.searchLabel}</h3>}
               <form onSubmit={reloadElements} className="p-input-icon-left fullwidth">
@@ -82,7 +83,6 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
             <div className="types">
               {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={section == type?.id ? 'active' : ''}>{type?.label}</Link>)}
             </div>
-            <AdBanner type="headerBanner"/>
             <div className={`templateCards_grid cards-${elements?.data?.length}`}>
               {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
                 skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)

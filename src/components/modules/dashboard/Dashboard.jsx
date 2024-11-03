@@ -44,7 +44,7 @@ const Dashboard = () => {
 				</div>
 			</div>
 			<div className="card__grid">
-				<AdBanner type="dashboardButton"/>
+				<AdBanner type="dashboardButton" />
 				{filteredModules.length > 0 ? filteredModules.map((module, key) => <Link key={key} to={module.link}>
 					<Card key={key}
 						icon={module.icon}

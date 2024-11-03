@@ -8,7 +8,7 @@ const AdBanner = ({location, type}) => {
   const [adInfo, setAdInfo] = useState(null)
   useEffect(()=>{
     getAd(type).then(data => {
-      if(data.target.split(", ").some(target => target == user.role))
+      if(data?.target?.split(", ").some(target => target == user?.role))
       setAdInfo(data)
   })
 }, [user])

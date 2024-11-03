@@ -51,7 +51,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
             {materials?.map(category => {
               const _categoryMaterials = profile?.materials?.filter(material => category?.items?.some(item => item?.label == material?.type))
               if(_categoryMaterials?.length > 0)
-                return <div className="materialCategory">
+                return <div key={category?.label} className="materialCategory">
                   <h6>{category?.label}</h6>
                   {_categoryMaterials.map(material =>
                     <RecycleMaterialCard
@@ -66,7 +66,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
           <a onClick={() => setMoreMaterials(prev => !prev)}>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</a>
         </div>
         }
-        <AdBanner type="headerBanner"/>
+        <AdBanner type="headerBanner" />
         {profile?.images?.length > 0 && 
           <PhotoGallery imageCatalog={profile?.images} />
         }
