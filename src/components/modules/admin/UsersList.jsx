@@ -21,14 +21,14 @@ import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 
 const Users = ({type}) => {
   const dispatch = useDispatch()
-  const [resetFields, setResetFields] = useState(false)
   const [profile, setProfile] = useState(null)
   const [users, setUsers] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: 6})
+  const [resetFields, setResetFields] = useState(false)
   const user = useSelector((state) => state.users.userData)
-  const [filters, setFilters] = useState({state: "1", role: "", keyword: ''})
-  const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+  const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
+  const [filters, setFilters] = useState({state: type == 'admins' ? '' : '1', role: '', keyword: ''})
 
   const changeState = async (id, state) => {
     await updateUser({state: state}, {id: id})
@@ -37,12 +37,12 @@ const Users = ({type}) => {
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callUsers = async () =>{
     let _filter = {}
+	if(filters?.role != '')
+	  _filter['user'] = `u.role='${filters.role}'`
+	else
+	  _filter['user'] = type == 'admins' ? `u.role='admin'` : `u.role<>'admin'`
     if(filters?.state != '')
       _filter['state'] = `u.state='${filters.state}'`
-    if(filters?.role != '')
-      _filter['user'] = `u.role='${filters.role}'`
-    else
-      _filter['user'] = type == 'admins' ? `u.role='admin'` : `u.role<>'admin'`
     if(filters?.keyword != '')
       _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%')`
     const _users = await getUsers(_filter, 'full', user?.id, page)
