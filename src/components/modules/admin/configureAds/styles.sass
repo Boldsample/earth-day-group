@@ -97,7 +97,6 @@
     background: #080808b7
     border-radius: 13px
     border: 1px solid #ffffff
-
     &__txt
         display: none
         font-size: 13px
@@ -107,7 +106,6 @@
         position: relative
         padding-right: 13px
         padding-left: 2px
-
     &:before
         content: ""
         display: block
@@ -118,8 +116,8 @@
         height: 9px
         border-radius: 5px
         background: red
-        animation: dot-anim .8s infinite ease-in-out
-
+        &:not(.ad-offline)
+            animation: dot-anim .8s infinite ease-in-out
     &:after
         content: ""
         display: block
@@ -131,7 +129,8 @@
         height: 15px
         border-radius: 50%
         border: 1px solid red
-        animation: wave-anim .8s infinite ease-out
+        &:not(.ad-offline)
+            animation: wave-anim .8s infinite ease-out
 
 .space-between
     display: flex

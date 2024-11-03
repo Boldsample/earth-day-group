@@ -192,6 +192,7 @@
       "adFailedToastTitle": "Error",
       "adSuccessToastMsg": "The ad was created succesfully!",
       "adFailedToastMsg": "Ad creation failed. Please try again",
+      "offline": "Offline",
       "modules": [
         {
           "name": "Users",
@@ -214,7 +215,7 @@
       "uploadBtnText": "Upload",
       "cancelBtnText": "Cancel",
       "uploadImgPlaceHolderText": "Drag and drop the image here to upload.",
-      "createAdBtnText": "Create Ad",
+      "createAdBtnText": "Create new ad",
       "adNameInputTitle": "Ad Name",
       "adNameInputPlaceholder": "Pepsi Summer Campaign",
       "adUrlInputTitle": "Ad URL",

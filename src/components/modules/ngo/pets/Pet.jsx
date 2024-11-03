@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'

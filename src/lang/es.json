@@ -193,6 +193,7 @@
       "adFailedToastTitle": "Error",
       "adSuccessToastMsg": "El anuncio fue creado de manera correcta!",
       "adFailedToastMsg": "La creación del anuncio ha fallado. Por favor, intentalo de nuevo.",
+      "offline": "Campaña concluida",
       "modules": [
         {
           "name": "Usuarios",
@@ -215,7 +216,7 @@
       "uploadBtnText": "Adjuntar",
       "cancelBtnText": "Cancelar",
       "uploadImgPlaceHolderText": "Arrastra y suelta la imagen aquí para adjuntarla.",
-      "createAdBtnText": "Crear Anuncio",
+      "createAdBtnText": "Crear nuevo anuncio",
       "adNameInputTitle": "Nombre del Anuncio",
       "adNameInputPlaceholder": "Campaña de Verano de Pepsi",
       "adUrlInputTitle": "URL del Anuncio",
