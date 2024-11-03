@@ -21,6 +21,7 @@ import { Avatar } from 'primereact/avatar'
 const Products = () => {
   const dispatch = useDispatch()
   const [reset, setReset] = useState(false)
+  const [confirm, setConfirm] = useState(false)
   const [products, setProducts] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: 6})
   const user = useSelector((state) => state.users.userData)
@@ -36,8 +37,11 @@ const Products = () => {
   
 
   const changeState = async (id, state) => {
-    await updateProduct({state: state}, {id: id})
-    setReset(true)
+    setConfirm(false)
+    if(action){
+		await updateProduct({state: state}, {id: id})
+		setReset(true)
+	}
   }
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callProducts = async () =>{

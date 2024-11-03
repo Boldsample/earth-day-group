@@ -11,6 +11,8 @@
     "disable": "Inactivo",
     "yes": "SÍ",
     "no": "NO",
+	"deleted": "Eliminado",
+	"confirmDelete": "Confirmar eliminación",
     "categoryListingiconTitle1": "100% Recyclado",
     "categoryListingiconTitle2": "Ecológico",
     "categoryListingiconTitle3": "Economía Sostenible",
@@ -525,7 +527,8 @@
         "petYearsOld": "años de edad",
         "contactShelterBtn": "Contactar refugio",
         "editPetBtn": "Editar mascota",
-        "deletePetBtn": "Eliminar mascota"
+        "deletePetBtn": "Eliminar mascota",
+        "deletePetTitle": "¿Desea eliminar la mascota?"
       }
     }
   },
@@ -781,7 +784,8 @@
         "addToCartBtnText": "Agregar al Carrito",
         "reportProductTooltipText": "Reportar Producto",
         "editProductBtnText": "Editar Producto",
-        "deleteProductBtn": "Eliminar Producto"
+        "deleteProductBtn": "Eliminar Producto",
+        "deleteProductTitle": "¿Desea eliminar el producto?"
       }
     }
   },

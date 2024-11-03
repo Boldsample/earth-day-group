@@ -16,14 +16,25 @@ import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
 import { faBookmark as faBookmarkLine, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 import { Tooltip } from "primereact/tooltip"
+import { Chip } from "primereact/chip"
+import ConfirmationModal from "@ui/modals/ConfirmationModal"
 
 const Pet = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const [ pet, setPet ] = useState(null)
+  const [ confirm, setConfirm ] = useState(null)
   const user = useSelector((state) => state.users.userData)
+  const [tGlobal] = useTranslation('translation', { keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'ngo.pets.pet' })
 
+  const changeState = async action => {
+	setConfirm(false)
+	if(action){
+		await updatePet({state: 2}, {id: id})
+		setPet(null)
+	}
+  }
   const doFollow = async e => {
     e.preventDefault()
     await followPet({type: 'pets', entity: id, follower: user?.id})
@@ -33,17 +44,15 @@ const Pet = () => {
     const _pet = await getPet(id)
     setPet(_pet)
   }
-  const deletePet = async () => {
-	await updatePet({state: 2}, {id: id})
-  }
 
   useEffect(() => {
-    if(id)
+    if(id && !pet)
       getPetData()
 		dispatch(setHeader('user'))
-  }, [id])
+  }, [id, pet])
   
   return <>
+    <ConfirmationModal title={t('deletePetTitle')} visible={confirm} action={changeState} />
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
@@ -69,7 +78,11 @@ const Pet = () => {
               <Link className="button small red-state outline hasTooltip" to={`/report/pet/${pet?.id}/`} data-pr-tooltip="Report pet"><FontAwesomeIcon icon={faFlag} /></Link>
             </> || <>
               <Link to={`/pet/edit/${pet?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editPetBtn')}</span></Link>
-              <a onClick={deletePet} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deletePetBtn')}</span></a>
+              {pet?.state == 1 && 
+                <button onClick={() => setConfirm(true)} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deletePetBtn')}</span></button>
+              || 
+                <Chip className="background-red-state ml-1" label={tGlobal('deleted')} />
+              }
             </>}
           </div>
         </div>

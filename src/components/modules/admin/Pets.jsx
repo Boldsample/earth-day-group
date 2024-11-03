@@ -14,7 +14,6 @@ import { getPets, updatePet } from '@services/petServices'
 import { setHeader } from '@store/slices/globalSlice'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
-import { Dropdown } from 'primereact/dropdown'
 import { InputSwitch } from 'primereact/inputswitch'
 import { Avatar } from 'primereact/avatar'
 
@@ -23,11 +22,9 @@ const Pets = () => {
   const [reset, setReset] = useState(false)
   const [pets, setPets] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: 6})
-  const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: ''})
+  const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'admin.pets' })
-  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.genericInputs'})
-  const stateDropDownText = t('stateDropdown', { returnObjects: true });
 
   const changeState = async (id, state) => {
     await updatePet({state: state}, {id: id})

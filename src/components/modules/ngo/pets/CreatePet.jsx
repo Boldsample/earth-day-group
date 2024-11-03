@@ -96,7 +96,7 @@ const CreatePet = () => {
     dispatch(setHeader("user"));
     if(id){
       getPet(id, user?.id).then(data => {
-        if(user?.id != data.user)
+        if(user?.id != data.user && user?.role != 'admin')
           navigate(-1)
         else
           reset({

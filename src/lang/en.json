@@ -11,6 +11,8 @@
     "disable": "Disable",
     "yes": "YES",
     "no": "NO",
+	"deleted": "Deleted",
+	"confirmDelete": "Confirm delete",
     "inputSearchPlaceHolder": "Keyword Search",
     "notfoundErrorMessage": "We couldn't find what you are looking for. Care to try again.",
     "categoryListingiconTitle1": "100% Recycled",
@@ -524,7 +526,8 @@
         "petYearsOld": "Years old",
         "contactShelterBtn": "Contact Shelter",
         "editPetBtn": "Edit Pet",
-        "deletePetBtn": "Delete Pet"
+        "deletePetBtn": "Delete Pet",
+        "deletePetTitle": "Do you want to delete the pet?"
       }
     }
   },
@@ -779,7 +782,8 @@
         "addToCartBtnText": "Add To Cart",
         "reportProductTooltipText": "Report Product",
         "editProductBtnText": "Edit Product",
-        "deleteProductBtn": "Delete Product"
+        "deleteProductBtn": "Delete Product",
+        "deleteProductTitle": "Do you want to delete de product?"
       }
     }
   },

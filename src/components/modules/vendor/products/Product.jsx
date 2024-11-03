@@ -11,20 +11,31 @@ import Footer from "@ui/footer/Footer"
 import { setHeader } from "@store/slices/globalSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
-import { followProduct, getProduct } from "@services/productServices"
+import { followProduct, getProduct, updateProduct } from "@services/productServices"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
 
 import "../../profile/profile.sass"
 import { Tooltip } from "primereact/tooltip"
 import AdBanner from "@ui/banners/AdBanner"
+import { Chip } from "primereact/chip"
+import ConfirmationModal from "@ui/modals/ConfirmationModal"
 
 const Product = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const [ product, setProduct ] = useState(null)
+  const [ confirm, setConfirm ] = useState(null)
   const user = useSelector((state) => state.users.userData)
+  const [tGlobal] = useTranslation('translation', { keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'vendor.products.product'})
 
+  const changeState = async action => {
+    setConfirm(false)
+    if(action){
+      await updateProduct({state: 2}, {id: id})
+      setProduct(null)
+    }
+  }
   const doFollow = async e => {
     e.preventDefault()
     await followProduct({type: 'product', entity: id, follower: user?.id})
@@ -36,12 +47,13 @@ const Product = () => {
   }
 
   useEffect(() => {
-    if(id)
+    if(id && !product)
       getProductData()
-		dispatch(setHeader('user'))
-  }, [id])
+	  dispatch(setHeader('user'))
+  }, [id, product])
 
   return <>
+    <ConfirmationModal title={t('deleteProductTitle')} visible={confirm} action={changeState} />
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
@@ -63,7 +75,11 @@ const Product = () => {
                 <Link className="button small red-state outline hasTooltip" to={`/report/product/${product?.id}/`} data-pr-tooltip={t('reportProductTooltipText')}><FontAwesomeIcon icon={faFlag} /></Link>
               </> || <>
                 <Link to={`/product/edit/${product?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editProductBtnText')}</span></Link>
-                <Link className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deleteProductBtn')}</span></Link>
+                {product?.state == 1 && 
+                  <button onClick={() => setConfirm(true)} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deleteProductBtn')}</span></button>
+                || 
+                  <Chip className="background-red-state ml-1" label={tGlobal('deleted')} />
+                }
               </>}
             </div>
           </div>

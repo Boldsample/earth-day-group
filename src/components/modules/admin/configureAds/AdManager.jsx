@@ -68,7 +68,6 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
         }else
             setValue('image', null)
     }
-    console.log('Changed Ad: ',ad)
 
     const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
     const onSubmit = async (data) => {
