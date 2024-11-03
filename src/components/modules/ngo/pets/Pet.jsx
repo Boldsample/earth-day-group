@@ -22,6 +22,7 @@ import ConfirmationModal from "@ui/modals/ConfirmationModal"
 const Pet = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [ pet, setPet ] = useState(null)
   const [ confirm, setConfirm ] = useState(null)
   const user = useSelector((state) => state.users.userData)
@@ -32,7 +33,10 @@ const Pet = () => {
 	setConfirm(false)
 	if(action){
 		await updatePet({state: 2}, {id: id})
-		setPet(null)
+		if(user.role != 'admin')
+			navigate('/profile/')
+		else
+			setPet(null)
 	}
   }
   const doFollow = async e => {
@@ -42,7 +46,10 @@ const Pet = () => {
   }
   const getPetData = async () => {
     const _pet = await getPet(id)
-    setPet(_pet)
+    if(user?.role != 'admin' && _pet?.state == 2)
+      navigate('/profile/')
+    else
+      setPet(_pet)
   }
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -23,6 +23,7 @@ import ConfirmationModal from "@ui/modals/ConfirmationModal"
 const Product = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [ product, setProduct ] = useState(null)
   const [ confirm, setConfirm ] = useState(null)
   const user = useSelector((state) => state.users.userData)
@@ -33,7 +34,10 @@ const Product = () => {
     setConfirm(false)
     if(action){
       await updateProduct({state: 2}, {id: id})
-      setProduct(null)
+      if(user.role != 'admin')
+        navigate('/profile/')
+      else
+        setProduct(null)
     }
   }
   const doFollow = async e => {
@@ -43,7 +47,10 @@ const Product = () => {
   }
   const getProductData = async () => {
     const _product = await getProduct(id, user?.id)
-    setProduct(_product)
+    if(user?.role != 'admin' && _product?.state == 2)
+      navigate('/profile/')
+    else
+      setProduct(_product)
   }
 
   useEffect(() => {
