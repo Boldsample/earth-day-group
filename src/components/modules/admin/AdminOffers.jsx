@@ -22,7 +22,7 @@ const AdminOffers = () => {
   const [detail, setDetail] = useState({})
   const [reset, setReset] = useState(false)
   const [offers, setOffers] = useState({data: []})
-  const [page, setPage] = useState({page: 0, rows: 6})
+  const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const [expandedRows, setExpandedRows] = useState({})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: '', materials: []})
@@ -94,17 +94,18 @@ const AdminOffers = () => {
         <TableSkeleton/>
       || 
         <DataTable paginator stripedRows lazy
-        emptyMessage={t('noOffersFoundText')}
           dataKey="id" 
           page={page.page}
           rows={page.rows} 
+          first={page.first}
           value={offers?.data} 
           header={renderHeader}
           expandedRows={expandedRows} 
           totalRecords={offers?.total} 
+          emptyMessage={t('noOffersFoundText')}
           onRowToggle={e => setExpandedRows(e.data)}
           rowExpansionTemplate={rowExpansionTemplate}
-          onPage={({page, rows}) => setPage({page, rows})}>
+          onPage={({first, page, rows}) => setPage({first, page, rows})}>
           {user.role != 'company' && 
             <Column expander={({offers}) => offers?.length > 0 } style={{width: "2.5rem"}} /> || null}
           {/* <Column header={null} body={ProfilePhoto}></Column> */}
@@ -121,6 +122,11 @@ const AdminOffers = () => {
             <Column header="Offers" body={({offers}) => offers?.length || 0}></Column>
           || null}
           <Column header={t('tableTitlePublishedDate')} body={({date}) => date.split(' ')[0]}></Column>
+          <Column header={t('rowExpansiontitleStatus')} body={({status, state}) => {
+            if(state == 2)        return t('statusTextDeleted')
+            else if(status == 0)  return t('statusTextPending')
+            else                  return t('statusTextAccepted')
+          }}></Column>
           {user.role == 'user' && 
             <Column className="actions" header={null} body={offer => 
               <Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>}></Column> || 

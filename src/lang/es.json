@@ -250,6 +250,7 @@
       "statusTextAccepted": "Aceptado",
       "statusTextRejected": "Rechazado",
       "statusTextPending": "Pendiente",
+      "statusTextDeleted": "Eliminado",
       "newOfferTextLink": "Nueva Oferta",
       "createPostOfferLinkText": "Crear Oferta",
       "noOffersFoundText": "No hay ofertas que cumplan con los criterios del filtro.",
@@ -546,11 +547,14 @@
   },
   "offers": {
     "offerInfo": {
+      "descriptionTitle": "Descripción:",
       "publishedByTitle": "Publicado por:",
       "quantityTitle": "Cantidad:",
       "askingPriceTitle": "Precio solicitado:",
       "sendOfferBtn": "Enviar oferta",
-      "reportOfferToolTip": "Reportar Oferta"
+      "reportOfferToolTip": "Reportar Oferta",
+      "deleteOffer": "Eliminar oferta",
+      "deleteOfferTitle": "¿Desea eliminar la oferta?"
     },
     "offerNew": {
       "mainTitle": "Publicar Oferta",
@@ -574,7 +578,9 @@
       "inputNumberAskingPriceLabel": "Precio de Venta",
       "inputNumberAskingPricePlaceholderText": "Precio de Venta",
       "postOfferBtnText": "Publicar Oferta",
-      "offerImagesTitle": "Imagenes de la oferta"
+      "offerImagesTitle": "Imagenes de la oferta",
+	  "textAreaDescriptionTitle": "Descripción",
+	  "descriptionPlaceholder": "Describe tu oferta."
     },
     "offersList": {
       "mainTitle": "Encuentra materiales reciclables",

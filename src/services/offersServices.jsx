@@ -7,6 +7,16 @@ export const createOffer = async (data) => {
   return response?.data?.id
 };
 
+export const updateOfferData = async (data, filter) => {
+	let filterStr = ''
+	Object.keys(filter).map(f => {
+	  filterStr += (filterStr ? " AND " : "") + f + "='" + filter[f] + "'"
+	})
+	filterStr = encodeURIComponent(filterStr)
+	const response = await API.post(`/update/offers&filter=${filterStr}`, data)
+	return {id: filter.id}
+}
+
 export const updateOffer = async (offer, proposal, reject, chat) => {
   if(reject){
     let filterStr = `id=${proposal}`
@@ -46,6 +56,6 @@ export const getOffers = async (filter, page) => {
   })
   filterStr = encodeURIComponent(filterStr)
   const userFilter = filter?.user || filter?.materials || ''
-  const { data } = await API.get(`/get/offers&filter=${filterStr}&userfilter=${userFilter}&page=${page.page * page.rows}&rows=${page.rows}`)
+  const { data } = await API.get(`/get/offers&filter=${filterStr}&userfilter=${userFilter}&page=${page.first}&rows=${page.rows}`)
   return {total: data.total, data: data.data, materials: data?.materials};
 };

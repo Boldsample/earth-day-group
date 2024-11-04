@@ -132,7 +132,7 @@
     ],
     "title": "offersModuleTitleText",
     "className": "dark-blue",
-    "link": "/offers/",
+    "link": "/offers/search/",
     "icon": "/assets/icons/post-offer.svg",
     "description": "offersModuleDescriptionText"
   },

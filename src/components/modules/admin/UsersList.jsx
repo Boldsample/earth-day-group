@@ -134,13 +134,13 @@ const Users = ({type}) => {
       || 
         <ProfileProvider profile={profile} setProfile={setProfile}>
           <DataTable paginator stripedRows lazy
-            emptyMessage={t('noUsersFoundText')}
             dataKey="id" 
             page={page.page} 
             rows={page.rows} 
             value={users?.data} 
             header={renderHeader} 
             totalRecords={users?.total} 
+            emptyMessage={t('noUsersFoundText')}
             onPage={({page, rows}) => setPage({page, rows})}>
             <Column headerClassName='table-header-styles' header={t('tableTitleUser')} bodyClassName='table-body-styles' body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
             {type == 'users' && 

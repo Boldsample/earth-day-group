@@ -249,6 +249,7 @@
       "statusTextAccepted": "Accepted",
       "statusTextRejected": "Rejected",
       "statusTextPending": "Pending",
+      "statusTextDeleted": "Deleted",
       "newOfferTextLink": "NewOffer",
       "createPostOfferLinkText": "Create Post Offer",
       "noOffersFoundText": "There are no offers that meet the filter criteria.",
@@ -546,10 +547,13 @@
   "offers": {
     "offerInfo": {
       "publishedByTitle": "Published by:",
+      "descriptionTitle": "Description:",
       "quantityTitle": "Quantity:",
       "askingPriceTitle": "Asking Price:",
       "sendOfferBtn": "Send an offer",
-      "reportOfferToolTip": "Report Offer"
+      "reportOfferToolTip": "Report Offer",
+      "deleteOffer": "Delete offer",
+      "deleteOfferTitle": "Do you want to delete the offer?"
     },
     "offerNew": {
       "mainTitle": "Post Offer",
@@ -573,7 +577,9 @@
       "inputNumberAskingPriceLabel": "Asking Price",
       "inputNumberAskingPricePlaceholderText": "Asking Price",
       "postOfferBtnText": "Post Offer",
-      "offerImagesTitle": "Offer Images"
+      "offerImagesTitle": "Offer Images",
+	  "textAreaDescriptionTitle": "Description",
+	  "descriptionPlaceholder": "Describe your offer."
     },
     "offersList": {
       "mainTitle": "Find recycle materials",

@@ -144,7 +144,6 @@ const Reports = () => {
 						dataKey="id" 
 						page={page.page} 
 						rows={page.rows} 
-						loading={loading} 
 						first={page.first} 
 						value={reports?.data} 
 						header={renderHeader} 

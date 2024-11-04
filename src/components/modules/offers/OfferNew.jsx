@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import { setHeader } from "@store/slices/globalSlice"
 import materials from "@json/recyclableMaterials.json"
 import { addImages, createOffer } from "@services/offersServices"
-import { TextInput, NumberInput, DropDownInput, UploadPhotoInput } from "@ui/forms"
+import { TextInput, NumberInput, DropDownInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
 
 import "@components/register/style.sass"
 
@@ -35,6 +35,7 @@ const OfferNew = () => {
       user: userId,
       material: "",
       quantity: "",
+      description: "",
       delivery_currency: i18n.language == 'es' ? 'cop' : 'usd'
     },
   })
@@ -186,6 +187,25 @@ const OfferNew = () => {
               {label: tGlobal('cop'), value: 'cop'},
               {label: tGlobal('usd'), value: 'usd'}
             ]} />
+        </div>
+        <div className="registerInput__container-x1">
+          <TextAreaInput
+            control={control}
+            isRequired={false}
+            nameInput="description"
+            getFormErrorMessage={getFormErrorMessage}
+            labelName={t('textAreaDescriptionTitle')}
+            placeHolderText={t('descriptionPlaceholder')}
+            rules={{
+              maxLength: {
+                value: 1000,
+                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 1000}),
+              },
+              pattern: {
+                value: /^\S/,
+                message: tGlobal('patternErrorMessage'),
+              },
+            }} />
         </div>
         <UploadPhotoInput
           type="imageUpload"

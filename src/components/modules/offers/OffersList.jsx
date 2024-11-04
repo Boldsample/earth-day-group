@@ -35,6 +35,7 @@ const Offers = ({type}) => {
 
 	const hidePopup = () => {
 		navigate(`/offers${type == 'search' ? '/search' : ''}/`)
+		setReset(true)
 	}
 	const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
 	const getOfferDetail = async id => {
@@ -44,7 +45,9 @@ const Offers = ({type}) => {
 	const callOffers = async () =>{
 		let _filter = {}
 		if(type != 'search')
-			_filter['user'] = `o.user=${user?.id}`
+			_filter['user'] = `o.user=${user?.id} AND o.state=1`
+		else
+			_filter['user'] = `o.state=1`
 		if(filters?.keyword != '')
 			_filter['keyword'] = `(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
 		if(filters?.materials?.length > 0)
