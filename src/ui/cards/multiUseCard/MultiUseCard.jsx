@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 
 import "./multiusecard.sass"
+import { useSelector } from "react-redux"
 
 const MultiUseCard = ({
   type,
@@ -16,7 +17,9 @@ const MultiUseCard = ({
   status,
   data = {},
   action = null,
+  bookmark = true,
 }) => {
+  const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'ui.cards.multiUseCard'})
 	const [tReport] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
 
@@ -170,7 +173,9 @@ const MultiUseCard = ({
           <Link to={`/${data?.role}/${data?.username}/`}><ProfilePhoto userPhoto={data?.picture} icon={faImage} /></Link>
           <div className="content">
             <h5 className="font-bold"><Link to={`/${data?.role}/${data?.username}/`}>{data?.name}</Link></h5>
-            <Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
+			      {bookmark && 
+            	<Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
+			      }
             <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
             <Link className="button small dark-blue" to={`/${data?.role}/${data?.username}/`}>{t('seeMoreBtnText')} <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
@@ -185,7 +190,9 @@ const MultiUseCard = ({
           <div className="content">
             <div className="price">{parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
             <h5 className="font-bold"><Link to={`/product/${data?.id}/`}>{data?.name}</Link></h5>
-            <Link className="bookmark" onClick={doActionProduct}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></Link>
+			      {bookmark && 
+              <Link className="bookmark" onClick={doActionProduct}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></Link>
+            }
             <Link className="button small dark-blue" to={`/product/${data?.id}/`}>{t('seeMoreBtnText')} <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
         </div>
@@ -198,7 +205,9 @@ const MultiUseCard = ({
           <Link to={`/pet/${data?.id}/`}><ProfilePhoto userPhoto={data?.picture} icon={faImage} /></Link>
           <div className="content">
             <h5 className="font-bold"><Link to={`/pet/${data?.id}/`}>{data?.name}</Link></h5>
-            <Link className="bookmark" onClick={doActionPet}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></Link>
+			      {bookmark && 
+              <Link className="bookmark" onClick={doActionPet}><FontAwesomeIcon icon={data.followed ? faBookmark : faBookmarkLine} /></Link>
+            }
             <small>{data?.gender} - {data?.age} Year{data?.age > 1 ? 's' : ''} old</small>
             <Link className="button small dark-blue" to={`/pet/${data?.id}/`}>{t('seeMoreBtnText')} <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>

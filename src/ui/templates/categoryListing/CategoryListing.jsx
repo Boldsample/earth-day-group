@@ -87,7 +87,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
               {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
                 skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
               || (elements?.total > 0 && 
-                elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
+                elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} bookmark={user?.role != 'admin' && element?.user != user?.id} />)
               ) ||
                 <div className="fullwidth text-center mt-2">
                   <p>{tGlobal('notfoundErrorMessage')}</p>

@@ -18,14 +18,14 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
   const skeletonPlaceHolder = ["", "", "", ""]
   const [elements, setElements] = useState(null)
   const [filters, setFilters] = useState({keyword: ''})
-  const userId = useSelector((state) => state.users.userData.id)
+  const loggedUser = useSelector((state) => state.users.userData)
   const [page, setPage] = useState({page: 0, rows: related ? 4 : 8})
   const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileElements'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
 
   const doFollow = async (id) => {
     const _type = type == 'products' ? 'product' : 'pet'
-    await followProduct({type: _type, entity: id, follower: userId})
+    await followProduct({type: _type, entity: id, follower: loggedUser?.id})
     loadElements()
   }
   const loadElements = async e => {
@@ -36,13 +36,13 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
       let _filter = {user: `p.user=${user}`, state: `p.state=1`}
       if(filters?.keyword != '')
         _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
-      const _products = await getProducts(_filter, page, userId)
+      const _products = await getProducts(_filter, page, loggedUser?.id)
       setElements(_products)
     }else{
       let _filter = {user: `p.user=${user}`, stete: `p.state=1`}
       if(filters?.keyword != '')
         _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
-      const _pets = await getPets(_filter, page, userId)
+      const _pets = await getPets(_filter, page, loggedUser?.id)
       setElements(_pets)
     }
   }
@@ -76,7 +76,7 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
       {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
         skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
       || (elements?.total > 0 && 
-        elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} />)
+        elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} bookmark={loggedUser?.role != 'admin' && element?.user != loggedUser?.id} />)
       ) ||
         <div className="fullwidth text-center mt-2">
           <p>{tGlobal2('notfoundErrorMessage')}</p>
