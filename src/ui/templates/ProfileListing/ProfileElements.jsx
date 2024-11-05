@@ -19,7 +19,7 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
   const [elements, setElements] = useState(null)
   const [filters, setFilters] = useState({keyword: ''})
   const loggedUser = useSelector((state) => state.users.userData)
-  const [page, setPage] = useState({page: 0, rows: related ? 4 : 8})
+  const [page, setPage] = useState({first: 0, page: 0, rows: related ? 4 : 8})
   const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileElements'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
 
@@ -83,7 +83,7 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
         </div>
       }
       {!related && page?.rows < elements?.total && 
-        <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
+        <Paginator first={page?.first} page={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({first: e.first, page: e.page, rows: e.rows})} />
       }
       {same && 
         <div className="fullwidth text-center">

@@ -58,7 +58,7 @@ const Shelters = ({type}) => {
   }, [page]);
   useEffect(() => {
     setFilters({keyword: ''})
-    setPage({page: 0, rows: 8})
+    setPage({first: 0, page: 0, rows: 8})
   }, [type]);
 
   return <CategoryListing content={vendorTemplateContent} section={type} elements={elements} filters={filters} setFilters={setFilters} reloadElements={loadElements} page={page} setPage={setPage} />

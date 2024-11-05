@@ -8,7 +8,7 @@ import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 
 const Companies = () => {
   const dispatch = useDispatch()
-  const [page, setPage] = useState({page: 0, rows: 8})
+  const [page, setPage] = useState({first: 0, page: 0, rows: 8})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
   const [elements, setElements] = useState({data: []})

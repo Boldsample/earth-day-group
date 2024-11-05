@@ -94,7 +94,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
                 </div>
               }
               {page?.rows < elements?.total && 
-                <Paginator first={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({page: e.first, rows: e.rows})} />
+                <Paginator first={page?.first} page={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({first: e.first, page: e.page, rows: e.rows})} />
               }
             </div>
           </div>
