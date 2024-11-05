@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { Dialog } from 'primereact/dialog'
 import { InputText } from 'primereact/inputtext'
@@ -21,6 +21,7 @@ import materials from "@json/recyclableMaterials.json"
 
 const Map = () => {
   const dispatch = useDispatch()
+  const { lat, lng } = useParams()
   const [ map, setMap ] = useState(null)
   const [ show, setShow ] = useState(null)
   const [ zIndex, setZIndex ] = useState({})
@@ -125,7 +126,9 @@ const Map = () => {
   }, [update])
   useEffect(() => {
     dispatch(setHeader('map'))
-    if(map && user?.default_location)
+	  if(lat && lng)
+      setCurrent({lat: parseFloat(lat), lng: parseFloat(lng)})
+    else if(map && user?.default_location)
       toCurrentLocation(user.default_location)
   }, [user, map])
   
@@ -227,7 +230,7 @@ const Map = () => {
           })}
         </div>}
       </MarkerClustererF>
-      <MarkerF position={current} icon={{ url: "/assets/icons/map-home.svg", scaledSize: new window.google.maps.Size(60, 60) }}
+      <MarkerF position={{lat: parseFloat(user?.lat), lng: parseFloat(user?.lng)}} icon={{ url: "/assets/icons/map-home.svg", scaledSize: new window.google.maps.Size(60, 60) }}
         optimized={false}
         zIndex={zIndex?.home?.index}
         onMouseOut={e => updateZIndex(e, 'home')}
