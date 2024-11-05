@@ -65,7 +65,7 @@ const Pets = () => {
   }, [user])
 
   return <div className="layout">
-    <ConfirmationModal title={tProduct('deletePetTitle')} visible={confirm} action={changeState} />
+    <ConfirmationModal title={tPet('deletePetTitle')} visible={confirm} action={changeState} />
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
       <h1 className="text-defaultCase mb-1">{t('mainTitle')} </h1>
