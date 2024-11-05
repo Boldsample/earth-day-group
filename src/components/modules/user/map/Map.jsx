@@ -27,21 +27,23 @@ const Map = () => {
   const [ update, setUpdate ] = useState(null)
   const [ markers, setMarkers ] = useState([])
   const [ showFilters, setShowFilters ] = useState(false)
-  const [current, setCurrent] = useState({lat: 0, lng: 0})
   const user = useSelector((state) => state.users.userData)
+  const [current, setCurrent] = useState({lat: 3.4, lng: -76.54})
   const [ filters, setFilters ] = useState({role: [], material: []})
   const [t] = useTranslation('translation', { keyPrefix: 'user.map'})
   const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials'})
 
   const updateFilter = e => {
     setFilters(_prev => {
-		if(e?.checked)
-			_prev[e?.target?.name].push(e?.value)
-		else
-			_prev[e?.target?.name].splice(_prev[e?.target?.name]?.indexOf(e?.value), 1)
-		if(!_prev?.role.includes('company'))
-			_prev.material = []
-		return {..._prev}
+      if(e?.value == 'all')
+        _prev[e?.target?.name] = []
+      else if(e?.checked)
+        _prev[e?.target?.name].push(e?.value)
+      else
+        _prev[e?.target?.name].splice(_prev[e?.target?.name]?.indexOf(e?.value), 1)
+      if(!_prev?.role?.includes('company'))
+        _prev.material = []
+      return {..._prev}
     })
     setUpdate(_prev => ({..._prev, date: new Date()}))
   }
@@ -160,8 +162,10 @@ const Map = () => {
       {show?.materials?.length > 0 && <>
         <h5 className="font-bold mb-1">{t('markerDetailMaterialTitle')}</h5>
         <div>
-          {show?.materials?.map(({type}, key) => 
-            <Button key={key} label={tMaterial(type)} className={'small mb-1 ' + type} />
+          {show?.materials?.map(({type}, key) => {
+            const _materials = materials.flatMap(m => filters?.material.some(fm => fm == m.label) ? [m.label, ...m.items.map(im => im.label)] : [])
+            return <Button key={key} label={tMaterial(type)} className={'small mb-1 ' + type} />
+          }
         )}
         </div>
       </>}
@@ -176,16 +180,18 @@ const Map = () => {
       <a className="open" onClick={() => setShowFilters(prev => !prev)}><FontAwesomeIcon icon={showFilters ? faChevronDown : faChevronUp} /></a>
       {user?.role == 'user' && <>
         <h5 className="text-dark-blue fullwidth font-bold">{t('filerByMaterialTitle')}</h5>
+        <div className="radio"><Checkbox inputId="role_all" name="role" value="all" checked={filters?.role?.length == 0} onChange={updateFilter} /> <label htmlFor="role_all">{t('filtersModalCheckBoxAll')}</label></div>
         <div className="radio"><Checkbox inputId="role_company" name="role" value="company" checked={filters?.role.includes('company')} onChange={updateFilter} /> <label htmlFor="role_company">{t('filtersModalCheckBoxRecycleCompany')}</label></div>
         <div className="radio"><Checkbox inputId="role_shelter" name="role" value="shelter" checked={filters?.role.includes('shelter')} onChange={updateFilter} /> <label htmlFor="role_shelter">{t('filtersModalCheckBoxShelters')}</label></div>
         <div className="radio"><Checkbox inputId="role_vendor" name="role" value="vendor" checked={filters?.role.includes('vendor')} onChange={updateFilter} /> <label htmlFor="role_vendor">{t('filtersModalCheckBoxShops')}</label></div>
         <div className="radio"><Checkbox inputId="role_social" name="role" value="social" checked={filters?.role.includes('social')} onChange={updateFilter} /> <label htmlFor="role_social">{t('filtersModalCheckBoxSocialOrg')}</label></div>
-	  </>}
+	    </>}
       {(filters?.role.includes('company') || user?.role == 'company') && <>
         <h5 className="text-dark-blue fullwidth font-bold mt-2">{t('filtersModalTitle')}</h5>
-		{materials?.map(category => 
+        <div className="radio"><Checkbox inputId="material_all" name="material" value="all" checked={filters?.material?.length == 0} onChange={updateFilter} /> <label htmlFor="material_all">{t('filtersModalCheckBoxAll')}</label></div>
+		    {materials?.map(category => 
         	<div key={category?.code} className="radio"><Checkbox inputId={`material_${category?.code}`} name="material" value={category?.label} checked={filters?.material.includes(category?.label)} onChange={updateFilter} /> <label htmlFor={`material_${category?.code}`}>{tMaterial(category?.label)}</label></div>
-		)}
+		    )}
       </>}
     </div>
     <GoogleMap
