@@ -39,8 +39,8 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
       case 'company':
         return [
           { key: t('userPhoneNumberTitle'), value: user?.phone },
-          { key: t('userNitNumberTitle'), value: user?.nit },
-          { key: t('userWebsiteNumberTitle'), value: <a href={formatExternalURL(user?.website)} target="_blank">{user?.website}</a> },
+          { key: t('userNitTitle'), value: user?.nit },
+          { key: t('userWebsiteTitle'), value: <a href={formatExternalURL(user?.website)} target="_blank">{user?.website}</a> },
           { key: t('userAddressTitle'), value: user?.address }
         ]
       default:
