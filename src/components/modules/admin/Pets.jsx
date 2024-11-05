@@ -16,19 +16,26 @@ import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { InputSwitch } from 'primereact/inputswitch'
 import { Avatar } from 'primereact/avatar'
+import ConfirmationModal from '@ui/modals/ConfirmationModal'
 
 const Pets = () => {
   const dispatch = useDispatch()
   const [reset, setReset] = useState(false)
+  const [confirm, setConfirm] = useState(false)
+  const [selected, setSelected] = useState(false)
   const [pets, setPets] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: 6})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'admin.pets' })
+  const [tPet] = useTranslation('translation', { keyPrefix: 'ngo.pets.pet' })
 
-  const changeState = async (id, state) => {
-    await updatePet({state: state}, {id: id})
-    setReset(true)
+  const changeState = async action => {
+    setConfirm(false)
+    if(action){
+      await updatePet({state: 2}, {id: selected})
+      setReset(true)
+    }
   }
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callPets = async () =>{
@@ -58,6 +65,7 @@ const Pets = () => {
   }, [user])
 
   return <div className="layout">
+    <ConfirmationModal title={tProduct('deletePetTitle')} visible={confirm} action={changeState} />
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
       <h1 className="text-defaultCase mb-1">{t('mainTitle')} </h1>
@@ -88,7 +96,15 @@ const Pets = () => {
           }}></Column>
           <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleState')}  body={({id, state}) => 
-             <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/>
+            <InputSwitch checked={state == 1} onChange={async (e) => {
+              if(state == 1){
+                setSelected(id)
+                setConfirm(true)
+              }else{
+                await updatePet({state: 1}, {id: id})
+                setReset(true)
+              }
+            }}/>
           }></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
             <Link className="button small dark-blue" to={`/pet/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>

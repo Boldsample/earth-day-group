@@ -13,21 +13,23 @@ import { useTranslation } from 'react-i18next'
 import { setHeader } from '@store/slices/globalSlice'
 import { getProducts, updateProduct } from '@services/productServices'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
-import { Dropdown } from 'primereact/dropdown'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { InputSwitch } from 'primereact/inputswitch'
 import { Avatar } from 'primereact/avatar'
+import ConfirmationModal from '@ui/modals/ConfirmationModal'
 
 const Products = () => {
   const dispatch = useDispatch()
   const [reset, setReset] = useState(false)
   const [confirm, setConfirm] = useState(false)
+  const [selected, setSelected] = useState(false)
   const [products, setProducts] = useState({data: []})
   const [page, setPage] = useState({page: 0, rows: 6})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: ''})
-  const [t] = useTranslation('translation', { keyPrefix: 'admin.products' })
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+  const [t] = useTranslation('translation', { keyPrefix: 'admin.products' })
+  const [tProduct] = useTranslation('translation', { keyPrefix: 'vendor.products.product'})
 
   function keepFirstLetters(inputString) {
     const words = inputString.split(' ');
@@ -35,13 +37,12 @@ const Products = () => {
     return firstLetters;
   }
   
-
-  const changeState = async (id, state) => {
+  const changeState = async action => {
     setConfirm(false)
     if(action){
-		await updateProduct({state: state}, {id: id})
-		setReset(true)
-	}
+      await updateProduct({state: 2}, {id: selected})
+      setReset(true)
+    }
   }
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callProducts = async () =>{
@@ -71,6 +72,7 @@ const Products = () => {
   }, [user])
   
   return <div className="layout">
+    <ConfirmationModal title={tProduct('deleteProductTitle')} visible={confirm} action={changeState} />
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
       <h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>
@@ -97,8 +99,15 @@ const Products = () => {
             <span className='table-item__background'>{parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
           </>}></Column>
           <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
-          <Column header={t('tableTitleState')} body={({id, state}) => 
-          <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/>
+          <Column header={t('tableTitleState')} body={({id, state}) => <InputSwitch checked={state == 1} onChange={async (e) => {
+              if(state == 1){
+                setSelected(id)
+                setConfirm(true)
+              }else{
+                await updateProduct({state: 1}, {id: id})
+                setReset(true)
+              }
+            }} />
           }></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
             <Link className="button small dark-blue" to={`/product/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
