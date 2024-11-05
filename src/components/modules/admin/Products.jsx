@@ -24,7 +24,7 @@ const Products = () => {
   const [confirm, setConfirm] = useState(false)
   const [selected, setSelected] = useState(false)
   const [products, setProducts] = useState({data: []})
-  const [page, setPage] = useState({page: 0, rows: 6})
+  const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const user = useSelector((state) => state.users.userData)
   const [filters, setFilters] = useState({keyword: ''})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
@@ -84,10 +84,11 @@ const Products = () => {
           dataKey="id" 
           page={page.page} 
           rows={page.rows} 
+          first={page.first} 
           value={products?.data} 
           header={renderHeader} 
           totalRecords={products?.total} 
-          onPage={({page, rows}) => setPage({page, rows})}>
+          onPage={({first, page, rows}) => setPage({first, page, rows})}>
           <Column headerClassName='table-header-styles' header={t('tableTitleName')} field="name" bodyClassName='table-body-styles' body={({name, picture})=>{
             const initials = keepFirstLetters(name)
             return <div className="flex aligncenter">

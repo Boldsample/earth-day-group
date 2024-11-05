@@ -26,7 +26,7 @@ const Offers = ({type}) => {
 	const [detail, setDetail] = useState({})
 	const [reset, setReset] = useState(false)
 	const [offers, setOffers] = useState({data: []})
-	const [page, setPage] = useState({page: 0, rows: 6})
+	const [page, setPage] = useState({first: 0, page: 0, rows: 6})
 	const [expandedRows, setExpandedRows] = useState({})
 	const user = useSelector((state) => state.users.userData)
 	const [filters, setFilters] = useState({keyword: '', materials: []})
@@ -122,13 +122,14 @@ const Offers = ({type}) => {
 					dataKey="id" 
 					page={page.page}
 					rows={page.rows} 
+					first={page.first} 
 					value={offers?.data} 
 					header={renderHeader}
 					expandedRows={expandedRows} 
 					totalRecords={offers?.total} 
 					onRowToggle={e => setExpandedRows(e.data)}
 					rowExpansionTemplate={rowExpansionTemplate}
-					onPage={({page, rows}) => setPage({page, rows})}>
+					onPage={({first, page, rows}) => setPage({first, page, rows})}>
 					{type != 'search' && 
 						<Column  expander={({offers}) => offers?.length > 0 } style={{width: "2.5rem"}} /> || null}
 					{type == 'search' && 

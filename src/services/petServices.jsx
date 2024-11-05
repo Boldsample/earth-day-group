@@ -36,6 +36,6 @@ export const getPets = async (filter, page, user = null) => {
   })
   filterStr = encodeURIComponent(filterStr)
   user = user ? `&user=${user}` : ''
-  const { data } = await API.get(`/get/pets&filter=${filterStr}${user}&page=${page.page}&rows=${page.rows}`)
+  const { data } = await API.get(`/get/pets&filter=${filterStr}${user}&page=${page.first}&rows=${page.rows}`)
   return {total: data.total, data: data.data, card: 'pet'};
 }

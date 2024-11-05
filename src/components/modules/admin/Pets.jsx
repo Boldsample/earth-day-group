@@ -21,12 +21,12 @@ import ConfirmationModal from '@ui/modals/ConfirmationModal'
 const Pets = () => {
   const dispatch = useDispatch()
   const [reset, setReset] = useState(false)
+  const [pets, setPets] = useState({data: []})
   const [confirm, setConfirm] = useState(false)
   const [selected, setSelected] = useState(false)
-  const [pets, setPets] = useState({data: []})
-  const [page, setPage] = useState({page: 0, rows: 6})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
+  const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.pets' })
   const [tPet] = useTranslation('translation', { keyPrefix: 'ngo.pets.pet' })
 
@@ -77,10 +77,11 @@ const Pets = () => {
           dataKey="id" 
           page={page.page} 
           rows={page.rows} 
+          first={page.first} 
           value={pets?.data} 
           header={renderHeader} 
           totalRecords={pets?.total} 
-          onPage={({page, rows}) => setPage({page, rows})}>
+          onPage={({first, page, rows}) => setPage({first, page, rows})}>
           <Column headerClassName='table-header-styles' header={t('tableTitleName')} bodyClassName='table-body-styles' field="name" body={({name, picture}) =>{
              return <div className="flex aligncenter">
              <Avatar icon={<FontAwesomeIcon  color='#fff' icon={faPaw}/>} style={{ backgroundColor: 'var(--dark-blue)', color: '#ffffff', width: '19%' }}  image={picture} shape="circle" />

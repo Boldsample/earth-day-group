@@ -26,7 +26,7 @@ const Users = ({type}) => {
   const [confirm, setConfirm] = useState(false)
   const [users, setUsers] = useState({data: []})
   const [selected, setSelected] = useState(false)
-  const [page, setPage] = useState({page: 0, rows: 6})
+  const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const [resetFields, setResetFields] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
@@ -144,11 +144,12 @@ const Users = ({type}) => {
             dataKey="id" 
             page={page.page} 
             rows={page.rows} 
+			first={page.first}
             value={users?.data} 
             header={renderHeader} 
             totalRecords={users?.total} 
             emptyMessage={t('noUsersFoundText')}
-            onPage={({page, rows}) => setPage({page, rows})}>
+            onPage={({first, page, rows}) => setPage({first, page, rows})}>
             <Column headerClassName='table-header-styles' header={t('tableTitleUser')} bodyClassName='table-body-styles' body={({name, picture}) => <><ProfilePhoto userPhoto={picture} /> {name}</>}></Column>
             {type == 'users' && 
               <Column header={t('tableTitleRole')} field="role" body={roleColumnBodyTemplate}></Column>
