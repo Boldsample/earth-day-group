@@ -148,9 +148,8 @@
         "image": "/assets/adExamples/ad1.png",
         "description": "Este formato horizontal largo capta la atención de los usuarios debido a su tamaño y ubicación, lo que lo hace ideal para el reconocimiento de marca y anuncios importantes.",
         "techRequirements": [
-          "Tamaño máximo de archivo: 1,3 MB",
-          "Ancho mínimo: 600 píxeles",
-          "Altura mínima: 300 píxeles"
+          "Tamaño máximo de archivo: 2 MB",
+          "Tamaño recomendado: 1800x400 pixeles"
         ],
         "designRecommendations": [
           "Tipo de archivo: JPG o PNG"
@@ -175,9 +174,8 @@
         "image": "/assets/adExamples/ad2.png",
         "description": "Banner rectangular pequeño ideal para propósitos de marca, especialmente para mostrar logotipos o mensajes simples de la marca. Es menos adecuado para anuncios con texto extenso o información detallada.",
         "techRequirements": [
-          "Tamaño máximo de archivo: 1,3 MB",
-          "Ancho mínimo: 600 píxeles",
-          "Altura mínima: 300 píxeles"
+          "Tamaño máximo de archivo: 2 MB",
+          "Tamaño recomendado: 510x340 pixeles"
         ],
         "designRecommendations": [
           "Tipo de archivo: JPG o PNG"

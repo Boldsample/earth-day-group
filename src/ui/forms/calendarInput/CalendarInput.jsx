@@ -25,12 +25,13 @@ function CalendarInput({
         control={control}
         render={({ field }) => 
         <Calendar
-          placeholder={placeHolderText}
-          selectionMode="range"
-          readOnlyInput 
-          hideOnRangeSelection
+		      readOnlyInput 
           value={field.value}
           disabled={disabled}
+          hideOnRangeSelection
+          minDate={new Date()}
+          selectionMode="range"
+          placeholder={placeHolderText}
           inputId={nameInput + "_" + name}
           // onChange={(e) => setDates(e.value)}
           onChange={e => field.onChange(e.value)}
