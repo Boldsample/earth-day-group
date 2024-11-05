@@ -418,7 +418,8 @@
       "allShelters": "Shelters",
       "allSocialOrg": "Social Organizations",
       "createPostOfferLinkText": "Create Post Offer",
-      "noUsersFoundText": "There are no users that meet the filter criteria."
+      "noUsersFoundText": "There are no users that meet the filter criteria.",
+      "deleteUserTitle": "Do you want to delete the user?"
     }
   },
   "bookmarks": {
@@ -618,6 +619,7 @@
       "pickUpNotAvailable": "Not Available",
       "contactBtnText": "Contact",
       "editProfileBtnText": "Edit Profile",
+      "deleteProfileBtnText": "Delete Profile",
       "newProductBtnText": "New Product",
       "newPetBtnText": "Contact",
       "viewLocationBtnText": "View Location",

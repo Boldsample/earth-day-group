@@ -18,11 +18,14 @@ import { ProfileProvider } from '@components/modules'
 import { setHeader } from '@store/slices/globalSlice'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
+import ConfirmationModal from '@ui/modals/ConfirmationModal'
 
 const Users = ({type}) => {
   const dispatch = useDispatch()
   const [profile, setProfile] = useState(null)
+  const [confirm, setConfirm] = useState(false)
   const [users, setUsers] = useState({data: []})
+  const [selected, setSelected] = useState(false)
   const [page, setPage] = useState({page: 0, rows: 6})
   const [resetFields, setResetFields] = useState(false)
   const user = useSelector((state) => state.users.userData)
@@ -30,9 +33,12 @@ const Users = ({type}) => {
   const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
   const [filters, setFilters] = useState({state: type == 'admins' ? '' : '1', role: '', keyword: ''})
 
-  const changeState = async (id, state) => {
-    await updateUser({state: state}, {id: id})
-    setResetFields(true)
+  const changeState = async action => {
+    setConfirm(false)
+    if(action){
+      await updateUser({state: 2}, {id: selected})
+      setResetFields(true)
+    }
   }
   const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
   const callUsers = async () =>{
@@ -126,6 +132,7 @@ const Users = ({type}) => {
   
 
   return <div className="layout">
+    <ConfirmationModal title={t('deleteUserTitle')} visible={confirm} action={changeState} />
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
       <h1 className="text-defaultCase mb-1">{type == 'admins' ? t('adminMainTitle') : t('userMainTitle')}</h1>
@@ -148,7 +155,15 @@ const Users = ({type}) => {
             }
             <Column header={t('tableTitleEmail')} field="email" body={ type == 'admins' ? ({email})=> <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faEnvelope}/><p className='ml-1 mb-0'>{email}</p></div> :  undefined }></Column>
             <Column header={t('tableTitleState')} body={({id, state}) => 
-                  <InputSwitch checked={state == 1} onChange={(e) => changeState(id, state == 1? 2 : 1)}/>
+              <InputSwitch checked={state == 1} onChange={async (e) => {
+                if(state == 1){
+                  setSelected(id)
+                  setConfirm(true)
+                }else{
+                  await updateUser({state: 1}, {id: id})
+                  setResetFields(true)
+                }
+              }}/>
             }></Column>
             <Column className="actions" header={null} body={u => <>
               <Link className="button small orange" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon  icon={faPencil} /></Link>

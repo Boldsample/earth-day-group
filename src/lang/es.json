@@ -419,7 +419,8 @@
       "allShelters": "Refugios",
       "allSocialOrg": "Organizaciones Sociales",
       "createPostOfferLinkText": "Crear Oferta de Publicación",
-      "noUsersFoundText": "No hay usuarios que cumplan con los criterios de filtro."
+      "noUsersFoundText": "No hay usuarios que cumplan con los criterios de filtro.",
+      "deleteUserTitle": "¿Desea eliminar el usuario?"
     }
   },
   "bookmarks": {
@@ -619,6 +620,7 @@
       "pickUpFromHomeText": "Recoger en casa:",
       "contactBtnText": "Contactar",
       "editProfileBtnText": "Editar Perfil",
+      "deleteProfileBtnText": "Eliminar Perfil",
       "newProductBtnText": "Nuevo Producto",
       "newPetBtnText": "Contactar",
       "viewLocationBtnText": "Ver Ubicación",
