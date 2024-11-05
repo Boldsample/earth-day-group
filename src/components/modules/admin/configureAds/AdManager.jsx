@@ -5,7 +5,6 @@ import { Dialog } from 'primereact/dialog'
 import { Button } from 'primereact/button'
 import { useTranslation } from 'react-i18next'
 import { FileUpload } from 'primereact/fileupload'
-import { useDispatch, useSelector } from 'react-redux'
 import React, {useState, useEffect, useRef} from 'react'
 import { ProgressSpinner } from 'primereact/progressspinner'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -91,6 +90,7 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     }
     
     useEffect(() => {
+		toast.current.show({severity:'success', summary: 'Test Toast', detail: 'Test Toast', life: 20000000});
         setFirstRender(true);
         getAd(type).then(data => {
             if(data?.state < 3){
