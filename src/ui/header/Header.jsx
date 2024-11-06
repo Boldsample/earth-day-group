@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark, faChevronLeft, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
@@ -9,10 +9,12 @@ import { logoutUser } from "@services/userServices"
 import { resetState } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import HeaderNotifications from "@components/modules/notifications/HeaderNotifications"
+import { useEffect } from "react"
 
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [t, i18n] = useTranslation('translation')
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
@@ -24,6 +26,13 @@ const Header = () => {
       navigate('/login/')
     }
   }
+
+  useEffect(() => {
+    window.scrollTo({
+      behavior: 'smooth',
+      top: 0
+    })
+  }, [pathname])
 
   return <header className={'main_header '+header}>
 
