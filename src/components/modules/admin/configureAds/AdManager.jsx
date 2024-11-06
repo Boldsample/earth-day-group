@@ -90,7 +90,7 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     }
     
     useEffect(() => {
-		toast.current.show({severity:'success', summary: 'Test Toast', detail: 'Test Toast', life: 20000000});
+		// toast.current.show({severity:'success', summary: 'Test Toast', detail: 'Test Toast', life: 20000000});
         setFirstRender(true);
         getAd(type).then(data => {
             if(data?.state < 3){
