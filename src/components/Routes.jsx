@@ -119,6 +119,7 @@ const AppRoutes = () => {
         <Route path="/offers/search" element={<Offers type="search" />} />
         <Route path="/offers/search/:offer" element={<Offers type="search" />} />
         <Route path="/settings/edit" element={<RegisterCompany />} />
+        <Route path="/settings/edit/:tab" element={<RegisterCompany />} />
        </>}
        {user?.role == 'vendor' && <>
         <Route path="/profile" element={<Profile />} />

@@ -9,10 +9,10 @@ import { getUser } from "@services/userServices"
 
 const RegisterCompany = ({create = false}) => {
   const dispatch = useDispatch()
-  const { username } = useParams()
-  const [activeIndex, setActiveIndex] = useState(0)
+  const { username, tab } = useParams()
   const [isDisabled, setIsDisabled] = useState(true)
   const user = useSelector((state) => state.users.userData)
+  const [activeIndex, setActiveIndex] = useState(tab == 'materials' ? 1 : 0)
   const [userData, setUserData] = useState({ pick_up_from_home: false, images: [], materials: [] })
 
   useEffect(() => {

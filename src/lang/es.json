@@ -887,7 +887,9 @@
           "productLabel": "Productos",
           "LessMaterials": "Menos materiales",
           "MoreMaterials": "Más materiales",
-          "recyclableGoodsTitle": "Precio de Bienes Reciclables"
+          "recyclableGoodsTitle": "Precio de Bienes Reciclables",
+          "editMaterials": "Crear/editar materiales",
+          "createFirstMaterial": "Añade los materiales que compras"
         }
       }
     },
