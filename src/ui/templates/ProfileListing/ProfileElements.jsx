@@ -35,13 +35,13 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
     if(type == 'products'){
       let _filter = {user: `p.user=${user}`, state: `p.state=1`}
       if(filters?.keyword != '')
-        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+        _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _products = await getProducts(_filter, page, loggedUser?.id)
       setElements(_products)
     }else{
       let _filter = {user: `p.user=${user}`, stete: `p.state=1`}
       if(filters?.keyword != '')
-        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+        _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _pets = await getPets(_filter, page, loggedUser?.id)
       setElements(_pets)
     }

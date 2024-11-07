@@ -41,7 +41,7 @@ const Pets = () => {
   const callPets = async () =>{
     let _filter = {}
     if(filters?.keyword != '')
-      _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%')`
+      _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%')`)
     const _pets = await getPets(_filter, page)
     setPets(_pets)
   }

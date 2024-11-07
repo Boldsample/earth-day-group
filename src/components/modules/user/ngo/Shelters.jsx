@@ -40,13 +40,13 @@ const Shelters = ({type}) => {
     if(type == 'shelters'){
       let _filter = { role: `(u.role='shelter' OR u.role='ngo')` }
       if(filters?.keyword != '')
-        _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+        _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _vendors = await getUsers(_filter, 'full', user.id, page)
       setElements(_vendors);
     }else if(type == 'pets'){
       let _filter = {state: `p.state=1`}
       if(filters?.keyword != '')
-        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+        _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _products = await getPets(_filter, page, user?.id)
       setElements(_products)
     }

@@ -50,7 +50,7 @@ const Users = ({type}) => {
     if(filters?.state != '')
       _filter['state'] = `u.state='${filters.state}'`
     if(filters?.keyword != '')
-      _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%')`
+      _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%')`)
     const _users = await getUsers(_filter, 'full', user?.id, page)
     setUsers(_users)
   }

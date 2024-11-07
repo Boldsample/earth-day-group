@@ -59,7 +59,7 @@ const Reports = () => {
 		if(filters?.admin !== '')
 			_filter['admin'] = `r.admin='${filters.admin}'`
 		if(filters?.keyword != '')
-			_filter['keyword'] = `(r.description LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
+			_filter['keyword'] = encodeURIComponent(`(r.description LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`)
 		const _reports = await getReports(_filter, page)
 		setLoading(false)
 		setReports(_reports)
