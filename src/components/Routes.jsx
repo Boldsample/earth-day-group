@@ -157,6 +157,7 @@ const AppRoutes = () => {
         <Route path="/shelter/:id" element={<Profile />} />
         <Route path="/social/:id" element={<Profile />} />
         <Route path="/ngo/:id" element={<Profile />} />
+        <Route path="/ngo/:id/pets" element={<Profile />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/chat/:contact/:report" element={<Chat />} />
         <Route path="/products" element={<Products />} />

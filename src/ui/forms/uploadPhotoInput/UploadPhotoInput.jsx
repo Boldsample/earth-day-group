@@ -45,9 +45,9 @@ const UploadPhotoInput = ({
     e.target.value = ""
   }
   const removeImage = (clickedImage) => {
-    if(uploadedImages.length <= 7)
+    const filteredImages = uploadedImages.map((image, key) => key === clickedImage ? { ...image, deleted: 1 } : image)
+    if(filteredImages.filter(image => !image.deleted).length <= 7)
       setReachedImageCapacity(false);
-    const filteredImages = uploadedImages.filter((image, key) => key !== clickedImage)
     setUploadedImages(filteredImages)
   }
   const markAsMain = (clickedImage) => {
@@ -74,8 +74,10 @@ const UploadPhotoInput = ({
             <label htmlFor="file" className="imageUpload__button">
               <FontAwesomeIcon icon={faCloudArrowUp} color="#408D27" fontSize="1.25rem" />
             </label>
-            {uploadedImages?.length && uploadedImages?.map((image, key) => 
-              <div key={key} className="image__container">
+            {uploadedImages?.length && uploadedImages?.map((image, key) => {
+              if(image.deleted)
+                return
+              return <div key={key} className="image__container">
                 <button type="button" className="close__btn" onClick={() => removeImage(key)}><FontAwesomeIcon icon={faClose} color="green" fontSize="1rem" /></button>
                 {image?.is_main == 1 ? 
                   <button type="button" className="is__main">{t('profileUploadMain')}</button>
@@ -84,6 +86,7 @@ const UploadPhotoInput = ({
                 }
                 <img className="uploadedImage" src={image?.picture} alt="" />
               </div>
+            }
             ) || null}
           </div>
           {reachedImageCapacity && 
