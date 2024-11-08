@@ -49,7 +49,7 @@ const Offers = ({type}) => {
 		else
 			_filter['user'] = `o.state=1`
 		if(filters?.keyword != '')
-			_filter['keyword'] = `(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`
+			_filter['keyword'] = encodeURIComponent(`(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`)
 		if(filters?.materials?.length > 0)
 			_filter['materials'] = "(o.material='" + filters.materials?.join("' OR o.material='") +"')"
 		else if(type == 'search'){

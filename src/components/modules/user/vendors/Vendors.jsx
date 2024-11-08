@@ -56,13 +56,13 @@ const Vendors = ({type}) => {
     if(type == 'vendors'){
       let _filter = { role: `(u.role='vendor' || u.role='social' || u.role='ngo')` }
       if(filters?.keyword != '')
-        _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+        _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _vendors = await getUsers(_filter, 'full', user.id, page)
       setElements(_vendors)
     }else if(type == 'products'){
       let _filter = {state: `p.state=1`}
       if(filters?.keyword != '')
-        _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+        _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _products = await getProducts(_filter, page, user?.id)
       setElements(_products)
     }

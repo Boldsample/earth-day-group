@@ -48,7 +48,7 @@ const Products = () => {
   const callProducts = async () =>{
     let _filter = {}
     if(filters?.keyword != '')
-      _filter['keyword'] = `(p.name LIKE '%${filters.keyword}%')`
+      _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%')`)
     const _products = await getProducts(_filter, page)
     setProducts(_products)
   }

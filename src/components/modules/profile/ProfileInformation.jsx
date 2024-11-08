@@ -54,7 +54,7 @@ const ProfileInformation = ({profile, same, doFollow, admin}) => {
           <Link className="button small green-earth" to={`/chat/${profile?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /> <span>{t('contactBtnText')}</span></Link>
         }
         {(same || admin) && <>
-          <Link className="button small dark-blue" to="/settings/edit/"><FontAwesomeIcon icon={faPen} /> <span>{t('editProfileBtnText')}</span></Link>
+          <Link className="button small dark-blue" to={admin ? `/${profile?.role}/edit/${profile?.username}/` : '/settings/edit/'}><FontAwesomeIcon icon={faPen} /> <span>{t('editProfileBtnText')}</span></Link>
           {admin && 
             <Button onClick={() => setConfirm(true)} className="small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deleteProfileBtnText')}</span></Button>
           }

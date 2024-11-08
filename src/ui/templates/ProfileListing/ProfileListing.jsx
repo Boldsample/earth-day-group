@@ -13,6 +13,7 @@ import "../styles.sass"
 import AdBanner from "@ui/banners/AdBanner"
 import materials from "@json/recyclableMaterials.json"
 import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
+import { Link } from "react-router-dom"
 
 const ProfileListing = ({type, profile, reloadElements = () => false}) => {
   const user = useSelector((state) => state.users.userData)
@@ -44,27 +45,35 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
         <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} admin={user?.role == 'admin'} />
-        {profile?.materials?.length > 0 && 
-        <div className="recycableGoods__container"> 
-          <h4>{t('recyclableGoodsTitle')}</h4>
-          <div className={'materialsCard__grid ' + (moreMaterials ? 'show' : 'hide')}>
-            {materials?.map(category => {
-              const _categoryMaterials = profile?.materials?.filter(material => category?.items?.some(item => item?.label == material?.type))
-              if(_categoryMaterials?.length > 0)
-                return <div key={category?.label} className="materialCategory">
-                  <h6>{category?.label}</h6>
-                  {_categoryMaterials.map(material =>
-                    <RecycleMaterialCard
-                      key={material?.type}
-                      unit={material?.unit}
-                      price={material?.price}
-                      material={material.type} />
-                  )}
-                </div>
-            })}
+        {(profile?.materials?.length > 0 || user?.id == profile?.id) && 
+          <div className="recycableGoods__container">
+            <div className="materialsBoxTitle">
+              <h4>{t('recyclableGoodsTitle')}</h4>
+              {user?.id == profile?.id &&
+                <Link to="/settings/edit/materials/">{t('editMaterials')}</Link>
+              }
+            </div>
+            {materials?.length == 0 &&
+              <Link className="button dark-blue mt-2" to="/settings/edit/materials/">{t('createFirstMaterial')}</Link>
+            }
+            <div className={'materialsCard__grid ' + (moreMaterials ? 'show' : 'hide')}>
+              {materials?.map(category => {
+                const _categoryMaterials = profile?.materials?.filter(material => category?.items?.some(item => item?.label == material?.type))
+                if(_categoryMaterials?.length > 0)
+                  return <div key={category?.label} className="materialCategory">
+                    <h6>{category?.label}</h6>
+                    {_categoryMaterials.map(material =>
+                      <RecycleMaterialCard
+                        key={material?.type}
+                        unit={material?.unit}
+                        price={material?.price}
+                        material={material.type} />
+                    )}
+                  </div>
+              })}
+            </div>
+            <a onClick={() => setMoreMaterials(prev => !prev)}>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</a>
           </div>
-          <a onClick={() => setMoreMaterials(prev => !prev)}>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</a>
-        </div>
         }
         <AdBanner type="headerBanner" />
         {profile?.images?.length > 0 && 

@@ -30,7 +30,7 @@ const Organizations = ({type}) => {
     setElements({data: []})
     let _filter = { role: `(u.role='social' OR u.role='ngo')` }
     if(filters?.keyword != '')
-      _filter['keyword'] = `(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`
+      _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
     const _social = await getUsers(_filter, 'full', user.id, page)
     setElements(_social)
   }
