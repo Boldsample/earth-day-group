@@ -1,17 +1,21 @@
+import Cookies from "js-cookie"
+import { Menu } from "primereact/menu"
+import { useEffect, useRef } from "react"
+import { Dropdown } from "primereact/dropdown"
 import { useTranslation } from "react-i18next"
-import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBookmark, faChevronLeft, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { faBookmark, faChevronLeft, faGear, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
 import { resetState } from "@store/slices/usersSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import HeaderNotifications from "@components/modules/notifications/HeaderNotifications"
-import { useEffect } from "react"
 
 const Header = () => {
+  const menu = useRef(null);
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { pathname } = useLocation()
@@ -72,7 +76,43 @@ const Header = () => {
           <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
         </>}
         <HeaderNotifications />
-        <button className="lang" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
+		    <div>
+          <Menu ref={menu} popup model={[
+            {
+              label: t(`global.language`),
+              template: <div className="menuDropdown">
+                <label>{t(`global.language`)}</label>
+                <Dropdown
+                  optionLabel="label"
+                  optionValue="value"
+                  value={i18n.language}
+                  onChange={(e) => i18n.changeLanguage(e.value)}
+                  options={[
+                    { label: 'Español', value: 'es' },
+                    { label: 'English', value: 'en' },
+                  ]}
+                />
+              </div>
+            },
+            {
+              label: t(`global.currency`),
+              template: <div className="menuDropdown">
+                <label>{t(`global.currency`)}</label>
+                <Dropdown
+                  optionLabel="label"
+                  optionValue="value"
+                  value={Cookies.get('edgUserCurrency')}
+                  onChange={(e) => Cookies.set('edgUserCurrency', e.value)}
+                  options={[
+                    { label: 'USD', value: 'usd' },
+                    { label: 'COP', value: 'cop' },
+                  ]}
+                />
+              </div>
+            }
+          ]} />
+          <Link onClick={(event) => menu.current.toggle(event)}><FontAwesomeIcon icon={faGear} /></Link>
+        </div>
         <a className="logout" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
       </div>
     }
