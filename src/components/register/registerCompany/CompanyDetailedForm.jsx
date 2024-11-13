@@ -65,7 +65,7 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
     reset()
   }
   const removeMaterial = (clickedMaterial) => {
-    const filteredMaterials = user.materials.filter(material => material.type !== clickedMaterial)
+    const filteredMaterials = user.materials.map(material => material.type === clickedMaterial ? { ...material, deleted: 1 } : material)
     setUser({ ...user, materials: filteredMaterials })
   };
   const handleRecyclableMaterial = async (data) => {
@@ -221,15 +221,17 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
       </div>
     </form>
     <div className="materialsCard__grid">
-      {user?.materials?.map(material => 
-        <RecycleMaterialCard
+      {user?.materials?.map(material => {
+        if(material.deleted)
+          return
+        return <RecycleMaterialCard
           key={material?.type}
           unit={material?.unit}
           price={material?.price}
           material={material.type}
           currency={material?.currency}
           removeMaterial={removeMaterial} />
-      )}
+      })}
     </div>
     <UploadPhotoInput
       type="imageUpload"

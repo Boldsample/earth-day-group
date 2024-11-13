@@ -788,23 +788,23 @@ button, .button
   z-index: 999999
 .enter-animation
   animation: fadeIn 500ms ease-in-out
-  background: var(--green-earth)
-  top: 100vh
+  background: #FFFBEB
+  opacity: 0
 .exit-animation
   animation: fadeOut 500ms ease-in-out 500ms
-  background: var(--green-earth)
-  top: 100vh
+  background: #FFFBEB
+  opacity: 0
 @keyframes fadeIn
   0%
-    top: 100vh
+    opacity: 0
   100%
-    top: 0
+    opacity: 1
 
 @keyframes fadeOut
   0%
-    top: 0
+    opacity: 1
   100%
-    top: -100vh
+    opacity: 0
 
 #intro
   .layout__background

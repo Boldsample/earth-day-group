@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { useNavigate, useLocation, Routes } from "react-router-dom"
 
 function PageAnimate({ children }) {
-  const navigate = useNavigate()
   const location = useLocation()
   const [nextPath, setNextPath] = useState(null)
   const [isTransitioning, setIsTransitioning] = useState(false)
@@ -16,9 +15,6 @@ function PageAnimate({ children }) {
   }
 
   useEffect(() => {
-    console.log('Pathname: ', location.pathname)
-    console.log('currentPath: ', currentPath)
-    console.log('Transitioning: ', isTransitioning)
     if(location.pathname != currentPath){
       setIsTransitioning(true)
       setNextPath(location.pathname)
