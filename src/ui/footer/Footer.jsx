@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <div className='footer__grid'>
         <Link to="/"><img src="/assets/earth-day-group.png" alt="Earth Day Group" /></Link>
-        <p className='contactInfo__text'>Earth Day Group LLC <br />Fort Laudardale,Florida <br />United States <br />info@earthdaygroup.com</p>
+        <p className='contactInfo__text'>Earth Day Group LLC<br />info@earthdaygroup.com</p>
 		<div>
 			{t('adWithUs')} <br />
 			<a className="button small dark-blue" href={`mailto:info@earthdaygroup.com?subject=${encodeURIComponent(t('adSubject'))}&body=${encodeURIComponent(t('adSubject'))}`}>{t('contact')}</a>
