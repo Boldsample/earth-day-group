@@ -43,6 +43,10 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
           { key: t('userWebsiteTitle'), value: <a href={formatExternalURL(user?.website)} target="_blank">{user?.website}</a> },
           { key: t('userAddressTitle'), value: user?.address }
         ]
+      case 'admin':
+        return [
+          { key: t('userPhoneNumberTitle'), value: user?.phone },
+        ]
       default:
         return [
           { key: t('userPhoneNumberTitle'), value: user?.phone },

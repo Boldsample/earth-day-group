@@ -72,6 +72,8 @@
 	"currency": "Moneda",
 	"cop": "COP $ (Peso colombiano)",
 	"usd": "USD $ (Dolar estadounidense)",
+	"search": "Buscar",
+	"reset": "Limpiar",
     "formErrors": {
       "acceptCheckboxErrorMessage": "Es obligatorio aceptar los términos y condiciones.",
       "acceptCheckboxErrorMessage2": "Es obligatorio aceptar la política de privacidad.",

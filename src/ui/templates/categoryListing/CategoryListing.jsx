@@ -64,7 +64,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
       <div ref={content?.secondary?.length == 0 ? bannerScroll : null} className="layout autoheight">
         <div className="main__content centerfullwidth pt-4">
           <div className="template__listing self-center">
-			<AdBanner type="headerBanner" />
+			      <AdBanner type="headerBanner" />
             <div className="edg-search mb-1">
               {content.searchLabel && <h3 className="text-center mb-1">{content.searchLabel}</h3>}
               <form onSubmit={reloadElements} className="p-input-icon-left fullwidth">
@@ -73,9 +73,13 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
                   placeholder={tGlobal('inputSearchPlaceHolder')}
                   value={filters.keyword}
                   className="p-inputtext"
-                  onChange={e => setFilters(prev => ({...prev, keyword: e.target.value}))} />
+                  onChange={e => {
+                    setFilters(prev => ({...prev, keyword: e.target.value}))
+                    if(e.target.value == '')
+                      reloadElements()
+                  }} />
                 {filters?.keyword && 
-                  <Link className="reset" onClick={() => { setReset(true); setFilters({keyword: ''}) }}><FontAwesomeIcon icon={faTimes} /></Link>
+                  <Link className="reset" onClick={() => { setFilters({keyword: ''}); reloadElements() }}><FontAwesomeIcon icon={faTimes} /></Link>
                 }
                 <button className="green-earth ml-1" onClick={reloadElements}>{t('search')}</button>
               </form>

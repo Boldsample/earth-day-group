@@ -10,7 +10,6 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faPencil, faPlus, faTrash, faUser, faEnvelope, faPersonShelter, faRecycle, faShop, faHouse, faBuildingNgo  } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 import { InputSwitch } from 'primereact/inputswitch'
-import { useForm } from "react-hook-form"
 
 import { Dropdown } from 'primereact/dropdown'
 import { getUsers, updateUser } from '@services/userServices'
@@ -26,12 +25,12 @@ const Users = ({type}) => {
   const [confirm, setConfirm] = useState(false)
   const [users, setUsers] = useState({data: []})
   const [selected, setSelected] = useState(false)
-  const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const [resetFields, setResetFields] = useState(false)
   const user = useSelector((state) => state.users.userData)
+  const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
-  const [filters, setFilters] = useState({state: type == 'admins' ? '' : '1', role: '', keyword: ''})
+  const [filters, setFilters] = useState({state: '', role: '', keyword: ''})
 
   const changeState = async action => {
     setConfirm(false)
@@ -40,7 +39,13 @@ const Users = ({type}) => {
       setResetFields(true)
     }
   }
-  const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
+  const updateFilters = (name, value, wait=false) => {
+    setFilters(prev => ({...prev, [name]: value}))
+    if(!wait){
+      setPage({first: 0, page: 0, rows: 6})
+      setReset(true)
+    }
+  }
   const callUsers = async () =>{
     let _filter = {}
 	if(filters?.role != '')
@@ -50,7 +55,7 @@ const Users = ({type}) => {
     if(filters?.state != '')
       _filter['state'] = `u.state='${filters.state}'`
     if(filters?.keyword != '')
-      _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%')`)
+      _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.email LIKE '%${filters.keyword}%')`)
     const _users = await getUsers(_filter, 'full', user?.id, page)
     setUsers(_users)
   }
@@ -95,7 +100,7 @@ const Users = ({type}) => {
   const renderHeader = () => {
     return <div className="filters">
       {type == 'users' && 
-        <Dropdown value={filters?.role} onChange={e => updateFilters('role', e.value)} optionLabel="name" optionValue="code" placeholder="Select a user role" options={[
+        <Dropdown style={{width: '9rem'}} value={filters?.role} onChange={e => updateFilters('role', e.value)} optionLabel="name" optionValue="code" placeholder="Select a user role" options={[
           {name: t('all'), code: ""},
           {name: t('allUsers'), code: "user"},
           {name: t('allCompanies'), code: "company"},
@@ -105,17 +110,22 @@ const Users = ({type}) => {
           {name: t('allSocialOrg'), code: "social"},
         ]} />
       }
-      <Dropdown value={filters?.state} onChange={e => updateFilters('state', e.value)} optionLabel="name" optionValue="code" placeholder="Select a state" options={[
+      <Dropdown style={{width: '9rem'}} value={filters?.state} onChange={e => updateFilters('state', e.value)} optionLabel="name" optionValue="code" placeholder="Select a state" options={[
         {name: tGlobal("all"), code: ""},
         {name: tGlobal("active"), code: "1"},
         {name: tGlobal("disable"), code: "2"},
       ]} />
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
-      <Button className="small dark-blue" type="button" onClick={callUsers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
+      <InputText 
+        style={{width: '14rem'}} 
+        value={filters?.keyword} 
+        placeholder={t('inputSearchPlaceHolder')} 
+        onKeyDown={(e) => e.key === 'Enter' ? callUsers() : null} 
+        onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
+      <Button className="small dark-blue" type="button" onClick={callUsers}>{tGlobal('search')}</Button>
       <Button className="small red-state" type="button" onClick={() => {
-        setResetFields(true)
-        setFilters({state: "1", role: "", keyword: ''})
-      }}><FontAwesomeIcon icon={faTrash} /></Button>
+        setReset(true)
+        setFilters({state: '', role: '', keyword: ''})
+      }}>{tGlobal('reset')}</Button>
       {type == 'admins' && 
         <Link className="button small green-earth" to="/admin/new/"><FontAwesomeIcon icon={faPlus} /> {t('newAdminButton')}</Link>
       }

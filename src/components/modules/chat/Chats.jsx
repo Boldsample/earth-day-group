@@ -15,11 +15,18 @@ import ChatSkeleton from '@ui/skeletons/chatSkeleton/ChatSkeleton'
 const Chats = () => {
   const [users, setUsers] = useState([])
   const [filters, setFilters] = useState([])
-  const [page, setPage] = useState({page: 0, rows: 8})
-  const user = useSelector(state => state.users.userData)
   const skeletonPlaceHolder = ["", "", "", ""]
+  const user = useSelector(state => state.users.userData)
+  const [page, setPage] = useState({first: 0, page: 0, rows: 8})
   const [t] = useTranslation('translation', { keyPrefix: 'chat.chats' })
 
+  const updateFilters = (name, value, wait=false) => {
+    setFilters(prev => ({...prev, [name]: value}))
+    if(!wait){
+      setPage({first: 0, page: 0, rows: 6})
+      setReset(true)
+    }
+  }
   const updateFilter = filter => {
     setFilters(prev => {
       if(prev.includes(filter))

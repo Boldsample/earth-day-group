@@ -2,17 +2,18 @@ import { Link } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { Column } from 'primereact/column'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { MultiSelect } from 'primereact/multiselect'
 import { useDispatch, useSelector } from 'react-redux'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPlus, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { useTranslation } from 'react-i18next'
 
 import OfferInfo from '@modules/offers/OfferInfo'
 import { setHeader } from '@store/slices/globalSlice'
+import materials from "@json/recyclableMaterials.json"
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { getOffer, getOffers } from '@services/offersServices'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
@@ -26,11 +27,18 @@ const AdminOffers = () => {
   const user = useSelector((state) => state.users.userData)
   const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const [filters, setFilters] = useState({keyword: '', materials: []})
+  const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
   const [t] = useTranslation('translation', { keyPrefix: 'admin.adminOffers' })
-  const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
+	const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
 
   const hidePopup = () => setDetail({...detail, show: false})
-  const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
+  const updateFilters = (name, value, wait=false) => {
+    setFilters(prev => ({...prev, [name]: value}))
+    if(!wait){
+      setPage({first: 0, page: 0, rows: 6})
+      setReset(true)
+    }
+  }
   const getUserDetail = async id => {
     const _offer = await getOffer(id)
     setDetail({..._offer, show: true})
@@ -47,13 +55,35 @@ const AdminOffers = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="label" placeholder={t('multiSelectInputPlaceHolder')} />
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
-      <Button className="small dark-blue" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
+      <MultiSelect 
+        optionLabel="label"
+        optionValue="value"
+        maxSelectedLabels={1} 
+        style={{width: '15rem'}}
+        optionGroupLabel="label"
+        value={filters?.materials} 
+        optionGroupChildren="items"
+        placeholder={t('multiSelectInputPlaceHolder')} 
+        onChange={(e) => updateFilters('materials', e.value)} 
+        options={materials?.map(group => ({
+          ...group,
+          label: tMaterial(group?.label),
+          items: group?.items.map(item => ({
+            label: tMaterial(item?.label),
+            value: item?.label
+          }))
+        }))} />
+      <InputText 
+        style={{width: '14rem'}} 
+        value={filters?.keyword} 
+        placeholder={t('inputSearchPlaceHolder')} 
+        onKeyDown={(e) => e.key === 'Enter' ? callOffers() : null} 
+        onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
+      <Button className="small dark-blue" type="button" onClick={callOffers}>{tGlobal('search')}</Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
         setFilters({keyword: '', materials: []})
-      }}><FontAwesomeIcon icon={faTrash} /></Button>
+      }}>{tGlobal('reset')}</Button>
     </div>
   }
   const rowExpansionTemplate = data => <div className="p-3">

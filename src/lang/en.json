@@ -72,6 +72,8 @@
 	"currency": "Currency",
 	"cop": "COP $ (Colombian peso)",
 	"usd": "USD $ (US Dolar)",
+	"search": "Search",
+	"reset": "Reset",
     "formErrors": {
       "acceptCheckboxErrorMessage": "You are required to accept the terms and conditions.",
       "acceptCheckboxErrorMessage2": "You are required to accept the privacy policy.",

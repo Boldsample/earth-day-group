@@ -28,6 +28,7 @@ const Pets = () => {
   const user = useSelector((state) => state.users.userData)
   const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.pets' })
+  const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
   const [tPet] = useTranslation('translation', { keyPrefix: 'ngo.pets.pet' })
 
   const changeState = async action => {
@@ -37,7 +38,13 @@ const Pets = () => {
       setReset(true)
     }
   }
-  const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
+  const updateFilters = (name, value, wait=false) => {
+    setFilters(prev => ({...prev, [name]: value}))
+    if(!wait){
+      setPage({first: 0, page: 0, rows: 6})
+      setReset(true)
+    }
+  }
   const callPets = async () =>{
     let _filter = {}
     if(filters?.keyword != '')
@@ -47,12 +54,17 @@ const Pets = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
-      <Button className="small dark-blue" type="button" onClick={callPets}><FontAwesomeIcon icon={faPaperPlane} /></Button>
+      <InputText 
+        style={{width: '14rem'}} 
+        value={filters?.keyword} 
+        placeholder={t('inputSearchPlaceHolder')} 
+        onKeyDown={(e) => e.key === 'Enter' ? callPets() : null} 
+        onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
+      <Button className="small dark-blue" type="button" onClick={callPets}>{tGlobal('search')}</Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
         setFilters({keyword: ''})
-      }}><FontAwesomeIcon icon={faTrash} /></Button>
+      }}>{tGlobal('reset')}</Button>
     </div>
   }
 

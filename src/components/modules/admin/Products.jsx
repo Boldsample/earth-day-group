@@ -44,7 +44,13 @@ const Products = () => {
       setReset(true)
     }
   }
-  const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
+  const updateFilters = (name, value, wait=false) => {
+    setFilters(prev => ({...prev, [name]: value}))
+    if(!wait){
+      setPage({first: 0, page: 0, rows: 6})
+      setReset(true)
+    }
+  }
   const callProducts = async () =>{
     let _filter = {}
     if(filters?.keyword != '')
@@ -54,12 +60,17 @@ const Products = () => {
   }
   const renderHeader = () => {
     return <div className="filters">
-      <InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={tGlobal('inputSearchPlaceHolder')} />
-      <Button className="small dark-blue" type="button" onClick={callProducts}><FontAwesomeIcon icon={faPaperPlane} /></Button>
+      <InputText 
+        style={{width: '14rem'}} 
+        value={filters?.keyword} 
+        placeholder={t('inputSearchPlaceHolder')} 
+        onKeyDown={(e) => e.key === 'Enter' ? callProducts() : null} 
+        onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
+      <Button className="small dark-blue" type="button" onClick={callProducts}>{tGlobal('search')}</Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
         setFilters({keyword: ''})
-      }}><FontAwesomeIcon icon={faTrash} /></Button>
+      }}>{tGlobal('reset')}</Button>
     </div>
   }
 

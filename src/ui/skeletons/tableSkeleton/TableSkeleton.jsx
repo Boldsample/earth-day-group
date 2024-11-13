@@ -8,12 +8,12 @@ const TableSkeleton = () => {
 
   return (
     <DataTable value={items} className="p-datatable-striped">
-    <Column field="Title" header="Title" style={{ width: '25%' }} body={<Skeleton />}></Column>
-    <Column field="Material" header="Material" style={{ width: '25%' }} body={<Skeleton />}></Column>
-    <Column field="Quantity" header="Quantity" style={{ width: '25%' }} body={<Skeleton />}></Column>
-    <Column field="Sell Price" header="Sell Price" style={{ width: '25%' }} body={<Skeleton />}></Column>
-    <Column field="Offers" header="Offers" style={{ width: '25%' }} body={<Skeleton />}></Column>
-    <Column field="Published Date" header="Published Date" style={{ width: '25%' }} body={<Skeleton />}></Column>
+      <Column field="Title" header="Title" style={{ width: '25%' }} body={<Skeleton />}></Column>
+      <Column field="Material" header="Material" style={{ width: '25%' }} body={<Skeleton />}></Column>
+      <Column field="Quantity" header="Quantity" style={{ width: '25%' }} body={<Skeleton />}></Column>
+      <Column field="Sell Price" header="Sell Price" style={{ width: '25%' }} body={<Skeleton />}></Column>
+      <Column field="Offers" header="Offers" style={{ width: '25%' }} body={<Skeleton />}></Column>
+      <Column field="Published Date" header="Published Date" style={{ width: '25%' }} body={<Skeleton />}></Column>
     </DataTable>
   )
 }

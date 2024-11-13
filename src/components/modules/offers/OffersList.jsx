@@ -1,18 +1,19 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { Column } from 'primereact/column'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { MultiSelect } from 'primereact/multiselect'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPlus, faSearch, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { useTranslation } from 'react-i18next'
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 import OfferInfo from '@modules/offers/OfferInfo'
 import { setHeader } from '@store/slices/globalSlice'
+import materials from "@json/recyclableMaterials.json"
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import { getOffer, getOffers } from '@services/offersServices'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
@@ -26,10 +27,11 @@ const Offers = ({type}) => {
 	const [detail, setDetail] = useState({})
 	const [reset, setReset] = useState(false)
 	const [offers, setOffers] = useState({data: []})
-	const [page, setPage] = useState({first: 0, page: 0, rows: 6})
 	const [expandedRows, setExpandedRows] = useState({})
 	const user = useSelector((state) => state.users.userData)
+	const [page, setPage] = useState({first: 0, page: 0, rows: 6})
 	const [filters, setFilters] = useState({keyword: '', materials: []})
+	const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
 	const [t] = useTranslation('translation', { keyPrefix: 'offers.offersList' })
 	const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
 
@@ -37,7 +39,13 @@ const Offers = ({type}) => {
 		navigate(`/offers${type == 'search' ? '/search' : ''}/`)
 		setReset(true)
 	}
-	const updateFilters = (name, value) => setFilters(prev => ({...prev, [name]: value}))
+	const updateFilters = (name, value, wait=false) => {
+		setFilters(prev => ({...prev, [name]: value}))
+		if(!wait){
+			setPage({first: 0, page: 0, rows: 6})
+			setReset(true)
+		}
+	}
 	const getOfferDetail = async id => {
 		const _offer = await getOffer(id)
 		setDetail({..._offer, show: true})
@@ -69,13 +77,35 @@ const Offers = ({type}) => {
 			{user?.role == 'company' && 
 				<Link to={'/offers/' + (type != 'search' ? 'search/' : '')} style={{margin: '0 auto 0 0'}}>{type != 'search' ? t('mainTitle') : t('ownerTitle')}</Link>
 			}
-			<MultiSelect value={filters?.materials} maxSelectedLabels={1} onChange={(e) => updateFilters('materials', e.value)} options={offers?.materials} optionLabel="label" placeholder={t('selectInputPlaceHolder')} />
-			<InputText value={filters?.keyword} onChange={e => updateFilters('keyword', e.target.value)} placeholder={t('inputSearchPlaceHolder')} />
-			<Button className="small dark-blue" type="button" onClick={callOffers}><FontAwesomeIcon icon={faPaperPlane} /></Button>
+			<MultiSelect 
+				optionLabel="label"
+				optionValue="value"
+				maxSelectedLabels={1} 
+				style={{width: '15rem'}}
+				optionGroupLabel="label"
+				value={filters?.materials} 
+				optionGroupChildren="items"
+				placeholder={t('selectInputPlaceHolder')} 
+				onChange={(e) => updateFilters('materials', e.value)} 
+				options={materials?.map(group => ({
+					...group,
+					label: tMaterial(group?.label),
+					items: group?.items.map(item => ({
+					label: tMaterial(item?.label),
+					value: item?.label
+					}))
+				}))} />
+			<InputText 
+				style={{width: '15rem'}} 
+				value={filters?.keyword} 
+				placeholder={t('inputSearchPlaceHolder')} 
+				onKeyDown={(e) => e.key === 'Enter' ? callOffers() : null} 
+				onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
+			<Button className="small dark-blue" type="button" onClick={callOffers}>{tGlobal('search')}</Button>
 			<Button className="small red-state" type="button" onClick={() => {
 				setReset(true)
 				setFilters({keyword: '', materials: []})
-			}}><FontAwesomeIcon icon={faTrash} /></Button>
+			}}>{tGlobal('reset')}</Button>
 			{type != 'search' && 
 				<Link className="button small green-earth" to="/offers/new/"><FontAwesomeIcon icon={faPlus} /> {t('newOfferBtn')}</Link>
 			}
