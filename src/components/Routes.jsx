@@ -1,11 +1,12 @@
 import Cookies from "js-cookie"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Router } from "react-router-dom"
 
 import Header from "@ui/header/Header"
 import Intro from "@components/intro/Intro"
 import { Pet, CreatePet } from "@modules/ngo"
+import PageAnimate from "@ui/transition/PageAnimate"
 import { Product, CreateProduct } from "@modules/vendor"
 import Profile from "@components/modules/profile/Profile"
 import { Forgot, Recover, LoginForm } from "@components/login"
@@ -54,7 +55,7 @@ const AppRoutes = () => {
   
 	return <BrowserRouter basename="">
     <Header />
-    <Routes>
+    <PageAnimate>
       {!user?.role && <>
         <Route exact path="/" element={<Intro />} />
         <Route path="/register" element={<RegisterRole />} />
@@ -114,32 +115,32 @@ const AppRoutes = () => {
       {(user?.role == 'user' || user?.role == 'shelter' || user?.role == 'ngo') && <>
         <Route path="/pet/:id" element={<Pet />} />
       </>}
-       {user?.role == 'company' && <>
+      {user?.role == 'company' && <>
         <Route path="/profile" element={<Profile />} />
         <Route path="/offers/search" element={<Offers type="search" />} />
         <Route path="/offers/search/:offer" element={<Offers type="search" />} />
         <Route path="/settings/edit" element={<RegisterCompany />} />
         <Route path="/settings/edit/:tab" element={<RegisterCompany />} />
-       </>}
-       {user?.role == 'vendor' && <>
+      </>}
+      {user?.role == 'vendor' && <>
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings/edit" element={<RegisterVendor />} />
-       </>}
+      </>}
       {(user?.role == 'vendor' || user?.role == 'social' || user?.role == 'ngo') && <>
         <Route path="/product/new" element={<CreateProduct />} />
         <Route path="/product/edit/:id" element={<CreateProduct />} />
       </>}
-       {(user?.role == 'shelter' || user?.role == 'ngo') && <>
+      {(user?.role == 'shelter' || user?.role == 'ngo') && <>
         <Route path="/pet/new" element={<CreatePet />} />
         <Route path="/pet/edit/:id" element={<CreatePet />} />
       </>}
-       {(user?.role == 'ngo') && <>
+      {(user?.role == 'ngo') && <>
         <Route path="/profile/pets" element={<Profile type="pets" />} />
       </>}
-       {(user?.role == 'shelter' || user?.role == 'social' || user?.role == 'ngo') && <>
+      {(user?.role == 'shelter' || user?.role == 'social' || user?.role == 'ngo') && <>
         <Route path="/profile" element={<Profile />} />
         <Route path="/settings/edit" element={<RegisterNgo />} />
-       </>}
+      </>}
 
       {(user?.role == 'admin') && <>
         <Route path="/admin/new" element={<RegisterAdmin create={true} />} />
@@ -152,8 +153,8 @@ const AppRoutes = () => {
         <Route path="/admins" element={<Users type="admins" />} />
         <Route path="/users" element={<Users type="users" />} />
         <Route path="/profile/:id" element={<Profile />} />
-		<Route path="/company/:id" element={<Profile />} />
-		<Route path="/vendor/:id" element={<Profile />} />
+    <Route path="/company/:id" element={<Profile />} />
+    <Route path="/vendor/:id" element={<Profile />} />
         <Route path="/shelter/:id" element={<Profile />} />
         <Route path="/social/:id" element={<Profile />} />
         <Route path="/ngo/:id" element={<Profile />} />
@@ -167,7 +168,7 @@ const AppRoutes = () => {
         <Route path="/pet/:id" element={<Pet />} />
         <Route path="/pet/edit/:id" element={<CreatePet />} />
         <Route path="/offers/search" element={<AdminOffers type="search" />} />
-		<Route path="/offers/search/:offer" element={<Offers type="search" />} />
+    <Route path="/offers/search/:offer" element={<Offers type="search" />} />
         <Route path="/ads" element={<ConfigureAds />} />
       </>}
       <Route path="/thankyou" element={<ThankYouPage />} />
@@ -179,7 +180,7 @@ const AppRoutes = () => {
       || 
         <Route path="*" element={<Dashboard />} />
       }
-    </Routes>
+    </PageAnimate>
   </BrowserRouter>
 }
 

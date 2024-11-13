@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setHeader } from '@store/slices/globalSlice'
-import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 import { getNotifications } from '@services/userServices'
-import { useTranslation } from 'react-i18next'
+import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 
 const Notifications = () => {
   const dispatch = useDispatch()

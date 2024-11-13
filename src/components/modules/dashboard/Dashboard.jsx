@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { useTranslation } from 'react-i18next'
 import { InputText } from "primereact/inputtext"
 import { useDispatch, useSelector } from 'react-redux'
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useTranslation } from 'react-i18next'
-
-//import modules from "./modules"
-import Card from "@ui/cards/Card"
-import modules from "@json/modules"
-import { setHeader } from '@store/slices/globalSlice'
 
 import "./dashboard.sass"
+import Card from "@ui/cards/Card"
+import modules from "@json/modules"
 import AdBanner from "@ui/banners/AdBanner"
+import { setHeader } from '@store/slices/globalSlice'
+
 
 const Dashboard = () => {
 	const dispatch = useDispatch()

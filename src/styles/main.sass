@@ -766,6 +766,33 @@ button, .button
     .p-icon
       max-width: initial
 
+.transition-overlay, .enter-animation, .exit-animation
+  height: 100%
+  left: 0
+  pointer-events: none
+  position: fixed
+  top: 0
+  width: 100%
+  z-index: 999999
+.enter-animation
+  animation: fadeIn 500ms ease-in-out
+  background: var(--green-earth)
+  top: 100vh
+.exit-animation
+  animation: fadeOut 500ms ease-in-out 500ms
+  background: var(--green-earth)
+  top: 100vh
+@keyframes fadeIn
+  0%
+    top: 100vh
+  100%
+    top: 0
+
+@keyframes fadeOut
+  0%
+    top: 0
+  100%
+    top: -100vh
 
 #intro
   .layout__background
