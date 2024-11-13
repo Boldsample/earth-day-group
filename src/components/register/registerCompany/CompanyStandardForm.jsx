@@ -3,11 +3,12 @@ import { useParams } from "react-router"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
 import { useEffect, useState } from "react"
-import { Autocomplete } from "@react-google-maps/api"
 import { useTranslation } from 'react-i18next'
+import { Autocomplete } from "@react-google-maps/api"
+
 import { checkUser } from "@services/userServices"
-import { TextInput, NumberInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput } from "@ui/forms"
 import PasswordRequirements from "@ui/templates/PasswordRequirements"
+import { TextInput, PasswordInput, TextAreaInput, CheckBoxInput, UploadPhotoInput, MaskInput } from "@ui/forms"
 
 const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
   const { username } = useParams()
@@ -153,11 +154,10 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
             message: tGlobal('patternErrorMessage'),
           },
         }} />
-      <NumberInput
+      <MaskInput
         isRequired={true}
         control={control}
         nameInput="phone"
-        useGrouping={false}
         getFormErrorMessage={getFormErrorMessage}
         labelName={tGlobal2('userPhoneNumberInputLabel')}
         placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}

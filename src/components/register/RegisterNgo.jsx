@@ -2,19 +2,18 @@ import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
 import { useEffect, useState } from "react"
+import { useTranslation } from 'react-i18next'
 import { Autocomplete } from "@react-google-maps/api"
 import { useNavigate, useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { useTranslation } from 'react-i18next'
 
+import "./style.sass"
 import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
-import { addImages, createUser, getUser, updateUser } from "@services/userServices"
-import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
-
-import "./style.sass"
 import PasswordRequirements from "@ui/templates/PasswordRequirements"
+import { addImages, createUser, getUser, updateUser } from "@services/userServices"
+import { TextInput, MaskInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
 
 const RegisterNgo = ({create = false}) => {
 	const dispatch = useDispatch()
@@ -250,11 +249,10 @@ const RegisterNgo = ({create = false}) => {
                 message: tGlobal('invalidWebAddressErrorMessage'),
               },
             }} />
-          <NumberInput
+          <MaskInput
             isRequired={true}
             control={control}
             nameInput="phone"
-            useGrouping={false}
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal2('userPhoneNumberInputLabel')}
             placeHolderText={tGlobal2('userPhoneNumberPlaceHolderText')}

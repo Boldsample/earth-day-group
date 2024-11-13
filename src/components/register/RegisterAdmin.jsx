@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
 import { useEffect, useState } from "react"
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { useTranslation } from 'react-i18next'
-import PasswordRequirements from "@ui/templates/PasswordRequirements"
 
+import "./style.sass"
 import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
+import PasswordRequirements from "@ui/templates/PasswordRequirements"
 import { createUser, getUser, updateUser } from "@services/userServices"
-import { TextInput, NumberInput, PasswordInput, UploadPhotoInput } from "@ui/forms"
+import { TextInput, MaskInput, PasswordInput, UploadPhotoInput } from "@ui/forms"
 
-import "./style.sass"
 
 const RegisterAdmin = ({create = false}) => {
 	const dispatch = useDispatch()
@@ -171,11 +171,10 @@ const RegisterAdmin = ({create = false}) => {
                 message: tGlobalErrors('patternErrorMessage'),
               },
             }} />
-          <NumberInput
+          <MaskInput
             control={control}
             nameInput="phone"
             isRequired={true}
-            useGrouping={false}
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal('userPhoneNumberInputLabel')}
             placeHolderText={tGlobal('userPhoneNumberPlaceHolderText')}
