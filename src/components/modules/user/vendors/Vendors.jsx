@@ -41,11 +41,11 @@ const Vendors = ({type}) => {
       },
       {
         title: tGlobal('categoryListingiconTitle2'),
-        icon: '/assets/icons/recycleCompanyIcon2.svg',
+        icon: '/assets/icons/recycleCompanyIcon3.svg',
       },
       {
         title: tGlobal('categoryListingiconTitle3'),
-        icon: '/assets/icons/recycleCompanyIcon3.svg',
+		    icon: '/assets/icons/recycleCompanyIcon2.svg',
       },
     ]
   }
