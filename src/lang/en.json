@@ -156,9 +156,9 @@
         ],
         "placesShown": [
           "Product Detail",
-          "Company profile",
+          "Recycling center profile",
           "Product Catalog",
-          "Company Catalog",
+          "Recycling center Catalog",
           "Shop Catalog",
           "Pet Catalog",
           "Pet detail",
@@ -198,7 +198,7 @@
           "value": "user"
         },
         {
-          "name": "Recycling Companies",
+          "name": "Recycling Centers",
           "value": "company"
         },
         {
@@ -241,7 +241,7 @@
       "tableTitleQuantity": "Quantity",
       "tableTitleSellPrice": "Sell Price",
       "tableTitlePublishedDate": "Published Date",
-      "rowExpansiontitleCompany": "Company",
+      "rowExpansiontitleCompany": "Recycling center",
       "rowExpansiontitleBid": "Bid",
       "rowExpansiontitleStatus": "Status",
       "rowExpansiontitleBiddingDate": "Bidding Date",
@@ -411,7 +411,7 @@
       "tableTitleState": "State",
       "all": "All",
       "allUsers": "Users",
-      "allCompanies": "Companies",
+      "allCompanies": "Recycling centers",
       "allStores": "Stores",
       "allNgos": "NGOs",
       "allShelters": "Shelters",
@@ -451,7 +451,7 @@
     "marketPlaceModuleTitleText": "Market Place",
     "marketPlaceModuleDescriptionText": "Find products that are eco friendly",
     "recycleModuleTitleText": "Recycle",
-    "recycleModuleDescriptionText": "Look for recycle center companies that may interest you",
+    "recycleModuleDescriptionText": "Look for recycle centers that may interest you",
     "postOfferModuleTitleText": "Post Offer",
     "postOfferModuleDescriptionText": "Post your recyclable material and sell it to the highest bidder",
     "sheltersModuleTitleText": "Shelters",
@@ -587,7 +587,7 @@
       "selectInputPlaceHolder": "Filter by Materials",
       "inputSearchPlaceHolder": "Keyword Search",
       "newOfferBtn": "New Offer",
-      "rowExpansionCompanyTitle": "Company",
+      "rowExpansionCompanyTitle": "Recycling center",
       "rowExpansionBidTitle": "Bid",
       "rowExpansionStatusTitle": "Status",
       "rowExpansionBiddingDateTitle": "Bidding Date",
@@ -707,7 +707,7 @@
   "user": {
     "companies": {
       "companyBannerTitle": "HELP THE PLANET AND HELP YOUR POCKET",
-      "searchLabelText": "Discover recycling companies",
+      "searchLabelText": "Discover recycling centers",
       "iconTitle1": "100% Recycled",
       "iconTitle2": "Eco Friendly",
       "iconTitle3": "Sustainable Economy"
@@ -725,7 +725,7 @@
       "filerByMaterialTitle": "Filter by:",
       "filtersModalTitle": "Choose Materials that you are interested in",
       "filtersModalCheckBoxAll": "All",
-      "filtersModalCheckBoxRecycleCompany": "Recycle Companies",
+      "filtersModalCheckBoxRecycleCompany": "Recycle Centers",
       "filtersModalCheckBoxShelters": "Shelters",
       "filtersModalCheckBoxShops": "Shops",
       "filtersModalCheckBoxSocialOrg": "Social Organizations",
@@ -807,19 +807,19 @@
         "selectUnitPlaceHolder": "Select Unit",
         "addPricelLabel": "Price per Unit",
         "addPricePlaceHolder": "Add Price per Unit",
-        "addCompanyImgsLabel": "Add Company Images",
+        "addCompanyImgsLabel": "Add Recycling Center Images",
         "pickUpFromHomeLabel": "Recycle materials pick up from home service.",
         "addMaterialBtnText": "Add Material",
         "signUpBtnText": "Sign up",
         "saveBtnText": "Save"
       },
       "companyStandardForm": {
-        "companyNameTitle": "Company Name",
+        "companyNameTitle": "Recycling Center Name",
         "companyNamePlaceHolderText": "Eco Nova",
         "companyNitTitle": "NIT",
         "companyNitPlaceHolderText": "112456787",
         "textAreaCompanyDescriptionLabel": "Description",
-        "textAreaCompanyDescriptionPlaceholder": "Write a short description about your company.",
+        "textAreaCompanyDescriptionPlaceholder": "Write a short description about your recycling center.",
         "continueBtnText": "Continue"
       }
     },
