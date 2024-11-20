@@ -53,10 +53,13 @@ const Pet = () => {
   }
 
   useEffect(() => {
-    if(id && !pet)
+    setPet(null)
+	  dispatch(setHeader('user'))
+  }, [id])
+  useEffect(() => {
+    if(id)
       getPetData()
-		dispatch(setHeader('user'))
-  }, [id, pet])
+  }, [pet])
   
   return <>
     <ConfirmationModal title={t('deletePetTitle')} visible={confirm} action={changeState} />

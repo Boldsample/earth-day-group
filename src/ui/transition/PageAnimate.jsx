@@ -21,12 +21,11 @@ function PageAnimate({ children }) {
     if(location.pathname != currentPath){
       const _cur = currentPath.split('/')
       const _new = location.pathname.split('/')
-      console.log(_cur[2], isNaN(_cur[2]))
       if( user?.id && 
           _new[1] != 'market-place' &&
           _new[1] != 'bookmarks' &&
           _new[1] != 'shelters' &&
-          (isNaN(_new[2]) || isNaN(_cur[2]) || _cur[1] != _new[1])){
+          (isNaN(_new[2]) || isNaN(_cur[2]) || _cur[1] != _new[1] || _new[1] == 'pet')){
         setIsTransitioning(true)
         setNextPath(location.pathname)
       }else{
