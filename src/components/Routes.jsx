@@ -86,12 +86,12 @@ const AppRoutes = () => {
         <Route path="/companies" element={<Companies />} />
         <Route path="/market-place" element={<Vendors type="vendors" />} />
         <Route path="/vendor/:id" element={<Profile />} />
-        <Route path="/products" element={<Vendors type="products" />} />
-        <Route path="/products/saved" element={<Bookmarks type="products" />} />
+        <Route path="/market-place/products" element={<Vendors type="products" />} />
+        <Route path="/bookmarks/products/saved" element={<Bookmarks type="products" />} />
         <Route path="/shelters" element={<Shelters type="shelters" />} />
         <Route path="/shelter/:id" element={<Profile />} />
-        <Route path="/pets" element={<Shelters type="pets" />} />
-        <Route path="/pets/favorite" element={<Bookmarks type="pets" />} />
+        <Route path="/shelters/pets" element={<Shelters type="pets" />} />
+        <Route path="/bookmarks/pets/favorite" element={<Bookmarks type="pets" />} />
         <Route path="/social-organizations" element={<Organizations type="organizations" />} />
         <Route path="/social-organizations/products" element={<Organizations type="products" />} />
         <Route path="/social/:id" element={<Profile />} />

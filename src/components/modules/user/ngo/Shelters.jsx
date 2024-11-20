@@ -27,7 +27,7 @@ const Shelters = ({type}) => {
       },
       {
         id: 'pets',
-        url: '/pets/',
+        url: '/shelters/pets/',
         card: 'product',
         label: t('tabLabelPets'),
       },

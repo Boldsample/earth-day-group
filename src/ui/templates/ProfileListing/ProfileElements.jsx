@@ -4,7 +4,7 @@ import { InputText } from "primereact/inputtext"
 import { Paginator } from "primereact/paginator"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCircleChevronRight, faPlus, faSearch } from "@fortawesome/free-solid-svg-icons"
+import { faCircleChevronRight, faPlus, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
 
 import { setHeader } from "@store/slices/globalSlice"
@@ -19,9 +19,10 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
   const [elements, setElements] = useState(null)
   const [filters, setFilters] = useState({keyword: ''})
   const loggedUser = useSelector((state) => state.users.userData)
-  const [page, setPage] = useState({first: 0, page: 0, rows: related ? 4 : 8})
-  const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileElements'})
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+  const [page, setPage] = useState({first: 0, page: 0, rows: related ? 4 : 8})
+  const [tListing] = useTranslation('translation', { keyPrefix: 'ui.templates.categoryListing'})
+  const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileElements'})
 
   const doFollow = async (id) => {
     const _type = type == 'products' ? 'product' : 'pet'
@@ -65,7 +66,10 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
             value={filters.keyword}
             className="p-inputtext"
             onChange={(e) => setFilters(prev => ({...prev, keyword: e.target.value}))} />
-          <Link onClick={loadElements}><FontAwesomeIcon icon={faCircleChevronRight} /></Link>
+          {filters?.keyword && 
+            <Link className="reset" onClick={() => { setFilters({keyword: ''}); loadElements() }}><FontAwesomeIcon icon={faTimes} /></Link>
+          }
+          <button className="green-earth ml-1" onClick={loadElements}>{tListing('search')}</button>
         </form>
       }
       <div className="types">
