@@ -31,7 +31,7 @@ const Vendors = ({type}) => {
         id: 'products',
         card: 'product',
         label:  t('tabLabelProductsText'),
-        url: '/products/',
+        url: '/market-place/products/',
       },
     ],
     secondary: [

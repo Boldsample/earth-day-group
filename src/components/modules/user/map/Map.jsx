@@ -177,7 +177,7 @@ const Map = () => {
         <h5 className="font-bold">{t('markerDetailPickUpTitle')} <span className="text-gray font-regular">{show.pick_up_from_home ? t('available') : t('notAvailable')}</span></h5>
         <p className="small">&nbsp;</p>
       </>}
-      <Link to={`/company/${show.id}`} className="button dark-blue">{t('markerDetailLearnMoreBtnText')}</Link>
+      <Link to={`/company/${show.username}`} className="button dark-blue">{t('markerDetailLearnMoreBtnText')}</Link>
     </div>}
     <div className={'map__filters '+(showFilters ? 'show' : '')}>
       <a className="open" onClick={() => setShowFilters(prev => !prev)}><FontAwesomeIcon icon={showFilters ? faChevronDown : faChevronUp} /></a>

@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { useNavigate, useLocation, Routes } from "react-router-dom"
+import { useLocation, Routes } from "react-router-dom"
 
 function PageAnimate({ children }) {
   const location = useLocation()
   const [nextPath, setNextPath] = useState(null)
+  const user = useSelector((state) => state.users.userData)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [currentPath, setCurrentPath] = useState(location.pathname)
 
@@ -11,13 +13,26 @@ function PageAnimate({ children }) {
     if(nextPath){
       setCurrentPath(nextPath)
       setNextPath(null)
+      window.scrollTo({ top: 0 })
     }
   }
 
   useEffect(() => {
     if(location.pathname != currentPath){
-      setIsTransitioning(true)
-      setNextPath(location.pathname)
+      const _cur = currentPath.split('/')
+      const _new = location.pathname.split('/')
+      console.log(_cur[2], isNaN(_cur[2]))
+      if( user?.id && 
+          _new[1] != 'market-place' &&
+          _new[1] != 'bookmarks' &&
+          _new[1] != 'shelters' &&
+          (isNaN(_new[2]) || isNaN(_cur[2]) || _cur[1] != _new[1])){
+        setIsTransitioning(true)
+        setNextPath(location.pathname)
+      }else{
+        setCurrentPath(location.pathname)
+        setNextPath(null)
+      }
     }
   }, [location.pathname]);
 
@@ -25,7 +40,7 @@ function PageAnimate({ children }) {
     <Routes location={{ pathname: currentPath }}>{children}</Routes>
     {isTransitioning && <div className="transition-overlay">
       <div className="enter-animation" onAnimationEnd={handleTransitionEnd}></div>
-      <div className="exit-animation" onAnimationEnd={() => { console.log('endTrans'); setIsTransitioning(false)}}></div>
+      <div className="exit-animation" onAnimationEnd={() => setIsTransitioning(false)}></div>
     </div>}
   </>
 }

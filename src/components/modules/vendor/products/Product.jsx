@@ -54,10 +54,13 @@ const Product = () => {
   }
 
   useEffect(() => {
-    if(id && !product)
-      getProductData()
+    setProduct(null)
 	  dispatch(setHeader('user'))
-  }, [id, product])
+  }, [id])
+  useEffect(() => {
+    if(id)
+      getProductData()
+  }, [product])
 
   return <>
     <ConfirmationModal title={t('deleteProductTitle')} visible={confirm} action={changeState} />

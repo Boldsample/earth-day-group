@@ -21,12 +21,12 @@ const Bookmarks = ({type}) => {
         id: 'products',
         card: 'product',
         label: t('savedProductsBannerTitle'),
-        url: '/products/saved/',
+        url: '/bookmarks/products/saved/',
       },
       {
         id: 'pets',
         card: 'products',
-        url: '/pets/favorite/',
+        url: '/bookmarks/pets/favorite/',
         label: t('favoritePetsBannerTitle'),
       },
     ]

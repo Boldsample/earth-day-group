@@ -1,6 +1,6 @@
+import { useRef } from "react"
 import Cookies from "js-cookie"
 import { Menu } from "primereact/menu"
-import { useEffect, useRef } from "react"
 import { Dropdown } from "primereact/dropdown"
 import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
@@ -18,7 +18,6 @@ const Header = () => {
   const menu = useRef(null);
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { pathname } = useLocation()
   const [t, i18n] = useTranslation('translation')
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
@@ -30,13 +29,6 @@ const Header = () => {
       navigate('/login/')
     }
   }
-
-  useEffect(() => {
-    window.scrollTo({
-      behavior: 'smooth',
-      top: 0
-    })
-  }, [pathname])
 
   return <header className={'main_header '+header}>
 
@@ -73,7 +65,7 @@ const Header = () => {
       <div className="navbar-item right-align icons">
         {!['settings', 'map'].some(s => s == header) && user?.role == 'user' && <>
           <FontAwesomeIcon icon={faShoppingCart} />
-          <Link to="/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
+          <Link to="/bookmarks/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
         </>}
         <HeaderNotifications />
 		    <div>
