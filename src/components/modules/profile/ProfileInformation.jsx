@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, faPlus, faVenusMars, faPaw, faSignal, faWeightScale, faFlag, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, faPlus, faVenusMars, faPaw, faSignal, faWeightScale, faFlag, faTrash, faAddressCard } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
 
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
@@ -36,6 +36,9 @@ const ProfileInformation = ({profile, same, doFollow, admin}) => {
       <h2>{profile?.name} {profile?.type ? `(${profile?.type})`: ''}</h2>
       <p className="mt-2 mb-4">{profile?.description}</p>
       <ul className="contact__grid">
+        {profile?.address && 
+          <li><FontAwesomeIcon icon={faAddressCard} className='contact__icon'/>{profile?.address}</li>
+        }
         {profile?.email && 
           <li><FontAwesomeIcon icon={faPhone} className='contact__icon'/>{profile?.phone}</li>
         }
@@ -46,7 +49,7 @@ const ProfileInformation = ({profile, same, doFollow, admin}) => {
           <li><FontAwesomeIcon icon={faGlobe}  className='contact__icon'/>{profile?.website}</li>
         }
         {profile?.role == 'company' && 
-          <li><FontAwesomeIcon icon={faHouse}  className='contact__icon'/> {t('pickUpFromHomeText')} {profile?.pick_up_from_home == true ? t('pickUpAvailable') : t('pickUNotpAvailable')}</li>
+          <li><FontAwesomeIcon icon={faHouse}  className='contact__icon'/> {t('pickUpFromHomeText')} {profile?.pick_up_from_home == true ? t('pickUpAvailable') : t('pickUpNotAvailable')}</li>
         }
       </ul>
       <div className="buttons__container">
