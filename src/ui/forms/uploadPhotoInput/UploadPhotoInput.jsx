@@ -2,7 +2,7 @@ import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCloudArrowUp, faClose, faUser, faMapPin } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
-
+import InfoTooltip from "@ui/tooltip/InfoTooltip"
 import FileUploadInput from "../fileUploadInput"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 
@@ -17,6 +17,7 @@ const UploadPhotoInput = ({
   setValue,
   getValues,
   className,
+  toolTipMessage="",
   uploadedImages,
   setUploadedImages,
 }) => {
@@ -63,12 +64,16 @@ const UploadPhotoInput = ({
           </div>
           <div className="profileUpload__container">
             <h5 className="profileUpload__title text-defaultCase">{t('profileUploadLabel')}</h5>
-            <FileUploadInput labelName={t('profileUploadBtn')} watch={watch} control={control} nameInput="picture" setValue={setValue} />
+            <FileUploadInput labelName={t('profileUploadBtn')} watch={watch} control={control} nameInput="picture" setValue={setValue}/>
           </div>
         </div>
       case "imageUpload":
         return <div className={`imagesHub__container p-field ${className || ''}`}>
-          <label>{title}</label>
+          <label>{title}
+          {toolTipMessage != "" && (
+              <InfoTooltip toolTipMessage={toolTipMessage}/>
+          )}
+          </label>
           <div className="imageCarousel__container">
             <input id="file" type="file" multiple accept="image/*" style={{ display: "none" }} onChange={handleFileChange} />
             <label htmlFor="file" className="imageUpload__button">

@@ -1,6 +1,7 @@
 import { Controller } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import { InputNumber } from "primereact/inputnumber"
+import InfoTooltip from "@ui/tooltip/InfoTooltip"
 
 const NumberInput = ({
   rules,
@@ -14,6 +15,7 @@ const NumberInput = ({
   mode = 'decimal',
   showLabel = true,
   useGrouping = true,
+  toolTipMessage = "",
   getFormErrorMessage,
   placeHolderText = "",
   maxFractionDigits = 2,
@@ -44,12 +46,23 @@ const NumberInput = ({
     </>
   );
 
-  return <div className="p-field">
-    {showLabel ? <label htmlFor={nameInput}>
-      {labelName} {isRequired && <span className="text-red-600">*</span>}
-      {renderInput()}
-    </label> : renderInput()}
-  </div>
+  return (
+    <div className="p-field">
+      {showLabel ? (
+      <>
+        <label htmlFor={nameInput}>
+        {labelName} {isRequired && <span className="text-red-600">*</span>}
+        {toolTipMessage != "" && (
+          <InfoTooltip toolTipMessage={toolTipMessage}/>
+        )}
+        {renderInput()}
+        </label>
+      </>
+      ) : (
+      renderInput()
+      )}
+    </div>
+    );
 }
 
 export default NumberInput

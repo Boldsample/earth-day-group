@@ -1,5 +1,7 @@
 import { Controller } from "react-hook-form"
 import { InputText } from "primereact/inputtext"
+import InfoTooltip from "@ui/tooltip/InfoTooltip";
+
 
 const TextInput = ({
   rules,
@@ -14,6 +16,7 @@ const TextInput = ({
   isRequired,
   type = "text",
   labelName = "",
+  toolTipMessage = "",
   disabled = false,
   showLabel = true,
   autocomplete = "on",
@@ -49,12 +52,23 @@ const TextInput = ({
     {getFormErrorMessage(nameInput)}
   </>
 
-  return <div className="p-field">
-    {showLabel ? <label htmlFor={nameInput}>
-      {labelName} {isRequired && <span className="text-red-600">*</span>}
-      {renderInput()}
-    </label> : renderInput()}
+return (
+  <div className="p-field">
+    {showLabel ? (
+      <>
+        <label htmlFor={nameInput}>
+          {labelName} {isRequired && <span className="text-red-600">*</span>}
+          {toolTipMessage != "" && (
+              <InfoTooltip toolTipMessage={toolTipMessage}/>
+          )}
+          {renderInput()}
+        </label>
+      </>
+    ) : (
+      renderInput()
+    )}
   </div>
+);
 }
 
 export default TextInput

@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react"
 import { Controller } from "react-hook-form"
 import { Password } from "primereact/password"
 import { useTranslation } from "react-i18next"
+import InfoTooltip from "@ui/tooltip/InfoTooltip"
+
 const PasswordInput = ({
   rules,
   control,
@@ -11,8 +13,9 @@ const PasswordInput = ({
   maxLength = 50,
   feedback = true,
   showLabel = true,
-  getFormErrorMessage,
+  toolTipMessage = "",
   placeHolderText = "",
+  getFormErrorMessage,
   passwordRequirementsPopUp,
 }) => {
   const passwordRef = useRef(null)
@@ -44,12 +47,23 @@ const PasswordInput = ({
     passwordRef?.current?.querySelector('.p-icon').removeAttribute('tabindex')
   }, [])
 
-  return <div className="p-field" ref={passwordRef}>
-    {showLabel ? <label htmlFor={nameInput}>
-      {labelName} {isRequired && <span className="text-red-600">*</span>}
-      {renderInput()}
-    </label> : renderInput()}
-  </div>
+  return (
+    <div className="p-field">
+      {showLabel ? (
+      <>
+        <label htmlFor={nameInput}>
+        {labelName} {isRequired && <span className="text-red-600">*</span>}
+        {toolTipMessage != "" && (
+          <InfoTooltip toolTipMessage={toolTipMessage}/>
+        )}
+        {renderInput()}
+        </label>
+      </>
+      ) : (
+      renderInput()
+      )}
+    </div>
+    );
 }
 
 export default PasswordInput;

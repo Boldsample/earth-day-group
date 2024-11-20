@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Controller } from "react-hook-form"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import "./fileUploadInput.sass"
 
 const FileUploadInput = ({
@@ -9,7 +10,7 @@ const FileUploadInput = ({
 	watch,
 	control,
 	setValue,
-	nameInput
+	nameInput,
 }) => {
 	const [selectedFile, setSelectedFile] = useState(null)
 	const handleFileChange = (event) => {

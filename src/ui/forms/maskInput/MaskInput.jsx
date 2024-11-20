@@ -1,6 +1,7 @@
 import { Controller } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import { InputMask } from "primereact/inputmask"
+import InfoTooltip from "@ui/tooltip/InfoTooltip"
 
 const MaskInput = ({
   rules,
@@ -11,6 +12,7 @@ const MaskInput = ({
   isRequired,
   labelName = "",
   showLabel = true,
+  toolTipMessage = "",
   getFormErrorMessage,
   placeHolderText = "123 456 7890",
 }) => {
@@ -34,12 +36,24 @@ const MaskInput = ({
     </>
   );
 
-  return <div className="p-field">
-    {showLabel ? <label htmlFor={nameInput}>
-      {labelName} {isRequired && <span className="text-red-600">*</span>}
-      {renderInput()}
-    </label> : renderInput()}
-  </div>
+ 
+  return (
+    <div className="p-field">
+      {showLabel ? (
+      <>
+        <label htmlFor={nameInput}>
+        {labelName} {isRequired && <span className="text-red-600">*</span>}
+        {toolTipMessage != "" && (
+          <InfoTooltip toolTipMessage={toolTipMessage}/>
+        )}
+        {renderInput()}
+        </label>
+      </>
+      ) : (
+      renderInput()
+      )}
+    </div>
+    );
 }
 
 export default MaskInput

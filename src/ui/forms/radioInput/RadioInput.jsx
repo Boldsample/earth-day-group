@@ -1,6 +1,7 @@
 import { RadioButton } from "primereact/radiobutton";
 import { Controller } from "react-hook-form";
 import './radioInput.sass'
+import InfoTooltip from "@ui/tooltip/InfoTooltip";
 
 function RadioInput({
   data,
@@ -10,6 +11,7 @@ function RadioInput({
   labelName,
   nameInput,
   isRequired,
+  toolTipMessage = "",
   disabled = false,
   showLabel = true,
 }) {
@@ -30,12 +32,23 @@ function RadioInput({
     </div>)}
   </div>
 
-  return <div className="p-field">
-    {showLabel && <label htmlFor={nameInput}>
-      {labelName} {isRequired && <span className="text-red-600">*</span>}
-      {renderInput()}
-    </label> || renderInput()}
+return (
+  <div className="p-field">
+    {showLabel ? (
+      <>
+        <label htmlFor={nameInput}>
+          {labelName} {isRequired && <span className="text-red-600">*</span>}
+          {toolTipMessage != "" && (
+              <InfoTooltip toolTipMessage={toolTipMessage}/>
+          )}
+          {renderInput()}
+        </label>
+      </>
+    ) : (
+      renderInput()
+    )}
   </div>
+);
 }
 
 export default RadioInput
