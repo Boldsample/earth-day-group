@@ -203,7 +203,13 @@ const Map = () => {
       center={current}
       onUnmount={onUnmount}
       onBoundsChanged={updateBounds}
-      options={{ styles: mapConfig }}
+      options={{
+        styles: mapConfig,
+        zoomControl: true,
+        mapTypeControl: false,
+        fullscreenControl: false,
+        streetViewControl: false,
+      }}
       mapContainerStyle={{ width: '100vw', height: '100vh' }}>
       <MarkerClustererF>
         {clusterer => <div>
