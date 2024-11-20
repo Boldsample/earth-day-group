@@ -25,7 +25,7 @@ function PageAnimate({ children }) {
           _new[1] != 'market-place' &&
           _new[1] != 'bookmarks' &&
           _new[1] != 'shelters' &&
-          (isNaN(_new[2]) || isNaN(_cur[2]) || _cur[1] != _new[1] || _new[1] == 'pet')){
+          (isNaN(_new[2]) || isNaN(_cur[2]) || _cur[1] != _new[1] || _new[1] == 'pet' || _new[1] == 'product')){
         setIsTransitioning(true)
         setNextPath(location.pathname)
       }else{
