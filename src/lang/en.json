@@ -297,7 +297,7 @@
       "noProductsFoundText": "There are no products that meet the filter criteria."
     },
     "reportInfo": {
-      "mainTitle": "Report Detail",
+      "mainTitle": "Report # ",
       "view": "View",
       "reporteduser": "Reported user",
       "reportedoffer": "Reported offer",

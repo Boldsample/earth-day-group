@@ -117,7 +117,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 				  </div>
 				)}
 				<div className="content">
-					<h4>{t('mainTitle')}</h4>
+					<h4>{t('mainTitle') + String(report?.id).padStart(5, '0')}</h4>
 					<div className="fullwidth mb-4" style={{ fontSize: '0.75rem' }}>
 						{report?.date}
 					</div>
