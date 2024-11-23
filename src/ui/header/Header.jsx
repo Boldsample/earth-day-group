@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { faBookmark, faChevronLeft, faGear, faRightFromBracket, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faChevronLeft, faGear, faRightFromBracket, faShoppingCart, faHeart } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
@@ -65,7 +65,7 @@ const Header = () => {
       <div className="navbar-item right-align icons">
         {!['settings', 'map'].some(s => s == header) && user?.role == 'user' && <>
           <FontAwesomeIcon icon={faShoppingCart} />
-          <Link to="/bookmarks/products/saved/"><FontAwesomeIcon icon={faBookmark} /></Link>
+          <Link to="/bookmarks/products/saved/"><FontAwesomeIcon icon={faHeart} /></Link>
         </>}
         <HeaderNotifications />
 		    <div>
