@@ -11,8 +11,8 @@
     "disable": "Disable",
     "yes": "YES",
     "no": "NO",
-	"deleted": "Deleted",
-	"confirmDelete": "Confirm delete",
+    "deleted": "Deleted",
+    "confirmDelete": "Confirm delete",
     "inputSearchPlaceHolder": "Keyword Search",
     "notfoundErrorMessage": "We couldn't find what you are looking for. Care to try again.",
     "categoryListingiconTitle1": "100% Recycled",
@@ -68,12 +68,12 @@
     "adSubject": "I want to advertise my business",
     "adMessage": "I want to promote my business on the Earth Day Group app.",
     "contact": "Conctact us",
-	"language": "Language",
-	"currency": "Currency",
-	"cop": "COP $ (Colombian peso)",
-	"usd": "USD $ (US Dolar)",
-	"search": "Search",
-	"reset": "Reset",
+    "language": "Language",
+    "currency": "Currency",
+    "cop": "COP $ (Colombian peso)",
+    "usd": "USD $ (US Dolar)",
+    "search": "Search",
+    "reset": "Reset",
     "formErrors": {
       "acceptCheckboxErrorMessage": "You are required to accept the terms and conditions.",
       "acceptCheckboxErrorMessage2": "You are required to accept the privacy policy.",
@@ -392,12 +392,12 @@
       "allOffers": "Offers",
       "allProducts": "Products",
       "allPets": "Pets",
-	  "allStatuses": "All statuses",
+      "allStatuses": "All statuses",
       "info": "In Process",
       "danger": "Pending",
       "success": "Resolved",
-	  "allAdmins": "All reports",
-	  "unassigned": "Unassigned",
+      "allAdmins": "All reports",
+      "unassigned": "Unassigned",
       "noProductsFoundText": "There are no reports that meet the filter criteria."
     },
     "usersList": {
@@ -426,6 +426,7 @@
   "bookmarks": {
     "savedProductsBannerTitle": "Saved Products",
     "favoritePetsBannerTitle": "Favorite Pets",
+    "profilesFollowingBannerTitle": "Profiles you follow",
     "noProductsSavedText": "Whoops! You have not saved anything yet."
   },
   "chat": {
@@ -523,8 +524,8 @@
         "petImageUploaderTitle": "Add Pet Images",
         "submitPetbtnText": "Create pet",
         "updatePetbtnText": "Update pet",
-		"months": "Mes(es)",
-		"years": "Año(s)"
+        "months": "Mes(es)",
+        "years": "Año(s)"
       },
       "pet": {
         "petYearsOld": "Years old",
@@ -580,8 +581,8 @@
       "inputNumberAskingPricePlaceholderText": "Asking Price",
       "postOfferBtnText": "Post Offer",
       "offerImagesTitle": "Offer Images",
-	  "textAreaDescriptionTitle": "Description",
-	  "descriptionPlaceholder": "Describe your offer."
+      "textAreaDescriptionTitle": "Description",
+      "descriptionPlaceholder": "Describe your offer."
     },
     "offersList": {
       "mainTitle": "Find recycle materials",
@@ -954,21 +955,21 @@
     "Used oils": "Used oils",
     "Tires": "Tires",
     "RCD - Construction and demolition waste": "RCD - Construction and demolition waste",
-	"tons": "Ton(s)",
-	"pounds": "Pound(s)",
-	"kilograms": "Kilogram(s)",
-	"grams": "Gram(s)",
-	"troy ounces": "Troy ounce(s)",
-	"gallons": "Gallon(s)",
-	"liters": "Liter(s)",
-	"units": "Unit(s)",
-	"tons_min": "t",
-	"pounds_min": "lbs",
-	"kilograms_min": "kg",
-	"grams_min": "g",
-	"troy ounces_min": "oz t",
-	"gallons_min": "gal",
-	"liters_min": "L",
-	"units_min": "units"
+    "tons": "Ton(s)",
+    "pounds": "Pound(s)",
+    "kilograms": "Kilogram(s)",
+    "grams": "Gram(s)",
+    "troy ounces": "Troy ounce(s)",
+    "gallons": "Gallon(s)",
+    "liters": "Liter(s)",
+    "units": "Unit(s)",
+    "tons_min": "t",
+    "pounds_min": "lbs",
+    "kilograms_min": "kg",
+    "grams_min": "g",
+    "troy ounces_min": "oz t",
+    "gallons_min": "gal",
+    "liters_min": "L",
+    "units_min": "units"
   }
 }

@@ -92,6 +92,7 @@ const AppRoutes = () => {
         <Route path="/shelter/:id" element={<Profile />} />
         <Route path="/shelters/pets" element={<Shelters type="pets" />} />
         <Route path="/bookmarks/pets/favorite" element={<Bookmarks type="pets" />} />
+        <Route path="/bookmarks/profiles/following" element={<Bookmarks type="following" />} />
         <Route path="/social-organizations" element={<Organizations type="organizations" />} />
         <Route path="/social-organizations/products" element={<Organizations type="products" />} />
         <Route path="/social/:id" element={<Profile />} />

@@ -5,6 +5,7 @@ import { getProducts } from "@services/productServices"
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 import { getPets } from "@services/petServices"
 import { useTranslation } from 'react-i18next'
+import { getUsers } from "@services/userServices"
 
 const Bookmarks = ({type}) => {
   const dispatch = useDispatch()
@@ -29,11 +30,27 @@ const Bookmarks = ({type}) => {
         url: '/bookmarks/pets/favorite/',
         label: t('favoritePetsBannerTitle'),
       },
+      {
+        id: 'following',
+        card: 'company',
+        url: '/bookmarks/profiles/following/',
+        label: t('profilesFollowingBannerTitle'),
+      },
     ]
   }
 
   const loadElements = async (e) => {
     if(e) e.preventDefault()
+    if(type == 'following'){
+      let _filter = {
+        user: `u.id<>'${user?.id}'`,
+        type: `f.follower'${user?.id}'`
+      }
+      if(filters?.keyword != '')
+        _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.email LIKE '%${filters.keyword}%')`)
+        const _following = await getUsers(_filter, 'following', null, page)
+        setElements(_following)
+    }
     if(type == 'products'){
       let _filter = { 'bookmarks': `f.type='product' AND f.date IS NOT NULL AND p.state=1` }
       if(filters?.keyword != '')

@@ -11,8 +11,8 @@
     "disable": "Inactivo",
     "yes": "SÍ",
     "no": "NO",
-	"deleted": "Eliminado",
-	"confirmDelete": "Confirmar eliminación",
+    "deleted": "Eliminado",
+    "confirmDelete": "Confirmar eliminación",
     "categoryListingiconTitle1": "100% Recyclado",
     "categoryListingiconTitle2": "Ecológico",
     "categoryListingiconTitle3": "Economía Sostenible",
@@ -68,12 +68,12 @@
     "adSubject": "Quiero pautar mi empresa",
     "adMessage": "Deseo promocionar mi empresa en la aplicación de Earth Day Group.",
     "contact": "Conctáctanos",
-	"language": "Idioma",
-	"currency": "Moneda",
-	"cop": "COP $ (Peso colombiano)",
-	"usd": "USD $ (Dolar estadounidense)",
-	"search": "Buscar",
-	"reset": "Limpiar",
+    "language": "Idioma",
+    "currency": "Moneda",
+    "cop": "COP $ (Peso colombiano)",
+    "usd": "USD $ (Dolar estadounidense)",
+    "search": "Buscar",
+    "reset": "Limpiar",
     "formErrors": {
       "acceptCheckboxErrorMessage": "Es obligatorio aceptar los términos y condiciones.",
       "acceptCheckboxErrorMessage2": "Es obligatorio aceptar la política de privacidad.",
@@ -393,12 +393,12 @@
       "allProducts": "Productos",
       "allPets": "Mascotas",
       "tableTitleAssignedTo": "Asignado a",
-	  "allStatuses": "Todos los estados",
+      "allStatuses": "Todos los estados",
       "info": "En proceso",
       "danger": "Pendiente",
       "success": "Resuelto",
-	  "allAdmins": "Todos reportes",
-	  "unassigned": "Sin asignar",
+      "allAdmins": "Todos reportes",
+      "unassigned": "Sin asignar",
       "noProductsFoundText": "No hay reportes que cumplan con los criterios del filtro."
     },
     "usersList": {
@@ -427,6 +427,7 @@
   "bookmarks": {
     "savedProductsBannerTitle": "Productos guardados",
     "favoritePetsBannerTitle": "Mascotas favoritas",
+    "profilesFollowingBannerTitle": "Perfiles que sigues",
     "noProductsSavedText": "Ups! Parece que todavia no has guardado nada."
   },
   "chat": {
@@ -524,8 +525,8 @@
         "petImageUploaderTitle": "Añade Imágenes de la Mascota",
         "submitPetbtnText": "Crear mascota",
         "updatePetbtnText": "Actualizar mascota",
-		"months": "Month(s)",
-		"years": "Year(s)"
+        "months": "Month(s)",
+        "years": "Year(s)"
       },
       "pet": {
         "petYearsOld": "años de edad",
@@ -581,8 +582,8 @@
       "inputNumberAskingPricePlaceholderText": "Precio de Venta",
       "postOfferBtnText": "Publicar Oferta",
       "offerImagesTitle": "Imagenes de la oferta",
-	  "textAreaDescriptionTitle": "Descripción",
-	  "descriptionPlaceholder": "Describe tu oferta."
+      "textAreaDescriptionTitle": "Descripción",
+      "descriptionPlaceholder": "Describe tu oferta."
     },
     "offersList": {
       "mainTitle": "Encuentra materiales reciclables",
@@ -956,21 +957,21 @@
     "Used oils": "Aceites usados",
     "Tires": "Llantas",
     "RCD - Construction and demolition waste": "RCD - Residuos de construcción y demolición",
-	"tons": "Tonelada(s)",
-	"pounds": "Libra(s)",
-	"kilograms": "Kilogramo(s)",
-	"grams": "Gramo(s)",
-	"troy ounces": "Onza(s) troy",
-	"gallons": "Galon(es)",
-	"liters": "Litro(s)",
-	"units": "Unidad(es)",
-	"tons_min": "t",
-	"pounds_min": "lb",
-	"kilograms_min": "kg",
-	"grams_min": "g",
-	"troy ounces_min": "oz t",
-	"gallons_min": "gal",
-	"liters_min": "L",
-	"units_min": "unid"
+    "tons": "Tonelada(s)",
+    "pounds": "Libra(s)",
+    "kilograms": "Kilogramo(s)",
+    "grams": "Gramo(s)",
+    "troy ounces": "Onza(s) troy",
+    "gallons": "Galon(es)",
+    "liters": "Litro(s)",
+    "units": "Unidad(es)",
+    "tons_min": "t",
+    "pounds_min": "lb",
+    "kilograms_min": "kg",
+    "grams_min": "g",
+    "troy ounces_min": "oz t",
+    "gallons_min": "gal",
+    "liters_min": "L",
+    "units_min": "unid"
   }
 }
