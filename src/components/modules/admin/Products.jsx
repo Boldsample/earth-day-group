@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
-import { faSearch, faTrash, faTags } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faTrash, faTags, faFileDownload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { useTranslation } from 'react-i18next'
@@ -51,12 +51,13 @@ const Products = () => {
       setReset(true)
     }
   }
-  const callProducts = async () =>{
+  const callProducts = async (ex = false) =>{
     let _filter = {}
     if(filters?.keyword != '')
       _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%')`)
-    const _products = await getProducts(_filter, page)
-    setProducts(_products)
+    const _products = await getProducts(_filter, page, null, ex)
+    if(!ex)
+      setProducts(_products)
   }
   const renderHeader = () => {
     return <div className="filters">
@@ -71,6 +72,7 @@ const Products = () => {
         setReset(true)
         setFilters({keyword: ''})
       }}>{tGlobal('reset')}</Button>
+      <Button className="green-earth" onClick={() => callProducts(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
     </div>
   }
 

@@ -7,7 +7,7 @@ import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { MultiSelect } from 'primereact/multiselect'
 import { useDispatch, useSelector } from 'react-redux'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faFileDownload, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 
@@ -43,15 +43,17 @@ const AdminOffers = () => {
     const _offer = await getOffer(id)
     setDetail({..._offer, show: true})
   }
-  const callOffers = async () =>{
-	let _filter = {}
-	if(filters?.keyword != '')
-		_filter['keyword'] = encodeURIComponent(`(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`)
-	if(filters?.materials?.length > 0)
-		_filter['materials'] = "(o.material='" + filters.materials?.join("' OR o.material='") +"')"
-	let _offers = await getOffers(_filter, page)
-	_offers.materials = _offers.materials.map(({material}) => ({label: tMaterial(material), value: material}));
-	setOffers(_offers)
+  const callOffers = async (ex = false) =>{
+    let _filter = {}
+    if(filters?.keyword != '')
+      _filter['keyword'] = encodeURIComponent(`(o.title LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%')`)
+    if(filters?.materials?.length > 0)
+      _filter['materials'] = "(o.material='" + filters.materials?.join("' OR o.material='") +"')"
+    let _offers = await getOffers(_filter, page, ex)
+    if(!ex){
+      _offers.materials = _offers.materials.map(({material}) => ({label: tMaterial(material), value: material}));
+      setOffers(_offers)
+    }
   }
   const renderHeader = () => {
     return <div className="filters">
@@ -84,6 +86,7 @@ const AdminOffers = () => {
         setReset(true)
         setFilters({keyword: '', materials: []})
       }}>{tGlobal('reset')}</Button>
+      <Button className="green-earth" onClick={() => callOffers(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
     </div>
   }
   const rowExpansionTemplate = data => <div className="p-3">

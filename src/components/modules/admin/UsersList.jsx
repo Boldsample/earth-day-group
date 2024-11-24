@@ -7,7 +7,7 @@ import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
-import { faPencil, faPlus, faTrash, faUser, faEnvelope, faPersonShelter, faRecycle, faShop, faHouse, faBuildingNgo  } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faPlus, faTrash, faUser, faEnvelope, faPersonShelter, faRecycle, faShop, faHouse, faBuildingNgo, faFileDownload  } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 import { InputSwitch } from 'primereact/inputswitch'
 
@@ -18,6 +18,7 @@ import { setHeader } from '@store/slices/globalSlice'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
 import ConfirmationModal from '@ui/modals/ConfirmationModal'
+import { API } from '@services/API'
 
 const Users = ({type}) => {
   const dispatch = useDispatch()
@@ -46,7 +47,7 @@ const Users = ({type}) => {
       setReset(true)
     }
   }
-  const callUsers = async () =>{
+  const callUsers = async (ex = false) =>{
     let _filter = {}
 	if(filters?.role != '')
 	  _filter['user'] = `u.role='${filters.role}'`
@@ -56,8 +57,9 @@ const Users = ({type}) => {
       _filter['state'] = `u.state='${filters.state}'`
     if(filters?.keyword != '')
       _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.email LIKE '%${filters.keyword}%')`)
-    const _users = await getUsers(_filter, 'full', user?.id, page)
-    setUsers(_users)
+    const _users = await getUsers(_filter, 'full', user?.id, page, ex)
+    if(!ex)
+      setUsers(_users)
   }
 
   const roleColumnBodyTemplate = (columnItem) => {
@@ -126,8 +128,9 @@ const Users = ({type}) => {
         setReset(true)
         setFilters({state: '', role: '', keyword: ''})
       }}>{tGlobal('reset')}</Button>
+      <Button className="green-earth" onClick={() => callUsers(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
       {type == 'admins' && 
-        <Link className="button small green-earth" to="/admin/new/"><FontAwesomeIcon icon={faPlus} /> {t('newAdminButton')}</Link>
+        <Link className="button small light-green" to="/admin/new/"><FontAwesomeIcon icon={faPlus} /> {t('newAdminButton')}</Link>
       }
     </div>
   }

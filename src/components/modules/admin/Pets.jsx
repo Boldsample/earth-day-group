@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
-import { faSearch, faTrash, faPaw, faCakeCandles } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faTrash, faPaw, faCakeCandles, faFileDownload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { useTranslation } from 'react-i18next'
@@ -45,12 +45,13 @@ const Pets = () => {
       setReset(true)
     }
   }
-  const callPets = async () =>{
+  const callPets = async (ex = false) =>{
     let _filter = {}
     if(filters?.keyword != '')
       _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%')`)
-    const _pets = await getPets(_filter, page)
-    setPets(_pets)
+    const _pets = await getPets(_filter, page, null, ex)
+    if(!ex)
+      setPets(_pets)
   }
   const renderHeader = () => {
     return <div className="filters">
@@ -65,6 +66,7 @@ const Pets = () => {
         setReset(true)
         setFilters({keyword: ''})
       }}>{tGlobal('reset')}</Button>
+      <Button className="green-earth" onClick={() => callPets(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
     </div>
   }
 
