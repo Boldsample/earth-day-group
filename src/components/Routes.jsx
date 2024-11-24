@@ -169,7 +169,7 @@ const AppRoutes = () => {
         <Route path="/pet/:id" element={<Pet />} />
         <Route path="/pet/edit/:id" element={<CreatePet />} />
         <Route path="/offers/search" element={<AdminOffers type="search" />} />
-    <Route path="/offers/search/:offer" element={<Offers type="search" />} />
+        <Route path="/offers/search/:offer" element={<Offers type="search" />} />
         <Route path="/ads" element={<ConfigureAds />} />
       </>}
       <Route path="/thankyou" element={<ThankYouPage />} />

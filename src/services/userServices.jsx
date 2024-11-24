@@ -107,16 +107,17 @@ export const getUser = async (id, user = null) => {
 }
 
 export const getUsers = async (filter = {}, type = 'min', user = null, page = null, ex = false) => {
-	let filterStr = ''
+  let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
   type += user ? `&user=${user}` : ''
+  const pages = page ? `&page=${page?.first}&rows=${page?.rows}` : ''
   if(ex)
     window.open(`${API.getUri()}/get/users/export&filter=${filterStr}&type=${type}`, '_blank', 'noopener,noreferrer')
   else{
-    const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}&page=${page?.first}&rows=${page?.rows}`)
+    const { data } = await API.get(`/get/users&filter=${filterStr}&type=${type}${pages}`)
     return {total: data.total, data: data.data, card: 'company'};
   }
 }
