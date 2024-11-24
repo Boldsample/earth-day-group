@@ -49,13 +49,17 @@ export const getOffer = async (id) => {
   return response[0];
 };
 
-export const getOffers = async (filter, page) => {
-	let filterStr = ''
+export const getOffers = async (filter, page, ex = false) => {
+  let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
   const userFilter = filter?.user || filter?.materials || ''
-  const { data } = await API.get(`/get/offers&filter=${filterStr}&userfilter=${userFilter}&page=${page.first}&rows=${page.rows}`)
-  return {total: data.total, data: data.data, materials: data?.materials};
+  if(ex)
+    window.open(`${API.getUri()}/get/offers/export&filter=${filterStr}&userfilter=${userFilter}`, '_blank', 'noopener,noreferrer')
+  else{
+    const { data } = await API.get(`/get/offers&filter=${filterStr}&userfilter=${userFilter}&page=${page.first}&rows=${page.rows}`)
+    return {total: data.total, data: data.data, materials: data?.materials};
+  }
 };

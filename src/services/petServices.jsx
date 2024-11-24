@@ -29,13 +29,17 @@ export const getPet = async (id, user = null) => {
   return data?.data[0];
 }
 
-export const getPets = async (filter, page, user = null) => {
-	let filterStr = ''
+export const getPets = async (filter, page, user = null, ex = false) => {
+  let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
   user = user ? `&user=${user}` : ''
-  const { data } = await API.get(`/get/pets&filter=${filterStr}${user}&page=${page.first}&rows=${page.rows}`)
-  return {total: data.total, data: data.data, card: 'pet'};
+  if(ex)
+    window.open(`${API.getUri()}/get/pets/export&filter=${filterStr}${user}`, '_blank', 'noopener,noreferrer')
+  else{
+    const { data } = await API.get(`/get/pets&filter=${filterStr}${user}&page=${page.first}&rows=${page.rows}`)
+    return {total: data.total, data: data.data, card: 'pet'};
+  }
 }

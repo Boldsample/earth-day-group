@@ -53,12 +53,16 @@ export const getReport = async id => {
   return data?.data[0];
 }
 
-export const getReports = async (filter, page) => {
+export const getReports = async (filter, page, ex = false) => {
 	let filterStr = ''
   Object.keys(filter).map(f => {
     filterStr += (filterStr ? " AND " : "") + filter[f]
   })
   filterStr = encodeURIComponent(filterStr)
-  const { data } = await API.get(`/get/reports&filter=${filterStr}&page=${page.first}&rows=${page.rows}`)
-  return {total: data.total, data: data.data, card: 'report'};
+  if(ex)
+    window.open(`${API.getUri()}/get/reports/export&filter=${filterStr}`, '_blank', 'noopener,noreferrer')
+  else{
+    const { data } = await API.get(`/get/reports&filter=${filterStr}&page=${page.first}&rows=${page.rows}`)
+    return {total: data.total, data: data.data, card: 'report'};
+  }
 }
