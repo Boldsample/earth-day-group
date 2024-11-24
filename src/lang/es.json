@@ -868,7 +868,15 @@
   "ui": {
     "cards": {
       "multiUseCard": {
-        "seeMoreBtnText": "Ver más"
+        "seeMoreBtnText": "Ver más",
+        "offerSent": "Oferta enviada",
+        "offerReceived": "Oferta recibida",
+        "offerAccepted": "Oferta aceptada",
+        "offerRejected": "Oferta rechazada",
+		"quantity": "Cantidad",
+		"askingPrice": "Precio solicitado",
+		"finalPrice": "Precio final",
+		"pay": "Pagar"
       }
     },
     "templates": {

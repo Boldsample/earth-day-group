@@ -99,17 +99,17 @@ const MultiUseCard = ({
               <div className="detail">
                 <small className="font-bold">
                   {data?.status == data?.id && 
-                    <span className="text-green-state">Offer accepted:</span> 
+                    <span className="text-green-state">{t('offerAccepted')}:</span> 
                   || ((data?.rejected || data?.status != 0) && 
-                    <span className="text-red-state">Offer rejected:</span> 
+                    <span className="text-red-state">{t('offerRejected')}:</span> 
                   ) || 
-                    <span>Offer {data?.same && 'sent' || 'received'}:</span>
+                    <span>{t('offer'+(data?.same && 'Sent' || 'Received'))}:</span>
                   }
                 </small>
                 <h5>{data?.title}</h5>
                 <div className="mb-1"><Button label={data?.material} className={'small ' + data?.material} /></div>
-                <div><small><b>Quantity:</b> {data?.quantity} {data?.unit}</small></div>
-                <div><small><b>Asking price:</b> {parseInt(data?.asking).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</small></div>
+                <div><small><b>{t('quantity')}:</b> {data?.quantity} {data?.unit}</small></div>
+                <div><small><b>{t('askingPrice')}:</b> {parseInt(data?.asking).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</small></div>
                 <div className="mt-1" style={{fontSize: '1.125rem'}}><b className="text-green-earth">Proposal:</b> {parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
               </div>
               {!data?.same && data?.status == 0 && !data?.rejected && 
@@ -121,15 +121,15 @@ const MultiUseCard = ({
             </div>) || (data?.type == 'confirmation' && 
             <div className="offer">
               <div className="detail">
-                <small><span className="text-green-state">Offer accepted:</span></small>
+                <small><span className="text-green-state">{t('offerAccepted')}:</span></small>
                 <h5>{data?.title}</h5>
                 <div className="mb-1"><Button label={data?.material} className={'small ' + data?.material} /></div>
-                <div><small><b>Quantity:</b> {data?.quantity} {data?.unit}</small></div>
-                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className="text-green-earth">Final price:</b> {parseInt(data?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+                <div><small><b>{t('quantity')}:</b> {data?.quantity} {data?.unit}</small></div>
+                <div className="mt-1" style={{fontSize: '1.125rem'}}><b className="text-green-earth">{t('finalPrice')}:</b> {parseInt(data?.final).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
               </div>
               {!data?.same && 
                 <div className="actions">
-                  <Button className="small green-state" style={{width: '6.25rem'}} onClick={() => data?.replyOffer(data?.offer, data?.id)}><FontAwesomeIcon icon={faCheck} /> Pay</Button>
+                  <Button className="small green-state" style={{width: '6.25rem'}} onClick={() => data?.replyOffer(data?.offer, data?.id)}><FontAwesomeIcon icon={faCheck} /> {t('pay')}</Button>
                 </div> 
               || null}
             </div>) || <div className="pre-line">{data?.message}</div>

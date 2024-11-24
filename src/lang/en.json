@@ -866,7 +866,15 @@
   "ui": {
     "cards": {
       "multiUseCard": {
-        "seeMoreBtnText": "See more"
+        "seeMoreBtnText": "See more",
+        "offerSent": "Offer sent",
+        "offerReceived": "Offer received",
+        "offerAccepted": "Offer accepted",
+        "offerRejected": "Offer rejected",
+		"quantity": "Quantity",
+		"askingPrice": "Asking price",
+		"finalPrice": "Final price",
+		"pay": "Pay"
       }
     },
     "templates": {

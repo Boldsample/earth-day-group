@@ -15,7 +15,7 @@ import ConfirmationModal from "@ui/modals/ConfirmationModal"
 const OfferInfo = ({ type = 'full', show, offer, onHide }) => {
   const [ confirm, setConfirm ] = useState(null)
   const user = useSelector((state) => state.users.userData)
-	const [t] = useTranslation('translation', { keyPrefix: 'offers.offerInfo'})
+  const [t] = useTranslation('translation', { keyPrefix: 'offers.offerInfo'})
   const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials'})
 
   const changeState = async action => {
@@ -38,7 +38,7 @@ const OfferInfo = ({ type = 'full', show, offer, onHide }) => {
       <div className="content">
         <h4 className="flex">
           {offer?.title}
-          {user?.role != 'admin' && 
+          {user?.role != 'admin' && offer?.user != user?.id && 
             <Link className="button small red-state outline hasTooltip ml-2" to={`/report/offer/${offer?.id}/`} data-pr-tooltip={t('reportOfferToolTip')}><FontAwesomeIcon icon={faFlag} /></Link>
           }
         </h4>
@@ -51,7 +51,7 @@ const OfferInfo = ({ type = 'full', show, offer, onHide }) => {
         {user?.role != 'admin' && type == 'full' && offer?.status == 0 && 
           <Link className="mt-1 button small green-earth" to={`/chat/${offer?.username}/${offer?.id}/`}><FontAwesomeIcon icon={faPaperPlane} /> {t('sendOfferBtn')}</Link>
         }
-        {user?.role == 'admin' && 
+        {(user?.role == 'admin' || offer?.user == user?.id) && offer?.state == 1 && 
           <Button onClick={() => setConfirm(true)} className="mt-1 small red-state"><FontAwesomeIcon icon={faTrash} /> {t('deleteOffer')}</Button>
         }
       </div>
