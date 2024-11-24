@@ -32,11 +32,11 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
       dispatch(followUserData({user: id, follower: user?.id}))
   }
   const doScroll = (e) => {
-	e.preventDefault()
-	window.scrollTo({
-		behavior: 'smooth',
-		top: bannerScroll.current.offsetTop,
-	})
+  e.preventDefault()
+  window.scrollTo({
+    behavior: 'smooth',
+    top: bannerScroll.current.offsetTop,
+  })
   }
   
   useEffect(() => {
@@ -48,7 +48,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
       <div className="template__top fullwidth">
         <div className="template__banner" style={{backgroundImage: content.bannerImage}}>
           <h1 className="text-upperCase">{content.title}</h1>
-		  <a className="scroll" href="#" onClick={doScroll}><FontAwesomeIcon icon={faChevronDown} /></a>
+      <a className="scroll" href="#" onClick={doScroll}><FontAwesomeIcon icon={faChevronDown} /></a>
         </div>
       </div>
       {content?.secondary?.length > 0 && 
@@ -64,7 +64,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
       <div ref={content?.secondary?.length == 0 ? bannerScroll : null} className="layout autoheight">
         <div className="main__content centerfullwidth pt-4">
           <div className="template__listing self-center">
-			      <AdBanner type="headerBanner" />
+            <AdBanner type="headerBanner" />
             <div className="edg-search mb-1">
               {content.searchLabel && <h3 className="text-center mb-1">{content.searchLabel}</h3>}
               <form onSubmit={reloadElements} className="p-input-icon-left fullwidth">

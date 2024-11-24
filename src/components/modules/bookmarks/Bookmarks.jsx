@@ -44,11 +44,11 @@ const Bookmarks = ({type}) => {
     if(type == 'following'){
       let _filter = {
         user: `u.id<>'${user?.id}'`,
-        type: `f.follower'${user?.id}'`
+        type: `f.follower='${user?.id}'`
       }
       if(filters?.keyword != '')
         _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.email LIKE '%${filters.keyword}%')`)
-        const _following = await getUsers(_filter, 'following', null, page)
+        const _following = await getUsers(_filter, 'full', user?.id, page)
         setElements(_following)
     }
     if(type == 'products'){

@@ -33,8 +33,8 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
     },
   ]
 
-  const doFollow = id => {
-    followUser({user: id, follower: user?.id})
+  const doFollow = async id => {
+    await followUser({user: id, follower: user?.id})
     reloadElements()
   }
 
