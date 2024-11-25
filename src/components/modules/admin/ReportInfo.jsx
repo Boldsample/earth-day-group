@@ -124,7 +124,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 					<div className="fullwidth mb-4" style={{ fontSize: '0.75rem' }}>
 						{report?.date}
 					</div>
-					{report?.status == 'success' && report?.aid !== user?.id && !report?.aid || report?.aid !== user?.id &&
+					{report?.status == 'success' && report?.aid !== user?.id && !report?.aid || report?.aid && report?.aid !== user?.id &&
 					<Message className="mb-1" severity={report?.status == 'success' ? "success": "warn"} text={report?.status == 'success' ? t("reportResolvedWarningMessage", {admin: report.admin}) : t("reportInProgressdWarningMessage" , {admin: report.admin})} />
 				}
 					{report?.type === 'offer' && <p>

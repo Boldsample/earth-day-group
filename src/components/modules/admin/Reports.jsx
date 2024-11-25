@@ -183,6 +183,8 @@ const Reports = () => {
 							<span className='table-item__background'>{aid ? admin : t(admin) }</span>
 						}></Column>
 						<Column className="actions" header={null} body={({id, aid, owner, admin, status }) => <>
+							{aid &&
+							<>
 							<Tooltip target=".chatToolTip"/>
 							<Link to={aid !== user.id ? null : `/chat/${owner}`}>
 								<span className='chatToolTip' data-pr-tooltip={aid !== user.id ? tToolTip('cannotHandleReportBtnMessage', {admin: admin}) : tToolTip('HandleReportBtnMessage' , {reportedUser: owner}) } data-pr-position="left">
@@ -191,6 +193,8 @@ const Reports = () => {
 								</Button>
 								</span>
 						   </Link>
+							</>
+							}
 							<Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
 						</>}></Column>
 					</DataTable>
