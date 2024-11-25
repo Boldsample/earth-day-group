@@ -335,6 +335,8 @@
       "positiveClosingCaseMessage": "Subject: Investigation Result: No Violations Found\n\nDear  {{userName}},\n\nAfter conducting a detailed review of the received report regarding your {{reported}}, we have concluded that no violation of our Terms and Conditions has occurred.\n\nNo further action is necessary, so you may continue using our platform normally. We appreciate your compliance with our policies and invite you to continue enjoying our services.\n\nIf you have any questions or suggestions, our support team is available to assist you.\n\nSincerely,\nEarth Day Group – Support Team",
       "negativeClosingCaseWarningMessage": "Warning: This template closing message will mark the report as resolved and delete the {{item}}. If you do not want to proceed with these actions, please select a different option from the message type dropdown.",
       "positiveClosingCaseWarningMessage": "Warning: This template closing message will mark the report as resolved. If you do not want to proceed with this action, please select a different option from the message type dropdown.",
+      "reportResolvedWarningMessage": "This report was already managed and resolved by {{admin}}",
+      "reportInProgressdWarningMessage": "You cannot interact with this report. This report is currently being managed by {{admin}}",
       "customCaseMessage": null,
       "product": "product",
       "user": "user",
@@ -871,10 +873,10 @@
         "offerReceived": "Offer received",
         "offerAccepted": "Offer accepted",
         "offerRejected": "Offer rejected",
-		"quantity": "Quantity",
-		"askingPrice": "Asking price",
-		"finalPrice": "Final price",
-		"pay": "Pay"
+        "quantity": "Quantity",
+        "askingPrice": "Asking price",
+        "finalPrice": "Final price",
+        "pay": "Pay"
       }
     },
     "templates": {
@@ -979,5 +981,9 @@
     "gallons_min": "gal",
     "liters_min": "L",
     "units_min": "units"
+  },
+  "tooltips": {
+    "cannotHandleReportBtnMessage": "This report belongs to {{admin}}",
+    "HandleReportBtnMessage": "Chat with {{reportedUser}}"
   }
 }

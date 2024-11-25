@@ -32,6 +32,7 @@ const Reports = () => {
 	const user = useSelector((state) => state.users.userData)
 	const [page, setPage] = useState({first: 0, page: 0, rows: 6})
 	const [t] = useTranslation('translation', { keyPrefix: 'admin.report' })
+	const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
 	const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
 	const [filters, setFilters] = useState({type: "", status: "", admin: "", keyword: ''})
 	const [tSubjects] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
@@ -68,6 +69,7 @@ const Reports = () => {
 		if(!ex)
 		  setReports(_reports)
 	}
+	console.log(reports)
 	const renderHeader = () => {
 		return <div className="filters">
 			<Dropdown style={{width: '10.7rem'}} value={filters?.type} onChange={e => updateFilters('type', e.value)} optionLabel="name" optionValue="value" placeholder={t('all')} options={[
@@ -180,10 +182,15 @@ const Reports = () => {
 						<Column header={t('tableTitleAssignedTo')}  field="admin" body={({aid, admin})=>
 							<span className='table-item__background'>{aid ? admin : t(admin) }</span>
 						}></Column>
-						<Column className="actions" header={null} body={({id, aid, owner }) => <>
-						{aid === user.id && (
-							<Link className="button small green-earth" to={`/chat/${owner}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
-						)}
+						<Column className="actions" header={null} body={({id, aid, owner, admin, status }) => <>
+							<Tooltip target=".chatToolTip"/>
+							<Link to={aid !== user.id ? null : `/chat/${owner}`}>
+								<span className='chatToolTip' data-pr-tooltip={aid !== user.id ? tToolTip('cannotHandleReportBtnMessage', {admin: admin}) : tToolTip('HandleReportBtnMessage' , {reportedUser: owner}) } data-pr-position="left">
+								<Button disabled={status == 'success' && aid !== user?.id && !aid || aid && aid !== user?.id } className=" button small green-earth mr-1" >
+									<FontAwesomeIcon icon={faPaperPlane} />
+								</Button>
+								</span>
+						   </Link>
 							<Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
 						</>}></Column>
 					</DataTable>

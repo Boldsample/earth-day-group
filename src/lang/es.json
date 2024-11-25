@@ -336,6 +336,8 @@
       "positiveClosingCaseMessage": "Asunto: Resultado de la Investigación: No se Encontraron Infracciones\n\nCordial Saludo, {{userName}}:\n\nDespués de llevar a cabo una revisión detallada sobre el reporte recibido en relación con tu {{reported}}, hemos concluido que no se ha producido ninguna infracción de nuestros Términos y Condiciones.\n\nNo será necesaria ninguna acción adicional, por lo que puedes continuar utilizando nuestra plataforma con normalidad. Agradecemos tu cumplimiento con nuestras políticas y te invitamos a seguir disfrutando de nuestros servicios.\n\nSi tienes cualquier duda o sugerencia, nuestro equipo de soporte está disponible para ayudarte.\n\nAtentamente,\nEarth Day Group – Equipo de Soporte",
       "negativeClosingCaseWarningMessage": "Advertencia: El mensaje de esta plantilla conlleva la acción de marcar el reporte como resuelto y elimina el {{item}}. Si no deseas proceder con esta acción, selecciona una opción diferente en el menú desplegable de tipo de mensaje.",
       "positiveClosingCaseWarningMessage": "Advertencia: El mensaje de esta plantilla conlleva la acción de marcar el reporte como resuelto. Si no deseas proceder con esta acción, selecciona una opción diferente en el menú desplegable de tipo de mensaje.",
+      "reportResolvedWarningMessage": "Este reporte ya fue gestionado y resuelto por {{admin}}",
+      "reportInProgressdWarningMessage": "No puedes interactuar con este reporte. Este reporte está siendo gestionado actualmente por {{admin}}",
       "customCaseMessage": null,
       "product": "producto",
       "user": "usuario",
@@ -873,10 +875,10 @@
         "offerReceived": "Oferta recibida",
         "offerAccepted": "Oferta aceptada",
         "offerRejected": "Oferta rechazada",
-		"quantity": "Cantidad",
-		"askingPrice": "Precio solicitado",
-		"finalPrice": "Precio final",
-		"pay": "Pagar"
+        "quantity": "Cantidad",
+        "askingPrice": "Precio solicitado",
+        "finalPrice": "Precio final",
+        "pay": "Pagar"
       }
     },
     "templates": {
@@ -981,5 +983,9 @@
     "gallons_min": "gal",
     "liters_min": "L",
     "units_min": "unid"
+  },
+  "tooltips": {
+    "cannotHandleReportBtnMessage": "Este reporte le pertenece a {{admin}}",
+    "HandleReportBtnMessage": "Escríbele a {{reportedUser}}"
   }
 }

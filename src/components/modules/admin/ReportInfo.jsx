@@ -103,6 +103,9 @@ const ReportInfo = ({ show, report, onHide }) => {
 		<Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")} >
 		  <Stepper ref={stepperRef}>
 			<StepperPanel header={t("reportSummaryTitle")}>
+				{/* {report?.status == 'success' && report?.aid !== user?.id && !report?.aid || report?.aid !== user?.id &&
+					<Message className="mb-2" severity={report?.status == 'success' ? "success": "warn"} text={report?.status == 'success' ? t("reportResolvedWarningMessage", {admin: report.admin}) : t("reportInProgressdWarningMessage" , {admin: report.admin})} />
+				} */}
 			  <div className="panel-1">
 				{report?.images?.length ? (
 				  <Galleria
@@ -121,6 +124,9 @@ const ReportInfo = ({ show, report, onHide }) => {
 					<div className="fullwidth mb-4" style={{ fontSize: '0.75rem' }}>
 						{report?.date}
 					</div>
+					{report?.status == 'success' && report?.aid !== user?.id && !report?.aid || report?.aid !== user?.id &&
+					<Message className="mb-1" severity={report?.status == 'success' ? "success": "warn"} text={report?.status == 'success' ? t("reportResolvedWarningMessage", {admin: report.admin}) : t("reportInProgressdWarningMessage" , {admin: report.admin})} />
+				}
 					{report?.type === 'offer' && <p>
 						<b>{t('reported'+report?.type)}:</b> <Link onClick={e => {e.preventDefault(); getUserDetail(report?.entity);}}>{report?.name}</Link>
 					</p>}
