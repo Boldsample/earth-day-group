@@ -337,6 +337,7 @@
       "positiveClosingCaseWarningMessage": "Warning: This template closing message will mark the report as resolved. If you do not want to proceed with this action, please select a different option from the message type dropdown.",
       "reportResolvedWarningMessage": "This report was already managed and resolved by {{admin}}",
       "reportInProgressdWarningMessage": "You cannot interact with this report. This report is currently being managed by {{admin}}",
+      "assignReportWarningMessage": "Warning: Sending this message will automatically assign the task to you, and this action cannot be undone. If you do not wish to take on this report, please do not send the message.",
       "customCaseMessage": null,
       "product": "product",
       "user": "user",
@@ -984,6 +985,9 @@
   },
   "tooltips": {
     "cannotHandleReportBtnMessage": "This report belongs to {{admin}}",
-    "HandleReportBtnMessage": "Chat with {{reportedUser}}"
+    "HandleReportBtnMessage": "Chat with {{reportedUser}}",
+    "viewReportBtn": "View Report",
+    "downloadReportBtn": "Download reports"
+    
   }
 }

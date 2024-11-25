@@ -188,7 +188,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 					<h4 className="mb-2 text-center">{t("handleReportTitle")}</h4>
 					</div>
 					<form className="respond" onSubmit={handleSubmit(onSubmit)}>
-						<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
+						<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2 no-wrap'}>
 						<DropDownInput
 							isEdit={true}
 							control={control}
@@ -280,6 +280,10 @@ const ReportInfo = ({ show, report, onHide }) => {
 							required: tErrorMessages('requiredErrorMessage'),
 							}}
 						/>
+						{
+						!report.aid && 	
+						<Message severity="warn" text={t("assignReportWarningMessage")} />
+						}
 						{(watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') &&
 						<Message severity="warn" text={watch('message') !== 'negativeClosingCaseMessage' ? t("positiveClosingCaseWarningMessage") : t("negativeClosingCaseWarningMessage", {item: report?.type})} />
 						}

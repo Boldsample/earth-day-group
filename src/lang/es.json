@@ -338,6 +338,7 @@
       "positiveClosingCaseWarningMessage": "Advertencia: El mensaje de esta plantilla conlleva la acción de marcar el reporte como resuelto. Si no deseas proceder con esta acción, selecciona una opción diferente en el menú desplegable de tipo de mensaje.",
       "reportResolvedWarningMessage": "Este reporte ya fue gestionado y resuelto por {{admin}}",
       "reportInProgressdWarningMessage": "No puedes interactuar con este reporte. Este reporte está siendo gestionado actualmente por {{admin}}",
+      "assignReportWarningMessage": "Advertencia: Enviar este mensaje asignará automáticamente el reporte a usted, y esta acción no se podrá deshacer. Si no desea encargarse de este reporte, no envíe el mensaje.",
       "customCaseMessage": null,
       "product": "producto",
       "user": "usuario",
@@ -986,6 +987,8 @@
   },
   "tooltips": {
     "cannotHandleReportBtnMessage": "Este reporte le pertenece a {{admin}}",
-    "HandleReportBtnMessage": "Escríbele a {{reportedUser}}"
+    "HandleReportBtnMessage": "Enviar mensaje a {{reportedUser}}",
+    "viewReportBtn": "Ver Reporte",
+    "downloadReportBtn": "Descargar reportes"
   }
 }

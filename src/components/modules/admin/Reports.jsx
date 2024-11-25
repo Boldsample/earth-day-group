@@ -103,7 +103,8 @@ const Reports = () => {
 				setReset(true)
 				setFilters({type: "", status: "", admin: "", keyword: ''})
 			}}>{tGlobal('reset')}</Button>
-    		<Button className="green-earth" onClick={() => callReports(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
+			<Tooltip target=".downloadReports"/>
+    		<Button className="green-earth downloadReports" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn')}  onClick={() => callReports(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
 		</div>
 	}
 	const typeColumnBodyTemplate = (columnItem) => {
@@ -195,7 +196,8 @@ const Reports = () => {
 						   </Link>
 							</>
 							}
-							<Button className="small dark-blue" onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
+							<Tooltip target=".viewReport"/>
+							<Button className="small dark-blue viewReport" data-pr-position="left"  data-pr-tooltip={tToolTip('viewReportBtn')} onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
 						</>}></Column>
 					</DataTable>
 				</>}
