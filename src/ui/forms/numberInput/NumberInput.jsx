@@ -24,7 +24,7 @@ const NumberInput = ({
   const renderInput = () => (
     <>
       <Controller
-        //rules={rules}
+        rules={rules}
         name={nameInput}
         control={control}
         render={({ field }) => <InputNumber

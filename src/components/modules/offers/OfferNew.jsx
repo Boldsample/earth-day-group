@@ -158,7 +158,7 @@ const OfferNew = () => {
             getFormErrorMessage={getFormErrorMessage}
             labelName={t('inputNumberAskingPriceLabel')}
             placeHolderText={t('inputNumberAskingPricePlaceholderText')}
-			maxFractionDigits={watch('delivery_currency') == 'cop' ? 0 : 2}
+			      maxFractionDigits={watch('delivery_currency') == 'cop' ? 0 : 2}
             rules={{
               maxLength: {
                 value: 7,
@@ -191,12 +191,13 @@ const OfferNew = () => {
         <div className="registerInput__container-x1">
           <TextAreaInput
             control={control}
-            isRequired={false}
+            isRequired={true}
             nameInput="description"
             getFormErrorMessage={getFormErrorMessage}
             labelName={t('textAreaDescriptionTitle')}
             placeHolderText={t('descriptionPlaceholder')}
             rules={{
+              required: tGlobalErrors('requiredErrorMessage'),
               maxLength: {
                 value: 1000,
                 message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 1000}),
@@ -208,6 +209,7 @@ const OfferNew = () => {
             }} />
         </div>
         <UploadPhotoInput
+          isRequired={true}
           type="imageUpload"
           title={t('offerImagesTitle')}
           uploadedImages={uploadedImages}

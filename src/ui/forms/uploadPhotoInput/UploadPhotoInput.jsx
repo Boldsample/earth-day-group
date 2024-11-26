@@ -17,6 +17,7 @@ const UploadPhotoInput = ({
   setValue,
   getValues,
   className,
+  isRequired,
   toolTipMessage="",
   uploadedImages,
   setUploadedImages,
@@ -97,6 +98,9 @@ const UploadPhotoInput = ({
           {reachedImageCapacity && 
             <small className="p-error">*You can only Upload 7 images. Please remove one if you wish to add a new one.</small>
           }
+           {/* {isRequired && uploadedImages.length == 0 &&
+            <small className="p-error">*Debes adjuntar al menos una foto.</small>
+          } */}
         </div>
       default:
         return null
