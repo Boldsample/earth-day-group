@@ -40,8 +40,9 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
   }
   
   useEffect(() => {
-    reloadElements()
-  }, [user])
+    if(filters?.keyword == '')
+      reloadElements()
+  }, [user, filters])
 
   return <>
     <div className="layout fullwidth hasfooter">
@@ -79,7 +80,7 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
                       reloadElements()
                   }} />
                 {filters?.keyword && 
-                  <Link className="reset" onClick={() => { setFilters({keyword: ''}); reloadElements() }}><FontAwesomeIcon icon={faTimes} /></Link>
+                  <Link className="reset" onClick={() => { setFilters({keyword: ''}); }}><FontAwesomeIcon icon={faTimes} /></Link>
                 }
                 <button className="green-earth ml-1" onClick={reloadElements}>{t('search')}</button>
               </form>
