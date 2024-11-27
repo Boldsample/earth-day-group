@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   error: "",
   thankyou: {},
+  prevPage: '',
   loading: false,
   header: 'false',
   headerTitle: '',
@@ -13,6 +14,9 @@ const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setPrevPage: (state, action) => {
+      state.prevPage = action.payload;
+    },
     setHeader: (state, action) => {
       state.header = action.payload;
     },
@@ -35,6 +39,7 @@ export const {
   setHeader,
   resetState,
   isSettings,
+  setPrevPage,
   headerTitle,
   loadingData,
   updateThankyou,

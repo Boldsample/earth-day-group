@@ -1,9 +1,13 @@
-import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { useLocation, Routes } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { useLocation, Routes, useNavigate } from "react-router-dom"
+
+import { setPrevPage } from "@store/slices/globalSlice"
 
 function PageAnimate({ children }) {
   const location = useLocation()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [nextPath, setNextPath] = useState(null)
   const user = useSelector((state) => state.users.userData)
   const [isTransitioning, setIsTransitioning] = useState(false)
@@ -11,6 +15,7 @@ function PageAnimate({ children }) {
 
   const handleTransitionEnd = () => {
     if(nextPath){
+      dispatch(setPrevPage(currentPath))
       setCurrentPath(nextPath)
       setNextPath(null)
       window.scrollTo({ top: 0 })

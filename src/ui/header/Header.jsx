@@ -21,7 +21,7 @@ const Header = () => {
   const [t, i18n] = useTranslation('translation')
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
-  const headerTitle = useSelector((state) => state.global.headerTitle)
+  const {headerTitle, prevPage} = useSelector((state) => state.global)
 
   const logout = async (e) => {
     if(await logoutUser()){
@@ -38,7 +38,7 @@ const Header = () => {
 
     <div className="navbar-item go-back">
       {user?.id && 
-        <a onClick={() => navigate(-1)}><FontAwesomeIcon icon={faChevronLeft} /></a>
+        <Link to={prevPage}><FontAwesomeIcon icon={faChevronLeft} /></Link>
       }
       {user?.id && !['map'].some((s) => s == header) && <>
         <ProfilePhoto userPhoto={user?.picture} className="left" />
