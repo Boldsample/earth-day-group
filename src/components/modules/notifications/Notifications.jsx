@@ -13,9 +13,9 @@ const Notifications = () => {
   const [t] = useTranslation('translation', { keyPrefix: 'notifications.notification' })
   const info = {
     offer: { title: t('offerTitleText'), message: t('offerBodyText') },
-    message: { title: t('messageTitleText'), message: t('messageBodyText'), },
+    message: { title: t('messageTitleText'), message: t('messageBodyText')},
+    report: { title: t('messageTitleText'), message: t('messageBodyText')},
   }
-
   const callNotifications = async () => {
     const res = await getNotifications({user: user?.id})
     const _res = res.map(notification => {

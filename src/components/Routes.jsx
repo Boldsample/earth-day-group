@@ -48,9 +48,9 @@ const AppRoutes = () => {
     const _id = Cookies.get('edgActiveUser')
     if(!user?.id && _id != 'undefined' && user == null)
       dispatch(getUserData(_id))
-    //else if(user?.id)
+    // else if(user?.id)
     //  startNotificationsSource()
-    //return () => stopNotificationsSource()
+    // return () => stopNotificationsSource()
   }, [user])
   
   return <BrowserRouter basename="">

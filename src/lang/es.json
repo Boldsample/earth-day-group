@@ -871,6 +871,8 @@
   "ui": {
     "cards": {
       "multiUseCard": {
+        "notificationMinutes": "Hace {{minutes}} minutos",
+        "notificationHours": "Hace {{hours}} horas",
         "seeMoreBtnText": "Ver más",
         "offerSent": "Oferta enviada",
         "offerReceived": "Oferta recibida",

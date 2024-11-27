@@ -869,6 +869,8 @@
   "ui": {
     "cards": {
       "multiUseCard": {
+        "notificationMinutes": "{{minutes}} minutes ago",
+        "notificationHours": "{{hours}} hours ago",
         "seeMoreBtnText": "See more",
         "offerSent": "Offer sent",
         "offerReceived": "Offer received",

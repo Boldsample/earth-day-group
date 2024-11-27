@@ -20,17 +20,27 @@ const MultiUseCard = ({
   bookmark = true,
 }) => {
   const user = useSelector((state) => state.users.userData)
-  const [t] = useTranslation('translation', { keyPrefix: 'ui.cards.multiUseCard'})
-	const [tReport] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
+  const [tReport] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
+  const [t, i18n] = useTranslation('translation', { keyPrefix: 'ui.cards.multiUseCard'})
 
   const renderCardContent = () => {
     switch (type) {
       case 'notification':
+        const receivedDate = new Date(data?.date.replace(" ", "T") + "Z")
+        const diffInMinutes = Math.floor((new Date() - receivedDate) / (1000 * 60))
+        const diffInHours = Math.floor(diffInMinutes / 60)
+        let showDate;
+        if(diffInMinutes < 120)
+          showDate = t('notificationMinutes', {minutes: diffInMinutes})
+        else if (diffInHours < 24)
+          showDate = t('notificationHours', {hours: diffInHours})
+        else
+          showDate = receivedDate.toLocaleDateString(i18n.language == 'es' ? 'es-CO' : 'en-US', { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });
         return <Link to={data?.link}>
           <header>
             <FontAwesomeIcon icon={faBell} />
             <h5>{data?.title}</h5>
-            <small>{data?.date}</small>
+            <small>{showDate}</small>
           </header>
           <p><b>{data?.user}</b> {data?.message}</p>
         </Link>
