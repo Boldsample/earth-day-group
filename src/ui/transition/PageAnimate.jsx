@@ -26,7 +26,7 @@ function PageAnimate({ children }) {
     if(location.pathname != currentPath){
       const _cur = currentPath.split('/')
       const _new = location.pathname.split('/')
-      if(user?.id && (_cur[1] != _new[1] || (!isNaN(_new[2]) && _new[2] != '' && _cur[1] != 'offers') || _cur[1] == 'chat' || _cur[2] == 'new' || _new[2] == 'new')){
+      if(user?.id && (_cur[1] != _new[1] || (!isNaN(_new[2]) && _new[2] != '' && _cur[1] != 'offers') || ['chat', 'settings'].includes(_cur[1]) || _cur[2] == 'new' || _new[2] == 'new')){
         setIsTransitioning(true)
         setNextPath(location.pathname)
       }else{
@@ -38,7 +38,7 @@ function PageAnimate({ children }) {
 
   return <>
     <Routes location={{ pathname: currentPath }}>{children}</Routes>
-    {isTransitioning && <div className="transition-overlay">
+    {isTransitioning && <div className={'transition-overlay ' + (['settings'].includes(currentPath.split('/')[1]) ? 'white' : '')}>
       <div className="enter-animation" onAnimationEnd={handleTransitionEnd}></div>
       <div className="exit-animation" onAnimationEnd={() => setIsTransitioning(false)}></div>
     </div>}

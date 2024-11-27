@@ -790,14 +790,17 @@ button, .button
   top: 0
   width: 100%
   z-index: 999999
-.enter-animation
-  animation: fadeIn 300ms ease-in-out
-  background: #FFFBEB
-  opacity: 0
-.exit-animation
-  animation: fadeOut 300ms ease-in-out 300ms
-  background: #FFFBEB
-  opacity: 0
+  .enter-animation
+    animation: fadeIn 300ms ease-in-out
+    background: #FFFBEB
+    opacity: 0
+  .exit-animation
+    animation: fadeOut 300ms ease-in-out 300ms
+    background: #FFFBEB
+    opacity: 0
+  &.white
+    .enter-animation, .exit-animation
+      background: #FFFFFF
 @keyframes fadeIn
   0%
     opacity: 0
