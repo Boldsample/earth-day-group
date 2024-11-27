@@ -105,7 +105,7 @@ const Products = () => {
           <Column headerClassName='table-header-styles' header={t('tableTitleName')} field="name" bodyClassName='table-body-styles' body={({name, picture})=>{
             const initials = keepFirstLetters(name)
             return <div className="flex aligncenter">
-              <Avatar  icon={<FontAwesomeIcon  color='#fff' icon={faTags}/>} style={{ backgroundColor: 'var(--dark-blue)', color: '#ffffff', width: '16%' }} image={picture} shape="circle" />
+              <Avatar  icon={<FontAwesomeIcon  color='#fff' icon={faTags}/>} style={{ backgroundColor: 'var(--dark-blue)', color: '#ffffff' }} image={picture} shape="circle" />
               <p className='ml-1 mb-0'>{name}</p>
             </div>;
           }}></Column>

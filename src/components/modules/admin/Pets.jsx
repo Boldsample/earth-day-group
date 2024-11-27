@@ -98,7 +98,7 @@ const Pets = () => {
           onPage={({first, page, rows}) => setPage({first, page, rows})}>
           <Column headerClassName='table-header-styles' header={t('tableTitleName')} bodyClassName='table-body-styles' field="name" body={({name, picture}) =>{
              return <div className="flex aligncenter">
-             <Avatar icon={<FontAwesomeIcon  color='#fff' icon={faPaw}/>} style={{ backgroundColor: 'var(--dark-blue)', color: '#ffffff', width: '19%' }}  image={picture} shape="circle" />
+             <Avatar icon={<FontAwesomeIcon  color='#fff' icon={faPaw}/>} style={{ backgroundColor: 'var(--dark-blue)', color: '#ffffff' }}  image={picture} shape="circle" />
              <p className='ml-1 mb-0'>{name}</p>
            </div>;
           }}></Column>
