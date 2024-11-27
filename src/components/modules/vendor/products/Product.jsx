@@ -55,10 +55,10 @@ const Product = () => {
 
   useEffect(() => {
     setProduct(null)
-	  dispatch(setHeader('user'))
+    dispatch(setHeader('user'))
   }, [id])
   useEffect(() => {
-    if(id)
+    if(id && product == null)
       getProductData()
   }, [product])
 

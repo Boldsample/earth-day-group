@@ -67,7 +67,7 @@ const Products = () => {
         placeholder={t('inputSearchPlaceHolder')} 
         onKeyDown={(e) => e.key === 'Enter' ? callProducts() : null} 
         onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
-      <Button className="small dark-blue" type="button" onClick={callProducts}>{tGlobal('search')}</Button>
+      <Button className="small dark-blue" type="button" onClick={() => callProducts()}>{tGlobal('search')}</Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
         setFilters({keyword: ''})

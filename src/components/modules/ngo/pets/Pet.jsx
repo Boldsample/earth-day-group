@@ -57,7 +57,7 @@ const Pet = () => {
 	  dispatch(setHeader('user'))
   }, [id])
   useEffect(() => {
-    if(id)
+    if(id && pet == null)
       getPetData()
   }, [pet])
   

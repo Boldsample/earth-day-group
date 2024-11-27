@@ -67,9 +67,8 @@ const Reports = () => {
 		const _reports = await getReports(_filter, page, ex)
 		setLoading(false)
 		if(!ex)
-		  setReports(_reports)
+		setReports(_reports)
 	}
-	console.log(reports)
 	const renderHeader = () => {
 		return <div className="filters">
 			<Dropdown style={{width: '10.7rem'}} value={filters?.type} onChange={e => updateFilters('type', e.value)} optionLabel="name" optionValue="value" placeholder={t('all')} options={[
@@ -98,13 +97,13 @@ const Reports = () => {
 				placeholder={t('inputSearchPlaceHolder')} 
 				onKeyDown={(e) => e.key === 'Enter' ? callReports() : null} 
 				onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
-			<Button className="small dark-blue" type="button" onClick={callReports}>{tGlobal('search')}</Button>
+			<Button className="small dark-blue" type="button" onClick={() => callReports()}>{tGlobal('search')}</Button>
 			<Button className="small red-state" type="button" onClick={() => {
 				setReset(true)
 				setFilters({type: "", status: "", admin: "", keyword: ''})
 			}}>{tGlobal('reset')}</Button>
 			<Tooltip target=".downloadReports"/>
-    		<Button className="green-earth downloadReports" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn')}  onClick={() => callReports(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
+			<Button className="green-earth downloadReports" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn')}  onClick={() => callReports(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
 		</div>
 	}
 	const typeColumnBodyTemplate = (columnItem) => {
@@ -193,7 +192,7 @@ const Reports = () => {
 									<FontAwesomeIcon icon={faPaperPlane} />
 								</Button>
 								</span>
-						   </Link>
+						</Link>
 							</>
 							}
 							<Tooltip target=".viewReport"/>

@@ -53,7 +53,7 @@ const AppRoutes = () => {
     //return () => stopNotificationsSource()
   }, [user])
   
-	return <BrowserRouter basename="">
+  return <BrowserRouter basename="">
     <Header />
     <PageAnimate>
       {!user?.role && <>

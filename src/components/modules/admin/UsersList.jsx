@@ -123,7 +123,7 @@ const Users = ({type}) => {
         placeholder={t('inputSearchPlaceHolder')} 
         onKeyDown={(e) => e.key === 'Enter' ? callUsers() : null} 
         onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
-      <Button className="small dark-blue" type="button" onClick={callUsers}>{tGlobal('search')}</Button>
+      <Button className="small dark-blue" type="button" onClick={() => callUsers()}>{tGlobal('search')}</Button>
       <Button className="small red-state" type="button" onClick={() => {
         setReset(true)
         setFilters({state: '', role: '', keyword: ''})

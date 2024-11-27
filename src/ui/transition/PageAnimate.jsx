@@ -21,11 +21,7 @@ function PageAnimate({ children }) {
     if(location.pathname != currentPath){
       const _cur = currentPath.split('/')
       const _new = location.pathname.split('/')
-      if( user?.id && 
-          _new[1] != 'market-place' &&
-          _new[1] != 'bookmarks' &&
-          _new[1] != 'shelters' &&
-          (isNaN(_new[2]) || isNaN(_cur[2]) || _cur[1] != _new[1] || _new[1] == 'pet' || _new[1] == 'product')){
+      if(user?.id && (_cur[1] != _new[1] || (!isNaN(_new[2]) && _new[2] != '' && _cur[1] != 'offers') || _cur[1] == 'chat' || _cur[2] == 'new' || _new[2] == 'new')){
         setIsTransitioning(true)
         setNextPath(location.pathname)
       }else{

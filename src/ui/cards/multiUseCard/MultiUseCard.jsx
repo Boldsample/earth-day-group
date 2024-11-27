@@ -136,7 +136,7 @@ const MultiUseCard = ({
           }
           {data?.type == 'report' && <div className="fullwidth mt-1 mb-1">
             {data?.report_type === 'offer' && 
-              <Link className="button dark-blue" to={`/offers/search/${data?.report_entity}/`}>{tReport('view') + ' ' + tReport('reported'+data?.report_type).toLowerCase()}</Link>
+              <Link className="button dark-blue" to={`/offers/${data?.report_entity}/`}>{tReport('view') + ' ' + tReport('reported'+data?.report_type).toLowerCase()}</Link>
             || 
               <Link className="button dark-blue" to={`/${data?.report_type == 'user' ? 'profile' : data?.report_type}/${data?.report_type == 'user' ? data?.report_owner : data?.report_entity}/`}>{tReport('view') + ' ' + tReport('reported'+data?.report_type).toLowerCase()}</Link>
             }
