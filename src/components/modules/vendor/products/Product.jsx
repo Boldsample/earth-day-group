@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark as faBookmarkLine } from "@fortawesome/free-regular-svg-icons"
 import { faBookmark, faCartPlus, faFlag, faImage, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
+import { Message } from "primereact/message"
 
 import Footer from "@ui/footer/Footer"
 import { setHeader } from "@store/slices/globalSlice"
@@ -88,7 +89,10 @@ const Product = () => {
                 {product?.state == 1 && 
                   <button onClick={() => setConfirm(true)} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deleteProductBtn')}</span></button>
                 || 
-                  <Chip className="background-red-state ml-1" label={tGlobal('deleted')} />
+                  // <Chip className="background-red-state ml-1" label={tGlobal('deleted')} />
+                  <div className="mt-2">
+                  <Message severity="error" text={t('deletedProductWarningMessage')} />
+                </div>
                 }
               </>}
             </div>

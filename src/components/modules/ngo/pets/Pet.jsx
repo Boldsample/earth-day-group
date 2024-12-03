@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
+import { Message } from "primereact/message"
 
 import Footer from "@ui/footer/Footer"
 import { getPet, updatePet } from "@services/petServices"
@@ -91,7 +92,9 @@ const Pet = () => {
               {pet?.state == 1 && 
                 <button onClick={() => setConfirm(true)} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deletePetBtn')}</span></button>
               || 
-                <Chip className="background-red-state ml-1" label={tGlobal('deleted')} />
+                <div className="mt-2">
+                  <Message severity="error" text={t('deletedPetWarningMessage')} />
+                </div>
               }
             </>}
           </div>

@@ -535,8 +535,9 @@
         "petYearsOld": "años de edad",
         "contactShelterBtn": "Contactar refugio",
         "editPetBtn": "Editar mascota",
-        "deletePetBtn": "Eliminar mascota",
-        "deletePetTitle": "¿Desea eliminar la mascota?"
+        "deletePetBtn": "Desactivar mascota",
+        "deletePetTitle": "¿Realmente Deseas desactivar esta mascota?",
+        "deletedPetWarningMessage": "Esta mascota está deshabilitada y solo puede ser vista por usuarios administradores. Para reinstaurarlo, por favor dirígete a la sección de Mascotas y cambia su estado a 'Habilitado'."
       }
     }
   },
@@ -799,8 +800,9 @@
         "addToCartBtnText": "Agregar al Carrito",
         "reportProductTooltipText": "Reportar Producto",
         "editProductBtnText": "Editar Producto",
-        "deleteProductBtn": "Eliminar Producto",
-        "deleteProductTitle": "¿Desea eliminar el producto?"
+        "deleteProductBtn": "Desactivar Producto",
+        "deleteProductTitle": "¿Realmente Deseas desactivar el producto?",
+        "deletedProductWarningMessage": "Este producto está actualmente deshabilitado y solo puede ser visto por usuarios administradores. Para reinstaurarlo, por favor dirígete a la sección de Productos y cambia su estado a 'Habilitado'."
       }
     }
   },

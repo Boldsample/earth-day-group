@@ -534,8 +534,9 @@
         "petYearsOld": "Years old",
         "contactShelterBtn": "Contact Shelter",
         "editPetBtn": "Edit Pet",
-        "deletePetBtn": "Delete Pet",
-        "deletePetTitle": "Do you want to delete the pet?"
+        "deletePetBtn": "Disable Pet",
+        "deletePetTitle": "Do you really want to disable this pet?",
+        "deletedPetWarningMessage": "This pet is currently disabled and can only be viewed by admin users. To reinstate it, please go to the Pets section and change its status to 'Enabled'."
       }
     }
   },
@@ -797,8 +798,9 @@
         "addToCartBtnText": "Add To Cart",
         "reportProductTooltipText": "Report Product",
         "editProductBtnText": "Edit Product",
-        "deleteProductBtn": "Delete Product",
-        "deleteProductTitle": "Do you want to delete de product?"
+        "deleteProductBtn": "Disable Product",
+        "deleteProductTitle": "Do you really want to disable this product?",
+        "deletedProductWarningMessage": "This product is currently disabled and can only be viewed by admin users. To reinstate it, please go to the Products section and change its status to 'Enabled'."
       }
     }
   },
@@ -990,6 +992,5 @@
     "HandleReportBtnMessage": "Chat with {{reportedUser}}",
     "viewReportBtn": "View Report",
     "downloadReportBtn": "Download reports"
-    
   }
 }
