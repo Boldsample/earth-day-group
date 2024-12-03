@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useTranslation } from 'react-i18next'
+import { Message } from "primereact/message"
 
 import { setHeader } from "@store/slices/globalSlice"
 import materials from "@json/recyclableMaterials.json"
@@ -215,6 +216,9 @@ const OfferNew = () => {
           uploadedImages={uploadedImages}
           setUploadedImages={setUploadedImages}
           className="imagesHub__container-variant mb-1" />
+          <div className="mb-2">
+            <Message severity="info" text={t('createOfferWarningMessage')} />
+          </div>  
         <div className="p-field" style={{ marginBottom: "1.5rem" }}>
           <Button className="dark-blue fullwidth" label={t('postOfferBtnText')} type="submit" loading={sending} />
         </div>

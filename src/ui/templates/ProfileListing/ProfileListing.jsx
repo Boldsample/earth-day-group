@@ -7,7 +7,7 @@ import { followUser } from "@services/userServices"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileInformation from "@components/modules/profile/ProfileInformation"
 import { useTranslation } from 'react-i18next'
-
+import { Message } from "primereact/message"
 
 import "../styles.sass"
 import AdBanner from "@ui/banners/AdBanner"
@@ -37,7 +37,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
     await followUser({user: id, follower: user?.id})
     reloadElements()
   }
-
+console.log(materials.length)
   if(!profile?.role)
     return
   return <>
@@ -50,11 +50,14 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
             <div className="materialsBoxTitle">
               <h4>{t('recyclableGoodsTitle')}</h4>
               {user?.id == profile?.id &&
-                <Link to="/settings/edit/materials/">{t('editMaterials')}</Link>
+                <Link className="button dark-blue mt-2" to="/settings/edit/materials/">{t('editMaterials')}</Link>
               }
             </div>
-            {materials?.length == 0 &&
-              <Link className="button dark-blue mt-2" to="/settings/edit/materials/">{t('createFirstMaterial')}</Link>
+            {profile.materials?.length == 0 &&
+              <div className="flex-column aligncenter ">
+                <Message className="width-60" severity="info" text={t('noItemsCreatedMessage')} />
+                <Link className="button dark-blue mt-2" to="/settings/edit/materials/">{t('createFirstMaterial')}</Link>
+              </div>
             }
             <div className={'materialsCard__grid ' + (moreMaterials ? 'show' : 'hide')}>
               {materials?.map(category => {
@@ -72,7 +75,9 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
                   </div>
               })}
             </div>
-            <a onClick={() => setMoreMaterials(prev => !prev)}>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</a>
+            {profile.materials?.length > 0 &&
+            <a className="button dark-blue mt-1" onClick={() => setMoreMaterials(prev => !prev)}>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</a>
+            }
           </div>
         }
         <AdBanner type="headerBanner" />

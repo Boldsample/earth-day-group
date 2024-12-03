@@ -537,7 +537,7 @@
         "editPetBtn": "Editar mascota",
         "deletePetBtn": "Desactivar mascota",
         "deletePetTitle": "¿Realmente Deseas desactivar esta mascota?",
-        "deletedPetWarningMessage": "Esta mascota está deshabilitada y solo puede ser vista por usuarios administradores. Para reinstaurarlo, por favor dirígete a la sección de Mascotas y cambia su estado a 'Habilitado'."
+        "deletedPetWarningMessage": "Esta mascota está deshabilitada y solo puede ser vista por usuarios administradores. Para restablecerla, por favor dirígete a la sección de Mascotas y cambia su estado a 'Habilitado'."
       }
     }
   },
@@ -587,7 +587,8 @@
       "postOfferBtnText": "Publicar Oferta",
       "offerImagesTitle": "Imagenes de la oferta",
       "textAreaDescriptionTitle": "Descripción",
-      "descriptionPlaceholder": "Describe tu oferta."
+      "descriptionPlaceholder": "Describe tu oferta.",
+      "createOfferWarningMessage": "Importante: Por favor, revisa cuidadosamente los detalles de tu oferta antes de publicarla, ya que no podrás editarla una vez que esté en línea. Si cometes un error después de publicarla, te recomendamos eliminarla y crear una nueva."
     },
     "offersList": {
       "mainTitle": "Encuentra materiales reciclables",
@@ -802,7 +803,7 @@
         "editProductBtnText": "Editar Producto",
         "deleteProductBtn": "Desactivar Producto",
         "deleteProductTitle": "¿Realmente Deseas desactivar el producto?",
-        "deletedProductWarningMessage": "Este producto está actualmente deshabilitado y solo puede ser visto por usuarios administradores. Para reinstaurarlo, por favor dirígete a la sección de Productos y cambia su estado a 'Habilitado'."
+        "deletedProductWarningMessage": "Este producto está actualmente deshabilitado y solo puede ser visto por usuarios administradores. Para restablecerlo, por favor dirígete a la sección de Productos y cambia su estado a 'Habilitado'."
       }
     }
   },
@@ -907,7 +908,9 @@
           "LessMaterials": "Menos materiales",
           "MoreMaterials": "Más materiales",
           "recyclableGoodsTitle": "Precio de Bienes Reciclables",
-          "editMaterials": "Crear/editar materiales",
+          "noItemsCreatedMessage": "¡Ups! Parece que no has especificado los materiales de reciclaje que te interesa comprar. Haz clic en el botón a continuación para comenzar a agregar materiales y precios por unidad.",
+          "editMaterials": "Editar precio  de materiales",
+          "addMaterials": "Agregar materiales y precio",
           "createFirstMaterial": "Añade los materiales que compras"
         }
       }

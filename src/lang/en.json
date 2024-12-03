@@ -63,7 +63,7 @@
     "createUserBtnLabelThankYouPage": "Go back to login",
     "createUsercontentText": "The account has been created successfully!",
     "newAdminContentText": "You have registered a new admin user! We have sent an email verification link.",
-    "newUserContentText": "You’re all signed up! You’re all signed up! Please verify your identity with the verification link that we sent to the email address you provided.",
+    "newUserContentText": "You’re all signed up! Please verify your identity with the verification link that we sent to the email address you provided.",
     "adWithUs": "Advertise with us:",
     "adSubject": "I want to advertise my business",
     "adMessage": "I want to promote my business on the Earth Day Group app.",
@@ -586,7 +586,8 @@
       "postOfferBtnText": "Post Offer",
       "offerImagesTitle": "Offer Images",
       "textAreaDescriptionTitle": "Description",
-      "descriptionPlaceholder": "Describe your offer."
+      "descriptionPlaceholder": "Describe your offer.",
+      "createOfferWarningMessage": "Important: Please double-check the details of your offer before publishing, as you won't be able to edit it once it's live. If you make an error after publishing, we suggest deleting the offer and creating a new one."
     },
     "offersList": {
       "mainTitle": "Find recycle materials",
@@ -905,7 +906,9 @@
           "LessMaterials": "Less materials",
           "MoreMaterials": "More materials",
           "recyclableGoodsTitle": "Price for Recyclable Goods",
-          "editMaterials": "Add/edit materials",
+          "editMaterials": "Edit material pricing",
+          "addMaterials": "Add new material pricing",
+          "noItemsCreatedMessage": "Oops! It looks like you haven't specified the recycling materials you're interested in purchasing. Please click the button below to start adding materials and their unit prices.",
           "createFirstMaterial": "Add the materials you purchase"
         }
       }
