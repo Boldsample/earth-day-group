@@ -903,13 +903,13 @@
         "profileListing": {
           "petLabel": "Pet Adoptions",
           "productLabel": "Products",
-          "LessMaterials": "Less materials",
-          "MoreMaterials": "More materials",
+          "LessMaterials": "See Less",
+          "MoreMaterials": "See more",
           "recyclableGoodsTitle": "Price for Recyclable Goods",
-          "editMaterials": "Edit material pricing",
+          "editMaterials": "Add/Edit materials",
           "addMaterials": "Add new material pricing",
           "noItemsCreatedMessage": "Oops! It looks like you haven't specified the recycling materials you're interested in purchasing. Please click the button below to start adding materials and their unit prices.",
-          "createFirstMaterial": "Add the materials you purchase"
+          "createFirstMaterial": "Add the materials you are interested in purchasing"
         }
       }
     },

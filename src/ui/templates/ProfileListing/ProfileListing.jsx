@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {  faPen, faPlus, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import Footer from "@ui/footer/Footer"
 import ProfileElements from "./ProfileElements"
 import { followUser } from "@services/userServices"
@@ -47,18 +48,19 @@ console.log(materials.length)
         <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} admin={user?.role == 'admin'} />
         {(profile?.materials?.length > 0 || user?.id == profile?.id) && 
           <div className="recycableGoods__container">
-            <div className="materialsBoxTitle">
+            <div className="materialsBoxTitle aligncenter">
               <h4>{t('recyclableGoodsTitle')}</h4>
-              {user?.id == profile?.id &&
-                <Link className="button dark-blue mt-2" to="/settings/edit/materials/">{t('editMaterials')}</Link>
+              {(user?.id == profile?.id && profile.materials?.length > 0) &&
+                <Link className="button dark-blue small" to="/settings/edit/materials/"><FontAwesomeIcon icon={faPen} /> <span>{t('editMaterials')}</span></Link>
               }
             </div>
             {profile.materials?.length == 0 &&
-              <div className="flex-column aligncenter ">
+              <div className="flex-column aligncenter mt-5">
                 <Message className="width-60" severity="info" text={t('noItemsCreatedMessage')} />
-                <Link className="button dark-blue mt-2" to="/settings/edit/materials/">{t('createFirstMaterial')}</Link>
+                <Link className="button green-earth mt-2" to="/settings/edit/materials/"><FontAwesomeIcon icon={faPlus} /> <span>{t('createFirstMaterial')}</span></Link>
               </div>
             }
+            {profile.materials?.length > 0 && 
             <div className={'materialsCard__grid ' + (moreMaterials ? 'show' : 'hide')}>
               {materials?.map(category => {
                 const _categoryMaterials = profile?.materials?.filter(material => category?.items?.some(item => item?.label == material?.type))
@@ -74,9 +76,10 @@ console.log(materials.length)
                     )}
                   </div>
               })}
-            </div>
+            </div>      
+          }
             {profile.materials?.length > 0 &&
-            <a className="button dark-blue mt-1" onClick={() => setMoreMaterials(prev => !prev)}>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</a>
+            <a className="button dark-blue mt-1 width-20 small" onClick={() => setMoreMaterials(prev => !prev)}><FontAwesomeIcon icon={moreMaterials ? faEyeSlash : faEye} /> <span>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</span></a>
             }
           </div>
         }

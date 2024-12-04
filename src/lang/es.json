@@ -905,13 +905,13 @@
         "profileListing": {
           "petLabel": "Mascotas en adopción",
           "productLabel": "Productos",
-          "LessMaterials": "Menos materiales",
-          "MoreMaterials": "Más materiales",
+          "LessMaterials": "Ver Menos",
+          "MoreMaterials": "Ver Más",
           "recyclableGoodsTitle": "Precio de Bienes Reciclables",
           "noItemsCreatedMessage": "¡Ups! Parece que no has especificado los materiales de reciclaje que te interesa comprar. Haz clic en el botón a continuación para comenzar a agregar materiales y precios por unidad.",
-          "editMaterials": "Editar precio  de materiales",
+          "editMaterials": "Agrega/Edita materiales",
           "addMaterials": "Agregar materiales y precio",
-          "createFirstMaterial": "Añade los materiales que compras"
+          "createFirstMaterial": "Añade los materiales que te interesan comprar"
         }
       }
     },
