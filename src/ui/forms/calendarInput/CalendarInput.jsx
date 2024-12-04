@@ -13,13 +13,19 @@ function CalendarInput({
   labelName,
   nameInput,
   isRequired,
-  toolTipMessage="",
+  placeHolderText,
   disabled = false,
   showLabel = true,
+  toolTipMessage="",
   getFormErrorMessage,
-  placeHolderText
 }) {
   // const [dates, setDates] = useState(null);
+  const disableToday = value => {
+    let _dates = []
+    if(value.length > 0 && value[1] == null)
+      _dates.push(new Date())
+    return _dates
+  }
   const renderInput = () => <div>
       <Controller
         rules={rules}
@@ -27,12 +33,13 @@ function CalendarInput({
         control={control}
         render={({ field }) => 
         <Calendar
-		      readOnlyInput 
+          readOnlyInput 
           value={field.value}
           disabled={disabled}
           hideOnRangeSelection
           minDate={new Date()}
           selectionMode="range"
+          disabledDates={disableToday(field.value)}
           placeholder={placeHolderText}
           inputId={nameInput + "_" + name}
           // onChange={(e) => setDates(e.value)}
