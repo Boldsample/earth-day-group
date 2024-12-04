@@ -994,6 +994,11 @@
     "cannotHandleReportBtnMessage": "This report belongs to {{admin}}",
     "HandleReportBtnMessage": "Chat with {{reportedUser}}",
     "viewReportBtn": "View Report",
-    "downloadReportBtn": "Download reports"
+    "downloadReportBtn": "Download reports",
+    "editUserBtn": "Edit User",
+    "viewItemBtn": "View {{item}}",
+    "sendMessage": "Send message",
+    "enableSateSwitchInputMessage": "Enabled",
+    "disableSateSwitchInputMessage": "Disabled"
   }
 }

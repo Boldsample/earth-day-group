@@ -10,6 +10,7 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faPencil, faPlus, faTrash, faUser, faEnvelope, faPersonShelter, faRecycle, faShop, faHouse, faBuildingNgo, faFileDownload  } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 import { InputSwitch } from 'primereact/inputswitch'
+import { Tooltip } from 'primereact/tooltip'
 
 import { Dropdown } from 'primereact/dropdown'
 import { getUsers, updateUser } from '@services/userServices'
@@ -31,6 +32,7 @@ const Users = ({type}) => {
   const [page, setPage] = useState({first: 0, page: 0, rows: 6})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.usersList' })
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const [filters, setFilters] = useState({state: '', role: '', keyword: ''})
 
   const changeState = async action => {
@@ -128,7 +130,8 @@ const Users = ({type}) => {
         setReset(true)
         setFilters({state: '', role: '', keyword: ''})
       }}>{tGlobal('reset')}</Button>
-      <Button className="green-earth" onClick={() => callUsers(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
+      <Tooltip target=".downloadUsers"/>
+      <Button className="green-earth downloadUsers" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn')} onClick={() => callUsers(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
       {type == 'admins' && 
         <Link className="button small light-green" to="/admin/new/"><FontAwesomeIcon icon={faPlus} /> {t('newAdminButton')}</Link>
       }
@@ -157,7 +160,7 @@ const Users = ({type}) => {
             dataKey="id" 
             page={page.page} 
             rows={page.rows} 
-			first={page.first}
+			      first={page.first}
             value={users?.data} 
             header={renderHeader} 
             totalRecords={users?.total} 
@@ -168,8 +171,10 @@ const Users = ({type}) => {
               <Column header={t('tableTitleRole')} field="role" body={roleColumnBodyTemplate}></Column>
             }
             <Column header={t('tableTitleEmail')} field="email" body={ type == 'admins' ? ({email})=> <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faEnvelope}/><p className='ml-1 mb-0'>{email}</p></div> :  undefined }></Column>
-            <Column header={t('tableTitleState')} body={({id, state}) => 
-              <InputSwitch checked={state == 1} onChange={async (e) => {
+            <Column header={t('tableTitleState')} body={({id, state}) => {
+              return <>
+              <Tooltip target=".stateInput"/>
+              <InputSwitch data-pr-tooltip={state == 1 ? tToolTip("enableSateSwitchInputMessage") : tToolTip("disableSateSwitchInputMessage")} className='stateInput' checked={state == 1} onChange={async (e) => {
                 if(state == 1){
                   setSelected(id)
                   setConfirm(true)
@@ -178,12 +183,18 @@ const Users = ({type}) => {
                   setResetFields(true)
                 }
               }}/>
-            }></Column>
+              </>
+            }}></Column>
             <Column className="actions" header={null} body={u => <>
-              <Link className="button small orange" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon  icon={faPencil} /></Link>
-              <Button className="small dark-blue" onClick={() => setProfile({id: u.id, update: new Date()})}><FontAwesomeIcon icon={faUser} /></Button>
+              <Tooltip target=".editBtn"/>
+              <Link data-pr-tooltip={tToolTip("editUserBtn")} className="button small orange editBtn" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon  icon={faPencil} /></Link>
+              <Tooltip target=".viewBtn"/>
+              <Button className="small dark-blue viewBtn" data-pr-tooltip={tToolTip("viewItemBtn")} onClick={() => setProfile({id: u.id, update: new Date()})}><FontAwesomeIcon icon={faUser} /></Button>
               {type == 'users' &&
-                <Link className="button small green-earth" to={`/chat/${u?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
+                <>
+                <Tooltip target=".sendMsgBtn"/>
+                <Link data-pr-tooltip={tToolTip("sendMessage")} data-pr-position="left" className="button small green-earth sendMsgBtn" to={`/chat/${u?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
+                </>
               }
             </>}></Column>
           </DataTable>
