@@ -103,7 +103,7 @@ const Reports = () => {
 				setFilters({type: "", status: "", admin: "", keyword: ''})
 			}}>{tGlobal('reset')}</Button>
 			<Tooltip target=".downloadReports"/>
-			<Button className="green-earth downloadReports" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn')}  onClick={() => callReports(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
+			<Button className="green-earth downloadReports" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn', {items: tToolTip('reports')} )}  onClick={() => callReports(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
 		</div>
 	}
 	const typeColumnBodyTemplate = (columnItem) => {

@@ -996,11 +996,14 @@
     "cannotHandleReportBtnMessage": "Este reporte le pertenece a {{admin}}",
     "HandleReportBtnMessage": "Enviar mensaje a {{reportedUser}}",
     "viewReportBtn": "Ver Reporte",
-    "downloadReportBtn": "Descargar reportes",
+    "downloadReportBtn": "Descargar {{items}}",
     "editUserBtn": "Editar Usuario",
     "viewItemBtn": "Ver {{item}}",
     "sendMessage": "Enviar mensaje",
     "enableSateSwitchInputMessage": "Habilitado",
-    "disableSateSwitchInputMessage": "Deshabilitado"
+    "disableSateSwitchInputMessage": "Deshabilitado",
+    "user": "usuario",
+    "users": "usuarios",
+    "reports": "reportes"
   }
 }
