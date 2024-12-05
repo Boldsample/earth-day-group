@@ -11,13 +11,16 @@ import { getUsers } from '@services/userServices'
 import { setHeader } from '@store/slices/globalSlice'
 import { ProfileProvider } from '@components/modules'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
+import ChatSkeleton from '@ui/skeletons/chatSkeleton/ChatSkeleton'
+import { Paginator } from 'primereact/paginator'
 
 const Followers = ({followers = true}) => {
   const navigate = useNavigate()
   const [users, setUsers] = useState([])
   const [filters, setFilters] = useState([])
+  const skeletonPlaceHolder = ["", "", "", ""]
   const [profile, setProfile] = useState(null)
-  const [page, setPage] = useState({page: 0, rows: 8})
+  const [page, setPage] = useState({first: 0, page: 0, rows: 4})
   const user = useSelector(state => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'followers' })
 
@@ -62,13 +65,20 @@ const Followers = ({followers = true}) => {
         </div>
       </div>
       <ProfileProvider profile={profile} setProfile={setProfile} reloadList={getUserList}>
-        {users?.data?.length > 0 && users?.data?.map(user => 
-          <MultiUseCard
-            type="user"
-            data={user}
-            key={user.id}
-            action={setProfile} />
-        )}
+        <>
+          {typeof users?.data == 'undefined' && 
+            skeletonPlaceHolder.map((skeleton, key) =>  <ChatSkeleton className="" key={key} />)
+          || users?.data?.length > 0 && users?.data?.map(user => 
+            <MultiUseCard
+              type="user"
+              data={user}
+              key={user.id}
+              action={setProfile} />
+          )}
+          {page?.rows < users?.total && 
+            <Paginator first={page?.first} page={page?.page} rows={page?.rows} totalRecords={users.total} onPageChange={e => setPage({first: e.first, page: e.page, rows: e.rows})} />
+          }
+        </>
       </ProfileProvider>
     </div>
   </div>

@@ -79,9 +79,10 @@ export const addImages = async (formData) => {
   }
 }
 
-export const getNotifications = async (filter, limit = 0) => {
-  const response = await API.get(`/get/notifications&user=${filter.user}&limit=${limit}`)
-  return response?.data?.data
+export const getNotifications = async (filter = {}, page = null) => {
+  const pages = page ? `&page=${page?.first}&rows=${page?.rows}` : ''
+  const response = await API.get(`/get/notifications&user=${filter.user}&page=${pages}`)
+  return response?.data
 }
 
 export const logoutUser = async () => {
