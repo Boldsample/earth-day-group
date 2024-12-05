@@ -1004,6 +1004,12 @@
     "disableSateSwitchInputMessage": "Deshabilitado",
     "user": "usuario",
     "users": "usuarios",
-    "reports": "reportes"
+    "reports": "reportes",
+    "offer": "Oferta",
+    "offers": "Ofertas ",
+    "product": "producto",
+    "pet": "mascota",
+    "products": "Productos",
+    "pets": "Mascotas"
   }
 }

@@ -130,7 +130,7 @@ const Users = ({type}) => {
         setReset(true)
         setFilters({state: '', role: '', keyword: ''})
       }}>{tGlobal('reset')}</Button>
-      <Tooltip target=".downloadUsers"/>
+      <Tooltip target=".downloadUsers" showDelay={700}/>
       <Button className="green-earth downloadUsers" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn', {items: tToolTip('users')})} onClick={() => callUsers(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
       {type == 'admins' && 
         <Link className="button small light-green" to="/admin/new/"><FontAwesomeIcon icon={faPlus} /> {t('newAdminButton')}</Link>
@@ -173,7 +173,7 @@ const Users = ({type}) => {
             <Column header={t('tableTitleEmail')} field="email" body={ type == 'admins' ? ({email})=> <div className="flex aligncenter"><FontAwesomeIcon  color='var(--dark-blue)'  icon={faEnvelope}/><p className='ml-1 mb-0'>{email}</p></div> :  undefined }></Column>
             <Column header={t('tableTitleState')} body={({id, state}) => {
               return <>
-              <Tooltip target=".stateInput"/>
+              <Tooltip target=".stateInput" showDelay={700}/>
               <InputSwitch data-pr-position="left" data-pr-tooltip={state == 1 ? tToolTip("enableSateSwitchInputMessage") : tToolTip("disableSateSwitchInputMessage")} className='stateInput' checked={state == 1} onChange={async (e) => {
                 if(state == 1){
                   setSelected(id)
@@ -188,11 +188,11 @@ const Users = ({type}) => {
             <Column className="actions" header={null} body={u => <>
               <Tooltip target=".editBtn" showDelay={700}/>
               <Link data-pr-position="top" data-pr-tooltip={tToolTip("editUserBtn")} className="button small orange editBtn" to={u?.id == user?.id ? '/settings/edit/' : `/${u?.role}/edit/${u?.username}/`}><FontAwesomeIcon  icon={faPencil} /></Link>
-              <Tooltip target=".viewBtn"/>
+              <Tooltip target=".viewBtn" showDelay={700}/>
               <Button data-pr-position="top" className="small dark-blue viewBtn" data-pr-tooltip={tToolTip("viewItemBtn", {item: tToolTip('user')})} onClick={() => setProfile({id: u.id, update: new Date()})}><FontAwesomeIcon icon={faUser} /></Button>
               {type == 'users' &&
                 <>
-                <Tooltip target=".sendMsgBtn"/>
+                <Tooltip target=".sendMsgBtn" showDelay={700}/>
                 <Link data-pr-tooltip={tToolTip("sendMessage")} data-pr-position="top" className="button small green-earth sendMsgBtn" to={`/chat/${u?.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
                 </>
               }

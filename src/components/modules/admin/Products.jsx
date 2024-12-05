@@ -9,7 +9,7 @@ import { faSearch, faTrash, faTags, faFileDownload } from '@fortawesome/free-sol
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { useTranslation } from 'react-i18next'
-
+import { Tooltip}  from 'primereact/tooltip'
 import { setHeader } from '@store/slices/globalSlice'
 import { getProducts, updateProduct } from '@services/productServices'
 import TableSkeleton from '@ui/skeletons/tableSkeleton/TableSkeleton'
@@ -30,6 +30,7 @@ const Products = () => {
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'admin.products' })
   const [tProduct] = useTranslation('translation', { keyPrefix: 'vendor.products.product'})
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
 
   function keepFirstLetters(inputString) {
     const words = inputString.split(' ');
@@ -72,7 +73,8 @@ const Products = () => {
         setReset(true)
         setFilters({keyword: ''})
       }}>{tGlobal('reset')}</Button>
-      <Button className="green-earth" onClick={() => callProducts(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
+      <Tooltip target=".downloadProducts" showDelay={700}/>
+      <Button data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn', {items: tToolTip('products')} )} className="green-earth downloadProducts" onClick={() => callProducts(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
     </div>
   }
 
@@ -113,19 +115,25 @@ const Products = () => {
             <span className='table-item__background'>{parseInt(price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
           </>}></Column>
           <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
-          <Column header={t('tableTitleState')} body={({id, state}) => <InputSwitch checked={state == 1} onChange={async (e) => {
-              if(state == 1){
-                setSelected(id)
-                setConfirm(true)
-              }else{
-                await updateProduct({state: 1}, {id: id})
-                setReset(true)
-              }
-            }} />
-          }></Column>
+          <Column header={t('tableTitleState')} body={({id, state}) => {
+            return <>
+            <Tooltip target=".stateInput" showDelay={700}/>
+            <InputSwitch className='stateInput' data-pr-position="left" data-pr-tooltip={state == 1 ? tToolTip("enableSateSwitchInputMessage") : tToolTip("disableSateSwitchInputMessage")} checked={state == 1} onChange={async (e) => {
+                if(state == 1){
+                  setSelected(id)
+                  setConfirm(true)
+                }else{
+                  await updateProduct({state: 1}, {id: id})
+                  setReset(true)
+                }
+              }} />
+            </>
+          }}></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
-            <Link className="button small dark-blue" to={`/product/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
-            <Link className="button small green-earth" to={`/chat/${username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
+          <Tooltip target=".viewProduct" showDelay={700}/>
+            <Link className="button small dark-blue viewProduct" data-pr-position="top" data-pr-tooltip={tToolTip("viewItemBtn", {item: tToolTip('product')})}  to={`/product/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
+            <Tooltip target=".sendMsgBtn" showDelay={700}/>
+            <Link data-pr-tooltip={tToolTip("sendMessage")} data-pr-position="top" className="button small green-earth sendMsgBtn" to={`/chat/${username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
           </>}></Column>
         </DataTable>
       </>}

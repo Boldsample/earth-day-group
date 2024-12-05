@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { faFileDownload, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { Tooltip } from 'primereact/tooltip'
 
 import OfferInfo from '@modules/offers/OfferInfo'
 import { setHeader } from '@store/slices/globalSlice'
@@ -30,6 +31,7 @@ const AdminOffers = () => {
   const [tGlobal] = useTranslation('translation', { keyPrefix: 'global' })
   const [t] = useTranslation('translation', { keyPrefix: 'admin.adminOffers' })
 	const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
 
   const hidePopup = () => setDetail({...detail, show: false})
   const updateFilters = (name, value, wait=false) => {
@@ -86,7 +88,8 @@ const AdminOffers = () => {
         setReset(true)
         setFilters({keyword: '', materials: []})
       }}>{tGlobal('reset')}</Button>
-      <Button className="green-earth" onClick={() => callOffers(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
+      <Tooltip target=".downloadOffers" showDelay={700}/>
+      <Button className="green-earth downloadOffers" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn', {items: tToolTip('offers')} )}  onClick={() => callOffers(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
     </div>
   }
   const rowExpansionTemplate = data => <div className="p-3">
@@ -163,13 +166,19 @@ const AdminOffers = () => {
           {user.role == 'user' && 
             <Column className="actions" header={null} body={offer => 
               <Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>}></Column> || 
-            <Column className="actions" header={null} body={offer => <>
-              <Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>
+            <Column className="actions" header={null} body={offer => { 
+                return <>
+                <Tooltip target=".viewOffer" showDelay={700}/>
+                <Button className="small dark-blue viewOffer" data-pr-position="top" data-pr-tooltip={tToolTip("viewItemBtn", {item: tToolTip('offer')})}  onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>
               {offer.status == 0 && 
-                <Link className="button small green-earth" to={`/chat/${offer.username}/${offer.id}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> || 
-                <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
+              <>
+              <Tooltip target=".messageUser" showDelay={700}/>
+              <Link data-pr-position="top" data-pr-tooltip={tToolTip("sendMessage")} className="button small green-earth messageUser" to={`/chat/${offer.username}/${offer.id}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> 
+              </>
+              || 
+              <Link className="button small green-earth" to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
               }
-            </> || null}></Column>}
+            </> || null}}></Column>}
         </DataTable>
       }
     </div>
