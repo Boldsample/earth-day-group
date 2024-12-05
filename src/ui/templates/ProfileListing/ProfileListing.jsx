@@ -88,7 +88,7 @@ console.log(materials.length)
           <PhotoGallery imageCatalog={profile?.images} />
         }
         {profile?.role != 'company' && 
-          <ProfileElements type={type} user={profile?.id} same={user?.id == profile?.id} types={profile?.role == 'ngo' ? ngoTypes : null} />
+          <ProfileElements type={type} entity={profile?.id} user={profile?.id} same={user?.id == profile?.id} types={profile?.role == 'ngo' ? ngoTypes : null} />
         }
       </div>
     </div>

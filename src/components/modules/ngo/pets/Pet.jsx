@@ -100,7 +100,7 @@ const Pet = () => {
           </div>
         </div>
         {user?.role != 'admin' && 
-          <ProfileElements type="pets" user={pet?.user} same={user?.id == pet?.user} related={true} />
+          <ProfileElements type="pets" entity={pet?.id} user={pet?.user} same={user?.id == pet?.user} related={true} />
         }
       </div>
     </div>
