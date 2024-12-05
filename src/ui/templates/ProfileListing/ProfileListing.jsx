@@ -38,7 +38,35 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
     await followUser({user: id, follower: user?.id})
     reloadElements()
   }
-console.log(materials.length)
+  const showMaterials = () => {
+    let hasMoreButton = false
+    return <>
+      {profile.materials?.length > 0 && 
+        <div className={'materialsCard__grid ' + (moreMaterials ? 'show' : 'hide')}>
+          {materials?.map(category => {
+            const _categoryMaterials = profile?.materials?.filter(material => category?.items?.some(item => item?.label == material?.type))
+            if(_categoryMaterials?.length > 1)
+              hasMoreButton = true
+            if(_categoryMaterials?.length > 0)
+              return <div key={category?.label} className="materialCategory">
+                <h6>{category?.label}</h6>
+                {_categoryMaterials.map(material =>
+                  <RecycleMaterialCard
+                    key={material?.type}
+                    unit={material?.unit}
+                    price={material?.price}
+                    material={material.type} />
+                )}
+              </div>
+          })}
+        </div>      
+      }
+      {hasMoreButton &&
+        <a className="button dark-blue mt-1 width-20 small" onClick={() => setMoreMaterials(prev => !prev)}><FontAwesomeIcon icon={moreMaterials ? faEyeSlash : faEye} /> <span>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</span></a>
+      }
+    </>
+  }
+
   if(!profile?.role)
     return
   return <>
@@ -60,27 +88,7 @@ console.log(materials.length)
                 <Link className="button green-earth mt-2" to="/settings/edit/materials/"><FontAwesomeIcon icon={faPlus} /> <span>{t('createFirstMaterial')}</span></Link>
               </div>
             }
-            {profile.materials?.length > 0 && 
-            <div className={'materialsCard__grid ' + (moreMaterials ? 'show' : 'hide')}>
-              {materials?.map(category => {
-                const _categoryMaterials = profile?.materials?.filter(material => category?.items?.some(item => item?.label == material?.type))
-                if(_categoryMaterials?.length > 0)
-                  return <div key={category?.label} className="materialCategory">
-                    <h6>{category?.label}</h6>
-                    {_categoryMaterials.map(material =>
-                      <RecycleMaterialCard
-                        key={material?.type}
-                        unit={material?.unit}
-                        price={material?.price}
-                        material={material.type} />
-                    )}
-                  </div>
-              })}
-            </div>      
-          }
-            {profile.materials?.length > 0 &&
-            <a className="button dark-blue mt-1 width-20 small" onClick={() => setMoreMaterials(prev => !prev)}><FontAwesomeIcon icon={moreMaterials ? faEyeSlash : faEye} /> <span>{moreMaterials ? t('LessMaterials') : t('MoreMaterials')}</span></a>
-            }
+            {showMaterials()}
           </div>
         }
         <AdBanner type="headerBanner" />
