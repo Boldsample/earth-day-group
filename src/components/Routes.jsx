@@ -72,6 +72,7 @@ const AppRoutes = () => {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/chat" element={<Chats />} />
         <Route path="/chat/:contact" element={<Chat />} />
+        <Route path="/chat/:contact/adopt/:pet/:petName" element={<Chat />} />
         <Route path="/followers" element={<Followers />} />
         <Route path="/following" element={<Followers followers={false} />} />
         <Route path="/settings" element={<Settings />} />

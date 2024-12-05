@@ -85,7 +85,7 @@ const Pet = () => {
             </ul>
             {user?.id != pet?.user && user?.role != 'admin' && <>
               <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
-              <Link to={`/chat/${pet?.username}/`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>{t('contactShelterBtn')}</span></Link>
+              <Link to={`/chat/${pet?.username}/adopt/${pet?.id}/${pet?.name}`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>{t('contactShelterBtn')}</span></Link>
               <Link className="button small red-state outline hasTooltip" to={`/report/pet/${pet?.id}/`} data-pr-tooltip="Report pet"><FontAwesomeIcon icon={faFlag} /></Link>
             </> || <>
               <Link to={`/pet/edit/${pet?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editPetBtn')}</span></Link>
