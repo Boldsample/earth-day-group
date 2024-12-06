@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { faChevronLeft, faGear, faRightFromBracket, faShoppingCart, faHeart } from "@fortawesome/free-solid-svg-icons"
+import { Tooltip } from "primereact/tooltip"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
@@ -19,6 +20,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [t, i18n] = useTranslation('translation')
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
   const {headerTitle, prevPage} = useSelector((state) => state.global)
@@ -64,8 +66,10 @@ const Header = () => {
     {user?.id && 
       <div className="navbar-item right-align icons">
         {!['settings', 'map'].some(s => s == header) && user?.role == 'user' && <>
-          <FontAwesomeIcon icon={faShoppingCart} />
-          <Link to="/bookmarks/products/saved/"><FontAwesomeIcon icon={faHeart} /></Link>
+          <Tooltip target=".cart" showDelay={700}/>
+          <FontAwesomeIcon className="cart" data-pr-tooltip={tToolTip("cart")} data-pr-position="bottom" icon={faShoppingCart} />
+          <Tooltip target=".bookmarks" showDelay={700}/>
+          <Link data-pr-tooltip={tToolTip("bookmarks")} data-pr-position="bottom" className="bookmarks" to="/bookmarks/products/saved/"><FontAwesomeIcon icon={faHeart} /></Link>
         </>}
         <HeaderNotifications />
 		    <div>
@@ -103,9 +107,11 @@ const Header = () => {
               </div>
             }
           ]} />
-          <Link onClick={(event) => menu.current.toggle(event)}><FontAwesomeIcon icon={faGear} /></Link>
+          <Tooltip target=".config" showDelay={700}/>
+          <Link data-pr-tooltip={tToolTip("settings")} data-pr-position="bottom" className="config" onClick={(event) => menu.current.toggle(event)}><FontAwesomeIcon icon={faGear} /></Link>
         </div>
-        <a className="logout" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
+        <Tooltip target=".logout" showDelay={700}/>
+        <a className="logout" data-pr-tooltip={tToolTip("logout")} data-pr-position="bottom" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
       </div>
     }
 
