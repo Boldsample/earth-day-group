@@ -5,7 +5,7 @@ import { Button } from "primereact/button"
 import { InputSwitch } from "primereact/inputswitch"
 import { useNavigate, useParams } from "react-router"
 import { useTranslation } from 'react-i18next'
-
+import InfoTooltip from "@ui/tooltip/InfoTooltip"
 import materials from "@json/recyclableMaterials.json"
 import { getUserData } from "@store/slices/usersSlice"
 import { updateThankyou } from "@store/slices/globalSlice"
@@ -23,6 +23,7 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
   const [tMaterial] = useTranslation('translation', {keyPrefix: 'materials'})
   const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [t, i18n] = useTranslation('translation', { keyPrefix: 'register.registerCompany.companyDetailedForm'})
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const {
     reset,
     watch,
@@ -129,7 +130,10 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
   return <>
     <form onSubmit={handleSubmit(handleRecyclableMaterial)}>
       <h5 className="recycableMaterialForm__title">{t('formDisclaimerTitle')}</h5>
-      <h4>{t('materialInputsTitle')}</h4>
+      <div className="inline-flex ">
+        <h4>{t('materialInputsTitle')}</h4>
+        <InfoTooltip toolTipMessage={tToolTip("recyclableMaterialsTooltipTitle")}  delay={300}/>
+      </div>
       <div className="registerInput__container-x2">
         <DropDownInput
           isEdit={true}
@@ -239,13 +243,17 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
       uploadedImages={user.images}
       setUploadedImages={setUploadedImages} />
     <div className="registerInput__container-x2">
+        <div className="inline-flex mb-2">
+          <p className="label-subtitle">{t('pickUpFromHomeLabel')}</p>
+          <InfoTooltip toolTipMessage={tToolTip("selfPickUpToolTip")}  delay={300}/>
+        </div> 
       <InputSwitch
         id="pick_up_from_home"
         checked={!!user?.pick_up_from_home}
-        onChange={e => setUser(prev => { return {...prev, pick_up_from_home: !user?.pick_up_from_home} })} /> {t('pickUpFromHomeLabel')}
+        onChange={e => setUser(prev => { return {...prev, pick_up_from_home: !user?.pick_up_from_home} })} />
     </div>
     <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-      <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? t('saveBtnText') : t('signUpBtnText')} name="submit" loading={sending} />
+      <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? t('signUpBtnText') : t('saveBtnText')} name="submit" loading={sending} />
     </div>
   </>
 }

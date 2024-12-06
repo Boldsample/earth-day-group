@@ -818,7 +818,7 @@
         "addPricelLabel": "Price per Unit",
         "addPricePlaceHolder": "Add Price per Unit",
         "addCompanyImgsLabel": "Add Recycling Center Images",
-        "pickUpFromHomeLabel": "Recycle materials pick up from home service.",
+        "pickUpFromHomeLabel": "Self pick up?",
         "addMaterialBtnText": "Add Material",
         "signUpBtnText": "Sign up",
         "saveBtnText": "Save"
@@ -1014,6 +1014,8 @@
     "bookmarks": "Bookmarks",
     "notifications": "Notifications",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "recyclableMaterialsTooltipTitle": "Select the materials you're interested in purchasing and set your price.",
+    "selfPickUpToolTip": "Enabling this option lets others know you're willing to pick up materials at their location."
   }
 }

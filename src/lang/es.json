@@ -820,7 +820,7 @@
         "addPricelLabel": "Precio por Unidad",
         "addPricePlaceHolder": "Añadir Precio por Unidad",
         "addCompanyImgsLabel": "Añadir Imágenes de la Empresa",
-        "pickUpFromHomeLabel": "Servicio de recogida en casa de materiales reciclables.",
+        "pickUpFromHomeLabel": "¿Servicio de recogida?",
         "addMaterialBtnText": "Agregar Material",
         "signUpBtnText": "Registrarse",
         "saveBtnText": "Guardar"
@@ -1016,6 +1016,8 @@
     "bookmarks": "Favoritos",
     "notifications": "Notificaciones",
     "settings": "Configuración",
-    "logout": "Cerrar sesión"
-  }
+    "logout": "Cerrar sesión",
+    "recyclableMaterialsTooltipTitle": "Selecciona los materiales que te interesan comprar y establece tu precio.",
+    "selfPickUpToolTip": "Habilitar esta opción permite que otros sepan que estás dispuesto a recoger los materiales en su ubicación."
+  }  
 }
