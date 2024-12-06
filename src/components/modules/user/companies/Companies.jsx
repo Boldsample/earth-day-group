@@ -8,10 +8,10 @@ import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 
 const Companies = () => {
   const dispatch = useDispatch()
-  const [page, setPage] = useState({first: 0, page: 0, rows: 8})
+  const [elements, setElements] = useState({data: []})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
-  const [elements, setElements] = useState({data: []})
+  const [page, setPage] = useState({first: 0, page: 0, rows: 8})
   const [t] = useTranslation('translation', { keyPrefix: 'user.companies'})
 
   const loadElements = async (e) => {
@@ -21,12 +21,13 @@ const Companies = () => {
     if(filters?.keyword != '')
       _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
     const _companies = await getUsers(_filter, 'full', user.id, page)
-    setElements(_companies);
+    if(_companies?.data)
+      setElements(_companies);
   }
 
   const companyTemplateContent = {
-		bannerImage: "url(/assets/user/image-6.svg)",
-		title: t('companyBannerTitle'),
+    bannerImage: "url(/assets/user/image-6.svg)",
+    title: t('companyBannerTitle'),
     searchLabel: t('searchLabelText'),
     secondary: [
       {

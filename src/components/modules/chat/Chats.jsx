@@ -11,22 +11,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CardSkeleton from '@ui/skeletons/cardSkeleton/CardSkeleton'
 import { useTranslation } from 'react-i18next'
 import ChatSkeleton from '@ui/skeletons/chatSkeleton/ChatSkeleton'
+import { Paginator } from 'primereact/paginator'
 
 const Chats = () => {
   const [users, setUsers] = useState([])
   const [filters, setFilters] = useState([])
   const skeletonPlaceHolder = ["", "", "", ""]
   const user = useSelector(state => state.users.userData)
-  const [page, setPage] = useState({first: 0, page: 0, rows: 8})
+  const [page, setPage] = useState({first: 0, page: 0, rows: 4})
   const [t] = useTranslation('translation', { keyPrefix: 'chat.chats' })
 
-  const updateFilters = (name, value, wait=false) => {
-    setFilters(prev => ({...prev, [name]: value}))
-    if(!wait){
-      setPage({first: 0, page: 0, rows: 6})
-      setReset(true)
-    }
-  }
   const updateFilter = filter => {
     setFilters(prev => {
       if(prev.includes(filter))
@@ -43,10 +37,9 @@ const Chats = () => {
     setUsers(_users);
   }
 
-
   useEffect(() => {
     getUserList()
-  }, [filters])
+  }, [filters, page])
 	useEffect(() => {
     setHeader('user')
   }, [user])
@@ -70,22 +63,17 @@ const Chats = () => {
             onChange={(e) => updateFilter(e.target.value)} />
         </div>
       </div>
-      {/* <CardSkeleton className="chatCard__skeleton" /> */}
-          {typeof users?.data == 'undefined' && 
-                skeletonPlaceHolder.map((skeleton, key) =>  <ChatSkeleton className="" key={key} />)
-              || users?.data?.length > 0 && users?.data?.map(user => 
-                <MultiUseCard
-                  type="user"
-                  data={user}
-                  key={user.id} />
-              )}
-            
-      {/* {users?.data?.length > 0 && users?.data?.map(user => 
+      {typeof users?.data == 'undefined' && 
+        skeletonPlaceHolder.map((skeleton, key) =>  <ChatSkeleton className="" key={key} />)
+      || users?.data?.length > 0 && users?.data?.map(user => 
         <MultiUseCard
           type="user"
           data={user}
           key={user.id} />
-      )} */}
+      )}
+      {page?.rows < users?.total && 
+        <Paginator first={page?.first} page={page?.page} rows={page?.rows} totalRecords={users.total} onPageChange={e => setPage({first: e.first, page: e.page, rows: e.rows})} />
+      }
     </div>
   </div>
 }

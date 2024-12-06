@@ -439,7 +439,8 @@
       "sendBtnText": "Send",
       "sendOfferBtnText": "Send Offer",
       "cancelBtnText": "Cancel",
-      "seeOfferDetailsBtnText": "See Offer Details"
+      "seeOfferDetailsBtnText": "See Offer Details",
+      "adoptPet": "Hola, deseo adoptar a {{pet}}"
     },
     "chats": {
       "mainTitle": "Chats",
@@ -532,7 +533,7 @@
       },
       "pet": {
         "petYearsOld": "Years old",
-        "contactShelterBtn": "Contact Shelter",
+        "contactShelterBtn": "Adopt pet",
         "editPetBtn": "Edit Pet",
         "deletePetBtn": "Disable Pet",
         "deletePetTitle": "Do you really want to disable this pet?",

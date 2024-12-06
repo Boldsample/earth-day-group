@@ -100,7 +100,7 @@ const Product = () => {
         </div>
         <AdBanner type="headerBanner"/>
         {user?.id != product?.user && user?.role != 'admin' && 
-          <ProfileElements user={product?.user} same={user?.id == product?.user} related={true} />
+          <ProfileElements user={product?.user} entity={product?.id} same={user?.id == product?.user} related={true} />
         }
       </div>
     </div>

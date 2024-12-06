@@ -10,9 +10,9 @@ import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
 const Organizations = ({type}) => {
   const dispatch = useDispatch()
   const [page, setPage] = useState({page: 0, rows: 8})
+  const [elements, setElements] = useState({data: []})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
-  const [elements, setElements] = useState({total: 0, data: []})
   const [t] = useTranslation('translation', { keyPrefix: 'user.ngo.organizations'})
   const vendorTemplateContent = {
     title: t('bannerTitle'),
@@ -32,7 +32,8 @@ const Organizations = ({type}) => {
     if(filters?.keyword != '')
       _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
     const _social = await getUsers(_filter, 'full', user.id, page)
-    setElements(_social)
+    if(_social?.data)
+      setElements(_social)
   }
 
   useEffect(() => {

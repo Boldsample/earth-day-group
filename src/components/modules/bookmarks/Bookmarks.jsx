@@ -10,9 +10,9 @@ import { getUsers } from "@services/userServices"
 const Bookmarks = ({type}) => {
   const dispatch = useDispatch()
   const [page, setPage] = useState({page: 0, rows: 8})
+  const [elements, setElements] = useState({data: []})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
-  const [elements, setElements] = useState({total: 0, data: []})
   const [t] = useTranslation('translation', { keyPrefix: 'bookmarks' })
   const bookmarksTemplateContent = {
     title: type == 'products' ? t('savedProductsBannerTitle') : t('favoritePetsBannerTitle'),
@@ -41,6 +41,7 @@ const Bookmarks = ({type}) => {
 
   const loadElements = async (e) => {
     if(e) e.preventDefault()
+	setElements({data: []})
     if(type == 'following'){
       let _filter = {
         user: `u.id<>'${user?.id}'`,
@@ -49,20 +50,23 @@ const Bookmarks = ({type}) => {
       if(filters?.keyword != '')
         _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.email LIKE '%${filters.keyword}%')`)
         const _following = await getUsers(_filter, 'full', user?.id, page)
-        setElements(_following)
+        if(_following?.data)
+          setElements(_following)
     }
     if(type == 'products'){
       let _filter = { 'bookmarks': `f.type='product' AND f.date IS NOT NULL AND p.state=1` }
       if(filters?.keyword != '')
         _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _products = await getProducts(_filter, page, user?.id)
-      setElements(_products)
+      if(_products?.data)
+        setElements(_products)
     }else if(type == 'pets'){
       let _filter = { 'bookmarks': `f.type='pet' AND f.date IS NOT NULL AND p.state=1` }
       if(filters?.keyword != '')
         _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
-      const _products = await getPets(_filter, page, user?.id)
-      setElements(_products)
+      const _pets = await getPets(_filter, page, user?.id)
+      if(_pets?.data)
+        setElements(_pets)
     }
   }
 

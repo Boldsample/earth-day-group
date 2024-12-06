@@ -1,18 +1,18 @@
 import {useState, useEffect} from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from "react-redux"
 
 import { getPets } from '@services/petServices'
 import { getUsers } from "@services/userServices"
 import { setHeader } from "@store/slices/globalSlice"
 import CategoryListing from "@ui/templates/categoryListing/CategoryListing"
-import { useTranslation } from 'react-i18next'
 
 const Shelters = ({type}) => {
   const dispatch = useDispatch()
   const [page, setPage] = useState({page: 0, rows: 8})
+  const [elements, setElements] = useState({data: []})
   const [filters, setFilters] = useState({keyword: ''})
   const user = useSelector((state) => state.users.userData)
-  const [elements, setElements] = useState({data: []})
   const [t] = useTranslation('translation', { keyPrefix: 'user.ngo.shelters'})
   const vendorTemplateContent = {
     searchLabel: t('searchInputTitle'),
@@ -42,13 +42,15 @@ const Shelters = ({type}) => {
       if(filters?.keyword != '')
         _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _vendors = await getUsers(_filter, 'full', user.id, page)
-      setElements(_vendors);
+      if(_vendors?.data)
+        setElements(_vendors);
     }else if(type == 'pets'){
       let _filter = {state: `p.state=1`}
       if(filters?.keyword != '')
         _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _products = await getPets(_filter, page, user?.id)
-      setElements(_products)
+      if(_products?.data)
+        setElements(_products)
     }
   }
 

@@ -13,7 +13,7 @@ import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 import { followProduct, getProducts } from "@services/productServices"
 import { getPets } from "@services/petServices"
 
-const ProfileElements = ({type = 'products', user, same = false, related = false, types = []}) => {
+const ProfileElements = ({entity = null, type = 'products', user, same = false, related = false, types = []}) => {
   const dispatch = useDispatch()
   const skeletonPlaceHolder = ["", "", "", ""]
   const [elements, setElements] = useState(null)
@@ -34,13 +34,13 @@ const ProfileElements = ({type = 'products', user, same = false, related = false
     if(elements !== null)
       setElements({data: []})
     if(type == 'products'){
-      let _filter = {user: `p.user=${user}`, state: `p.state=1`}
+      let _filter = {user: `p.user=${user}`, state: `p.state=1`, exclude: `p.id<>${entity}`}
       if(filters?.keyword != '')
         _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _products = await getProducts(_filter, page, loggedUser?.id)
       setElements(_products)
     }else{
-      let _filter = {user: `p.user=${user}`, stete: `p.state=1`}
+      let _filter = {user: `p.user=${user}`, stete: `p.state=1`, exclude: `p.id<>${entity}`}
       if(filters?.keyword != '')
         _filter['keyword'] = encodeURIComponent(`(p.name LIKE '%${filters.keyword}%' OR u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)
       const _pets = await getPets(_filter, page, loggedUser?.id)
