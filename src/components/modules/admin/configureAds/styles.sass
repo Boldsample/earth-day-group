@@ -92,7 +92,7 @@
     height: 35px
     top: 22px
     right: 19px
-    padding-left: 26px
+    padding-left: 15px
     padding-right: 15px
     background: #080808b7
     border-radius: 13px
@@ -106,7 +106,9 @@
         position: relative
         padding-right: 13px
         padding-left: 2px
-    &:before
+    &.ad-online
+        padding-left: 26px
+    &.ad-online:before
         content: ""
         display: block
         position: absolute
@@ -116,9 +118,8 @@
         height: 9px
         border-radius: 5px
         background: red
-        &:not(.ad-offline)
-            animation: dot-anim .8s infinite ease-in-out
-    &:after
+        animation: dot-anim .8s infinite ease-in-out
+    &.ad-online:after
         content: ""
         display: block
         position: absolute
@@ -129,8 +130,7 @@
         height: 15px
         border-radius: 50%
         border: 1px solid red
-        &:not(.ad-offline)
-            animation: wave-anim .8s infinite ease-out
+        animation: wave-anim .8s infinite ease-out
 
 .space-between
     display: flex

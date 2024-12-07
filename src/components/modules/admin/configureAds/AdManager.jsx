@@ -82,11 +82,9 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
             await addImages([{type:'ads', entity: response?.id, picture: image}])
             setSending(false)
             setUpdate(new Date())
-            console.log('Test')
             toast.current.show({severity:'success', summary: t('adSuccessToastTitle'), detail:t('adSuccessToastMsg'), life: 3000});
         }else{
             setSending(false)
-            console.log('Test2')
             toast.current.show({severity:'error', summary: t('adFailedToastTitle'), detail:t('adFailedToastMsg'), life: 3000});
         }
     }
@@ -94,17 +92,20 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     useEffect(() => {
         setFirstRender(true);
         getAd(type).then(data => {
+            console.log(data)
             if(data?.state < 3){
+                console.log('not cancelled')
                 setLoading(true)
                 setAd(data);
             }else{
+                console.log('cancelled')
                 setAd(null);
                 setLoading(false)
             }
             setFirstRender(false);
         });
     }, [update]);
-    
+    console.log(ad)
     return <>
         <Dialog
             visible={visible}
@@ -184,7 +185,7 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
                                 <Button type="button" onClick={cancel} className="red-state">{ad?.id ? t('cancelCampaignBtnText') : t('cancelBtnText')}</Button>
                             }
                         </div>
-                        {ad?.id && <div className={'btn-str' + ( ad?.state == 1 ?  ' ad-offline' : '')}>
+                        {ad?.id && <div className={'btn-str' + ( ad?.state == 1 ?  ' ad-online' : '')}>
                             <span className='btn-str__text'>{ad?.state == 1 ? t('liveAdText') : t('offline')}</span>
                         </div>}
                     </div>
