@@ -82,10 +82,12 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
             await addImages([{type:'ads', entity: response?.id, picture: image}])
             setSending(false)
             setUpdate(new Date())
-            toast.current.show({severity:'success', summary: t('adSuccessToastTitle'), detail:t('adSuccessToastMsg'), life: 20000});
+            console.log('Test')
+            toast.current.show({severity:'success', summary: t('adSuccessToastTitle'), detail:t('adSuccessToastMsg'), life: 3000});
         }else{
             setSending(false)
-            toast.current.show({severity:'error', summary: t('adFailedToastTitle'), detail:t('adFailedToastMsg'), life: 20000});
+            console.log('Test2')
+            toast.current.show({severity:'error', summary: t('adFailedToastTitle'), detail:t('adFailedToastMsg'), life: 3000});
         }
     }
     
@@ -149,7 +151,7 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
             <div className='fullwidth mt-3'>
                 <div className="flex flex-start mb-1">
                     <h4 className='title__noWidth'>{bannerTitle}</h4>
-                    <button className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" /></button>
+                    <button type="button" className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="25px" /></button>
                 </div>
                 <p>{bannerDescription}</p>
                 { firstRender ? (
@@ -164,18 +166,22 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
                         cancelLabel={t('cancelBtnText')}
                         chooseLabel={t('chooseBtnText')}
                         uploadHandler={customBase64Uploader}
+                        ptOptions={{className: 'green-earth'}}
+                        chooseOptions={{className: 'button dark-blue'}}
+                        cancelOptions={{className: 'red-state'}}
+                        uploadOptions={{className: 'green-earth'}}
                         emptyTemplate={<p className="m-0">{t('uploadImgPlaceHolderText')}</p>} />
                 </div> : <div className='p-fileupload p-fileupload-advanced p-component mt-3'>
                     <div className='p-fileupload p-fileupload-buttonbar space-between position-relative'>
                         <div>
                             {!ad?.id && 
-                                <Button loading={sending} type='submit' onClick={handleSubmit(onSubmit)} form='ad_form' className='green-earth'>{t('createAdBtnText')}</Button>
+                                <Button loading={sending} type="submit" className="green-earth" onClick={handleSubmit(onSubmit)} form="ad_form">{t('createAdBtnText')}</Button>
                             }
                             {ad?.state == 2  && 
-                                <Button loading={sending} type='submit' onClick={cancel} form='ad_form' className='green-earth'>{t('createAdBtnText')}</Button>
+                                <Button loading={sending} type="submit" className="green-earth" onClick={cancel} form="ad_form">{t('createAdBtnText')}</Button>
                             }
                             {ad?.state == 1 && 
-                                <Button type='button' onClick={cancel} className='red-state'>{ad?.id ? t('cancelCampaignBtnText') : t('cancelBtnText')}</Button>
+                                <Button type="button" onClick={cancel} className="red-state">{ad?.id ? t('cancelCampaignBtnText') : t('cancelBtnText')}</Button>
                             }
                         </div>
                         {ad?.id && <div className={'btn-str' + ( ad?.state == 1 ?  ' ad-offline' : '')}>
