@@ -24,6 +24,7 @@ const RegisterVendor = ({create = false}) => {
 	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 	const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [t, i18n] = useTranslation('translation', { keyPrefix: 'register.registerVendor'})
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const {
     watch,
     reset,
@@ -260,6 +261,7 @@ const RegisterVendor = ({create = false}) => {
         </div>
         <div className="registerInput__container-x2">
           <RadioInput
+            toolTipMessage={tToolTip('deliveryAvailableToolTip')}
             data={radioData}
             control={control}
             isRequired={true}
@@ -269,6 +271,7 @@ const RegisterVendor = ({create = false}) => {
               required: true,
             }} />
           <RadioInput
+            toolTipMessage={tToolTip('storePickUpToolTip')}
             data={radioData}
             showLabel={true}
             control={control}

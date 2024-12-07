@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { Autocomplete } from "@react-google-maps/api"
 import { useNavigate, useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-
+import { Dialog } from "primereact/dialog"
+import InfoTooltip from "@ui/tooltip/InfoTooltip"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleInfo, faHouse, faPersonShelter, faBuildingNgo } from '@fortawesome/free-solid-svg-icons'
 import "./style.sass"
 import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
@@ -18,6 +21,7 @@ import { TextInput, MaskInput, PasswordInput, CheckBoxInput, RadioInput, UploadP
 const RegisterNgo = ({create = false}) => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
+  const [visible, setVisible] = useState(false)
 	const { username } = useParams()
 	const [sending, setSending] = useState(false)
 	const user = useSelector((state) => state.users.userData)
@@ -144,6 +148,29 @@ const RegisterNgo = ({create = false}) => {
   }, []);
 
   return <div className="layout">
+           <Dialog
+            visible={visible}
+            style={{ width: '50vw' }}
+            header={'Guía de roles:'}
+            onHide={() => {
+                if (!visible) return
+                setVisible(false)
+            }} >
+            <div className="dialog-container">
+              <div>
+                <h4>Organización Social  <FontAwesomeIcon color='var(--dark-blue)' icon={faPersonShelter} fontSize="1.1rem" /></h4>
+                <p className="mt-2">El rol de Organización Social te permite compartir tu propósito con la comunidad y vender tus productos a través de nuestra plataforma. ¡Una excelente manera de hacer crecer tu proyecto!</p>
+              </div>
+              <div>
+                <h4>Refugio  <FontAwesomeIcon color='var(--dark-blue)' icon={faHouse} fontSize="1.1rem" /></h4>
+                <p className="mt-2">Al elegir el rol de Refugio, podrás dar a conocer la misión de tu refugio y poner en adopción a las mascotas que cuidas. ¡Ayuda a más animales a encontrar su hogar!</p>
+              </div>
+              <div>
+                <h4>Ambos  <FontAwesomeIcon color='var(--dark-blue)' icon={faBuildingNgo} fontSize="1.1rem" /></h4>
+                <p className="mt-2">Con el rol de Ambos, podrás compartir tu propósito, vender productos y poner en adopción a las mascotas de tu refugio. ¡Una gran manera de impulsar tu proyecto y ayudar a los animales!</p>
+              </div>
+            </div>
+        </Dialog>
     <img className="layout__background" src="/assets/register/image-2.svg" />
     <div className="main__content xpadding-1">
       <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
@@ -277,7 +304,10 @@ const RegisterNgo = ({create = false}) => {
             labelName={t('organizationTypeLabel')}
             rules={{
               required: true,
-            }} />
+            }}>
+              { <button className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="1.1rem" /></button>}
+            </RadioInput>
+         
         </div>
         <div className="registerInput__container-x1">
           <TextAreaInput

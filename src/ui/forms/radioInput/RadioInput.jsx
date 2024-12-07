@@ -14,6 +14,7 @@ function RadioInput({
   toolTipMessage = "",
   disabled = false,
   showLabel = true,
+  children
 }) {
   const renderInput = () => <div className="radioInput__container">
     {data.map(({ name, value }, key) => <div key={key} className="inline-block">
@@ -38,6 +39,7 @@ return (
       <>
         <label htmlFor={nameInput}>
           {labelName} {isRequired && <span className="text-red-600">*</span>}
+          {children}
           {toolTipMessage != "" && (
               <InfoTooltip toolTipMessage={toolTipMessage}/>
           )}

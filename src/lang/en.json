@@ -1016,6 +1016,8 @@
     "settings": "Settings",
     "logout": "Logout",
     "recyclableMaterialsTooltipTitle": "Select the materials you're interested in purchasing and set your price.",
-    "selfPickUpToolTip": "Enabling this option lets others know you're willing to pick up materials at their location."
+    "selfPickUpToolTip": "Enabling this option lets others know you're willing to pick up materials at their location.",
+    "deliveryAvailableToolTip": "You provide delivery service to your customers",
+    "storePickUpToolTip": "You offer in-store pickup for your customers"
   }
 }

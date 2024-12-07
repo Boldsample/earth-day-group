@@ -1018,6 +1018,8 @@
     "settings": "Configuración",
     "logout": "Cerrar sesión",
     "recyclableMaterialsTooltipTitle": "Selecciona los materiales que te interesan comprar y establece tu precio.",
-    "selfPickUpToolTip": "Habilitar esta opción permite que otros sepan que estás dispuesto a recoger los materiales en su ubicación."
-  }  
+    "selfPickUpToolTip": "Habilitar esta opción permite que otros sepan que estás dispuesto a recoger los materiales en su ubicación.",
+    "deliveryAvailableToolTip": "Ofreces servicio de domicilio a tus clientes.",
+    "storePickUpToolTip": "Ofreces la opción de recoger las compras en tu tienda fisica"
+  }
 }
