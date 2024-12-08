@@ -193,7 +193,7 @@
       "adFailedToastTitle": "Error",
       "adSuccessToastMsg": "The ad was created succesfully!",
       "adFailedToastMsg": "Ad creation failed. Please try again",
-      "offline": "Offline",
+      "offline": "AD CAMPAIGN COMPLETE",
       "modules": [
         {
           "name": "Users",
@@ -1018,6 +1018,15 @@
     "recyclableMaterialsTooltipTitle": "Select the materials you're interested in purchasing and set your price.",
     "selfPickUpToolTip": "Enabling this option lets others know you're willing to pick up materials at their location.",
     "deliveryAvailableToolTip": "You provide delivery service to your customers",
-    "storePickUpToolTip": "You offer in-store pickup for your customers"
+    "storePickUpToolTip": "You offer in-store pickup for your customers",
+    "rolesGuide": "Roles Guide:",
+    "socialOrgTitle": "Social Organization",
+    "socialOrgBodyText": "The Social Organization role allows you to share your mission with the community and sell your products through our platform. An excellent way to grow your project!",
+    "shelterTitle": "Shelter",
+    "shelterBodyText": "By choosing the Shelter role, you'll be able to share your shelter's mission and put the pets you care for up for adoption. Help more animals find their home!",
+    "bothTitle": "Both",
+    "bothBodyText": "With the Both role, you can share your mission, sell products, and put the pets from your shelter up for adoption. A great way to boost your project and help animals!",
+    "homeLocation": "Use the location you provided during registration",
+    "currentLocation": "Use geolocation to pinpoint your current location."
   }
 }

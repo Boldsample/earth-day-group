@@ -7,7 +7,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { GoogleMap, MarkerF, Autocomplete, InfoBoxF, MarkerClustererF } from '@react-google-maps/api'
 import { faChevronDown, faChevronUp, faHouse, faLocationCrosshairs, faTimes } from '@fortawesome/free-solid-svg-icons'
-
+import { Tooltip } from 'primereact/tooltip'
 import mapConfig from "@json/mapConfig.json"
 import { getUsers } from '@services/userServices'
 import { setHeader } from '@store/slices/globalSlice'
@@ -33,6 +33,7 @@ const Map = () => {
   const [ filters, setFilters ] = useState({role: [], material: []})
   const [t] = useTranslation('translation', { keyPrefix: 'user.map'})
   const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials'})
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
 
   const updateFilter = e => {
     setFilters(_prev => {
@@ -149,8 +150,10 @@ const Map = () => {
             placeholder={t('inputSearchPlaceHolder')}
             className="p-inputtext" />
         </Autocomplete>
-        <a onClick={() => toCurrentLocation('home')}><FontAwesomeIcon icon={faHouse} /></a>
-        <a onClick={() => toCurrentLocation('current')}><FontAwesomeIcon icon={faLocationCrosshairs} /></a>
+        <Tooltip target=".homeLocation" showDelay={700}/>
+        <a className='homeLocation' data-pr-tooltip={tToolTip("homeLocation")} data-pr-position="bottom" onClick={() => toCurrentLocation('home')}><FontAwesomeIcon icon={faHouse} /></a>
+        <Tooltip target=".currentLocation" showDelay={700}/>
+        <a className='currentLocation' data-pr-tooltip={tToolTip("currentLocation")} data-pr-position="bottom" onClick={() => toCurrentLocation('current')}><FontAwesomeIcon icon={faLocationCrosshairs} /></a>
       </div>
     </div>
     {show && <div className="marker__detail">

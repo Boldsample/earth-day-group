@@ -28,6 +28,7 @@ const RegisterNgo = ({create = false}) => {
 	const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerNgo'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const {
     watch,
     reset,
@@ -151,23 +152,23 @@ const RegisterNgo = ({create = false}) => {
            <Dialog
             visible={visible}
             style={{ width: '50vw' }}
-            header={'Guía de roles:'}
+            header={tToolTip('rolesGuide')}
             onHide={() => {
                 if (!visible) return
                 setVisible(false)
             }} >
             <div className="dialog-container">
               <div>
-                <h4>Organización Social  <FontAwesomeIcon color='var(--dark-blue)' icon={faPersonShelter} fontSize="1.1rem" /></h4>
-                <p className="mt-2">El rol de Organización Social te permite compartir tu propósito con la comunidad y vender tus productos a través de nuestra plataforma. ¡Una excelente manera de hacer crecer tu proyecto!</p>
+                <h4>{tToolTip('socialOrgTitle')}  <FontAwesomeIcon color='var(--dark-blue)' icon={faPersonShelter} fontSize="1.1rem" /></h4>
+                <p className="mt-2">{tToolTip('socialOrgBodyText')}</p>
               </div>
               <div>
-                <h4>Refugio  <FontAwesomeIcon color='var(--dark-blue)' icon={faHouse} fontSize="1.1rem" /></h4>
-                <p className="mt-2">Al elegir el rol de Refugio, podrás dar a conocer la misión de tu refugio y poner en adopción a las mascotas que cuidas. ¡Ayuda a más animales a encontrar su hogar!</p>
+                <h4>{tToolTip('shelterTitle')}  <FontAwesomeIcon color='var(--dark-blue)' icon={faHouse} fontSize="1.1rem" /></h4>
+                <p className="mt-2">{tToolTip('shelterBodyText')}</p>
               </div>
               <div>
-                <h4>Ambos  <FontAwesomeIcon color='var(--dark-blue)' icon={faBuildingNgo} fontSize="1.1rem" /></h4>
-                <p className="mt-2">Con el rol de Ambos, podrás compartir tu propósito, vender productos y poner en adopción a las mascotas de tu refugio. ¡Una gran manera de impulsar tu proyecto y ayudar a los animales!</p>
+                <h4>{tToolTip('BothTitle')}  <FontAwesomeIcon color='var(--dark-blue)' icon={faBuildingNgo} fontSize="1.1rem" /></h4>
+                <p className="mt-2">{tToolTip('bothBodyText')}</p>
               </div>
             </div>
         </Dialog>
@@ -305,7 +306,7 @@ const RegisterNgo = ({create = false}) => {
             rules={{
               required: true,
             }}>
-              { <button className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="1.1rem" /></button>}
+              { <button type="button" className='info__btn' onClick={() => setVisible(true)}><FontAwesomeIcon color='var(--dark-blue)' icon={faCircleInfo} fontSize="1.1rem" /></button>}
             </RadioInput>
          
         </div>

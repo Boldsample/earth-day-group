@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CardSkeleton from '@ui/skeletons/cardSkeleton/CardSkeleton'
 import { TextInput, MultiSelectInput, CalendarInput } from '@ui/forms'
 import { addAd, addImages, getAd, updateAd } from '@services/adsServices'
-import { faCircleInfo, faCircleCheck, faRectangleAd, faBullseye, faClock, faLink } from '@fortawesome/free-solid-svg-icons'
+import { faX,faPlus,faCheck,faCircleInfo, faCircleCheck, faRectangleAd, faBullseye, faClock, faLink } from '@fortawesome/free-solid-svg-icons'
 
 const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     const toast = useRef(null)
@@ -179,14 +179,14 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
                                 <Button loading={sending} type="submit" className="green-earth" onClick={handleSubmit(onSubmit)} form="ad_form">{t('createAdBtnText')}</Button>
                             }
                             {ad?.state == 2  && 
-                                <Button loading={sending} type="submit" className="green-earth" onClick={cancel} form="ad_form">{t('createAdBtnText')}</Button>
+                                <Button loading={sending} type="submit" className="green-earth" onClick={cancel} form="ad_form"><FontAwesomeIcon color='#fff' icon={faPlus} fontSize="15px" /> {t('createAdBtnText')}</Button>
                             }
                             {ad?.state == 1 && 
-                                <Button type="button" onClick={cancel} className="red-state">{ad?.id ? t('cancelCampaignBtnText') : t('cancelBtnText')}</Button>
+                                <Button type="button" onClick={cancel} className="red-state"><FontAwesomeIcon color='#fff' icon={faX} fontSize="15px" /> {ad?.id ? t('cancelCampaignBtnText') : t('cancelBtnText')}</Button>
                             }
                         </div>
                         {ad?.id && <div className={'btn-str' + ( ad?.state == 1 ?  ' ad-online' : '')}>
-                            <span className='btn-str__text'>{ad?.state == 1 ? t('liveAdText') : t('offline')}</span>
+                            <span className='btn-str__text'>{ad?.state == 1? "" : <FontAwesomeIcon color='#fff' icon={faCheck} fontSize="15px" />}  {ad?.state == 1 ? t('liveAdText') : t('offline')}</span>
                         </div>}
                     </div>
                     <div className='p-fileupload-content'>

@@ -194,7 +194,7 @@
       "adFailedToastTitle": "Error",
       "adSuccessToastMsg": "El anuncio fue creado de manera correcta!",
       "adFailedToastMsg": "La creación del anuncio ha fallado. Por favor, intentalo de nuevo.",
-      "offline": "Campaña concluida",
+      "offline": "CAMPAÑA DE ANUNCIO COMPLETADA",
       "modules": [
         {
           "name": "Usuarios",
@@ -1020,6 +1020,15 @@
     "recyclableMaterialsTooltipTitle": "Selecciona los materiales que te interesan comprar y establece tu precio.",
     "selfPickUpToolTip": "Habilitar esta opción permite que otros sepan que estás dispuesto a recoger los materiales en su ubicación.",
     "deliveryAvailableToolTip": "Ofreces servicio de domicilio a tus clientes.",
-    "storePickUpToolTip": "Ofreces la opción de recoger las compras en tu tienda fisica"
+    "storePickUpToolTip": "Ofreces la opción de recoger las compras en tu tienda fisica",
+    "rolesGuide": "Guía de roles:",
+    "socialOrgTitle": "Organización Social",
+    "socialOrgBodyText": "El rol de Organización Social te permite compartir tu propósito con la comunidad y vender tus productos a través de nuestra plataforma. ¡Una excelente manera de hacer crecer tu proyecto!",
+    "shelterTitle": "Refugio",
+    "shelterBodyText": "Al elegir el rol de Refugio, podrás dar a conocer la misión de tu refugio y poner en adopción a las mascotas que cuidas. ¡Ayuda a más animales a encontrar su hogar!",
+    "bothTitle": "Ambos",
+    "bothBodyText": "Con el rol de Ambos, podrás compartir tu propósito, vender productos y poner en adopción a las mascotas de tu refugio. ¡Una gran manera de impulsar tu proyecto y ayudar a los animales!",
+    "homeLocation": "Usa la ubicación que proporcionaste durante el registro",
+    "currentLocation": "Usa la geolocalización para señalar tu ubicación actual"
   }
 }
