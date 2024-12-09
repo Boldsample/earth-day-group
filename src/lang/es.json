@@ -12,7 +12,7 @@
     "yes": "SÍ",
     "no": "NO",
     "deleted": "Eliminado",
-    "confirmDelete": "Confirmar eliminación",
+    "confirmDelete": "Confirmar",
     "categoryListingiconTitle1": "100% Recyclado",
     "categoryListingiconTitle2": "Ecológico",
     "categoryListingiconTitle3": "Economía Sostenible",
@@ -1029,6 +1029,9 @@
     "bothTitle": "Ambos",
     "bothBodyText": "Con el rol de Ambos, podrás compartir tu propósito, vender productos y poner en adopción a las mascotas de tu refugio. ¡Una gran manera de impulsar tu proyecto y ayudar a los animales!",
     "homeLocation": "Usa la ubicación que proporcionaste durante el registro",
-    "currentLocation": "Usa la geolocalización para señalar tu ubicación actual"
+    "currentLocation": "Usa la geolocalización para señalar tu ubicación actual",
+    "markAsResolved": "Si seleccionas esta opción, el estado del reporte pasara a ser resuelto",
+    "sendOffer": "Enviar Oferta"
+    
   }
 }

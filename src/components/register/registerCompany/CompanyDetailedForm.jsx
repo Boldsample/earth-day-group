@@ -253,7 +253,7 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
         onChange={e => setUser(prev => { return {...prev, pick_up_from_home: !user?.pick_up_from_home} })} />
     </div>
     <div className="p-field" style={{ marginBottom: "1.5rem" }}>
-      <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? t('signUpBtnText') : t('saveBtnText')} name="submit" loading={sending} />
+      <Button onClick={onSubmit} className="dark-blue fullwidth" label={user.id ? t('saveBtnText') : t('signUpBtnText')} name="submit" loading={sending} />
     </div>
   </>
 }

@@ -22,6 +22,7 @@ import { StepperPanel } from 'primereact/stepperpanel';
 import { InputSwitch } from "primereact/inputswitch"
 import { Message } from 'primereact/message';
 import { Tag } from 'primereact/tag'
+import InfoTooltip from "@ui/tooltip/InfoTooltip"
 import OfferInfo from "../offers/OfferInfo"
 
 const ReportInfo = ({ show, report, onHide }) => {
@@ -33,6 +34,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 	const [tStatus] = useTranslation('translation', { keyPrefix: 'admin.report' })
 	const types = { 'user': 'User', 'product': 'Product', 'pet': 'Pet', 'offer': 'Offer' }
 	const [tErrorMessages] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+	const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
 	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
 	const {
 		watch,
@@ -215,9 +217,14 @@ const ReportInfo = ({ show, report, onHide }) => {
 						{(watch('message') === 'customCaseMessage') && (
 							<div className="switches-container">
 							<div className="labels-container">
-								<label htmlFor="solvedReport">{t( "resolveReportInputTitle")}</label>
+								<div>
+									<label htmlFor="solvedReport">{t( "resolveReportInputTitle")}</label>
+									<InfoTooltip toolTipMessage={tToolTip("markAsResolved")}  delay={700}/>
+								</div>
 								{watch('message') !== 'positiveClosingCaseMessage' && (
-								<label htmlFor="delete">{t("deleteItemInputTitle", {item: types[report?.type]})}</label>
+									<div>
+										<label htmlFor="delete">{t("deleteItemInputTitle", {item: types[report?.type]})}</label>
+									</div>
 								)}
 							</div>
 							<div className="inputSwitches-container">

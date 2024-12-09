@@ -12,7 +12,7 @@
     "yes": "YES",
     "no": "NO",
     "deleted": "Deleted",
-    "confirmDelete": "Confirm delete",
+    "confirmDelete": "Confirm",
     "inputSearchPlaceHolder": "Keyword Search",
     "notfoundErrorMessage": "We couldn't find what you are looking for. Care to try again.",
     "categoryListingiconTitle1": "100% Recycled",
@@ -467,8 +467,8 @@
     "socialOrganizationModuleDescriptionText": "Find social organizations near your location",
     "profileModuleTitleText": "Profile",
     "profileModuleDescriptionText": "View your profile.",
-    "recycleMaterialsModuleTitleText": "Recycle Materials",
-    "recycleMaterialsModuleDescriptionText": "Find recyclable material and buy it.",
+    "recycleMaterialsModuleTitleText": "Recyclable Materials",
+    "recycleMaterialsModuleDescriptionText": "Search for recyclable materials.",
     "createProductModuleTitleText": "Add Product",
     "createProductModuleDescriptionText": "Add products that would be sold on your store’s site.",
     "createPetModuleTitleText": "Add Pet",
@@ -591,7 +591,7 @@
       "createOfferWarningMessage": "Important: Please double-check the details of your offer before publishing, as you won't be able to edit it once it's live. If you make an error after publishing, we suggest deleting the offer and creating a new one."
     },
     "offersList": {
-      "mainTitle": "Find recycle materials",
+      "mainTitle": "Find recyclable materials",
       "ownerTitle": "My offers",
       "selectInputPlaceHolder": "Filter by Materials",
       "inputSearchPlaceHolder": "Keyword Search",
@@ -1027,6 +1027,8 @@
     "bothTitle": "Both",
     "bothBodyText": "With the Both role, you can share your mission, sell products, and put the pets from your shelter up for adoption. A great way to boost your project and help animals!",
     "homeLocation": "Use the location you provided during registration",
-    "currentLocation": "Use geolocation to pinpoint your current location."
+    "currentLocation": "Use geolocation to pinpoint your current location.",
+    "markAsResolved": "If you select this option, the report status will be set to resolved.",
+    "sendOffer": "Send Offer"
   }
 }
