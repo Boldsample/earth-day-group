@@ -19,6 +19,9 @@
     "categoryListingiconTitle2": "Eco Friendly",
     "categoryListingiconTitle3": "Sustainable Economy",
     "passwordRequirementTitle": "Password Requirements:",
+    "changePasswordPlaceholder1": "Type your current password",
+    "changePasswordPlaceholder2": "Type a new password",
+    "changePasswordPlaceholder3": "Confirm new password",
     "passwordRequirementTitle2": "Pick a Password",
     "passwordRequirement1": "At least one numeric",
     "passwordRequirement2": "At least one lowercase",
@@ -42,6 +45,7 @@
     "userPhoneNumberInputLabel": "Phone Number",
     "userPhoneNumberPlaceHolderText": "(954) 987-69-17",
     "userPasswordInputLabel": "Password",
+    "deleteAccountPlaceHolder": "Type your password to delete your account",
     "userPasswordPlaceHolderText": "Enter a Password",
     "userNewPasswordPlaceHolderText": "Enter a new Password",
     "userConfirmPasswordInputLabel": "Confirm Password",
@@ -622,7 +626,7 @@
     },
     "profile": {},
     "profileInformation": {
-      "pickUpFromHomeText": "Pickup from home:",
+      "pickUpFromHomeText": "Self Pickup:",
       "pickUpAvailable": "Available",
       "pickUpNotAvailable": "Not Available",
       "contactBtnText": "Contact",
@@ -1029,6 +1033,9 @@
     "homeLocation": "Use the location you provided during registration",
     "currentLocation": "Use geolocation to pinpoint your current location.",
     "markAsResolved": "If you select this option, the report status will be set to resolved.",
-    "sendOffer": "Send Offer"
+    "sendOffer": "Send Offer",
+    "selfPickupAvailable": "This recycling company is willing to collect the materials at the location you specify.",
+    "selfPickupNotAvailable": "This recycling company does not offer pickup services.",
+    "priceForRecyclableGoodsToolTip": "Below are the materials and pricing per unit the recycling company is interested in purchasing"
   }
 }

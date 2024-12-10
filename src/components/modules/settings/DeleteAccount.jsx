@@ -77,7 +77,7 @@ const DeleteAccount = () => {
             nameInput="password"
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal('userPasswordInputLabel')}
-            placeHolderText={tGlobal('userPasswordInputLabel')}
+            placeHolderText={tGlobal('deleteAccountPlaceHolder')}
             rules={{
               maxLength: {
                 value: 60,

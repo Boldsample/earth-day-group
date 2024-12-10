@@ -18,6 +18,9 @@
     "categoryListingiconTitle3": "Economía Sostenible",
     "passwordRequirementTitle": "Requerimientos:",
     "passwordRequirementTitle2": "Escribe una contraseña",
+    "changePasswordPlaceholder1": "Escribe tu contraseña actual",
+    "changePasswordPlaceholder2": "Escribe una nueva contraseña",
+    "changePasswordPlaceholder3": "Confirma la nueva contraseña",
     "passwordRequirement1": "Al menos un número",
     "passwordRequirement2": "Al menos una letra minúscula",
     "passwordRequirement3": "Al menos una letra mayúscula",
@@ -40,6 +43,7 @@
     "userPhoneNumberInputLabel": "Número de Teléfono",
     "userPhoneNumberPlaceHolderText": "(954) 987-69-17",
     "userPasswordInputLabel": "Contraseña",
+    "deleteAccountPlaceHolder": "Escribe tu contraseña para eliminar tu cuenta",
     "userPasswordPlaceHolderText": "Escribe una contraseña",
     "userNewPasswordPlaceHolderText": "Escribe una nueva contraseña",
     "userConfirmPasswordInputLabel": "Confirmar contraseña",
@@ -95,7 +99,7 @@
     "slide1_description": "Una solución moderna para una sociedad sostenible.",
     "slide1_item1": "Genera ingresos extra.",
     "slide1_item2": "Encuentra centros de reciclaje cerca a tu ubicación.",
-    "slide1_item3": "Encuenta fundaciones.",
+    "slide1_item3": "Encuentra fundaciones.",
     "slide1_item4": "Encuentra refugios de animales",
     "slide1_item5": "Encuentra productos ecológicos.",
     "locale_recycling_centers": "Encuentra centros de reciclaje cerca a tu ubicación",
@@ -624,8 +628,8 @@
     "profile": {},
     "profileInformation": {
       "pickUpAvailable": "Disponible",
-      "pickUpNotAvailable": "No Disponible",
-      "pickUpFromHomeText": "Recoger en casa:",
+      "pickUpNotAvailable": "no disponible",
+      "pickUpFromHomeText": "Recoger en ubicación:",
       "contactBtnText": "Contactar",
       "editProfileBtnText": "Editar Perfil",
       "deleteProfileBtnText": "Eliminar Perfil",
@@ -1031,7 +1035,11 @@
     "homeLocation": "Usa la ubicación que proporcionaste durante el registro",
     "currentLocation": "Usa la geolocalización para señalar tu ubicación actual",
     "markAsResolved": "Si seleccionas esta opción, el estado del reporte pasara a ser resuelto",
-    "sendOffer": "Enviar Oferta"
+    "sendOffer": "Enviar mensaje",
+    "selfPickupAvailable": "Esta empresa de reciclaje está dispuesta a recoger los materiales en la ubicación que le indiques.",
+    "selfPickupNotAvailable": "Esta empresa de reciclaje no ofrece servicios de recogida de los materiales.",
+    "priceForRecyclableGoodsToolTip": "Estos son los materiales y precios por unidad que la empresa de reciclaje está interesada en comprar"
+
     
   }
 }

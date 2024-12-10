@@ -15,12 +15,13 @@ import AdBanner from "@ui/banners/AdBanner"
 import materials from "@json/recyclableMaterials.json"
 import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
 import { Link } from "react-router-dom"
+import InfoTooltip from "@ui/tooltip/InfoTooltip"
 
 const ProfileListing = ({type, profile, reloadElements = () => false}) => {
   const user = useSelector((state) => state.users.userData)
   const [moreMaterials, setMoreMaterials] = useState(false)
   const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileListing'})
-
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const ngoTypes = [
     {
       id: 'products',
@@ -76,8 +77,11 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
         <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} admin={user?.role == 'admin'} />
         {(profile?.materials?.length > 0 || user?.id == profile?.id) && 
           <div className="recycableGoods__container">
-            <div className="materialsBoxTitle aligncenter">
-              <h4>{t('recyclableGoodsTitle')}</h4>
+            <div className={`${profile.materials?.length !== 0 && user?.id != profile?.id  ? 'flex-start' : ''} materialsBoxTitle`}>
+              <h4 className="width-auto">{t('recyclableGoodsTitle')}</h4>
+              {profile.materials?.length != 0 && user?.id != profile?.id &&
+                <InfoTooltip toolTipMessage={tToolTip("priceForRecyclableGoodsToolTip")} delay={700} />
+              }
               {(user?.id == profile?.id && profile.materials?.length > 0) &&
                 <Link className="button dark-blue small" to="/settings/edit/materials/"><FontAwesomeIcon icon={faPen} /> <span>{t('editMaterials')}</span></Link>
               }

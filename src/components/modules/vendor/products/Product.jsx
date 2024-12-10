@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBookmark as faBookmarkLine } from "@fortawesome/free-regular-svg-icons"
-import { faBookmark, faCartPlus, faFlag, faImage, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark as faBookmarkLine, faHeart as faHeartLine } from "@fortawesome/free-regular-svg-icons"
+import { faBookmark, faCartPlus, faFlag, faImage, faTrash, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
 import { Message } from "primereact/message"
 
@@ -81,7 +81,7 @@ const Product = () => {
             <h4 className="dark-blue">{parseInt(product?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h4>
             <div className="buttons__container">
               {user?.id != product?.user && user?.role != 'admin' && <>
-                <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={product?.followed ? faBookmark : faBookmarkLine} /></Link>
+                <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={product?.followed ? faHeart : faHeartLine} /></Link>
                 <Link className="button small green-earth"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('addToCartBtnText')}</span></Link>
                 <Link className="button small red-state outline hasTooltip" to={`/report/product/${product?.id}/`} data-pr-tooltip={t('reportProductTooltipText')}><FontAwesomeIcon icon={faFlag} /></Link>
               </> || <>

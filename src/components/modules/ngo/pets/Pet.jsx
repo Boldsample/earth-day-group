@@ -11,11 +11,11 @@ import { setHeader } from "@store/slices/globalSlice"
 
 import "../../profile/profile.sass"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
-import { faBookmark, faCartPlus, faFlag, faPaw, faSignal, faTrash, faVenusMars, faWeightScale } from "@fortawesome/free-solid-svg-icons"
+import { faBookmark, faCartPlus, faFlag, faPaw, faSignal, faTrash, faVenusMars, faWeightScale, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
-import { faBookmark as faBookmarkLine, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
+import { faBookmark as faBookmarkLine, faPaperPlane, faHeart as faHeartLine } from "@fortawesome/free-regular-svg-icons"
 import { Tooltip } from "primereact/tooltip"
 import { Chip } from "primereact/chip"
 import ConfirmationModal from "@ui/modals/ConfirmationModal"
@@ -84,7 +84,7 @@ const Pet = () => {
               <li><FontAwesomeIcon icon={faWeightScale}  className='contact__icon'/>{pet?.weight} Kg</li>
             </ul>
             {user?.id != pet?.user && user?.role != 'admin' && <>
-              <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faBookmark : faBookmarkLine} /></Link>
+              <Link className="button small dark-blue" onClick={doFollow}><FontAwesomeIcon icon={pet?.followed ? faHeart : faHeartLine} /></Link>
               <Link to={`/chat/${pet?.username}/adopt/${pet?.id}/${pet?.name}`} className="button small green-earth"><FontAwesomeIcon icon={faPaperPlane} /> <span>{t('contactShelterBtn')}</span></Link>
               <Link className="button small red-state outline hasTooltip" to={`/report/pet/${pet?.id}/`} data-pr-tooltip="Report pet"><FontAwesomeIcon icon={faFlag} /></Link>
             </> || <>

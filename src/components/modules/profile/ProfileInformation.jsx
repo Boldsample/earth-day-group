@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
 import { faPhone, faLocationDot, faHouse, faGlobe, faPen, faHeart, faEnvelope, faPlus, faVenusMars, faPaw, faSignal, faWeightScale, faFlag, faTrash, faAddressCard } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
-
+import InfoTooltip from '@ui/tooltip/InfoTooltip'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
 
 import './profile.sass'
@@ -18,6 +18,7 @@ const ProfileInformation = ({profile, same, doFollow, admin}) => {
   const [confirm, setConfirm] = useState(false)
 	const [tAdmin] = useTranslation('translation', { keyPrefix: 'admin.usersList'})
 	const [t] = useTranslation('translation', { keyPrefix: 'profile.profileInformation'})
+	const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
 
   const changeState = async action => {
     setConfirm(false)
@@ -49,7 +50,11 @@ const ProfileInformation = ({profile, same, doFollow, admin}) => {
           <li><FontAwesomeIcon icon={faGlobe}  className='contact__icon'/>{profile?.website}</li>
         }
         {profile?.role == 'company' && 
-          <li><FontAwesomeIcon icon={faHouse}  className='contact__icon'/> {t('pickUpFromHomeText')} {profile?.pick_up_from_home == true ? t('pickUpAvailable') : t('pickUpNotAvailable')}</li>
+            <li className='flex-row'><FontAwesomeIcon icon={faHouse}  className='contact__icon'/>
+            <p> {t('pickUpFromHomeText')} {profile?.pick_up_from_home == true ? t('pickUpAvailable') : t('pickUpNotAvailable')}</p>
+             <InfoTooltip toolTipMessage={ profile?.pick_up_from_home == true ? tToolTip("selfPickupAvailable") : tToolTip("selfPickupNotAvailable")  } delay={700} />
+             </li>
+
         }
       </ul>
       <div className="buttons__container">

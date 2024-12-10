@@ -75,7 +75,7 @@ const Password = () => {
             nameInput="password"
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal('userPasswordInputLabel')}
-            placeHolderText={tGlobal('userPasswordInputLabel')}
+            placeHolderText={tGlobal('changePasswordPlaceholder1')}
             rules={{
               maxLength: {
                 value: 60,
@@ -95,7 +95,7 @@ const Password = () => {
             getFormErrorMessage={getFormErrorMessage}
             passwordRequirementsPopUp={PasswordRequirements}
             labelName={tGlobal('userNewPasswordPlaceHolderText')}
-            placeHolderText={tGlobal('userPasswordPlaceHolderText')}
+            placeHolderText={tGlobal('changePasswordPlaceholder2')}
             rules={{
               maxLength: {
                 value: 20,
@@ -116,8 +116,8 @@ const Password = () => {
             isRequired={true}
             nameInput="password_confirmation"
             getFormErrorMessage={getFormErrorMessage}
-            labelName={tGlobal('userConfirmPasswordInputLabel')}
-            placeHolderText={tGlobal('userConfirmPasswordPlaceHolderText')}
+            labelName={tGlobal('changePasswordPlaceholder3')}
+            placeHolderText={tGlobal('changePasswordPlaceholder3')}
             rules={{
               required: tGlobalErrors('requiredErrorMessage'),
               validate: value => value === watch('new_password') || tGlobalErrors('passwordDoNotMatchErrorMessage'),
