@@ -75,7 +75,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
         <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} admin={user?.role == 'admin'} />
-        {(profile?.materials?.length > 0 || user?.id == profile?.id) && 
+        {user?.role == 'company' && (profile?.materials?.length > 0 || user?.id == profile?.id) && 
           <div className="recycableGoods__container">
             <div className={`${profile.materials?.length !== 0 && user?.id != profile?.id  ? 'flex-start' : ''} materialsBoxTitle`}>
               <h4 className="width-auto">{t('recyclableGoodsTitle')}</h4>

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { Button } from "primereact/button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBookmark as faBookmarkLine, faHeart as faHeartLine } from "@fortawesome/free-regular-svg-icons"
-import { faBell, faCheck, faChevronRight, faImage, faLocationDot, faBookmark, faHeart, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faBell, faCheck, faChevronRight, faImage, faLocationDot, faBookmark, faHeart, faXmark, faAdd } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
 
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
@@ -15,6 +15,7 @@ const MultiUseCard = ({
   date,
   title,
   status,
+  listType,
   data = {},
   action = null,
   bookmark = true,
@@ -189,6 +190,12 @@ const MultiUseCard = ({
             <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
             <Link className="button small dark-blue" to={`/${data?.role}/${data?.username}/`}>{t('seeMoreBtnText')} <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
+        </div>
+      case 'add':
+        return <div className="main__container">
+          <Link to={action}>
+            <div className="content"><FontAwesomeIcon icon={faAdd} /><br />{t(`add${listType}`)}</div>
+          </Link>
         </div>
       case 'product':
         const doActionProduct = e => {

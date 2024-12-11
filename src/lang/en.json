@@ -880,6 +880,8 @@
         "notificationMinutes": "{{minutes}} minutes ago",
         "notificationHours": "{{hours}} hours ago",
         "seeMoreBtnText": "See more",
+		"addpet": "Add pet",
+		"addproduct": "Add product",
         "offerSent": "Offer sent",
         "offerReceived": "Offer received",
         "offerAccepted": "Offer accepted",

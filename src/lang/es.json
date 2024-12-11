@@ -882,6 +882,8 @@
         "notificationMinutes": "Hace {{minutes}} minutos",
         "notificationHours": "Hace {{hours}} horas",
         "seeMoreBtnText": "Ver más",
+		"addpet": "Añadir mascota",
+		"addproduct": "Añadir producto",
         "offerSent": "Oferta enviada",
         "offerReceived": "Oferta recibida",
         "offerAccepted": "Oferta aceptada",

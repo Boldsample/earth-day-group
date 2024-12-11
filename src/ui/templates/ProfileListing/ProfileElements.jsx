@@ -20,7 +20,7 @@ const ProfileElements = ({entity = null, type = 'products', user, same = false, 
   const [filters, setFilters] = useState({keyword: ''})
   const loggedUser = useSelector((state) => state.users.userData)
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
-  const [page, setPage] = useState({first: 0, page: 0, rows: related ? 4 : 8})
+  const [page, setPage] = useState({first: 0, page: 0, rows: related ? 3 : 7})
   const [tListing] = useTranslation('translation', { keyPrefix: 'ui.templates.categoryListing'})
   const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileElements'})
 
@@ -79,23 +79,18 @@ const ProfileElements = ({entity = null, type = 'products', user, same = false, 
     <div className={`templateCards_grid cards-${elements?.data?.length}`}>
       {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
         skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
-      || (elements?.total > 0 && 
-        elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} bookmark={loggedUser?.role != 'admin' && element?.user != loggedUser?.id} />)
-      ) ||
+      || (elements?.total > 0 && <>
+        {same && 
+          <MultiUseCard type="add" action={type == 'products' ? '/product/new/' : '/pet/new/'} listType={type} />
+        }
+        {elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} bookmark={loggedUser?.role != 'admin' && element?.user != loggedUser?.id} />)}
+      </>) ||
         <div className="fullwidth text-center mt-2">
           <p>{tGlobal2('notfoundErrorMessage')}</p>
         </div>
       }
       {!related && page?.rows < elements?.total && 
         <Paginator first={page?.first} page={page?.page} rows={page?.rows} totalRecords={elements.total} onPageChange={e => setPage({first: e.first, page: e.page, rows: e.rows})} />
-      }
-      {same && 
-        <div className="fullwidth text-center">
-          {type == 'products' && 
-            <Link className="button small blue-earth self-center" to="/product/new/"><FontAwesomeIcon icon={faPlus} />{t('newProductBtnText')}</Link> ||
-            <Link className="button small green-earth self-center" to="/pet/new/"><FontAwesomeIcon icon={faPlus} />{t('newPetBtnText')}</Link>
-          }
-        </div>
       }
     </div>
   </div>
