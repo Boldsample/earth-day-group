@@ -122,15 +122,17 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         </>}
         {user?.materials?.length > 0 && <>
           <h4 className="internal text-left">{t('companyMaterialPriceTitle')}</h4>
-          <div className="materials">
-            {user.materials.map(material => 
-              <RecycleMaterialCard
-                key={material.id}
-                material={tMaterial(material.type)}
-                unit={material.unit}
-                price={material.price}
-                color={material.color} />
-            )}
+          <div className="materialsCard__grid">
+            {user?.materials?.map(material => {
+              if(material.deleted)
+                return
+              return <RecycleMaterialCard
+                key={material?.type}
+                unit={material?.unit}
+                price={material?.price}
+                material={material.type}
+                currency={material?.currency} />
+            })}
           </div>
         </>}
       </div>
