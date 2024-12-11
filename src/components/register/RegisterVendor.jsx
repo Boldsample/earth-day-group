@@ -16,13 +16,13 @@ import { createUser, getUser, updateUser } from "@services/userServices"
 import { TextInput, NumberInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput, DropDownInput, MaskInput } from "@ui/forms"
 
 const RegisterVendor = ({create = false}) => {
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
-	const { username } = useParams()
-	const [sending, setSending] = useState(false)
-	const user = useSelector((state) => state.users.userData)
-	const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
-	const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { username } = useParams()
+  const [sending, setSending] = useState(false)
+  const user = useSelector((state) => state.users.userData)
+  const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+  const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [t, i18n] = useTranslation('translation', { keyPrefix: 'register.registerVendor'})
   const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const {
@@ -154,6 +154,11 @@ const RegisterVendor = ({create = false}) => {
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal('userNameInputLabel')}
             placeHolderText={tGlobal('userNamePlaceHolderText')}
+            onInput={e => {
+              const regex = /^[a-z0-9_]*$/
+              if(!regex.test(e.target.value))
+                e.target.value = e.target.value.replace(/[^a-z0-9_]/g, "")
+            }}
             rules={{
               maxLength: {
                 value: 80,

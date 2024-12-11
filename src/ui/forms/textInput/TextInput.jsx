@@ -19,6 +19,7 @@ const TextInput = ({
   toolTipMessage = "",
   disabled = false,
   showLabel = true,
+  onInput = () => {},
   autocomplete = "on",
   getFormErrorMessage,
   onKeyDown = () => {},
@@ -40,6 +41,7 @@ const TextInput = ({
         <InputText
           type={type}
           id={field.name}
+          onInput={onInput}
           style={inputWidth}
           disabled={disabled}
           className={className}
