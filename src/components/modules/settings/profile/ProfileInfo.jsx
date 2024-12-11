@@ -25,11 +25,11 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
     const response = await recoverUser({email: user?.email})
     if(response?.id){
       dispatch(updateThankyou({
-        title: "Email sent successfully!",
+        title: t("recoverEmailthankyouPagetitle"),
         link: `/${user?.role == 'admin' ? 'admins' : 'users'}/`,
         background: "image-1.svg",
-        button_label: "Go back to the list of users",
-        content: `We sent a recover email to ${user?.email}!`,
+        button_label: t("recoverEmailthankyouPagebuttonLabel"),
+        content: t("recoverEmailthankyouPagebodyText", {user: user?.email })
       }))
       navigate('/thankyou/')
     }

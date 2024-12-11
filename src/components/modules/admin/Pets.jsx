@@ -33,6 +33,7 @@ const Pets = () => {
   const [tPet] = useTranslation('translation', { keyPrefix: 'ngo.pets.pet' })
   const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   
+
   const changeState = async action => {
     setConfirm(false)
     if(action){
@@ -82,7 +83,7 @@ const Pets = () => {
   }, [user])
 
   return <div className="layout">
-    <ConfirmationModal title={tPet('deletePetTitle')} visible={confirm} action={changeState} />
+    <ConfirmationModal title={user?.role == "admin" ? tPet('disablePetTitle') : tPet('deletePetTitle')} visible={confirm} action={changeState} type={user?.role} />
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
       <h1 className="text-defaultCase mb-1">{t('mainTitle')} </h1>

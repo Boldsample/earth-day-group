@@ -87,7 +87,7 @@ const Products = () => {
   }, [user])
   
   return <div className="layout">
-    <ConfirmationModal title={tProduct('deleteProductTitle')} visible={confirm} action={changeState} />
+    <ConfirmationModal title={user?.role == "admin" ? tProduct('disableProductTitle') : tProduct('deleteProductTitle')} visible={confirm} action={changeState} type={user?.role} />
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
       <h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>

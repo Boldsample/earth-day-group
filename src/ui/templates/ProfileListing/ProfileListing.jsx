@@ -34,7 +34,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
       url: user?.id == profile?.id ? '/profile/pets/' : `/${profile?.role}/${profile?.username}/pets/`,
     },
   ]
-
+console.log(user)
   const doFollow = async id => {
     await followUser({user: id, follower: user?.id})
     reloadElements()
@@ -75,7 +75,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
         <ProfileInformation profile={profile} same={user?.id == profile?.id} doFollow={doFollow} admin={user?.role == 'admin'} />
-        {(profile?.materials?.length > 0 || user?.id == profile?.id) && 
+        {(profile?.materials?.length > 0 || user?.id == profile?.id && user?.role == "admin " || user?.id == profile?.id && user?.role == "company "  ) && 
           <div className="recycableGoods__container">
             <div className={`${profile.materials?.length !== 0 && user?.id != profile?.id  ? 'flex-start' : ''} materialsBoxTitle`}>
               <h4 className="width-auto">{t('recyclableGoodsTitle')}</h4>

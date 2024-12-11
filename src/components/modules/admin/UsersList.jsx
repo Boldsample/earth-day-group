@@ -148,7 +148,7 @@ const Users = ({type}) => {
   
 
   return <div className="layout">
-    <ConfirmationModal title={t('deleteUserTitle')} visible={confirm} action={changeState} />
+    <ConfirmationModal title={t('deleteUserTitle')} visible={confirm} action={changeState} type={user?.role} />
     <img className="layout__background" src="/assets/full-width.svg" />
     <div className={'main__content fullwidth'}>
       <h1 className="text-defaultCase mb-1">{type == 'admins' ? t('adminMainTitle') : t('userMainTitle')}</h1>

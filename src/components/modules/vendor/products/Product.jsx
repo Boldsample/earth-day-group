@@ -64,7 +64,7 @@ const Product = () => {
   }, [product])
 
   return <>
-    <ConfirmationModal title={t('deleteProductTitle')} visible={confirm} action={changeState} />
+    <ConfirmationModal title={user?.role == "admin" ? t('disableProductTitle') : t('deleteProductTitle')} visible={confirm} action={changeState} type={user?.role}  />
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
@@ -87,7 +87,7 @@ const Product = () => {
               </> || <>
                 <Link to={`/product/edit/${product?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editProductBtnText')}</span></Link>
                 {product?.state == 1 && 
-                  <button onClick={() => setConfirm(true)} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deleteProductBtn')}</span></button>
+                  <button onClick={() => setConfirm(true)} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{user?.role == "admin" ? t('disableProductBtn') : t('deleteProductBtn')}</span></button>
                 || 
                   // <Chip className="background-red-state ml-1" label={tGlobal('deleted')} />
                   <div className="mt-2">

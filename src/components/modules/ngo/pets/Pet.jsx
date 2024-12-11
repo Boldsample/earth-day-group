@@ -30,6 +30,7 @@ const Pet = () => {
   const [tGlobal] = useTranslation('translation', { keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'ngo.pets.pet' })
 
+
   const changeState = async action => {
 	setConfirm(false)
 	if(action){
@@ -63,7 +64,7 @@ const Pet = () => {
   }, [pet])
   
   return <>
-    <ConfirmationModal title={t('deletePetTitle')} visible={confirm} action={changeState} />
+    <ConfirmationModal title={user?.role == "admin" ? t('disablePetTitle') : t('deletePetTitle')} visible={confirm} action={changeState} type={user?.role} />
     <div className="layout hasfooter">
       <img className="layout__background" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
@@ -90,7 +91,7 @@ const Pet = () => {
             </> || <>
               <Link to={`/pet/edit/${pet?.id}/`} className="button small dark-blue"><FontAwesomeIcon icon={faCartPlus} /> <span>{t('editPetBtn')}</span></Link>
               {pet?.state == 1 && 
-                <button onClick={() => setConfirm(true)} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{t('deletePetBtn')}</span></button>
+                <button onClick={() => setConfirm(true)} className="button small red-state"><FontAwesomeIcon icon={faTrash} /> <span>{user?.role == "admin" ? t('disablePetBtn') : t('deletePetBtn')}</span></button>
               || 
                 <div className="mt-2">
                   <Message severity="error" text={t('deletedPetWarningMessage')} />

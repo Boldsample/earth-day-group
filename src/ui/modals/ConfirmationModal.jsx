@@ -22,21 +22,10 @@ const ConfirmationModal = ({title, text, handleConfirmation, type, visible, acti
     <div className="icon trash text-red-state"><FontAwesomeIcon icon={icon} fontSize={35}  /></div>
     <div>
       <h4>{title}</h4>
-      <p>{t('dialogText2')}</p>
+      {type != "admin" &&
+        <p>{t('dialogText2')}</p>
+      }
     </div>
-     {/* <PasswordInput
-          width="50%"
-          maxLength={20}
-          label={t('passwordInputLabel')}
-          showLabel={false}
-          control={control}
-          nameInput="password"
-          isRequired={true}
-          placeHolderText={t('passwordInputPlaceHolderText')}
-          getFormErrorMessage={getFormErrorMessage}
-          rules={{
-            required:  tGlobal(`requiredErrorMessage`),
-          }} /> */}
   </Dialog>
 }
 

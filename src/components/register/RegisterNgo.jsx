@@ -167,7 +167,7 @@ const RegisterNgo = ({create = false}) => {
                 <p className="mt-2">{tToolTip('shelterBodyText')}</p>
               </div>
               <div>
-                <h4>{tToolTip('BothTitle')}  <FontAwesomeIcon color='var(--dark-blue)' icon={faBuildingNgo} fontSize="1.1rem" /></h4>
+                <h4>{tToolTip('bothTitle')}  <FontAwesomeIcon color='var(--dark-blue)' icon={faBuildingNgo} fontSize="1.1rem" /></h4>
                 <p className="mt-2">{tToolTip('bothBodyText')}</p>
               </div>
             </div>

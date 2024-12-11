@@ -27,7 +27,7 @@ const OfferInfo = ({ type = 'full', show, offer, onHide }) => {
   }
 
   return <>
-    <ConfirmationModal title={t('deleteOfferTitle')} visible={confirm} action={changeState} />
+    <ConfirmationModal title={t('deleteOfferTitle')} visible={confirm} action={changeState} type={user?.role} />
     <Dialog visible={show} onHide={onHide} draggable={false}>
       {offer?.images?.length && 
         <Galleria value={offer?.images} numVisible={5}

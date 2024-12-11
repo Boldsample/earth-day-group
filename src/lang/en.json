@@ -427,7 +427,7 @@
       "allSocialOrg": "Social Organizations",
       "createPostOfferLinkText": "Create Post Offer",
       "noUsersFoundText": "There are no users that meet the filter criteria.",
-      "deleteUserTitle": "Do you want to delete the user?"
+      "deleteUserTitle": "Do you want to disable the user?"
     }
   },
   "bookmarks": {
@@ -539,8 +539,10 @@
         "petYearsOld": "Years old",
         "contactShelterBtn": "Adopt pet",
         "editPetBtn": "Edit Pet",
-        "deletePetBtn": "Disable Pet",
-        "deletePetTitle": "Do you really want to disable this pet?",
+        "deletePetBtn": "Delete Pet",
+        "disablePetBtn": "Disable Pet",
+        "disablePetTitle": "Do you really want to disable this pet?",
+        "deletePetTitle": "¿Do you really wish to disable this pet?",
         "deletedPetWarningMessage": "This pet is currently disabled and can only be viewed by admin users. To reinstate it, please go to the Pets section and change its status to 'Enabled'."
       }
     }
@@ -660,6 +662,9 @@
     "profile": {
       "profile": {},
       "profileInfo": {
+        "recoverEmailthankyouPagetitle": "Email sent successfully!",
+        "recoverEmailthankyouPagebuttonLabel": "Go back to the users list",
+        "recoverEmailthankyouPagebodyText": "We sent a recover email to {{user}}.",
         "followersBtnText": "Followers",
         "followingBtnText": "Following",
         "editBtnText": "Edit",
@@ -804,8 +809,10 @@
         "addToCartBtnText": "Add To Cart",
         "reportProductTooltipText": "Report Product",
         "editProductBtnText": "Edit Product",
-        "deleteProductBtn": "Disable Product",
-        "deleteProductTitle": "Do you really want to disable this product?",
+        "deleteProductBtn": "Delete Product",
+        "disableProductBtn": "Disable Product",
+        "disableProductTitle": "Do you really want to disable this product?",
+        "deleteProductTitle": "Do you really want to delete this product?",
         "deletedProductWarningMessage": "This product is currently disabled and can only be viewed by admin users. To reinstate it, please go to the Products section and change its status to 'Enabled'."
       }
     }
