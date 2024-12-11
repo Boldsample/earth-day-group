@@ -44,7 +44,7 @@ const Chat = () => {
   const [t] = useTranslation('translation', { keyPrefix: 'chat.chat' })
   const notifications = useSelector((state) => state.users.notifications)
   const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
-  const [message, setMessage] = useState(pet ? t('adoptPet', {name: petName}) : null)
+  const [message, setMessage] = useState(pet ? t('adoptPet', {name: petName}) : '')
   
   const callMessages = async () => {
     setCalling(true)
