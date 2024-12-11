@@ -21,7 +21,7 @@ const AdBanner = ({location, type}) => {
              <Link to={ adInfo.link.includes('http') ? adInfo.link : '//:' + adInfo.link } target="_blank"><img src={adInfo.picture} alt="" /></Link>
           </div>
           case 'dashboardButton':
-          return  <Link to={ adInfo.link } target="_blank"><img style={{borderRadius: "0.5rem"}} src={adInfo.picture} alt="" /></Link>
+          return  <Link to={ adInfo.link.includes('http') ? adInfo.link : '//:' + adInfo.link } target="_blank"><img style={{borderRadius: "0.5rem"}} src={adInfo.picture} alt="" /></Link>
         default:
           return 
       }
