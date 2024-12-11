@@ -64,7 +64,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         {user?.role == 'user' && <p className="mb-2">{user?.description}</p>}
       </div>
       {same && !admin && <>
-        <div className="followers">
+        {/* <div className="followers">
           <Link to="/followers/">
             <span>{user?.followers}</span>
             {t('followersBtnText')}
@@ -73,7 +73,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
             <span>{user?.following}</span>
             {t('followingBtnText')}
           </Link>
-        </div>
+        </div> */}
         <Link to={'/settings/edit/'} className="button small dark-blue">{t('editBtnText')}</Link>
       </> || <>
         {!admin && 
