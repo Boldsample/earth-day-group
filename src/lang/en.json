@@ -893,7 +893,8 @@
         "quantity": "Quantity",
         "askingPrice": "Asking price",
         "finalPrice": "Final price",
-        "pay": "Pay"
+        "pay": "Pay",
+        "add": "add {{element}}"
       }
     },
     "templates": {

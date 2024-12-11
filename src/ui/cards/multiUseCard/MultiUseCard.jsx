@@ -194,7 +194,7 @@ const MultiUseCard = ({
       case 'add':
         return <div className="main__container">
           <Link to={action}>
-            <div className="content"><FontAwesomeIcon icon={faAdd} /><br />{t(`add${listType}`)}</div>
+            <div className="content"><FontAwesomeIcon icon={faAdd} /><br />{t(`add`, {element: listType})}</div>
           </Link>
         </div>
       case 'product':

@@ -899,7 +899,8 @@
         "quantity": "Cantidad",
         "askingPrice": "Precio solicitado",
         "finalPrice": "Precio final",
-        "pay": "Pagar"
+        "pay": "Pagar",
+        "add": "agregar {{element}}"
       }
     },
     "templates": {
@@ -1049,7 +1050,5 @@
     "selfPickupAvailable": "Esta empresa de reciclaje está dispuesta a recoger los materiales en la ubicación que le indiques.",
     "selfPickupNotAvailable": "Esta empresa de reciclaje no ofrece servicios de recogida de los materiales.",
     "priceForRecyclableGoodsToolTip": "Estos son los materiales y precios por unidad que la empresa de reciclaje está interesada en comprar"
-
-    
   }
 }
