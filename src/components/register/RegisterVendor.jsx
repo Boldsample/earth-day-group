@@ -219,6 +219,7 @@ const RegisterVendor = ({create = false}) => {
               placeHolderText={tGlobal('userAddressPlaceHolderText')}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
+                validate: (value) => (watch("lat") && watch("lng")) || tGlobal(`latlngErrorMessage`),
                 required: tGlobalErrors(`requiredErrorMessage`),
                 pattern: {
                   value: /^\S/,
