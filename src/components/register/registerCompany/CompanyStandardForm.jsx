@@ -105,6 +105,11 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         getFormErrorMessage={getFormErrorMessage}
         labelName={tGlobal2('userNameInputLabel')}
         placeHolderText={tGlobal2('userNamePlaceHolderText')}
+        onInput={e => {
+          const regex = /^[a-z0-9_]*$/
+          if(!regex.test(e.target.value))
+            e.target.value = e.target.value.replace(/[^a-z0-9_]/g, "")
+        }}
         rules={{
           maxLength: {
             value: 80,

@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { Button } from "primereact/button"
+import { Dialog } from "primereact/dialog"
 import { useEffect, useState } from "react"
 import { useTranslation } from 'react-i18next'
 import { Autocomplete } from "@react-google-maps/api"
 import { useNavigate, useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { Dialog } from "primereact/dialog"
-import InfoTooltip from "@ui/tooltip/InfoTooltip"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo, faHouse, faPersonShelter, faBuildingNgo } from '@fortawesome/free-solid-svg-icons'
+
 import "./style.sass"
 import { setHeader } from "@store/slices/globalSlice"
 import { getUserData } from "@store/slices/usersSlice"
@@ -19,13 +19,13 @@ import { addImages, createUser, getUser, updateUser } from "@services/userServic
 import { TextInput, MaskInput, PasswordInput, CheckBoxInput, RadioInput, UploadPhotoInput, TextAreaInput } from "@ui/forms"
 
 const RegisterNgo = ({create = false}) => {
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
-	const { username } = useParams()
-	const [sending, setSending] = useState(false)
-	const user = useSelector((state) => state.users.userData)
-	const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+  const { username } = useParams()
+  const [sending, setSending] = useState(false)
+  const user = useSelector((state) => state.users.userData)
+  const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerNgo'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
@@ -191,6 +191,11 @@ const RegisterNgo = ({create = false}) => {
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal2('userNameInputLabel')}
             placeHolderText={tGlobal2('userNamePlaceHolderText')}
+            onInput={e => {
+              const regex = /^[a-z0-9_]*$/
+              if(!regex.test(e.target.value))
+                e.target.value = e.target.value.replace(/[^a-z0-9_]/g, "")
+            }}
             rules={{
               maxLength: {
                 value: 80,
@@ -198,7 +203,7 @@ const RegisterNgo = ({create = false}) => {
               },
               required: tGlobal(`requiredErrorMessage`),
               pattern: {
-                value: /^[a-zA-Z_]+$/,
+                value: /^[a-z0-9_]+$/,
                 message: tGlobal('lettersandUnderscoreOnlyErrorMessage'),
               },
             }} />

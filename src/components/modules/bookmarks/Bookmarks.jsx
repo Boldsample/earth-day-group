@@ -15,8 +15,8 @@ const Bookmarks = ({type}) => {
   const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'bookmarks' })
   const bookmarksTemplateContent = {
-    title: type == 'products' ? t('savedProductsBannerTitle') : t('favoritePetsBannerTitle'),
-    bannerImage: type == 'products' ? 'url(/assets/user/image-8.svg)' : 'url(/assets/user/image-9.svg)',
+    title: type == 'products' ? t('savedProductsBannerTitle') : (type == 'pets' ? t('favoritePetsBannerTitle') : t('profilesFollowingBannerTitle')),
+    bannerImage: type == 'products' ? 'url(/assets/user/image-8.svg)' : (type == 'pets' ? 'url(/assets/user/image-9.svg)' : 'url(/assets/user/image-11.svg)'),
     types: [
       {
         id: 'products',
