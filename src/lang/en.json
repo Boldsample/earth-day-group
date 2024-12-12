@@ -89,6 +89,7 @@
       "lettersandUnderscoreOnlyErrorMessage": "This field may only include letters and underscores, not spaces.",
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
+      "latlngErrorMessage": "You must select a location from the list.",
       "passwordPatternErrorMessage": "Must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one digit, and one special character (e.g., !, @, #, $).",
       "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit."
     }
@@ -896,7 +897,8 @@
         "quantity": "Quantity",
         "askingPrice": "Asking price",
         "finalPrice": "Final price",
-        "pay": "Pay"
+        "pay": "Pay",
+        "add": "add {{element}}"
       }
     },
     "templates": {

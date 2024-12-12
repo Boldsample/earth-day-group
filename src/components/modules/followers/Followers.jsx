@@ -52,10 +52,10 @@ const Followers = ({followers = true}) => {
     <div className="main__content">
       <div className="edg-search mb-0">
         <h1 className="text-defaultCase mb-1">{followers ? t('followersMainTitle') : t('followingMainTitle')}</h1>
-        <div className="mb-1">
+        {/* <div className="mb-1">
           <Button label={t('followersMainTitle')} onClick={() => navigate('/followers/')} className={'green-earth small ' + (followers ? '' : 'outline')} />
           <Button label={t('followingMainTitle')} onClick={() => navigate('/following/')} className={'green-earth small ' + (!followers ? '' : 'outline')} />
-        </div>
+        </div> */}
         <div className="fullwidth p-input-icon-left">
           <FontAwesomeIcon icon={faSearch} />
           <InputText

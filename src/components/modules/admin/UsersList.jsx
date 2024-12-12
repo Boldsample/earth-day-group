@@ -51,10 +51,10 @@ const Users = ({type}) => {
   }
   const callUsers = async (ex = false) =>{
     let _filter = {}
-	if(filters?.role != '')
-	  _filter['user'] = `u.role='${filters.role}'`
-	else
-	  _filter['user'] = type == 'admins' ? `u.role='admin'` : `u.role<>'admin'`
+    if(filters?.role != '')
+      _filter['user'] = `u.role='${filters.role}'`
+    else
+      _filter['user'] = type == 'admins' ? `u.role='admin'` : `u.role<>'admin'`
     if(filters?.state != '')
       _filter['state'] = `u.state='${filters.state}'`
     if(filters?.keyword != '')

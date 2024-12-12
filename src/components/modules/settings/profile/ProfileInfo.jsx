@@ -64,7 +64,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         {user?.role == 'user' && <p className="mb-2">{user?.description}</p>}
       </div>
       {same && !admin && <>
-        <div className="followers">
+        {/* <div className="followers">
           <Link to="/followers/">
             <span>{user?.followers}</span>
             {t('followersBtnText')}
@@ -73,7 +73,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
             <span>{user?.following}</span>
             {t('followingBtnText')}
           </Link>
-        </div>
+        </div> */}
         <Link to={'/settings/edit/'} className="button small dark-blue">{t('editBtnText')}</Link>
       </> || <>
         {!admin && 
@@ -122,15 +122,17 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         </>}
         {user?.materials?.length > 0 && <>
           <h4 className="internal text-left">{t('companyMaterialPriceTitle')}</h4>
-          <div className="materials">
-            {user.materials.map(material => 
-              <RecycleMaterialCard
-                key={material.id}
-                material={tMaterial(material.type)}
-                unit={material.unit}
-                price={material.price}
-                color={material.color} />
-            )}
+          <div className="materialsCard__grid">
+            {user?.materials?.map(material => {
+              if(material.deleted)
+                return
+              return <RecycleMaterialCard
+                key={material?.type}
+                unit={material?.unit}
+                price={material?.price}
+                material={material.type}
+                currency={material?.currency} />
+            })}
           </div>
         </>}
       </div>

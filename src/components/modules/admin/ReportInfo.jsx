@@ -84,10 +84,8 @@ const ReportInfo = ({ show, report, onHide }) => {
 
 	const onSubmit = async data => {
 		const message = data?.message === data?.custom_message ? data?.message : data?.custom_message
-		if(data?.reportResolved == true){
-			await updateReport({admin: user?.id, status: 'success'}, {id: report?.id})
-			onHide(true)
-		}else if(await sendMessage({ message, incoming: user?.id, outgoing: report?.oid, type: 'report', offer: report?.id })){
+		console.log(data?.reportResolved)
+		if(await sendMessage({ message, incoming: user?.id, outgoing: report?.oid, type: 'report', offer: report?.id })){
 			if(data?.deleteElement && report?.type == 'user')
 				await updateUser({state: 2}, {id: report?.entity})
 			else if(data?.deleteElement && report?.type == 'product')
@@ -98,6 +96,10 @@ const ReportInfo = ({ show, report, onHide }) => {
 				await updateOffer({state: 2}, {id: report?.entity})
 			await updateReport({admin: user?.id, status: 'info'}, {id: report?.id})
 			navigate(`/chat/${report?.owner}/`)
+		}
+		if(data?.reportResolved == true){
+			await updateReport({admin: user?.id, status: 'success'}, {id: report?.id})
+			onHide(true)
 		}
 	}
 	return <>

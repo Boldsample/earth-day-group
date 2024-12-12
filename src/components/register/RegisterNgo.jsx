@@ -215,6 +215,7 @@ const RegisterNgo = ({create = false}) => {
             labelName={tGlobal2('userEmailInputLabel')}
             placeHolderText={tGlobal2('userEmailPlaceHolderText')}
             rules={{
+              validate: (value) => (watch("lat") && watch("lng")) || tGlobal(`latlngErrorMessage`),
               maxLength: {
                 value: 100,
                 message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
