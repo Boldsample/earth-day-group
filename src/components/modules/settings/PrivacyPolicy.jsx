@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
 	}, [])
   
 	return <div className="layout">
-	  <img className="layout__background" src="/assets/register/image-2.svg" />
+	  <img className="layout__background hide__mobile" src="/assets/register/image-2.svg" />
 	  <div className="main__content">
 		<div className="about">
 		  <p>This Privacy Policy describes how Earth Day Group LLC (the "Site", "we", "us", or "our") collects, uses, and discloses your personal information when you visit, use our services, or make a purchase from https://earthdaygroup.com/ (the "Site") or otherwise communicate with us (collectively, the "Services"). For purposes of this Privacy Policy, "you" and "your" means you as the user of the Services, whether you are a customer, website visitor, or another individual whose information we have collected pursuant to this Privacy Policy.</p>

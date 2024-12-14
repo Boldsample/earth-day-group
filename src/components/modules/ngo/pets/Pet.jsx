@@ -66,7 +66,7 @@ const Pet = () => {
   return <>
     <ConfirmationModal title={user?.role == "admin" ? t('disablePetTitle') : t('deletePetTitle')} visible={confirm} action={changeState} type={user?.role} />
     <div className="layout hasfooter">
-      <img className="layout__background" src="/assets/full-width.svg" />
+      <img className="layout__background hide__mobile" src="/assets/full-width.svg" />
       <div className="main__content centerfullwidth">
         <div className="profileInformation__grid">
           <div className="image__container">

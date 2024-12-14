@@ -15,7 +15,7 @@ const Terms = () => {
   }, [])
 
   return <div className="layout">
-    <img className="layout__background" src="/assets/register/image-2.svg" />
+    <img className="layout__background hide__mobile" src="/assets/register/image-2.svg" />
     <div className="main__content">
       <div className="about">
         <h4 className="mb-1">Overview</h4>

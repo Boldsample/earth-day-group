@@ -17,7 +17,7 @@ const AdBanner = ({location, type}) => {
     const renderBanner = () => {
       switch (type) {
         case 'headerBanner':
-          return <div className="horizontal-banner-container">
+          return <div className="horizontal-banner-container hide__mobile">
              <Link to={ adInfo.link.includes('http') ? adInfo.link : '//:' + adInfo.link } target="_blank"><img src={adInfo.picture} alt="" /></Link>
           </div>
           case 'dashboardButton':

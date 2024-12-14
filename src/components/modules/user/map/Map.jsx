@@ -133,7 +133,7 @@ const Map = () => {
       toCurrentLocation(user.default_location)
   }, [user, map])
   
-  return <div className="layout fullwidth no-overflow">
+  return <div className="layout fullwidth no-overflow map-layout">
     {!user?.default_location && 
       <Dialog className="no-close" visible={true} onHide={changeDefault} draggable={false}>
         <div className="text-center">
@@ -166,8 +166,8 @@ const Map = () => {
       <p className="small">{show.description}</p>
       <p className="small">&nbsp;</p>
       {show?.materials?.length > 0 && <>
-        <h5 className="font-bold mb-1">{t('markerDetailMaterialTitle')}</h5>
-        <div>
+        <h5 className="font-bold mb-1 hide__mobile">{t('markerDetailMaterialTitle')}</h5>
+        <div className="hide__mobile">
           {show?.materials?.map(({type}, key) => {
             const _materials = materials.flatMap(m => filters?.material.some(fm => fm == m.label) ? [m.label, ...m.items.map(im => im.label)] : [])
             return <Button key={key} label={tMaterial(type)} className={'small mb-1 ' + type} />
@@ -213,7 +213,7 @@ const Map = () => {
         fullscreenControl: false,
         streetViewControl: false,
       }}
-      mapContainerStyle={{ width: '100vw', height: '100vh' }}>
+      mapContainerStyle={{ width: '100%', height: '100%' }}>
       <MarkerClustererF>
         {clusterer => <div>
           {markers?.map((marker, key) => {

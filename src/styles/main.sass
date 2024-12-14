@@ -311,9 +311,6 @@ button, .button
       padding: 0 0.4rem
       &:nth-child(2)
         margin-left: 0.4rem
-@media (max-width: 1140px)
-  .main_header
-    padding: 0 1.25rem
 /*  HEADER END  */
 
 /*  LAYOUT START  */
@@ -382,17 +379,6 @@ button, .button
     &.fullviewportwidth
       padding: 0
       width: 100%
-@media (max-width: 1140px)
-  .hide__mobile
-    display: none !important
-  .layout
-    padding: 0 1.25rem
-    .layout__background
-      object-position: right bottom
-    .main__content
-      margin-left: 0
-      padding: 8.75rem 0 1.875rem !important
-      width: 100% !important
 /*  LAYOUT END  */
 
 // DATATABLE STYLES
@@ -649,7 +635,7 @@ button, .button
 .table-header-styles
   color: black !important
   padding: 0.75rem 1rem !important
-.table-body-styles
+.table-body-styles, .p-datatable .p-datatable-tbody > tr > td
   color: var(--gray) !important
   padding: 0.75rem 1rem !important
 
@@ -844,7 +830,3 @@ $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.
     padding-bottom: #{$space} !important
   .pl-#{$name}
     padding-left: #{$space} !important
-
-@media (min-width: 1280px)
-  html
-    font-size: 1.28vw

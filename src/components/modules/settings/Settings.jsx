@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faChevronRight, faList, faLock, faShieldHalved, faTrashCan, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faChevronRight, faGear, faHeart, faList, faLock, faShieldHalved, faTrashCan, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 
 import { logoutUser } from '@services/userServices'
@@ -33,6 +33,8 @@ const Settings = () => {
 			<div className="settings">
 				<Link className="button outline" to="/settings/profile/"><div className="icon"><FontAwesomeIcon icon={faUser} /></div> {t('profileBtnText')} <FontAwesomeIcon icon={faChevronRight} /></Link>
 				<Link className="button outline" to="/settings/password/"><div className="icon"><FontAwesomeIcon icon={faLock} /></div> {t('changePasswordBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/bookmarks/products/saved"><div className="icon"><FontAwesomeIcon icon={faHeart} /></div> {t('bookmarksBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
+				<Link className="button outline" to="/settings/preferences/"><div className="icon"><FontAwesomeIcon icon={faGear} /></div> {t('preferencesBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
 				<Link className="button outline" to="/terms-of-service/"><div className="icon"><FontAwesomeIcon icon={faShieldHalved} /></div>{t('termsAndConditionsBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>
 				<Link className="button outline" to="/privacy-policy/"><div className="icon"><FontAwesomeIcon icon={faCheck} /></div>{t('privacyPolicyBtnText')}<FontAwesomeIcon icon={faChevronRight} /></Link>
 				<Link className="button outline" to="/settings/delete-account/"><div className="icon trash"><FontAwesomeIcon icon={faTrashCan} /></div> {t('deleteAccountBtnText')}  <FontAwesomeIcon icon={faChevronRight} /></Link>

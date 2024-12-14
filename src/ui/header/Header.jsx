@@ -69,7 +69,7 @@ const Header = () => {
           <Tooltip target=".cart" showDelay={700}/>
           <FontAwesomeIcon className="cart" data-pr-tooltip={tToolTip("cart")} data-pr-position="bottom" icon={faShoppingCart} />
           <Tooltip target=".bookmarks" showDelay={700}/>
-          <Link data-pr-tooltip={tToolTip("bookmarks")} data-pr-position="bottom" className="bookmarks" to="/bookmarks/products/saved/"><FontAwesomeIcon icon={faHeart} /></Link>
+          <Link data-pr-tooltip={tToolTip("bookmarks")} data-pr-position="bottom" className="bookmarks hide__mobile" to="/bookmarks/products/saved/"><FontAwesomeIcon icon={faHeart} /></Link>
         </>}
         <HeaderNotifications />
 		    <div>
@@ -108,7 +108,7 @@ const Header = () => {
             }
           ]} />
           <Tooltip target=".config" showDelay={700}/>
-          <Link data-pr-tooltip={tToolTip("settings")} data-pr-position="bottom" className="config" onClick={(event) => menu.current.toggle(event)}><FontAwesomeIcon icon={faGear} /></Link>
+          <Link data-pr-tooltip={tToolTip("settings")} data-pr-position="bottom" className="config hide__mobile" onClick={(event) => menu.current.toggle(event)}><FontAwesomeIcon icon={faGear} /></Link>
         </div>
         <Tooltip target=".logout" showDelay={700}/>
         <a className="logout" data-pr-tooltip={tToolTip("logout")} data-pr-position="bottom" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>
@@ -118,7 +118,7 @@ const Header = () => {
     {!user?.id && 
       <div className="navbar-item right-align">
         <Link className="button small dark-blue" to="/login/">{t(`global.login`)}</Link>
-        <button className="small" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
+        <button className="hide__mobile small" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
       </div>
     }
   </header>

@@ -54,7 +54,7 @@ const Chats = () => {
   }, [user])
   
   return <div className="layout">
-    <img className="layout__background" src="/assets/user/image-1.svg" />
+    <img className="layout__background hide__mobile" src="/assets/user/image-1.svg" />
     <div className="main__content">
       <div className="edg-search mb-0">
         <h1 className="text-defaultCase mb-1">{t('mainTitle')}</h1>

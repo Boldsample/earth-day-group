@@ -716,6 +716,8 @@
       "settings": "Configuración",
       "profileBtnText": "Mi Perfil",
       "changePasswordBtnText": "Cambiar Contraseña",
+      "bookmarksBtnText": "Favoritos",
+      "preferencesBtnText": "Ajustes generales",
       "termsAndConditionsBtnText": "Términos y Condiciones",
       "privacyPolicyBtnText": "Política de Privacidad",
       "deleteAccountBtnText": "Eliminar Cuenta",

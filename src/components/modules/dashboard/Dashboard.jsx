@@ -32,15 +32,15 @@ const Dashboard = () => {
 	return <div className="layout">
 		<img className="layout__background" src="/assets/intro/image-3.svg" />
 		<div className="main__content dashboard-content">
-			<div className="edg-search mb-5">
+			<div className="edg-search">
 				<h4 className="mb-1">{t('inputSearchTitle')}</h4>
-				<div className="fullwidth p-input-icon-left">
+				{/* <div className="fullwidth p-input-icon-left">
 					<FontAwesomeIcon icon={faSearch} />
 					<InputText
 						placeholder={t('inputSearchPlaceHolder')}
 						className="p-inputtext"
 						onChange={(e) => setFilteredModule(e.target.value)} />
-				</div>
+				</div> */}
 			</div>
 			<div className="card__grid">
 				<AdBanner type="dashboardButton" />

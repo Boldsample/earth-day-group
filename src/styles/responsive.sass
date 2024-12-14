@@ -1,9 +1,17 @@
 @media (min-width: 768px)
+@media (orientation: landscape)
+  html
+    font-size: 1.28vw
   #intro
     .layout
       background-image: none !important
-@media (max-width: 767px)
+  .footer__grid
+    z-index: 120
+@media (orientation: portrait)
+  .hide__mobile
+    display: none !important
   .main_header
+    padding: 0 1.25rem
     .navbar-item
       &.go-back
         .user-name
@@ -45,7 +53,9 @@
     &:not(.intro, .login, .register) + .layout:not(.hasfooter)
       padding-bottom: 4rem
   .layout
+    padding: 0 1.25rem
     .layout__background
+      align-self: flex-end
       height: 90vw
       margin: -15vw -1.25rem 0
       max-width: initial
@@ -56,11 +66,17 @@
       width: 100vw
       z-index: 0
     .main__content
+      margin-left: 0
       order: 1
-      padding-bottom: 0 !important
+      padding-top: 8.75rem
+      padding-right: 0 !important
+      padding-left: 0 !important
+      width: 100% !important
       z-index: 1
+      &.verticalcenter-1
+        min-height: calc(100vh - 8.75rem - 50vw)
       &.verticalcenter-2
-        min-height: 0
+        padding: 8.75rem 0 3rem !important
     .dashboard-content
       .card
         width: 100%
@@ -68,8 +84,8 @@
       background-position: left bottom
       background-size: 170vw
       height: auto
-      padding: 8.75rem 2rem 12.5rem 2rem
-      text-align: right
+      padding: 8.75rem 2rem 16rem 2rem
+      text-align: center
     .features
       gap: 1rem
       .icon img
@@ -88,7 +104,7 @@
       background-position: center bottom
       background-repeat: no-repeat
       background-size: contain
-      height: 210vw
+      pading-bottom: 50vw
     .layout__background
       display: none
   #registerRole
@@ -155,11 +171,26 @@
     left: 1rem
     margin: 0
     width: calc(100% - 4rem)
+  .map-layout
+    height: calc(100vh - 4.3rem)
+    min-height: calc(100vh - 4.3rem)
+    padding: 0 !important
   .map__filters
-    bottom: -5rem
+    bottom: -22rem
+    height: 22rem
     width: 100%
     &.show
-      bottom: 8rem
+      bottom: 0rem
+    h5
+      margin-bottom: 0.5rem
+    .radio
+      display: inline-block
+      margin: 0.2rem
+  .marker__detail
+    width: calc(100vw - 4rem)
+  .card__skeleton
+    max-width: initial
+    margin-bottom: 1rem
   .multiUse__card
     &.company, &.product, &.pet
       max-width: initial
@@ -174,6 +205,8 @@
     text-align: center
     & > *
       width: 100%
+    .socialMedia__container
+      padding-top: 1rem
   .profileInformation__grid
     grid-template-columns: initial
     .image__container
@@ -188,7 +221,7 @@
       display: flex
       flex-wrap: wrap
       gap: 1rem
-      button, .button
+      button, .button, .button.small + .small
         margin-left: 0
   .settings__card
     .settings__table
@@ -199,3 +232,32 @@
         width: 100%
       p
         text-align: left
+  .card__grid
+    grid-template-columns: repeat(1, 1fr)
+  .card
+    width: calc(100% - 1.875rem)
+  .p-paginator
+    .p-paginator-first, .p-paginator-last
+      display: none
+    .p-paginator-page
+      height: 2rem
+      min-width: 2rem
+  .template__listing
+    margin-bottom: 0
+  .recycableGoods__container
+    margin-top: 0
+    & > .button
+      display: none
+    .materialsCard__grid
+      max-height: initial !important
+      .materialCategory
+        width: 100%
+        h6
+          justify-content: flex-start
+          text-align: left
+        .recycle__card
+          width: calc(50% - 0.15rem)
+  .emoji__wrapper
+    right: -5.3rem !important
+  .about
+    height: auto
