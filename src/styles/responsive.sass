@@ -47,11 +47,13 @@
       .box
         border-radius: 0
         flex-direction: row
-        gap: 1.875rem
+        gap: 2.5rem
         padding: 1rem 1.875rem
         width: 100%
     &:not(.intro, .login, .register) + .layout:not(.hasfooter)
       padding-bottom: 4rem
+    &.settings .profile__photo
+      display: none
   .layout
     padding: 0 1.25rem
     .layout__background
@@ -65,6 +67,7 @@
       position: relative
       width: 100vw
       z-index: 0
+      display: none
     .main__content
       margin-left: 0
       order: 1
@@ -114,55 +117,6 @@
     flex-wrap: wrap
     & > .p-field, & > .input__wrapper
       width: 100%
-  .p-datatable
-    .p-datatable-header
-      .filters
-        flex-wrap: wrap
-        justify-self: flex-start
-        justify-items: flex-start
-        .p-dropdown, .p-multiselect, .p-inputtext
-          margin-bottom: 0.5rem
-          width: 100%
-        button
-          font-size: 0.9rem
-          height: 2.5rem
-          line-height: 1em
-          margin: 0 0.5rem 0 0
-          padding: 0 0.75rem
-          vertical-align: top
-          &:last-child
-            margin-right: 0
-    .p-datatable-thead
-      display: none
-    .p-datatable-tbody
-      & > tr
-        display: flex
-        flex-wrap: wrap
-        width: 100%
-        & > td
-          display: block
-          width: 100%
-          &::before
-            font-weight: 700
-        & > td:nth-child(2)
-          width: calc(100% - 2.5rem)
-        & > td:nth-child(3)::before
-          content: 'Material: '
-        & > td:nth-child(4)::before
-          content: 'Cantidad: '
-        & > td:nth-child(5)::before
-          content: 'Precio de venta: '
-        & > td:nth-child(6)::before
-          content: 'Ofertas: '
-        & > td:nth-child(7)::before
-          content: 'Publicación: '
-      .p-datatable-row-expansion
-        td:nth-child(3)::before
-          content: 'Oferta: '
-        td:nth-child(4)::before
-          content: 'Estado: '
-        td:nth-child(5)::before
-          content: 'Fecha: '
   .chat__scroll
     height: calc(100vh - 17rem)
   .chat__input
@@ -171,6 +125,8 @@
     left: 1rem
     margin: 0
     width: calc(100% - 4rem)
+    h4
+      margin: 0.8rem
   .map-layout
     height: calc(100vh - 4.3rem)
     min-height: calc(100vh - 4.3rem)
@@ -192,10 +148,12 @@
     max-width: initial
     margin-bottom: 1rem
   .multiUse__card
-    &.company, &.product, &.pet
+    &.company, &.product, &.pet, &.add
       max-width: initial
       .main__container a .profile__photo
         height: 55vw
+    &.add
+      min-height: 50vw
   .footer__grid
     flex-wrap: wrap
     grid-template-columns: initial
@@ -222,7 +180,7 @@
       flex-wrap: wrap
       gap: 1rem
       button, .button, .button.small + .small
-        margin-left: 0
+        margin-right: 0
   .settings__card
     .settings__table
       flex-wrap: wrap
@@ -261,3 +219,86 @@
     right: -5.3rem !important
   .about
     height: auto
+  .p-dialog .p-dialog-content
+    .p-galleria
+      margin-bottom: 2rem
+      width: 100%
+      .p-galleria-item img
+        height: auto
+    .content
+      min-width: initial
+      width: 100%
+      button, .button
+        margin: 0 0 1rem
+  .dialog-dimnesions.reports
+    .p-stepper-nav
+      flex-wrap: wrap
+      padding: 0
+      .p-stepper-header, .p-stepper-action
+        padding: 0
+      .p-stepper-header
+        margin-bottom: 0.5rem
+        width: 100%
+    .panel-1
+      flex-wrap: wrap
+    .panel-2
+      h4
+        text-align: left
+      .switches-container
+        margin-top: 1.4rem
+        width: 100%
+        .labels-container
+          flex-wrap: wrap
+          padding-left: 0
+          & > div
+            margin-bottom: 1rem
+            width: 100%
+            .flex
+              padding-top: 0
+      button, .button
+        margin: 0 0 1rem
+  .p-datatable
+    .p-datatable-header
+      .filters
+        flex-wrap: wrap
+        justify-self: flex-start
+        justify-items: flex-start
+        padding: 0
+        .p-dropdown, .p-multiselect, .p-inputtext
+          margin-right: 0
+          margin-bottom: 0.5rem
+          width: 100% !important
+        button, .button
+          margin-bottom: 0.5rem
+    .p-datatable-tbody > tr > td
+      &.actions
+        min-width: 10rem
+  .p-fileupload
+    & > div
+      width: 100%
+      .p-button
+        margin: 0
+        width: 100%
+    .btn-str
+      height: auto
+      padding: 0.5rem
+      position: relative
+      right: auto
+      top: auto
+      &.ad-online
+        padding-left: 2rem
+    .p-fileupload-content .form__container
+      flex-wrap: wrap
+      & > *
+        width: 100%
+      & > .width-50
+        order: 2
+      .ad-summary-image
+        margin-bottom: 2rem
+        order: 1
+        img
+          height: auto
+    .p-fileupload-row
+      flex-wrap: wrap
+      & > *
+        width: 100%

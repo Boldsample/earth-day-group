@@ -52,13 +52,14 @@
     display: inline-flex !important
 
 .dialog-dimnesions
-    width: 70%
-    height: 90%
+    max-height: 90%
+    max-width: 800px
+    width: 96%
 
 .switches-container
     display: flex
     flex-direction: column
-    width: 50%
+    width: calc((100% - 0.9375rem) / 2)
     label
         gap: 10px
         font-weight: 700
@@ -79,7 +80,12 @@
     display: flex
     flex-direction: row
     justify-content: space-between
-    padding: 0rem 1.375rem
+    & > div
+        align-items: center
+        display: flex
+        flex-wrap: wrap
+        .flex
+            padding-top: 0.4rem
 
 .p-inline-message-text
     font-size: 0.7rem

@@ -108,8 +108,8 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     console.log(ad)
     return <>
         <Dialog
+            className="ads-popup"
             visible={visible}
-            style={{ width: '50vw' }}
             header={t('dialogMainTitle')}
             onHide={() => {
                 if (!visible) return

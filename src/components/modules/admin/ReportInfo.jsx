@@ -104,7 +104,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 	}
 	return <>
 		<OfferInfo type="full" show={detail.show} offer={detail} onHide={hidePopup}  />
-		<Dialog className="dialog-dimnesions" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")} >
+		<Dialog className="dialog-dimnesions reports" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")} >
 		  <Stepper ref={stepperRef}>
 			<StepperPanel header={t("reportSummaryTitle")}>
 				{/* {report?.status == 'success' && report?.aid !== user?.id && !report?.aid || report?.aid !== user?.id &&
@@ -192,7 +192,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 					<h4 className="mb-2 text-center">{t("handleReportTitle")}</h4>
 					</div>
 					<form className="respond" onSubmit={handleSubmit(onSubmit)}>
-						<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2 no-wrap'}>
+						<div className={watch('action') === 'solved' ? 'registerInput__container-x1' : 'registerInput__container-x2'}>
 						<DropDownInput
 							isEdit={true}
 							control={control}
@@ -222,50 +222,47 @@ const ReportInfo = ({ show, report, onHide }) => {
 								<div>
 									<label htmlFor="solvedReport">{t( "resolveReportInputTitle")}</label>
 									<InfoTooltip toolTipMessage={tToolTip("markAsResolved")}  delay={700}/>
+									<div className="flex">
+										<Controller
+											name="reportResolved"
+											control={control}
+											render={({ field }) => (
+												<InputSwitch
+												id={field.name}
+												inputId="solvedReport"
+												checked={watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage' ? true : field.value}
+												onChange={(e) => {
+													if (watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') {
+													setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a negative message" });
+													}
+													field.onChange(e.value);
+												}}
+												/>
+											)} />
+									</div>
 								</div>
 								{watch('message') !== 'positiveClosingCaseMessage' && (
 									<div>
 										<label htmlFor="delete">{t("deleteItemInputTitle", {item: types[report?.type]})}</label>
+										<div className="flex">
+											<Controller
+												control={control}
+												name="deleteElement"
+												render={({ field }) => (
+												<InputSwitch
+													id={field.name}
+													inputId="delete"
+													// checked={field.value}
+													checked={watch('message') === 'negativeClosingCaseMessage' ? true : field.value}
+													onChange={(e) => {
+													if (watch('message') === 'negativeClosingCaseMessage') {
+														setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a close case message. Try with a custom message type." });
+													}
+													field.onChange(e.value);
+													}} />
+												)} />
+										</div>
 									</div>
-								)}
-							</div>
-							<div className="inputSwitches-container">
-								<Controller
-								name="reportResolved"
-								control={control}
-								render={({ field }) => (
-									<InputSwitch
-									id={field.name}
-									inputId="solvedReport"
-									checked={watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage' ? true : field.value}
-									onChange={(e) => {
-										if (watch('message') === 'negativeClosingCaseMessage' || watch('message') === 'positiveClosingCaseMessage') {
-										setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a negative message" });
-										}
-										field.onChange(e.value);
-									}}
-									/>
-								)}
-								/>
-								{watch('message') !== t('positiveClosingCaseMessage') && (
-								<Controller
-									name="deleteElement"
-									control={control}
-									render={({ field }) => (
-									<InputSwitch
-										id={field.name}
-										inputId="delete"
-										// checked={field.value}
-										checked={watch('message') === 'negativeClosingCaseMessage' ? true : field.value}
-										onChange={(e) => {
-										if (watch('message') === 'negativeClosingCaseMessage') {
-											setError("reportResolved", { type: "custom", message: "Cannot uncheck if you are going to send a close case message. Try with a custom message type." });
-										}
-										field.onChange(e.value);
-										}}
-									/>
-									)}
-								/>
 								)}
 							</div>
 							{errors.reportResolved && <small className="p-error ml-3">{errors.reportResolved.message}</small>}
