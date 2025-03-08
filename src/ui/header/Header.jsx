@@ -57,9 +57,9 @@ const Header = () => {
     }
     
     {!['settings', 'map'].some(s => s == header) && 
-      <div className="navbar-item logo">
-        <Link to="/"><img src="/assets/earth-day-group.png" alt="Earth Day Group" /></Link>
-      </div>
+      <Link to="/" className="navbar-item logo">
+        <img src="/assets/earth-day-group.png" alt="Earth Day Group" />
+      </Link>
     }
 
     {['map'].some(s => s == header) && <div></div>}
