@@ -24,7 +24,7 @@ export const addAd = async (data) => {
   }
   
   export const getAd = async (type) => {
-    let filterStr = `a.type='${type}' AND a.state<3`
+    let filterStr = `a.type='${type}' AND a.state=1`
     filterStr = encodeURIComponent(filterStr)
     const { data } = await API.get(`/get/ads&filter=${filterStr}&single=1`)
     let returningData = {...data.data[0]}
