@@ -15,7 +15,7 @@ import { authUser, getUser, getUserGoogle, updateUser } from "@services/userServ
 import { Message } from "primereact/message"
 
 const LoginForm = () => {
-	const {token} = useParams()
+  const {token} = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [fApi, setFApi] = useState()
@@ -37,7 +37,7 @@ const LoginForm = () => {
     },
   })
   
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobal(errors[fieldName]?.message)}</small>
   const onSubmit = async (data) => {
     setSending(true)
     const response = await authUser(data)

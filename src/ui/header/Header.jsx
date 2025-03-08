@@ -117,7 +117,9 @@ const Header = () => {
 
     {!user?.id && 
       <div className="navbar-item right-align">
-        <Link className="button small dark-blue" to="/login/">{t(`global.login`)}</Link>
+		{['login'].some(s => s != header) && 
+        	<Link className="button small dark-blue" to="/login/">{t(`global.login`)}</Link>
+		}
         <button className="hide__mobile small" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
       </div>
     }

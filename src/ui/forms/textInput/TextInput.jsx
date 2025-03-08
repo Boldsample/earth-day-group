@@ -20,7 +20,7 @@ const TextInput = ({
   disabled = false,
   showLabel = true,
   onInput = () => {},
-  autocomplete = "on",
+  autoComplete = "on",
   getFormErrorMessage,
   onKeyDown = () => {},
   placeHolderText = "",
@@ -47,7 +47,7 @@ const TextInput = ({
           className={className}
           maxLength={maxLength}
           onKeyDown={onKeyDown}
-          autoComplete={autocomplete}
+          autoComplete={autoComplete}
           placeholder={placeHolderText}
           {...field} />
       } />

@@ -20,7 +20,7 @@ const PasswordInput = ({
 }) => {
   const passwordRef = useRef(null)
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
-  const headerTitle = <div className="font-bold mb-3">{tGlobal2('passwordRequirementTitle2')}</div>;
+  const headerTitle = <div className="font-bold mb-1">{tGlobal2('passwordRequirementTitle2')}</div>;
   
 
   const renderInput = () => <>
@@ -30,7 +30,7 @@ const PasswordInput = ({
       control={control}
       render={({ field }) => (
         <Password
-		      toggleMask
+          toggleMask
           id={field.name}
           feedback={feedback}
           header={headerTitle}

@@ -84,15 +84,21 @@
       "passwordDoNotMatchErrorMessage": "La contraseña no coincide",
       "invalidNitErrorMessage": "Por favor, ingresa un NIT válido.",
       "invalidWebAddressErrorMessage": "Por favor, ingresa un enlace de URL válido.",
-      "validEmailAddressErrorMessage": "Por favor, introduce una dirección de correo electrónico válida.",
+      "validEmailAddressErrorMessage": "El correo electrónico no es válido.",
       "validPhoneErrorMessage": "Por favor, introduce un número de teléfono válido.",
       "lettersandUnderscoreOnlyErrorMessage": "Este campo solo puede incluir letras y guiones bajos, no espacios.",
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
       "requiredErrorMessage": "Este campo es obligatorio.",
       "latlngErrorMessage": "Debe seleccionar una ubicación del listado.",
-      "passwordPatternErrorMessage": "Debe tener al menos 8 caracteres e incluir al menos una letra minúscula, una letra mayúscula, un dígito y un carácter especial (por ejemplo, !, @, #, $).",
+      "passwordPatternErrorMessage": "Debes cumplir los parámetros de contraseña.",
       "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres.",
-      "newAdminContextText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico."
+      "newAdminContextText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico.",
+      "error_used": "Ya se encuentra en uso.",
+	  "error_not_account": "No se encontró una cuenta con este usuario o correo electrónico.",
+	  "error_verify_email": "Por favor, verifica tu correo electrónico.",
+	  "error_wrong_password": "Contraseña incorrecta.",
+	  "error_user_disabled": "Esta cuenta ha sido deshabilitada. Contacta con soporte.",
+	  "error_user_deleted": "Esta cuenta ha sido eliminada."
     }
   },
   "intro": {
@@ -877,8 +883,8 @@
       "bioDescriptionPlaceholder": "Comparte un poco sobre ti"
     },
     "registerVendor": {
-      "deliveryLabel": "Entrega a Domicilio ",
-      "deliveryChargesPlaceHolder": "Precio de domicilio*",
+      "deliveryLabel": "Entrega a Domicilio",
+      "deliveryChargesPlaceHolder": "Precio de domicilio",
       "selfPickUpLabel": "Recoger en Tienda",
       "shopNameInputTitle": "Nombre de la Tienda",
       "shopNamePlaceHolderText": "La tienda de Juan",

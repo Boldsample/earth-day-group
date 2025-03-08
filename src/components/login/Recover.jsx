@@ -49,7 +49,7 @@ const Recover = () => {
 		}
 		setSending(false)
 	}
-	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+	const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobalErrors(errors[fieldName]?.message)}</small>
 
 	useEffect(() => {
 		dispatch(setHeader('register'))

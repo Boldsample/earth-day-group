@@ -55,7 +55,7 @@ const RegisterVendor = ({create = false}) => {
       pick_up_from_home: 0,
       delivery_available: 0,
       password_confirmation: "",
-      currency: i18n.language == 'es' ? 'cop' : 'usd'
+      delivery_currency: i18n.language == 'es' ? 'cop' : 'usd'
     },
   })
 
@@ -70,8 +70,9 @@ const RegisterVendor = ({create = false}) => {
     { name: tGlobal('no'), value: 0 },
   ]
   
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobalErrors(errors[fieldName]?.message)}</small>
   const onSubmit = async (data) => {
+	console.log('Test')
     let response
     setSending(true)
     if(data?.id)
@@ -137,7 +138,7 @@ const RegisterVendor = ({create = false}) => {
   return <div className="layout">
     <img className="layout__background" src="/assets/register/image-2.svg" />
     <div className="main__content xpadding-1">
-      <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
+      <form onSubmit={handleSubmit(onSubmit)} className="fullwidth" autoComplete="off">
         <UploadPhotoInput
           watch={watch}
           control={control}
@@ -212,14 +213,14 @@ const RegisterVendor = ({create = false}) => {
             <TextInput
               control={control}
               isRequired={true}
-              autocomplete="off"
+              autoComplete="off"
               nameInput="address"
               getFormErrorMessage={getFormErrorMessage}
               labelName={tGlobal('userAddressInputLabel')}
               placeHolderText={tGlobal('userAddressPlaceHolderText')}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
-                validate: (value) => (watch("lat") && watch("lng")) || tGlobal(`latlngErrorMessage`),
+                validate: (value) => (watch("lat") && watch("lng")) || tGlobalErrors(`latlngErrorMessage`),
                 required: tGlobalErrors(`requiredErrorMessage`),
                 pattern: {
                   value: /^\S/,
@@ -231,7 +232,6 @@ const RegisterVendor = ({create = false}) => {
         <div className="registerInput__container-x2">
           <TextInput
             control={control}
-            isRequired={true}
             nameInput="website"
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal('userWebsiteInputLabel')}
@@ -270,39 +270,31 @@ const RegisterVendor = ({create = false}) => {
             toolTipMessage={tToolTip('deliveryAvailableToolTip')}
             data={radioData}
             control={control}
-            isRequired={true}
             labelName={t('deliveryLabel')}
-            nameInput="delivery_available"
-            rules={{
-              required: true,
-            }} />
+            nameInput="delivery_available" />
           <RadioInput
             toolTipMessage={tToolTip('storePickUpToolTip')}
             data={radioData}
             showLabel={true}
             control={control}
-            isRequired={true}
             nameInput="pick_up_from_home"
-            labelName={t('selfPickUpLabel')}
-            rules={{
-              required: true,
-            }} />
+            labelName={t('selfPickUpLabel')} />
           {!!watch('delivery_available') && <>
             <NumberInput
               mode="currency"
               control={control}
               nameInput="delivery_charges"
-              isRequired={watch('delivery_available')}
+              isRequired={watch('delivery_available') == 1}
               getFormErrorMessage={getFormErrorMessage}
               labelName={t('deliveryChargesPlaceHolder')}
               placeHolderText={t('deliveryChargesPlaceHolder')}
-              maxFractionDigits={watch('currency') == 'cop' ? 0 : 2}
+              maxFractionDigits={watch('delivery_currency') == 'cop' ? 0 : 2}
               rules={{
                 maxLength: {
                   value: 12,
                   message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 12}),
                 },
-                required: watch('delivery_available') ? "*El campo es requerido." : false,
+                required: watch('delivery_available') == 1 ? tGlobalErrors(`requiredErrorMessage`) : undefined,
                 pattern: {
                   value: /^\S/,
                   message: tGlobalErrors('patternErrorMessage'),
@@ -311,15 +303,15 @@ const RegisterVendor = ({create = false}) => {
             <DropDownInput
               isEdit={true}
               control={control}
-              isRequired={true}
+              isRequired={watch('delivery_available') == 1}
               optionLabel="label"
               optionValue="value"
-              nameInput="currency"
+              nameInput="delivery_currency"
               labelName={tGlobal('currency')}
               placeHolderText={tGlobal('currency')}
               getFormErrorMessage={getFormErrorMessage}
               rules={{
-                required: tGlobalErrors('requiredErrorMessage'),
+                required: watch('delivery_available') == 1 ? tGlobalErrors('requiredErrorMessage') : undefined,
               }}
               options={[
                 {label: tGlobal('cop'), value: 'cop'},
@@ -330,7 +322,6 @@ const RegisterVendor = ({create = false}) => {
         <div className="registerInput__container-x1">
           <TextAreaInput
             control={control}
-            isRequired={false}
             nameInput="description"
             getFormErrorMessage={getFormErrorMessage}
             labelName={t('textAreaIniciativeDescriptionTitle')}
@@ -385,7 +376,7 @@ const RegisterVendor = ({create = false}) => {
               }} />
           </div>
           <div className="p-field mb-2">
-            <div className="mb-1">
+            <div className="mb-2">
               <CheckBoxInput
                 control={control}
                 nameInput="accept_terms"

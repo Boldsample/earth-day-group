@@ -6,8 +6,8 @@ const PasswordRequirements = () => {
   return (
     <>
         <Divider />
-            <p className="mt-2">{tGlobal2('passwordRequirementTitle')}</p>
-            <ul className="pl-2 ml-2 mt-0 line-height-3">
+            <p>{tGlobal2('passwordRequirementTitle')}</p>
+            <ul className="pl-2 ml-2 mt-0">
                 <li>{tGlobal2('passwordRequirement1')}</li>
                 <li>{tGlobal2('passwordRequirement2')}</li>
                 <li>{tGlobal2('passwordRequirement3')}</li>

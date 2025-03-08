@@ -85,13 +85,20 @@
       "invalidNitErrorMessage": "Please enter a valid NIT number",
       "invalidWebAddressErrorMessage": "Please enter a valid Web URL",
       "validPhoneErrorMessage": "Please enter a valid phone number.",
-      "validEmailAddressErrorMessage": "Please enter a valid e-mail address",
+      "validEmailAddressErrorMessage": "It's not a valid e-mail address.",
       "lettersandUnderscoreOnlyErrorMessage": "This field may only include letters and underscores, not spaces.",
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
       "latlngErrorMessage": "You must select a location from the list.",
-      "passwordPatternErrorMessage": "Must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one digit, and one special character (e.g., !, @, #, $).",
-      "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit."
+      "passwordPatternErrorMessage": "Follow the password requirements.",
+      "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit.",
+      "newAdminContextText": "You have registered a new administrator user! We have sent a verification link via email.",
+      "error_used": "Already in use.",
+	  "error_not_account": "Account not found for this username or email.",
+	  "error_verify_email": "Please verify your email.",
+	  "error_wrong_password": "Incorrect password.",
+	  "error_user_disabled": "Account disabled. Contact support.",
+	  "error_user_deleted": "This account has been deleted."
     }
   },
   "intro": {
@@ -875,8 +882,8 @@
       "bioDescriptionPlaceholder": "Share a little about yourself"
     },
     "registerVendor": {
-      "deliveryLabel": "Delivery Available ",
-      "deliveryChargesPlaceHolder": "Delivery Charges*",
+      "deliveryLabel": "Delivery Available",
+      "deliveryChargesPlaceHolder": "Delivery Charges",
       "selfPickUpLabel": "Self Pick up",
       "shopNameInputTitle": "Shop Name",
       "shopNamePlaceHolderText": "John's Shop",

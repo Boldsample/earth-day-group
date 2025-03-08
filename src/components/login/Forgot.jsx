@@ -29,7 +29,7 @@ const Forgot = () => {
   })
   const forgotTitle = t('title'); // "Forgot Password?"
 
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobal(errors[fieldName]?.message)}</small>
   const onSubmit = async (data) => {
     setSending(true)
     const response = await recoverUser(data)

@@ -34,8 +34,12 @@
   padding-bottom: 0.5rem
   position: relative
   width: 100%
+  & > div
+    min-height: 1.8rem
+    position: relative
   .p-error
     bottom: -0.8rem
+    font-weight: 700
     left: 0
     position: absolute
   label
@@ -142,3 +146,9 @@
   margin: 1.25rem 0
   gap: 0.3125rem
   width: 100%
+.p-password-panel
+  padding: 0.8rem 1rem
+  div, p, ul
+    font-size: 0.8rem
+  .p-divider.p-divider-horizontal
+    margin: 0.6rem 0

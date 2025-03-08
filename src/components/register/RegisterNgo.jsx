@@ -72,7 +72,7 @@ const RegisterNgo = ({create = false}) => {
     { name: t('bothRadioOption'), value: 'ngo' },
   ]
   
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobal(errors[fieldName]?.message)}</small>
   const setUploadedImages = (images) => {
     setValue('images', images)
   }
@@ -250,8 +250,8 @@ const RegisterNgo = ({create = false}) => {
             <TextInput
               control={control}
               isRequired={true}
-              autocomplete="off"
               nameInput="address"
+              autocomplete="new-address"
               getFormErrorMessage={getFormErrorMessage}
               labelName={tGlobal2('userAddressInputLabel')}
               placeHolderText={tGlobal2('userAddressPlaceHolderText')}
@@ -379,7 +379,7 @@ const RegisterNgo = ({create = false}) => {
               }} />
           </div>
           <div className="p-field mb-2">
-            <div className="mb-1">
+            <div className="mb-2">
               <CheckBoxInput
                 control={control}
                 nameInput="accept_terms"

@@ -60,7 +60,7 @@ const RegisterUser = ({create = false}) => {
     setValue('lat', window?.autocomplete?.getPlace()?.geometry?.location?.lat())
     setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
   }
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobal(errors[fieldName]?.message)}</small>
   const onSubmit = async (data) => {
     let response
     setSending(true)
@@ -218,8 +218,8 @@ const RegisterUser = ({create = false}) => {
             <TextInput
               control={control}
               isRequired={true}
-              autocomplete="off"
               nameInput="address"
+              autocomplete="new-address"
               getFormErrorMessage={getFormErrorMessage}
               labelName={tGlobal2('userAddressInputLabel')}
               placeHolderText={tGlobal2('userAddressPlaceHolderText')}
@@ -292,7 +292,7 @@ const RegisterUser = ({create = false}) => {
               }} />
           </div>
           <div className="p-field mb-2">
-            <div className="mb-1">
+            <div className="mb-2">
               <CheckBoxInput
                 control={control}
                 nameInput="accept_terms"
