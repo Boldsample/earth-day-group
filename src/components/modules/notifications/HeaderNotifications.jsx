@@ -12,13 +12,13 @@ import './styles.sass'
 const HeaderNotifications = () => {
   const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const notifications = useSelector((state) => state.users.notifications)
-  return <div className={`header_notifications`}>
+  return <div className={`header_notifications hide__mobile`}>
     <Link className="p-overlay-badge" to={"/notifications/"}>
       {notifications?.length > 0 && 
         <Badge severity="danger" value={notifications?.length}></Badge>
       }
-      <Tooltip target=".notifications" showDelay={700}/>
-      <FontAwesomeIcon className=' notifications' data-pr-tooltip={tToolTip("notifications")} data-pr-position="bottom" icon={faBell} />
+      <Tooltip target=".notifications" />
+      <FontAwesomeIcon className=' notifications' data-pr-tooltip={tToolTip("notifications")} data-pr-position="top" icon={faBell} />
     </Link>
     <div className="list">
       {notifications?.length > 0 && notifications.map((notification, key) => 

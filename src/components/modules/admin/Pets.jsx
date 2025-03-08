@@ -69,7 +69,7 @@ const Pets = () => {
         setReset(true)
         setFilters({keyword: ''})
       }}>{tGlobal('reset')}</Button>
-      <Tooltip target=".downloadPets" showDelay={700}/>
+      <Tooltip target=".downloadPets" />
       <Button data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn', {items: tToolTip('pets')} )} className="green-earth downloadPets" onClick={() => callPets(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
     </div>
   }
@@ -116,7 +116,7 @@ const Pets = () => {
           <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleState')}  body={({id, state}) => {
             return <>
-              <Tooltip target=".stateInput" showDelay={700}/>
+              <Tooltip target=".stateInput" />
               <InputSwitch  className='stateInput' data-pr-position="left" data-pr-tooltip={state == 1 ? tToolTip("enableSateSwitchInputMessage") : tToolTip("disableSateSwitchInputMessage")} checked={state == 1} onChange={async (e) => {
                 if(state == 1){
                   setSelected(id)
@@ -129,9 +129,9 @@ const Pets = () => {
             </>
           }}></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
-            <Tooltip target=".viewPet" showDelay={700}/>
+            <Tooltip target=".viewPet" />
             <Link className="button small dark-blue viewPet" data-pr-position="top" data-pr-tooltip={tToolTip("viewItemBtn", {item: tToolTip('pet')})} to={`/pet/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
-            <Tooltip target=".sendMsgBtn" showDelay={700}/>
+            <Tooltip target=".sendMsgBtn" />
             <Link data-pr-tooltip={tToolTip("sendMessage")} data-pr-position="top" className="button small green-earth sendMsgBtn" to={`/chat/${username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
           </>}></Column>
         </DataTable>

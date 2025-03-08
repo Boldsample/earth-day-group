@@ -150,9 +150,9 @@ const Map = () => {
             placeholder={t('inputSearchPlaceHolder')}
             className="p-inputtext" />
         </Autocomplete>
-        <Tooltip target=".homeLocation" showDelay={700}/>
+        <Tooltip target=".homeLocation" />
         <a className='homeLocation' data-pr-tooltip={tToolTip("homeLocation")} data-pr-position="bottom" onClick={() => toCurrentLocation('home')}><FontAwesomeIcon icon={faHouse} /></a>
-        <Tooltip target=".currentLocation" showDelay={700}/>
+        <Tooltip target=".currentLocation" />
         <a className='currentLocation' data-pr-tooltip={tToolTip("currentLocation")} data-pr-position="bottom" onClick={() => toCurrentLocation('current')}><FontAwesomeIcon icon={faLocationCrosshairs} /></a>
       </div>
     </div>

@@ -10,9 +10,15 @@
       object-position: center bottom
   .footer__grid
     z-index: 120
+  .show__mobile
+    display: none !important
 @media (orientation: portrait)
   .hide__mobile
     display: none !important
+  .show__mobile
+    display: block !important
+  .mobileMenu .p-menuitem
+    padding: 0.5rem
   .main_header
     padding: 0 1.25rem
     .navbar-item

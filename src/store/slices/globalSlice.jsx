@@ -3,11 +3,10 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   error: "",
   thankyou: {},
-  prevPage: '',
+  prevPage: [],
   loading: false,
   header: 'false',
-  headerTitle: '',
-
+  headerTitle: ''
 };
 
 const globalSlice = createSlice({
@@ -15,7 +14,12 @@ const globalSlice = createSlice({
   initialState,
   reducers: {
     setPrevPage: (state, action) => {
-      state.prevPage = action.payload;
+      const nextPath = action.payload;
+      console.log(state.prevPage?.at(-1), nextPath)
+      if (Array.isArray(state.prevPage) && state.prevPage?.at(-2) === nextPath)
+        state.prevPage = [...state.prevPage].slice(0, -1)
+      else
+        state.prevPage = [...state.prevPage, nextPath]
     },
     setHeader: (state, action) => {
       state.header = action.payload;

@@ -88,7 +88,7 @@ const AdminOffers = () => {
         setReset(true)
         setFilters({keyword: '', materials: []})
       }}>{tGlobal('reset')}</Button>
-      <Tooltip target=".downloadOffers" showDelay={700}/>
+      <Tooltip target=".downloadOffers" />
       <Button className="green-earth downloadOffers" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn', {items: tToolTip('offers')} )}  onClick={() => callOffers(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
     </div>
   }
@@ -168,11 +168,11 @@ const AdminOffers = () => {
               <Button className="small dark-blue" onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>}></Column> || 
             <Column className="actions" header={null} body={offer => { 
                 return <>
-                <Tooltip target=".viewOffer" showDelay={700}/>
+                <Tooltip target=".viewOffer" />
                 <Button className="small dark-blue viewOffer" data-pr-position="top" data-pr-tooltip={tToolTip("viewItemBtn", {item: tToolTip('offer')})}  onClick={() => getUserDetail(offer?.id)}><FontAwesomeIcon icon={faSearch} /></Button>
               {offer.status == 0 && 
               <>
-              <Tooltip target=".messageUser" showDelay={700}/>
+              <Tooltip target=".messageUser" />
               <Link data-pr-position="top" data-pr-tooltip={tToolTip("sendMessage")} className="button small green-earth messageUser" to={`/chat/${offer.username}/${offer.id}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link> 
               </>
               || 

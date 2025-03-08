@@ -1,5 +1,5 @@
 import Cookies from "js-cookie"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom"
 
@@ -19,23 +19,33 @@ import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Boo
 
 let notificationsSource = null;
 
+const Loading = () => {
+  return <div>Cargando...</div>;
+};
+
 const AppRoutes = () => {
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true)
   const user = useSelector((state) => state.users.userData)
 
   const loadNotifications = () => {
     dispatch(callNotifications({user: user?.id}))
   }
   const initializeNotificationsSource = () => {
-    if(notificationsSource)
-      notificationsSource.close()
+    if(notificationsSource) notificationsSource.close()
     notificationsSource = new EventSource(`https://earth-day-group.boldsample.com/php/notifications/${user?.id}`)
     notificationsSource.onmessage = e => loadNotifications()
-    notificationsSource.onerror = (error) => console.error('EventSource error:', error)
+    notificationsSource.onerror = (error) => {
+      setTimeout(initializeNotificationsSource, 5000);
+    }
+    notificationsSource.onopen = () => {
+    };
+    notificationsSource.onclose = () => {
+    };
   }
   const startNotificationsSource = () => {
-    if(!notificationsSource)
-      initializeNotificationsSource()
+    // if(!notificationsSource)
+    //   initializeNotificationsSource()
   }
   const stopNotificationsSource = () => {
     if(notificationsSource){
@@ -47,12 +57,15 @@ const AppRoutes = () => {
   useEffect(() => {
     const _id = Cookies.get('edgActiveUser')
     if(!user?.id && _id != 'undefined' && user == null)
-      dispatch(getUserData(_id))
-    // else if(user?.id)
-    //  startNotificationsSource()
-    // return () => stopNotificationsSource()
+      dispatch(getUserData(_id)).then(() => setLoading(false))
+    else if(user?.id){
+      setLoading(false)
+      startNotificationsSource()
+    }
+    return () => stopNotificationsSource()
   }, [user])
   
+  if(loading) return <Loading />
   return <BrowserRouter basename="">
     <Header />
     <PageAnimate>

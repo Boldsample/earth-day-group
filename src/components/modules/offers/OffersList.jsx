@@ -125,7 +125,7 @@ const Offers = ({type}) => {
 			</Column>
 			<Column header={t('rowExpansionBiddingDateTitle')} body={({date}) => date.split(' ')[0]}></Column>
 			<Column className="actions" header={null} body={offer => <>
-				<Tooltip target=".sendOffer" showDelay={700}/>
+				<Tooltip target=".sendOffer" />
 				<Link className="button small green-earth sendOffer" data-pr-position="top"  data-pr-tooltip={tToolTip('sendOffer')} to={`/chat/${offer.username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link></>
 			}></Column>
 		</DataTable>
@@ -185,22 +185,22 @@ const Offers = ({type}) => {
 					<Column header={t('tableColumnPublishedDateTitle')} body={({date}) => date.split(' ')[0]}></Column>
 					{type != 'search' && 
 						<Column className="actions" header={null} body={offer => <>
-							<Tooltip target=".viewOffer" showDelay={700}/>
+							<Tooltip target=".viewOffer" />
 							<Link className="button small dark-blue viewOffer" data-pr-position="top"  data-pr-tooltip={tToolTip('viewItemBtn',  {item: tToolTip("offer")})}  to={`/offers${type == 'search' ? '/search' : ''}/${offer?.id}/`}><FontAwesomeIcon icon={faSearch} /></Link> </>}>
 						</Column> || 
 						<Column className="actions" header={null} body={offer => <>
-							<Tooltip target=".viewOffer" showDelay={700}/>
+							<Tooltip target=".viewOffer" />
 							<Link className="button small dark-blue viewOffer" data-pr-position="top"  data-pr-tooltip={tToolTip('viewItemBtn',  {item: tToolTip("offer")})}  to={`/offers${type == 'search' ? '/search' : ''}/${offer?.id}/`}><FontAwesomeIcon icon={faSearch} /></Link>
 							{offer.status === 0 ? (
 								<>
-									<Tooltip target=".sendOffer" showDelay={700} />
+									<Tooltip target=".sendOffer"  />
 									<Link data-pr-position="top"  data-pr-tooltip={tToolTip('sendOffer')} className="sendOffer button small green-earth" to={`/chat/${offer.username}/${offer.id}/`}>
 									<FontAwesomeIcon icon={faPaperPlane} />
 									</Link>
 								</>
 								) : (
 								<>
-									<Tooltip target=".sendOffer" showDelay={700} />
+									<Tooltip target=".sendOffer"  />
 									<Link data-pr-position="top"  data-pr-tooltip={tToolTip('sendOffer')} className="sendOffer button small green-earth" to={`/chat/${offer.username}/`}>
 									<FontAwesomeIcon icon={faPaperPlane} />
 									</Link>

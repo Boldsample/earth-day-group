@@ -43,10 +43,12 @@ export const callNotifications = createAsyncThunk("users/notifications", async (
   const info = {
     offer: { title: 'New offer', message: 'sent you a offer.' },
     message: { title: 'New message', message: 'sent you a message.' },
+	default: { title: 'New notification', message: 'sent you a notification.' }
   }
-  const res = await getNotifications(data, 6)
-  const _res = res.map(notification => {
-    const {title, message} = info[notification.type]
+  const res = await getNotifications(data, {first: 0, page: 1, rows: 6});
+  if(res?.data.length === 0) return []
+  const _res = res?.data.map(notification => {
+    const {title, message} = info[notification?.type] || info['default'] 
     let _notification = {...notification}
     _notification.title = title
     _notification.message = message

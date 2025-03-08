@@ -73,7 +73,7 @@ const Products = () => {
         setReset(true)
         setFilters({keyword: ''})
       }}>{tGlobal('reset')}</Button>
-      <Tooltip target=".downloadProducts" showDelay={700}/>
+      <Tooltip target=".downloadProducts" />
       <Button data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn', {items: tToolTip('products')} )} className="green-earth downloadProducts" onClick={() => callProducts(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
     </div>
   }
@@ -117,7 +117,7 @@ const Products = () => {
           <Column header={t('tableTitlePublishedBy')}  body={({username, upicture}) => <><ProfilePhoto userPhoto={upicture} /> {username}</>}></Column>
           <Column header={t('tableTitleState')} body={({id, state}) => {
             return <>
-            <Tooltip target=".stateInput" showDelay={700}/>
+            <Tooltip target=".stateInput" />
             <InputSwitch className='stateInput' data-pr-position="left" data-pr-tooltip={state == 1 ? tToolTip("enableSateSwitchInputMessage") : tToolTip("disableSateSwitchInputMessage")} checked={state == 1} onChange={async (e) => {
                 if(state == 1){
                   setSelected(id)
@@ -130,9 +130,9 @@ const Products = () => {
             </>
           }}></Column>
           <Column className="actions" header={null} body={({id, username}) => <>
-          <Tooltip target=".viewProduct" showDelay={700}/>
+          <Tooltip target=".viewProduct" />
             <Link className="button small dark-blue viewProduct" data-pr-position="top" data-pr-tooltip={tToolTip("viewItemBtn", {item: tToolTip('product')})}  to={`/product/${id}`}><FontAwesomeIcon icon={faSearch} /></Link>
-            <Tooltip target=".sendMsgBtn" showDelay={700}/>
+            <Tooltip target=".sendMsgBtn" />
             <Link data-pr-tooltip={tToolTip("sendMessage")} data-pr-position="top" className="button small green-earth sendMsgBtn" to={`/chat/${username}/`}><FontAwesomeIcon icon={faPaperPlane} /></Link>
           </>}></Column>
         </DataTable>

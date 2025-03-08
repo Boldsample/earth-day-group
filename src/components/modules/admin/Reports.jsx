@@ -102,7 +102,7 @@ const Reports = () => {
 				setReset(true)
 				setFilters({type: "", status: "", admin: "", keyword: ''})
 			}}>{tGlobal('reset')}</Button>
-			<Tooltip target=".downloadReports" showDelay={700}/>
+			<Tooltip target=".downloadReports" />
 			<Button className="green-earth downloadReports" data-pr-position="top"  data-pr-tooltip={tToolTip('downloadReportBtn', {items: tToolTip('reports')} )}  onClick={() => callReports(true)}><FontAwesomeIcon icon={faFileDownload} /></Button>
 		</div>
 	}
@@ -185,7 +185,7 @@ const Reports = () => {
 						<Column className="actions" header={null} body={({id, aid, owner, admin, status }) => <>
 							{aid &&
 							<>
-							<Tooltip target=".chatToolTip" showDelay={700}/>
+							<Tooltip target=".chatToolTip" />
 							<Link to={aid !== user.id ? null : `/chat/${owner}`}>
 								<span className='chatToolTip' data-pr-tooltip={aid !== user.id ? tToolTip('cannotHandleReportBtnMessage', {admin: admin}) : tToolTip('HandleReportBtnMessage' , {reportedUser: owner}) } data-pr-position="left">
 								<Button disabled={status == 'success' && aid !== user?.id && !aid || aid && aid !== user?.id } className=" button small green-earth mr-1" >
@@ -195,7 +195,7 @@ const Reports = () => {
 						</Link>
 							</>
 							}
-							<Tooltip target=".viewReport" showDelay={700}/>
+							<Tooltip target=".viewReport" />
 							<Button className="small dark-blue viewReport" data-pr-position="top"  data-pr-tooltip={tToolTip('viewReportBtn')} onClick={() => getReportDetail(id)}><FontAwesomeIcon icon={faSearch} /></Button>
 						</>}></Column>
 					</DataTable>
