@@ -89,7 +89,7 @@
       "lettersandUnderscoreOnlyErrorMessage": "Este campo solo puede incluir letras y guiones bajos, no espacios.",
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
       "requiredErrorMessage": "Este campo es obligatorio.",
-      "latlngErrorMessage": "Debe seleccionar una ubicación del listado.",
+      "latlngErrorMessage": "Selecciona una ubicación de la lista.",
       "passwordPatternErrorMessage": "Debes cumplir los parámetros de contraseña.",
       "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres.",
       "newAdminContextText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico.",

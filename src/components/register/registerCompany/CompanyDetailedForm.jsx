@@ -122,7 +122,7 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
       navigate('/thankyou/')
     }else{
       setFocus(response.field)
-      setError(response.field, { type: "manual", message: response.message })
+      setError(response.field, { type: "manual", message: tGlobalErrors(response.message) })
       return
     }
 	}

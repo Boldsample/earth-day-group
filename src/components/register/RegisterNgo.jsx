@@ -72,7 +72,7 @@ const RegisterNgo = ({create = false}) => {
     { name: t('bothRadioOption'), value: 'ngo' },
   ]
   
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobal(errors[fieldName]?.message)}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const setUploadedImages = (images) => {
     setValue('images', images)
   }
@@ -118,7 +118,7 @@ const RegisterNgo = ({create = false}) => {
       navigate('/thankyou/')
     }else{
       setFocus(response.field)
-      setError(response.field, { type: "manual", message: response.message })
+      setError(response.field, { type: "manual", message: tGlobal(response.message) })
       return
     }
   }
@@ -215,7 +215,6 @@ const RegisterNgo = ({create = false}) => {
             labelName={tGlobal2('userEmailInputLabel')}
             placeHolderText={tGlobal2('userEmailPlaceHolderText')}
             rules={{
-              validate: (value) => (watch("lat") && watch("lng")) || tGlobal(`latlngErrorMessage`),
               maxLength: {
                 value: 100,
                 message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 100}),
@@ -257,6 +256,7 @@ const RegisterNgo = ({create = false}) => {
               placeHolderText={tGlobal2('userAddressPlaceHolderText')}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
+				validate: (value) => (watch("lat") && watch("lng")) || tGlobal(`latlngErrorMessage`),
                 required: tGlobal(`requiredErrorMessage`),
                 pattern: {
                   value: /^\S/,

@@ -60,7 +60,7 @@ const RegisterUser = ({create = false}) => {
     setValue('lat', window?.autocomplete?.getPlace()?.geometry?.location?.lat())
     setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
   }
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobal(errors[fieldName]?.message)}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
     let response
     setSending(true)
@@ -93,7 +93,7 @@ const RegisterUser = ({create = false}) => {
       navigate('/thankyou/')
     }else{
       setFocus(response.field)
-      setError(response.field, { type: "manual", message: response.message })
+      setError(response.field, { type: "manual", message: tGlobal(response.message) })
       return
     }
   }

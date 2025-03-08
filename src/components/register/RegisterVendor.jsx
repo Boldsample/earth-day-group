@@ -70,7 +70,7 @@ const RegisterVendor = ({create = false}) => {
     { name: tGlobal('no'), value: 0 },
   ]
   
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobalErrors(errors[fieldName]?.message)}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
 	console.log('Test')
     let response
@@ -104,7 +104,7 @@ const RegisterVendor = ({create = false}) => {
       navigate('/thankyou/')
     }else{
       setFocus(response.field)
-      setError(response.field, { type: "manual", message: response.message })
+      setError(response.field, { type: "manual", message: tGlobalErrors(response.message) })
       return
     }
   }

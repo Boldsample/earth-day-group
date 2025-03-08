@@ -89,7 +89,7 @@
       "lettersandUnderscoreOnlyErrorMessage": "This field may only include letters and underscores, not spaces.",
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
-      "latlngErrorMessage": "You must select a location from the list.",
+      "latlngErrorMessage": "Select a location from the list.",
       "passwordPatternErrorMessage": "Follow the password requirements.",
       "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit.",
       "newAdminContextText": "You have registered a new administrator user! We have sent a verification link via email.",
