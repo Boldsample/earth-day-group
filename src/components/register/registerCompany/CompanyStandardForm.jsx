@@ -54,7 +54,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
     setValue('lat', window?.autocomplete?.getPlace()?.geometry?.location?.lat())
     setValue('lng', window?.autocomplete?.getPlace()?.geometry?.location?.lng())
   }
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobal(errors[fieldName]?.message)}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
     setSending(true)
     const { email, username } = getValues()
@@ -62,7 +62,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
     setSending(false)
     if(response?.field){
       setFocus(response.field)
-      setError(response.field, { type: "manual", message: response.message })
+      setError(response.field, { type: "manual", message: tGlobal(response.message) })
       return
     }
     setUser({ ...user, ...data })
