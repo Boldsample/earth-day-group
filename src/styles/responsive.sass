@@ -5,6 +5,9 @@
   #intro
     .layout
       background-image: none !important
+    .layout__background
+      height: 100%
+      object-position: center bottom
   .footer__grid
     z-index: 120
 @media (orientation: portrait)
@@ -302,3 +305,10 @@
       flex-wrap: wrap
       & > *
         width: 100%
+@media (min-width: 190vh)
+  #intro
+    .layout__background
+      object-position: center center
+    .main__content
+      min-height: 51vw
+      padding-bottom: 100px
