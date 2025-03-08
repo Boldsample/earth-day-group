@@ -293,7 +293,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
           }} />
       </div>
       <div className="p-field mb-2">
-        <div className="mb-2">
+        <div className="terms">
           <CheckBoxInput
             control={control}
             nameInput="accept_terms"
@@ -301,7 +301,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
             rules={{ required: tGlobal('acceptCheckboxErrorMessage') }}
             checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
         </div>
-        <div>
+        <div className="terms">
           <CheckBoxInput
             control={control}
             nameInput="accept_policy"

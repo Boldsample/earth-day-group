@@ -376,7 +376,7 @@ const RegisterVendor = ({create = false}) => {
               }} />
           </div>
           <div className="p-field mb-2">
-            <div className="mb-2">
+            <div className="terms">
               <CheckBoxInput
                 control={control}
                 nameInput="accept_terms"
@@ -384,7 +384,7 @@ const RegisterVendor = ({create = false}) => {
                 getFormErrorMessage={getFormErrorMessage}
                 checkBoxText={<span>{tGlobal('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal('acceptTermsText2')}</Link>.</span>} />
             </div>
-            <div>
+            <div className="terms">
               <CheckBoxInput
                 control={control}
                 nameInput="accept_policy"

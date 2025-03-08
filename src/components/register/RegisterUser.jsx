@@ -292,7 +292,7 @@ const RegisterUser = ({create = false}) => {
               }} />
           </div>
           <div className="p-field mb-2">
-            <div className="mb-2">
+            <div className="terms">
               <CheckBoxInput
                 control={control}
                 nameInput="accept_terms"
@@ -300,7 +300,7 @@ const RegisterUser = ({create = false}) => {
                 getFormErrorMessage={getFormErrorMessage}
                 checkBoxText={<span>{tGlobal2('acceptTermsText1')} <Link to="/terms-of-service/" target="_blank">{tGlobal2('acceptTermsText2')}</Link>.</span>} />
             </div>
-            <div>
+            <div className="terms">
               <CheckBoxInput
                 control={control}
                 nameInput="accept_policy"
