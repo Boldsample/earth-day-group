@@ -378,7 +378,7 @@ const RegisterNgo = ({create = false}) => {
                 validate: value => value === getValues().password || tGlobal('passwordDoNotMatchErrorMessage'),
               }} />
           </div>
-          <div className="p-field mb-2">
+          <div className="p-field">
             <div className="terms">
               <CheckBoxInput
                 control={control}
