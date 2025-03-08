@@ -29,7 +29,7 @@ function PageAnimate({ children }) {
     if(location.pathname != currentPath){
       const _cur = currentPath.split('/')
       const _new = location.pathname.split('/')
-      if(user?.id && (_cur[1] != _new[1] || (!isNaN(_new[2]) && _new[2] != '' && _cur[1] != 'offers') || ['chat', 'settings'].includes(_cur[1]) || _cur[2] == 'new' || _new[2] == 'new')){
+      if((_cur[1] != _new[1] || (!isNaN(_new[2]) && _new[2] != '' && _cur[1] != 'offers') || ['chat', 'settings'].includes(_cur[1]) || _cur[2] == 'new' || _new[2] == 'new')){
         setIsTransitioning(true)
         setNextPath(location.pathname)
       }else{
