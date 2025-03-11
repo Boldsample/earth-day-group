@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faInstagram, faTiktok, faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons"
+import { faInstagram, faTiktok, faFacebook, faXTwitter } from "@fortawesome/free-brands-svg-icons"
 
 import './footer.sass'
 
@@ -20,7 +20,7 @@ const Footer = () => {
           <Link to={i18n.language == 'es' ? 'https://www.instagram.com/earthdaygroup' : 'https://www.instagram.com/earthdaygroup_usa'} target="_blank"><FontAwesomeIcon icon={faInstagram} className='footer__icon'/></Link>
           <Link to="https://www.facebook.com/earthdaygroup" target="_blank"><FontAwesomeIcon icon={faFacebook} className='footer__icon'/></Link>
           <Link to="https://www.tiktok.com/@earthdaygroup" target="_blank"><FontAwesomeIcon icon={faTiktok} className='footer__icon'/></Link>
-          <Link to="https://x.com/EarthDayGroup2" target="_blank"><FontAwesomeIcon icon={faTwitter} className='footer__icon'/></Link>
+          <Link to="https://x.com/EarthDayGroup2" target="_blank"><FontAwesomeIcon icon={faXTwitter} className='footer__icon'/></Link>
       </div>
     </div>
   )

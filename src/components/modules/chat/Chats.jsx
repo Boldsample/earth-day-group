@@ -74,6 +74,7 @@ const Chats = () => {
       </div>
       {typeof users?.data == 'undefined' && 
         skeletonPlaceHolder.map((skeleton, key) =>  <ChatSkeleton className="" key={key} />)
+      || users?.data?.length == 0 && <p className='mt-2'>{t('noChatsMessage')}</p>
       || users?.data?.length > 0 && users?.data?.map(user => 
         <MultiUseCard
           type="user"

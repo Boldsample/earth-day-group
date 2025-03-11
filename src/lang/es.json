@@ -265,7 +265,7 @@
       "statusTextDeleted": "Eliminado",
       "newOfferTextLink": "Nueva Oferta",
       "createPostOfferLinkText": "Crear Oferta",
-      "noOffersFoundText": "No hay ofertas que cumplan con los criterios del filtro.",
+      "noOffersFoundText": "No se encontraron ofertas.",
       "noOffersPostedText": "Aún no has publicado ninguna oferta."
     },
     "pets": {
@@ -460,7 +460,8 @@
       "recyclingBtnText": "Centros de Reciclaje",
       "vendorsBtnText": "Tiendas",
       "ngoBtnText": "ONGs",
-      "inputSearchPlaceHolder": "Buscar"
+      "inputSearchPlaceHolder": "Buscar",
+      "noChatsMessage": "No tienes mensajes."
     }
   },
   "dashboard": {
@@ -605,7 +606,7 @@
       "createOfferWarningMessage": "Importante: Por favor, revisa cuidadosamente los detalles de tu oferta antes de publicarla, ya que no podrás editarla una vez que esté en línea. Si cometes un error después de publicarla, te recomendamos eliminarla y crear una nueva."
     },
     "offersList": {
-      "mainTitle": "Encuentra materiales reciclables",
+      "mainTitle": "Buscar materiales",
       "ownerTitle": "Mis ofertas",
       "selectInputPlaceHolder": "Filtrar por Materiales",
       "inputSearchPlaceHolder": "Búsqueda por Palabra Clave",
@@ -626,7 +627,7 @@
       "noOffersPostedmessage": "Aún no has publicado ninguna oferta.",
       "noOffersForMaterialsMessage": "No hay ofertas para los materiales que te interesan comprar",
       "createOfferBtn": "Crear Oferta",
-      "noOffersFoundText": "No hay ofertas que cumplan con los criterios del filtro."
+      "noOffersFoundText": "No se encontraron ofertas."
     }
   },
   "profile": {

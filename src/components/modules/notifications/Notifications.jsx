@@ -31,18 +31,20 @@ const Notifications = () => {
     })
     setListNotifications({...res, data: _res})
   }
-
+  
   useEffect(() => {
     dispatch(setHeader('user'))
     callNotifications()
   }, [page])
   
+  console.log(listNotifications)
   return <div className="layout">
     <img className="layout__background hide__mobile" src="/assets/user/image-5.svg" />
     <div className="main__content verticalcenter-1">
       <h1 className='text-defaultCase'>{t('mainTitle')}</h1>
       {typeof listNotifications?.data == 'undefined' && 
         skeletonPlaceHolder.map((skeleton, key) =>  <ChatSkeleton className="" key={key} />)
+      || listNotifications?.data?.length == 0 && <p className='mt-2'>{t('noNotificationsFoundText')}</p>
       || listNotifications?.data?.length > 0 && listNotifications?.data?.map(notification => 
         <MultiUseCard
           data={notification}

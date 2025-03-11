@@ -460,7 +460,8 @@
       "recyclingBtnText": "Recycling Centers",
       "vendorsBtnText": "Vendors",
       "ngoBtnText": "NGOs",
-      "inputSearchPlaceHolder": "Search"
+      "inputSearchPlaceHolder": "Search",
+      "noChatsMessage": "You do not have any messages."
     }
   },
   "dashboard": {
@@ -626,7 +627,7 @@
       "noOffersPostedmessage": "You have not posted any offers yet.",
       "noOffersForMaterialsMessage": "There's no offers for the materials you are interested in buying",
       "createOfferBtn": "Create Offer",
-      "noOffersFoundText": "There are no offers that meet the filter criteria."
+      "noOffersFoundText": "No offers found."
     }
   },
   "profile": {
@@ -858,7 +859,7 @@
     "registerNgo": {
       "organizationImgsTitle": "Organization Images",
       "textAreaIniciativeDescriptionTitle": "Initiative",
-      "iniciativeDescriptionPlaceholder": "Tell us about your inicitative",
+      "iniciativeDescriptionPlaceholder": "Tell us about your initiative",
       "organizationTypeLabel": "Organization Type",
       "organizationNameInputTitle": "Organization Name",
       "organizationNamePlaceHolderText": "John's animal shelter",
