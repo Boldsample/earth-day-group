@@ -53,8 +53,8 @@ const ProfileElements = ({entity = null, type = 'products', user, same = false, 
     dispatch(setHeader("user"));
   }, [page, type, user]);
   
-  if(elements == null || elements?.total == 0)
-    return
+//   if(elements == null || elements?.total == 0)
+//     return
   return <div className="template__listing fullwidth">
     <div className="edg-search mb-1">
       <h3 className="text-center mb-1">{(same && (type == 'products' ? t('productsTitle0') : t('adoptPetTitle0'))) || (related && (type == 'products' ? t('productsTitle1') : t('adoptPetTitle1'))) || (type == 'products' ? t('productsTitle2')  : t('adoptPetTitle2'))}</h3>

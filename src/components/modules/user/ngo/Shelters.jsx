@@ -34,9 +34,10 @@ const Shelters = ({type}) => {
     ]
   }
 
-  const loadElements = async (e) => {
-    if(e) e.preventDefault()
-    setElements({data: []})
+  const loadElements = async (e = false) => {
+    //if(e) e.preventDefault()
+    if(!e)
+      setElements({data: []})
     if(type == 'shelters'){
       let _filter = { role: `(u.role='shelter' OR u.role='ngo')` }
       if(filters?.keyword != '')

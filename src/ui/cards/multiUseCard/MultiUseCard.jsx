@@ -103,6 +103,11 @@ const MultiUseCard = ({
           e.preventDefault()
           action({id: data?.incoming, update: new Date(), type: 'chat'})
         }
+		    const isEmoji = (text) => {
+          const emojiRegex = /\p{Extended_Pictographic}/gu;
+          const emojis = text.match(emojiRegex);
+          return emojis && emojis.length <= 3 && text.trim() === emojis[0];
+        };
         return <div className={'main__container'}>
           <a onClick={doActionChat}><ProfilePhoto userPhoto={data?.picture} /></a>
           {(data?.type == 'offer' && 
@@ -143,7 +148,7 @@ const MultiUseCard = ({
                   <Button className="small green-state" style={{width: '6.25rem'}} onClick={() => data?.replyOffer(data?.offer, data?.id)}><FontAwesomeIcon icon={faCheck} /> {t('pay')}</Button>
                 </div> 
               || null}
-            </div>) || <div className="pre-line">{data?.message}</div>
+            </div>) || <div className={'pre-line '+(isEmoji(data?.message) ? 'emoji' : '')}>{data?.message}</div>
           }
           {data?.type == 'report' && <div className="fullwidth mt-1 mb-1">
             {data?.report_type === 'offer' && 

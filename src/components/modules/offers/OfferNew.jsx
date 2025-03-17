@@ -163,7 +163,7 @@ const OfferNew = () => {
             rules={{
               maxLength: {
                 value: 7,
-                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 7}),
+                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 15}),
               },
               required: tGlobalErrors('requiredErrorMessage'),
               pattern: {

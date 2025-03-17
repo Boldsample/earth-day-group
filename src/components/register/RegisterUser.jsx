@@ -123,7 +123,7 @@ const RegisterUser = ({create = false}) => {
   return <div className="layout">
     <img className="layout__background" src="/assets/register/image-2.svg" />
     <div className="main__content xpadding-1">
-      <form onSubmit={handleSubmit(onSubmit)} className="fullwidth">
+      <form onSubmit={handleSubmit(onSubmit)} className="fullwidth mb-6">
         <UploadPhotoInput
           watch={watch}
           control={control}

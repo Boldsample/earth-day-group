@@ -84,7 +84,6 @@ const ReportInfo = ({ show, report, onHide }) => {
 
 	const onSubmit = async data => {
 		const message = data?.message === data?.custom_message ? data?.message : data?.custom_message
-		console.log(data?.reportResolved)
 		if(await sendMessage({ message, incoming: user?.id, outgoing: report?.oid, type: 'report', offer: report?.id })){
 			if(data?.deleteElement && report?.type == 'user')
 				await updateUser({state: 2}, {id: report?.entity})

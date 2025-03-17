@@ -104,7 +104,7 @@ const Chat = () => {
     const newMessage = notifications?.some(n => n?.incoming == outgoing?.id && n.outgoing == userId)
     if(!calling && outgoing && (messages == null || newMessage || sent))
       callMessages()
-  }, [notifications, sent, outgoing])
+  }, [sent, outgoing])
   useEffect(() => {
     dispatch(setHeaderTitle(''))
     dispatch(setHeader('settings'))

@@ -15,6 +15,7 @@ import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 
 import "../styles.sass"
 import AdBanner from "@ui/banners/AdBanner"
+import { followUser } from "@services/userServices"
 
 const CategoryListing = ({content, section, elements, filters, reloadElements = () => false, setFilters = () => false, setReset = () => false, page, setPage = () => false}) => {
   const dispatch = useDispatch()
@@ -25,11 +26,11 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 
   const doFollow = async id => {
-    if(elements?.card == 'product' || elements?.card == 'pet'){
+    if(elements?.card == 'product' || elements?.card == 'pet')
       await followProduct({type: elements?.card, entity: id, follower: user?.id})
-      reloadElements()
-    }else
-      dispatch(followUserData({user: id, follower: user?.id}))
+    else
+      await followUser({user: id, follower: user?.id})
+    reloadElements(true)
   }
   const doScroll = (e) => {
   e.preventDefault()

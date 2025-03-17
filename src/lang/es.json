@@ -859,6 +859,7 @@
     },
     "registerAdmin": {},
     "registerNgo": {
+      "companyNitTitle": "NIT",
       "organizationImgsTitle": "Imágenes de la organización",
       "textAreaIniciativeDescriptionTitle": "Iniciativa",
       "iniciativeDescriptionPlaceholder": "Cuéntanos sobre tu iniciativa",

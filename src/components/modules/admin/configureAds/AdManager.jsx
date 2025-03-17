@@ -92,20 +92,17 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
     useEffect(() => {
         setFirstRender(true);
         getAd(type).then(data => {
-            console.log(data)
             if(data?.state < 3){
-                console.log('not cancelled')
                 setLoading(true)
                 setAd(data);
             }else{
-                console.log('cancelled')
                 setAd(null);
                 setLoading(false)
             }
             setFirstRender(false);
         });
     }, [update]);
-    console.log(ad)
+    
     return <>
         <Dialog
             className="ads-popup"

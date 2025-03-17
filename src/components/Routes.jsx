@@ -1,12 +1,12 @@
 import Cookies from "js-cookie"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom"
+import { BrowserRouter, Route } from "react-router-dom"
 
 import Header from "@ui/header/Header"
-import { baseURL } from "@services/API"
 import Intro from "@components/intro/Intro"
 import { Pet, CreatePet } from "@modules/ngo"
+import useWebSocket from "@components/WebSocket"
 import PageAnimate from "@ui/transition/PageAnimate"
 import { Product, CreateProduct } from "@modules/vendor"
 import Profile from "@components/modules/profile/Profile"
@@ -28,32 +28,11 @@ const AppRoutes = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const user = useSelector((state) => state.users.userData)
+  //const { notifications } = useWebSocket(user?.id);
 
-  const loadNotifications = () => {
-    dispatch(callNotifications({user: user?.id}))
-  }
-  const initializeNotificationsSource = () => {
-    if(notificationsSource) notificationsSource.close()
-    notificationsSource = new EventSource(`${baseURL}/notifications/${user?.id}`)
-    notificationsSource.onmessage = e => loadNotifications()
-    notificationsSource.onerror = (error) => {
-      setTimeout(initializeNotificationsSource, 5000);
-    }
-    notificationsSource.onopen = () => {
-    };
-    notificationsSource.onclose = () => {
-    };
-  }
-  const startNotificationsSource = () => {
-    // if(!notificationsSource)
-    //   initializeNotificationsSource()
-  }
-  const stopNotificationsSource = () => {
-    if(notificationsSource){
-      notificationsSource.close()
-      notificationsSource = null
-    }
-  }
+  // useWebSocket(user?.id, (data) => {
+  //   dispatch(callNotifications({user: user?.id}))
+  // });
 
   useEffect(() => {
     const _id = Cookies.get('edgActiveUser')
@@ -61,9 +40,7 @@ const AppRoutes = () => {
       dispatch(getUserData(_id)).then(() => setLoading(false))
     else if(user?.id){
       setLoading(false)
-      startNotificationsSource()
     }
-    return () => stopNotificationsSource()
   }, [user])
   
   //if(loading) return <Loading />

@@ -276,6 +276,8 @@ button, .button
       gap: 1.875rem
       justify-content: center
       padding: 1.875rem 1rem
+      .active svg path
+        fill: var(--green-earth)
       svg
         cursor: pointer
         transition: all 0.4s ease
@@ -292,8 +294,9 @@ button, .button
   margin: 0 calc((100% - 31.25rem) / 2)
   position: absolute
   width: 31.25rem
-  z-index: 101
+  z-index: 131
   h4
+    font-size: 1.25rem
     margin: 1.45rem
     text-align: center
     .profile__photo
@@ -736,8 +739,11 @@ button, .button
     padding: 0
     text-align: center
 
-.chat__input .emoji .emoji__wrapper button
-  padding: 0
+.chat__input
+  button
+    margin: 0 !important
+  .emoji .emoji__wrapper button
+    padding: 0
 
 .menuDropdown
   display: flex

@@ -17,7 +17,6 @@ const globalSlice = createSlice({
   reducers: {
     setPrevPage: (state, action) => {
       const nextPath = action.payload;
-      console.log(state.prevPage?.at(-1), nextPath)
       if (Array.isArray(state.prevPage) && state.prevPage?.at(-2) === nextPath)
         state.prevPage = [...state.prevPage].slice(0, -1)
       else

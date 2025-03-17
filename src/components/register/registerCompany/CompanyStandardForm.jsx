@@ -88,7 +88,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
       })
   }, [user]);
 
-  return <form onSubmit={handleSubmit(onSubmit)}>
+  return <form className="mb-6" onSubmit={handleSubmit(onSubmit)}>
     <UploadPhotoInput
       watch={watch}
       control={control}
@@ -204,7 +204,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         labelName={t('companyNitTitle')}
         nameInput="nit"
         control={control}
-        isRequired={true}
+        isRequired={false}
         placeHolderText={t('companyNitPlaceHolderText')}
         getFormErrorMessage={getFormErrorMessage}
         rules={{
@@ -212,7 +212,6 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
             value: 20,
             message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20}),
           },
-          required: tGlobal(`requiredErrorMessage`),
           pattern: {
             value: /^[0-9]+/,
             message: tGlobal('invalidNitErrorMessage'),

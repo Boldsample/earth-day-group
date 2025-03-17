@@ -14,9 +14,10 @@ const Companies = () => {
   const [page, setPage] = useState({first: 0, page: 0, rows: 8})
   const [t] = useTranslation('translation', { keyPrefix: 'user.companies'})
 
-  const loadElements = async (e) => {
-    if(e) e.preventDefault()
-    setElements({data: []})
+  const loadElements = async (e = false) => {
+    //if(e) e.preventDefault()
+    if(!e)
+		  setElements({data: []})
     let _filter = { role: `u.role='company'` }
     if(filters?.keyword != '')
       _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)

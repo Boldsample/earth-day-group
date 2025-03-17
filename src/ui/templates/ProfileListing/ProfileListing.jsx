@@ -34,7 +34,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
       url: user?.id == profile?.id ? '/profile/pets/' : `/${profile?.role}/${profile?.username}/pets/`,
     },
   ]
-console.log(user)
+
   const doFollow = async id => {
     await followUser({user: id, follower: user?.id})
     reloadElements()
@@ -67,7 +67,7 @@ console.log(user)
       }
     </>
   }
-
+console.log(profile?.materials)
   if(!profile?.role)
     return
   return <>

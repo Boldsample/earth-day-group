@@ -14,7 +14,7 @@ const Nav = () => {
   return <div className="nav__container">
     <div className="box">
       {sections?.map((section, key) => {
-        return <Link key={key} to={section.path} className="navLink" data-pr-tooltip={t(`${section.label}`)} data-pr-position="right" data-pr-at="right+5 center-1" data-pr-my="left center-2">
+        return <Link key={key} to={section.path} className={'navLink '+(window.location.pathname == section?.path ? 'active' : '')} data-pr-tooltip={t(`${section.label}`)} data-pr-position="right" data-pr-at="right+5 center-1" data-pr-my="left center-2">
           <Tooltip target=".navLink" />
           <ReactSVG src={section.icon} />
         </Link>

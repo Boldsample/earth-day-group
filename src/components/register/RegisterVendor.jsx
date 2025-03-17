@@ -39,6 +39,7 @@ const RegisterVendor = ({create = false}) => {
     defaultValues: {
       lat: "",
       lng: "",
+      nit: "",
       name: "",
       phone: "",
       email: "",
@@ -72,7 +73,6 @@ const RegisterVendor = ({create = false}) => {
   
   const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
-	console.log('Test')
     let response
     setSending(true)
     if(data?.id)
@@ -119,6 +119,7 @@ const RegisterVendor = ({create = false}) => {
           id: data?.id || "",
           lat: data?.lat || "",
           lng: data?.lng || "",
+          nit: data?.nit || "",
           name: data?.name || "",
           phone: data?.phone || "",
           email: data?.email || "",
@@ -138,7 +139,7 @@ const RegisterVendor = ({create = false}) => {
   return <div className="layout">
     <img className="layout__background" src="/assets/register/image-2.svg" />
     <div className="main__content xpadding-1">
-      <form onSubmit={handleSubmit(onSubmit)} className="fullwidth" autoComplete="off">
+      <form onSubmit={handleSubmit(onSubmit)} className="fullwidth mb-6" autoComplete="off">
         <UploadPhotoInput
           watch={watch}
           control={control}
@@ -171,6 +172,25 @@ const RegisterVendor = ({create = false}) => {
                 message: tGlobalErrors('lettersandUnderscoreOnlyErrorMessage'),
               },
             }} />
+          <TextInput
+            labelName={t('companyNitTitle')}
+            nameInput="nit"
+            control={control}
+            isRequired={false}
+            placeHolderText={t('companyNitPlaceHolderText')}
+            getFormErrorMessage={getFormErrorMessage}
+            rules={{
+              maxLength: {
+                value: 20,
+                message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 20}),
+              },
+              pattern: {
+                value: /^[0-9]+/,
+                message: tGlobal('invalidNitErrorMessage'),
+              },
+            }} />
+        </div>
+        <div className="registerInput__container-x1">
           <TextInput
             control={control}
             nameInput="email"

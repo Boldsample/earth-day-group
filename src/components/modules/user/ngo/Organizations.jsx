@@ -25,9 +25,10 @@ const Organizations = ({type}) => {
     ],
   }
 
-  const loadElements = async (e) => {
-    if(e) e.preventDefault()
-    setElements({data: []})
+  const loadElements = async (e = false) => {
+    //if(e) e.preventDefault()
+    if(!e)
+      setElements({data: []})
     let _filter = { role: `(u.role='social' OR u.role='ngo')` }
     if(filters?.keyword != '')
       _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.description LIKE '%${filters.keyword}%')`)

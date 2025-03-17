@@ -244,6 +244,11 @@ const Map = () => {
         zIndex={zIndex?.home?.index}
         onMouseOut={e => updateZIndex(e, 'home')}
         onMouseOver={e => updateZIndex(e, 'home')} />
+      <MarkerF position={{lat: parseFloat(current?.lat), lng: parseFloat(current?.lng)}} icon={{ url: "/assets/icons/map-pointer.svg", scaledSize: new window.google.maps.Size(60, 60) }}
+        optimized={false}
+        zIndex={zIndex?.home?.index}
+        onMouseOut={e => updateZIndex(e, 'current')}
+        onMouseOver={e => updateZIndex(e, 'current')} />
     </GoogleMap>
   </div>
 }

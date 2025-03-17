@@ -188,8 +188,8 @@ const CompanyDetailedForm = ({ user, setUser, currentUserID }) => {
           maxFractionDigits={watch('currency') == 'cop' ? 0 : 2}
           rules={{
             maxLength: {
-              value: 3,
-              message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 3}),
+              value: 15,
+              message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 15}),
             },
             required: tGlobalErrors(`requiredErrorMessage`),
             pattern: {
