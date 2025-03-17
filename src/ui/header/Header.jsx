@@ -95,7 +95,7 @@ const Header = () => {
         </div>
         <HeaderNotifications />
         <div>
-          <Menu ref={menu} popup style={{ width: '15.6rem' }} model={[
+          <Menu ref={menu} popup style={{ width: 'auto', padding: '0.6rem' }} model={[
             {
               label: t(`global.language`),
               template: <div className="menuDropdown">
