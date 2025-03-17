@@ -1,9 +1,10 @@
 import axios from "axios"
 
+export const baseURL = "https://api.earthdaygroup.com/php"
 export const API = axios.create({
+	baseURL: baseURL,
 	withXSRFToken: true,
 	withCredentials: true,
-	baseURL: "https://earth-day-group.boldsample.com/php",
 	headers: {
 		Accept: 'application/json'
 	}

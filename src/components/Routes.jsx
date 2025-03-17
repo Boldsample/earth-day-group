@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom"
 
 import Header from "@ui/header/Header"
+import { baseURL } from "@services/API"
 import Intro from "@components/intro/Intro"
 import { Pet, CreatePet } from "@modules/ngo"
 import PageAnimate from "@ui/transition/PageAnimate"
@@ -33,7 +34,7 @@ const AppRoutes = () => {
   }
   const initializeNotificationsSource = () => {
     if(notificationsSource) notificationsSource.close()
-    notificationsSource = new EventSource(`https://earth-day-group.boldsample.com/php/notifications/${user?.id}`)
+    notificationsSource = new EventSource(`${baseURL}/notifications/${user?.id}`)
     notificationsSource.onmessage = e => loadNotifications()
     notificationsSource.onerror = (error) => {
       setTimeout(initializeNotificationsSource, 5000);
@@ -65,7 +66,7 @@ const AppRoutes = () => {
     return () => stopNotificationsSource()
   }, [user])
   
-  if(loading) return <Loading />
+  //if(loading) return <Loading />
   return <BrowserRouter basename="">
     <Header />
     <PageAnimate>
