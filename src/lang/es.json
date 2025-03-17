@@ -723,6 +723,7 @@
       "settings": "Configuración",
       "profileBtnText": "Mi Perfil",
       "changePasswordBtnText": "Cambiar Contraseña",
+	  "changePreferences": "Cambiar preferencias",
       "bookmarksBtnText": "Favoritos",
       "preferencesBtnText": "Preferencias",
       "termsAndConditionsBtnText": "Términos y Condiciones",

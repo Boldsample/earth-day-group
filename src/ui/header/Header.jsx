@@ -1,17 +1,17 @@
 import { useRef } from "react"
-import Cookies from "js-cookie"
 import { Menu } from "primereact/menu"
+import { Tooltip } from "primereact/tooltip"
 import { Dropdown } from "primereact/dropdown"
 import { useTranslation } from "react-i18next"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Link, useLocation, useNavigate } from "react-router-dom"
-import { faChevronLeft, faGear, faRightFromBracket, faShoppingCart, faHeart, faBell, faBars, faSliders, faLanguage, faCoins } from "@fortawesome/free-solid-svg-icons"
-import { Tooltip } from "primereact/tooltip"
+import { faChevronLeft, faRightFromBracket, faShoppingCart, faHeart, faBell, faBars, faSliders, faLanguage, faCoins } from "@fortawesome/free-solid-svg-icons"
 
 import Nav from "@ui/nav/Nav"
 import { logoutUser } from "@services/userServices"
 import { resetState } from "@store/slices/usersSlice"
+import { setCurrency } from "@store/slices/globalSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import HeaderNotifications from "@components/modules/notifications/HeaderNotifications"
 
@@ -21,10 +21,11 @@ const Header = () => {
   const navigate = useNavigate()
   const menuMobile = useRef(null);
   const [t, i18n] = useTranslation('translation')
-  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
+  const currency = useSelector((state) => state.global.currency)
   const {headerTitle, prevPage} = useSelector((state) => state.global)
+  const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
 
   const logout = async (e) => {
     if(await logoutUser()){
@@ -117,10 +118,10 @@ const Header = () => {
               template: <div className="menuDropdown">
                 <label><FontAwesomeIcon className="mr-1" icon={faCoins} />{t(`global.currency`)}</label>
                 <Dropdown
+                  value={currency}
                   optionLabel="label"
                   optionValue="value"
-                  value={Cookies.get('edgUserCurrency')}
-                  onChange={(e) => Cookies.set('edgUserCurrency', e.value)}
+                  onChange={(e) => dispatch(setCurrency(e.value))}
                   options={[
                     { label: 'USD', value: 'usd' },
                     { label: 'COP', value: 'cop' },

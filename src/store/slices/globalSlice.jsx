@@ -1,3 +1,4 @@
+import Cookies from "js-cookie"
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
@@ -6,7 +7,8 @@ const initialState = {
   prevPage: [],
   loading: false,
   header: 'false',
-  headerTitle: ''
+  headerTitle: '',
+  currency: Cookies.get("edgUserCurrency") || "usd"
 };
 
 const globalSlice = createSlice({
@@ -30,6 +32,10 @@ const globalSlice = createSlice({
     updateThankyou: (state, action) => {
       state.thankyou = { ...action.payload };
     },
+    setCurrency: (state, action) => {
+      state.currency = action.payload;
+      Cookies.set("edgUserCurrency", action.payload);
+    },
     resetState: (state) => {
       return initialState;
     },
@@ -46,6 +52,7 @@ export const {
   setPrevPage,
   headerTitle,
   loadingData,
+  setCurrency,
   updateThankyou,
   setHeaderTitle,
 } = globalSlice.actions;
