@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import { faChevronLeft, faGear, faRightFromBracket, faShoppingCart, faHeart, faBell, faBars } from "@fortawesome/free-solid-svg-icons"
+import { faChevronLeft, faGear, faRightFromBracket, faShoppingCart, faHeart, faBell, faBars, faSliders, faLanguage, faCoins } from "@fortawesome/free-solid-svg-icons"
 import { Tooltip } from "primereact/tooltip"
 
 import Nav from "@ui/nav/Nav"
@@ -95,11 +95,11 @@ const Header = () => {
         </div>
         <HeaderNotifications />
         <div>
-          <Menu ref={menu} popup style={{ width: '13.6rem' }} model={[
+          <Menu ref={menu} popup style={{ width: '15.6rem' }} model={[
             {
               label: t(`global.language`),
               template: <div className="menuDropdown">
-                <label>{t(`global.language`)}</label>
+                <label><FontAwesomeIcon className="mr-1" icon={faLanguage} />{t(`global.language`)}</label>
                 <Dropdown
                   optionLabel="label"
                   optionValue="value"
@@ -115,7 +115,7 @@ const Header = () => {
             {
               label: t(`global.currency`),
               template: <div className="menuDropdown">
-                <label>{t(`global.currency`)}</label>
+                <label><FontAwesomeIcon className="mr-1" icon={faCoins} />{t(`global.currency`)}</label>
                 <Dropdown
                   optionLabel="label"
                   optionValue="value"
@@ -130,7 +130,7 @@ const Header = () => {
             }
           ]} />
           <Tooltip target=".config" />
-          <Link data-pr-tooltip={tToolTip("settings")} data-pr-position="top" className="config hide__mobile" onClick={(event) => menu.current.toggle(event)}><FontAwesomeIcon icon={faGear} /></Link>
+          <Link data-pr-tooltip={tToolTip("preferences")} data-pr-position="top" className="config hide__mobile" onClick={(event) => menu.current.toggle(event)}><FontAwesomeIcon icon={faSliders} /></Link>
         </div>
         <Tooltip target=".logout" />
         <a className="logout" data-pr-tooltip={tToolTip("logout")} data-pr-position="top" onClick={logout}><FontAwesomeIcon icon={faRightFromBracket} /></a>

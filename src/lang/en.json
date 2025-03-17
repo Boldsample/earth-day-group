@@ -94,11 +94,11 @@
       "inputMaxLengthErrorMessage": "The text exceeds the {{maxLength}}-character limit.",
       "newAdminContextText": "You have registered a new administrator user! We have sent a verification link via email.",
       "error_used": "Already in use.",
-	  "error_not_account": "Account not found for this username or email.",
-	  "error_verify_email": "Please verify your email.",
-	  "error_wrong_password": "Incorrect password.",
-	  "error_user_disabled": "Account disabled. Contact support.",
-	  "error_user_deleted": "This account has been deleted."
+      "error_not_account": "Account not found for this username or email.",
+      "error_verify_email": "Please verify your email.",
+      "error_wrong_password": "Incorrect password.",
+      "error_user_disabled": "Account disabled. Contact support.",
+      "error_user_deleted": "This account has been deleted."
     }
   },
   "intro": {
@@ -1039,6 +1039,7 @@
     "bookmarks": "Bookmarks",
     "notifications": "Notifications",
     "settings": "Settings",
+    "preferences": "Preferences",
     "logout": "Logout",
     "recyclableMaterialsTooltipTitle": "Select the materials you're interested in buying and set your price.",
     "selfPickUpToolTip": "Enabling this option lets others know you're willing to pick up the materials at their location.",

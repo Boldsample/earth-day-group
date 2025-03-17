@@ -94,11 +94,11 @@
       "inputMaxLengthErrorMessage": "El texto supera el límite de {{maxLength}} caracteres.",
       "newAdminContextText": "¡Has registrado un nuevo usuario administrador! Hemos enviado un enlace de verificación por correo electrónico.",
       "error_used": "Ya se encuentra en uso.",
-	  "error_not_account": "No se encontró una cuenta con este usuario o correo electrónico.",
-	  "error_verify_email": "Por favor, verifica tu correo electrónico.",
-	  "error_wrong_password": "Contraseña incorrecta.",
-	  "error_user_disabled": "Esta cuenta ha sido deshabilitada. Contacta con soporte.",
-	  "error_user_deleted": "Esta cuenta ha sido eliminada."
+      "error_not_account": "No se encontró una cuenta con este usuario o correo electrónico.",
+      "error_verify_email": "Por favor, verifica tu correo electrónico.",
+      "error_wrong_password": "Contraseña incorrecta.",
+      "error_user_disabled": "Esta cuenta ha sido deshabilitada. Contacta con soporte.",
+      "error_user_deleted": "Esta cuenta ha sido eliminada."
     }
   },
   "intro": {
@@ -724,7 +724,7 @@
       "profileBtnText": "Mi Perfil",
       "changePasswordBtnText": "Cambiar Contraseña",
       "bookmarksBtnText": "Favoritos",
-      "preferencesBtnText": "Ajustes generales",
+      "preferencesBtnText": "Preferencias",
       "termsAndConditionsBtnText": "Términos y Condiciones",
       "privacyPolicyBtnText": "Política de Privacidad",
       "deleteAccountBtnText": "Eliminar Cuenta",
@@ -1040,6 +1040,7 @@
     "bookmarks": "Favoritos",
     "notifications": "Notificaciones",
     "settings": "Configuración",
+    "preferences": "Preferencias",
     "logout": "Cerrar sesión",
     "recyclableMaterialsTooltipTitle": "Selecciona los materiales que te interesan comprar y establece tu precio.",
     "selfPickUpToolTip": "Habilitar esta opción permite que otros sepan que estás dispuesto a recoger los materiales en su ubicación.",
