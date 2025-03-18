@@ -157,7 +157,7 @@ const RegisterVendor = ({create = false}) => {
             labelName={tGlobal('userNameInputLabel')}
             placeHolderText={tGlobal('userNamePlaceHolderText')}
             onInput={e => {
-              const regex = /^[a-z0-9_]*$/
+              const regex = /^[a-zA-Z0-9_]*$/
               if(!regex.test(e.target.value))
                 e.target.value = e.target.value.replace(/[^a-z0-9_]/g, "")
             }}
@@ -168,7 +168,7 @@ const RegisterVendor = ({create = false}) => {
               },
               required: tGlobalErrors(`requiredErrorMessage`),
               pattern: {
-                value: /^[a-zA-Z_]+$/,
+                value: /^[a-zA-Z0-9_]+$/,
                 message: tGlobalErrors('lettersandUnderscoreOnlyErrorMessage'),
               },
             }} />
@@ -240,7 +240,7 @@ const RegisterVendor = ({create = false}) => {
               placeHolderText={tGlobal('userAddressPlaceHolderText')}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
-                validate: (value) => (watch("lat") && watch("lng")) || tGlobalErrors(`latlngErrorMessage`),
+                validate: (value) => (watch("lat") && watch("lng") && true) || tGlobal(`latlngErrorMessage`),
                 required: tGlobalErrors(`requiredErrorMessage`),
                 pattern: {
                   value: /^\S/,

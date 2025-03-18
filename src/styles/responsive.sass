@@ -1,3 +1,6 @@
+@media (pointer: coarse)
+  .p-tooltip
+    display: none !important
 @media (orientation: landscape)
   html
     font-size: 1.28vw
@@ -221,8 +224,8 @@
         h6
           justify-content: flex-start
           text-align: left
-        .recycle__card
-          width: calc(50% - 0.15rem)
+  .materialsCard__grid .recycle__card
+    width: calc(50% - 0.15rem)
   .emoji__wrapper
     right: -5.3rem !important
   .about
@@ -310,6 +313,12 @@
       flex-wrap: wrap
       & > *
         width: 100%
+  .imagesHub__container
+    .imageCarousel__container
+      .imageUpload__button, .image__container
+        margin-right: 0.5rem
+        height: 6rem
+        width: 6rem
 @media (min-width: 190vh)
   #intro
     .layout__background

@@ -6,6 +6,7 @@ import CompanyDetailedForm from "./CompanyDetailedForm"
 import { useParams } from "react-router"
 import { setHeader } from "@store/slices/globalSlice"
 import { getUser } from "@services/userServices"
+import { useTranslation } from "react-i18next"
 
 const RegisterCompany = ({create = false}) => {
   const dispatch = useDispatch()
@@ -13,6 +14,7 @@ const RegisterCompany = ({create = false}) => {
   const [isDisabled, setIsDisabled] = useState(true)
   const user = useSelector((state) => state.users.userData)
   const [activeIndex, setActiveIndex] = useState(tab == 'materials' ? 1 : 0)
+  const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany' })
   const [userData, setUserData] = useState({ pick_up_from_home: false, images: [], materials: [] })
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const RegisterCompany = ({create = false}) => {
       <img className="layout__background" src="/assets/register/image-2.svg" />
       <div className="main__content xpadding-1">
         <TabView className="fullwidth" activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-          <TabPanel header={activeIndex == 1 ? "Edit previous form" : ""} leftIcon={activeIndex == 1 ? "pi pi-angle-left" : ""}>
+          <TabPanel header={activeIndex == 1 ? t('EditPreviousForm') : ""} leftIcon={activeIndex == 1 ? "pi pi-angle-left" : ""}>
             <CompanyStandardForm user={userData} setUser={setUserData} setActiveIndex={setActiveIndex} />
           </TabPanel>
           <TabPanel disabled={isDisabled}>

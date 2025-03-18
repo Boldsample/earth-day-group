@@ -87,7 +87,7 @@
       "invalidWebAddressErrorMessage": "Por favor, ingresa un enlace de URL válido.",
       "validEmailAddressErrorMessage": "El correo electrónico no es válido.",
       "validPhoneErrorMessage": "Por favor, introduce un número de teléfono válido.",
-      "lettersandUnderscoreOnlyErrorMessage": "Este campo solo puede incluir letras y guiones bajos, no espacios.",
+      "lettersandUnderscoreOnlyErrorMessage": "El nombre de usuario no es válido.",
       "patternErrorMessage": "El campo no debe tener espacios vacíos al principio.",
       "requiredErrorMessage": "Este campo es obligatorio.",
       "latlngErrorMessage": "Selecciona una ubicación de la lista.",
@@ -833,6 +833,7 @@
   },
   "register": {
     "registerCompany": {
+      "EditPreviousForm": "Editar formulario anterior",
       "companyDetailedForm": {
         "formDisclaimerTitle": "Este formulario es opcional y se puede completar más tarde. Si prefieres omitirlo, haz clic en 'Registrarse'.",
         "materialInputsTitle": "Material Reciclable",

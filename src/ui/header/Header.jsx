@@ -16,10 +16,11 @@ import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 import HeaderNotifications from "@components/modules/notifications/HeaderNotifications"
 
 const Header = () => {
-  const menu = useRef(null);
+  let preferences = []
+  const menu = useRef(null)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const menuMobile = useRef(null);
+  const menuMobile = useRef(null)
   const [t, i18n] = useTranslation('translation')
   const user = useSelector((state) => state.users.userData)
   const header = useSelector((state) => state.global.header)
@@ -33,6 +34,39 @@ const Header = () => {
       navigate('/login/')
     }
   }
+  preferences.push({
+    label: t(`global.language`),
+    template: <div className="menuDropdown">
+      <label className='mr-2' ><FontAwesomeIcon className="mr-1" icon={faLanguage} />{t(`global.language`)}</label>
+      <Dropdown
+        optionLabel="label"
+        optionValue="value"
+        value={i18n.language}
+        onChange={(e) => i18n.changeLanguage(e.value)}
+        options={[
+          { label: 'Español', value: 'es' },
+          { label: 'English', value: 'en' },
+        ]}
+      />
+    </div>
+  })
+  if(user?.role != 'shelter' && user?.role != 'admin')
+    preferences.push({
+      label: t(`global.currency`),
+      template: <div className="menuDropdown">
+        <label className='mr-2'><FontAwesomeIcon className="mr-1" icon={faCoins} />{t(`global.currency`)}</label>
+        <Dropdown
+          value={currency}
+          optionLabel="label"
+          optionValue="value"
+          onChange={(e) => dispatch(setCurrency(e.value))}
+          options={[
+            { label: 'USD', value: 'usd' },
+            { label: 'COP', value: 'cop' },
+          ]}
+        />
+      </div>
+    })
 
   return <header className={'main_header '+header}>
 
@@ -67,9 +101,11 @@ const Header = () => {
 
     {user?.id && 
       <div className="navbar-item right-align icons">
-        {!['settings', 'map'].some(s => s == header) && user?.role == 'user' && <>
-          <Tooltip target=".cart" />
-          <FontAwesomeIcon className="cart hide__mobile" data-pr-tooltip={tToolTip("cart")} data-pr-position="top" icon={faShoppingCart} />
+        {!['settings', 'map'].some(s => s == header) && (user?.role == 'user' || user?.role == 'company') && <>
+          {user?.role == 'user' && <>
+            <Tooltip target=".cart" />
+            <FontAwesomeIcon className="cart hide__mobile" data-pr-tooltip={tToolTip("cart")} data-pr-position="top" icon={faShoppingCart} />
+          </>}
           <Tooltip target=".bookmarks" />
           <Link data-pr-tooltip={tToolTip("bookmarks")} data-pr-position="top" className="bookmarks hide__mobile" to="/bookmarks/products/saved/"><FontAwesomeIcon icon={faHeart} /></Link>
         </>}
@@ -96,40 +132,7 @@ const Header = () => {
         </div>
         <HeaderNotifications />
         <div>
-          <Menu ref={menu} popup style={{ width: 'auto', padding: '0.6rem' }} model={[
-            {
-              label: t(`global.language`),
-              template: <div className="menuDropdown">
-                <label className='mr-2' ><FontAwesomeIcon className="mr-1" icon={faLanguage} />{t(`global.language`)}</label>
-                <Dropdown
-                  optionLabel="label"
-                  optionValue="value"
-                  value={i18n.language}
-                  onChange={(e) => i18n.changeLanguage(e.value)}
-                  options={[
-                    { label: 'Español', value: 'es' },
-                    { label: 'English', value: 'en' },
-                  ]}
-                />
-              </div>
-            },
-            {
-              label: t(`global.currency`),
-              template: <div className="menuDropdown">
-                <label className='mr-2'><FontAwesomeIcon className="mr-1" icon={faCoins} />{t(`global.currency`)}</label>
-                <Dropdown
-                  value={currency}
-                  optionLabel="label"
-                  optionValue="value"
-                  onChange={(e) => dispatch(setCurrency(e.value))}
-                  options={[
-                    { label: 'USD', value: 'usd' },
-                    { label: 'COP', value: 'cop' },
-                  ]}
-                />
-              </div>
-            }
-          ]} />
+          <Menu ref={menu} popup style={{ width: 'auto', padding: '0.6rem' }} model={preferences} />
           <Tooltip target=".config" />
           <Link data-pr-tooltip={tToolTip("preferences")} data-pr-position="top" className="config hide__mobile" onClick={(event) => menu.current.toggle(event)}><FontAwesomeIcon icon={faSliders} /></Link>
         </div>

@@ -87,7 +87,7 @@
       "invalidWebAddressErrorMessage": "Please enter a valid Web URL",
       "validPhoneErrorMessage": "Please enter a valid phone number.",
       "validEmailAddressErrorMessage": "It's not a valid e-mail address.",
-      "lettersandUnderscoreOnlyErrorMessage": "This field may only include letters and underscores, not spaces.",
+      "lettersandUnderscoreOnlyErrorMessage": "This is a invalid username.",
       "patternErrorMessage": "The field should not have empty spaces in the beginning.",
       "requiredErrorMessage": "This field is required.",
       "latlngErrorMessage": "Select a location from the list.",
@@ -832,6 +832,7 @@
   },
   "register": {
     "registerCompany": {
+      "EditPreviousForm": "Edit previous form",
       "companyDetailedForm": {
         "formDisclaimerTitle": "This form is optional and can be filled out later. If you’d like to skip it for now, just click 'Sign Up.'",
         "materialInputsTitle": "Recycable Material",

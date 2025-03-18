@@ -194,9 +194,9 @@ const RegisterNgo = ({create = false}) => {
             labelName={tGlobal2('userNameInputLabel')}
             placeHolderText={tGlobal2('userNamePlaceHolderText')}
             onInput={e => {
-              const regex = /^[a-z0-9_]*$/
+              const regex = /^[a-zA-Z0-9_]*$/
               if(!regex.test(e.target.value))
-                e.target.value = e.target.value.replace(/[^a-z0-9_]/g, "")
+                e.target.value = e.target.value.replace(/[^a-zA-Z0-9_]/g, "")
             }}
             rules={{
               maxLength: {
@@ -205,7 +205,7 @@ const RegisterNgo = ({create = false}) => {
               },
               required: tGlobal(`requiredErrorMessage`),
               pattern: {
-                value: /^[a-z0-9_]+$/,
+                value: /^[a-zA-Z0-9_]+$/,
                 message: tGlobal('lettersandUnderscoreOnlyErrorMessage'),
               },
             }} />
@@ -277,7 +277,7 @@ const RegisterNgo = ({create = false}) => {
               placeHolderText={tGlobal2('userAddressPlaceHolderText')}
               onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
               rules={{
-				validate: (value) => (watch("lat") && watch("lng")) || tGlobal(`latlngErrorMessage`),
+				        validate: (value) => (watch("lat") && watch("lng") && true) || tGlobal(`latlngErrorMessage`),
                 required: tGlobal(`requiredErrorMessage`),
                 pattern: {
                   value: /^\S/,

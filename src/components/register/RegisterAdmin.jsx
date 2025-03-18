@@ -122,6 +122,11 @@ const RegisterAdmin = ({create = false}) => {
             getFormErrorMessage={getFormErrorMessage}
             labelName={tGlobal('userNameInputLabel')}
             placeHolderText={tGlobal('userNamePlaceHolderText')}
+            onInput={e => {
+              const regex = /^[a-zA-Z0-9_]*$/
+              if(!regex.test(e.target.value))
+                e.target.value = e.target.value.replace(/[^a-zA-Z0-9_]/g, "")
+            }}
             rules={{
               maxLength: {
                 value: 80,
@@ -129,7 +134,7 @@ const RegisterAdmin = ({create = false}) => {
               },
               required: tGlobalErrors('requiredErrorMessage'),
               pattern: {
-                value: /^[a-zA-Z_]+$/,
+                value: /^[a-zA-Z0-9_]+$/,
                 message: tGlobalErrors('lettersandUnderscoreOnlyErrorMessage'),
               },
             }} />

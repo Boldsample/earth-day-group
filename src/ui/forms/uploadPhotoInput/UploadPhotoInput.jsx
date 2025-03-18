@@ -59,7 +59,7 @@ const UploadPhotoInput = ({
   const renderContent = () => {
     switch (type) {
       case "profilePhotoUpload":
-        return <div className="profile__container">
+        return <div className={`profile__container ${className || ''}`}>
           <div className="profilePicture__container">
             <ProfilePhoto userPhoto={getValues("picture")} />
           </div>

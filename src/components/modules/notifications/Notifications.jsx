@@ -38,7 +38,7 @@ const Notifications = () => {
   }, [page])
   
   return <div className="layout">
-    <img className="layout__background" src="/assets/user/image-5.svg" />
+    <img className="layout__background" src="/assets/user/image-5.svg" style={{display: 'block'}} />
     <div className="main__content verticalcenter-1">
       <h1 className='text-defaultCase'>{t('mainTitle')}</h1>
       {typeof listNotifications?.data == 'undefined' && 

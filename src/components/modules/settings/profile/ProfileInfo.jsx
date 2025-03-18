@@ -102,16 +102,18 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
         </div>)}
       </div>
     }
-    {user?.role == 'company' && <>
+    {user?.role != 'user' && <>
       <div className="settings__card">
         <h4 className="internal mb-1">{t('companyInformationTitle')}</h4>
         <p className="small mb-1">{user?.description}</p>
       </div>
       <div className="settings__card">
-        <div className="settings__table">
-          <h4 className="internal">{t('companyPickUpAtHomeTitle')}</h4>
-          <p>{user?.pick_up_from_home ? t('pickUpAvailable') : t('pickUpNotAvailable')}</p>
-        </div>
+        {user?.role == 'company' && 
+          <div className="settings__table">
+            <h4 className="internal">{t('companyPickUpAtHomeTitle')}</h4>
+            <p>{user?.pick_up_from_home ? t('pickUpAvailable') : t('pickUpNotAvailable')}</p>
+          </div>
+        }
         {user?.images?.length > 0 && <>
           <h4 className="internal text-left">{t('companyGalleryTitle')}</h4>
           <div className="gallery mb-2">

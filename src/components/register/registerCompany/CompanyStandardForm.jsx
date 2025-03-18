@@ -87,10 +87,11 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         description: user?.description || "",
       })
   }, [user]);
-
+console.log(watch("lat"), watch("lng"))
   return <form className="mb-6" onSubmit={handleSubmit(onSubmit)}>
     <UploadPhotoInput
       watch={watch}
+      className="mb-2"
       control={control}
       setError={setError}
       setValue={setValue}
@@ -189,12 +190,20 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
           labelName={tGlobal2('userAddressInputLabel')}
           placeHolderText={tGlobal2('userAddressPlaceHolderText')}
           onKeyDown={e => { if(e.key == 'Enter') e.preventDefault() }}
+          onInput={e => {
+            const regex = /^[a-zA-Z0-9_]*$/
+            if(!regex.test(e.target.value))
+              e.target.value = e.target.value.replace(/[^a-zA-Z0-9_]/g, "")
+          }}
           rules={{
-            validate: (value) => (watch("lat") && watch("lng")) || tGlobal(`latlngErrorMessage`),
-            required: tGlobal(`requiredErrorMessage`),
+            maxLength: {
+              value: 80,
+              message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 80}),
+            },
+            required: tGlobalErrors('requiredErrorMessage'),
             pattern: {
-              value: /^\S/,
-              message: tGlobal('patternErrorMessage'),
+              value: /^[a-zA-Z0-9_]+$/,
+              message: tGlobalErrors('lettersandUnderscoreOnlyErrorMessage'),
             },
           }} />
       </Autocomplete>
