@@ -861,6 +861,7 @@
     "registerAdmin": {},
     "registerNgo": {
       "companyNitTitle": "NIT",
+      "companyNitPlaceHolderText": "112456787",
       "organizationImgsTitle": "Imágenes de la organización",
       "textAreaIniciativeDescriptionTitle": "Iniciativa",
       "iniciativeDescriptionPlaceholder": "Cuéntanos sobre tu iniciativa",
@@ -887,6 +888,8 @@
       "bioDescriptionPlaceholder": "Comparte un poco sobre ti"
     },
     "registerVendor": {
+      "companyNitTitle": "NIT",
+      "companyNitPlaceHolderText": "112456787",
       "deliveryLabel": "Entrega a Domicilio",
       "deliveryChargesPlaceHolder": "Precio de domicilio",
       "selfPickUpLabel": "Recoger en Tienda",

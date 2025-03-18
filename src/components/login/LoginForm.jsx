@@ -37,7 +37,7 @@ const LoginForm = () => {
     },
   })
   
-  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{tGlobal(errors[fieldName]?.message)}</small>
+  const getFormErrorMessage = (fieldName) => errors[fieldName] && <small className="p-error">{errors[fieldName]?.message}</small>
   const onSubmit = async (data) => {
     setSending(true)
     const response = await authUser(data)
@@ -46,7 +46,7 @@ const LoginForm = () => {
       dispatch(getUserData(response.id))
     else{
       setFocus(response.field)
-      setError(response.field, { type: "manual", message: response.message })
+      setError(response.field, { type: "manual", message: tGlobal(response.message) })
     }
   }
   const gLogin = useGoogleLogin({

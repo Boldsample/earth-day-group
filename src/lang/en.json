@@ -860,6 +860,7 @@
     "registerAdmin": {},
     "registerNgo": {
       "companyNitTitle": "NIT",
+      "companyNitPlaceHolderText": "112456787",
       "organizationImgsTitle": "Organization Images",
       "textAreaIniciativeDescriptionTitle": "Initiative",
       "iniciativeDescriptionPlaceholder": "Tell us about your initiative",
@@ -886,6 +887,8 @@
       "bioDescriptionPlaceholder": "Share a little about yourself"
     },
     "registerVendor": {
+      "companyNitTitle": "NIT",
+      "companyNitPlaceHolderText": "112456787",
       "deliveryLabel": "Delivery Available",
       "deliveryChargesPlaceHolder": "Delivery Charges",
       "selfPickUpLabel": "Self Pick up",
