@@ -100,7 +100,7 @@ const Header = () => {
             {
               label: t(`global.language`),
               template: <div className="menuDropdown">
-                <label><FontAwesomeIcon className="mr-1" icon={faLanguage} />{t(`global.language`)}</label>
+                <label className='mr-2' ><FontAwesomeIcon className="mr-1" icon={faLanguage} />{t(`global.language`)}</label>
                 <Dropdown
                   optionLabel="label"
                   optionValue="value"
@@ -116,7 +116,7 @@ const Header = () => {
             {
               label: t(`global.currency`),
               template: <div className="menuDropdown">
-                <label><FontAwesomeIcon className="mr-1" icon={faCoins} />{t(`global.currency`)}</label>
+                <label className='mr-2'><FontAwesomeIcon className="mr-1" icon={faCoins} />{t(`global.currency`)}</label>
                 <Dropdown
                   value={currency}
                   optionLabel="label"

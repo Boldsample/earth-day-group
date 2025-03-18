@@ -21,9 +21,11 @@ const Preferences = () => {
 	return <div className="layout" style={{background: 'white'}}>
 		<div className="main__content centerwidth">
       <div className="fullwidth">
-        <div className="password-container">
+        <div className="settings__card">
+          <p className='mb-3'>{t('global.preferencesDescription')}</p>
+          <div className='flex flex-row'>
           <div className="menuDropdown">
-            <label><FontAwesomeIcon className="mr-1" icon={faLanguage} />{t(`global.language`)}</label>
+            <label className='mr-2'><FontAwesomeIcon className="mr-1" icon={faLanguage} />{t(`global.language`)}</label>
             <Dropdown
               optionLabel="label"
               optionValue="value"
@@ -36,7 +38,7 @@ const Preferences = () => {
             />
           </div>
           <div className="menuDropdown">
-            <label><FontAwesomeIcon className="mr-1" icon={faCoins} />{t(`global.currency`)}</label>
+            <label className='mr-2'><FontAwesomeIcon className="mr-1" icon={faCoins} />{t(`global.currency`)}</label>
             <Dropdown
               value={currency}
               optionLabel="label"
@@ -47,6 +49,7 @@ const Preferences = () => {
                 { label: 'COP', value: 'cop' },
               ]}
             />
+          </div>
           </div>
         </div>
       </div>
