@@ -219,6 +219,7 @@ const RegisterAdmin = ({create = false}) => {
                 },
               }} />
             <PasswordInput
+              labelName=" "
               maxLength={20}
               feedback={false}
               control={control}
@@ -226,7 +227,6 @@ const RegisterAdmin = ({create = false}) => {
               isRequired={true}
               nameInput="password_confirmation"
               getFormErrorMessage={getFormErrorMessage}
-              labelName={tGlobal('userConfirmPasswordInputLabel')}
               placeHolderText={tGlobal('userConfirmPasswordPlaceHolderText')}
               rules={{
                 required: tGlobalErrors('requiredErrorMessage'),

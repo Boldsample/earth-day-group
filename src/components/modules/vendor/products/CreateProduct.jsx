@@ -160,6 +160,7 @@ const CreateProduct = () => {
         </div>
         <div className="registerInput__container-x2">
           <NumberInput
+            maxLength={15}
             mode="currency"
             disabled={false}
             control={control}
@@ -168,11 +169,11 @@ const CreateProduct = () => {
             labelName={t('inputNumberPriceLabel')}
             getFormErrorMessage={getFormErrorMessage}
             placeHolderText={t('inputNumberPricePlaceholderText')}
-			maxFractionDigits={watch('currency') == 'cop' ? 0 : 2}
+            maxFractionDigits={watch('currency') == 'cop' ? 0 : 2}
             rules={{
               maxLength: {
-                value: 3,
-                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 3}),
+                value: 15,
+                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 15}),
               },
               required: tGlobalErrors('requiredErrorMessage'),
               pattern: {
@@ -191,7 +192,7 @@ const CreateProduct = () => {
             placeHolderText={tGlobal('currency')}
             getFormErrorMessage={getFormErrorMessage}
             rules={{
-            required: tGlobalErrors('requiredErrorMessage'),
+              required: tGlobalErrors('requiredErrorMessage'),
             }}
             options={[
             {label: tGlobal('cop'), value: 'cop'},

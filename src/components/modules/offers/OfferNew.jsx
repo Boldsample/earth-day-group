@@ -152,6 +152,7 @@ const OfferNew = () => {
         </div>
         <div className="registerInput__container-x2">
           <NumberInput
+            maxLength={15}
             mode="currency"
             control={control}
             nameInput="price"
@@ -162,7 +163,7 @@ const OfferNew = () => {
 			      maxFractionDigits={watch('delivery_currency') == 'cop' ? 0 : 2}
             rules={{
               maxLength: {
-                value: 7,
+                value: 15,
                 message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 15}),
               },
               required: tGlobalErrors('requiredErrorMessage'),

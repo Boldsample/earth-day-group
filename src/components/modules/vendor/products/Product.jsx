@@ -11,6 +11,7 @@ import { Message } from "primereact/message"
 import Footer from "@ui/footer/Footer"
 import { setHeader } from "@store/slices/globalSlice"
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
+import { useNotifications } from "@components/WebSocket"
 import PhotoGallery from "@components/modules/profile/PhotoGallery"
 import { followProduct, getProduct, updateProduct } from "@services/productServices"
 import ProfileElements from "@ui/templates/ProfileListing/ProfileElements"
@@ -27,6 +28,7 @@ const Product = () => {
   const navigate = useNavigate()
   const [ product, setProduct ] = useState(null)
   const [ confirm, setConfirm ] = useState(null)
+  const { sendNotificationMessage } = useNotifications()
   const user = useSelector((state) => state.users.userData)
   const [tGlobal] = useTranslation('translation', { keyPrefix: 'global'})
   const [t] = useTranslation('translation', { keyPrefix: 'vendor.products.product'})
@@ -43,7 +45,7 @@ const Product = () => {
   }
   const doFollow = async e => {
     e.preventDefault()
-    await followProduct({type: 'product', entity: id, follower: user?.id})
+    await followProduct({type: 'product', entity: id, follower: user?.id, userID: product?.userid}, sendNotificationMessage)
     getProductData()
   }
   const getProductData = async () => {

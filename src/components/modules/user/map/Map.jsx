@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { Button } from 'primereact/button'
 import { Dialog } from 'primereact/dialog'
-import { InputText } from 'primereact/inputtext'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -18,6 +17,7 @@ import { useTranslation } from 'react-i18next'
 import './style.sass'
 import { Checkbox } from 'primereact/checkbox'
 import materials from "@json/recyclableMaterials.json"
+import SearchPlaces from './SearchPlaces'
 
 const Map = () => {
   const dispatch = useDispatch()
@@ -28,10 +28,13 @@ const Map = () => {
   const [ update, setUpdate ] = useState(null)
   const [ markers, setMarkers ] = useState([])
   const [ showFilters, setShowFilters ] = useState(false)
+  const [current, setCurrent] = useState({lat: 0, lng: 0})
+  const [placesService, setPlacesService] = useState(null)
   const user = useSelector((state) => state.users.userData)
-  const [current, setCurrent] = useState({lat: 3.4, lng: -76.54})
+  const [center, setCenter] = useState({lat: 3.4, lng: -76.54})
   const [ filters, setFilters ] = useState({role: [], material: []})
   const [t] = useTranslation('translation', { keyPrefix: 'user.map'})
+  const [autocompleteService, setAutocompleteService] = useState(null)
   const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials'})
   const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
 
@@ -58,7 +61,7 @@ const Map = () => {
   const onPlaceChanged = () => {
     const _location = window.autocomplete.getPlace()?.geometry?.location
     if(_location)
-      setCurrent({ lat: _location.lat(), lng: _location.lng() })
+      setCenter({ lat: _location.lat(), lng: _location.lng() })
   }
   const onLoad = useCallback(map => setMap(map), [])
   const onUnmount = useCallback(map => setMap(null), [])
@@ -90,9 +93,9 @@ const Map = () => {
       _filter.role = "(u.role='"+_role.join("' OR u.role='")+"')"
     }
     if(filters?.material?.length > 0){
-		const _materials = materials.flatMap(m => filters?.material.some(fm => fm == m.label) ? [m.label, ...m.items.map(im => im.label)] : [])
-		_filter.material = "EXISTS (SELECT 1 FROM materials m WHERE (m.type='"+_materials.join("' OR m.type='")+"') AND m.user=u.id)"
-	}
+      const _materials = materials.flatMap(m => filters?.material.some(fm => fm == m.label) ? [m.label, ...m.items.map(im => im.label)] : [])
+      _filter.material = "EXISTS (SELECT 1 FROM materials m WHERE (m.type='"+_materials.join("' OR m.type='")+"') AND m.user=u.id)"
+    }
     _filter['bounds'] = `u.lat BETWEEN ${sw.lat()} AND ${ne.lat()} AND u.lng BETWEEN ${sw.lng()} AND ${ne.lng()}`
     let _response = await getUsers(_filter, 'full', user?.id)
     setMarkers(_response?.data)
@@ -102,11 +105,11 @@ const Map = () => {
       navigator?.geolocation.getCurrentPosition(
         ({ coords: { latitude: lat, longitude: lng } }) => {
           const pos = { lat, lng }
-          setCurrent(pos)
+          setCenter(pos)
         }
       )
     }else
-      setCurrent({ lat: parseFloat(user?.lat), lng: parseFloat(user?.lng) })
+      setCenter({ lat: parseFloat(user?.lat), lng: parseFloat(user?.lng) })
   }
   const getIcon = role => {
     if(role == 'social' || role == 'ngo')
@@ -127,10 +130,22 @@ const Map = () => {
   }, [update])
   useEffect(() => {
     dispatch(setHeader('map'))
-	  if(lat && lng)
-      setCurrent({lat: parseFloat(lat), lng: parseFloat(lng)})
+    if(lat && lng)
+      setCenter({lat: parseFloat(lat), lng: parseFloat(lng)})
     else if(map && user?.default_location)
       toCurrentLocation(user.default_location)
+    if(current.lat == 0){
+      navigator?.geolocation.getCurrentPosition(
+        ({ coords: { latitude: lat, longitude: lng } }) => {
+          const pos = { lat, lng }
+          setCurrent(pos)
+        }
+      )
+    }
+    if (map && window.google) {
+      setAutocompleteService(new window.google.maps.places.AutocompleteService());
+      setPlacesService(new window.google.maps.places.PlacesService(map));
+    }
   }, [user, map])
   
   return <div className="layout fullwidth no-overflow map-layout">
@@ -145,11 +160,17 @@ const Map = () => {
     || null}
     <div className="navbar-item insection_header">
       <div className="edg-search">
-        <Autocomplete className="input__wrapper" onLoad={setAutocomplete} onPlaceChanged={onPlaceChanged}>
-          <InputText
-            placeholder={t('inputSearchPlaceHolder')}
-            className="p-inputtext" />
-        </Autocomplete>
+        <SearchPlaces 
+          map={map} 
+          setCenter={setCenter} 
+          updateBounds={updateBounds} 
+          placesService={placesService} 
+          autocompleteService={autocompleteService}
+          onUserSelect={(userId) => {
+            const marker = markers.find(m => m.id === userId)
+            if (marker)
+              setShow(marker)
+          }} />
         <Tooltip target=".homeLocation" />
         <a className='homeLocation' data-pr-tooltip={tToolTip("homeLocation")} data-pr-position="bottom" onClick={() => toCurrentLocation('home')}><FontAwesomeIcon icon={faHouse} /></a>
         <Tooltip target=".currentLocation" />
@@ -191,19 +212,19 @@ const Map = () => {
         <div className="radio"><Checkbox inputId="role_shelter" name="role" value="shelter" checked={filters?.role.includes('shelter')} onChange={updateFilter} /> <label htmlFor="role_shelter">{t('filtersModalCheckBoxShelters')}</label></div>
         <div className="radio"><Checkbox inputId="role_vendor" name="role" value="vendor" checked={filters?.role.includes('vendor')} onChange={updateFilter} /> <label htmlFor="role_vendor">{t('filtersModalCheckBoxShops')}</label></div>
         <div className="radio"><Checkbox inputId="role_social" name="role" value="social" checked={filters?.role.includes('social')} onChange={updateFilter} /> <label htmlFor="role_social">{t('filtersModalCheckBoxSocialOrg')}</label></div>
-	    </>}
+      </>}
       {(filters?.role.includes('company') || user?.role == 'company') && <>
         <h5 className="text-dark-blue fullwidth font-bold mt-2">{t('filtersModalTitle')}</h5>
         <div className="radio"><Checkbox inputId="material_all" name="material" value="all" checked={filters?.material?.length == 0} onChange={updateFilter} /> <label htmlFor="material_all">{t('filtersModalCheckBoxAll')}</label></div>
-		    {materials?.map(category => 
-        	<div key={category?.code} className="radio"><Checkbox inputId={`material_${category?.code}`} name="material" value={category?.label} checked={filters?.material.includes(category?.label)} onChange={updateFilter} /> <label htmlFor={`material_${category?.code}`}>{tMaterial(category?.label)}</label></div>
-		    )}
+        {materials?.map(category => 
+          <div key={category?.code} className="radio"><Checkbox inputId={`material_${category?.code}`} name="material" value={category?.label} checked={filters?.material.includes(category?.label)} onChange={updateFilter} /> <label htmlFor={`material_${category?.code}`}>{tMaterial(category?.label)}</label></div>
+        )}
       </>}
     </div>
     <GoogleMap
       zoom={16}
       onLoad={onLoad}
-      center={current}
+      center={center}
       onUnmount={onUnmount}
       onBoundsChanged={updateBounds}
       options={{
@@ -216,18 +237,18 @@ const Map = () => {
       mapContainerStyle={{ width: '100%', height: '100%' }}>
       <MarkerClustererF>
         {clusterer => <div>
-          {markers?.map((marker, key) => {
+          {markers?.map((marker) => {
             return marker?.lat && marker?.lng && 
-              <MarkerF key={key} data-key={key} position={{lat: parseFloat(marker?.lat), lng: parseFloat(marker?.lng)}} icon={{
+              <MarkerF key={marker?.id} data-key={marker?.id} position={{lat: parseFloat(marker?.lat), lng: parseFloat(marker?.lng)}} icon={{
                   url: getIcon(marker.role),
                   scaledSize: new window.google.maps.Size(60, 60)
                 }}
                 optimized={false}
-                zIndex={zIndex[key]?.index}
+                zIndex={zIndex[marker?.id]?.index}
                 onClick={() => setShow(marker)}
-                onMouseOut={e => updateZIndex(e, key)}
-                onMouseOver={e => updateZIndex(e, key)}>
-                {zIndex[key]?.info && 
+                onMouseOut={e => updateZIndex(e, marker?.id)}
+                onMouseOver={e => updateZIndex(e, marker?.id)}>
+                {zIndex[marker?.id]?.info && 
                   <InfoBoxF>
                     <a className="map-card" onClick={() => setShow(marker)}>
                       <ProfilePhoto userPhoto={marker.picture} />

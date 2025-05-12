@@ -80,8 +80,8 @@ export const addImages = async (formData) => {
 }
 
 export const getNotifications = async (filter = {}, page = null) => {
-  const pages = page ? `&page=${page?.first}&rows=${page?.rows}` : ''
-  const response = await API.get(`/get/notifications&user=${filter.user}&page=${pages}`)
+  const pages = page != null ? `&page=${page?.first}&rows=${page?.rows}` : ''
+  const response = await API.get(`/get/notifications&user=${filter.user}${pages}`)
   return response?.data
 }
 
@@ -123,7 +123,9 @@ export const getUsers = async (filter = {}, type = 'min', user = null, page = nu
   }
 }
 
-export const followUser = async (formData) => {
+export const followUser = async (formData, sendNotificationMessage = () => {}) => {
   const {data} = await API.post(`/follow/`, formData)
+  if(formData?.user)
+    sendNotificationMessage(formData?.user, 'Nueva notificación')
   return data?.id
 }

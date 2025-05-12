@@ -2,19 +2,19 @@ import { Dialog } from "primereact/dialog"
 import { useEffect, useState } from "react"
 
 import ProfileInfo from "./ProfileInfo"
+import { useSelector } from "react-redux"
+import { useNotifications } from '@components/WebSocket'
 import { followUser, getUser } from "@services/userServices"
-import { useDispatch, useSelector } from "react-redux"
-import { followUserData } from "@store/slices/usersSlice"
 
 const ProfileProvider = ({profile, reloadList = () => false, children}) => {
-  const dispatch = useDispatch()
   const [ user, setUser ] = useState({})
   const [ show, setShow ] = useState(false)
+  const { sendNotificationMessage } = useNotifications()
   const userData = useSelector((state) => state.users.userData)
 
   const hidePopup = () => setShow(false)
   const doFollow = async () => {
-    await followUser({user: user.id, follower: userData?.id})
+    await followUser({user: user.id, follower: userData?.id}, sendNotificationMessage)
     loadUser(true)
   }
   const loadUser = async (force = false) => {

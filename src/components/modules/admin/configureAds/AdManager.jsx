@@ -73,8 +73,8 @@ const AdManager = ({type, adSpecs, bannerTitle, bannerDescription}) => {
         let response
         setSending(true)
         const image = data?.image
-        data.start_date = data?.ad_duration[0]?.toISOString()
-        data.end_date = data?.ad_duration[1]?.toISOString()
+        data.start_date = data?.ad_duration[0]?.toISOString().slice(0, 10)
+        data.end_date = data?.ad_duration[1]?.toISOString().slice(0, 10)
         delete data?.ad_duration
         delete data?.image
         response = await addAd(data)

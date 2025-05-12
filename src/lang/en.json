@@ -562,8 +562,12 @@
     "notification": {
       "offerTitleText": "New Offer",
       "offerBodyText": "Sent you and offer",
+	  "reportTitleText": "You have reported",
+	  "reportBodyText": "We will review the report and get in touch with you.",
       "messageTitleText": "New Message",
       "messageBodyText": "Sent you a Message",
+      "followTitleText": "New Follower",
+      "followBodyText": "started following you",
       "mainTitle": "Notifications",
       "noNotificationsFoundText": "You don't have any notifications at the moment."
     }
@@ -1065,6 +1069,11 @@
     "sendOffer": "Send message",
     "selfPickupAvailable": "This recycling company is willing to collect the materials at the location you specify.",
     "selfPickupNotAvailable": "This recycling company does not offer material pickup services.",
-    "priceForRecyclableGoodsToolTip": "These are the materials and unit prices the recycling company is interested in purchasing"
+    "priceForRecyclableGoodsToolTip": "These are the materials and unit prices the recycling company is interested in purchasing",
+    "reporteduser": "Your user was reported.",
+    "reportedproduct": "Your product was reported.",
+    "reportedpet": "Your pet was reported.",
+    "reportedoffer": "Your offer was reported.",
+    "reportedDetail": "Please bear with us as we assess the situation. We’ll reach out as soon as we’ve reviewed the report. Thank you for your patience."
   }
 }

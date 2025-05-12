@@ -1,19 +1,18 @@
 import { Link } from 'react-router-dom'
 import { Button } from 'primereact/button'
-import EmojiPicker from 'emoji-picker-react'
+import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 import { InputNumber } from 'primereact/inputnumber'
 import { useNavigate, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceSmile, faSearch } from '@fortawesome/free-solid-svg-icons'
-import { useTranslation } from 'react-i18next'
 
 import { getUser } from '@services/userServices'
 import OfferInfo from '@modules/offers/OfferInfo'
 import { ProfileProvider } from '@components/modules'
 import ProfilePhoto from '@ui/profilePhoto/ProfilePhoto'
-import { callNotifications } from '@store/slices/usersSlice'
+import { useNotifications } from '@components/WebSocket'
 import MultiUseCard from '@ui/cards/multiUseCard/MultiUseCard'
 import { getOffer, updateOffer } from '@services/offersServices'
 import { getMessages, sendMessage } from '@services/chatServices'
@@ -21,6 +20,8 @@ import { setHeader, setHeaderTitle } from '@store/slices/globalSlice'
 
 import './styles.sass'
 import { getReport, updateReport } from '@services/reportServices'
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 
 const Chat = () => {
   let last = 0
@@ -39,6 +40,7 @@ const Chat = () => {
   const [outgoing, setOutgoing] = useState(null)
   const [offerInfo, setOfferInfo] = useState(null)
   const [reportInfo, setReportInfo] = useState(null)
+  const { sendNotificationMessage } = useNotifications()
   const { contact, offer, report, pet, petName } = useParams()
   const userId = useSelector((state) => state.users.userData.id)
   const [t] = useTranslation('translation', { keyPrefix: 'chat.chat' })
@@ -47,25 +49,20 @@ const Chat = () => {
   const [message, setMessage] = useState(pet ? t('adoptPet', {name: petName}) : '')
   
   const callMessages = async () => {
+    if (calling) return;
     setCalling(true)
     setSent(false)
-    const _last = messages?.length ? messages[messages.length - 1].date : 0
+    const _last = messages?.length ? messages[messages.length - 1]?.date ?? 0 : 0;
     const _add = await getMessages({user: userId, contact: outgoing?.id, last: _last})
-    dispatch(callNotifications({user: userId}))
-    if(_add?.length)
-      setMessages(prev => {
-        const _prev = prev?.length ? [...prev] : []
-        const _new = [..._prev, ..._add]
-        return _new
-      })
-    else
+    if (_add?.length)
+      setMessages(prev => [...(prev || []), ..._add])
+    else if (messages == null)
       setMessages([])
     setCalling(false)
   }
-  const handleEmoji = e => {
-    setOpen(false)
-    setMessage(prev => prev + e.emoji)
-    input.current.focus()
+  const handleEmoji = emoji => {
+    setMessage(prev => prev + emoji.native)
+    input.current?.focus()
   }
   const handleClickOutside = e => {
     if(!emojiWrapper.current.contains(e.target))
@@ -73,7 +70,7 @@ const Chat = () => {
   }
   const send = async e => {
     e.preventDefault()
-    if(await sendMessage({ message, incoming: userId, outgoing: outgoing?.id })){
+    if(await sendMessage({ message, incoming: userId, outgoing: outgoing?.id }, sendNotificationMessage)){
       setSent(true)
       setMessage("")
     }
@@ -81,7 +78,7 @@ const Chat = () => {
   const hidePopup = () => setShow(false)
   const sendOffer = async e => {
     e.preventDefault()
-    if(await sendMessage({ type: 'offer', offer, incoming: userId, outgoing: outgoing?.id, price: proposal })){
+    if(await sendMessage({ type: 'offer', offer, incoming: userId, outgoing: outgoing?.id, price: proposal }, sendNotificationMessage)){
       navigate(`/chat/${contact}/`)
       setSent(true)
       setMessage("")
@@ -95,15 +92,25 @@ const Chat = () => {
   }
 
   useEffect(() => {
+    if (!calling && outgoing) {
+      const lastMessageDate = messages?.length ? messages[messages.length - 1]?.date : 0
+      const hasNewMessageNotification = notifications.some(notification =>
+        notification?.type === 'message' &&
+        notification?.incoming === outgoing?.id &&
+        notification?.date > String(lastMessageDate)
+      )
+      if (messages == null || sent || hasNewMessageNotification)
+        callMessages()
+    }
+  }, [sent, calling, outgoing, notifications]);
+  
+  useEffect(() => {
     if(report && !reportInfo)
       getReport(report).then(data => {
         setReportInfo(data)
       })
     if(offer && !offerInfo)
       getOffer(offer).then(data => setOfferInfo(data))
-    const newMessage = notifications?.some(n => n?.incoming == outgoing?.id && n.outgoing == userId)
-    if(!calling && outgoing && (messages == null || newMessage || sent))
-      callMessages()
   }, [sent, outgoing])
   useEffect(() => {
     dispatch(setHeaderTitle(''))
@@ -133,7 +140,7 @@ const Chat = () => {
         <div className="chat__messages">
           <ProfileProvider profile={profile} setProfile={setProfile}>
           {messages?.map((message, key) => {
-            const same = last == message.incoming ? 'same ' : ''
+            const same = message.incoming == last ? 'same ' : ''
             last = message.incoming
             return <div key={key} className={'chat_card ' + same + (message.incoming == userId ? 'user' : 'contact')}>
               <MultiUseCard 
@@ -150,7 +157,9 @@ const Chat = () => {
           <input ref={input} value={message} type="text" placeholder={t('chatBoxPlaceHolderText')} onChange={e => setMessage(e.target.value)} />
           <div className="emoji">
             <FontAwesomeIcon icon={faFaceSmile} onClick={() => setOpen(!open)} />
-            <div ref={emojiWrapper} className="emoji__wrapper"><EmojiPicker open={open} onEmojiClick={handleEmoji} /></div>
+            {open && 
+              <div ref={emojiWrapper} className="emoji__wrapper"><Picker data={data} set="native" onEmojiSelect={handleEmoji} /></div>
+            }
           </div>
           <button className={!message ? '' : 'dark-blue'} type="submit" disabled={!message}>{t('sendBtnText')}</button>
         </form> 

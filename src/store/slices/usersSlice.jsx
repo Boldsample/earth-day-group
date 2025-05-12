@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
-import { followUser, getNotifications, getUser, getUsers, updateUser } from "@services/userServices"
+import { getNotifications, getUser, getUsers, updateUser } from "@services/userServices"
 
 const initialState = {
   loading: false,
@@ -31,27 +31,20 @@ export const updateUserData = createAsyncThunk("users/updateUserData", async ({d
   delete res.password_confirmation
   return res;
 })
-export const followUserData = createAsyncThunk("users/followUser", async (data) => {
-  const _id = await followUser(data)
-  const res = await getUser(_id);
-  delete res.password
-  delete res.password_confirmation
-  return res;
-})
 
 export const callNotifications = createAsyncThunk("users/notifications", async (data) => {
   const info = {
     offer: { title: 'New offer', message: 'sent you a offer.' },
     message: { title: 'New message', message: 'sent you a message.' },
-	default: { title: 'New notification', message: 'sent you a notification.' }
+	  default: { title: 'New notification', message: 'sent you a notification.' }
   }
-  const res = await getNotifications(data, {first: 0, page: 1, rows: 6});
+  const res = await getNotifications(data);
   if(res?.data.length === 0) return []
   const _res = res?.data.map(notification => {
     const {title, message} = info[notification?.type] || info['default'] 
     let _notification = {...notification}
     _notification.title = title
-    _notification.message = message
+    _notification.message = _notification?.type == 'report' ? _notification?.message : message
     return _notification
   })
   return _res;
@@ -90,9 +83,6 @@ const usersSlice = createSlice({
       if (action.error.code) state.error = action.error.code;
     });
     builder.addCase(updateUserData.fulfilled, (state, action) => {
-      state.userData = action.payload;
-    });
-    builder.addCase(followUserData.fulfilled, (state, action) => {
       state.userData = action.payload;
     });
     builder.addCase(callNotifications.fulfilled, (state, action) => {

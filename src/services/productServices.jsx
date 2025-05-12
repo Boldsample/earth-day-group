@@ -44,7 +44,9 @@ export const getProducts = async (filter, page, user = null, ex = false) => {
   }
 }
 
-export const followProduct = async (senddata) => {
+export const followProduct = async (senddata, sendNotificationMessage = () => {}) => {
   const {data} = await API.post(`/follow/`, senddata)
+  if(senddata?.userid)
+    sendNotificationMessage(senddata?.userid, 'Nueva notificación')
   return data.id
 }

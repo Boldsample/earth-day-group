@@ -8,16 +8,19 @@ import { faCircleChevronRight, faPlus, faSearch, faTimes } from "@fortawesome/fr
 import { useTranslation } from 'react-i18next'
 
 import { setHeader } from "@store/slices/globalSlice"
+import { useNotifications } from "@components/WebSocket"
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 import { followProduct, getProducts } from "@services/productServices"
 import { getPets } from "@services/petServices"
+import { ProgressSpinner } from "primereact/progressspinner"
 
 const ProfileElements = ({entity = null, type = 'products', user, same = false, related = false, types = []}) => {
   const dispatch = useDispatch()
   const skeletonPlaceHolder = ["", "", "", ""]
   const [elements, setElements] = useState(null)
   const [filters, setFilters] = useState({keyword: ''})
+  const { sendNotificationMessage } = useNotifications()
   const loggedUser = useSelector((state) => state.users.userData)
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
   const [page, setPage] = useState({first: 0, page: 0, rows: related ? 3 : 7})
@@ -26,7 +29,7 @@ const ProfileElements = ({entity = null, type = 'products', user, same = false, 
 
   const doFollow = async (id) => {
     const _type = type == 'products' ? 'product' : 'pet'
-    await followProduct({type: _type, entity: id, follower: loggedUser?.id})
+    await followProduct({type: _type, entity: id, follower: loggedUser?.id}, sendNotificationMessage)
     loadElements()
   }
   const loadElements = async e => {
@@ -77,9 +80,9 @@ const ProfileElements = ({entity = null, type = 'products', user, same = false, 
       </div>
     </div>
     <div className={`templateCards_grid cards-${elements?.data?.length}`}>
-      {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
-        skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
-      || (elements?.total > 0 && <>
+      {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && <ProgressSpinner />
+        //skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
+      || ((elements?.total > 0 || loggedUser?.role != 'user') && <>
         {same && 
           <MultiUseCard type="add" action={type == 'products' ? '/product/new/' : '/pet/new/'} listType={type} />
         }

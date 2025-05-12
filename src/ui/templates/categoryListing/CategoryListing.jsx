@@ -1,35 +1,37 @@
-import { useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useRef } from "react"
+import { useTranslation } from 'react-i18next'
 import { InputText } from "primereact/inputtext"
 import { Paginator } from "primereact/paginator"
+import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronDown, faCircleChevronRight, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
-import { useTranslation } from 'react-i18next'
+import { faChevronDown, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
 
 import Footer from "@ui/footer/Footer"
+import { useNotifications } from "@components/WebSocket"
 import { followProduct } from "@services/productServices"
-import { followUserData } from "@store/slices/usersSlice"
 import MultiUseCard from "@ui/cards/multiUseCard/MultiUseCard"
 import CardSkeleton from "@ui/skeletons/cardSkeleton/CardSkeleton"
 
 import "../styles.sass"
 import AdBanner from "@ui/banners/AdBanner"
 import { followUser } from "@services/userServices"
+import { ProgressSpinner } from "primereact/progressspinner"
 
 const CategoryListing = ({content, section, elements, filters, reloadElements = () => false, setFilters = () => false, setReset = () => false, page, setPage = () => false}) => {
   const dispatch = useDispatch()
   const bannerScroll = useRef(null)
   const skeletonPlaceHolder = ["", "", "", ""]
+  const { sendNotificationMessage } = useNotifications()
   const user = useSelector((state) => state.users.userData)
   const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.categoryListing'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
 
-  const doFollow = async id => {
+  const doFollow = async (id, userID) => {
     if(elements?.card == 'product' || elements?.card == 'pet')
-      await followProduct({type: elements?.card, entity: id, follower: user?.id})
+      await followProduct({type: elements?.card, entity: id, follower: user?.id, userID }, sendNotificationMessage)
     else
-      await followUser({user: id, follower: user?.id})
+      await followUser({user: id, follower: user?.id}, sendNotificationMessage)
     reloadElements(true)
   }
   const doScroll = (e) => {
@@ -90,8 +92,8 @@ const CategoryListing = ({content, section, elements, filters, reloadElements = 
               {content?.types?.map((type, key) => <Link key={key} to={type?.url} className={section == type?.id ? 'active' : ''}>{type?.label}</Link>)}
             </div>
             <div className={`templateCards_grid cards-${elements?.data?.length}`}>
-              {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && 
-                skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
+              {typeof elements?.total == 'undefined' && elements?.data?.length == 0 && <ProgressSpinner />
+                //skeletonPlaceHolder.map((skeleton, key) =>  <CardSkeleton key={key} />)
               || (elements?.total > 0 && 
                 elements?.data?.map(element => <MultiUseCard key={element.id} type={elements?.card || 'company'} data={element} action={doFollow} bookmark={user?.role != 'admin' && element?.user != user?.id} />)
               ) ||

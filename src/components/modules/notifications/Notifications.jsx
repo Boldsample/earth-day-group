@@ -18,10 +18,12 @@ const Notifications = () => {
   const info = {
     offer: { title: t('offerTitleText'), message: t('offerBodyText') },
     message: { title: t('messageTitleText'), message: t('messageBodyText')},
+    follow: { title: t('followTitleText'), message: t('followBodyText')},
     report: { title: t('messageTitleText'), message: t('messageBodyText')},
   }
   const callNotifications = async () => {
     const res = await getNotifications({user: user?.id}, page)
+    console.log(notification.type)
     const _res = res?.data?.map(notification => {
       const {title, message} = info[notification.type]
       let _notification = {...notification}

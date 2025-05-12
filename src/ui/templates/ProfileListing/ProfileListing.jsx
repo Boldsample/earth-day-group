@@ -11,13 +11,15 @@ import { useTranslation } from 'react-i18next'
 import { Message } from "primereact/message"
 
 import "../styles.sass"
-import AdBanner from "@ui/banners/AdBanner"
-import materials from "@json/recyclableMaterials.json"
-import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
 import { Link } from "react-router-dom"
+import AdBanner from "@ui/banners/AdBanner"
 import InfoTooltip from "@ui/tooltip/InfoTooltip"
+import materials from "@json/recyclableMaterials.json"
+import { useNotifications } from "@components/WebSocket"
+import RecycleMaterialCard from "@ui/cards/recycleMaterialCard/RecycleMaterialCard"
 
 const ProfileListing = ({type, profile, reloadElements = () => false}) => {
+  const { sendNotificationMessage } = useNotifications()
   const user = useSelector((state) => state.users.userData)
   const [moreMaterials, setMoreMaterials] = useState(false)
   const [t] = useTranslation('translation', { keyPrefix: 'ui.templates.profileListing.profileListing'})
@@ -36,7 +38,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
   ]
 
   const doFollow = async id => {
-    await followUser({user: id, follower: user?.id})
+    await followUser({user: id, follower: user?.id}, sendNotificationMessage)
     reloadElements()
   }
   const showMaterials = () => {
@@ -67,7 +69,7 @@ const ProfileListing = ({type, profile, reloadElements = () => false}) => {
       }
     </>
   }
-console.log(profile?.materials)
+
   if(!profile?.role)
     return
   return <>

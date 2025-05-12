@@ -562,8 +562,12 @@
     "notification": {
       "offerTitleText": "Nueva Oferta",
       "offerBodyText": "te ha enviado una oferta",
+	  "reportTitleText": "Has sido reportado",
+	  "reportBodyText": "Revisaremos el reporte y nos comunicaremos contigo.",
       "messageTitleText": "Nuevo Mensaje ",
       "messageBodyText": "te ha enviado un mensaje",
+      "followTitleText": "Nuevo Seguidor",
+      "followBodyText": "empezó a seguir tu perfil",
       "mainTitle": "Notificaciones",
       "noNotificationsFoundText": "No tienes notificaciones en este momento."
     }
@@ -1066,6 +1070,11 @@
     "sendOffer": "Enviar mensaje",
     "selfPickupAvailable": "Esta empresa de reciclaje está dispuesta a recoger los materiales en la ubicación que le indiques.",
     "selfPickupNotAvailable": "Esta empresa de reciclaje no ofrece servicios de recogida de los materiales.",
-    "priceForRecyclableGoodsToolTip": "Estos son los materiales y precios por unidad que la empresa de reciclaje está interesada en comprar"
+    "priceForRecyclableGoodsToolTip": "Estos son los materiales y precios por unidad que la empresa de reciclaje está interesada en comprar",
+    "reporteduser": "Su usuario fue reportado",
+    "reportedproduct": "Su producto fue reportado",
+    "reportedpet": "Su mascota fue reportada",
+    "reportedoffer": "Su oferta fue reportada",
+    "reportedDetail": "Por favor, tengan paciencia mientras evaluamos la situación. Nos pondremos en contacto con ustedes en cuanto revisemos el informe. Gracias por su paciencia."
   }
 }

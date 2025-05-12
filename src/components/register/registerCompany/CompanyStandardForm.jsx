@@ -87,7 +87,7 @@ const CompanyStandardForm = ({ user, setUser, setActiveIndex }) => {
         description: user?.description || "",
       })
   }, [user]);
-console.log(watch("lat"), watch("lng"))
+  
   return <form className="mb-6" onSubmit={handleSubmit(onSubmit)}>
     <UploadPhotoInput
       watch={watch}
@@ -198,13 +198,9 @@ console.log(watch("lat"), watch("lng"))
           rules={{
             maxLength: {
               value: 80,
-              message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 80}),
+              message: tGlobal(`inputMaxLengthErrorMessage`, {maxLength: 80}),
             },
-            required: tGlobalErrors('requiredErrorMessage'),
-            pattern: {
-              value: /^[a-zA-Z0-9_]+$/,
-              message: tGlobalErrors('lettersandUnderscoreOnlyErrorMessage'),
-            },
+            required: tGlobal('requiredErrorMessage'),
           }} />
       </Autocomplete>
     </div>
@@ -286,14 +282,14 @@ console.log(watch("lat"), watch("lng"))
             },
           }} />
         <PasswordInput
+          labelName=" "
           maxLength={20}
           feedback={false}
           control={control}
-          showLabel={false}
+          showLabel={true}
           isRequired={true}
           nameInput="password_confirmation"
           getFormErrorMessage={getFormErrorMessage}
-          labelName={tGlobal2('userConfirmPasswordInputLabel')}
           placeHolderText={tGlobal2('userConfirmPasswordPlaceHolderText')}
           rules={{
             required: tGlobal(`requiredErrorMessage`),

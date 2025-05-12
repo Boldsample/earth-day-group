@@ -11,6 +11,7 @@ import store from "@store/store"
 import lang_es from "@lang/es.json"
 import lang_en from "@lang/en.json"
 import { useEffect, useState } from "react"
+import NotificationsProvider from "@components/WebSocket"
 
 i18next
   .use(LanguageDetector)
@@ -51,7 +52,9 @@ const Providers = ({ children }) => {
         <LoadScript googleMapsApiKey="AIzaSyA6Ml_ldHM_SaImawJPIitRZ8T-EJGl2VI" libraries={['places']} loading="async">
           <Provider store={store}>
             <PrimeReactProvider>
-              {children}   
+              <NotificationsProvider>
+                {children}
+              </NotificationsProvider>
             </PrimeReactProvider>
           </Provider>
         </LoadScript>

@@ -1,49 +1,45 @@
-import { useEffect, useRef, useState } from "react";
+import useWebSocket from "react-use-websocket"
+import { useDispatch, useSelector } from "react-redux"
+import { createContext, useContext, useEffect, useState } from "react"
 
-const useWebSocket = (userId) => {
-    const socketRef = useRef(null);
-    const [notifications, setNotifications] = useState([]);
+import { callNotifications } from "@store/slices/usersSlice"
 
-    useEffect(() => {
-        if (!userId) return; // Si no hay usuario, no conectamos WebSocket
+const NotificationsContext = createContext()
 
-        console.log(`🔌 Conectando WebSocket para el usuario ${userId}...`);
+export const NotificationsProvider = ({ children }) => {
+  const dispatch = useDispatch()
+  const [socketUrl, setSocketUrl] = useState(null)
+  const user = useSelector((state) => state.users.userData)
+  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl, {
+    reconnectAttempts: 1,
+    reconnectInterval: 30000,
+    shouldReconnect: () => true,
+    onOpen: () => dispatch(callNotifications({user: user?.id}))
+  })
 
-        socketRef.current = new WebSocket("wss://api.earthdaygroup.com:8080");
+  const sendNotificationMessage = (receiverId, message) => {
+    if (!receiverId || !message) return;
+    const data = JSON.stringify({ action: "notify", user_id: receiverId, message });
+    sendMessage(data);
+  };
 
-        socketRef.current.onopen = () => {
-            console.log("✅ WebSocket conectado");
+  useEffect(() => {
+    if (user?.id)
+      setSocketUrl(`wss://api.earthdaygroup.com:8080?user_id=${user?.id}`);
+  }, [user]);
+  useEffect(() => {
+    dispatch(callNotifications({user: user?.id}))
+  }, [lastMessage]);
 
-            // Enviar el user_id al backend para asociar la sesión
-            socketRef.current.send(JSON.stringify({
-                action: "register",
-                user_id: userId
-            }));
-        };
+  return (
+    <NotificationsContext.Provider value={{ sendNotificationMessage, readyState }}>
+      {children}
+    </NotificationsContext.Provider>
+  );
+}
 
-        socketRef.current.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            console.log("📩 Notificación recibida:", data);
+export const useNotifications = () => {
+    return useContext(NotificationsContext);
+}
 
-            // Agregar notificación al estado
-            setNotifications(prev => [...prev, data]);
-        };
-
-        socketRef.current.onerror = (error) => {
-            console.error("❌ WebSocket Error:", error);
-        };
-
-        socketRef.current.onclose = () => {
-            console.log("⚠️ WebSocket desconectado");
-        };
-
-        return () => {
-            console.log("🔴 Cerrando WebSocket...");
-            socketRef.current?.close();
-        };
-    }, [userId]); // Se ejecuta solo cuando cambia userId
-
-    return { notifications };
-};
-
-export default useWebSocket;
+export default NotificationsProvider

@@ -6,44 +6,37 @@ import { BrowserRouter, Route } from "react-router-dom"
 import Header from "@ui/header/Header"
 import Intro from "@components/intro/Intro"
 import { Pet, CreatePet } from "@modules/ngo"
-import useWebSocket from "@components/WebSocket"
 import PageAnimate from "@ui/transition/PageAnimate"
+import { getUserData } from "@store/slices/usersSlice"
 import { Product, CreateProduct } from "@modules/vendor"
 import Profile from "@components/modules/profile/Profile"
+//import useWebSocketConnection from "@components/WebSocket"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
-import { callNotifications, getUserData } from "@store/slices/usersSlice"
 import { Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo, RegisterAdmin } from "@components/register"
 import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Preferences, Terms, PrivacyPolicy, DeleteAccount, CreateReport, Users, Reports, Products, Pets, AdminOffers, ConfigureAds } from "@components/modules"
-
-
-let notificationsSource = null;
-
-const Loading = () => {
-  return <div>Cargando...</div>;
-};
+import { ProgressSpinner } from "primereact/progressspinner"
 
 const AppRoutes = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const user = useSelector((state) => state.users.userData)
-  //const { notifications } = useWebSocket(user?.id);
-
-  // useWebSocket(user?.id, (data) => {
-  //   dispatch(callNotifications({user: user?.id}))
-  // });
+  const hasTokenInURL = (window.location.pathname.startsWith('/login/') && window.location.pathname !== '/login/') || (window.location.pathname.startsWith('/recover/') && window.location.pathname !== '/recover/')
 
   useEffect(() => {
     const _id = Cookies.get('edgActiveUser')
-    if(!user?.id && _id != 'undefined' && user == null)
-      dispatch(getUserData(_id)).then(() => setLoading(false))
-    else if(user?.id){
+    if (!hasTokenInURL) {
+      if (!user?.id && _id !== 'undefined' && user == null)
+        dispatch(getUserData(_id)).then(() => setLoading(false))
+      else if (user?.id)
+        setLoading(false)
+    } else
       setLoading(false)
-    }
-  }, [user])
+  }, [user, dispatch, hasTokenInURL])
   
-  //if(loading) return <Loading />
+  if(loading) 
+    return <ProgressSpinner />
   return <BrowserRouter basename="">
     <Header />
     <PageAnimate>

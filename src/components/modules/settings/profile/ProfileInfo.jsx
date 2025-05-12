@@ -20,6 +20,7 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
   const navigate = useNavigate()
   const [tMaterial] = useTranslation('translation', { keyPrefix: 'material'})
   const [t] = useTranslation('translation', { keyPrefix: 'settings.profile.profileInfo'})
+  const [tNgo] = useTranslation('translation', { keyPrefix: 'register.registerNgo'})
 
   const sendRecover = async () => {
     const response = await recoverUser({email: user?.email})
@@ -96,6 +97,16 @@ const ProfileInfo = ({user, doFollow = () => false, same = false, type = 'settin
     </div>
     {(same || user?.role == 'company') && 
       <div className="settings__card">
+        {(user?.role == 'ngo' || user?.role == 'social' || user?.role == 'shelter') && 
+          <div className="settings__table">
+            <h4 className="internal">{tNgo('organizationTypeLabel')}</h4>
+            <p>{
+              (user?.role == 'ngo' && tNgo('shelterRadioOption')+', '+tNgo('socialOrgRadioOption')) ||
+              (user?.role == 'social' && tNgo('socialOrgRadioOption')) ||
+              (user?.role == 'shelter' && tNgo('shelterRadioOption'))
+            }</p>
+          </div>
+        }
         {userData().map((data, key) => <div key={key} className="settings__table">
           <h4 className="internal">{data.key}</h4>
           <p>{data.value}</p>

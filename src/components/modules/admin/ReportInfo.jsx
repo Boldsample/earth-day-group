@@ -103,7 +103,7 @@ const ReportInfo = ({ show, report, onHide }) => {
 	}
 	return <>
 		<OfferInfo type="full" show={detail.show} offer={detail} onHide={hidePopup}  />
-		<Dialog className="dialog-dimnesions reports" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")} >
+		<Dialog className="dialog-dimensions reports" visible={show} onHide={onHide} draggable={false} header={t("manageReportMainTitle")} >
 		  <Stepper ref={stepperRef}>
 			<StepperPanel header={t("reportSummaryTitle")}>
 				{/* {report?.status == 'success' && report?.aid !== user?.id && !report?.aid || report?.aid !== user?.id &&

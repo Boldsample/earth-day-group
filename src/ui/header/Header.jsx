@@ -50,7 +50,7 @@ const Header = () => {
       />
     </div>
   })
-  if(user?.role != 'shelter' && user?.role != 'admin')
+  if(user?.role != 'shelter')
     preferences.push({
       label: t(`global.currency`),
       template: <div className="menuDropdown">
@@ -101,7 +101,7 @@ const Header = () => {
 
     {user?.id && 
       <div className="navbar-item right-align icons">
-        {!['settings', 'map'].some(s => s == header) && (user?.role == 'user' || user?.role == 'company') && <>
+        {!['settings'].some(s => s == header) && (user?.role == 'user' || user?.role == 'company') && <>
           {user?.role == 'user' && <>
             <Tooltip target=".cart" />
             <FontAwesomeIcon className="cart hide__mobile" data-pr-tooltip={tToolTip("cart")} data-pr-position="top" icon={faShoppingCart} />
@@ -143,10 +143,10 @@ const Header = () => {
 
     {!user?.id && 
       <div className="navbar-item right-align">
-    {['login'].some(s => s != header) && 
-          <Link className="button small dark-blue" to="/login/">{t(`global.login`)}</Link>
-    }
-        <button className="hide__mobile small" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
+        {['login'].some(s => s != header) && 
+              <Link className="button small dark-blue" to="/login/">{t(`global.login`)}</Link>
+        }
+        <button className="small" onClick={() => i18n.changeLanguage(i18n.language == 'es' ? 'en' : 'es')}>ES/EN</button>
       </div>
     }
   </header>

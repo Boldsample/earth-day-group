@@ -301,19 +301,20 @@ const RegisterVendor = ({create = false}) => {
             labelName={t('selfPickUpLabel')} />
           {!!watch('delivery_available') && <>
             <NumberInput
+              maxLength={15}
               mode="currency"
               control={control}
               nameInput="delivery_charges"
-              isRequired={watch('delivery_available') == 1}
               getFormErrorMessage={getFormErrorMessage}
               labelName={t('deliveryChargesPlaceHolder')}
+              isRequired={watch('delivery_available') == 1}
               placeHolderText={t('deliveryChargesPlaceHolder')}
               maxFractionDigits={watch('delivery_currency') == 'cop' ? 0 : 2}
               rules={{
-                maxLength: {
-                  value: 12,
-                  message: tGlobalErrors(`inputMaxLengthErrorMessage`, {maxLength: 12}),
-                },
+              maxLength: {
+                value: 15,
+                message: tGlobalErrors('inputMaxLengthErrorMessage', {maxLength: 15}),
+              },
                 required: watch('delivery_available') == 1 ? tGlobalErrors(`requiredErrorMessage`) : undefined,
                 pattern: {
                   value: /^\S/,
@@ -381,6 +382,7 @@ const RegisterVendor = ({create = false}) => {
                 },
               }} />
             <PasswordInput
+              labelName=" "
               maxLength={20}
               feedback={false}
               showLabel={false}
@@ -388,7 +390,6 @@ const RegisterVendor = ({create = false}) => {
               isRequired={true}
               nameInput="password_confirmation"
               getFormErrorMessage={getFormErrorMessage}
-              labelName={tGlobal('userConfirmPasswordInputLabel')}
               placeHolderText={tGlobal('userConfirmPasswordPlaceHolderText')}
               rules={{
                 required: user?.id ? undefined : tGlobalErrors(`requiredErrorMessage`),

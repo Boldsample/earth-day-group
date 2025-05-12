@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom"
 import { Button } from "primereact/button"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBookmark as faBookmarkLine, faHeart as faHeartLine } from "@fortawesome/free-regular-svg-icons"
-import { faBell, faCheck, faChevronRight, faImage, faLocationDot, faBookmark, faHeart, faXmark, faAdd } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from 'react-i18next'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHeart as faHeartLine } from "@fortawesome/free-regular-svg-icons"
+import { faBell, faCheck, faChevronRight, faImage, faLocationDot, faHeart, faXmark, faAdd } from "@fortawesome/free-solid-svg-icons"
 
 import ProfilePhoto from "@ui/profilePhoto/ProfilePhoto"
 
 import "./multiusecard.sass"
 import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
 
 const MultiUseCard = ({
   type,
@@ -20,9 +21,15 @@ const MultiUseCard = ({
   action = null,
   bookmark = true,
 }) => {
+  const [followed, setFollowed] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const [tReport] = useTranslation('translation', { keyPrefix: 'admin.reportInfo' })
   const [t, i18n] = useTranslation('translation', { keyPrefix: 'ui.cards.multiUseCard'})
+  const [tNotif] = useTranslation('translation', { keyPrefix: 'notifications.notification' })
+
+  useEffect(() => {
+    setFollowed(data?.followed)
+  }, [data])
 
   const renderCardContent = () => {
     switch (type) {
@@ -37,13 +44,22 @@ const MultiUseCard = ({
           showDate = t('notificationHours', {hours: diffInHours})
         else
           showDate = receivedDate.toLocaleDateString(i18n.language == 'es' ? 'es-CO' : 'en-US', { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });
+        const info = {
+          offer: { title: tNotif('offerTitleText'), message: tNotif('offerBodyText') },
+          message: { title: tNotif('messageTitleText'), message: tNotif('messageBodyText')},
+          follow: { title: tNotif('followTitleText'), message: tNotif('followBodyText')},
+          report: { title: tNotif('reportTitleText'), message: tNotif('reportBodyText') },
+        }
         return <Link to={data?.link}>
           <header>
             <FontAwesomeIcon icon={faBell} />
-            <h5>{data?.title}</h5>
+            <h5>{info[data?.type].title}</h5>
             <small>{showDate}</small>
           </header>
-          <p><b>{data?.user}</b> {data?.message}</p>
+          {data?.type == 'report' && 
+            <p><b>{info[data?.type].title}</b> {info[data?.type].message}</p> ||
+            <p><b>{data?.user}</b> {info[data?.type].message}</p>
+          }
         </Link>
       case 'offer':
         return <div className="main__container">
@@ -103,10 +119,11 @@ const MultiUseCard = ({
           e.preventDefault()
           action({id: data?.incoming, update: new Date(), type: 'chat'})
         }
-		    const isEmoji = (text) => {
-          const emojiRegex = /\p{Extended_Pictographic}/gu;
-          const emojis = text.match(emojiRegex);
-          return emojis && emojis.length <= 3 && text.trim() === emojis[0];
+        const isEmoji = (text) => {
+          const emojiRegex = /((?:\p{Emoji}(?:\uFE0F|\p{Emoji_Modifier})?)(?:\u200D(?:\p{Emoji}(?:\uFE0F|\p{Emoji_Modifier})?))*)/gu;
+          const stripped = text.replace(/\s/g, '');
+          const matches = [...stripped.matchAll(emojiRegex)];
+          return matches.length === 1 && stripped === matches[0][0];
         };
         return <div className={'main__container'}>
           <a onClick={doActionChat}><ProfilePhoto userPhoto={data?.picture} /></a>
@@ -183,15 +200,16 @@ const MultiUseCard = ({
       case 'company':
         const doActionCompany = e => {
           e.preventDefault()
+          setFollowed(!followed)
           action(data?.id)
         }
         return <div className="main__container">
           <Link to={`/${data?.role}/${data?.username}/`}><ProfilePhoto userPhoto={data?.picture} icon={faImage} /></Link>
           <div className="content">
             <h5 className="font-bold"><Link to={`/${data?.role}/${data?.username}/`}>{data?.name}</Link></h5>
-			      {bookmark && 
-            	<Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
-			      }
+            {bookmark && 
+              <Link className="bookmark" onClick={doActionCompany}><FontAwesomeIcon icon={followed ? faHeart : faHeartLine} /></Link>
+            }
             <span className="text-gray"><FontAwesomeIcon icon={faLocationDot} /> {data?.address}</span>
             <Link className="button small dark-blue" to={`/${data?.role}/${data?.username}/`}>{t('seeMoreBtnText')} <FontAwesomeIcon icon={faChevronRight} /></Link>
           </div>
@@ -205,14 +223,15 @@ const MultiUseCard = ({
       case 'product':
         const doActionProduct = e => {
           e.preventDefault()
-          action(data?.id)
+          setFollowed(!followed)
+          action(data?.id, data?.userid)
         }
         return <div className="main__container">
           <Link to={`/product/${data?.id}/`}><ProfilePhoto userPhoto={data?.picture} icon={faImage} /></Link>
           <div className="content">
             <div className="price">{parseInt(data?.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
             <h5 className="font-bold"><Link to={`/product/${data?.id}/`}>{data?.name}</Link></h5>
-			      {bookmark && 
+            {bookmark && 
               <Link className="bookmark" onClick={doActionProduct}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
             }
             <Link className="button small dark-blue" to={`/product/${data?.id}/`}>{t('seeMoreBtnText')} <FontAwesomeIcon icon={faChevronRight} /></Link>
@@ -221,13 +240,14 @@ const MultiUseCard = ({
       case 'pet':
         const doActionPet = e => {
           e.preventDefault()
-          action(data?.id)
+          setFollowed(!followed)
+          action(data?.id, data?.userid)
         }
         return <div className="main__container">
           <Link to={`/pet/${data?.id}/`}><ProfilePhoto userPhoto={data?.picture} icon={faImage} /></Link>
           <div className="content">
             <h5 className="font-bold"><Link to={`/pet/${data?.id}/`}>{data?.name}</Link></h5>
-			      {bookmark && 
+            {bookmark && 
               <Link className="bookmark" onClick={doActionPet}><FontAwesomeIcon icon={data.followed ? faHeart : faHeartLine} /></Link>
             }
             <small>{data?.gender} - {data?.age} Year{data?.age > 1 ? 's' : ''} old</small>

@@ -46,7 +46,7 @@ const Users = ({type}) => {
     setFilters(prev => ({...prev, [name]: value}))
     if(!wait){
       setPage({first: 0, page: 0, rows: 6})
-      setReset(true)
+      setResetFields(true)
     }
   }
   const callUsers = async (ex = false) =>{
@@ -58,7 +58,7 @@ const Users = ({type}) => {
     if(filters?.state != '')
       _filter['state'] = `u.state='${filters.state}'`
     if(filters?.keyword != '')
-      _filter['keyword'] = encodeURIComponent(`(u.name LIKE '%${filters.keyword}%' OR u.email LIKE '%${filters.keyword}%')`)
+      _filter['keyword'] = encodeURIComponent(`(LOWER(u.name) LIKE LOWER('%${filters.keyword}%') OR LOWER(u.email) LIKE LOWER('%${filters.keyword}%'))`)
     const _users = await getUsers(_filter, 'full', user?.id, page, ex)
     if(!ex)
       setUsers(_users)
@@ -127,7 +127,7 @@ const Users = ({type}) => {
         onChange={e => updateFilters('keyword', e.target.value, e.target.value != '')} />
       <Button className="small dark-blue" type="button" onClick={() => callUsers()}>{tGlobal('search')}</Button>
       <Button className="small red-state" type="button" onClick={() => {
-        setReset(true)
+        setResetFields(true)
         setFilters({state: '', role: '', keyword: ''})
       }}>{tGlobal('reset')}</Button>
       <Tooltip target=".downloadUsers" />
@@ -141,7 +141,7 @@ const Users = ({type}) => {
   useEffect(() => {
     callUsers()
     setResetFields(false)
-  }, [page, resetFields])
+  }, [page, resetFields, filters])
   useEffect(() => {
     dispatch(setHeader('user'))
   }, [user])
