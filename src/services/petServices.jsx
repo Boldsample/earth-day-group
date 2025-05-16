@@ -2,7 +2,6 @@ import { API } from "./API"
 
 export const addPet = async (data) => {
   const response = await API.post("/add/pets", data)
-  console.log(response)
   return response?.data
 }
 

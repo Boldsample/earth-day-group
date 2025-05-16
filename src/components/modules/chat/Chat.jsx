@@ -43,23 +43,43 @@ const Chat = () => {
   const { sendNotificationMessage } = useNotifications()
   const { contact, offer, report, pet, petName } = useParams()
   const userId = useSelector((state) => state.users.userData.id)
+  const [hasMoreOldMessages, setHasMoreOldMessages] = useState(true)
   const [t] = useTranslation('translation', { keyPrefix: 'chat.chat' })
   const notifications = useSelector((state) => state.users.notifications)
   const [tMaterial] = useTranslation('translation', { keyPrefix: 'materials' })
   const [message, setMessage] = useState(pet ? t('adoptPet', {name: petName}) : '')
   
-  const callMessages = async () => {
+  const callMessages = async (type = 'forward', previousScrollHeight = null) => {
     if (calling) return;
     setCalling(true)
     setSent(false)
-    const _last = messages?.length ? messages[messages.length - 1]?.date ?? 0 : 0;
-    const _add = await getMessages({user: userId, contact: outgoing?.id, last: _last})
-    if (_add?.length)
-      setMessages(prev => [...(prev || []), ..._add])
-    else if (messages == null)
-      setMessages([])
+    let queryDate = 0
+    if (type === 'forward')
+      queryDate = messages?.length ? messages[messages.length - 1]?.date ?? 0 : 0
+    else if (type === 'backward')
+      queryDate = messages?.length ? messages[0]?.date ?? 0 : 0
+    const _add = await getMessages({user: userId, contact: outgoing?.id, last: queryDate, direction: type}, sendNotificationMessage)
+    if (_add?.length){
+      setMessages(prev => {
+        const _messages = type === 'backward' ? [..._add, ...(prev || [])] : [...(prev || []), ..._add]
+        setTimeout(() => {
+          if (type === 'backward' && previousScrollHeight !== null) {
+            if (chatWrapper?.current)
+              chatWrapper.current.scrollTop = chatWrapper.current.scrollHeight - previousScrollHeight
+          } else
+            scrollToBottom()
+        }, 10);
+        return _messages
+      })
+    } else {
+      if (type === 'backward')
+        setHasMoreOldMessages(false)
+      else if (messages == null)
+        setMessages([])
+    }
     setCalling(false)
   }
+  
   const handleEmoji = emoji => {
     setMessage(prev => prev + emoji.native)
     input.current?.focus()
@@ -70,7 +90,7 @@ const Chat = () => {
   }
   const send = async e => {
     e.preventDefault()
-    if(await sendMessage({ message, incoming: userId, outgoing: outgoing?.id }, sendNotificationMessage)){
+    if(await sendMessage({ message, incoming: outgoing?.id, outgoing: userId }, sendNotificationMessage)){
       setSent(true)
       setMessage("")
     }
@@ -78,32 +98,69 @@ const Chat = () => {
   const hidePopup = () => setShow(false)
   const sendOffer = async e => {
     e.preventDefault()
-    if(await sendMessage({ type: 'offer', offer, incoming: userId, outgoing: outgoing?.id, price: proposal }, sendNotificationMessage)){
+    if(await sendMessage({ type: 'offer', offer, incoming: outgoing?.id, outgoing: userId, price: proposal }, sendNotificationMessage)){
       navigate(`/chat/${contact}/`)
       setSent(true)
       setMessage("")
     }
   }
   const replyOffer = async (offer, proposal, reject = false) => {
-    if(await updateOffer(offer, proposal, reject, {incoming: userId, outgoing: outgoing?.id})){
+    if(await updateOffer(offer, proposal, reject, {incoming: outgoing?.id, outgoing: userId})){
       setMessages(null)
       setSent(true)
     }
   }
+  const scrollToBottom = () => {
+    if (chatWrapper.current)
+      chatWrapper.current.scrollTo({ behavior: 'smooth', top: chatWrapper.current.scrollHeight })
+  }
 
   useEffect(() => {
+    dispatch(setHeaderTitle(''))
+    dispatch(setHeader('settings'))
+    if(!outgoing)
+      getUser(contact).then(data => setOutgoing(data))
+    scrollToBottom()
+  }, [])
+  useEffect(() => {
+    const handleScroll = async () => {
+      console.log(messages?.length)
+      console.log(calling, !messages?.length, chatWrapper?.current?.scrollTop === 0)
+      if (!chatWrapper?.current || calling || !messages?.length || !hasMoreOldMessages) return
+      if (chatWrapper.current.scrollTop === 0)
+        callMessages('backward', chatWrapper.current?.scrollHeight)
+    }
+    if (chatWrapper?.current)
+      chatWrapper?.current.addEventListener('scroll', handleScroll);
+    if (window.visualViewport)
+      window.visualViewport.addEventListener('resize', scrollToBottom)
+    else
+      window.addEventListener('resize', scrollToBottom)
+    return () => {
+      if (chatWrapper?.current)
+        chatWrapper?.current.removeEventListener('scroll', handleScroll);
+      if (window.visualViewport)
+        window.visualViewport.removeEventListener('resize', scrollToBottom)
+      else
+        window.removeEventListener('resize', scrollToBottom)
+    }
+  }, [messages, calling, hasMoreOldMessages])
+  useEffect(() => {
+    setMessages(null);
+    setHasMoreOldMessages(true);
+  }, [outgoing?.id]);
+  useEffect(() => {
     if (!calling && outgoing) {
-      const lastMessageDate = messages?.length ? messages[messages.length - 1]?.date : 0
+      const lastMessageDate = messages?.length ? messages[messages.length - 1]?.date : 0;
       const hasNewMessageNotification = notifications.some(notification =>
         notification?.type === 'message' &&
-        notification?.incoming === outgoing?.id &&
+        notification?.outgoing === outgoing?.id &&
         notification?.date > String(lastMessageDate)
       )
       if (messages == null || sent || hasNewMessageNotification)
-        callMessages()
+        callMessages();
     }
-  }, [sent, calling, outgoing, notifications]);
-  
+  }, [sent, outgoing, notifications]);
   useEffect(() => {
     if(report && !reportInfo)
       getReport(report).then(data => {
@@ -112,16 +169,6 @@ const Chat = () => {
     if(offer && !offerInfo)
       getOffer(offer).then(data => setOfferInfo(data))
   }, [sent, outgoing])
-  useEffect(() => {
-    dispatch(setHeaderTitle(''))
-    dispatch(setHeader('settings'))
-    if(!outgoing)
-      getUser(contact).then(data => setOutgoing(data))
-    chatWrapper.current.scrollTo({
-      behavior: 'smooth',
-      top: chatWrapper.current.scrollHeight,
-    })
-  }, [messages])
   useEffect(() => {
     if(emojiWrapper.current)
       document.addEventListener("mousedown", handleClickOutside)
@@ -142,7 +189,7 @@ const Chat = () => {
           {messages?.map((message, key) => {
             const same = message.incoming == last ? 'same ' : ''
             last = message.incoming
-            return <div key={key} className={'chat_card ' + same + (message.incoming == userId ? 'user' : 'contact')}>
+            return <div key={key} className={'chat_card ' + same + (message.outgoing == userId ? 'user' : 'contact')}>
               <MultiUseCard 
                 type="chat"
                 action={setProfile}

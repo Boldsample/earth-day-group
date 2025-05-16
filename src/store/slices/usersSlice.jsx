@@ -10,6 +10,7 @@ const initialState = {
   userData: null,
   inputField: "",
   notifications: [],
+  preRegisterUser: null,
 }
 
 export const getUsersList = createAsyncThunk("users/getUsersList", async (filter) => {
@@ -55,6 +56,9 @@ const usersSlice = createSlice({
   name: "users",
   reducers: {
     resetState: state => { return {...initialState} },
+    setPreRegisterUser: (state, action) => {
+      state.preRegisterUser = action.payload
+    }
     //updateUser: (state, action) => state.userData = { ...action.payload },
   },
   extraReducers(builder) {
@@ -97,6 +101,7 @@ export const {
   addUserList,
   addCleanData,
   captureInputData,
+  setPreRegisterUser,
   storeUserRegistrationData,
 } = usersSlice.actions;
 

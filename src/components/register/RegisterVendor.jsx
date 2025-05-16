@@ -22,9 +22,32 @@ const RegisterVendor = ({create = false}) => {
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global'})
+  const preRegisterUser = useSelector((state) => state.users.preRegisterUser)
   const [tGlobalErrors] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [t, i18n] = useTranslation('translation', { keyPrefix: 'register.registerVendor'})
   const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
+  const defaultValues = {
+    lat: "",
+    lng: "",
+    nit: "",
+    name: "",
+    phone: "",
+    email: "",
+    website: "",
+    picture: "",
+    address: "",
+    username: "",
+    password: "",
+    role: "vendor",
+    description: "",
+    accept_terms: false,
+    accept_policy: false,
+    delivery_charges: "",
+    pick_up_from_home: 0,
+    delivery_available: 0,
+    password_confirmation: "",
+    delivery_currency: i18n.language == 'es' ? 'cop' : 'usd'
+  }
   const {
     watch,
     reset,
@@ -35,30 +58,7 @@ const RegisterVendor = ({create = false}) => {
     getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      lat: "",
-      lng: "",
-      nit: "",
-      name: "",
-      phone: "",
-      email: "",
-      website: "",
-      picture: "",
-      address: "",
-      username: "",
-      password: "",
-      role: "vendor",
-      description: "",
-      accept_terms: false,
-      accept_policy: false,
-      delivery_charges: "",
-      pick_up_from_home: 0,
-      delivery_available: 0,
-      password_confirmation: "",
-      delivery_currency: i18n.language == 'es' ? 'cop' : 'usd'
-    },
-  })
+  } = useForm({defaultValues})
 
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
   const onPlaceChanged = e => {
@@ -111,6 +111,15 @@ const RegisterVendor = ({create = false}) => {
 
   useEffect(() => {
     dispatch(setHeader("register"))
+    if (preRegisterUser) {
+      reset({
+        ...defaultValues,
+        name: preRegisterUser.name || "",
+        email: preRegisterUser.email || "",
+        picture: preRegisterUser.picture || "",
+      })
+      return
+    }
     if(!create){
       const _username = username || user?.username
       getUser(_username, user?.id).then(data => {

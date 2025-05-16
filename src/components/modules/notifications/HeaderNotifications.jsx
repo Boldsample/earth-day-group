@@ -36,7 +36,6 @@ const HeaderNotifications = () => {
     <div className="list">
       {notifications?.length > 0 && notifications.map((notification, key) => 
         {
-          console.log(notification)
           if(notification?.type != 'report')
             return <MultiUseCard 
               key={key}

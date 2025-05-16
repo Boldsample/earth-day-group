@@ -16,7 +16,7 @@ const Terms = () => {
     dispatch(setHeader('settings'))
     dispatch(setHeaderTitle('termsAndConditionsBtnText'))
   }, [])
-  console.log(i18n)
+  
   return <div className="layout">
     <img className="layout__background hide__mobile" src="/assets/register/image-2.svg" />
     <div className="main__content">

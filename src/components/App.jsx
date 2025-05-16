@@ -9,23 +9,31 @@ import 'primeicons/primeicons.css'
 
 const App = () => {
   useEffect(() => {
-    document.addEventListener("wheel", function (event) {
-      if (event.ctrlKey) {
-        event.preventDefault();
-      }
-    }, { passive: false });
-    document.addEventListener("keydown", function (event) {
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        (event.key === "+" || event.key === "-" || event.key === "0")
-      ) {
-        event.preventDefault();
-      }
-    });
+    const preventZoom = (event) => {
+      if (event.ctrlKey || (event.metaKey && (event.key === '+' || event.key === '-' || event.key === '0')))
+        event.preventDefault()
+    }
+    const preventWheelZoom = (event) => {
+      if (event.ctrlKey)
+        event.preventDefault()
+    }
+    document.addEventListener('wheel', preventWheelZoom, { passive: false })
+    document.addEventListener('keydown', preventZoom)
+
+    const updateVh = () => {
+      const vh = (window.visualViewport?.height || window.innerHeight) * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    }
+    updateVh()
+    window.visualViewport?.addEventListener('resize', updateVh)
+    window.addEventListener('resize', updateVh)
+
     return () => {
-      document.removeEventListener("wheel", function () { });
-      document.removeEventListener("keydown", function () { });
-    };
+      document.removeEventListener('wheel', preventWheelZoom)
+      document.removeEventListener('keydown', preventZoom)
+      window.visualViewport?.removeEventListener('resize', updateVh)
+      window.removeEventListener('resize', updateVh)
+    }
   }, []);
   
   return <Providers>

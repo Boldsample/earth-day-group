@@ -48,11 +48,10 @@
         .lang, .logout
           display: none
     .nav__container
-      bottom: 0
       height: auto
       left: 0
       position: fixed
-      top: auto
+      top: calc((var(--vh) * 100) - 4rem)
       width: 100%
       z-index: 10
       .box
@@ -131,9 +130,12 @@
     .registerInput__container-age, .registerInput__container-weight
       width: 100%
   .chat__scroll
-    height: calc(100vh - 17rem - 60px)
+    height: calc(var(--vh) * 100 - 17.5rem)
   .chat__input
     padding: 0
+    position: fixed
+    top: calc((var(--vh) * 100) - 8rem)
+    width: calc(100% - 2.5rem)
   .insection_header
     left: 4rem
     margin: 0

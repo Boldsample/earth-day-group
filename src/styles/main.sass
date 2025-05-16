@@ -26,10 +26,18 @@ html, body
   background-color: #FFFBEB
   color: var(--grey)
   font-weight: 400
-  min-height: 100vh
+  height: 100%
   margin: 0
   overflow-x: hidden
   padding: 0
+html:has(.chat__scroll), body:has(.chat__scroll)
+  -webkit-overflow-scrolling: auto
+  overflow: hidden
+  height: calc(var(--vh) * 100)
+  max-height: calc(var(--vh) * 100)
+  min-height: initial
+  overscroll-behavior: none
+  touch-action: none
 body
   font-size: 1rem
   line-height: 1.3em
@@ -834,6 +842,8 @@ button, .button
 
 $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.5em", "6": "3em", "7": "3.5em", "8": "4em")
 @each $name, $space in $spaces
+  .ma-#{$name}
+    margin: #{$space} !important
   .mt-#{$name}
     margin-top: #{$space} !important
   .mr-#{$name}
@@ -842,6 +852,8 @@ $spaces: ("0": "0", "1": "0.5em", "2": "1em", "3": "1.5em", "4": "2em", "5": "2.
     margin-bottom: #{$space} !important
   .ml-#{$name}
     margin-left: #{$space} !important
+  .pa-#{$name}
+    padding: #{$space} !important
   .pt-#{$name}
     padding-top: #{$space} !important
   .pr-#{$name}

@@ -26,9 +26,29 @@ const RegisterNgo = ({create = false}) => {
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+  const preRegisterUser = useSelector((state) => state.users.preRegisterUser)
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerNgo'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
   const [tToolTip] = useTranslation('translation', { keyPrefix: 'tooltips' })
+  const defaultValues = {
+    lat: "",
+    lng: "",
+    nit: "",
+    name: "",
+    phone: "",
+    email: "",
+    images: [],
+    website: "",
+    picture: "",
+    address: "",
+    password: "",
+    username: "",
+    role: "shelter",
+    description: "",
+    accept_terms: false,
+    accept_policy: false,
+    password_confirmation: "",
+  }
   const {
     watch,
     reset,
@@ -39,27 +59,7 @@ const RegisterNgo = ({create = false}) => {
     getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      lat: "",
-      lng: "",
-      nit: "",
-      name: "",
-      phone: "",
-      email: "",
-      images: [],
-      website: "",
-      picture: "",
-      address: "",
-      password: "",
-      username: "",
-      role: "shelter",
-      description: "",
-      accept_terms: false,
-      accept_policy: false,
-      password_confirmation: "",
-    },
-  })
+  } = useForm({defaultValues})
 
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
   const onPlaceChanged = e => {
@@ -126,6 +126,15 @@ const RegisterNgo = ({create = false}) => {
 
   useEffect(() => {
     dispatch(setHeader("register"))
+    if (preRegisterUser) {
+      reset({
+        ...defaultValues,
+        name: preRegisterUser.name || "",
+        email: preRegisterUser.email || "",
+        picture: preRegisterUser.picture || "",
+      });
+      return
+    }
     if(!create){
       const _username = username || user?.username
       getUser(_username, user?.id).then(data => {

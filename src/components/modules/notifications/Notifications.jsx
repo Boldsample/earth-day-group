@@ -23,7 +23,6 @@ const Notifications = () => {
   }
   const callNotifications = async () => {
     const res = await getNotifications({user: user?.id}, page)
-    console.log(notification.type)
     const _res = res?.data?.map(notification => {
       const {title, message} = info[notification.type]
       let _notification = {...notification}

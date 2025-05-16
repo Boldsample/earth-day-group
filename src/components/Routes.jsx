@@ -2,6 +2,7 @@ import Cookies from "js-cookie"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { BrowserRouter, Route } from "react-router-dom"
+import { ProgressSpinner } from "primereact/progressspinner"
 
 import Header from "@ui/header/Header"
 import Intro from "@components/intro/Intro"
@@ -10,13 +11,11 @@ import PageAnimate from "@ui/transition/PageAnimate"
 import { getUserData } from "@store/slices/usersSlice"
 import { Product, CreateProduct } from "@modules/vendor"
 import Profile from "@components/modules/profile/Profile"
-//import useWebSocketConnection from "@components/WebSocket"
 import { Forgot, Recover, LoginForm } from "@components/login"
 import ThankYouPage from "@components/thankYouPage/ThankYouPage"
 import { Map, Orders, Companies, Vendors, Shelters, Organizations } from "@modules/user"
 import { RegisterRole, RegisterUser, RegisterCompany, RegisterVendor, RegisterNgo, RegisterAdmin } from "@components/register"
 import { Dashboard, Notifications, Offers, OfferNew, Chats, Chat, Followers, Bookmarks, Settings, ProfileSettings, Password, Preferences, Terms, PrivacyPolicy, DeleteAccount, CreateReport, Users, Reports, Products, Pets, AdminOffers, ConfigureAds } from "@components/modules"
-import { ProgressSpinner } from "primereact/progressspinner"
 
 const AppRoutes = () => {
   const dispatch = useDispatch()
@@ -29,7 +28,7 @@ const AppRoutes = () => {
     if (!hasTokenInURL) {
       if (!user?.id && _id !== 'undefined' && user == null)
         dispatch(getUserData(_id)).then(() => setLoading(false))
-      else if (user?.id)
+      else
         setLoading(false)
     } else
       setLoading(false)

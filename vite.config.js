@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     port: 9000,
     https: true,
-    host: "localhost",
+    host: true,
   },
   resolve: {
     alias: {

@@ -1,12 +1,12 @@
 .chat__scroll
-  height: calc(100vh - 12.5rem)
+  height: calc((var(--vh) * 100) - 12.5rem)
   margin-top: -1.25rem
   margin-bottom: 1.25rem
   overflow: auto
   padding-bottom: 1.25rem
   width: 100%
   &.offer
-    height: calc(100vh - 21rem)
+    height: calc((var(--vh) * 100) - 21rem)
 .chat__messages
   display: flex
   flex-direction: column
@@ -94,6 +94,7 @@
   display: flex
   flex-wrap: wrap
   padding: 0 3.75rem
+  position: relative
   width: 100%
   .p-inputnumber
     flex-grow: 1

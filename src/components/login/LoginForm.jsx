@@ -10,8 +10,8 @@ import { useGoogleLogin } from "@react-oauth/google"
 
 import { setHeader } from "@store/slices/globalSlice"
 import { TextInput, PasswordInput } from "@ui/forms/"
-import { getUserData } from "@store/slices/usersSlice"
-import { authUser, getUser, getUserGoogle, updateUser } from "@services/userServices"
+import { getUserData, setPreRegisterUser } from "@store/slices/usersSlice"
+import { authUser, getUserGoogle, updateUser } from "@services/userServices"
 import { Message } from "primereact/message"
 
 const LoginForm = () => {
@@ -52,8 +52,17 @@ const LoginForm = () => {
   const gLogin = useGoogleLogin({
     onSuccess: async ({access_token}) => {
       const { name, email, picture, locale } = await getUserGoogle(access_token)
-      if(await authUser({email}))
-        dispatch(getUserData())
+      const user = await authUser({ email, access_token, provider: 'google' });
+      if(user?.id)
+        dispatch(getUserData(user.id));
+      else{
+        dispatch(setPreRegisterUser({
+          name: name,
+          email: email,
+          picture: picture,
+        }));
+        navigate('/register/');
+      }
     }
   })
   const fLogin = async () => {

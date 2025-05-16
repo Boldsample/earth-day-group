@@ -14,6 +14,7 @@ const RegisterCompany = ({create = false}) => {
   const [isDisabled, setIsDisabled] = useState(true)
   const user = useSelector((state) => state.users.userData)
   const [activeIndex, setActiveIndex] = useState(tab == 'materials' ? 1 : 0)
+  const preRegisterUser = useSelector((state) => state.users.preRegisterUser)
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerCompany' })
   const [userData, setUserData] = useState({ pick_up_from_home: false, images: [], materials: [] })
 
@@ -22,6 +23,16 @@ const RegisterCompany = ({create = false}) => {
   }, [activeIndex]);
   useEffect(() => {
     dispatch(setHeader("register"))
+    if (preRegisterUser) {
+      setUserData({
+        ...userData,
+        role: "company",
+        name: preRegisterUser.name || "",
+        email: preRegisterUser.email || "",
+        picture: preRegisterUser.picture || "",
+      });
+      return;
+    }
     if(!create){
       const _username = username || user?.username
       getUser(_username, user?.id).then(data => {

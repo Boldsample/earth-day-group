@@ -23,8 +23,25 @@ const RegisterUser = ({create = false}) => {
   const [sending, setSending] = useState(false)
   const user = useSelector((state) => state.users.userData)
   const [tGlobal2] = useTranslation('translation', {keyPrefix: 'global'})
+  const preRegisterUser = useSelector((state) => state.users.preRegisterUser)
   const [t] = useTranslation('translation', { keyPrefix: 'register.registerUser'})
   const [tGlobal] = useTranslation('translation', {keyPrefix: 'global.formErrors'})
+  const defaultValues = {
+    lat: "",
+    lng: "",
+    name: "",
+    phone: "",
+    email: "",
+    picture: "",
+    address: "",
+    role: "user",
+    username: "",
+    password: "",
+    description: "",
+    accept_terms: false,
+    accept_policy: false,
+    password_confirmation: "",
+  }
   const {
     watch,
     reset,
@@ -35,24 +52,7 @@ const RegisterUser = ({create = false}) => {
     getValues,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      lat: "",
-      lng: "",
-      name: "",
-      phone: "",
-      email: "",
-      picture: "",
-      address: "",
-      role: "user",
-      username: "",
-      password: "",
-      description: "",
-      accept_terms: false,
-      accept_policy: false,
-      password_confirmation: "",
-    },
-  })
+  } = useForm({defaultValues})
   
   const setAutocomplete = autocomplete => window.autocomplete = autocomplete
   const onPlaceChanged = e => {
@@ -100,6 +100,15 @@ const RegisterUser = ({create = false}) => {
 
   useEffect(() => {
     dispatch(setHeader("register"))
+    if (preRegisterUser) {
+      reset({
+        ...defaultValues,
+        name: preRegisterUser.name || "",
+        email: preRegisterUser.email || "",
+        picture: preRegisterUser.picture || "",
+      });
+      return
+    }
     if(!create){
       const _username = username || user?.username
       getUser(_username, user?.id).then(data => {
