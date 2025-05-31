@@ -111,6 +111,8 @@ const Chat = () => {
     }
   }
   const scrollToBottom = () => {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
     if (chatWrapper.current)
       chatWrapper.current.scrollTo({ behavior: 'smooth', top: chatWrapper.current.scrollHeight })
   }
@@ -124,8 +126,8 @@ const Chat = () => {
   }, [])
   useEffect(() => {
     const handleScroll = async () => {
-      console.log(messages?.length)
-      console.log(calling, !messages?.length, chatWrapper?.current?.scrollTop === 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
       if (!chatWrapper?.current || calling || !messages?.length || !hasMoreOldMessages) return
       if (chatWrapper.current.scrollTop === 0)
         callMessages('backward', chatWrapper.current?.scrollHeight)

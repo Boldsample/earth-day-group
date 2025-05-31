@@ -1,8 +1,9 @@
 .chat__scroll
+  -webkit-overflow-scrolling: touch
   height: calc((var(--vh) * 100) - 12.5rem)
   margin-top: -1.25rem
   margin-bottom: 1.25rem
-  overflow: auto
+  overflow-y: auto
   padding-bottom: 1.25rem
   width: 100%
   &.offer
@@ -26,6 +27,8 @@
       .main__container
         display: flex
         flex-wrap: wrap
+        justify-content: flex-start
+        text-align: left
         .profile__photo
           left: -3.75rem
           margin: 0
