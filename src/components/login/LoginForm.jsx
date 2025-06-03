@@ -68,12 +68,20 @@ const LoginForm = () => {
   const fLogin = async () => {
     fApi.login(function({authResponse}){
       if(authResponse){
-        fApi.api('/me', {fields: 'name, email'}, async ({email}) => {
-          if(await authUser({email}))
-            dispatch(getUserData())
+        fApi.api('/me', {fields: 'name, email, picture'}, async ({name, email, picture}) => {
+          const user = await authUser({ email, access_token: authResponse?.accessToken, provider: 'facebook' });
+          if(user?.id)
+            dispatch(getUserData(user.id));
+          else{
+            dispatch(setPreRegisterUser({
+              name: name,
+              email: email,
+              picture: picture,
+            }));
+            navigate('/register/');
+          }
         });
-      }else
-      toast.error('User cancelled login or did not fully authorize.');
+      }
     });
   }
   const tokenLogin = async () => {
