@@ -37,7 +37,7 @@ const Recover = () => {
 		if(response?.response == 'Ok'){
 			dispatch(updateThankyou({
 				title: tGlobal('updateUserTitleThankYouPage'),
-				link: username ? '/dashboard/' : '/settings/profile/',
+				link: '/dashboard/',
 				background: "image-1.svg",
 				button_label: tGlobal('updateUserBtnLabelThankYouPage3'),
 				content: tGlobal('updateUsercontentText'),
